@@ -1,0 +1,134 @@
+/*
+Main Grid Terminology:
+
+grid container  :contains all the grid items
+grid item       :e.g. header,footer,aside,main...
+grid line       :colums or rows seperating the grid into sections
+grid cell       :a single cell inside a grid
+grid track      :the space between two or more adjasent grid lines
+grid area       :a defined rectangular area inside a grid
+grid gap        :spacing between the cells
+
+*/
+
+
+
+*{
+    font-family: Calibri, Arial, sans-serif;
+    font-size: 12pt;
+}
+
+html{
+    background: linear-gradient(to bottom, #759ABD, #FFFFFF);
+    background-attachment: fixed;
+    height:100%;
+}
+
+body{
+    display: grid;
+}
+
+/* SMALL PHONES */
+@media only screen and (max-width: 600px){
+    body{
+        margin:0px;
+        grid-template-columns: 1fr;
+        grid-template-rows: 60px 30px auto auto;
+        grid-template-areas:
+            "header"
+            "nav"
+            "main"
+            "aside";
+    }
+}
+
+/* PORTRAIT TABLETS - LARGE PHONES */
+@media only screen and (min-width: 600px){
+    body{
+        grid-template-columns: 1fr 5fr 1fr;
+        grid-template-rows: 15px 60px 45px auto auto 10px;
+        grid-template-areas:
+            ". . ."
+            ". header ."
+            ". nav ."
+            ". main ."
+            ". aside ."
+            ". . .";
+    }
+}
+
+/* LANDSCAPE TABLETS */
+@media only screen and (min-width: 768px){
+    body{
+        grid-template-columns: 1fr 5fr 2fr 1fr;
+        grid-template-rows: 15px 70px 45px auto 10px;
+        grid-template-areas:
+            ". . . ."
+            ". header header ."
+            ". nav nav ."
+            ". main aside ."
+            ". . . .";
+    }
+}
+
+/* DESKTOP */
+@media only screen and (min-width: 992px){
+    body{
+        grid-template-columns: 1fr 3fr 1fr 1fr;
+        grid-template-rows: 15px 100px 45px auto 10px;
+        grid-template-areas:
+            ". . . ."
+            ". header header ."
+            ". nav nav ."
+            ". main aside ."
+            ". . . .";
+    }
+}
+
+
+
+header{
+    grid-area: header;
+
+    background: #FFFFFF;
+    box-shadow: 0 0 2px 1px #828282;
+    padding: 10px 0 3px 25px;
+}
+
+nav{
+    grid-area: nav;
+
+    background: #0066CC;
+    color: #FFFFFF;
+    box-shadow: 0 0 2px 1px #828282;
+}
+
+main{
+    grid-area: main;
+
+    background: #FFFFFF;
+    padding: 5px;
+    box-shadow: 0 0 2px 1px #828282;
+}
+
+aside{
+    grid-area: aside;
+
+    background: #FFFFFF;
+    padding:5px;
+    box-shadow: 0 0 2px 1px #828282;
+}
+
+footer{
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    text-align:center;
+    background: #454545;
+    color: #FFFFFF;
+}
+
+.header_logo{
+    height: 100%;
+}

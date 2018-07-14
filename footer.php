@@ -1,3 +1,8 @@
 <?php
-     echo '<footer>&copy; 2014 O&Ouml;. Badmintonverband - Design by Markus Benda</footer>';
+     echo '
+            <footer>
+                &copy; 2014-2018 O&Ouml;. Badmintonverband - Design by 2 nice guys
+            </footer>
+        </body>
+     ';
 ?>
