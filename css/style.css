@@ -1,18 +1,3 @@
-/*
-Main Grid Terminology:
-
-grid container  :contains all the grid items
-grid item       :e.g. header,footer,aside,main...
-grid line       :colums or rows seperating the grid into sections
-grid cell       :a single cell inside a grid
-grid track      :the space between two or more adjasent grid lines
-grid area       :a defined rectangular area inside a grid
-grid gap        :spacing between the cells
-
-*/
-
-
-
 *{
     font-family: Calibri, Arial, sans-serif;
     font-size: 12pt;
@@ -33,10 +18,10 @@ body{
     body{
         margin:0px;
         grid-template-columns: 1fr;
-        grid-template-rows: 60px 30px auto auto;
+        grid-template-rows: 30px 60px auto auto;
         grid-template-areas:
-            "header"
             "nav"
+            "header"
             "main"
             "aside";
     }
@@ -46,7 +31,7 @@ body{
 @media only screen and (min-width: 600px){
     body{
         grid-template-columns: 1fr 5fr 1fr;
-        grid-template-rows: 15px 60px 45px auto auto 10px;
+        grid-template-rows: 15px 60px 38px auto auto 30px;
         grid-template-areas:
             ". . ."
             ". header ."
@@ -60,8 +45,8 @@ body{
 /* LANDSCAPE TABLETS */
 @media only screen and (min-width: 768px){
     body{
-        grid-template-columns: 1fr 5fr 2fr 1fr;
-        grid-template-rows: 15px 70px 45px auto 10px;
+        grid-template-columns: 1fr 5fr 3fr 1fr;
+        grid-template-rows: 15px 70px 38px auto 30px;
         grid-template-areas:
             ". . . ."
             ". header header ."
@@ -74,8 +59,8 @@ body{
 /* DESKTOP */
 @media only screen and (min-width: 992px){
     body{
-        grid-template-columns: 1fr 3fr 1fr 1fr;
-        grid-template-rows: 15px 100px 45px auto 10px;
+        grid-template-columns: 1fr 3fr 2fr 1fr;
+        grid-template-rows: 15px 100px 38px auto 30px;
         grid-template-areas:
             ". . . ."
             ". header header ."
@@ -107,7 +92,7 @@ main{
     grid-area: main;
 
     background: #FFFFFF;
-    padding: 5px;
+    padding: 20px;
     box-shadow: 0 0 2px 1px #828282;
 }
 
@@ -129,6 +114,74 @@ footer{
     color: #FFFFFF;
 }
 
+h1{
+    font-size: 22pt;
+    font-weight: lighter;
+    letter-spacing: -1px;
+    color: #F01B16;
+    margin:2px 0 2px 0;
+}
+
+h2{
+    font-size: 19pt;
+    font-weight: lighter;
+    letter-spacing: -1px;
+    color: #F01B16;
+    margin:2px 0 2px 0;
+}
+
+h3{
+    font-size: 17pt;
+    font-weight: lighter;
+    letter-spacing: -1px;
+    color: #F01B16;
+    margin:2px 0 2px 0;
+}
+
+h4{
+    font-size: 15pt;
+    font-weight: normal;
+    color: #F01B16;
+    margin:2px 0 2px 0;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
 .header_logo{
     height: 100%;
+
+}
+
+.header_sponsor{
+    height: 100%;
+    max-height:100px;
+    float:right;
+    margin-right: 20px;
+}
+
+.home_news_container{
+    width: 100%;
+}
+
+.home_news_imagecontainer{
+    float:left;
+
+    height: 100px;
+    border: 2px solid #3B9EBF;
+    margin-right:10px;
+}
+
+.home_news_image{
+    max-height: 100px;
+    max-width: 180px;
+    margin: auto;
+    display: block;
+}
+
+.home_news_article{
+    margin-bottom: 20px;
 }

@@ -23,6 +23,7 @@
 
                 <header>
                     <img src="/content/logo.png" alt="O&Ouml;. Badminton-Verband" class="header_logo"/>
+                    <img src="/content/babolat.png" alt="" class="header_sponsor"/>
                 </header>
 
 
@@ -43,13 +44,13 @@
 
                             <li class="active"><a href="#">Spielbetrieb</a>
                                 <ul>
-                                    <li><a href="#">O&Ouml;MM</a>
+                                    <li><a href="#">O&Ouml;MM <span style="float:right;">&#10148;</span></a>
                                         <ul>
                                             <li><a href="#">Allg. Klasse</a></li>
                                             <li><a href="#">Sch&uuml;ler / Jugend</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Ranglisten</a>
+                                    <li><a href="#">Ranglisten <span style="float:right;">&#10148;</span></a>
                                         <ul>
                                             <li><a href="#">O&Ouml;BV-Ranglisten</a></li>
                                             <li><a href="#">&Ouml;BV-Ranglisten</a></li>
@@ -73,7 +74,7 @@
                                 <ul>
                                     <li><a href="#">Jahresberichte</a></li>
                                     <li><a href="#">News-Archiv</a></li>
-                                    <li><a href="#">O&Ouml;MM-Archiv</a>
+                                    <li><a href="#">O&Ouml;MM-Archiv <span style="float:right;">&#10148;</span></a>
                                         <ul>
                                             <li><a href="#">2005/2006</a></li>
                                             <li><a href="#">2004/2005</a></li>
