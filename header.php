@@ -4,7 +4,6 @@
     require("data/basefunctions.php");
     require("data/functions.php");
 
-
     $revision = 2;
 
     echo '
