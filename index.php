@@ -8,7 +8,7 @@
     echo '
 
 
-    
+
 
 
 
@@ -19,6 +19,7 @@
     ';
 
     include("footer.php");
+
 
 
     //Hallo i bims
