@@ -4,10 +4,15 @@
 
     require("header.php");
     //
+    $foto='<img src ="/content/logo.png">' ;
     echo '
 
 
-    <img src ="/content/logo.png">
+    
+
+
+
+     '.$foto.'
 
     <img src="/content/babolat_hover.gif" alt="Mamalat logo" />
 
