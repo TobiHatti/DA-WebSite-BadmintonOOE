@@ -5,10 +5,13 @@
     require("data/functions.php");
 
 
+    $revision = 1;
+
     echo '
         <!DOCTYPE html>
             <html>
                 <head>
+<<<<<<< HEAD
                     <link rel="stylesheet" type="text/css" href="css/style.css?2323">
                     <link rel="stylesheet" type="text/css" href="css/designer.css?2323">
                     <link rel="stylesheet" type="text/css" href="css/flags.css?2323">
@@ -21,11 +24,19 @@
                        &Ouml;
                        &szlig;
 
+=======
+                    <link rel="stylesheet" type="text/css" href="css/style.css?'.$revision.'">
+                    <link href="files/content/favicon.ico" rel="icon" type="image/x-icon" />
+                    <script src="/data/source.js?'.$revision.'"></script>
+                <head>
+                <body>
+>>>>>>> b22f62b1275c0633ccec353857189d312661ebcf
                     <header>
-                    <main>
-                    <article>
+
+                    </header>
                     <nav>
-                    <footer>
+
+                    </nav>
     ';
 
 ?>
