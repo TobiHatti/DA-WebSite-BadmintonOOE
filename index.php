@@ -1,12 +1,18 @@
 <?php
-<<<<<<< HEAD
-=======
 
     //luuul
->>>>>>> e64629a1854b0c107f3852346ed5fc7097da8003
-    require("header.php");
 
-    echo("Heloo");
+    require("header.php");
+    //
+    echo '
+
+
+    <img src ="/content/logo.png">
+
+    <img src="/content/babolat_hover.gif" alt="Mamalat logo" />
+
+    ';
+
     include("footer.php");
 
 
