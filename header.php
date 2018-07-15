@@ -19,7 +19,7 @@
 
 
                 <!-- Start WOWSlider.com HEAD section --> <!-- add to the <head> of your page -->
-                <link rel="stylesheet" type="text/css" href="content/style.css" />
+                <link rel="stylesheet" type="text/css" href="data/style.css" />
                 <script type="text/javascript" src="data/jquery.js"></script>
                 <!-- End WOWSlider.com HEAD section -->
 
