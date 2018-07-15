@@ -16,13 +16,18 @@
                 <link href="content/favicon.png" rel="icon" type="image/x-icon" />
                 <script src="/data/source.js?'.$revision.'"></script>
                 <script src="/data/menu.js?'.$revision.'"></script>
+
+
+                <!-- Start WOWSlider.com HEAD section --> <!-- add to the <head> of your page -->
+                <link rel="stylesheet" type="text/css" href="content/style.css" />
+                <script type="text/javascript" src="data/jquery.js"></script>
+                <!-- End WOWSlider.com HEAD section -->
+
+
                 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
                 <title>O&Ouml;. Badmintonverband</title>
-                <body style="background-color:#d7d7d7;margin:auto">
             </head>
 
-
-            <head>
             <body>
 
                 <header>

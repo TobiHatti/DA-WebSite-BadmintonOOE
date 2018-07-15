@@ -38,9 +38,32 @@
 
 
 
+                <!-- Start WOWSlider.com BODY section --> <!-- add to the <body> of your page -->
 
 
+                <div id="wowslider-container1">
+                    <div class="ws_images">
+                        <ul>
+                            <li><img src="content/federall_sample2.jpg" alt="federall_sample2" title="federall_sample2" id="wows1_0"/></li>
+                            <li><a href="http://wowslider.net"><img src="content/federball_sample1.jpg" alt="html slider" title="federball_sample1" id="wows1_1"/></a></li>
+                            <li><img src="content/federball_sample3.jpg" alt="federball_sample3" title="federball_sample3" id="wows1_2"/></li>
+                        </ul>
+                    </div>
+                    <div class="ws_bullets">
+                        <div>
+                            <a href="#" title="federall_sample2"><span><img src="data1/tooltips/federall_sample2.jpg" alt="federall_sample2"/>1</span></a>
+                            <a href="#" title="federball_sample1"><span><img src="data1/tooltips/federball_sample1.jpg" alt="federball_sample1"/>2</span></a>
+                            <a href="#" title="federball_sample3"><span><img src="data1/tooltips/federball_sample3.jpg" alt="federball_sample3"/>3</span></a>
+                        </div>
+                    </div>
+                    <!--<div class="ws_script" style="position:absolute;left:-99%"><a href="http://wowslider.net">responsive slider</a> by WOWSlider.com v8.8</div>-->
+                    <div class="ws_shadow"></div>
+                </div>
+                <script type="text/javascript" src="/data/wowslider.js"></script>
+                <script type="text/javascript" src="/data/script.js"></script>
 
+
+                <!-- End WOWSlider.com BODY section -->
 
 
 
