@@ -4,6 +4,8 @@
     require("data/basefunctions.php");
     require("data/functions.php");
 
+    echo PreventAutoScroll();
+
     $revision = 2;
 
     echo '
@@ -13,18 +15,12 @@
                 <meta charset="utf-8">
                 <link rel="stylesheet" type="text/css" href="css/style.css?'.$revision.'">
                 <link rel="stylesheet" type="text/css" href="css/menu.css?'.$revision.'">
+                <link rel="stylesheet" type="text/css" href="css/slide.css?'.$revision.'" />
                 <link href="content/favicon.png" rel="icon" type="image/x-icon" />
                 <script src="/data/source.js?'.$revision.'"></script>
                 <script src="/data/menu.js?'.$revision.'"></script>
-
-
-                <!-- Start WOWSlider.com HEAD section --> <!-- add to the <head> of your page -->
-                <link rel="stylesheet" type="text/css" href="data/style.css" />
-                <script type="text/javascript" src="data/jquery.js"></script>
-                <!-- End WOWSlider.com HEAD section -->
-
-
                 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+
                 <title>O&Ouml;. Badmintonverband</title>
             </head>
 
@@ -39,7 +35,7 @@
                 <nav>
                     <div id="cssmenu">
                         <ul>
-                            <li><a href="#">Startseite</a></li>
+                            <li><a href="/">Startseite</a></li>
 
                             <li class="active"><a href="#">Verband</a>
                                 <ul>
@@ -97,7 +93,24 @@
                                 </ul>
                             </li>
                         </ul>
+
+                        <!-- Standard Search-Bar -->
+                        <div class="searchbar_container">
+                            <input class="searchbar" name="" type="text" placeholder="Suchen...">
+                        </div>
+
+                        <!-- Mobile Search-Bar -->
+                        <div class="mobile_searchtrigger_container">
+                            <a href="#searchpop" onclick="bgenScroll();"><button class="searchbar_trigger"><center><img src="/content/search.png" style="height:22px;" alt="" /></center></button></a>
+                        </div>
+
                     </div>
+
+                    <!-- Search-Bar Mobile version -->
+                    <div class="mobile_searchbar_container" id="searchpop">
+                        <div style="vertical-align:top; display:block;"><input type="text" class="mobile_searchbar"/><a href="#"><img src="/content/cross.png" style="height:18px;margin-bottom:-3px;margin-left: 8px;" alt="" /></a></div>
+                    </div>
+
                 </nav>
     ';
 

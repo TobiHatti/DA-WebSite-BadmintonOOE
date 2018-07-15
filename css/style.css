@@ -1,3 +1,15 @@
+/*
+======================
+=======================
+WARNING!!!
+
+FOR EVERY GRID AND GRID-ELEMENT A FALLBACK-CLASS
+NEEDS TO BE CREATED!
+
+THANKS INTERNET EXPLORER
+
+*/
+
 *{
     font-family: Calibri, Arial, sans-serif;
     font-size: 12pt;
@@ -25,14 +37,6 @@ body{
             "main"
             "main";
     }
-
-    main{
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
-        grid-template-areas:
-           "article"
-           "aside";
-    }
 }
 
 /* PORTRAIT TABLETS - LARGE PHONES */
@@ -48,14 +52,6 @@ body{
             ". main ."
             ". . .";
     }
-
-    main{
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
-        grid-template-areas:
-           "article"
-           "aside";
-    }
 }
 
 /* LANDSCAPE TABLETS */
@@ -70,13 +66,6 @@ body{
             ". main main ."
             ". . . .";
     }
-
-    main{
-        grid-template-columns: 2fr 2fr;
-        grid-template-rows: 1fr;
-        grid-template-areas:
-           "article aside";
-    }
 }
 
 /* DESKTOP */
@@ -90,13 +79,6 @@ body{
             ". nav nav ."
             ". main main ."
             ". . . .";
-    }
-
-    main{
-        grid-template-columns: 3fr 2fr;
-        grid-template-rows: 1fr;
-        grid-template-areas:
-           "article aside";
     }
 }
 
@@ -128,11 +110,50 @@ main{
     box-shadow: 0 0 2px 1px #828282;
 }
 
+@media only screen and (max-width: 1090px){
+    main{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+           "article"
+           "aside";
+
+    }
+
+    article{
+        grid-area: article;
+        background: #FFFFFF;
+        padding:5px;
+        border-right: none;
+        border-bottom: 1px solid black;
+    }
+}
+
+@media only screen and (min-width: 1090px){
+    main{
+        grid-template-columns: 3fr 2fr;
+        grid-template-rows: 1fr;
+        grid-template-areas:
+           "article aside";
+
+    }
+
+    article{
+        grid-area: article;
+        background: #FFFFFF;
+        padding:5px;
+        border-bottom: none;
+        border-right: 1px solid black;
+    }
+
+}
+
+
 aside{
     grid-area: aside;
     background: #FFFFFF;
     padding:5px;
-    border-left: 1px solid black;
+
 }
 
 article{
@@ -188,6 +209,96 @@ hr {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
+@keyframes stag_fade_in_1{
+    0% { opacity: 0; }
+    10%{ opacity: 0; }
+    40%{ opacity: 1; }
+    100%{opacity: 1; }
+}
+
+.stagfade1{
+    animation: stag_fade_in_1;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+@keyframes stag_fade_in_2{
+    0% { opacity: 0; }
+    20%{ opacity: 0; }
+    50%{ opacity: 1; }
+    100%{opacity: 1; }
+}
+
+.stagfade2{
+    animation: stag_fade_in_2;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+@keyframes stag_fade_in_3{
+    0% { opacity: 0; }
+    30%{ opacity: 0; }
+    60%{ opacity: 1; }
+    100%{opacity: 1; }
+}
+
+.stagfade3{
+    animation: stag_fade_in_3;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+@keyframes stag_fade_in_4{
+    0% { opacity: 0; }
+    40%{ opacity: 0; }
+    70%{ opacity: 1; }
+    100%{opacity: 1; }
+}
+
+.stagfade4{
+    animation: stag_fade_in_4;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+@keyframes stag_fade_in_5{
+    0% { opacity: 0; }
+    50%{ opacity: 0; }
+    80%{ opacity: 1; }
+    100%{opacity: 1; }
+}
+
+.stagfade5{
+    animation: stag_fade_in_5;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+@keyframes stag_fade_in_6{
+    0% { opacity: 0; }
+    60%{ opacity: 0; }
+    90%{ opacity: 1; }
+    100%{opacity: 1; }
+}
+
+.stagfade6{
+    animation: stag_fade_in_6;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+@keyframes stag_fade_in_7{
+    0% { opacity: 0; }
+    70%{ opacity: 0; }
+    100%{opacity: 1; }
+}
+
+.stagfade7{
+    animation: stag_fade_in_7;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
 .header_logo{
     height: 100%;
 
@@ -204,47 +315,8 @@ hr {
 /* Home > News-Feed                                                                  */
 /*===================================================================================*/
 
-@keyframes news_fade_in_1{
-    0% { opacity: 0; }
-    10%{ opacity: 0; }
-    70%{ opacity: 1; }
-    100%{opacity: 1; }
-}
-
-@keyframes news_fade_in_2{
-    0% { opacity: 0; }
-    20%{ opacity: 0; }
-    80%{ opacity: 1; }
-    100%{opacity: 1; }
-}
-
-@keyframes news_fade_in_3{
-    0% { opacity: 0; }
-    30%{ opacity: 0; }
-    90%{ opacity: 1; }
-    100%{opacity: 1; }
-}
-
 .home_news_container{
     width: 100%;
-}
-
-.home_news_n1{
-    animation: news_fade_in_1;
-    animation-duration: 0.8s;
-    animation-iteration-count: 1;
-}
-
-.home_news_n2{
-    animation: news_fade_in_2;
-    animation-duration: 0.8s;
-    animation-iteration-count: 1;
-}
-
-.home_news_n3{
-    animation: news_fade_in_3;
-    animation-duration: 0.8s;
-    animation-iteration-count: 1;
 }
 
 .home_news_imagecontainer{
@@ -269,20 +341,52 @@ hr {
 /*===================================================================================*/
 /* Home > Tiles                                                                      */
 /*===================================================================================*/
-.home_tile_container{
+.home_tile_wrapper{
     display: grid;
 }
 
-.home_tile_col1{
+@media only screen and (max-width: 1090px){
+    .home_tile_wrapper{
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas:
+            "tile_col1 tile_col2";
+    }
+}
 
+@media only screen and (min-width: 1090px){
+    .home_tile_wrapper{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+            "tile_col1"
+            "tile_col2";
+    }
+}
+
+@media only screen and (min-width: 1350px){
+    .home_tile_wrapper{
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas:
+            "tile_col1 tile_col2";
+    }
+}
+
+.home_tile_col1{
+    grid-area: tile_col1;
 }
 
 .home_tile_col2{
-
+    grid-area: tile_col2;
 }
 
-.home_tile_container{
+.home_tile_container_l{
     width:230px;
+}
+
+.home_tile_container_s{
+    width:190px;
 }
 
 .home_tile_title{
@@ -298,7 +402,109 @@ hr {
 
 }
 
+/*===================================================================================*/
+/* Searchbar                                                                    */
+/*===================================================================================*/
 
+@media only screen and (max-width: 850px){
+    .searchbar_container{
+        display:none;
+    }
+
+    .mobile_searchtrigger_container{
+        position: absolute;
+        right: 8px;
+        top: 4px;
+
+    }
+
+    .searchbar_trigger{
+        border:none;
+        background: #507CA5;
+        padding: 3px 1px 1px 1px;
+        width: 35px;
+        box-shadow: inset 0 0 2px 1px #375572;
+    }
+
+    .mobile_searchbar_container{
+        display: none;
+        height: 0px;
+        -webkit-transition: all .5s ease-in-out;
+        transition: all .5s ease-in-out;
+    }
+
+    .mobile_searchbar_container:target{
+        display: inline-block;
+        background: #416586;
+        width: 100%;
+        height: 38px;
+        z-index: 300000;
+        padding: 5px;
+
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+
+        -webkit-transition: all .5s ease-in-out;
+        transition: all .5s ease-in-out;
+
+    }
+
+    .mobile_searchbar{
+        width:90%;
+        line-height: 26px;
+        font-size:14pt;
+        border:none;
+        box-shadow: inset 0 0 2px 1px #375572;
+        background: #507CA5;
+        color: #FFFFFF;
+        padding-left: 5px;
+
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+}
+
+@media only screen and (min-width: 850px){
+    .searchbar_container{
+        position: absolute;
+        right: 8px;
+        top: 8px;
+    }
+
+    .searchbar{
+        float: right;
+        border: none;
+        background: #507CA5;
+        color: #FFFFFF;
+        padding-left: 5px;
+        box-shadow: inset 0 0 2px 1px #375572;
+    }
+
+    .mobile_searchtrigger_container, .mobile_searchbar_container{
+        display:none;
+    }
+
+
+
+}
+
+.searchbar::placeholder {
+    color: #FFFFFF;
+    opacity: 0.5;
+}
+
+.searchbar:-ms-input-placeholder {
+    color: #FFFFFF;
+    opacity: 0.5;
+}
+
+.searchbar::-ms-input-placeholder {
+    color: #FFFFFF;
+    opacity: 0.5;
+}
 
 
 

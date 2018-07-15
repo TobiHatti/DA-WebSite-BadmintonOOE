@@ -33,7 +33,7 @@
             <hr>
             <br>
             <div class="home_news_container">
-                <div class="home_news_article home_news_n1">
+                <div class="home_news_article stagfade1">
                     <div class="home_news_imagecontainer">
                         <img src="/content/sample.jpg" alt="" class="home_news_image"/>
                     </div>
@@ -47,7 +47,7 @@
                         wird nur sehr selten gehalten oder gar gez&uuml;chtet.
                     </div>
                 </div>
-                <div class="home_news_article home_news_n2">
+                <div class="home_news_article stagfade2">
                     <div class="home_news_imagecontainer">
                         <img src="/content/sample2.jpg" alt="" class="home_news_image"/>
                     </div>
@@ -63,7 +63,7 @@
                         Unterarten unterschieden:
                     </div>
                 </div>
-                <div class="home_news_article home_news_n3">
+                <div class="home_news_article stagfade3">
                     <div class="home_news_imagecontainer">
                         <img src="/content/sample3.jpg" alt="" class="home_news_image"/>
                     </div>
@@ -82,21 +82,21 @@
             </div>
         </article>
         <aside>
-           <div class="home_tile_container">
+           <div class="home_tile_wrapper">
                 <div class="home_tile_col1">
 
 
-                    <div class="home_tile_container">
+                    <div class="home_tile_container_l stagfade1">
                         <div class="home_tile_title">Nachwuchs</div>
                         <div class="home_tile_content">Content</div>
                     </div>
 
-                    <div class="home_tile_container">
+                    <div class="home_tile_container_l stagfade2">
                         <div class="home_tile_title"><img src="/content/rss.png" alt="" style="width:20px; height: 20px; margin-bottom:-2px; margin-right: 5px;"/>&Ouml;BV News</div>
                         <div class="home_tile_content">Content</div>
                     </div>
 
-                    <div class="home_tile_container">
+                    <div class="home_tile_container_l stagfade3">
                         <div class="home_tile_title">Video</div>
                         <div class="home_tile_content">Content</div>
                     </div>
@@ -105,22 +105,22 @@
                 </div>
                 <div class="home_tile_col2">
 
-                    <div class="home_tile_container">
+                    <div class="home_tile_container_s stagfade1">
                         <div class="home_tile_title">Termine</div>
                         <div class="home_tile_content">Content</div>
                     </div>
 
-                    <div class="home_tile_container">
+                    <div class="home_tile_container_s stagfade2">
                         <div class="home_tile_title">Meisterschaft</div>
                         <div class="home_tile_content">Content</div>
                     </div>
 
-                    <div class="home_tile_container">
+                    <div class="home_tile_container_s stagfade3">
                         <div class="home_tile_title">Ranglisten</div>
                         <div class="home_tile_content">Content</div>
                     </div>
 
-                    <div class="home_tile_container">
+                    <div class="home_tile_container_s stagfade4">
                         <div class="home_tile_title">Links</div>
                         <div class="home_tile_content">Content</div>
                     </div>
