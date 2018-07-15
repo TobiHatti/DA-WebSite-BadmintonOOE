@@ -18,6 +18,10 @@
                 <script src="/data/menu.js?'.$revision.'"></script>
                 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
                 <title>O&Ouml;. Badmintonverband</title>
+                <body style="background-color:#d7d7d7;margin:auto">
+            </head>
+
+
             <head>
             <body>
 
