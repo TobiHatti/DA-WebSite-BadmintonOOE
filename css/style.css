@@ -23,7 +23,15 @@ body{
             "nav"
             "header"
             "main"
-            "aside";
+            "main";
+    }
+
+    main{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+           "article"
+           "aside";
     }
 }
 
@@ -37,8 +45,16 @@ body{
             ". header ."
             ". nav ."
             ". main ."
-            ". aside ."
+            ". main ."
             ". . .";
+    }
+
+    main{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+           "article"
+           "aside";
     }
 }
 
@@ -51,8 +67,15 @@ body{
             ". . . ."
             ". header header ."
             ". nav nav ."
-            ". main aside ."
+            ". main main ."
             ". . . .";
+    }
+
+    main{
+        grid-template-columns: 2fr 2fr;
+        grid-template-rows: 1fr;
+        grid-template-areas:
+           "article aside";
     }
 }
 
@@ -65,8 +88,15 @@ body{
             ". . . ."
             ". header header ."
             ". nav nav ."
-            ". main aside ."
+            ". main main ."
             ". . . .";
+    }
+
+    main{
+        grid-template-columns: 3fr 2fr;
+        grid-template-rows: 1fr;
+        grid-template-areas:
+           "article aside";
     }
 }
 
@@ -90,6 +120,7 @@ nav{
 
 main{
     grid-area: main;
+    display: grid;
 
     background: #FFFFFF;
     padding: 20px;
@@ -98,10 +129,15 @@ main{
 
 aside{
     grid-area: aside;
-
     background: #FFFFFF;
     padding:5px;
-    box-shadow: 0 0 2px 1px #828282;
+    border-left: 1px solid black;
+}
+
+article{
+    grid-area: article;
+    background: #FFFFFF;
+    padding:5px;
 }
 
 footer{

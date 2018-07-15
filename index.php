@@ -2,16 +2,32 @@
     require("header.php");
 
     echo '
-        <main>
+    <main>
+        <article>
             <center>
                 <div style="width: 480px; height:240px; border:1px solid black">
+
+
+
+
+
+
+
                     Slideshow Here
+
+
+
+
+
+
+
+
+
                 </div>
             </center>
 
             <hr>
             <br>
-
             <div class="home_news_container">
                 <div class="home_news_article">
                     <div class="home_news_imagecontainer">
@@ -27,8 +43,6 @@
                         wird nur sehr selten gehalten oder gar gez&uuml;chtet.
                     </div>
                 </div>
-
-
                 <div class="home_news_article">
                     <div class="home_news_imagecontainer">
                         <img src="/content/sample2.jpg" alt="" class="home_news_image"/>
@@ -45,7 +59,6 @@
                         Unterarten unterschieden:
                     </div>
                 </div>
-
                 <div class="home_news_article">
                     <div class="home_news_imagecontainer">
                         <img src="/content/sample3.jpg" alt="" class="home_news_image"/>
@@ -62,14 +75,8 @@
                         da der Schadstoffanteil zu hoch ist.
                     </div>
                 </div>
-
             </div>
-
-            <br><br><br>
-
-
-        </main>
-
+        </article>
         <aside>
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
             sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
@@ -82,6 +89,7 @@
             kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
             sit amet.
         </aside>
+    </main>
     ';
 
     include("footer.php");
