@@ -9,16 +9,16 @@
 
 
     <!-- Start WOWSlider.com HEAD section --> <!-- add to the <head> of your page -->
-    <link rel="stylesheet" type="text/css" href="content/style.css" />
+    <link rel="stylesheet" type="text/css" href="data/style.css" />
     <script type="text/javascript" src="data/jquery.js"></script>
     <!-- End WOWSlider.com HEAD section -->
 
     <!-- Start WOWSlider.com BODY section --> <!-- add to the <body> of your page -->
     <div id="wowslider-container1">
     <div class="ws_images"><ul>
-        <li><img src="content/federall_sample2.jpg" alt="federall_sample2" title="federall_sample2" id="wows1_0"/></li>
-        <li><a href="http://wowslider.net"><img src="content/federball_sample1.jpg" alt="html slider" title="federball_sample1" id="wows1_1"/></a></li>
-        <li><img src="content/federball_sample3.jpg" alt="federball_sample3" title="federball_sample3" id="wows1_2"/></li>
+        <li><img src="content/federall_sample2.jpg" alt="federall_sample2" title="Der Federball" id="wows1_0"/></li>
+        <li><a href="http://wowslider.net"><img src="content/federball_sample1.jpg" alt="html slider" title="Der Federball" id="wows1_1"/></a></li>
+        <li><img src="content/federball_sample3.jpg" alt="federball_sample3" title="Der Federball" id="wows1_2"/></li>
     </ul></div>
     <div class="ws_bullets"><div>
         <a href="#" title="federall_sample2"><span><img src="data1/tooltips/federall_sample2.jpg" alt="federall_sample2"/>1</span></a>
