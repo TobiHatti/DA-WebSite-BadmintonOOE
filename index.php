@@ -5,7 +5,7 @@
     <main>
         <article>
             <center>
-                <div style="width: 480px; height:240px; border:1px solid #0066CC">
+                <div style="width: 480px; height:240px; border:1px solid #0066CC;">
 
                     <div id="wowslider-container1">
                         <div class="ws_images">
@@ -33,7 +33,7 @@
             <hr>
             <br>
             <div class="home_news_container">
-                <div class="home_news_article">
+                <div class="home_news_article home_news_n1">
                     <div class="home_news_imagecontainer">
                         <img src="/content/sample.jpg" alt="" class="home_news_image"/>
                     </div>
@@ -47,7 +47,7 @@
                         wird nur sehr selten gehalten oder gar gez&uuml;chtet.
                     </div>
                 </div>
-                <div class="home_news_article">
+                <div class="home_news_article home_news_n2">
                     <div class="home_news_imagecontainer">
                         <img src="/content/sample2.jpg" alt="" class="home_news_image"/>
                     </div>
@@ -63,7 +63,7 @@
                         Unterarten unterschieden:
                     </div>
                 </div>
-                <div class="home_news_article">
+                <div class="home_news_article home_news_n3">
                     <div class="home_news_imagecontainer">
                         <img src="/content/sample3.jpg" alt="" class="home_news_image"/>
                     </div>
@@ -82,16 +82,52 @@
             </div>
         </article>
         <aside>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-            sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-            aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-            sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-            ut labore et dolore magna aliquyam erat, sed diam voluptua. At
-            vero eos et accusam et justo duo dolores et ea rebum. Stet clita
-            kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
-            sit amet.
+           <div class="home_tile_container">
+                <div class="home_tile_col1">
+
+
+                    <div class="home_tile_container">
+                        <div class="home_tile_title">Nachwuchs</div>
+                        <div class="home_tile_content">Content</div>
+                    </div>
+
+                    <div class="home_tile_container">
+                        <div class="home_tile_title"><img src="/content/rss.png" alt="" style="width:20px; height: 20px; margin-bottom:-2px; margin-right: 5px;"/>&Ouml;BV News</div>
+                        <div class="home_tile_content">Content</div>
+                    </div>
+
+                    <div class="home_tile_container">
+                        <div class="home_tile_title">Video</div>
+                        <div class="home_tile_content">Content</div>
+                    </div>
+
+
+                </div>
+                <div class="home_tile_col2">
+
+                    <div class="home_tile_container">
+                        <div class="home_tile_title">Termine</div>
+                        <div class="home_tile_content">Content</div>
+                    </div>
+
+                    <div class="home_tile_container">
+                        <div class="home_tile_title">Meisterschaft</div>
+                        <div class="home_tile_content">Content</div>
+                    </div>
+
+                    <div class="home_tile_container">
+                        <div class="home_tile_title">Ranglisten</div>
+                        <div class="home_tile_content">Content</div>
+                    </div>
+
+                    <div class="home_tile_container">
+                        <div class="home_tile_title">Links</div>
+                        <div class="home_tile_content">Content</div>
+                    </div>
+
+                </div>
+
+            </div>
         </aside>
     </main>
     ';
