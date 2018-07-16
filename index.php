@@ -116,7 +116,58 @@
 
                     <div class="home_tile_container_s stagfade2">
                         <div class="home_tile_title">Meisterschaft</div>
-                        <div class="home_tile_content">Content</div>
+                        <div class="home_tile_content"><li> 1. Landesliga </li></div>
+                        <br>
+                        <table cellspacing="0px" cellpadding="0">
+                            <tbody>
+                                <tr style="font-weight: bold;">
+                                    <td style="padding: 2px;">Pl</td>
+                                    <td style="padding: 2px;">Mannschaft</td>
+                                    <td style="padding: 2px;">Sp</td>
+                                    <td style="padding: 2px;">Pkt</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 2px; align="right">1</td>
+                                    <td style="padding: 2px;">BSC 70 Linz 2</td>
+                                    <td style="padding: 2px;" align="center">10</td>
+                                    <td style="padding: 2px;" align="center">28</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 2px; align="right">2</td>
+                                    <td style="padding: 2px;">Union Oaschdorf</td>
+                                    <td style="padding: 2px;" align="center">10</td>
+                                    <td style="padding: 2px;" align="center">25</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="padding: 2px; align="right">3</td>
+                                    <td style="padding: 2px;">U. W-garsten 1</td>
+                                    <td style="padding: 2px;" align="center">10</td>
+                                    <td style="padding: 2px;" align="center">21</td>
+
+                                </tr>
+                                 <tr>
+                                    <td style="padding: 2px; align="right">4</td>
+                                    <td style="padding: 2px;">ASK&Ouml; Traun 2</td>
+                                    <td style="padding: 2px;" align="center">10</td>
+                                    <td style="padding: 2px;" align="center">20</td>
+                                </tr>
+                                 <tr>
+                                    <td style="padding: 2px; align="right">5</td>
+                                    <td style="padding: 2px;">UBC Vorchdorf 2</td>
+                                    <td style="padding: 2px;" align="center">10</td>
+                                    <td style="padding: 2px;" align="center">14</td>
+                                </tr>
+                                 <tr>
+                                    <td style="padding: 2px; align="right">6</td>
+                                    <td style="padding: 2px;">UBC Neuhofen 1</td>
+                                    <td style="padding: 2px;" align="center">10</td>
+                                    <td style="padding: 2px;" align="center">12</td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br>
                     </div>
 
                     <div class="home_tile_container_s stagfade3">
