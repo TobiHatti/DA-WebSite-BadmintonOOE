@@ -17,11 +17,18 @@ THANKS INTERNET EXPLORER
 
 html{
     font-family: Calibri, Arial, sans-serif;
-    font-size: 12pt;    
+    font-size: 12pt;
     background: linear-gradient(to bottom, #759ABD, #FFFFFF);
     background-attachment: fixed;
     height:100%;
 }
+
+a{
+    text-decoration: none;
+    color: #3B9EBF;
+}
+
+
 
 body{
     display: grid;
@@ -177,6 +184,8 @@ footer{
 code{
     font-family: monospace !important;
 }
+
+
 
 h1{
     font-size: 22pt;
