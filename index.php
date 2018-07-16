@@ -93,7 +93,11 @@
 
                     <div class="home_tile_container_l stagfade2">
                         <div class="home_tile_title"><img src="/content/rss.png" alt="" style="width:20px; height: 20px; margin-bottom:-2px; margin-right: 5px;"/>&Ouml;BV News</div>
-                        <div class="home_tile_content">Content</div>
+                        <div class="home_tile_content"><li> <A HREF="http://www.badminton.at/extended.php?id=5217">Bundessportakademie</A> </li></div>
+                        <div class="home_tile_content"><li> <A HREF="http://www.badminton.at/extended.php?id=5216">White Nights 2018</A> </li></div>
+                        <div class="home_tile_content"><li> <A HREF="http://www.badminton.at/extended.php?id=5215">&Ouml;BV-Leistungssportkonferenz</A> </li></div>
+                        <div class="home_tile_content"><li> <A HREF="http://www.badminton.at/extended.php?id=5214">&Ouml;BV-Kdernominierungen</A> </li></div>
+                        <div class="home_tile_content"><li> <A HREF="http://www.badminton.at/extended.php?id=5213">Shuttle Time und &Uuml;L-Ausbildungen</A> </li></div>
                     </div>
 
                     <div class="home_tile_container_l stagfade3">
