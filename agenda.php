@@ -1,23 +1,15 @@
 <?php
 
-/*
-   Simple Calendar
-   by Karlis Blumentals (www.blumentals.net)
-
-   Displays a calendar, one month at a time.
-   Selected date is passed as parameter day=yyyy-mm-dd
-   e.g. myscript.php?day=2012-11-22
-*/
-
+   require ("header.php");
+   echo '<main>';
 ?>
 
 
-<!DOCTYPE html>
 
-<html>
 
 <head>
-  <title>Calendar</title>
+  <title>Terminkalender | O&Ouml;. Badmintonverband</title>
+
   <style>
   body {
     font-family: Arial, Helvetica, sans-serif;
@@ -27,11 +19,11 @@
   }
   a:hover {
     text-decoration: underline;
-  }  
+  }
   </style>
 </head>
 
-<body>
+
 
 <?php
 
@@ -103,8 +95,10 @@ for ($i=1;$i<=6;$i++) {
   echo('</tr>'."\n");
 }
 echo('</table>');
+echo ('</main>');
+include ("footer.php");
+
 ?>
 
-</body>
 
-</html>
+
