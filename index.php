@@ -107,7 +107,11 @@
 
                     <div class="home_tile_container_s stagfade1">
                         <div class="home_tile_title">Termine</div>
-                        <div class="home_tile_content">Content</div>
+                        <br>
+                            <div class="home_tile_content"><li> Terminliste zurzeit nicht verf&uuml;gbar, bitte folgenden Link zum Terminkalender verwenden ...</li></div>
+                        <br>
+                        <div class="home_tile_content"><li><A HREF="agenda">Terminkalender</A></li></div>
+                        <br>
                     </div>
 
                     <div class="home_tile_container_s stagfade2">
