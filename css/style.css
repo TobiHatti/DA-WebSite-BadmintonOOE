@@ -11,11 +11,13 @@ THANKS INTERNET EXPLORER
 */
 
 *{
-    font-family: Calibri, Arial, sans-serif;
-    font-size: 12pt;
+
+
 }
 
 html{
+    font-family: Calibri, Arial, sans-serif;
+    font-size: 12pt;    
     background: linear-gradient(to bottom, #759ABD, #FFFFFF);
     background-attachment: fixed;
     height:100%;
@@ -170,6 +172,10 @@ footer{
     text-align:center;
     background: #454545;
     color: #FFFFFF;
+}
+
+code{
+    font-family: monospace !important;
 }
 
 h1{
