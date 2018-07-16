@@ -26,9 +26,18 @@ html{
 a{
     text-decoration: none;
     color: #3B9EBF;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
 }
 
+a:hover{
+    text-decoration: underline;
+    color: #F01B16;
+}
 
+a:active{
+    color: #63B4CF;
+}
 
 body{
     display: grid;

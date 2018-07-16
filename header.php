@@ -39,11 +39,11 @@
 
                             <li class="active"><a href="#">Verband</a>
                                 <ul>
-                                    <li><a href="#">Vorstand</a></li>
-                                    <li><a href="#">Satzung & Ordnungen</a></li>
-                                    <li><a href="#">Vereine</a></li>
-                                    <li><a href="#">Links</a></li>
-                                    <li><a href="#">Downloads</a></li>
+                                    <li><a href="vorstand">Vorstand</a></li>
+                                    <li><a href="satzungen">Satzung & Ordnungen</a></li>
+                                    <li><a href="vereine">Vereine</a></li>
+                                    <li><a href="links">Links</a></li>
+                                    <li><a href="downloads">Downloads</a></li>
                                 </ul>
                             </li>
 
@@ -51,43 +51,43 @@
                                 <ul>
                                     <li><a href="#">O&Ouml;MM <span style="float:right;">&#10148;</span></a>
                                         <ul>
-                                            <li><a href="#">Allg. Klasse</a></li>
-                                            <li><a href="#">Sch&uuml;ler / Jugend</a></li>
+                                            <li><a href="allgemeine-klasse">Allg. Klasse</a></li>
+                                            <li><a href="schueler-jugend">Sch&uuml;ler / Jugend</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="#">Ranglisten <span style="float:right;">&#10148;</span></a>
                                         <ul>
-                                            <li><a href="#">O&Ouml;BV-Ranglisten</a></li>
-                                            <li><a href="#">&Ouml;BV-Ranglisten</a></li>
+                                            <li><a href="ooebv-ranglisten.php">O&Ouml;BV-Ranglisten</a></li>
+                                            <li><a href="http://www.badminton.at">&Ouml;BV-Ranglisten</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Zentralausschreibung</a></li>
-                                    <li><a href="#">Senioren</a></li>
-                                    <li><a href="#">Schiedsrichter</a></li>
+                                    <li><a href="zentralausschreibung">Zentralausschreibung</a></li>
+                                    <li><a href="senioren">Senioren</a></li>
+                                    <li><a href="schriedsrichter">Schiedsrichter</a></li>
                                 </ul>
                             </li>
 
                             <li class="active"><a href="#">Nachwuchs</a>
                                 <ul>
-                                    <li><a href="#">O&Ouml; Nachwuchskader</a></li>
-                                    <li><a href="#">Trainingszeiten BNLZ-Nord</a></li>
-                                    <li><a href="#">Fotogalerie</a></li>
+                                    <li><a href="nachwuchskader">O&Ouml; Nachwuchskader</a></li>
+                                    <li><a href="trainingszeiten">Trainingszeiten BNLZ-Nord</a></li>
+                                    <li><a href="fotogalerie">Fotogalerie</a></li>
                                 </ul>
                             </li>
 
                             <li class="active"><a href="#">Archiv</a>
                                 <ul>
-                                    <li><a href="#">Jahresberichte</a></li>
-                                    <li><a href="#">News-Archiv</a></li>
-                                    <li><a href="#">O&Ouml;MM-Archiv <span style="float:right;">&#10148;</span></a>
+                                    <li><a href="jahresberichte">Jahresberichte</a></li>
+                                    <li><a href="news-archiv">News-Archiv</a></li>
+                                    <li><a href="ooemm-archiv">O&Ouml;MM-Archiv <span style="float:right;">&#10148;</span></a>
                                         <ul>
-                                            <li><a href="#">2005/2006</a></li>
-                                            <li><a href="#">2004/2005</a></li>
-                                            <li><a href="#">2003/2004</a></li>
-                                            <li><a href="#">2002/2003</a></li>
-                                            <li><a href="#">2001/2002</a></li>
-                                            <li><a href="#">2000/2001</a></li>
-                                            <li><a href="#">1999/2000</a></li>
+                                            <li><a href="ooemm-archiv.php?jahr=2005-2006">2005/2006</a></li>
+                                            <li><a href="ooemm-archiv.php?jahr=2004-2005">2004/2005</a></li>
+                                            <li><a href="ooemm-archiv.php?jahr=2003-2004">2003/2004</a></li>
+                                            <li><a href="ooemm-archiv.php?jahr=2002-2003">2002/2003</a></li>
+                                            <li><a href="ooemm-archiv.php?jahr=2001-2002">2001/2002</a></li>
+                                            <li><a href="ooemm-archiv.php?jahr=2000-2001">2000/2001</a></li>
+                                            <li><a href="ooemm-archiv.php?jahr=1999-2000">1999/2000</a></li>
                                         </ul>
                                     </li>
                                 </ul>
