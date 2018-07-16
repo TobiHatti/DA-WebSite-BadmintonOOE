@@ -97,7 +97,7 @@
                     </div>
 
                     <div class="home_tile_container_l stagfade3">
-                        <div class="home_tile_title">Zebras sind nice</div>
+                        <div class="home_tile_title">Videos</div>
                         <div class="home_tile_content">Content</div>
                     </div>
 
