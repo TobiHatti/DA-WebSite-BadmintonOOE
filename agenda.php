@@ -9,18 +9,6 @@
 
 <head>
   <title>Terminkalender | O&Ouml;. Badmintonverband</title>
-
-  <style>
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  a {
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-  </style>
 </head>
 
 
