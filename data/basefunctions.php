@@ -6,6 +6,8 @@
 //                                      Contains:                                   *
 // Basic Functions                                                                  *
 //      •Redirect       (return: void)                                              *
+//      •SubStringFind  (return: bool)                                              *
+//      •XSubStringFind (return: bool)                                              *
 // Property-Functions                                                               *
 //      •SetProperty    (return: void)                                              *
 //      •GetProperty    (return: string)                                            *
@@ -29,13 +31,40 @@
 
 function Redirect($path,$delay=0)
 {
+    // DESCRIPTION:
+    // Use Redirect() to change to another page.
+    // Usefull afer POST-Instructions with SQL-Querys like: INSERT, DELETE, etc.
+    // $path    relative or absolute path: "/testpage", "google.at"
+    // $delay   time afer which the redirect is executed. default: 0s
     echo '<meta http-equiv="refresh" content="'.$delay.'; url='.$path.'" />';
 }
 
 function SubStringFind($string,$search)
 {
+    // DESCRIPTION:
+    // Returns true/false when a string is found inside another string
+    // $string  the string that needs to be examined
+    // $search  the string you want to search for
+
     if(str_replace($search,'',$string)==$string) return false;
     else return true;
+}
+
+function XSubStringFind()
+{
+    // DESCRIPTION:
+    // = SubstringFind for infinite search-strings
+    // Returns true/false when one of the given strings is found inside the main string
+    // 1st Arg  String to search in
+    // nth Arg  Strings to be found in main string
+
+    $amt = func_num_args();
+    $search = func_get_args();
+    $string = strtolower($search[0]);
+    $retval=false;
+
+    for($i=1;$i<$amt;$i++) if(str_replace(strtolower($search[$i]),'',$string)!=$string) $retval = true;
+    return $retval;
 }
 
 //***********************************************************************************
@@ -44,6 +73,11 @@ function SubStringFind($string,$search)
 
 function GetProperty($key)
 {
+    // DESCRIPTION:
+    // Return a Property saved in the Database
+    // If property does not exist, an empty string ("") is returned
+    // $key     Keyword of the property (e.g. keyword="site_name" returns "My Cool Website")
+
     return MySQLSkalar("SELECT value AS x FROM settings WHERE setting = '$key'");
 }
 
