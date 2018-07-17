@@ -1,5 +1,6 @@
 <?php
     require("header.php");
+    PageTitle("Home");
 
     $video_match_badminton='<iframe width="425" height="349" src="https://www.youtube.com/watch?v=_FpDVKgfTHs" frameborder="0" allowfullscreen></iframe>"';
 
@@ -114,7 +115,7 @@
                     <div class="home_tile_container_l stagfade3">
                         <div class="home_tile_title">Videos</div>
                         <div class="home_tile_content">
-                           
+
                           <iframe width="300" height="129" src="https://www.youtube.com/embed/_FpDVKgfTHs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                         </div>
 

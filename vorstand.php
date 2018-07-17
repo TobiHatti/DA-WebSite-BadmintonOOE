@@ -30,18 +30,144 @@
             </div>
 
             <div>
-                 <img src="/content/Vorstand/herbert_koch.jpg" alt="Herbert Koch" class="user_img_m"/>
+                 <img src="/content/Vorstand/peter_zauner.jpg" alt="Peter Zauner" class="user_img_m"/>
              </div>
              <div>
-                <span style="color: #AD0000"><b> Kons. Herbert Koch </b></span>
+                <span style="color: #AD0000"><b> Peter Zauner </b></span>
                 <br>
-                <i><span style="color: #444444">Pr&auml;sident</span></i>
+                <i><span style="color: #444444">Sportkoordinator</span></i>
                 <br>
-                <a href="mailto:herbert.koch@gmx.at">E-Mail senden</a>
+                <i><span style="color: #444444">Borg</span></i>
+                <br>
+                <a href="mailto:zape@me.com">E-Mail senden</a>
                 <br>
                 <span style="color: #444444">Mobiltelefon:</span>
                 <br>
-                <span style="color: #444444">0664/2407556</span>
+                <span style="color: #444444">0676/841234861</span>
+
+            </div>
+
+            <div>
+                 <img src="/content/Vorstand/klaus_mitterhauser.jpg" alt="Klaus Mitterhauser" class="user_img_m"/>
+             </div>
+             <div>
+                <span style="color: #AD0000"><b> Klaus Mitterhauser </b></span>
+                <br>
+                <i><span style="color: #444444">Vizepr&auml;sident</span></i>
+                <br>
+                <i><span style="color: #444444">Rechtsreferent</span></i>
+                <br>
+                <i><span style="color: #444444">Homepage</span></i>
+                <br>
+                <a href="mailto:zape@me.com">E-Mail senden</a>
+                <br>
+                <span style="color: #444444">Mobiltelefon:</span>
+                <br>
+                <span style="color: #444444">0676/841234861</span>
+
+            </div>
+
+            <div>
+                 <img src="/content/Vorstand/karin_burger.jpg" alt="Karin Burger" class="user_img_m"/>
+             </div>
+             <div>
+                <span style="color: #AD0000"><b> Karin Burger </b></span>
+                <br>
+                <i><span style="color: #444444">Schriftf&uuml;hrerin</span></i>
+                <br>
+                <i><span style="color: #444444">Nachwuchsranglisten</span></i>
+                <br>
+                <a href="mailto:ooe-badmintonverband@aon.at">E-Mail senden</a>
+                <br>
+                <span style="color: #444444">Mobiltelefon:</span>
+                <br>
+                <span style="color: #444444">0681/10621408</span>
+
+            </div>
+
+            <div>
+                 <img src="/content/Vorstand/anton_aistleitner.jpg" alt="Anton Aistleitner" class="user_img_m"/>
+             </div>
+             <div>
+                <span style="color: #AD0000"><b> Anton Aistleitner </b></span>
+                <br>
+                <i><span style="color: #444444">Finanzreferent</span></i>
+                <br>
+                <a href="mailto:anton.aistleitner@hotmail.com">E-Mail senden</a>
+                <br>
+                <span style="color: #444444">Mobiltelefon:</span>
+                <br>
+                <span style="color: #444444">0660/1348822</span>
+
+            </div>
+
+            <div>
+                 <img src="/content/Vorstand/stephan_dlapka.jpg" alt="Stephan Dlapka" class="user_img_m"/>
+             </div>
+             <div>
+                <span style="color: #AD0000"><b> Stephan Dlapka </b></span>
+                <br>
+                <i><span style="color: #444444">Nachwuchsreferent</span></i>
+                <br>
+                <i><span style="color: #444444">Sch&uuml;ler</span></i>
+                <br>
+                <span style="color: #444444">Mobiltelefon:</span>
+                <br>
+                <span style="color: #444444">0660/6503582</span>
+
+            </div>
+
+            <div>
+                 <img src="/content/Vorstand/othmar_auberger.jpg" alt="Othmar Auberger" class="user_img_m"/>
+             </div>
+             <div>
+                <span style="color: #AD0000"><b> Othmar Auberger </b></span>
+                <br>
+                <i><span style="color: #444444">Nachwuchsreferent</span></i>
+                <br>
+                <i><span style="color: #444444">Jugend</span></i>
+                <br>
+                <span style="color: #444444">Mobiltelefon:</span>
+                <br>
+                <span style="color: #444444">0699/19211350</span>
+
+            </div>
+
+             <div>
+                 <img src="/content/Vorstand/andreas_rabel.jpg" alt="Andreas Rabel" class="user_img_m"/>
+             </div>
+             <div>
+                <span style="color: #AD0000"><b> Othmar Auberger </b></span>
+                <br>
+                <i><span style="color: #444444">Vizepr&auml;sident</span></i>
+                <br>
+                <i><span style="color: #444444">Ligareferent</span></i>
+                <br>
+                <i><span style="color: #444444">O&Ouml;MM</span></i>
+                <br>
+                <a href="mailto:rabel.badminton@aon.at">E-Mail senden</a>
+                <br>
+                <span style="color: #444444">Mobiltelefon:</span>
+                <br>
+                <span style="color: #444444">0676/9433042</span>
+
+            </div>
+
+            <div>
+                 <img src="/content/Vorstand/tina_fuereder.jpg" alt="Tina Füreder" class="user_img_m"/>
+             </div>
+             <div>
+                <span style="color: #AD0000"><b> Mag. Tina F&uuml;reder </b></span>
+                <br>
+                <i><span style="color: #444444">Schulsportreferentin</span></i>
+                <br>
+                <i><span style="color: #444444">Aus- und Weiterbildung</span></i>
+                <br>
+                <a href="mailto:tina_4720200@hotmail.com">E-Mail senden</a>
+                <br>
+                <span style="color: #444444">Mobiltelefon:</span>
+                <br>
+                <span style="color: #444444">0650/4720200</span>
 
             </div>
         </div>
@@ -53,5 +179,8 @@
              <aside></aside>
     ';
 
+
+
     include("footer.php");
 ?>
+
