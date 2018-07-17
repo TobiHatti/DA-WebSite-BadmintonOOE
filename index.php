@@ -114,8 +114,8 @@
                     <div class="home_tile_container_l stagfade3">
                         <div class="home_tile_title">Videos</div>
                         <div class="home_tile_content">
-                            Video
-                            <video style="width: 229px; height: 129px; left: 35.3333px; top:0px;" tabindex="-1" controlslist="nodownload" src="blob:https://www.youtube.com/watch?v=_FpDVKgfTHs"</video>
+                           
+                          <iframe width="300" height="129" src="https://www.youtube.com/embed/_FpDVKgfTHs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                         </div>
 
 
