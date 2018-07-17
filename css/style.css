@@ -1,50 +1,68 @@
 /*
-======================
-=======================
-WARNING!!!
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+///////////////////////////////////////////////////////////////////////////////////////
 
-FOR EVERY GRID AND GRID-ELEMENT A FALLBACK-CLASS
-NEEDS TO BE CREATED!
+    Notes:
+    • For every CSS-Grid a Fallback-Class needs to be created.
 
-THANKS INTERNET EXPLORER
+///////////////////////////////////////////////////////////////////////////////////////
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
+    Content:
+    ====== 0 - General =====================
+    (01)    HTML-Structural-Tags
+    (02)    Default HTML-Tags
+    (03)    Headings
+    (04)    Theme-Classes
+    (05)    General-Classes
+    (06)    Searchbar
+    (07)    Staggered Fade Animations
+    ====== A - Home ========================
+    (A1)    Home > Header
+    (A2)    Home > News-Feed
+    (A3)    Home > Tiles
+    ====== B - Home ========================
+    (B1)
+    ====== C - Home ========================
+    (C1)
+    ====== D - Home ========================
+    (D1)
+    ====== E - Home ========================
+    (E1)
+    ====== F - Home ========================
+    (F1)
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+///////////////////////////////////////////////////////////////////////////////////////
 */
 
-*{
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*================================   0 - GENERAL     ================================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 
-
-}
+/*===================================================================================*/
+/* (01) HTML-Structural-Tags                                                         */
+/*===================================================================================*/
 
 html{
     font-family: Calibri, Arial, sans-serif;
-    font-size: 12pt;
+    font-size: 11pt;
     background: linear-gradient(to bottom, #759ABD, #FFFFFF);
     background-attachment: fixed;
     height:100%;
-}
-
-a{
-    text-decoration: none;
-    color: #3B9EBF;
-    -webkit-transition: all .1s ease-in-out;
-    transition: all .1s ease-in-out;
-}
-
-a:hover{
-    text-decoration: underline;
-    color: #F01B16;
-}
-
-a:active{
-    color: #63B4CF;
 }
 
 body{
     display: grid;
 }
 
-/* SMALL PHONES */
 @media only screen and (max-width: 600px){
+    /* SMALL PHONES */
     body{
         margin:0px;
         grid-template-columns: 1fr;
@@ -57,8 +75,8 @@ body{
     }
 }
 
-/* PORTRAIT TABLETS - LARGE PHONES */
 @media only screen and (min-width: 600px){
+    /* PORTRAIT TABLETS - LARGE PHONES */
     body{
         grid-template-columns: 1fr 5fr 1fr;
         grid-template-rows: 15px 60px 38px auto auto 30px;
@@ -72,8 +90,8 @@ body{
     }
 }
 
-/* LANDSCAPE TABLETS */
 @media only screen and (min-width: 768px){
+    /* LANDSCAPE TABLETS */
     body{
         grid-template-columns: 1fr 5fr 3fr 1fr;
         grid-template-rows: 15px 70px 38px auto 30px;
@@ -86,8 +104,8 @@ body{
     }
 }
 
-/* DESKTOP */
 @media only screen and (min-width: 992px){
+    /* DESKTOP */
     body{
         grid-template-columns: 1fr 3fr 2fr 1fr;
         grid-template-rows: 15px 100px 38px auto 30px;
@@ -99,8 +117,6 @@ body{
             ". . . .";
     }
 }
-
-
 
 header{
     grid-area: header;
@@ -128,6 +144,12 @@ main{
     box-shadow: 0 0 2px 1px #828282;
 }
 
+article{
+    grid-area: article;
+    background: #FFFFFF;
+    padding:5px;
+}
+
 @media only screen and (max-width: 1090px){
     main{
         grid-template-columns: 1fr;
@@ -139,9 +161,6 @@ main{
     }
 
     article{
-        grid-area: article;
-        background: #FFFFFF;
-        padding:5px;
         border-right: none;
         border-bottom: 1px solid black;
     }
@@ -157,25 +176,14 @@ main{
     }
 
     article{
-        grid-area: article;
-        background: #FFFFFF;
-        padding:5px;
         border-bottom: none;
         border-right: 1px solid black;
     }
 
 }
 
-
 aside{
     grid-area: aside;
-    background: #FFFFFF;
-    padding:5px;
-
-}
-
-article{
-    grid-area: article;
     background: #FFFFFF;
     padding:5px;
 }
@@ -190,11 +198,51 @@ footer{
     color: #FFFFFF;
 }
 
+/*===================================================================================*/
+/* (02) Default HTML-Tags                                                            */
+/*===================================================================================*/
+
+a{
+    text-decoration: none;
+    color: #3B9EBF;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+
+a:hover{
+    text-decoration: underline;
+    color: #F01B16;
+}
+
+a:active{
+    color: #63B4CF;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+ul{
+    padding-left: 18px;
+    margin: 5px 0 2px 0;
+}
+
+ul li{
+    list-style-image: url('bullet.png');
+    list-style-position: outside;
+    margin-top:4px;
+}
+
 code{
     font-family: monospace !important;
 }
 
 
+/*===================================================================================*/
+/* (03) Headings                                                                     */
+/*===================================================================================*/
 
 h1{
     font-size: 22pt;
@@ -227,11 +275,145 @@ h4{
     margin:2px 0 2px 0;
 }
 
-hr {
-    border: 0;
-    height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+/*===================================================================================*/
+/* (04) Theme-Classes                                                                */
+/*===================================================================================*/
+
+.theme{
+
 }
+
+.t_button{
+
+}
+
+.t_textbox{
+
+}
+
+.t_selectbox{
+
+}
+
+.t_textarea{
+
+}
+
+.t_checkbox{
+
+}
+
+.t_radio{
+
+}
+
+/*===================================================================================*/
+/* (05) General-Classes                                                              */
+/*===================================================================================*/
+
+
+
+/*===================================================================================*/
+/* (06) Searchbar                                                                    */
+/*===================================================================================*/
+
+@media only screen and (max-width: 850px){
+    .searchbar_container{
+        display:none;
+    }
+
+    .mobile_searchtrigger_container{
+        position: absolute;
+        right: 8px;
+        top: 4px;
+    }
+
+    .searchbar_trigger{
+        border:none;
+        background: #507CA5;
+        padding: 3px 1px 1px 1px;
+        width: 35px;
+        box-shadow: inset 0 0 2px 1px #375572;
+    }
+
+    .mobile_searchbar_container{
+        display: none;
+        height: 0px;
+        -webkit-transition: all .5s ease-in-out;
+        transition: all .5s ease-in-out;
+    }
+
+    .mobile_searchbar_container:target{
+        display: inline-block;
+        background: #416586;
+        width: 100%;
+        height: 38px;
+        z-index: 300000;
+        padding: 5px;
+
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+
+        -webkit-transition: all .5s ease-in-out;
+        transition: all .5s ease-in-out;
+    }
+
+    .mobile_searchbar{
+        width:90%;
+        line-height: 26px;
+        font-size:14pt;
+        border:none;
+        box-shadow: inset 0 0 2px 1px #375572;
+        background: #507CA5;
+        color: #FFFFFF;
+        padding-left: 5px;
+
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+}
+
+@media only screen and (min-width: 850px){
+    .searchbar_container{
+        position: absolute;
+        right: 8px;
+        top: 8px;
+    }
+
+    .searchbar{
+        float: right;
+        border: none;
+        background: #507CA5;
+        color: #FFFFFF;
+        padding-left: 5px;
+        box-shadow: inset 0 0 2px 1px #375572;
+    }
+
+    .mobile_searchtrigger_container, .mobile_searchbar_container{
+        display:none;
+    }
+}
+
+.searchbar::placeholder {
+    color: #FFFFFF;
+    opacity: 0.5;
+}
+
+.searchbar:-ms-input-placeholder {
+    color: #FFFFFF;
+    opacity: 0.5;
+}
+
+.searchbar::-ms-input-placeholder {
+    color: #FFFFFF;
+    opacity: 0.5;
+}
+
+/*===================================================================================*/
+/* (07) Staggered Fade Animations                                                    */
+/*===================================================================================*/
 
 @keyframes stag_fade_in_1{
     0% { opacity: 0; }
@@ -323,6 +505,16 @@ hr {
     animation-iteration-count: 1;
 }
 
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*================================      A - HOME     ================================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+
+/*===================================================================================*/
+/* (A1) Home > Header                                                                */
+/*===================================================================================*/
+
 .header_logo{
     height: 100%;
 
@@ -336,7 +528,7 @@ hr {
 }
 
 /*===================================================================================*/
-/* Home > News-Feed                                                                  */
+/* (A2) Home > News-Feed                                                             */
 /*===================================================================================*/
 
 .home_news_container{
@@ -363,7 +555,7 @@ hr {
 }
 
 /*===================================================================================*/
-/* Home > Tiles                                                                      */
+/* (A3) Home > Tiles                                                                 */
 /*===================================================================================*/
 .home_tile_wrapper{
     display: grid;
@@ -381,17 +573,18 @@ hr {
 @media only screen and (min-width: 1090px){
     .home_tile_wrapper{
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-rows: auto auto;
         grid-template-areas:
             "tile_col1"
             "tile_col2";
     }
 }
 
-@media only screen and (min-width: 1350px){
+@media only screen and (min-width: 1380px){
     .home_tile_wrapper{
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr;
+        grid-gap: 20px;
         grid-template-areas:
             "tile_col1 tile_col2";
     }
@@ -407,10 +600,12 @@ hr {
 
 .home_tile_container_l{
     width:230px;
+    margin-top:10px;
 }
 
 .home_tile_container_s{
     width:190px;
+    margin-top:10px;
 }
 
 .home_tile_title{
@@ -423,113 +618,8 @@ hr {
 }
 
 .home_tile_content{
-
+    padding: 2px 2px 5px 3px;
 }
-
-/*===================================================================================*/
-/* Searchbar                                                                    */
-/*===================================================================================*/
-
-@media only screen and (max-width: 850px){
-    .searchbar_container{
-        display:none;
-    }
-
-    .mobile_searchtrigger_container{
-        position: absolute;
-        right: 8px;
-        top: 4px;
-
-    }
-
-    .searchbar_trigger{
-        border:none;
-        background: #507CA5;
-        padding: 3px 1px 1px 1px;
-        width: 35px;
-        box-shadow: inset 0 0 2px 1px #375572;
-    }
-
-    .mobile_searchbar_container{
-        display: none;
-        height: 0px;
-        -webkit-transition: all .5s ease-in-out;
-        transition: all .5s ease-in-out;
-    }
-
-    .mobile_searchbar_container:target{
-        display: inline-block;
-        background: #416586;
-        width: 100%;
-        height: 38px;
-        z-index: 300000;
-        padding: 5px;
-
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-
-        -webkit-transition: all .5s ease-in-out;
-        transition: all .5s ease-in-out;
-
-    }
-
-    .mobile_searchbar{
-        width:90%;
-        line-height: 26px;
-        font-size:14pt;
-        border:none;
-        box-shadow: inset 0 0 2px 1px #375572;
-        background: #507CA5;
-        color: #FFFFFF;
-        padding-left: 5px;
-
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-    }
-
-}
-
-@media only screen and (min-width: 850px){
-    .searchbar_container{
-        position: absolute;
-        right: 8px;
-        top: 8px;
-    }
-
-    .searchbar{
-        float: right;
-        border: none;
-        background: #507CA5;
-        color: #FFFFFF;
-        padding-left: 5px;
-        box-shadow: inset 0 0 2px 1px #375572;
-    }
-
-    .mobile_searchtrigger_container, .mobile_searchbar_container{
-        display:none;
-    }
-
-
-
-}
-
-.searchbar::placeholder {
-    color: #FFFFFF;
-    opacity: 0.5;
-}
-
-.searchbar:-ms-input-placeholder {
-    color: #FFFFFF;
-    opacity: 0.5;
-}
-
-.searchbar::-ms-input-placeholder {
-    color: #FFFFFF;
-    opacity: 0.5;
-}
-
 
 
 

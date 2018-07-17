@@ -2,8 +2,8 @@
     require("header.php");
 
     $video_match_badminton='<iframe width="425" height="349" src="https://www.youtube.com/watch?v=_FpDVKgfTHs" frameborder="0" allowfullscreen></iframe>"';
+
     echo '
-    <main>
         <article>
             <center>
                 <div style="width: 480px; height:240px; border:1px solid #0066CC;">
@@ -82,6 +82,8 @@
                 </div>
             </div>
         </article>
+
+
         <aside>
            <div class="home_tile_wrapper">
                 <div class="home_tile_col1">
@@ -89,22 +91,30 @@
 
                     <div class="home_tile_container_l stagfade1">
                         <div class="home_tile_title">Nachwuchs</div>
-                        <div class="home_tile_content">Content</div>
+                        <div class="home_tile_content">
+
+                            Content
+
+                        </div>
                     </div>
 
                     <div class="home_tile_container_l stagfade2">
                         <div class="home_tile_title"><img src="/content/rss.png" alt="" style="width:20px; height: 20px; margin-bottom:-2px; margin-right: 5px;"/>&Ouml;BV News</div>
-                        <div class="home_tile_content"><li> <A HREF="http://www.badminton.at/extended.php?id=5217">Bundessportakademie</A> </li></div>
-                        <div class="home_tile_content"><li> <A HREF="http://www.badminton.at/extended.php?id=5216">White Nights 2018</A> </li></div>
-                        <div class="home_tile_content"><li> <A HREF="http://www.badminton.at/extended.php?id=5215">&Ouml;BV-Leistungssportkonferenz</A> </li></div>
-                        <div class="home_tile_content"><li> <A HREF="http://www.badminton.at/extended.php?id=5214">&Ouml;BV-Kdernominierungen</A> </li></div>
-                        <div class="home_tile_content"><li> <A HREF="http://www.badminton.at/extended.php?id=5213">Shuttle Time und &Uuml;L-Ausbildungen</A> </li></div>
+                        <div class="home_tile_content">
+                            <ul>
+                                <li><a href="http://www.badminton.at/extended.php?id=5217">Bundessportakademie</a></li>
+                                <li><a href="http://www.badminton.at/extended.php?id=5216">White Nights 2018</a></li>
+                                <li><a href="http://www.badminton.at/extended.php?id=5215">&Ouml;BV-Leistungssportkonferenz</a></li>
+                                <li><a href="http://www.badminton.at/extended.php?id=5214">&Ouml;BV-Kdernominierungen</a></li>
+                                <li><a href="http://www.badminton.at/extended.php?id=5213">Shuttle Time und &Uuml;L-Ausbildungen</a></li>
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="home_tile_container_l stagfade3">
                         <div class="home_tile_title">Videos</div>
-                        <div class="home_tile_content"> Video</div>
-                        <div class="home_tile_content" data-layer="0">
+                        <div class="home_tile_content">
+                            Video
                             <video style="width: 229px; height: 129px; left: 35.3333px; top:0px;" tabindex="-1" controlslist="nodownload" src="blob:https://www.youtube.com/watch?v=_FpDVKgfTHs"</video>
                         </div>
 
@@ -117,19 +127,22 @@
 
                     <div class="home_tile_container_s stagfade1">
                         <div class="home_tile_title">Termine</div>
-                        <br>
-                            <div class="home_tile_content"><li> Terminliste zurzeit nicht verf&uuml;gbar, bitte folgenden Link zum Terminkalender verwenden ...</li></div>
-                        <br>
-                        <div class="home_tile_content"><li><A HREF="agenda">Terminkalender</A></li></div>
-                        <br>
+                            <div class="home_tile_content">
+                            <ul>
+                                <li> Terminliste zurzeit nicht verf&uuml;gbar, bitte folgenden Link zum Terminkalender verwenden ...</li>
+                                <br>
+                                <li><a href="agenda">Terminkalender</a></li>
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="home_tile_container_s stagfade2">
                         <div class="home_tile_title">Meisterschaft</div>
-                        <div class="home_tile_content"><li> 1. Landesliga </li></div>
-                        <br>
-                        <table cellspacing="0px" cellpadding="0">
-                            <tbody>
+                        <div class="home_tile_content">
+                            <ul>
+                                <li>1. Landesliga</li>
+                            </ul>
+                            <table cellspacing="0px" cellpadding="0">
                                 <tr style="font-weight: bold;">
                                     <td style="padding: 2px;">Pl</td>
                                     <td style="padding: 2px;">Mannschaft</td>
@@ -173,32 +186,36 @@
                                     <td style="padding: 2px;">UBC Neuhofen 1</td>
                                     <td style="padding: 2px;" align="center">10</td>
                                     <td style="padding: 2px;" align="center">12</td>
-
                                 </tr>
-                            </tbody>
-                        </table>
-                        <br>
+                            </table>
+                        </div>
                     </div>
 
                     <div class="home_tile_container_s stagfade3">
                         <div class="home_tile_title">Ranglisten</div>
-                        <div class="home_tile_content">Content</div>
+                        <div class="home_tile_content">
+
+                            Content
+
+                        </div>
                     </div>
 
                     <div class="home_tile_container_s stagfade4">
                         <div class="home_tile_title">Links</div>
-                        <div class="home_tile_content"><li><A HREF="http://www.badminton.at/">&Ouml;. Badmintonverband</A></li></div>
-                        <div class="home_tile_content"><li><A HREF="http://oebv-badminton.liga.nu/">&Ouml;BV-Verwaltungssystem</A></li></div>
-                        <div class="home_tile_content"><li><A HREF="http://obv.tournamentsoftware.com/Home">Tournamentsoftware</A></li></div>
-                        <div class="home_tile_content"><li><A HREF="https://turnieranmeldung.at/">Turnieranmeldung O&Ouml;BV Doppeltuniere</A></li></div>
-
+                        <div class="home_tile_content">
+                            <ul>
+                                <li><a href="http://www.badminton.at/">&Ouml;. Badmintonverband</a></li>
+                                <li><a href="http://oebv-badminton.liga.nu/">&Ouml;BV-Verwaltungssystem</a></li>
+                                <li><a href="http://obv.tournamentsoftware.com/Home">Tournamentsoftware</a></li>
+                                <li><a href="https://turnieranmeldung.at/">Turnieranmeldung O&Ouml;BV Doppeltuniere</a></li>
+                            </ul>
+                        </div>
                     </div>
 
                 </div>
 
             </div>
         </aside>
-    </main>
     ';
 
     include("footer.php");

@@ -2,7 +2,6 @@
     require("header.php");
 
         echo '
-        <main>
             <h1>.php Pages</h1>
             <br>
             <code>
@@ -89,8 +88,6 @@
                     </tr>
                 </table>
             </code>
-        </main>
-
         ';
 
     include("footer.php")

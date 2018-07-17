@@ -18,4 +18,9 @@ function PreventAutoScroll()
             }
         </script>';
 }
+
+function PageTitle($string)
+{
+    echo '<head>O&Ouml;. Badmintonverband - '.$string.'</head>';
+}
 ?>
