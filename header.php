@@ -20,7 +20,7 @@
                 <script src="/data/source.js?'.$revision.'"></script>
                 <script src="/data/menu.js?'.$revision.'"></script>
                 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-
+                <title>O&Ouml;. Badmintonverband</title>
             </head>
 
             <body>

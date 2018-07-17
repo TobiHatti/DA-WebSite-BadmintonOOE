@@ -1,8 +1,12 @@
 <?php
 function PreventAutoScroll()
 {
-    // Description:
-    // When using
+    // DESCRIPTION:
+    // When using CSS-Targets, a <a href="#anchor"> is required.
+    // To prevent the page from jumping to the anchor and therefor putting
+    // it on top of the page, the <a>-Tag needs to contain the following event:
+    // onclick="bgenScroll();"
+
     return '
         <script language="JavaScript" type="text/javascript">
             //Prevent Autoscroll for target-anchors
@@ -23,10 +27,11 @@ function PreventAutoScroll()
 
 function PageTitle($string)
 {
-    // Descripton:
+    // DESCRIPTON:
     // Changes the Page-Title in the Tab
     // Since it is changed in the Middle of the page, and not in the <head>-part,
     // Javascript is required to do so.
-    echo '<script>document.title = "O\u00d6. Badmintonverband - '.$string.'";</script>';
+
+    echo '<script>document.title = "'.$string.' | O\u00d6. Badmintonverband";</script>';
 }
 ?>
