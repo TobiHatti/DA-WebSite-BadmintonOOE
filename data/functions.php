@@ -1,6 +1,8 @@
 <?php
 function PreventAutoScroll()
 {
+    // Description:
+    // When using
     return '
         <script language="JavaScript" type="text/javascript">
             //Prevent Autoscroll for target-anchors
@@ -21,6 +23,10 @@ function PreventAutoScroll()
 
 function PageTitle($string)
 {
-    echo '<head>O&Ouml;. Badmintonverband - '.$string.'</head>';
+    // Descripton:
+    // Changes the Page-Title in the Tab
+    // Since it is changed in the Middle of the page, and not in the <head>-part,
+    // Javascript is required to do so.
+    echo '<script>document.title = "O\u00d6. Badmintonverband - '.$string.'";</script>';
 }
 ?>
