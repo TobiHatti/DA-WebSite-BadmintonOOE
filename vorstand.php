@@ -171,13 +171,84 @@
                 <span style="color: #444444">0650/4720200</span>
 
             </div>
-        </div>
-        <br>
+
+            <div>
+                 <img src="/content/Vorstand/peter_krenmayr.jpg" alt="Peter Krenmayr" class="user_img_m"/>
+             </div>
+             <div>
+                <span style="color: #AD0000"><b> Peter Krenmayr </b></span>
+                <br>
+                <i><span style="color: #444444">Breitensportreferent</span></i>
+                <br>
+                <i><span style="color: #444444">Homepage</span></i>
+                <br>
+                <a href="mailto:kre@gmx.at">E-Mail senden</a>
+                <br>
+                <span style="color: #444444">Mobiltelefon:</span>
+                <br>
+                <span style="color: #444444">0650/3698352</span>
+
+            </div>
+
+            <div>
+                 <img src="/content/Vorstand/lukas-simon_rebhandl.jpg" alt="Lukas und Simon Rebhandl" class="user_img_m"/>
+             </div>
+             <div>
+                <span style="color: #AD0000"><b> Lukas und Simon Rebhandl </b></span>
+                <br>
+                <i><span style="color: #444444">Pressereferenten</span></i>
+                <br>
+                <i><span style="color: #444444">Homepage</span></i>
+                <br>
+                <a href="mailto:berichte-ooebv@gmx.at">E-Mail senden</a>
+                <br>
+                <span style="color: #444444">Mobiltelefon:</span>
+                <br>
+                <span style="color: #444444">0676/9359342</span>
+
+            </div>
+
+          <div>
+                 <img src="/content/Vorstand/peter_schwarzmann.jpg" alt=" Peter Schwarzmann" class="user_img_m"/>
+             </div>
+             <div>
+                <span style="color: #AD0000"><b> Peter Schwarzmann </b></span>
+                <br>
+                <i><span style="color: #444444">Marketing</span></i>
+                <br>
+                <a href="mailto:what.defack@gmx.at">Selbe Email??</a>
+                <br>
+                <span style="color: #444444">Mobiltelefon:</span>
+                <br>
+                <span style="color: #444444">0699/18151253</span>
+
+            </div>
+
+             <div>
+                 <img src="/content/Vorstand/markus_eckersberger.jpg" alt=" Markus Eckersberger" class="user_img_m"/>
+             </div>
+             <div>
+                <span style="color: #AD0000"><b> Markus Eckersberger </b></span>
+                <br>
+                <i><span style="color: #444444">Schiedsrichterreferent</span></i>
+                <br>
+                <i><span style="color: #444444">Doppelranglisten</span></i>
+                <br>
+                <i><span style="color: #444444">Nachwuchsranglisten</span></i>
+                <br>
+                <a href="mailto:markus_eckersberger@gmx.at">E-Mail senden</a>
+                <br>
+                <span style="color: #444444">Mobiltelefon:</span>
+                <br>
+                <span style="color: #444444">0699/11138311</span>
+
+            </div   >
+            <br>
             <br>
             <br>
 
 
-             <aside></aside>
+         <aside></aside>
     ';
 
 
