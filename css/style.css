@@ -15,11 +15,12 @@
     (01)    HTML-Structural-Tags
     (02)    Default HTML-Tags
     (03)    Headings
-    (04)    Theme-Classes
-    (05)    General-Classes
-    (06)    Searchbar
-    (07)    Staggered Fade Animations
-    (08)    Double-Column Classes
+    (04)    Form-Elements
+    (05)    Theme-Classes
+    (06)    General-Classes
+    (07)    Searchbar
+    (08)    Staggered Fade Animations
+    (09)    Double-Column Classes
     ====== A - Home ========================
     (A1)    Home > Header
     (A2)    Home > News-Feed
@@ -264,7 +265,125 @@ h4{
 }
 
 /*===================================================================================*/
-/* (04) Theme-Classes                                                                */
+/* (04) Form-Element - Classes                                                       */
+/*===================================================================================*/
+
+input[type="text"],         /* Text/Number Based Form-Elements */
+input[type="number"],
+input[type="password"],
+input[type="email"],
+input[type="search"],
+input[type="tel"],
+input[type="url"]{
+    padding: 2px;
+    border:none;
+    margin: 3px;
+    border-bottom: 1px solid #A9A9A9;
+    display: inline-block;
+    outline: none;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+
+}
+
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus{
+    border-bottom: 1px solid #3B9EBF;
+}
+
+input[type="date"],         /* Date-Based Form-Elements */
+input[type="datetime-local"],
+input[type="month"],
+input[+type="time"],
+input[type="week"]{
+
+}
+
+input[type="button"],       /* Text-Button Form-Elements */
+input[type="reset"],
+input[type="submit"],
+button{
+    min-height:28px;
+    border: none;
+    border-bottom: 4px solid #416586;
+    border-top: 0px solid #FFFFFF;
+    background: #3B9EBF;
+    color: #FEFEFE;
+    padding: 4px 6px 4px 6px;
+    border-radius: 5px;
+    margin: 3px;
+    outline: none;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    -webkit-transition: all .09s ease-in-out;
+    transition: all .09s ease-in-out;
+}
+
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover,
+button:hover{
+    color: #FFFF99;
+    border-bottom: 3.5px solid #416586;
+    border-top: 0.5px solid #FFFFFF;
+}
+
+input[type="button"]:active,
+input[type="reset"]:active,
+input[type="submit"]:active,
+button:active{
+    color: #FFFFFF;
+    border-bottom: 2px solid #416586;
+    border-top: 2px solid #FFFFFF;
+}
+
+input[type="checkbox"]{     /* Checkbox Form-Element */
+    /* http://abpetkov.github.io/switchery/ */
+}
+
+input[type="radio"]{        /* Radio-Button Form-Element */
+
+}
+
+textarea{                   /* Textarea Form-Element */
+
+}
+
+select{                     /* Select-Menu Form-Element */
+
+}
+
+input[type="range"]{        /* Range-Slider Form-Element */
+
+
+}
+
+input[type="color"] {       /* Color-Button Form-Element */
+
+
+}
+
+input[type="file"]{         /* File-Selector Button Form-Element */
+
+
+}
+
+/*===================================================================================*/
+/* (05) Theme-Classes                                                                */
 /*===================================================================================*/
 
 .theme{
@@ -296,7 +415,7 @@ h4{
 }
 
 /*===================================================================================*/
-/* (05) General-Classes                                                              */
+/* (06) General-Classes                                                              */
 /*===================================================================================*/
 
 .footer_sponsors{
@@ -306,7 +425,7 @@ h4{
 }
 
 /*===================================================================================*/
-/* (06) Searchbar                                                                    */
+/* (07) Searchbar                                                                    */
 /*===================================================================================*/
 
 @media only screen and (max-width: 850px){
@@ -404,7 +523,7 @@ h4{
 }
 
 /*===================================================================================*/
-/* (07) Staggered Fade Animations                                                    */
+/* (08) Staggered Fade Animations                                                    */
 /*===================================================================================*/
 
 @keyframes stag_fade_in_1{
@@ -498,7 +617,7 @@ h4{
 }
 
 /*===================================================================================*/
-/* (08) Double-Column Classes                                                        */
+/* (09) Double-Column Classes                                                        */
 /*===================================================================================*/
 
 /*=== <main><div class="doublecol"><article></article><aside></aside></div></main> ==*/
