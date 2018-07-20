@@ -6,6 +6,7 @@
 //                                      Contains:                                   *
 // Basic Functions                                                                  *
 //      •Redirect       (return: void)                                              *
+//      •ThisPage       (return: string)                                              *
 //      •SubStringFind  (return: bool)                                              *
 //      •XSubStringFind (return: bool)                                              *
 // Property-Functions                                                               *
@@ -38,6 +39,12 @@ function Redirect($path,$delay=0)
     // $delay   time afer which the redirect is executed. default: 0s
     echo '<meta http-equiv="refresh" content="'.$delay.'; url='.$path.'" />';
 }
+
+function ThisPage()
+{
+    return  basename($_SERVER["REQUEST_URI"], '.php');
+}
+
 
 function SubStringFind($string,$search)
 {

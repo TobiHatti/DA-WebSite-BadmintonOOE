@@ -104,11 +104,11 @@
                         <div class="home_tile_title"><img src="/content/rss.png" alt="" style="width:20px; height: 20px; margin-bottom:-2px; margin-right: 5px;"/>&Ouml;BV News</div>
                         <div class="home_tile_content">
                             <ul>
-                                <li><a href="http://www.badminton.at/extended.php?id=5217">Bundessportakademie</a></li>
-                                <li><a href="http://www.badminton.at/extended.php?id=5216">White Nights 2018</a></li>
-                                <li><a href="http://www.badminton.at/extended.php?id=5215">&Ouml;BV-Leistungssportkonferenz</a></li>
-                                <li><a href="http://www.badminton.at/extended.php?id=5214">&Ouml;BV-Kdernominierungen</a></li>
-                                <li><a href="http://www.badminton.at/extended.php?id=5213">Shuttle Time und &Uuml;L-Ausbildungen</a></li>
+                                <li><a href="http://www.badminton.at/extended.php?id=5217" target="_blank">Bundessportakademie</a></li>
+                                <li><a href="http://www.badminton.at/extended.php?id=5216" target="_blank">White Nights 2018</a></li>
+                                <li><a href="http://www.badminton.at/extended.php?id=5215" target="_blank">&Ouml;BV-Leistungssportkonferenz</a></li>
+                                <li><a href="http://www.badminton.at/extended.php?id=5214" target="_blank">&Ouml;BV-Kdernominierungen</a></li>
+                                <li><a href="http://www.badminton.at/extended.php?id=5213" target="_blank">Shuttle Time und &Uuml;L-Ausbildungen</a></li>
                             </ul>
                         </div>
                     </div>
@@ -118,8 +118,15 @@
                         <div class="home_tile_content">
                             <iframe width="220" src="https://www.youtube.com/embed/_FpDVKgfTHs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                         </div>
+                    </div>
 
-
+                    <div class="home_tile_container_l stagfade3">
+                        <div class="home_tile_title">Development</div>
+                        <div class="home_tile_content">
+                            <ul>
+                                <li><a href="__tempform">TempForm</a></li>
+                            </ul>
+                        </div>
                     </div>
 
 
@@ -205,10 +212,10 @@
                         <div class="home_tile_title">Links</div>
                         <div class="home_tile_content">
                             <ul>
-                                <li><a href="http://www.badminton.at/">&Ouml;. Badmintonverband</a></li>
-                                <li><a href="http://oebv-badminton.liga.nu/">&Ouml;BV-Verwaltungssystem</a></li>
-                                <li><a href="http://obv.tournamentsoftware.com/Home">Tournamentsoftware</a></li>
-                                <li><a href="https://turnieranmeldung.at/">Turnieranmeldung O&Ouml;BV Doppeltuniere</a></li>
+                                <li><a href="http://www.badminton.at/" target="_blank">&Ouml;. Badmintonverband</a></li>
+                                <li><a href="http://oebv-badminton.liga.nu/" target="_blank">&Ouml;BV-Verwaltungssystem</a></li>
+                                <li><a href="http://obv.tournamentsoftware.com/Home" target="_blank">Tournamentsoftware</a></li>
+                                <li><a href="https://turnieranmeldung.at/" target="_blank">Turnieranmeldung O&Ouml;BV Doppeltuniere</a></li>
                             </ul>
                         </div>
                     </div>

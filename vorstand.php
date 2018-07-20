@@ -264,9 +264,6 @@
 
             <div class="vmember_container">
                 <div class="vmember_img">
-<<<<<<< HEAD
-                    <img src="/content/vorstand/peter_schwarzmann.jpg" alt="Peter Schwarzmann" class="user_img_m"/>
-=======
                     <img src="/content/Vorstand/josef_moser.jpg" alt="Lukas, Josef Moser" class="user_img_m"/>
                 </div>
                 <div class="vmember_content">
@@ -328,10 +325,9 @@
                 </div>
             </div>
 
-                        <div class="vmember_container">
+            <div class="vmember_container">
                 <div class="vmember_img">
                     <img src="/content/Vorstand/peter_schwarzmann.jpg" alt="Peter Schwarzmann" class="user_img_m"/>
->>>>>>> f70650e0d85bf2d3ffaa173a6fb61a3cf573a9f6
                 </div>
                 <div class="vmember_content">
                     <b>Peter Schwarzmann</b>
@@ -372,97 +368,86 @@
                 </div>
             </div>
 
-            <br>
-            <br>
-            <br>
+            <hr style="margin: 10px 0 10px 0">
 
-            <div>
-               <span style="color: #AD0000"><b> Nachwuchsarbeiterkreis </b></span>
-               <br>
-               <span style="color: #000000">Otmar Auberger</span>
-               <br>
-               <span style="color: #000000">Stephan Dlapka</span>
-               <br>
-               <span style="color: #000000">Alexander Mittermayr</span>
-               <br>
-               <span style="color: #000000">Klaus Niederhuber</span>
-               <br>
-               <span style="color: #000000">Peter Schwarzmann</span>
-               <br>
-               <span style="color: #000000">Sepp Retschitzegger</span>
-               <br>
-               <span style="color: #000000">Hermann Schausberger</span>
-               <br>
-               <span style="color: #000000">Peter Kickinger</span>
-               <br>
-               <span style="color: #000000">Dieter Stockinger</span>
-               <br>
-               <span style="color: #000000">Phillip Stelzm&uuml;ller</span>
-               <br>
-               <span style="color: #000000">Fritz Freim&uuml;ller</span>
-               <br>
-               <span style="color: #000000">Daniel Walchshofer</span>
-            </div>
+            <center>
+                <div class="vadditional_info">
+                    <b>Nachwuchsarbeiterkreis</b>
+                    <br>
+                    Otmar Auberger
+                    <br>
+                    Stephan Dlapka
+                    <br>
+                    Alexander Mittermayr
+                    <br>
+                    Klaus Niederhuber
+                    <br>
+                    Peter Schwarzmann
+                    <br>
+                    Sepp Retschitzegger
+                    <br>
+                    Hermann Schausberger
+                    <br>
+                    Peter Kickinger
+                    <br>
+                    Dieter Stockinger
+                    <br>
+                    Phillip Stelzm&uuml;ller
+                    <br>
+                    Fritz Freim&uuml;ller
+                    <br>
+                    Daniel Walchshofer
+                </div>
 
-            <div>
-               <br>
-               <span style="color: #AD0000"><b>Ligagremium</b></span>
-               <br>
-               <span style="color: #000000">Klaus Mitterhauser</span>
-               <br>
-               <span style="color: #000000">Hermann Schausberger</span>
-               <br>
-               <span style="color: #000000">Peter Krenmayr</span>
-            </div>
+                <div class="vadditional_info">
+                    <b>Ligagremium</b>
+                    <br>
+                    Klaus Mitterhauser
+                    <br>
+                    Hermann Schausberger
+                    <br>
+                    Peter Krenmayr
+                </div>
 
-            <div>
-               <br>
-               <span style="color: #AD0000"><b>Ligaausschuss</b></span>
-               <br>
-               <span style="color: #000000">Andreas Rabel</span>
-               <br>
-               <span style="color: #000000">Harald Starl</span>
-               <br>
-               <span style="color: #000000">Karl Pr&ouml;ll</span>
-               <br>
-               <span style="color: #000000">Hermann Schausberger</span>
-               <br>
-               <span style="color: #000000">Markus Eckersberger</span>
-               <br>
-               <span style="color: #000000">Michael Kaun</span>
-               <br>
-               <span style="color: #000000">Klaus Mitterhauser</span>
-            </div>
+                <div class="vadditional_info">
+                    <b>Ligaausschuss</b>
+                    <br>
+                    Andreas Rabel
+                    <br>
+                    Harald Starl
+                    <br>
+                    Karl Pr&ouml;ll
+                    <br>
+                    Hermann Schausberger
+                    <br>
+                    Markus Eckersberger
+                    <br>
+                    Michael Kaun
+                    <br>
+                    Klaus Mitterhauser
+                </div>
 
-            <div>
-                <br>
-               <span style="color: #AD0000"><b>Schiedsgericht</b></span>
-               <br>
-               <span style="color: #000000">Sandra Kranzl</span>
-               <br>
-               <span style="color: #000000">Wolfgang Hofreiter</span>
-               <br>
-               <span style="color: #000000">Manfred Berger-S&ouml;llinger</span>
-               <br>
-               <span style="color: #000000">Christian Klement</span>
-               <br>
-               <span style="color: #000000">Franz G&ouml;sweiner</span>
-               <br>
-               <span style="color: #000000">Martin Grafinger</span>
-               <br>
-               <span style="color: #000000">Richard Z&ouml;llner</span>
-               <br>
-               <span style="color: #000000">Stefan Holl</span>
-            </div>
-         <aside></aside>
-
-
-
-
+                <div class="vadditional_info">
+                    <b>Schiedsgericht</b>
+                    <br>
+                    Sandra Kranzl
+                    <br>
+                    Wolfgang Hofreiter
+                    <br>
+                    Manfred Berger-S&ouml;llinger
+                    <br>
+                    Christian Klement
+                    <br>
+                    Franz G&ouml;sweiner
+                    <br>
+                    Martin Grafinger
+                    <br>
+                    Richard Z&ouml;llner
+                    <br>
+                    Stefan Holl
+                </div>
+            </center>
     ';
-
-
-
 
     include("footer.php");
 ?>

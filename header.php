@@ -48,13 +48,13 @@
 
                             <li class="active"><a href="#">Spielbetrieb</a>
                                 <ul>
-                                    <li><a href="#">O&Ouml;MM <span style="float:right;">&#10148;</span></a>
+                                    <li><a href="#">O&Ouml;MM <span style="float:right; color: #FFFFFF;">&#10148;</span></a>
                                         <ul>
                                             <li><a href="allgemeine-klasse">Allg. Klasse</a></li>
                                             <li><a href="schueler-jugend">Sch&uuml;ler / Jugend</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Ranglisten <span style="float:right;">&#10148;</span></a>
+                                    <li><a href="#">Ranglisten <span style="float:right; color: #FFFFFF;">&#10148;</span></a>
                                         <ul>
                                             <li><a href="ooebv-ranglisten.php">O&Ouml;BV-Ranglisten</a></li>
                                             <li><a href="http://www.badminton.at">&Ouml;BV-Ranglisten</a></li>
@@ -78,7 +78,7 @@
                                 <ul>
                                     <li><a href="jahresberichte">Jahresberichte</a></li>
                                     <li><a href="news-archiv">News-Archiv</a></li>
-                                    <li><a href="ooemm-archiv">O&Ouml;MM-Archiv <span style="float:right;">&#10148;</span></a>
+                                    <li><a href="ooemm-archiv">O&Ouml;MM-Archiv <span style="float:right; color: #FFFFFF;">&#10148;</span></a>
                                         <ul>
                                             <li><a href="ooemm-archiv.php?jahr=2005-2006">2005/2006</a></li>
                                             <li><a href="ooemm-archiv.php?jahr=2004-2005">2004/2005</a></li>
