@@ -240,74 +240,134 @@
             </div>
 
 
-<<<<<<< HEAD
-            </div   >
+            <div class="vmember_container">
+                <div class="vmember_img">
+                    <img src="/content/Vorstand/harald_starl.jpg" alt="Lukas, Harald Starl" class="user_img_m"/>
+                </div>
+                <div class="vmember_content">
+                    <b>Harald Starl</b>
+                    <br>
+                    <i>
+                        Rechnungspr&uuml;fer<br>
+                    </i>
+                    <br>
+                    <a href="mailto:starl@badminton.at">E-Mail senden</a>
+                    <br>
+                    <span>
+                        Mobiltelefon:<br>
+                        0676/5117052
+                    </span>
+                </div>
+            </div>
 
-             <div>
-                 <img src="/content/Vorstand/harald_starl.jpg" alt=" Harald Starl" class="user_img_m"/>
-             </div>
-             <div>
-                <span style="color: #AD0000"><b> Harald Starl </b></span>
-                <br>
-                <i><span style="color: #444444">Rechnungspr&uuml;fer</span></i>
-                <br>
-                <a href="mailto:starl@badminton.at">E-Mail senden</a>
-                <br>
-                <span style="color: #444444">Mobiltelefon:</span>
-                <br>
-                <span style="color: #444444">0676/5117052</span>
 
-            </div   >
 
-            <div>
-                 <img src="/content/Vorstand/josef_moser.jpg" alt=" Josef Moser" class="user_img_m"/>
-             </div>
-             <div>
-                <span style="color: #AD0000"><b> Kons. Josef Moser </b></span>
-                <br>
-                <i><span style="color: #444444">Rechnungspr&uuml;fer</span></i>
-                <br>
-                <a href="mailto:pepi-moser@gmx.at">E-Mail senden</a>
-                <br>
-                <span style="color: #444444">Mobiltelefon:</span>
-                <br>
-                <span style="color: #444444">0676/81424577</span>
+            <div class="vmember_container">
+                <div class="vmember_img">
+                    <img src="/content/Vorstand/josef_moser.jpg" alt="Lukas, Josef Moser" class="user_img_m"/>
+                </div>
+                <div class="vmember_content">
+                    <b>Josef Moser</b>
+                    <br>
+                    <i>
+                        Rechnungspr&uuml;fer<br>
+                    </i>
+                    <br>
+                    <a href="mailto:pepi-moser@gmx.at">E-Mail senden</a>
+                    <br>
+                    <span>
+                        Mobiltelefon:<br>
+                        0676/81424577
+                    </span>
+                </div>
+            </div>
 
-            </div   >
 
-            <div>
-                 <img src="/content/Vorstand/heinz_lahnsteiner.jpg" alt=" Karl Heinz Lahnsteiner" class="user_img_m"/>
-             </div>
-             <div>
-                <span style="color: #AD0000"><b> Dr. Karl Heinz Lahnsteiner </b></span>
-                <br>
-                <i><span style="color: #444444">Rechtsausschuss</span></i>
-                <br>
-                <a href="mailto:elahn@tele2.at">E-Mail senden</a>
-                <br>
-                <span style="color: #444444">Telefon:</span>
-                <br>
-                <span style="color: #444444">06133/5354</span>
+            <div class="vmember_container">
+                <div class="vmember_img">
+                    <img src="/content/Vorstand/heinz_lahnsteiner.jpg" alt="Lukas, Karl Heinz Lahnsteiner" class="user_img_m"/>
+                </div>
+                <div class="vmember_content">
+                    <b> Dr. Karl Heinz Lahnsteiner </b>
+                    <br>
+                    <i>
+                        Rechtsausschuss<br>
+                    </i>
+                    <br>
+                    <a href="mailto:elahn@tele2.at">E-Mail senden</a>
+                    <br>
+                    <span>
+                        Telefon:<br>
+                        06133/5354
+                    </span>
+                </div>
+            </div>
 
-            </div   >
 
-            <div>
-                 <img src="/content/Vorstand/karl_proell.jpg" alt=" Karl Pröll" class="user_img_m"/>
-             </div>
-             <div>
-                <span style="color: #AD0000"><b> Karl Pr&ouml;ll </b></span>
-                <br>
-                <i><span style="color: #444444">Rechtsausschuss</span></i>
-                <br>
-                <i><span style="color: #444444">Rechnungspr&uuml;fer</span></i>
-                <br>
-                <a href="mailto:starl@badminton.at">E-Mail senden</a>
-                <br>
-                <span style="color: #444444">Mobiltelefon:</span>
-                <br>
-                <span style="color: #444444">0676/814276220</span>
+            <div class="vmember_container">
+                <div class="vmember_img">
+                    <img src="/content/Vorstand/karl_proell.jpg" alt="Karl Pröll" class="user_img_m"/>
+                </div>
+                <div class="vmember_content">
+                    <b>  Karl Pr&ouml;ll </b>
+                    <br>
+                    <i>
+                        Rechtsausschuss<br>
+                        Rechungspr&uuml;fer
+                    </i>
+                    <br>
+                    <a href="mailto:proell.karl@aon.at">E-Mail senden</a>
+                    <br>
+                    <span>
+                        Mobiltelefon:<br>
+                        0676/814276220
+                    </span>
+                </div>
+            </div>
 
-            </div >
+                        <div class="vmember_container">
+                <div class="vmember_img">
+                    <img src="/content/Vorstand/peter_schwarzmann.jpg" alt="Peter Schwarzmann" class="user_img_m"/>
+                </div>
+                <div class="vmember_content">
+                    <b>Peter Schwarzmann</b>
+                    <br>
+                    <i>
+                        Marketing<br>
+                        Aus- und Weiterbildung
+                    </i>
+                    <br>
+                    <a href="mailto:what.defack@gmx.at">E-Mail senden</a>
+                    <br>
+                    <span>
+                        Mobiltelefon:<br>
+                        0699/18151253
+                    </span>
+                </div>
+            </div>
+
+            <div class="vmember_container">
+                <div class="vmember_img">
+                    <img src="/content/Vorstand/markus_eckersberger.jpg" alt="Markus Eckersberger" class="user_img_m"/>
+                </div>
+                <div class="vmember_content">
+                    <b>Markus Eckersberger</b>
+                    <br>
+                    <i>
+                        Schiedsrichterreferent<br>
+                        Doppelranglisten<br>
+                        Nachwuchsranglisten
+                    </i>
+                    <br>
+                    <a href="mailto:markus_eckersberger@gmx.at">E-Mail senden</a>
+                    <br>
+                    <span>
+                        Mobiltelefon:<br>
+                        0699/11138311
+                    </span>
+                </div>
+            </div>
+
             <br>
             <br>
             <br>
@@ -391,51 +451,10 @@
                <span style="color: #000000">Stefan Holl</span>
             </div>
          <aside></aside>
-=======
 
-            <div class="vmember_container">
-                <div class="vmember_img">
-                    <img src="/content/Vorstand/peter_schwarzmann.jpg" alt="Peter Schwarzmann" class="user_img_m"/>
-                </div>
-                <div class="vmember_content">
-                    <b>Peter Schwarzmann</b>
-                    <br>
-                    <i>
-                        Marketing<br>
-                        Aus- und Weiterbildung
-                    </i>
-                    <br>
-                    <a href="mailto:what.defack@gmx.at">E-Mail senden</a>
-                    <br>
-                    <span>
-                        Mobiltelefon:<br>
-                        0699/18151253
-                    </span>
-                </div>
-            </div>
 
-            <div class="vmember_container">
-                <div class="vmember_img">
-                    <img src="/content/Vorstand/markus_eckersberger.jpg" alt="Markus Eckersberger" class="user_img_m"/>
-                </div>
-                <div class="vmember_content">
-                    <b>Markus Eckersberger</b>
-                    <br>
-                    <i>
-                        Schiedsrichterreferent<br>
-                        Doppelranglisten<br>
-                        Nachwuchsranglisten
-                    </i>
-                    <br>
-                    <a href="mailto:markus_eckersberger@gmx.at">E-Mail senden</a>
-                    <br>
-                    <span>
-                        Mobiltelefon:<br>
-                        0699/11138311
-                    </span>
-                </div>
-            </div>
->>>>>>> 15dcc5276f7e0ecb70bf1cb3f9f0b5f27d70f1f3
+
+
     ';
 
 
