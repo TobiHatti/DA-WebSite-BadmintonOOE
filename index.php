@@ -5,6 +5,7 @@
     $video_match_badminton='<iframe width="425" height="349" src="https://www.youtube.com/watch?v=_FpDVKgfTHs" frameborder="0" allowfullscreen></iframe>"';
 
     echo '
+    <div class="doublecol">
         <article>
             <center>
                 <div style="width: 480px; height:240px; border:1px solid #0066CC;">
@@ -115,8 +116,7 @@
                     <div class="home_tile_container_l stagfade3">
                         <div class="home_tile_title">Videos</div>
                         <div class="home_tile_content">
-
-                          <iframe width="300" height="129" src="https://www.youtube.com/embed/_FpDVKgfTHs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <iframe width="220" src="https://www.youtube.com/embed/_FpDVKgfTHs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                         </div>
 
 
@@ -143,50 +143,50 @@
                             <ul>
                                 <li>1. Landesliga</li>
                             </ul>
-                            <table cellspacing="0px" cellpadding="0">
+                            <table cellspacing="0px" cellpadding="2px">
                                 <tr style="font-weight: bold;">
-                                    <td style="padding: 2px;">Pl</td>
-                                    <td style="padding: 2px;">Mannschaft</td>
-                                    <td style="padding: 2px;">Sp</td>
-                                    <td style="padding: 2px;">Pkt</td>
+                                    <td>Pl</td>
+                                    <td>Mannschaft</td>
+                                    <td>Sp</td>
+                                    <td>Pkt</td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 2px; align="right">1</td>
-                                    <td style="padding: 2px;">BSC 70 Linz 2</td>
-                                    <td style="padding: 2px;" align="center">10</td>
-                                    <td style="padding: 2px;" align="center">28</td>
+                                    <td style="text-align:right;">1</td>
+                                    <td>BSC 70 Linz 2</td>
+                                    <td style="text-align:center;">10</td>
+                                    <td style="text-align:center;">28</td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 2px; align="right">2</td>
-                                    <td style="padding: 2px;">Union Oaschdorf</td>
-                                    <td style="padding: 2px;" align="center">10</td>
-                                    <td style="padding: 2px;" align="center">25</td>
+                                    <td style="text-align:right;">2</td>
+                                    <td>Union Oaschdorf</td>
+                                    <td style="text-align:center;">10</td>
+                                    <td style="text-align:center;">25</td>
 
                                 </tr>
                                 <tr>
-                                    <td style="padding: 2px; align="right">3</td>
-                                    <td style="padding: 2px;">U. W-garsten 1</td>
-                                    <td style="padding: 2px;" align="center">10</td>
-                                    <td style="padding: 2px;" align="center">21</td>
+                                    <td style="text-align:right;">3</td>
+                                    <td>U. W-garsten 1</td>
+                                    <td style="text-align:center;">10</td>
+                                    <td style="text-align:center;">21</td>
 
                                 </tr>
                                  <tr>
-                                    <td style="padding: 2px; align="right">4</td>
-                                    <td style="padding: 2px;">ASK&Ouml; Traun 2</td>
-                                    <td style="padding: 2px;" align="center">10</td>
-                                    <td style="padding: 2px;" align="center">20</td>
+                                    <td style="text-align:right;">4</td>
+                                    <td>ASK&Ouml; Traun 2</td>
+                                    <td style="text-align:center;">10</td>
+                                    <td style="text-align:center;">20</td>
                                 </tr>
                                  <tr>
-                                    <td style="padding: 2px; align="right">5</td>
-                                    <td style="padding: 2px;">UBC Vorchdorf 2</td>
-                                    <td style="padding: 2px;" align="center">10</td>
-                                    <td style="padding: 2px;" align="center">14</td>
+                                    <td style="text-align:right;">5</td>
+                                    <td>UBC Vorchdorf 2</td>
+                                    <td style="text-align:center;">10</td>
+                                    <td style="text-align:center;">14</td>
                                 </tr>
                                  <tr>
-                                    <td style="padding: 2px; align="right">6</td>
-                                    <td style="padding: 2px;">UBC Neuhofen 1</td>
-                                    <td style="padding: 2px;" align="center">10</td>
-                                    <td style="padding: 2px;" align="center">12</td>
+                                    <td style="text-align:right;">6</td>
+                                    <td>UBC Neuhofen 1</td>
+                                    <td style="text-align:center;">10</td>
+                                    <td style="text-align:center;">12</td>
                                 </tr>
                             </table>
                         </div>
@@ -217,6 +217,7 @@
 
             </div>
         </aside>
+    </div>
     ';
 
     include("footer.php");
