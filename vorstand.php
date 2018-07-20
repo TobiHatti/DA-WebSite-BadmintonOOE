@@ -18,7 +18,7 @@
 
             <div class="vmember_container">
                 <div class="vmember_img">
-                    <img src="/content/Vorstand/herbert_koch.jpg" alt="Kons. Herbert Koch" class="user_img_m"/>
+                    <img src="/content/vorstand/herbert_koch.jpg" alt="Kons. Herbert Koch" class="user_img_m"/>
                 </div>
                 <div class="vmember_content">
                     <b>Kons. Herbert Koch</b>
@@ -36,7 +36,7 @@
 
             <div class="vmember_container">
                 <div class="vmember_img">
-                    <img src="/content/Vorstand/peter_zauner.jpg" alt="Peter Zauner" class="user_img_m"/>
+                    <img src="/content/vorstand/peter_zauner.jpg" alt="Peter Zauner" class="user_img_m"/>
                 </div>
                 <div class="vmember_content">
                     <b>Peter Zauner</b>
@@ -57,7 +57,7 @@
 
             <div class="vmember_container">
                 <div class="vmember_img">
-                    <img src="/content/Vorstand/klaus_mitterhauser.jpg" alt="Klaus Mitterhauser" class="user_img_m"/>
+                    <img src="/content/vorstand/klaus_mitterhauser.jpg" alt="Klaus Mitterhauser" class="user_img_m"/>
                 </div>
                 <div class="vmember_content">
                     <b>Klaus Mitterhauser</b>
@@ -79,7 +79,7 @@
 
             <div class="vmember_container">
                 <div class="vmember_img">
-                    <img src="/content/Vorstand/karin_burger.jpg" alt="Karin Burger" class="user_img_m"/>
+                    <img src="/content/vorstand/karin_burger.jpg" alt="Karin Burger" class="user_img_m"/>
                 </div>
                 <div class="vmember_content">
                     <b>Karin Burger</b>
@@ -100,7 +100,7 @@
 
             <div class="vmember_container">
                 <div class="vmember_img">
-                    <img src="/content/Vorstand/anton_aistleitner.jpg" alt="Anton Aistleitner" class="user_img_m"/>
+                    <img src="/content/vorstand/anton_aistleitner.jpg" alt="Anton Aistleitner" class="user_img_m"/>
                 </div>
                 <div class="vmember_content">
                     <b>Anton &#8218;Toni&#8216;<br>Aistleitner</b>
@@ -118,7 +118,7 @@
 
             <div class="vmember_container">
                 <div class="vmember_img">
-                    <img src="/content/Vorstand/stephan_dlapka.jpg" alt="Stephan Dlapka" class="user_img_m"/>
+                    <img src="/content/vorstand/stephan_dlapka.jpg" alt="Stephan Dlapka" class="user_img_m"/>
                 </div>
                 <div class="vmember_content">
                     <b>Stephan Dlapka</b>
@@ -137,7 +137,7 @@
 
             <div class="vmember_container">
                 <div class="vmember_img">
-                    <img src="/content/Vorstand/othmar_auberger.jpg" alt="Othmar Auberger" class="user_img_m"/>
+                    <img src="/content/vorstand/othmar_auberger.jpg" alt="Othmar Auberger" class="user_img_m"/>
                 </div>
                 <div class="vmember_content">
                     <b>Othmar Auberger</b>
@@ -156,7 +156,7 @@
 
             <div class="vmember_container">
                 <div class="vmember_img">
-                    <img src="/content/Vorstand/andreas_rabel.jpg" alt="Andreas Rabel" class="user_img_m"/>
+                    <img src="/content/vorstand/andreas_rabel.jpg" alt="Andreas Rabel" class="user_img_m"/>
                 </div>
                 <div class="vmember_content">
                     <b>Andreas Rabel</b>
@@ -178,7 +178,7 @@
 
             <div class="vmember_container">
                 <div class="vmember_img">
-                    <img src="/content/Vorstand/tina_fuereder.jpg" alt="Tina F&uuml;reder" class="user_img_m"/>
+                    <img src="/content/vorstand/tina_fuereder.jpg" alt="Tina F&uuml;reder" class="user_img_m"/>
                 </div>
                 <div class="vmember_content">
                     <b>Mag. Tina F&uuml;reder</b>
@@ -199,7 +199,7 @@
 
             <div class="vmember_container">
                 <div class="vmember_img">
-                    <img src="/content/Vorstand/peter_krenmayr.jpg" alt="Peter Krenmayr" class="user_img_m"/>
+                    <img src="/content/vorstand/peter_krenmayr.jpg" alt="Peter Krenmayr" class="user_img_m"/>
                 </div>
                 <div class="vmember_content">
                     <b>Peter Krenmayr</b>
@@ -220,7 +220,7 @@
 
             <div class="vmember_container">
                 <div class="vmember_img">
-                    <img src="/content/Vorstand/lukas-simon_rebhandl.jpg" alt="Lukas, Simon Rebhandl" class="user_img_m"/>
+                    <img src="/content/vorstand/lukas-simon_rebhandl.jpg" alt="Lukas, Simon Rebhandl" class="user_img_m"/>
                 </div>
                 <div class="vmember_content">
                     <b>Lukas und Simon<br>Rebhandl</b>
@@ -243,7 +243,7 @@
 
             <div class="vmember_container">
                 <div class="vmember_img">
-                    <img src="/content/Vorstand/peter_schwarzmann.jpg" alt="Peter Schwarzmann" class="user_img_m"/>
+                    <img src="/content/vorstand/peter_schwarzmann.jpg" alt="Peter Schwarzmann" class="user_img_m"/>
                 </div>
                 <div class="vmember_content">
                     <b>Peter Schwarzmann</b>
@@ -264,7 +264,7 @@
 
             <div class="vmember_container">
                 <div class="vmember_img">
-                    <img src="/content/Vorstand/markus_eckersberger.jpg" alt="Markus Eckersberger" class="user_img_m"/>
+                    <img src="/content/vorstand/markus_eckersberger.jpg" alt="Markus Eckersberger" class="user_img_m"/>
                 </div>
                 <div class="vmember_content">
                     <b>Markus Eckersberger</b>
