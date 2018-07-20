@@ -240,10 +240,98 @@
             </div>
 
 
+            <div class="vmember_container">
+                <div class="vmember_img">
+                    <img src="/content/Vorstand/harald_starl.jpg" alt="Lukas, Harald Starl" class="user_img_m"/>
+                </div>
+                <div class="vmember_content">
+                    <b>Harald Starl</b>
+                    <br>
+                    <i>
+                        Rechnungspr&uuml;fer<br>
+                    </i>
+                    <br>
+                    <a href="mailto:starl@badminton.at">E-Mail senden</a>
+                    <br>
+                    <span>
+                        Mobiltelefon:<br>
+                        0676/5117052
+                    </span>
+                </div>
+            </div>
+
+
 
             <div class="vmember_container">
                 <div class="vmember_img">
+<<<<<<< HEAD
                     <img src="/content/vorstand/peter_schwarzmann.jpg" alt="Peter Schwarzmann" class="user_img_m"/>
+=======
+                    <img src="/content/Vorstand/josef_moser.jpg" alt="Lukas, Josef Moser" class="user_img_m"/>
+                </div>
+                <div class="vmember_content">
+                    <b>Josef Moser</b>
+                    <br>
+                    <i>
+                        Rechnungspr&uuml;fer<br>
+                    </i>
+                    <br>
+                    <a href="mailto:pepi-moser@gmx.at">E-Mail senden</a>
+                    <br>
+                    <span>
+                        Mobiltelefon:<br>
+                        0676/81424577
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="vmember_container">
+                <div class="vmember_img">
+                    <img src="/content/Vorstand/heinz_lahnsteiner.jpg" alt="Lukas, Karl Heinz Lahnsteiner" class="user_img_m"/>
+                </div>
+                <div class="vmember_content">
+                    <b> Dr. Karl Heinz Lahnsteiner </b>
+                    <br>
+                    <i>
+                        Rechtsausschuss<br>
+                    </i>
+                    <br>
+                    <a href="mailto:elahn@tele2.at">E-Mail senden</a>
+                    <br>
+                    <span>
+                        Telefon:<br>
+                        06133/5354
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="vmember_container">
+                <div class="vmember_img">
+                    <img src="/content/Vorstand/karl_proell.jpg" alt="Karl Pröll" class="user_img_m"/>
+                </div>
+                <div class="vmember_content">
+                    <b>  Karl Pr&ouml;ll </b>
+                    <br>
+                    <i>
+                        Rechtsausschuss<br>
+                        Rechungspr&uuml;fer
+                    </i>
+                    <br>
+                    <a href="mailto:proell.karl@aon.at">E-Mail senden</a>
+                    <br>
+                    <span>
+                        Mobiltelefon:<br>
+                        0676/814276220
+                    </span>
+                </div>
+            </div>
+
+                        <div class="vmember_container">
+                <div class="vmember_img">
+                    <img src="/content/Vorstand/peter_schwarzmann.jpg" alt="Peter Schwarzmann" class="user_img_m"/>
+>>>>>>> f70650e0d85bf2d3ffaa173a6fb61a3cf573a9f6
                 </div>
                 <div class="vmember_content">
                     <b>Peter Schwarzmann</b>
@@ -283,6 +371,94 @@
                     </span>
                 </div>
             </div>
+
+            <br>
+            <br>
+            <br>
+
+            <div>
+               <span style="color: #AD0000"><b> Nachwuchsarbeiterkreis </b></span>
+               <br>
+               <span style="color: #000000">Otmar Auberger</span>
+               <br>
+               <span style="color: #000000">Stephan Dlapka</span>
+               <br>
+               <span style="color: #000000">Alexander Mittermayr</span>
+               <br>
+               <span style="color: #000000">Klaus Niederhuber</span>
+               <br>
+               <span style="color: #000000">Peter Schwarzmann</span>
+               <br>
+               <span style="color: #000000">Sepp Retschitzegger</span>
+               <br>
+               <span style="color: #000000">Hermann Schausberger</span>
+               <br>
+               <span style="color: #000000">Peter Kickinger</span>
+               <br>
+               <span style="color: #000000">Dieter Stockinger</span>
+               <br>
+               <span style="color: #000000">Phillip Stelzm&uuml;ller</span>
+               <br>
+               <span style="color: #000000">Fritz Freim&uuml;ller</span>
+               <br>
+               <span style="color: #000000">Daniel Walchshofer</span>
+            </div>
+
+            <div>
+               <br>
+               <span style="color: #AD0000"><b>Ligagremium</b></span>
+               <br>
+               <span style="color: #000000">Klaus Mitterhauser</span>
+               <br>
+               <span style="color: #000000">Hermann Schausberger</span>
+               <br>
+               <span style="color: #000000">Peter Krenmayr</span>
+            </div>
+
+            <div>
+               <br>
+               <span style="color: #AD0000"><b>Ligaausschuss</b></span>
+               <br>
+               <span style="color: #000000">Andreas Rabel</span>
+               <br>
+               <span style="color: #000000">Harald Starl</span>
+               <br>
+               <span style="color: #000000">Karl Pr&ouml;ll</span>
+               <br>
+               <span style="color: #000000">Hermann Schausberger</span>
+               <br>
+               <span style="color: #000000">Markus Eckersberger</span>
+               <br>
+               <span style="color: #000000">Michael Kaun</span>
+               <br>
+               <span style="color: #000000">Klaus Mitterhauser</span>
+            </div>
+
+            <div>
+                <br>
+               <span style="color: #AD0000"><b>Schiedsgericht</b></span>
+               <br>
+               <span style="color: #000000">Sandra Kranzl</span>
+               <br>
+               <span style="color: #000000">Wolfgang Hofreiter</span>
+               <br>
+               <span style="color: #000000">Manfred Berger-S&ouml;llinger</span>
+               <br>
+               <span style="color: #000000">Christian Klement</span>
+               <br>
+               <span style="color: #000000">Franz G&ouml;sweiner</span>
+               <br>
+               <span style="color: #000000">Martin Grafinger</span>
+               <br>
+               <span style="color: #000000">Richard Z&ouml;llner</span>
+               <br>
+               <span style="color: #000000">Stefan Holl</span>
+            </div>
+         <aside></aside>
+
+
+
+
     ';
 
 
