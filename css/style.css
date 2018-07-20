@@ -19,12 +19,13 @@
     (05)    General-Classes
     (06)    Searchbar
     (07)    Staggered Fade Animations
+    (08)    Double-Column Classes
     ====== A - Home ========================
     (A1)    Home > Header
     (A2)    Home > News-Feed
     (A3)    Home > Tiles
-    ====== B - Home ========================
-    (B1)
+    ====== B - Vorstand ====================
+    (B1)    Vorstand > User-Tiles
     ====== C - Home ========================
     (C1)
     ====== D - Home ========================
@@ -66,55 +67,71 @@ body{
     body{
         margin:0px;
         grid-template-columns: 1fr;
-        grid-template-rows: 30px 60px auto auto;
+        grid-template-rows: 30px 60px auto 150px;
         grid-template-areas:
             "nav"
             "header"
             "main"
-            "main";
+            ".";
     }
+
+    footer{
+        width: 98%;
+    }
+
 }
 
 @media only screen and (min-width: 600px){
     /* PORTRAIT TABLETS - LARGE PHONES */
     body{
         grid-template-columns: 1fr 5fr 1fr;
-        grid-template-rows: 15px 60px 38px auto auto 30px;
+        grid-template-rows: 15px 60px 38px auto 150px;
         grid-template-areas:
             ". . ."
             ". header ."
             ". nav ."
             ". main ."
-            ". main ."
             ". . .";
+    }
+
+    footer{
+        width: 69%;
     }
 }
 
 @media only screen and (min-width: 768px){
     /* LANDSCAPE TABLETS */
     body{
-        grid-template-columns: 1fr 5fr 3fr 1fr;
-        grid-template-rows: 15px 70px 38px auto 30px;
+        grid-template-columns: 1fr 8fr 1fr;
+        grid-template-rows: 15px 70px 38px auto 150px;
         grid-template-areas:
-            ". . . ."
-            ". header header ."
-            ". nav nav ."
-            ". main main ."
-            ". . . .";
+            ". . ."
+            ". header ."
+            ". nav ."
+            ". main ."
+            ". . .";
+    }
+
+    footer{
+        width: 78%;
     }
 }
 
 @media only screen and (min-width: 992px){
     /* DESKTOP */
     body{
-        grid-template-columns: 1fr 3fr 2fr 1fr;
-        grid-template-rows: 15px 100px 38px auto 30px;
+        grid-template-columns: 1fr 5fr 1fr;
+        grid-template-rows: 15px 100px 38px auto 150px;
         grid-template-areas:
-            ". . . ."
-            ". header header ."
-            ". nav nav ."
-            ". main main ."
-            ". . . .";
+            ". . ."
+            ". header ."
+            ". nav ."
+            ". main ."
+            ". . .";
+    }
+
+    footer{
+        width: 69%;
     }
 }
 
@@ -137,7 +154,6 @@ nav{
 
 main{
     grid-area: main;
-    display: grid;
 
     background: #FFFFFF;
     padding: 20px;
@@ -150,38 +166,6 @@ article{
     padding:5px;
 }
 
-@media only screen and (max-width: 1090px){
-    main{
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto;
-        grid-template-areas:
-           "article"
-           "aside";
-
-    }
-
-    article{
-        border-right: none;
-        border-bottom: 1px solid black;
-    }
-}
-
-@media only screen and (min-width: 1090px){
-    main{
-        grid-template-columns: 3fr 2fr;
-        grid-template-rows: 1fr;
-        grid-template-areas:
-           "article aside";
-
-    }
-
-    article{
-        border-bottom: none;
-        border-right: 1px solid black;
-    }
-
-}
-
 aside{
     grid-area: aside;
     background: #FFFFFF;
@@ -190,12 +174,15 @@ aside{
 
 footer{
     position:fixed;
-    bottom:0px;
-    left:0px;
-    right:0px;
+    z-index: -10;
+    border: 1px solid #FFFFFF;
+    border-radius: 10px 10px 0 0;
+    background: linear-gradient(to bottom, #B9DDE9, #FFFFFF);
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0px;
     text-align:center;
-    background: #454545;
-    color: #FFFFFF;
+    color: #444444;
 }
 
 /*===================================================================================*/
@@ -311,7 +298,11 @@ h4{
 /* (05) General-Classes                                                              */
 /*===================================================================================*/
 
+.footer_sponsors{
+    max-height: 50px;
+    margin-left: 50px;
 
+}
 
 /*===================================================================================*/
 /* (06) Searchbar                                                                    */
@@ -505,6 +496,47 @@ h4{
     animation-iteration-count: 1;
 }
 
+/*===================================================================================*/
+/* (08) Double-Column Classes                                                        */
+/*===================================================================================*/
+
+/*=== <main><div class="doublecol"><article></article><aside></aside></div></main> ==*/
+.doublecol{
+    display: grid;
+}
+
+@media only screen and (max-width: 1090px){
+    .doublecol{
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+           "article"
+           "aside";
+
+    }
+
+    article{
+        border-right: none;
+        border-bottom: 1px solid black;
+    }
+}
+
+@media only screen and (min-width: 1090px){
+    .doublecol{
+        grid-template-columns: 3fr 2fr;
+        grid-template-rows: 1fr;
+        grid-template-areas:
+           "article aside";
+
+    }
+
+    article{
+        border-bottom: none;
+        border-right: 1px solid black;
+    }
+
+}
+
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*================================      A - HOME     ================================*/
@@ -621,10 +653,43 @@ h4{
     padding: 2px 2px 5px 3px;
 }
 
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*================================   B - Vorstand    ================================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 
+.user_img_m{
+    height: 120px;
+}
 
+.vmember_container{
+    display: inline-block;
+    vertical-align: top;
+    width:150px;
+    margin:8px 8px 3px 8px;
+    border-bottom: 2px solid #63B4CF;
+    border-radius: 0 0 15px 15px;
+}
 
+.vmember_img{
+    background: linear-gradient(to right, #FFFFFF,#3B9EBF,#FFFFFF);
+    text-align: center;
+    height:120px;
+}
 
+.vmember_content{
+    padding-left: 8px;
+    min-height: 125px;
+}
+
+.vmember_content b{
+    color: #AD0000;
+}
+
+.vmember_content i, span{
+    color: #444444;
+}
 
 
 
