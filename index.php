@@ -27,8 +27,8 @@
                         </div>
                         <div class="ws_shadow"></div>
                     </div>
-                    <script type="text/javascript" src="data/wowslider.js"></script>
-                    <script type="text/javascript" src="data/script.js"></script>
+                    <script type="text/javascript" src="/js/wowslider.js"></script>
+                    <script type="text/javascript" src="/js/script.js"></script>
 
                 </div>
             </center>
@@ -124,6 +124,8 @@
                         <div class="home_tile_title">Development</div>
                         <div class="home_tile_content">
                             <ul>
+                                <li><a href="__formoverview">PHP-Forms Overview</a></li>
+                                <li><a href="__sources">Sources</a></li>
                                 <li><a href="__tempform">TempForm</a></li>
                             </ul>
                         </div>

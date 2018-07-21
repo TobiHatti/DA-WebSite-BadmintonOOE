@@ -4,37 +4,46 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 
     Notes:
-    • For every CSS-Grid a Fallback-Class needs to be created.
+    •   For every CSS-Grid a Fallback-Class needs to be created.
+    •   For Overriding CSS-Form Classes use the following syntax:
+        .container .element{} will override the Default, while
+        .element{} alone will not override the default without the use of !important
+        #element{} will override the default, but is not allways possible
 
 ///////////////////////////////////////////////////////////////////////////////////////
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
     Content:
-    ====== 0 - General =====================
-    (01)    HTML-Structural-Tags
-    (02)    Default HTML-Tags
-    (03)    Headings
-    (04)    Theme-Classes
-    (05)    General-Classes
-    (06)    Searchbar
-    (07)    Staggered Fade Animations
-    (08)    Double-Column Classes
+    ====== @ -  Fontfaces/Keyframes ========
+    (@01)   Keyframes > Staggered Fade
+    ====== Z - General =====================
+    (Z01)   HTML-Structural-Tags
+    (Z02)   Default HTML-Tags
+    (Z03)   Headings
+    (Z04)   Double-Column Classes
+    ====== Y - Form-Elements ===============
+    (Y01)   Buttons
+    (Y02)   Textboxes
+    (Y03)   Textarea
+    (Y04)   Selectbox
+    (Y05)   Checkbox
+    (Y06)   Radio Button
+    (Y07)   Range Slider
+    (Y08)   File Selector
+    (Y09)   Date/Time Selectors
+    (Y10)   Custom Element-Lengths
+    (Y11)   Custom Element-Classes
+    ====== X - General Classes ==============
+    (X01)   Header-Contents
+    (X02)   Searchbar
+    (X03)   Footer-Contents
     ====== A - Home ========================
-    (A1)    Home > Header
-    (A2)    Home > News-Feed
-    (A3)    Home > Tiles
+    (A01)   Home > News-Feed
+    (A02)   Home > Tiles
     ====== B - Vorstand ====================
-    (B1)    Vorstand > User-Tiles
-    (B2)    Vorstand > Additional Info
-    ====== C - Home ========================
-    (C1)
-    ====== D - Home ========================
-    (D1)
-    ====== E - Home ========================
-    (E1)
-    ====== F - Home ========================
-    (F1)
+    (B01)   Vorstand > User-Tiles
+    (B02)   Vorstand > Additional Info
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -43,12 +52,112 @@
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
-/*================================   0 - GENERAL     ================================*/
+/*============================= @ -  Fontfaces/Keyframes ============================*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 
 /*===================================================================================*/
-/* (01) HTML-Structural-Tags                                                         */
+/* (@01) Keyframes > Staggered Fade                                                  */
+/*===================================================================================*/
+
+@keyframes stag_fade_in_1{
+    0% { opacity: 0; }
+    10%{ opacity: 0; }
+    40%{ opacity: 1; }
+    100%{opacity: 1; }
+}
+
+.stagfade1{
+    animation: stag_fade_in_1;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+@keyframes stag_fade_in_2{
+    0% { opacity: 0; }
+    20%{ opacity: 0; }
+    50%{ opacity: 1; }
+    100%{opacity: 1; }
+}
+
+.stagfade2{
+    animation: stag_fade_in_2;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+@keyframes stag_fade_in_3{
+    0% { opacity: 0; }
+    30%{ opacity: 0; }
+    60%{ opacity: 1; }
+    100%{opacity: 1; }
+}
+
+.stagfade3{
+    animation: stag_fade_in_3;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+@keyframes stag_fade_in_4{
+    0% { opacity: 0; }
+    40%{ opacity: 0; }
+    70%{ opacity: 1; }
+    100%{opacity: 1; }
+}
+
+.stagfade4{
+    animation: stag_fade_in_4;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+@keyframes stag_fade_in_5{
+    0% { opacity: 0; }
+    50%{ opacity: 0; }
+    80%{ opacity: 1; }
+    100%{opacity: 1; }
+}
+
+.stagfade5{
+    animation: stag_fade_in_5;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+@keyframes stag_fade_in_6{
+    0% { opacity: 0; }
+    60%{ opacity: 0; }
+    90%{ opacity: 1; }
+    100%{opacity: 1; }
+}
+
+.stagfade6{
+    animation: stag_fade_in_6;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+@keyframes stag_fade_in_7{
+    0% { opacity: 0; }
+    70%{ opacity: 0; }
+    100%{opacity: 1; }
+}
+
+.stagfade7{
+    animation: stag_fade_in_7;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*================================   Z - GENERAL     ================================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+
+/*===================================================================================*/
+/* (Z01) HTML-Structural-Tags                                                        */
 /*===================================================================================*/
 
 html{
@@ -187,7 +296,7 @@ footer{
 }
 
 /*===================================================================================*/
-/* (02) Default HTML-Tags                                                            */
+/* (Z02) Default HTML-Tags                                                           */
 /*===================================================================================*/
 
 a{
@@ -229,7 +338,7 @@ code{
 
 
 /*===================================================================================*/
-/* (03) Headings                                                                     */
+/* (Z03) Headings                                                                    */
 /*===================================================================================*/
 
 h1{
@@ -263,242 +372,15 @@ h4{
     margin:2px 0 2px 0;
 }
 
-/*===================================================================================*/
-/* (04) Theme-Classes                                                                */
-/*===================================================================================*/
-
-.theme{
-
-}
-
-.t_button{
-
-}
-
-.t_textbox{
-
-}
-
-.t_selectbox{
-
-}
-
-.t_textarea{
-
-}
-
-.t_checkbox{
-
-}
-
-.t_radio{
-
+h5{
+    font-size: 12pt;
+    font-weight: normal;
+    color: #F01B16;
+    margin:5px 0 2px 0;
 }
 
 /*===================================================================================*/
-/* (05) General-Classes                                                              */
-/*===================================================================================*/
-
-.footer_sponsors{
-    max-height: 50px;
-    margin-left: 50px;
-
-}
-
-/*===================================================================================*/
-/* (06) Searchbar                                                                    */
-/*===================================================================================*/
-
-@media only screen and (max-width: 850px){
-    .searchbar_container{
-        display:none;
-    }
-
-    .mobile_searchtrigger_container{
-        position: absolute;
-        right: 8px;
-        top: 4px;
-    }
-
-    .searchbar_trigger{
-        border:none;
-        background: #507CA5;
-        padding: 3px 1px 1px 1px;
-        width: 35px;
-        box-shadow: inset 0 0 2px 1px #375572;
-    }
-
-    .mobile_searchbar_container{
-        display: none;
-        height: 0px;
-        -webkit-transition: all .5s ease-in-out;
-        transition: all .5s ease-in-out;
-    }
-
-    .mobile_searchbar_container:target{
-        display: inline-block;
-        background: #416586;
-        width: 100%;
-        height: 38px;
-        z-index: 300000;
-        padding: 5px;
-
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-
-        -webkit-transition: all .5s ease-in-out;
-        transition: all .5s ease-in-out;
-    }
-
-    .mobile_searchbar{
-        width:90%;
-        line-height: 26px;
-        font-size:14pt;
-        border:none;
-        box-shadow: inset 0 0 2px 1px #375572;
-        background: #507CA5;
-        color: #FFFFFF;
-        padding-left: 5px;
-
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-    }
-}
-
-@media only screen and (min-width: 850px){
-    .searchbar_container{
-        position: absolute;
-        right: 8px;
-        top: 8px;
-    }
-
-    .searchbar{
-        float: right;
-        border: none;
-        background: #507CA5;
-        color: #FFFFFF;
-        padding-left: 5px;
-        box-shadow: inset 0 0 2px 1px #375572;
-    }
-
-    .mobile_searchtrigger_container, .mobile_searchbar_container{
-        display:none;
-    }
-}
-
-.searchbar::placeholder {
-    color: #FFFFFF;
-    opacity: 0.5;
-}
-
-.searchbar:-ms-input-placeholder {
-    color: #FFFFFF;
-    opacity: 0.5;
-}
-
-.searchbar::-ms-input-placeholder {
-    color: #FFFFFF;
-    opacity: 0.5;
-}
-
-/*===================================================================================*/
-/* (07) Staggered Fade Animations                                                    */
-/*===================================================================================*/
-
-@keyframes stag_fade_in_1{
-    0% { opacity: 0; }
-    10%{ opacity: 0; }
-    40%{ opacity: 1; }
-    100%{opacity: 1; }
-}
-
-.stagfade1{
-    animation: stag_fade_in_1;
-    animation-duration: 1s;
-    animation-iteration-count: 1;
-}
-
-@keyframes stag_fade_in_2{
-    0% { opacity: 0; }
-    20%{ opacity: 0; }
-    50%{ opacity: 1; }
-    100%{opacity: 1; }
-}
-
-.stagfade2{
-    animation: stag_fade_in_2;
-    animation-duration: 1s;
-    animation-iteration-count: 1;
-}
-
-@keyframes stag_fade_in_3{
-    0% { opacity: 0; }
-    30%{ opacity: 0; }
-    60%{ opacity: 1; }
-    100%{opacity: 1; }
-}
-
-.stagfade3{
-    animation: stag_fade_in_3;
-    animation-duration: 1s;
-    animation-iteration-count: 1;
-}
-
-@keyframes stag_fade_in_4{
-    0% { opacity: 0; }
-    40%{ opacity: 0; }
-    70%{ opacity: 1; }
-    100%{opacity: 1; }
-}
-
-.stagfade4{
-    animation: stag_fade_in_4;
-    animation-duration: 1s;
-    animation-iteration-count: 1;
-}
-
-@keyframes stag_fade_in_5{
-    0% { opacity: 0; }
-    50%{ opacity: 0; }
-    80%{ opacity: 1; }
-    100%{opacity: 1; }
-}
-
-.stagfade5{
-    animation: stag_fade_in_5;
-    animation-duration: 1s;
-    animation-iteration-count: 1;
-}
-
-@keyframes stag_fade_in_6{
-    0% { opacity: 0; }
-    60%{ opacity: 0; }
-    90%{ opacity: 1; }
-    100%{opacity: 1; }
-}
-
-.stagfade6{
-    animation: stag_fade_in_6;
-    animation-duration: 1s;
-    animation-iteration-count: 1;
-}
-
-@keyframes stag_fade_in_7{
-    0% { opacity: 0; }
-    70%{ opacity: 0; }
-    100%{opacity: 1; }
-}
-
-.stagfade7{
-    animation: stag_fade_in_7;
-    animation-duration: 1s;
-    animation-iteration-count: 1;
-}
-
-/*===================================================================================*/
-/* (08) Double-Column Classes                                                        */
+/* (Z04) Double-Column Classes                                                        */
 /*===================================================================================*/
 
 /*=== <main><div class="doublecol"><article></article><aside></aside></div></main> ==*/
@@ -540,12 +422,545 @@ h4{
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
-/*================================      A - HOME     ================================*/
+/*================================ Y - Form-Elements ================================*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 
 /*===================================================================================*/
-/* (A1) Home > Header                                                                */
+/* (Y01) FormElements > Buttons                                                      */
+/*===================================================================================*/
+
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+input[type="color"],
+button{
+    min-height:28px;
+    border: none;
+    border-bottom: 3px solid #416586;
+    border-top: 0px solid #FFFFFF;
+    background: #3B9EBF;
+    color: #FEFEFE;
+    padding: 4px 6px 4px 6px;
+    border-radius: 5px;
+    margin: 3px;
+    outline: none;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    -webkit-transition: all .09s ease-in-out;
+    transition: all .09s ease-in-out;
+}
+
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover,
+input[type="color"]:hover,
+button:hover{
+    color: #FFFF99;
+    border-bottom: 2.5px solid #416586;
+    border-top: 0.5px solid #FFFFFF;
+}
+
+input[type="button"]:active,
+input[type="reset"]:active,
+input[type="submit"]:active,
+input[type="color"]:active,
+button:active{
+    color: #FFFFFF;
+    border-bottom: 1px solid #416586;
+    border-top: 2px solid #FFFFFF;
+}
+
+input[type="button"]:focus,
+input[type="reset"]:focus,
+input[type="submit"]:focus,
+input[type="color"]:focus,
+button:focus{
+    background: #4FABC9;
+    color: #FFFFBD;
+}
+
+/*===================================================================================*/
+/* (Y02) FormElements > Textboxes                                                    */
+/*===================================================================================*/
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+input[type="search"],
+input[type="tel"],
+input[type="url"]{
+    padding: 4px;
+    margin: 3px;
+    border: 1px solid #A9A9A9;
+    color: #000000;
+    display: inline-block;
+    outline: none;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus{
+    border-bottom: 1px solid #3B9EBF;
+    color: #416586;
+}
+
+input[type="text"]:read-only:focus,
+input[type="number"]:read-only:focus,
+input[type="password"]:read-only:focus,
+input[type="email"]:read-only:focus,
+input[type="search"]:read-only:focus,
+input[type="tel"]:read-only:focus,
+input[type="url"]:read-only:focus,
+textarea:read-only:focus{
+    border: 1px solid #A9A9A9;
+    color: #000000;
+}
+
+input[type="text"]::placeholder,
+input[type="number"]::placeholder,
+input[type="password"]::placeholder,
+input[type="email"]::placeholder,
+input[type="search"]::placeholder,
+input[type="tel"]::placeholder,
+input[type="url"]::placeholder,
+textarea::placeholder{
+    opacity: 0.5;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+
+input[type="text"]:focus::placeholder,
+input[type="number"]:focus::placeholder,
+input[type="password"]:focus::placeholder,
+input[type="email"]:focus::placeholder,
+input[type="search"]:focus::placeholder,
+input[type="tel"]:focus::placeholder,
+input[type="url"]:focus::placeholder,
+textarea:focus::placeholder{
+    opacity: 0.7;
+    color: #416586;
+}
+
+/*===================================================================================*/
+/* (Y03) FormElements > Textarea                                                     */
+/*===================================================================================*/
+
+textarea{
+    padding: 2px;
+    margin: 3px;
+    border: 1px solid #A9A9A9;
+    color: #000000;
+    display: inline-block;
+    outline: none;
+    font-family: Calivr, Arial, sans-serif;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+
+/* :focus in (Y02) */
+
+/*===================================================================================*/
+/* (Y04) FormElements > Selectbox                                                    */
+/*===================================================================================*/
+
+select{
+    padding: 4px 1px 4px 1px;
+    margin: 3px;
+    border: 1px solid #A9A9A9;
+    color: #000000;
+    display: inline-block;
+    outline: none;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+
+select:focus{
+    border-bottom: 1px solid #3B9EBF;
+}
+
+/*===================================================================================*/
+/* (Y05) FormElements > Checkbox                                                     */
+/*===================================================================================*/
+
+input[type=checkbox].slidecheckbox{
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+.checkbox_toggle_lable {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 50px;
+    height: 25px;
+    background: grey;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+}
+
+.checkbox_toggle_lable:after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.3s;
+}
+
+input.slidecheckbox:checked + .checkbox_toggle_lable {
+    background: #3B9EBF;
+}
+
+input.slidecheckbox:checked + .checkbox_toggle_lable:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+}
+
+/*===================================================================================*/
+/* (Y06) FormElements > Radio Button                                                 */
+/*===================================================================================*/
+
+.radiolabel {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.radiolabel input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.radiocheckmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+.radiolabel:hover input[type="radio"] ~ .radiocheckmark {
+    background-color: #ccc;
+}
+
+.radiolabel input[type="radio"]:checked ~ .radiocheckmark {
+    background-color: #3B9EBF;
+}
+
+.radiocheckmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.radiolabel input[type="radio"]:checked ~ .radiocheckmark:after {
+    display: block;
+}
+
+.radiolabel .radiocheckmark:after {
+ 	top: 6px;
+    left: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+/*===================================================================================*/
+/* (Y07) FormElements > Range Slider                                                 */
+/*===================================================================================*/
+
+input[type=range]::-webkit-slider-thumb {
+    box-shadow: 1px 1px 1px #000000;
+    border: 2px solid #3B9EBF;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    background: #FFFFFF;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -8.5px;
+}
+
+input[type=range]::-moz-range-thumb {
+    box-shadow: 1px 1px 1px #000000;
+    border: 2px solid #3B9EBF;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    background: #FFFFFF;
+    cursor: pointer;
+}
+
+input[type=range]::-ms-thumb {
+    margin-top: 1px;
+    box-shadow: 1px 1px 1px #000000;
+    border: 2px solid #3B9EBF;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    background: #FFFFFF;
+    cursor: pointer;
+}
+
+input[type=range]::-ms-fill-lower {
+    background: #828282;
+    border: 0px solid #3B9EBF;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px #000000;
+}
+
+input[type=range]::-ms-fill-upper {
+    background: #828282;
+    border: 0px solid #3B9EBF;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px #000000;
+}
+
+input[type=range]:focus::-ms-fill-lower {
+    background: #828282;
+}
+
+input[type=range]:focus::-ms-fill-upper {
+    background: #828282;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #828282;
+}
+
+input[type=range] {
+    height: 10px;
+    -webkit-appearance: none;
+    margin: 10px 0;
+    width: 200px;
+}
+
+input[type=range]::-ms-track {
+    width: 200px;
+    height: 5px;
+    cursor: pointer;
+    animate: 0.2s;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 200px;
+    height: 5px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 1px 1px 1px #000000;
+    background: #828282;
+    border-radius: 5px;
+    border: 0px solid #3B9EBF;
+}
+
+input[type=range]::-moz-range-track {
+    width: 200px;
+    height: 5px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 1px 1px 1px #000000;
+    background: #828282;
+    border-radius: 5px;
+    border: 0px solid #3B9EBF;
+}
+
+/*===================================================================================*/
+/* (Y08) FormElements > File Selectors                                               */
+/*===================================================================================*/
+
+input[type="file"] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+input[type="file"] + label {
+    max-width: 80%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 10px 20px;
+}
+
+.no-js input[type="file"] + label {
+    display: none;
+}
+
+input[type="file"]:focus + label,
+input[type="file"].has-focus + label {
+    outline: 1px dotted #000000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+input[type="file"] + label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -4px;
+    margin-right: 4px;
+}
+
+input[type="file"] + label {
+    color: #FEFEFE;
+    background-color: #3B9EBF;
+}
+
+input[type="file"]:focus + label,
+input[type="file"].has-focus + label,
+input[type="file"] + label:hover {
+    color: #FFFF99;
+}
+
+/*===================================================================================*/
+/* (Y09) FormElements > Date/Time Selectors                                          */
+/*===================================================================================*/
+
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="time"],
+input[type="week"]{
+    padding: 2px;
+    margin: 3px;
+    border: 1px solid #A9A9A9;
+    color: #000000;
+    display: inline-block;
+    outline: none;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+
+input[type="date"]:focus,
+input[type="datetime-local"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus{
+    border-bottom: 1px solid #3B9EBF;
+    color: #416586;
+}
+
+/*===================================================================================*/
+/* (Y10) FormElements > Custom Element-Lenghts                                       */
+/*===================================================================================*/
+
+.cel_xxs{
+    width: 25px
+}
+
+.cel_xs{
+    width:50px;
+}
+
+.cel_s{
+    width: 100px;
+}
+
+.cel_m{
+    width: 180px;
+}
+
+.cel_l{
+    width: 300px;
+}
+
+.cel_xl{
+    width: 500px;
+}
+
+.cel_xxl{
+    width:700px;
+}
+
+.cel_100{
+    width:100%;
+}
+
+.cel_50{
+    width: 50%;
+}
+
+.cel_33{
+    width:33%;
+}
+
+.cel_25{
+    width: 25%;
+}
+
+/*===================================================================================*/
+/* (Y11) FormElements > Custom Element-Classes                                       */
+/*===================================================================================*/
+
+.codeprev{
+    width:750px;
+    height:25px;
+    resize:none;
+    font-family: "Courier New", Courier, monospace;
+}
+
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*=============================== X - General Classes ===============================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+
+/*===================================================================================*/
+/* (X01) Header-Contents                                                             */
 /*===================================================================================*/
 
 .header_logo{
@@ -561,7 +976,131 @@ h4{
 }
 
 /*===================================================================================*/
-/* (A2) Home > News-Feed                                                             */
+/* (X02) Searchbar                                                                   */
+/*===================================================================================*/
+
+@media only screen and (max-width: 850px){
+    .searchbar_container{
+        display:none;
+    }
+
+    .mobile_searchtrigger_container{
+        position: absolute;
+        right: 8px;
+        top: 2px;
+    }
+
+    .mobile_searchtrigger_container .searchbar_trigger{
+        border:none;
+        background: #507CA5;
+        padding: 3px 1px 1px 1px;
+        width: 35px;
+        box-shadow: inset 0 0 2px 1px #375572;
+    }
+
+    .mobile_searchbar_container{
+        display: none;
+        height: 0px;
+        -webkit-transition: all .5s ease-in-out;
+        transition: all .5s ease-in-out;
+    }
+
+    .mobile_searchbar_container:target{
+        display: inline-block;
+        background: #416586;
+        width: 100%;
+        height: 38px;
+        z-index: 300000;
+        padding: 5px;
+
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+
+        -webkit-transition: all .5s ease-in-out;
+        transition: all .5s ease-in-out;
+    }
+
+    .mobile_searchbar_container .mobile_searchbar{
+        width:90%;
+        line-height: 26px;
+        font-size:14pt;
+        padding: 0px;
+        border:none;
+        box-shadow: inset 0 0 2px 1px #375572;
+        background: #507CA5;
+        color: #FFFFFF;
+        padding-left: 5px;
+
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .mobile_searchbar_container .mobile_searchbar:focus{
+        border: none;
+        color: #FFFFFF;
+    }
+}
+
+@media only screen and (min-width: 850px){
+    .searchbar_container{
+        position: absolute;
+        right: 8px;
+        top: 5px;
+    }
+
+    .searchbar_container .searchbar{
+        float: right;
+        border: none;
+        background: #507CA5;
+        color: #FFFFFF;
+        padding-left: 5px;
+        box-shadow: inset 0 0 2px 1px #375572;
+    }
+
+    .searchbar_container .searchbar:focus{
+        border: none;
+        color: #FFFFFF;
+    }
+
+    .mobile_searchtrigger_container, .mobile_searchbar_container{
+        display:none;
+    }
+}
+
+.searchbar::placeholder {
+    color: #FFFFFF;
+    opacity: 0.5;
+}
+
+.searchbar:-ms-input-placeholder {
+    color: #FFFFFF;
+    opacity: 0.5;
+}
+
+.searchbar::-ms-input-placeholder {
+    color: #FFFFFF;
+    opacity: 0.5;
+}
+
+/*===================================================================================*/
+/* (X03) Footer-Contents                                                             */
+/*===================================================================================*/
+
+.footer_sponsors{
+    max-height: 50px;
+    margin-left: 50px;
+}
+
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*================================      A - HOME     ================================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+
+/*===================================================================================*/
+/* (A01) Home > News-Feed                                                             */
 /*===================================================================================*/
 
 .home_news_container{
@@ -588,7 +1127,7 @@ h4{
 }
 
 /*===================================================================================*/
-/* (A3) Home > Tiles                                                                 */
+/* (A02) Home > Tiles                                                                 */
 /*===================================================================================*/
 .home_tile_wrapper{
     display: grid;
@@ -661,7 +1200,7 @@ h4{
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 
 /*===================================================================================*/
-/* (B1) Vorstand > User-Tiles                                                                  */
+/* (B01) Vorstand > User-Tiles                                                        */
 /*===================================================================================*/
 
 .user_img_m{
@@ -697,7 +1236,7 @@ h4{
 }
 
 /*===================================================================================*/
-/* (B2) Vorstand > Additional Info                                                              */
+/* (B02) Vorstand > Additional Info                                                   */
 /*===================================================================================*/
 
 .vadditional_info{
@@ -710,7 +1249,4 @@ h4{
 .vadditional_info b{
     color: #AD0000;
 }
-
-
-
 
