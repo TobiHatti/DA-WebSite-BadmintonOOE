@@ -13,9 +13,9 @@
         <html>
             <head>
                 <meta charset="utf-8">
-                <link rel="stylesheet" type="text/css" href="css/style.css?'.$revision.'">
-                <link rel="stylesheet" type="text/css" href="css/menu.css?'.$revision.'">
-                <link rel="stylesheet" type="text/css" href="css/slide.css?'.$revision.'" />
+                <link rel="stylesheet" type="text/css" href="/css/style.css?'.$revision.'">
+                <link rel="stylesheet" type="text/css" href="/css/menu.css?'.$revision.'">
+                <link rel="stylesheet" type="text/css" href="/css/slide.css?'.$revision.'" />
                 <link href="content/favicon.png" rel="icon" type="image/x-icon" />
                 <script src="/data/source.js?'.$revision.'"></script>
                 <script src="/data/menu.js?'.$revision.'"></script>

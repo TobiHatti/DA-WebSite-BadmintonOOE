@@ -25,6 +25,21 @@ function PreventAutoScroll()
         </script>';
 }
 
+function Checkbox($name, $id, $checked = 0)
+{
+    return '<input type="checkbox" name="'.$name.'" id="'.$id.'" class="slidecheckbox" '.(($checked) ? 'checked' : '').'/><label class="checkbox_toggle_lable" for="'.$id.'">Toggle</label>';
+}
+
+function RadioButton($title, $name, $checked = 0)
+{
+    return '
+        <label class="radiolabel">'.$title.'
+            <input type="radio" name="'.$name.'" '.(($checked) ? 'checked' : '').'>
+            <span class="radiocheckmark"></span>
+        </label>
+    ';
+}
+
 function PageTitle($string)
 {
     // DESCRIPTON:

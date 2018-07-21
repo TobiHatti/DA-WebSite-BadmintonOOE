@@ -279,6 +279,7 @@ input[type="url"]{
     border:none;
     margin: 3px;
     border-bottom: 1px solid #A9A9A9;
+    color: #000000;
     display: inline-block;
     outline: none;
 
@@ -300,6 +301,7 @@ input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="url"]:focus{
     border-bottom: 1px solid #3B9EBF;
+    color: #416586;
 }
 
 input[type="date"],         /* Date-Based Form-Elements */
@@ -313,10 +315,11 @@ input[type="week"]{
 input[type="button"],       /* Text-Button Form-Elements */
 input[type="reset"],
 input[type="submit"],
+input[type="color"],
 button{
     min-height:28px;
     border: none;
-    border-bottom: 4px solid #416586;
+    border-bottom: 3px solid #416586;
     border-top: 0px solid #FFFFFF;
     background: #3B9EBF;
     color: #FEFEFE;
@@ -336,44 +339,241 @@ button{
 input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover,
+input[type="color"]:hover,
 button:hover{
     color: #FFFF99;
-    border-bottom: 3.5px solid #416586;
+    border-bottom: 2.5px solid #416586;
     border-top: 0.5px solid #FFFFFF;
 }
 
 input[type="button"]:active,
 input[type="reset"]:active,
 input[type="submit"]:active,
+input[type="color"]:active,
 button:active{
     color: #FFFFFF;
-    border-bottom: 2px solid #416586;
+    border-bottom: 1px solid #416586;
     border-top: 2px solid #FFFFFF;
 }
 
-input[type="checkbox"]{     /* Checkbox Form-Element */
-    /* http://abpetkov.github.io/switchery/ */
+/* Checkbox Start */
+
+input[type=checkbox].slidecheckbox{
+    height: 0;
+    width: 0;
+    visibility: hidden;
 }
 
-input[type="radio"]{        /* Radio-Button Form-Element */
-
+.checkbox_toggle_lable {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 50px;
+    height: 25px;
+    background: grey;
+    display: block;
+    border-radius: 100px;
+    position: relative;
 }
+
+.checkbox_toggle_lable:after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.3s;
+}
+
+input.slidecheckbox:checked + .checkbox_toggle_lable {
+    background: #3B9EBF;
+}
+
+input.slidecheckbox:checked + .checkbox_toggle_lable:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+}
+
+/* Checkbox End */
+
+
+
+input[type=range]::-webkit-slider-thumb {
+    box-shadow: 1px 1px 1px #000000;
+    border: 2px solid #3B9EBF;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    background: #FFFFFF;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -8.5px;
+}
+input[type=range]::-moz-range-thumb {
+    box-shadow: 1px 1px 1px #000000;
+    border: 2px solid #3B9EBF;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    background: #FFFFFF;
+    cursor: pointer;
+}
+input[type=range]::-ms-thumb {
+    margin-top: 1px;
+    box-shadow: 1px 1px 1px #000000;
+    border: 2px solid #3B9EBF;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    background: #FFFFFF;
+    cursor: pointer;
+}
+input[type=range]::-ms-fill-lower {
+    background: #828282;
+    border: 0px solid #3B9EBF;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px #000000;
+}
+input[type=range]::-ms-fill-upper {
+    background: #828282;
+    border: 0px solid #3B9EBF;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px #000000;
+}
+input[type=range]:focus::-ms-fill-lower {
+    background: #828282;
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: #828282;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #828282;
+}
+input[type=range] {
+    height: 10px;
+    -webkit-appearance: none;
+    margin: 10px 0;
+    width: 200px;
+}
+input[type=range]::-ms-track {
+    width: 200px;
+    height: 5px;
+    cursor: pointer;
+    animate: 0.2s;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 200px;
+    height: 5px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 1px 1px 1px #000000;
+    background: #828282;
+    border-radius: 5px;
+    border: 0px solid #3B9EBF;
+}
+input[type=range]::-moz-range-track {
+    width: 200px;
+    height: 5px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 1px 1px 1px #000000;
+    background: #828282;
+    border-radius: 5px;
+    border: 0px solid #3B9EBF;
+}
+
+
+
+
+/* The container */
+.radiolabel {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+/* Hide the browser's default radio button */
+.radiolabel input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.radiocheckmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.radiolabel:hover input[type="radio"] ~ .radiocheckmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.radiolabel input[type="radio"]:checked ~ .radiocheckmark {
+    background-color: #3B9EBF;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.radiocheckmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radiolabel input[type="radio"]:checked ~ .radiocheckmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radiolabel .radiocheckmark:after {
+ 	top: 6px;
+    left: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 textarea{                   /* Textarea Form-Element */
 
 }
 
 select{                     /* Select-Menu Form-Element */
-
-}
-
-input[type="range"]{        /* Range-Slider Form-Element */
-
-
-}
-
-input[type="color"] {       /* Color-Button Form-Element */
-
 
 }
 
