@@ -18,7 +18,7 @@
            <h5><span style="color: #FF0000">Die Ligaeinteilung f&uuml;r die Saison 2016/2017</span></h5>
            <a href="http://www.badminton-ooe.at/wp-content/uploads/Spielerrangliste-2016-2017-R%C3%BCckrunde3.pdf">Spielerrangliste 2016-2017(Stand: 28.03.2017)</a><br>
            <a href="http://obv.tournamentsoftware.com/sport/tournament.aspx?id=96E388BE-2235-45B2-8120-49D5FD067A39">Ligen 2016-2017 auf Tournamentsoftware</a>
-
+           
     </p>
 
     <p>
