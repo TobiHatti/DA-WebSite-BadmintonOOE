@@ -17,8 +17,10 @@
                 <link rel="stylesheet" type="text/css" href="/css/menu.css?'.$revision.'">
                 <link rel="stylesheet" type="text/css" href="/css/slide.css?'.$revision.'" />
                 <link href="content/favicon.png" rel="icon" type="image/x-icon" />
-                <script src="/data/source.js?'.$revision.'"></script>
-                <script src="/data/menu.js?'.$revision.'"></script>
+                <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->  <!-- File-Buttons -->
+    	        <script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script> <!-- File-Buttons -->
+                <script src="/js/source.js?'.$revision.'"></script>
+                <!--<script src="/js/menu.js?'.$revision.'"></script>-->
                 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
                 <title>O&Ouml;. Badmintonverband</title>
             </head>

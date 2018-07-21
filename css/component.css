@@ -1,0 +1,48 @@
+input[type="file"] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+     
+input[type="file"] + label {
+    max-width: 80%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 10px 20px;
+}
+
+.no-js input[type="file"] + label {
+    display: none;
+}
+
+input[type="file"]:focus + label,
+input[type="file"].has-focus + label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+input[type="file"] + label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -4px;
+    margin-right: 4px;
+}
+
+input[type="file"] + label {
+    color: #FEFEFE;
+    background-color: #3B9EBF;
+}
+
+input[type="file"]:focus + label,
+input[type="file"].has-focus + label,
+input[type="file"] + label:hover {
+    color: #FFFF99;
+}
