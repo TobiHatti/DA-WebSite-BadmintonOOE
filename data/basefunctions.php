@@ -6,7 +6,7 @@
 //                                      Contains:                                   *
 // Basic Functions                                                                  *
 //      •Redirect       (return: void)                                              *
-//      •ThisPage       (return: string)                                              *
+//      •ThisPage       (return: string)                                            *
 //      •SubStringFind  (return: bool)                                              *
 //      •XSubStringFind (return: bool)                                              *
 // Property-Functions                                                               *
@@ -15,7 +15,7 @@
 //      •IncProperty    (return: int)                                               *
 //      •DecProperty    (return: int)                                               *
 // MySQL-Functions                                                                  *
-//      •MySQLNonQuery  (return: void)                                              *
+//      •MySQLNonQuery  (return: bool)                                              *
 //      •MySQLSkalar    (return: string)                                            *
 //      •MySQLCount     (return: int)                                               *
 //      •MySQLExists    (return: bool)                                              *
@@ -114,8 +114,9 @@ function DecProperty($key)
 function MySQLNonQuery($strSQL)
 {
     require("mysql_connect.php");
-    mysqli_query($link,$strSQL);
+    $rs = mysqli_query($link,$strSQL);
     mysqli_close($link);
+    return $rs;
 }
 
 function MySQLSkalar($strSQL)

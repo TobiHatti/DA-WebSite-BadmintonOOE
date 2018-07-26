@@ -1,33 +1,44 @@
 <?php
     require("header.php");
 
+//=================================================================================
+//=================================================================================
+//      POST - SECTION
+//=================================================================================
+//=================================================================================
+
+if(isset($_POST['add_vorstand_member']))
+{
+    
+}
+
+//=================================================================================
+//=================================================================================
+//      PAGE - SECTION
+//=================================================================================
+//=================================================================================
+
     echo '
-        <h1 class="stagfade1">Temporary Form-File</h1>
-
-        <h3 class="stagfade2">Use temporarily for SQL/PHP Forms and Database insertions</h3>
-        <br><br><br>
-
+        <a href="__tempform"><h1 class="stagfade1">Temporary Form-File</h1></a>
         <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-
-            <input type="text" class="cel_xxs" placeholder="Kurzer Text..."/><br>
-            <input type="text" class="cel_xs" placeholder="Kurzer Text..."/><br>
-            <input type="text" class="cel_s" placeholder="Kurzer Text..."/><br>
-            <input type="text" class="cel_m" placeholder="Kurzer Text..."/><br>
-            <input type="text" class="cel_l" placeholder="Kurzer Text..."/><br>
-            <input type="text" class="cel_xl" placeholder="Kurzer Text..."/><br>
-            <input type="text" class="cel_xxl" placeholder="Kurzer Text..."/><br><br>
-
-            <input type="text" class="cel_100" placeholder="Kurzer Text..."/><br>
-            <input type="text" class="cel_50" placeholder="Kurzer Text..."/><br>
-            <input type="text" class="cel_33" placeholder="Kurzer Text..."/><br>
-            <input type="text" class="cel_25" placeholder="Kurzer Text..."/><br>
-
-        </form>
-
-
-
-
     ';
+
+    if(!isset($_GET['page']))
+    {
+        echo '<h3 class="stagfade2">Use temporarily for SQL/PHP Forms and Database insertions</h3> ';
+
+        echo '
+            <ul>
+                <li><a href="?page=vorstand">[SQL-INSERT]: Vorand</a></li>
+            </ul>
+        ';
+    }
+    else if(isset($_GET['page']) AND $_GET['page']=='vorstand')
+    {
+
+    }
+
+    echo '</form>';
 
     require("footer.php");
 ?>

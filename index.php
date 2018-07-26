@@ -125,8 +125,10 @@
                         <div class="home_tile_content">
                             <ul>
                                 <li><a href="__formoverview">PHP-Forms Overview</a></li>
+                                <li><a href="__formintro1">PHP-Forms Intro (Simple)</a></li>
+                                <li><a href="__formintro2">PHP-Forms Intro (Advanced)</a></li>
                                 <li><a href="__sources">Sources</a></li>
-                                <li><a href="__tempform">TempForm</a></li>
+                                <li><a href="__tempform">TempForms</a></li>
                             </ul>
                         </div>
                     </div>

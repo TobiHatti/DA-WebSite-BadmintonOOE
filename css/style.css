@@ -445,6 +445,7 @@ button{
     border-bottom: 1px solid transparent;
     border-top: 1px solid transparent;
     padding: 8px 20px 8px 20px;
+    margin: 3px; 
     outline: none;
 
     -webkit-transition: all .1s ease-in-out;
