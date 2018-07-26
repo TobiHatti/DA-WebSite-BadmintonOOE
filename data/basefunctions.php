@@ -113,6 +113,9 @@ function DecProperty($key)
 
 function MySQLNonQuery($strSQL)
 {
+    // DESCRIPTION:
+    // Executes a standard SQL-Query such as UPDATE,DELETE,INSERT, etc.
+    // Can be used in combination with "or die("error_msg");"
     require("mysql_connect.php");
     $rs = mysqli_query($link,$strSQL);
     mysqli_close($link);
@@ -121,6 +124,10 @@ function MySQLNonQuery($strSQL)
 
 function MySQLSkalar($strSQL)
 {
+    // DESCRIPTION:
+    // Returns a single value from a Table.
+    // Syntax: MySQLSkalar("SELECT name AS x FROM users....");
+    // Use "rowname AS x" to get the wanted value
     require("mysql_connect.php");
     $retval = '';
     $rs=mysqli_query($link,$strSQL);
@@ -131,6 +138,12 @@ function MySQLSkalar($strSQL)
 
 function MySQLExists($strSQL)
 {
+    // DESCRIPTION:
+    // Checks if a specific value or value-combination exists in a table
+    // Syntax: MySQLExists("SELECT * FROM users WHERE ...");
+    // If at least one result is found, this function returns true, else
+    // it returns false
+    // Should be used inside an if-Statements, NOT with "or die("error_msg");"
     require("mysql_connect.php");
     $rs=mysqli_query($link,$strSQL);
     $retval = (mysqli_num_rows($rs)!=0) ? true : false ;
@@ -140,6 +153,10 @@ function MySQLExists($strSQL)
 
 function MySQLCount($strSQL)
 {
+    // DESCRIPTION:
+    // Returns the number of rows that fit a specific SQL-Query.
+    // Syntax: MySQLCount("SELECT * FROM users WHERE ...");
+    // Usualy used for normal counting
     require("mysql_connect.php");
     $rs=mysqli_query($link,$strSQL);
     $retval = mysqli_num_rows($rs);
@@ -149,6 +166,13 @@ function MySQLCount($strSQL)
 
 function Fetch($db,$get,$col,$like)
 {
+    // DESCRIPTION:
+    // Returns a single value from a table
+    // Similar to MySQLSkalar(), but here only 1 "WHERE"-Argument is possible
+    // $db      Name of the table
+    // $get     The column you want to get the value from
+    // $col     For "WHERE"-Argument: =Where this column...
+    // $like    ...is this value
     require("mysql_connect.php");
 
     $retval = '';
@@ -161,6 +185,12 @@ function Fetch($db,$get,$col,$like)
 
 function FetchCount($db,$col,$like)
 {
+    // DESCRIPTION:
+    // Returns the number of rows that fit one condition
+    // Similar to MySQLCount(), but here only 1 "WHERE"-Argument is possible
+    // $db      Name of the table
+    // $col     For "WHERE"-Argument: =Where this column...
+    // $like    ...is this value
     require("mysql_connect.php");
 
     $strSQL = "SELECT * FROM $db WHERE $col LIKE '$like'";

@@ -40,6 +40,9 @@
         // Mit Redirect(ThisPage()); wird die Seite einfach nochmal neu geladen.
         // Dies verhindert ein mehrfaches eintragen in die Datenbank
         Redirect(ThisPage());
+        // Man kann allerdings hier auch auf eine andere Seite verweisen:
+        // Redirect('/mynextpage.php');
+
 
         // Im Grunde ist das alles. Oft müssen allerdings nich die Eingegangenen Daten
         // geprüft oder Manipuliert werden. (z.B. Auf Kleinbuchstaben umwandeln, Prüfen
