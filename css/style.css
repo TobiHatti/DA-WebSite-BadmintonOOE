@@ -44,6 +44,9 @@
     ====== B - Vorstand ====================
     (B01)   Vorstand > User-Tiles
     (B02)   Vorstand > Additional Info
+    ====== E - Links =======================
+    (E01)   Links > Containers
+
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -429,6 +432,54 @@ h5{
 /*===================================================================================*/
 /* (Y01) FormElements > Buttons                                                      */
 /*===================================================================================*/
+/* DESIGN A - Simple Flat Responsive Buttons (Modern) */
+
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+input[type="color"],
+button{
+    background: #3B9EBF;
+    color: #FFFFFF;
+    border: none;
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    padding: 8px 20px 8px 20px;
+    outline: none;
+
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover,
+input[type="color"]:hover,
+button:hover{
+    color: #FFFF99;
+}
+
+input[type="button"]:active,
+input[type="reset"]:active,
+input[type="submit"]:active,
+input[type="color"]:active,
+button:active{
+    background: #416586;
+    color: #FFFF5C;
+}
+
+input[type="button"]:focus,
+input[type="reset"]:focus,
+input[type="submit"]:focus,
+input[type="color"]:focus,
+button:focus{
+    color: #FFFFBD;
+    border-bottom: 1px solid #416586;
+    border-top: 1px solid #416586;
+}
+
+
+/* DESIGN B - Fancy Buttons (Push-Buttons)
 
 input[type="button"],
 input[type="reset"],
@@ -482,6 +533,8 @@ button:focus{
     background: #4FABC9;
     color: #FFFFBD;
 }
+
+*/
 
 /*===================================================================================*/
 /* (Y02) FormElements > Textboxes                                                    */
@@ -1250,3 +1303,33 @@ input[type="week"]:focus{
     color: #AD0000;
 }
 
+
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*================================     E - Links     ================================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+
+/*===================================================================================*/
+/* (E01) Links > Containers                                                          */
+/*===================================================================================*/
+
+.links_container{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.links_iframe_container{
+    float: right;
+    display: inline-block;
+    vertical-align: middle;
+    height: 600px;
+    width: 70%;
+}
+
+
+.links_iframe{
+
+    height: 100%;
+    width: 100%;
+}
