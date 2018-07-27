@@ -76,4 +76,14 @@ function PageTitle($string)
 
     echo '<script>document.title = "'.$string.' | O\u00d6. Badmintonverband";</script>';
 }
+
+function PageContent($paragraph_index)
+{
+    // DESCRIPTION:
+    // Gets the text/description for the current page
+    // With $paragraph_index, several entries can be saved in one page.
+
+    $page = ThisPage();
+    return nl2br(MySQLSkalar("SELECT text AS x FROM page_content WHERE page = '$page' AND paragraph_index = '$paragraph_index'"));
+}
 ?>

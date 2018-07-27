@@ -337,7 +337,7 @@ function MySQLPDSave($period = "d")
 //**** File Functions ***************************************************************
 //***********************************************************************************
 
-function MultiFileUpload($path,$formId,$formats="",$limit="",$sql="")
+function FileUpload($path,$formId,$formats="",$limit="",$sql="")
 {
     // DESCRIPTION:
     // Required for File-Uploads
@@ -361,12 +361,12 @@ function MultiFileUpload($path,$formId,$formats="",$limit="",$sql="")
     $count=0;
     if(isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST")
     {
-        foreach ($_FILES['files']['name'] as $f => $name)
+        foreach ($_FILES[$formId]['name'] as $f => $name)
         {
-            if ($_FILES['files']['error'][$f] == 4) continue;
-            if ($_FILES['files']['error'][$f] == 0)
+            if ($_FILES[$formId]['error'][$f] == 4) continue;
+            if ($_FILES[$formId]['error'][$f] == 0)
             {
-                if ($_FILES['files']['size'][$f] > $max_file_size)
+                if ($_FILES[$formId]['size'][$f] > $max_file_size)
                 {
                     $message[] = "$name is too large!.";
                     continue;
@@ -378,7 +378,7 @@ function MultiFileUpload($path,$formId,$formats="",$limit="",$sql="")
                 }
                 else
                 {
-                    if(move_uploaded_file($_FILES["files"]["tmp_name"][$f], $path.$name)) $count++;
+                    if(move_uploaded_file($_FILES[$formId]["tmp_name"][$f], $path.$name)) $count++;
                     MySQLNonQuery(str_replace('FNAME',$name,$sql));
                 }
             }
