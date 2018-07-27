@@ -5,6 +5,7 @@
     require("data/functions.php");
 
     echo PreventAutoScroll();
+    MySQLPDSave("d");
 
     $revision = 2;
 
@@ -20,7 +21,7 @@
                 <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->  <!-- File-Buttons -->
     	        <script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script> <!-- File-Buttons -->
                 <script src="/js/source.js?'.$revision.'"></script>
-                <!--<script src="/js/menu.js?'.$revision.'"></script>-->
+                <!--<script src="/js/menu.js?'.$revision.'"></script>-->  <!-- Not used? -->
                 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
                 <title>O&Ouml;. Badmintonverband</title>
             </head>
@@ -31,7 +32,6 @@
                     <img src="/content/logo.png" alt="O&Ouml;. Badminton-Verband" class="header_logo"/>
                     <img src="/content/babolat.png" alt="" class="header_sponsor"/>
                 </header>
-
 
                 <nav>
                     <div id="cssmenu">

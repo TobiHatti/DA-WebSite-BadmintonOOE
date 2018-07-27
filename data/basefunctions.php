@@ -9,6 +9,8 @@
 //      •ThisPage       (return: string)                                            *
 //      •SubStringFind  (return: bool)                                              *
 //      •XSubStringFind (return: bool)                                              *
+//      •StartsWith     (return: bool)                                              *
+//      •EndsWith       (return: bool)                                              *
 // Property-Functions                                                               *
 //      •SetProperty    (return: void)                                              *
 //      •GetProperty    (return: string)                                            *
@@ -21,6 +23,8 @@
 //      •MySQLExists    (return: bool)                                              *
 //      •Fetch          (return: string)                                            *
 //      •FetchCount     (return: int)                                               *
+//      •MySQLSave      (return: int)                                               *
+//      •MySQLPDSave    (return: int)                                               *
 // File-Uploads                                                                     *
 //      •FileUpload     (return: void)                                              *
 //      •DeleteFolder   (return: void)                                              *
@@ -37,11 +41,17 @@ function Redirect($path,$delay=0)
     // Usefull afer POST-Instructions with SQL-Querys like: INSERT, DELETE, etc.
     // $path    relative or absolute path: "/testpage", "google.at"
     // $delay   time afer which the redirect is executed. default: 0s
+
     echo '<meta http-equiv="refresh" content="'.$delay.'; url='.$path.'" />';
 }
 
 function ThisPage()
 {
+    // DESCRIPTION:
+    // Can be used in the "action"-argument of a <form>-Tag
+    // or in combination with the Redirect()-Function
+    // Returns the current pagename
+
     return  basename($_SERVER["REQUEST_URI"], '.php');
 }
 
@@ -74,9 +84,45 @@ function XSubStringFind()
     return $retval;
 }
 
+function StartsWith($haystack, $needle)
+{
+    // DESCRIPTION:
+    // Checks if a string starts with a specific string
+    // $haystack    The String that should be searched in
+    // $needle      The String that should be searched for
+
+    $length = strlen($needle);
+    return (substr($haystack, 0, $length) === $needle);
+}
+
+function EndsWith($haystack, $needle)
+{
+    // DESCRIPTION:
+    // Checks if a string ends with a specific string
+    // $haystack    The String that should be searched in
+    // $needle      The String that should be searched for
+
+    $length = strlen($needle);
+
+    return $length === 0 || (substr($haystack, -$length) === $needle);
+}
+
 //***********************************************************************************
 //**** Property Functions ***********************************************************
 //***********************************************************************************
+
+function SetProperty($key,$value)
+{
+    // DESCRIPTION:
+    // Sets a Property saved in the Database
+    // If property does not exist, the entry is created in the Database,
+    // otherwise it just updates the value
+    // $key     Keyword of the property (e.g. keyword="site_name" returns "My Cool Website")
+    // $value   The value the property should take
+
+    if(fetch_count("settings","setting",$key) != 0) MySQLNonQuery("UPDATE settings SET value = '$value' WHERE setting = '$key'");
+    else MySQLNonQuery("INSERT INTO settings (setting,value) VALUES ('$key','$value')");
+}
 
 function GetProperty($key)
 {
@@ -88,14 +134,15 @@ function GetProperty($key)
     return MySQLSkalar("SELECT value AS x FROM settings WHERE setting = '$key'");
 }
 
-function SetProperty($key,$value)
-{
-    if(fetch_count("settings","setting",$key) != 0) MySQLNonQuery("UPDATE settings SET value = '$value' WHERE setting = '$key'");
-    else MySQLNonQuery("INSERT INTO settings (setting,value) VALUES ('$key','$value')");
-}
-
 function IncProperty($key,$resetLimit = "none")
 {
+    // DESCRIPTION:
+    // Increases the value of a property by 1
+    // Order: First the value gets increased, then returned
+    // Only works if the property is a numeric value
+    // $key         Keyword of the property
+    // $resetLimit  Default: none. If the defined value is reached, the value is reset to 0
+
     if($resetLimit != "none" AND GetProperty($key)>=$resetLimit) SetProperty($key,0);
     SetProperty($key,GetProperty($key) + 1);
     return GetProperty($key);
@@ -103,6 +150,12 @@ function IncProperty($key,$resetLimit = "none")
 
 function DecProperty($key)
 {
+    // DESCRIPTION:
+    // Decreases the value of a property by 1
+    // Order: First the value gets decreased, then returned
+    // Only works if the property is a numeric value
+    // $key Keyword of the property
+
     SetProperty($key,GetProperty($key) - 1);
     return GetProperty($key);
 }
@@ -116,6 +169,7 @@ function MySQLNonQuery($strSQL)
     // DESCRIPTION:
     // Executes a standard SQL-Query such as UPDATE,DELETE,INSERT, etc.
     // Can be used in combination with "or die("error_msg");"
+
     require("mysql_connect.php");
     $rs = mysqli_query($link,$strSQL);
     mysqli_close($link);
@@ -128,10 +182,25 @@ function MySQLSkalar($strSQL)
     // Returns a single value from a Table.
     // Syntax: MySQLSkalar("SELECT name AS x FROM users....");
     // Use "rowname AS x" to get the wanted value
+
     require("mysql_connect.php");
     $retval = '';
     $rs=mysqli_query($link,$strSQL);
     while($row=mysqli_fetch_assoc($rs)) $retval = $row['x'];
+    mysqli_close($link);
+    return $retval;
+}
+
+function MySQLCount($strSQL)
+{
+    // DESCRIPTION:
+    // Returns the number of rows that fit a specific SQL-Query.
+    // Syntax: MySQLCount("SELECT * FROM users WHERE ...");
+    // Usualy used for normal counting
+
+    require("mysql_connect.php");
+    $rs=mysqli_query($link,$strSQL);
+    $retval = mysqli_num_rows($rs);
     mysqli_close($link);
     return $retval;
 }
@@ -144,22 +213,10 @@ function MySQLExists($strSQL)
     // If at least one result is found, this function returns true, else
     // it returns false
     // Should be used inside an if-Statements, NOT with "or die("error_msg");"
+
     require("mysql_connect.php");
     $rs=mysqli_query($link,$strSQL);
     $retval = (mysqli_num_rows($rs)!=0) ? true : false ;
-    mysqli_close($link);
-    return $retval;
-}
-
-function MySQLCount($strSQL)
-{
-    // DESCRIPTION:
-    // Returns the number of rows that fit a specific SQL-Query.
-    // Syntax: MySQLCount("SELECT * FROM users WHERE ...");
-    // Usualy used for normal counting
-    require("mysql_connect.php");
-    $rs=mysqli_query($link,$strSQL);
-    $retval = mysqli_num_rows($rs);
     mysqli_close($link);
     return $retval;
 }
@@ -173,6 +230,7 @@ function Fetch($db,$get,$col,$like)
     // $get     The column you want to get the value from
     // $col     For "WHERE"-Argument: =Where this column...
     // $like    ...is this value
+
     require("mysql_connect.php");
 
     $retval = '';
@@ -191,6 +249,7 @@ function FetchCount($db,$col,$like)
     // $db      Name of the table
     // $col     For "WHERE"-Argument: =Where this column...
     // $like    ...is this value
+
     require("mysql_connect.php");
 
     $strSQL = "SELECT * FROM $db WHERE $col LIKE '$like'";
@@ -200,12 +259,89 @@ function FetchCount($db,$col,$like)
     return $retval;
 }
 
+function MySQLSave($buname)
+{
+    // DESCRIPTION:
+    // Creates a Database Backup
+    // $buname: The name of the backup
+
+    require("mysql_connect.php");
+
+    $dbhost     = $servername;
+    $dbuser     = $username;
+    $dbpwd      = $password;
+    $dbname     = $database;
+    $dbbackup   = 'backup/'.$buname.'.sql';
+
+    error_reporting(0);
+    set_time_limit(0);
+
+    // ab hier nichts mehr ändern
+    $conn = mysql_connect($dbhost, $dbuser, $dbpwd) or die(mysql_error());
+    mysql_select_db($dbname);
+    $f = fopen($dbbackup, "w");
+
+    $tables = mysql_list_tables($dbname);
+    while ($cells = mysql_fetch_array($tables))
+    {
+        $table = $cells[0];
+        $res = mysql_query("SHOW CREATE TABLE `".$table."`");
+        if ($res)
+        {
+            $create = mysql_fetch_array($res);
+            $create[1] .= ";";
+            $line = str_replace("\n", "", $create[1]);
+            fwrite($f, $line."\n");
+            $data = mysql_query("SELECT * FROM `".$table."`");
+            $num = mysql_num_fields($data);
+            while ($row = mysql_fetch_array($data))
+            {
+                $line = "INSERT INTO `".$table."` VALUES(";
+                for ($i=1;$i<=$num;$i++)
+                {
+                    $line .= "'".mysql_real_escape_string($row[$i-1])."', ";
+                }
+                $line = substr($line,0,-2);
+                fwrite($f, $line.");\n");
+            }
+        }
+    }
+    fclose($f);
+}
+
+function MySQLPDSave($period = "d")
+{
+    // DESCRIPTION:
+    // Used for frequent Database Backups
+    // $period: Default: "d". the period in which backups are created
+    //          d...Daily
+    //          w...Weekly
+    //          h...Hourly
+
+    switch($period)
+    {
+        case 'w': $filename = 'dbbu_'.date("\DY-\WW"); break;
+        case 'd': $filename = 'dbbu_'.date("\DY-m-d"); break;
+        case 'h': $filename = 'dbbu_'.date("\DY-m-d-\HH"); break;
+        default : $filename = 'dbbu_'.date("\DY-m-d"); break;
+    }
+
+    if(!file_exists('backup/'.$filename.'.sql'))
+    {
+        MySQLSave($filename);
+    }
+}
+
+
 //***********************************************************************************
 //**** File Functions ***************************************************************
 //***********************************************************************************
 
 function MultiFileUpload($path,$formId,$formats="",$limit="",$sql="")
 {
+    // DESCRIPTION:
+    // Required for File-Uploads
+    // Put this function inside the POST-Part
     // $path        Upload Directory
     // $formId      ID-Property of File-Upload-Element
     // $formats     Allowed file formats, blank if any, Delimiter: ","
@@ -252,6 +388,9 @@ function MultiFileUpload($path,$formId,$formats="",$limit="",$sql="")
 
 function DeleteFolder($path)
 {
+    // DESCRIPTION
+    // Deletes a folder and everything it contains
+
     $files = glob($path.'*');
     foreach($files as $file)
     {
