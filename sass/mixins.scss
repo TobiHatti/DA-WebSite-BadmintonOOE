@@ -1,0 +1,35 @@
+@mixin box-sizing($boxs)
+{
+    -webkit-box-sizing: $boxs;
+       -moz-box-sizing: $boxs;
+            box-sizing: $boxs;
+}
+
+@mixin ease($duration){
+    -webkit-transition: all $duration ease-in-out;
+       -moz-transition: all $duration ease-in-out;
+        -ms-transition: all $duration ease-in-out;
+         -o-transition: all $duration ease-in-out;
+            transition: all $duration ease-in-out;
+}
+
+@mixin border-radius($radius){
+    -webkit-border-radius: $radius;
+       -moz-border-radius: $radius;
+        -ms-border-radius: $radius;
+            border-radius: $radius;
+}
+
+@mixin border-radiusPlus($tl,$tr,$br,$bl){
+    -webkit-border-radius: $tl $tr $br $bl;
+       -moz-border-radius: $tl $tr $br $bl;
+        -ms-border-radius: $tl $tr $br $bl;
+            border-radius: $tl $tr $br $bl;
+}
+
+@mixin animation($name,$duration,$iterations,$delay){
+    animation: $name;
+    animation-duration: $duration;
+    animation-iteration-count: $iterations;
+    animation-delay: $delay;
+}

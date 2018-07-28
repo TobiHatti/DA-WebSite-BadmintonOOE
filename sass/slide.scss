@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 @import url(https://fonts.googleapis.com/css?family=Gurajada&subset=latin,telugu);
 @font-face {
@@ -30,9 +31,7 @@
     text-shadow: none; /* fix some user styles */
 
     /* reset box-sizing (to boostrap friendly) */
-    -webkit-box-sizing: content-box;
-    -moz-box-sizing: content-box;
-    box-sizing: content-box;
+    @include box-sizing(border-box);
 }
 
 * html #wowslider-container1{ width:830px }
@@ -251,8 +250,7 @@
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
 
-    -webkit-transition: -webkit-transform 0.5s ease;
-  	transition: -webkit-transform 0.5s ease, transform 0.5s ease;
+    @include ease(0.5s);
 }
 
 #wowslider-container1 .ws_bullets a > span:before,
@@ -323,8 +321,7 @@
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
 
-    -webkit-transition: -webkit-transform 0.5s ease;
-  	transition: -webkit-transform 0.5s ease, transform 0.5s ease;
+    @include ease(0.5s);
 }
 
 

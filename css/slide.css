@@ -70,9 +70,9 @@
   text-shadow: none;
   /* fix some user styles */
   /* reset box-sizing (to boostrap friendly) */
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box; }
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
 
 * html #wowslider-container1 {
   width: 830px; }
@@ -260,8 +260,11 @@
   width: 100%;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
-  -webkit-transition: -webkit-transform 0.5s ease;
-  transition: -webkit-transform 0.5s ease, transform 0.5s ease; }
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out; }
 
 #wowslider-container1 .ws_bullets a > span:before,
 #wowslider-container1 .ws_bullets a > span:after {
@@ -319,8 +322,11 @@
   display: block;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
-  -webkit-transition: -webkit-transform 0.5s ease;
-  transition: -webkit-transform 0.5s ease, transform 0.5s ease; }
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out; }
 
 #wowslider-container1 a.ws_next > span:before,
 #wowslider-container1 a.ws_prev > span:before,

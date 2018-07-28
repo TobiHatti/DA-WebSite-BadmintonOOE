@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 #cssmenu,
 #cssmenu ul,
@@ -12,9 +13,8 @@
     line-height: 1;
     display: block;
     position: relative;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+
+    @include box-sizing(border-box);
 }
 
 #cssmenu:after,
@@ -94,11 +94,7 @@
     height: 8px;
     background: #DDDDDD;
     content: '';
-    -webkit-transition: all .25s ease;
-    -moz-transition: all .25s ease;
-    -ms-transition: all .25s ease;
-    -o-transition: all .25s ease;
-    transition: all .25s ease;
+    @include ease(0.25s);
 }
 
 #cssmenu > ul > li.has-sub:hover > a:before {
@@ -117,11 +113,7 @@
 
 #cssmenu ul ul li {
     height: 0;
-    -webkit-transition: all $menu-drop-speed ease;
-    -moz-transition: all $menu-drop-speed ease;
-    -ms-transition: all $menu-drop-speed ease;
-    -o-transition: all $menu-drop-speed ease;
-    transition: all $menu-drop-speed ease;
+    @include ease($menu-drop-speed);
 }
 
 #cssmenu li:hover > ul {
@@ -158,8 +150,7 @@
 
     box-shadow: inset 0 0 0px $theme-dark;
 
-    -webkit-transition: all .1s ease-in-out;
-    transition: all .1s ease-in-out;
+    @include ease(0.1s);
 }
 
 #cssmenu ul ul li a:hover {
@@ -180,8 +171,7 @@
     font-weight: 400;
     background: $theme-bright;
 
-    -webkit-transition: all .1s ease-in-out;
-    transition: all .1s ease-in-out;
+    @include ease(0.1s);
 }
 
 #cssmenu ul ul ul li a:hover {
@@ -227,11 +217,7 @@
     height: 8px;
     background: #dddddd;
     content: '';
-    -webkit-transition: all .25s ease;
-    -moz-transition: all .25s ease;
-    -ms-transition: all .25s ease;
-    -o-transition: all .25s ease;
-    transition: all .25s ease;
+    @include ease(0.25s);
 }
 
 #cssmenu.align-right ul ul li.has-sub > a:before {
