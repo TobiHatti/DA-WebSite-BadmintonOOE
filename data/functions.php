@@ -86,4 +86,14 @@ function PageContent($paragraph_index)
     $page = ThisPage();
     return nl2br(MySQLSkalar("SELECT text AS x FROM page_content WHERE page = '$page' AND paragraph_index = '$paragraph_index'"));
 }
+
+function Loader()
+{
+    return '
+        <center>
+            <img src="/content/silhouette.png" alt="" class="ease10" style="height: 100px;" id="loadAnim1"/>
+            <img src="/content/loader.gif" alt="" class="ease10" style="height: 60px; opacity: 0; margin-left:-80px;margin-bottom:20px;" id="loadAnim2"/>
+        </center>
+    ';
+}
 ?>

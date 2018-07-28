@@ -8,7 +8,7 @@
         <p>'.PageContent('1').'</p>
         <br>
         ';
-
+        
         $strSQL = "SELECT * FROM vorstand WHERE darstellung = 'box'";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
@@ -36,9 +36,7 @@
 
         echo '
         <hr style="margin: 10px 0 10px 0">
-
         <center>
-
         ';
 
         $strSQL = "SELECT DISTINCT bereich FROM vorstand WHERE darstellung = 'list'";
@@ -61,10 +59,7 @@
             echo '</div>';
         }
 
-        echo '
-            </div>
-        </center>
-    ';
+        echo '</center>';
 
     include("footer.php");
 ?>

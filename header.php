@@ -30,8 +30,10 @@
             <body>
 
                 <header>
+
                     <img src="/content/logo.png" alt="O&Ouml;. Badminton-Verband" class="header_logo"/>
                     <img src="/content/babolat.png" alt="" class="header_sponsor"/>
+                    '.((isset($_SESSION['user_id'])) ? '<div class="logout_bar">Angemeldet als '.$_SESSION['username'].' - <a href="/logout">Abmelden</a></div>' : '').'
                 </header>
 
                 <nav>

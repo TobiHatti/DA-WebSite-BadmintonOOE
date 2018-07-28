@@ -41,6 +41,7 @@
     (X01)   Header-Contents
     (X02)   Searchbar
     (X03)   Footer-Contents
+    (X04)   Tables
     ====== A - Home ========================
     (A01)   Home > News-Feed
     (A02)   Home > Tiles
@@ -903,6 +904,15 @@ input[type="week"]:focus {
 .cel_25 {
   width: 25%; }
 
+.cel_f13 {
+  font-size: 13pt; }
+
+.cel_f15 {
+  font-size: 15pt; }
+
+.cel_f18 {
+  font-size: 18pt; }
+
 /*===================================================================================*/
 /* (Y11) FormElements > Custom Element-Classes                                       */
 /*===================================================================================*/
@@ -929,6 +939,18 @@ input[type="week"]:focus {
   float: right;
   margin-right: 20px; }
 
+.logout_bar {
+  color: #FFFFFF;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  background: #416586;
+  padding: 3px;
+  box-shadow: 0px 0px 6px 3px #416586; }
+
+@media only screen and (max-width: 600px) {
+  .logout_bar {
+    top: 38px; } }
 /*===================================================================================*/
 /* (X02) Searchbar                                                                   */
 /*===================================================================================*/
@@ -1022,6 +1044,23 @@ input[type="week"]:focus {
 .footer_sponsors {
   max-height: 50px;
   margin-left: 50px; }
+
+/*===================================================================================*/
+/* (X04) Tables                                                                      */
+/*===================================================================================*/
+table.centered_content td {
+  text-align: center; }
+
+/*===================================================================================*/
+/* (X05) Animation-Easing                                                            */
+/*===================================================================================*/
+.ease10 {
+  -webkit-transition: all .10s ease-in-out;
+  transition: all .10s ease-in-out; }
+
+.ease25 {
+  -webkit-transition: all .25s ease-in-out;
+  transition: all .25s ease-in-out; }
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
