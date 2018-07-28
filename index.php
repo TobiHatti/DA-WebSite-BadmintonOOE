@@ -14,7 +14,7 @@
                         <div class="ws_images">
                             <ul>
                                 <li><img src="content/federall_sample2.jpg" alt="federall_sample2" title="Der Federball" id="wows1_0"/></li>
-                                <li><a href="http://wowslider.net"><img src="content/federball_sample1.jpg" alt="html slider" title="Der Federball" id="wows1_1"/></a></li>
+                                <li><img src="content/federball_sample1.jpg" alt="html slider" title="Der Federball" id="wows1_1"/></li>
                                 <li><img src="content/federball_sample3.jpg" alt="federball_sample3" title="Der Federball" id="wows1_2"/></li>
                             </ul>
                         </div>

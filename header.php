@@ -15,6 +15,7 @@
             <head>
                 <meta charset="utf-8">
                 <link rel="stylesheet" type="text/css" href="/css/style.css?'.$revision.'">
+                <link rel="stylesheet" type="text/css" href="/css/layout.css?'.$revision.'">
                 <link rel="stylesheet" type="text/css" href="/css/menu.css?'.$revision.'">
                 <link rel="stylesheet" type="text/css" href="/css/slide.css?'.$revision.'" />
                 <link href="content/favicon.png" rel="icon" type="image/x-icon" />
@@ -59,7 +60,7 @@
                                     <li><a href="#">Ranglisten <span style="float:right; color: #FFFFFF;">&#10148;</span></a>
                                         <ul>
                                             <li><a href="ooebv-ranglisten.php">O&Ouml;BV-Ranglisten</a></li>
-                                            <li><a href="http://www.badminton.at">&Ouml;BV-Ranglisten</a></li>
+                                            <li><a target="_blank" href="http://www.badminton.at">&Ouml;BV-Ranglisten</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="zentralausschreibung">Zentralausschreibung</a></li>
