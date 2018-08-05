@@ -96,6 +96,22 @@
                                     </li>
                                 </ul>
                             </li>
+
+                            ';
+
+                            if(isset($_SESSION['user_id']))   // Condition: Check if user can edit any element of the page
+                            {
+                                echo '
+                                    <li class="active"><a href="#">| Verwaltung</a>
+                                        <ul>
+                                            <li><a href="#">News-Artikel hinzuf&uuml;gen</a></li>
+                                        </ul>
+                                    </li>
+                                ';
+                            }
+
+                            echo '
+
                         </ul>
 
                         <!-- Standard Search-Bar -->
