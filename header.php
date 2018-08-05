@@ -5,7 +5,7 @@
     require("data/functions.php");
 
     echo PreventAutoScroll();
-    MySQLPDSave("d");
+    //MySQLPDSave("d");
 
     $revision = 2;
 
