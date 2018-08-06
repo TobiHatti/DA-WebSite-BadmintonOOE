@@ -26,6 +26,10 @@
                 <b>Custom Range-Slider</b><br>
                 <i><a target="_blank" href="http://www.cssportal.com/style-input-range/">{CSS}Portal</a></i>
             </li>
+            <li>
+                <b>Advanced Textarea with text-editor</b><br>
+                <i><a target="_blank" href="https://www.froala.com">Fraola</a></i>
+            </li>
         </ul>
     ';
 

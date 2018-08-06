@@ -67,6 +67,50 @@ function FileButton($name, $id, $multiple=0)
     ';
 }
 
+function TextareaPlus($name)
+{
+    return '
+        <textarea id="edit" style="margin-top: 30px;" placeholder="Artikel-Text..." name="'.$name.'">
+            <h1>Textarea</h1>
+            <p>The editor can also be initialized on a textarea.</p>
+        </textarea>
+
+
+        <script>
+            $(function(){
+                $("#edit")
+                    .on("froalaEditor.initialized", function (e, editor) {
+                        $("#edit").parents("form").on("submit", function () {
+                            console.log($("#edit").val());
+                            return true;  // originally false
+                    })
+                })
+                .froalaEditor({enter: $.FroalaEditor.ENTER_P, placeholderText: null})
+            });
+        </script>
+
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+        <script type="text/javascript" src="/js/froala/froala_editor.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/align.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/code_beautifier.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/code_view.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/draggable.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/image.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/image_manager.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/link.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/lists.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/paragraph_format.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/paragraph_style.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/table.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/video.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/url.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/entities.min.js"></script>
+    ';
+}
+
 function PageTitle($string)
 {
     // DESCRIPTON:

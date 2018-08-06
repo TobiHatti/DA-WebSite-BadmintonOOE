@@ -14,17 +14,47 @@
         <html>
             <head>
                 <meta charset="utf-8">
-                <link rel="stylesheet" type="text/css" href="/css/style.css?'.$revision.'">
-                <link rel="stylesheet" type="text/css" href="/css/layout.css?'.$revision.'">
-                <link rel="stylesheet" type="text/css" href="/css/menu.css?'.$revision.'">
-                <link rel="stylesheet" type="text/css" href="/css/slide.css?'.$revision.'" />
-                <link href="content/favicon.png" rel="icon" type="image/x-icon" />
-                <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->  <!-- File-Buttons -->
-    	        <script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script> <!-- File-Buttons -->
-                <script src="/js/source.js?'.$revision.'"></script>
-                <!--<script src="/js/menu.js?'.$revision.'"></script>-->  <!-- Not used? -->
-                <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
                 <title>O&Ouml;. Badmintonverband</title>
+
+                <!-- Own links -->
+                    <link rel="stylesheet" type="text/css" href="/css/style.css?'.$revision.'">
+                    <link rel="stylesheet" type="text/css" href="/css/layout.css?'.$revision.'">
+                    <link rel="stylesheet" type="text/css" href="/css/menu.css?'.$revision.'">
+                    <link rel="stylesheet" type="text/css" href="/css/slide.css?'.$revision.'" />
+                    <link href="content/favicon.png" rel="icon" type="image/x-icon" />
+                <!-- End own links -->
+
+
+                <!-- Own Scripts -->
+                    <script src="/js/source.js?'.$revision.'"></script>
+                <!-- End of Own Scripts -->
+
+
+                <!-- External Links/Scripts -->
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+                    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+                <!-- End of External Links/Scripts -->
+
+
+                <!-- Froala-Texteditor -->
+                    <link rel="stylesheet" href="/css/froala/froala_editor.css">
+                    <link rel="stylesheet" href="/css/froala/froala_style.css">
+                    <link rel="stylesheet" href="/css/froala/plugins/code_view.css">
+                    <link rel="stylesheet" href="/css/froala/plugins/image_manager.css">
+                    <link rel="stylesheet" href="/css/froala/plugins/image.css">
+                    <link rel="stylesheet" href="/css/froala/plugins/table.css">
+                    <link rel="stylesheet" href="/css/froala/plugins/video.css">
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+                <!-- End of Froala -->
+
+
+                <!-- File Buttons -->
+                    <!--[if IE]>
+                    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+                    <![endif]-->
+                    <script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
+                <!-- End of File Buttons -->
+
             </head>
 
             <body>
