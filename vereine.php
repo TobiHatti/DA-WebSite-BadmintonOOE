@@ -619,7 +619,111 @@
         <br>
         E-mail: <a href="mailto: martin@grafinger-denk.com">martin@grafinger-denk.com</a>
         <br>
-        Mobil: 0676 5427215 
+        Mobil: 0676 5427215
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <h4 style="margin-top: 0px;">
+            <a href="#vorchdorf" name="vorchdorf">UBC Vorchdorf</a>
+        </h4>
+        <br>
+        Kennzahl: 309
+        <br>
+        Dachverband: Sportunion
+        <br>
+        <br>
+        <b>Harald Starl</b>
+        <br>
+        Weidenstra&szlig;e 38
+        <br>
+        4655 Vorchdorf
+        <br>
+        Internet: <a href="http://www.ubc-vorchdorf.at/">www.ubc-vorchdorf.at</a>
+        <br>
+        E-mail: <a href="mailto: starl@badminton.at">starl@badminton.at</a>
+        <br>
+        Mobil: 0676 5117052
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+       <h4 style="margin-top: 0px;">
+            <a href="#wels" name="wels">ABV Wels</a>
+        </h4>
+        <br>
+        Kennzahl: 319
+        <br>
+        Dachverband: ASK&Ouml;
+        <br>
+        <br>
+        <b>Stefan Wellinger</b>
+        <br>
+        Elisabethstra&szlig;e 24
+        <br>
+        4600 Wels
+        <br>
+        Internet: <a href="http://www.badminton-wels.at/">www.badminton-wels.at</a>
+        <br>
+        E-Mail: <a href="mailto: stefan.wellinger@gmail.com">stefan.wellinger@gmail.com</a>
+        <br>
+        Mobil: 0664 6287107
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <h4 style="margin-top: 0px;">
+            <a href="#windischgarstenunion" name="windischgarstenunion">Union Windischgarsten</a>
+        </h4>
+        <br>
+        Kennzahl: 317
+        <br>
+        Dachverband: Sportunion
+        <br>
+        <br>
+        <b>Andreas Weilguni</b>
+        <br>
+        Pichl 8
+        <br>
+        4575 Ro&szlig;leithen
+        <br>
+        Internet: <a href="https://www.badminton-windischgarsten.at/web/">www.badminton-windischgarsten.at</a>
+        <br>
+        E-mail: <a href="mailto: andreas.weilguni@gmx.at">andreas.weilguni@gmx.at</a>
+        <br>
+        Mobil: 0664 3822570
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <h4 style="margin-top: 0px;">
+            <a href="#windischgarstenbc" name="windischgarstenbc">BC Windischgarsten</a>
+        </h4>
+        <br>
+        Kennzahl: 347
+        <br>
+        Dachverband: ASK&Ouml;
+        <br>
+        <br>
+        <b>Mathias Hayb&ouml;ck</b>
+        <br>
+        Pichl 30
+        <br>
+        4575 Ro&szlig;leithen
+        <br>
+        Internet: <a href="http://www.bc-windischgarsten.at/">www.bc-windischgarsten.at</a>
+        <br>
+        E-mail: <a href="mailto: badminton@bc-windischgarsten.at">badminton@bc-windischgarsten.at</a>
+        <br>
+        Mobil: 0664 80611126
     </div>
     ';
 
