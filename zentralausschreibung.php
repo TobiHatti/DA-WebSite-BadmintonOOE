@@ -2,7 +2,478 @@
     require("header.php");
     PageTitle("Zentralausschreibungen");
 
-    echo '<h1 class="stagfade1">Zentralausschreibungen</h1>';
+    echo '<h1 class="stagfade1">Zentralausschreibungen</h1>
+    <br>
+
+    <p>
+       <a href="#september">SEPTEMBER 2018</a>
+       |
+       <a href="#oktober">OKTOBER 2018</a>
+       |
+       <a href="#november">NOVEMEBER 2018</a>
+       |
+       <a href="#dezember">DEZEMBER 2018</a>
+       |
+       <a href="#jaenner">J&Auml;NNER 2019</a>
+       |
+       <a href="#februar">FEBRUAR 2019</a>
+       |
+       <a href="#maerz">M&Auml;RZ 2019</a>
+       |
+       <a href="#april">APRIL 2019</a>
+       |
+       <a href="#mai">MAI 2019</a>
+       |
+       <a href="#juni">JUNI 2019</a>
+       |
+    </p>
+
+    <br>
+    <hr>
+    <div class="za_box">
+        <div>
+                <h1>O&Ouml;BV U11/U13 RLT <br>Rookie/Advanced</h1>
+                <h2><span style="color: #000000">Samstag, 15. September 2018</span></h2>
+
+        </div>
+
+        <table>
+              <tr>
+                 <td class="ta_r"><b>Verein:</b></td>
+                 <td class="ta_l"><b>Union Ohlsdorf</b></td>
+              </tr>
+              <br>
+              <tr>
+                 <td class="ta_r">Uhrzeit:</td>
+                 <td class="ta_l">9.00 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Auslosung:</td>
+                 <td class="ta_l">8.30 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Hallenname:</td>
+                 <td class="ta_l">Turnsaal NMS Ohlsdorf</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anschrift Halle:</td>
+                 <td class="ta_l">Hauptstra&szlig;e 3, 4694 Ohlsdorf</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anzahl Felder:</td>
+                 <td class="ta_l">4</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Turnierverantwortlicher:</td>
+                 <td class="ta_l">Hermann Schausberger</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Telefon:</td>
+                 <td class="ta_l"><a href="http://obv.tournamentsoftware.com/sport/tournament.aspx?id=3AD9E09D-D88B-4B35-BCBF-1DE72F7CE390">Online-Anmeldung</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennungen E-Mail:</td>
+                 <td class="ta_l"><a href="mailto: h.schaussi@gmail.com">h.schaussi@gmail.com</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennschluss:</td>
+                 <td class="ta_l">Donnerstag, 13.September 2018</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Zusatzangaben:</td>
+                 <td class="ta_l">Buffet vorhanden</td>
+              </tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <h1>O&Ouml;BV U15/JGD RLT<br></h1>
+                <h2><span style="color: #000000">Sonntag, 16. September 2018</span></h2>
+
+        </div>
+
+        <table>
+              <tr>
+                 <td class="ta_r"><b>Verein:</b></td>
+                 <td class="ta_l"><b>BC Windischgarsten</b></td>
+              </tr>
+              <br>
+              <tr>
+                 <td class="ta_r">Uhrzeit:</td>
+                 <td class="ta_l">9.00 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Auslosung:</td>
+                 <td class="ta_l">8.30 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Hallenname:</td>
+                 <td class="ta_l">VS R&ouml;merfeld</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anschrift Halle:</td>
+                 <td class="ta_l">Gleinkerseestra&szlig;e 15, 4580 Windischgarsten</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anzahl Felder:</td>
+                 <td class="ta_l">4</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Turnierverantwortlicher:</td>
+                 <td class="ta_l">Mathias Hayb&ouml;ck</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anmeldung Online:</td>
+                 <td class="ta_l"><a href="http://obv.tournamentsoftware.com/sport/tournament.aspx?id=120795A7-8BCB-4FA6-B6A1-5DA7A5410B17">Online-Anmeldung</a></td>
+              </tr>
+
+               <tr>
+                 <td class="ta_r">Anmeldung E-Mail:</td>
+                 <td class="ta_l"><a href="mailto: badminton@bc-windischgarsten.at">badminton@bc-windischgarsten.at</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennschluss:</td>
+                 <td class="ta_l">Donnerstag, 13. September 2018</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Zusatzangaben:</td>
+                 <td class="ta_l">Buffet vorhanden</td>
+              </tr>
+
+        </table>
+    </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <span style="color: #FF0099">Regiotraining Rookie<br></span>
+               23. September 2018
+               Alkhoven
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <span style="color: #FF0099">Regiotraining Advanced<br></span>
+               7. Oktober 2018
+               Windischgarsten
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <span style="color: #FF0099">Regiotraining Rookie<br></span>
+               21. Oktober 2018
+               Alkhoven
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <h1>8.O&Ouml;BV Doppel RLT-HD/DD<br></h1>
+                <h2><span style="color: #000000">Sonntag, 21. Oktober 2018</span></h2>
+
+        </div>
+
+        <table>
+              <tr>
+                 <td class="ta_r"><b>Verein:</b></td>
+                 <td class="ta_l"><b>ASK&Ouml; Linz</b></td>
+              </tr>
+              <br>
+              <tr>
+                 <td class="ta_r">Uhrzeit:</td>
+                 <td class="ta_l">10.00 Uhr Herren / 12.00 Uhr Damen</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Auslosung:</td>
+                 <td class="ta_l">9.30/11.30 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Hallenname:</td>
+                 <td class="ta_l">Solar City</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anschrift Halle:</td>
+                 <td class="ta_l">Heliosallee 140-142, 4030 Linz</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anzahl Felder:</td>
+                 <td class="ta_l">6</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Turnierverantwortlicher:</td>
+                 <td class="ta_l">Manfred Peterseil</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Telefon:</td>
+                 <td class="ta_l">0664 8411881</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anmeldung:</td>
+                 <td class="ta_l"><a href="https://turnieranmeldung.at/">Online-Anmeldung</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennungen E-Mail:</td>
+                 <td class="ta_l"><a href="mailto: manfred.peterseil@szl.linz.at">manfred.peterseil@szl.linz.at</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennschluss:</td>
+                 <td class="ta_l">Donnerstag, 18. OKtober 2018</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Zusatzangaben:</td>
+                 <td class="ta_l">Buffet vorhanden</td>
+              </tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <h1>O&Ouml;. Senioren Landesmeisterschaften<br></h1>
+                <h2><span style="color: #000000">Sa./So., 03/04. November 2018</span></h2>
+
+        </div>
+
+        <table>
+              <tr>
+                 <td class="ta_r"><b>Verein:</b></td>
+                 <td class="ta_l"><b>ASK Nettingsdorf-Badminton/Racketlon</b></td>
+              </tr>
+              <br>
+              <tr>
+                 <td class="ta_r">Uhrzeit:</td>
+                 <td class="ta_l">10.00 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Auslosung:</td>
+                 <td class="ta_l">Freitag, 2. November 2017 / 19.00 Uhr (Sporthalle Haid)</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Hallenname:</td>
+                 <td class="ta_l">Sporthalle Haid (Walter-Wimmer-Halle)</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anschrift Halle:</td>
+                 <td class="ta_l">Dr. Adolf Schr&auml;rf-Stra&szlig;e 23, 4053 Haid</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anzahl Felder:</td>
+                 <td class="ta_l">6 + 1 Einspielfeld</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Turnierverantwortlicher:</td>
+                 <td class="ta_l">Peter Krenmayr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Online-Anmeldung:</td>
+                 <td class="ta_l"><a href="http://obv.tournamentsoftware.com/sport/tournament.aspx?id=713D194D-BF74-4E50-A87C-CCEB690F064C">Online-Anmeldung</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennung E-Mail:</td>
+                 <td class="ta_l"><a href="mailto: kre@gmx.at">kre@gmx.at</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennschluss:</td>
+                 <td class="ta_l">Montag, 29. Oktober 2018</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Zusatzangaben:</td>
+                 <td class="ta_l">Buffet vorhanden</td>
+              </tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <h1>O&Ouml;. Nachwuchs Landesmeisterschaften<br></h1>
+                <h2><span style="color: #000000">Sa./So., 17/18. November 2018</span></h2>
+
+        </div>
+
+        <table>
+              <tr>
+                 <td class="ta_r"><b>Verein:</b></td>
+                 <td class="ta_l"><b>ASK&Ouml; Traun</b></td>
+              </tr>
+              <br>
+              <tr>
+                 <td class="ta_r">Uhrzeit:</td>
+                 <td class="ta_l">10.00 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Auslosung:</td>
+                 <td class="ta_l">wird noch bekanntgegeben</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Hallenname:</td>
+                 <td class="ta_l">Bundesschulzentrum Traun</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anschrift Halle:</td>
+                 <td class="ta_l">Dr. Adolf Schr&auml;rf-Stra&szlig;e 23, 4053 Haid</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anzahl Felder:</td>
+                 <td class="ta_l">6 + 1 Einspielfeld</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Turnierverantwortlicher:</td>
+                 <td class="ta_l">Peter Krenmayr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Telefon:</td>
+                 <td class="ta_l">0650 3698352</td>
+              </tr>
+              <tr>
+                 <td class="ta_r">Online-Anmeldung:</td>
+                 <td class="ta_l"><a href="https://turnieranmeldung.at/">Online-Anmeldung</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennung E-Mail:</td>
+                 <td class="ta_l"><a href="mailto: kre@gmx.at">kre@gmx.at</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennschluss:</td>
+                 <td class="ta_l">Donnerstag, 29. November 2018</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Zusatzangaben:</td>
+                 <td class="ta_l">Buffet vorhanden</td>
+              </tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <h1>9.O&Ouml;. Doppel RLT-MD<br></h1>
+                <h2><span style="color: #000000">Sonntag, 02. Dezember 2018</span></h2>
+
+        </div>
+
+        <table>
+              <tr>
+                 <td class="ta_r"><b>Verein:</b></td>
+                 <td class="ta_l"><b>ASK Nettingsdorf-Badminton/Racketlon</b></td>
+              </tr>
+              <br>
+              <tr>
+                 <td class="ta_r">Uhrzeit:</td>
+                 <td class="ta_l">10.00 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Auslosung:</td>
+                 <td class="ta_l">9.30 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Hallenname:</td>
+                 <td class="ta_l">Sporthalle Haid (Walter-Wimmer-Halle)</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anschrift Halle:</td>
+                 <td class="ta_l">Eingang Kreuzfeldstra&szlig;e</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anzahl Felder:</td>
+                 <td class="ta_l">7</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Turnierverantwortlicher:</td>
+                 <td class="ta_l">Herbert Koch</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Online-Anmeldung:</td>
+                 <td class="ta_l">Online &uuml;ber Tournament</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennung E-Mail:</td>
+                 <td class="ta_l"><a href="mailto: herbert.koch@gmx.at">herbert.koch@gmx.at</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennschluss:</td>
+                 <td class="ta_l">Montag, 12. November 2018</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Zusatzangaben:</td>
+                 <td class="ta_l">Buffet vorhanden</td>
+              </tr>
+        </table>
+    </div>
+
+
+
+
+    ';
 
     include("footer.php");
 ?>
