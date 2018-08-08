@@ -470,8 +470,299 @@
         </table>
     </div>
 
+    <hr>
 
+    <div class="za_box">
+        <div>
+                <span style="color: #FF0099">Regiotraining Rookie/Advanced<br></span>
+               09. Dezember 2018 - 9.00-13.00 Uhr
+               Ohlsdorf
+        </div>
+    </div>
 
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <span style="color: #FF0099">Regiotraining Rookie/Advanced<br></span>
+               30. Dezember 2018
+               bitte um Bewerbung
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <h1>1.O&Ouml;BV. Doppel RLT-HD/DD<br></h1>
+                <h2><span style="color: #000000">Sonntag, 06. J&auml;nner 2019</span></h2>
+
+        </div>
+
+        <table>
+              <tr>
+                 <td class="ta_r"><b>Verein:</b></td>
+                 <td class="ta_l"><b>UBC Vorchdorf</b></td>
+              </tr>
+              <br>
+              <tr>
+                 <td class="ta_r">Uhrzeit:</td>
+                 <td class="ta_l">10.00 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Auslosung:</td>
+                 <td class="ta_l">vor Spielbeginn</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Hallenname:</td>
+                 <td class="ta_l">Sporthalle Vorchdorf</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anschrift Halle:</td>
+                 <td class="ta_l">Schulstra&szlig;e 8, 4655 Vorchdorf</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anzahl Felder:</td>
+                 <td class="ta_l">6</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Turnierverantwortlicher:</td>
+                 <td class="ta_l">Harald Starl</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Telefon:</td>
+                 <td class="ta_r">0676 5117052</td>
+
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Online-Anmeldung:</td>
+                 <td class="ta_l"><a href="https://turnieranmeldung.at/">Online-Anmeldung</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennung E-Mail:</td>
+                 <td class="ta_l"><a href="mailto: starl@badminton.at">starl@badminton.at</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennschluss:</td>
+                 <td class="ta_l">Donnerstag, 3. J&auml;nner 2019</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Zusatzangaben:</td>
+                 <td class="ta_l">Buffet vorhanden</td>
+              </tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <h1>1.O&Ouml;BV. U11/U13 RLT Rookie/Advanced<br></h1>
+                <h2><span style="color: #000000">Samstag, 12. J&auml;nner 2019</span></h2>
+
+        </div>
+
+        <table>
+              <tr>
+                 <td class="ta_r"><b>Verein:</b></td>
+                 <td class="ta_l"><b>Union Vorchdorf</b></td>
+              </tr>
+              <br>
+              <tr>
+                 <td class="ta_r">Uhrzeit:</td>
+                 <td class="ta_l">9.00 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Auslosung:</td>
+                 <td class="ta_l">08.30 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Hallenname:</td>
+                 <td class="ta_l">Turnsaal NMS Ohlsdorf</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anschrift Halle:</td>
+                 <td class="ta_l">Hauptstra&szlig;e 3, 4694 Ohlsdorf</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anzahl Felder:</td>
+                 <td class="ta_l">4</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Turnierverantwortlicher:</td>
+                 <td class="ta_l">Hermann Schausberger</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Online-Anmeldung:</td>
+                 <td class="ta_l"><a href="http://obv.tournamentsoftware.com/sport/tournament.aspx?id=3AD9E09D-D88B-4B35-BCBF-1DE72F7CE390">Online-Anmeldung</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennung E-Mail:</td>
+                 <td class="ta_l"><a href="mailto: h.schaussi@gmail.at">h.schaussi@gmail.com</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennschluss:</td>
+                 <td class="ta_l">Donnerstag, 10. J&auml;nner 2019</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Zusatzangaben:</td>
+                 <td class="ta_l">Buffet vorhanden</td>
+              </tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <h1>1.O&Ouml;BV. U15/JGD RLT<br></h1>
+                <h2><span style="color: #000000">Sonntag, 13. J&auml;nner 2019</span></h2>
+
+        </div>
+
+        <table>
+              <tr>
+                 <td class="ta_r"><b>Verein:</b></td>
+                 <td class="ta_l"><b>Union Ohlsdorf</b></td>
+              </tr>
+              <br>
+              <tr>
+                 <td class="ta_r">Uhrzeit:</td>
+                 <td class="ta_l">9.00 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Auslosung:</td>
+                 <td class="ta_l">08.30 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Hallenname:</td>
+                 <td class="ta_l">Turnsaal NMS Ohlsdorf</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anschrift Halle:</td>
+                 <td class="ta_l">Hauptstra&szlig;e 3, 4694 Ohlsdorf</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anzahl Felder:</td>
+                 <td class="ta_l">4</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Turnierverantwortlicher:</td>
+                 <td class="ta_l">Hermann Schausberger</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Online-Anmeldung:</td>
+                 <td class="ta_l"><a href="http://obv.tournamentsoftware.com/onlineentry/onlineentry.aspx?id=D1B469EC-77C2-48C8-9797-C0807A3F562F">Online-Anmeldung</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennung E-Mail:</td>
+                 <td class="ta_l"><a href="mailto: h.schaussi@gmail.at">h.schaussi@gmail.com</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennschluss:</td>
+                 <td class="ta_l">Donnerstag, 10. J&auml;nner 2019</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Zusatzangaben:</td>
+                 <td class="ta_l">Buffet vorhanden</td>
+              </tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <h1>O&Ouml;. Landesmeisterschaften Allgemeine Klasse<br></h1>
+                <h2><span style="color: #000000">Sa./So., 19./20. J&auml;nner 2019</span></h2>
+
+        </div>
+
+        <table>
+              <tr>
+                 <td class="ta_r"><b>Verein:</b></td>
+                 <td class="ta_l"><b>ASK&Ouml; Traun</b></td>
+              </tr>
+              <br>
+              <tr>
+                 <td class="ta_r">Uhrzeit:</td>
+                 <td class="ta_l">10.00 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Auslosung:</td>
+                 <td class="ta_l">wird noch bekannt gegeben</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Hallenname:</td>
+                 <td class="ta_l">Bundesschulzentrum Traun</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anschrift Halle:</td>
+                 <td class="ta_l">Eingang Kreuzfeldstra&szlig;e</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anzahl Felder:</td>
+                 <td class="ta_l">7</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Turnierverantwortlicher:</td>
+                 <td class="ta_l">Herbert Koch</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennungen:</td>
+                 <td class="ta_l"><a href="http://obv.tournamentsoftware.com/onlineentry/onlineentry.aspx?id=D9057363-42D9-42D4-A0E9-1547BD65C94D">Online-Anmeldung</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Oberschiedsrichter:</td>
+                 <td class="ta_l">wird noch bekannt gegeben</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennschluss:</td>
+                 <td class="ta_l">Montag, 14. J&auml;nner 2019</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Zusatzangaben:</td>
+                 <td class="ta_l">Buffet vorhanden</td>
+              </tr>
+        </table>
+    </div>
 
     ';
 
