@@ -70,22 +70,17 @@ function FileButton($name, $id, $multiple=0)
 function TextareaPlus($name)
 {
     return '
-        <textarea id="edit" style="margin-top: 30px;" placeholder="Artikel-Text..." name="'.$name.'">
-            <h1>Textarea</h1>
-            <p>The editor can also be initialized on a textarea.</p>
-        </textarea>
+        <script src="/js/froala/de.js"></script>
 
+        <textarea id="froala-editor">Initialize the Froala WYSIWYG HTML Editor on a textarea.</textarea>
 
+        <div id="edit"></div>
         <script>
-            $(function(){
-                $("#edit")
-                    .on("froalaEditor.initialized", function (e, editor) {
-                        $("#edit").parents("form").on("submit", function () {
-                            console.log($("#edit").val());
-                            return true;  // originally false
-                    })
+            $(function() {
+                $("textarea#froala-editor").froalaEditor({
+                    // Set the language code.
+                    language: "de"
                 })
-                .froalaEditor({enter: $.FroalaEditor.ENTER_P, placeholderText: null})
             });
         </script>
 
