@@ -339,6 +339,392 @@
         <br>
         Mobil: 0676 81424577
     </div>
+
+    <br>
+    <br>
+
+    <div>
+        <h4 style="margin-top: 0px;">
+            <a href="#nettingsdorf" name="nettingsdorf">ASK Nettingsdorf-Badminton/Rackelton</a>
+        </h4>
+        <br>
+        Kennzahl: 325
+        <br>
+        Dachverband: ASK&Ouml;
+        <br>
+        <br>
+        <b>Peter Krenmayr</b>
+        <br>
+        Neubauzeile 7/1/5
+        <br>
+        4061 Pasching
+        <br>
+        Internet: <a href="https://ask-nettingsdorf-badminton.at/">www.ask-nettingsdorf-badminton.at</a>
+        <br>
+        E-mail: <a href="mailto: kre@gmx.at">kre@gmx.at</a>
+        <br>
+        Mobil: 0650 3698352
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <h4 style="margin-top: 0px;">
+            <a href="#neuhofen" name="neuhofen">Union BC Neuhofen</a>
+        </h4>
+        <br>
+        Kennzahl: 333
+        <br>
+        Dachverband: Sportunion
+        <br>
+        <br>
+        <b>Andreas Rabel</b>
+        <br>
+        Teichweg 13
+        <br>
+        4501 Neuhofen
+        <br>
+        Internet: <a href="http://ubc-neuhofen.at/">www.ubc-neuhofen.at</a>
+        <br>
+        E-mail: <a href="mailto: rabel.badminton@aon.at">rabel.badminton@aon.at</a>
+        <br>
+        Mobil: 0664 1147807
+        <br>
+        Telefon Firma: 0732 7613940
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <h4 style="margin-top: 0px;">
+            <a href="#ohlsdorf" name="ohlsdorf">&Ouml;sterreichische Turn- und Sportunion Ohlsdorf</a>
+        </h4>
+        <br>
+        Kennzahl: 314
+        <br>
+        Dachverband: Sportunion
+        <br>
+        <br>
+        <b>Josef Retschitzegger</b>
+        <br>
+        Ehrendorfer Wald 2
+        <br>
+        4694 Ohlsdorf
+        <br>
+        Internt: <a href="http://www.sportunion-ohlsdorf.at/">www.sportunion-ohlsdorf.at</a>
+        <br>
+        E-mail: <a href="mailto: retschis@utanat.at">retschis@utanat.at</a>
+        <br>
+        Mobil: 0669 12657691
+        <br>
+        Telefon Privat: 07612 47732
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+         <h4 style="margin-top: 0px;">
+            <a href="#pasching" name="pasching">ASk&Ouml; Badmintonverein Pasching</a>
+        </h4>
+        <br>
+        Kennzahl: 305
+        <br>
+        Dachverband: ASK&Ouml;
+        <br>
+        <br>
+        <b>Manfred Dorn</b>
+        <br>
+        Herdegenstra&szlig;e 26
+        <br>
+        4061 Pasching
+        <br>
+        E-mail: <a href="mailto: ek.proell@aon.at">ek.proell@aon.at</a>
+        <br>
+        Mobil: 0664 8188404
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <h4 style="margin-top: 0px;">
+            <a href="#schlierbach" name="schlierbach">Sportunion Badminton Schlierbach</a>
+        </h4>
+        <br>
+        Kennzahl: 348
+        <br>
+        Dachverband: Sportunion
+        <br>
+        <br>
+        <b>Sonja und Klaus Hebesberger</b>
+        <br>
+        Haselweg 3
+        <br>
+        4553 Schlierbach
+        <br>
+        E-mail: <a href="mailto: sonja.hebesberger@aon.at">sonja.hebesberger@aon.at</a>
+        <br>
+        Mobil: 0664 75058845
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <h4 style="margin-top: 0px;">
+            <a href="#stadlpaura" name="stadlpaura">&Ouml;sterreichische Turn- und Sportunion Stadl-Paura</a>
+        </h4>
+        <br>
+        Kennzahl: 302
+        <br>
+        Dachverband: Sportunion
+        <br>
+        <br>
+        <b>Ronald Taferner</b>
+        <br>
+        Karl-K&ouml;ttl-Stra&szlig;e 19
+        <br>
+        4650 Lambach
+        <br>
+        Internet: <a href="http://www.union4651.at.tf/">www.union4651.at.tf (stimmt nichtt!!!)</a>
+        <br>
+        E-mail: <a href="mailto: badm.4651@gmx.at">badm.4651@gmx.at</a>
+        <br>
+        Mobil: 0676 4546039
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <h4 style="margin-top: 0px;">
+            <a href="#steinbach" name="steinbach">ATSV Steinbach/Gr&uuml;nburg</a>
+        </h4>
+        <br>
+        Kennzahl: 331
+        <br>
+        Dachverband: ASK&Ouml;
+        <br>
+        <br>
+        <b>Reinhard Ebner</b>
+        <br>
+        Kirchenstra&szlig;e 2
+        <br>
+        4593 Obergr&uuml;nburg
+        <br>
+        E-mail: <a href="mailto: reinhard.ebner@webspeed.at">reinhard.ebner@webspeed.at</a>
+        <br>
+        Mobil: 06502309650
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+         <h4 style="margin-top: 0px;">
+            <a href="#steyr" name="steyr">ASTV Steyr</a>
+        </h4>
+        <br>
+        Kennzahl: 308
+        <br>
+        Dachverband: ASK&Ouml;
+        <br>
+        <br>
+        <b>Wolfgang Hofreiter</b>
+        <br>
+        Hanuschstra&szlig;e 12/3
+        <br>
+        4400 Steyr
+        <br>
+        E-mail: <a href="mailto: whofreiter@gmx.at">whofreiter@gmx.at</a>
+        <br>
+        Mobil: 0669 81719824
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+         <h4 style="margin-top: 0px;">
+            <a href="#steyraskoe" name="steyraskoe">ASK&Ouml;-Steyrerm&uuml;hl-Papier</a>
+        </h4>
+        <br>
+        Kennzahl: 342
+        <br>
+        Dachverband: ASK&Ouml;
+        <br>
+        <br>
+        <b>Hermann Hofmann</b>
+        <br>
+        Kerblweg 22
+        <br>
+        4663 Laakirchen
+        <br>
+        E-mail: <a href="mailto: hermann.hofmann@hotmail.com">hermann.hofmann@hotmail.com</a>
+        <br>
+        Mobil: 0699 10457747
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+       <h4 style="margin-top: 0px;">
+            <a href="#traun" name="traun">ASK&Ouml; Traun</a>
+        </h4>
+        <br>
+        Kennzahl: 307
+        <br>
+        Dachverband: ASK&Ouml;
+        <br>
+        <br>
+        <b>Herbet Koch</b>
+        <br>
+        Theodor-K&ouml;rnerstra&szlig;e 5/4
+        <br>
+        4050 Traun
+        <br>
+        Internet: <a href="http://www.badminton-traun.at/">www.badminton-traun.at</a>
+        <br>
+        E-mail: <a href="mailto: herbet.koch@gmx.at">herbet.koch@gmx.at</a>
+        <br>
+        Mobil: 0664 2407556
+        <br>
+        Telefon Privat: 07229 63867
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <h4 style="margin-top: 0px;">
+            <a href="#urfahr" name="urfahr">&Ouml;sterreichische Turn- und Sportunion Urfahr</a>
+        </h4>
+        <br>
+        Kennzahl: 332
+        <br>
+        Dachverband: Sportunion
+        <br>
+        <br>
+        <b>Martin Grafinger</b>
+        <br>
+        Niedermayrweg 5a
+        <br>
+        4040 Linz
+        <br>
+        Internet: <a href="http://www.unionurfahr.at/index.php">www.unionurfahr.at</a>
+        <br>
+        E-mail: <a href="mailto: martin@grafinger-denk.com">martin@grafinger-denk.com</a>
+        <br>
+        Mobil: 0676 5427215
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <h4 style="margin-top: 0px;">
+            <a href="#vorchdorf" name="vorchdorf">UBC Vorchdorf</a>
+        </h4>
+        <br>
+        Kennzahl: 309
+        <br>
+        Dachverband: Sportunion
+        <br>
+        <br>
+        <b>Harald Starl</b>
+        <br>
+        Weidenstra&szlig;e 38
+        <br>
+        4655 Vorchdorf
+        <br>
+        Internet: <a href="http://www.ubc-vorchdorf.at/">www.ubc-vorchdorf.at</a>
+        <br>
+        E-mail: <a href="mailto: starl@badminton.at">starl@badminton.at</a>
+        <br>
+        Mobil: 0676 5117052
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+       <h4 style="margin-top: 0px;">
+            <a href="#wels" name="wels">ABV Wels</a>
+        </h4>
+        <br>
+        Kennzahl: 319
+        <br>
+        Dachverband: ASK&Ouml;
+        <br>
+        <br>
+        <b>Stefan Wellinger</b>
+        <br>
+        Elisabethstra&szlig;e 24
+        <br>
+        4600 Wels
+        <br>
+        Internet: <a href="http://www.badminton-wels.at/">www.badminton-wels.at</a>
+        <br>
+        E-Mail: <a href="mailto: stefan.wellinger@gmail.com">stefan.wellinger@gmail.com</a>
+        <br>
+        Mobil: 0664 6287107
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <h4 style="margin-top: 0px;">
+            <a href="#windischgarstenunion" name="windischgarstenunion">Union Windischgarsten</a>
+        </h4>
+        <br>
+        Kennzahl: 317
+        <br>
+        Dachverband: Sportunion
+        <br>
+        <br>
+        <b>Andreas Weilguni</b>
+        <br>
+        Pichl 8
+        <br>
+        4575 Ro&szlig;leithen
+        <br>
+        Internet: <a href="https://www.badminton-windischgarsten.at/web/">www.badminton-windischgarsten.at</a>
+        <br>
+        E-mail: <a href="mailto: andreas.weilguni@gmx.at">andreas.weilguni@gmx.at</a>
+        <br>
+        Mobil: 0664 3822570
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <h4 style="margin-top: 0px;">
+            <a href="#windischgarstenbc" name="windischgarstenbc">BC Windischgarsten</a>
+        </h4>
+        <br>
+        Kennzahl: 347
+        <br>
+        Dachverband: ASK&Ouml;
+        <br>
+        <br>
+        <b>Mathias Hayb&ouml;ck</b>
+        <br>
+        Pichl 30
+        <br>
+        4575 Ro&szlig;leithen
+        <br>
+        Internet: <a href="http://www.bc-windischgarsten.at/">www.bc-windischgarsten.at</a>
+        <br>
+        E-mail: <a href="mailto: badminton@bc-windischgarsten.at">badminton@bc-windischgarsten.at</a>
+        <br>
+        Mobil: 0664 80611126
+    </div>
     ';
 
     include("footer.php");
