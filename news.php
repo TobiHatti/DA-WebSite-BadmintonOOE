@@ -2,7 +2,7 @@
     require("header.php");
     PageTitle("News");
 
-    if(isset($_POST['send']))
+    if(isset($_POST['check_article']))
     {
         echo '<textarea>'.nl2br($_POST['content']).'</textarea>';
     }
@@ -21,15 +21,13 @@
     }
     else if(isset($_GET['neu']))
     {
-        echo '<h1 class="stagfade1">Neuer Artikel</h1>';
-
         echo '
-            <hr>
+            <h2 class="stagfade1">Neuen Artikel verfassen</h2>
             <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                 <br>
-                '.TextareaPlus("content").'
-
-                <button type="submit" name="send">Senden</button>
+                '.TextareaPlus("content","article","<h3>Artikel-Titel</h3>Hier den Artikel verfassen...","height:500px;").'
+                <br>
+                <button type="submit" name="check_article">Pr&uuml;fen und Fortfahren</button>
             </form>
         ';
     }

@@ -67,17 +67,17 @@ function FileButton($name, $id, $multiple=0)
     ';
 }
 
-function TextareaPlus($name)
+function TextareaPlus($name, $id="editor", $placeholder="" ,$style="height: 300px;")
 {
     return '
         <script src="/js/froala/de.js"></script>
 
-        <textarea id="froala-editor">Initialize the Froala WYSIWYG HTML Editor on a textarea.</textarea>
+        <textarea name="'.$name.'" id="'.$id.'" style="'.$style.'">'.$placeholder.'</textarea>
 
         <div id="edit"></div>
         <script>
             $(function() {
-                $("textarea#froala-editor").froalaEditor({
+                $("textarea#'.$id.'").froalaEditor({
                     // Set the language code.
                     language: "de"
                 })

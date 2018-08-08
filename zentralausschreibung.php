@@ -42,7 +42,6 @@
                  <td class="ta_r"><b>Verein:</b></td>
                  <td class="ta_l"><b>Union Ohlsdorf</b></td>
               </tr>
-              <br>
               <tr>
                  <td class="ta_r">Uhrzeit:</td>
                  <td class="ta_l">9.00 Uhr</td>
@@ -109,7 +108,7 @@
                  <td class="ta_r"><b>Verein:</b></td>
                  <td class="ta_l"><b>BC Windischgarsten</b></td>
               </tr>
-              <br>
+
               <tr>
                  <td class="ta_r">Uhrzeit:</td>
                  <td class="ta_l">9.00 Uhr</td>
@@ -207,7 +206,7 @@
                  <td class="ta_r"><b>Verein:</b></td>
                  <td class="ta_l"><b>ASK&Ouml; Linz</b></td>
               </tr>
-              <br>
+
               <tr>
                  <td class="ta_r">Uhrzeit:</td>
                  <td class="ta_l">10.00 Uhr Herren / 12.00 Uhr Damen</td>
@@ -279,7 +278,7 @@
                  <td class="ta_r"><b>Verein:</b></td>
                  <td class="ta_l"><b>ASK Nettingsdorf-Badminton/Racketlon</b></td>
               </tr>
-              <br>
+
               <tr>
                  <td class="ta_r">Uhrzeit:</td>
                  <td class="ta_l">10.00 Uhr</td>
@@ -346,7 +345,7 @@
                  <td class="ta_r"><b>Verein:</b></td>
                  <td class="ta_l"><b>ASK&Ouml; Traun</b></td>
               </tr>
-              <br>
+
               <tr>
                  <td class="ta_r">Uhrzeit:</td>
                  <td class="ta_l">10.00 Uhr</td>
@@ -417,7 +416,6 @@
                  <td class="ta_r"><b>Verein:</b></td>
                  <td class="ta_l"><b>ASK Nettingsdorf-Badminton/Racketlon</b></td>
               </tr>
-              <br>
               <tr>
                  <td class="ta_r">Uhrzeit:</td>
                  <td class="ta_l">10.00 Uhr</td>
@@ -504,7 +502,7 @@
                  <td class="ta_r"><b>Verein:</b></td>
                  <td class="ta_l"><b>UBC Vorchdorf</b></td>
               </tr>
-              <br>
+
               <tr>
                  <td class="ta_r">Uhrzeit:</td>
                  <td class="ta_l">10.00 Uhr</td>
@@ -537,7 +535,7 @@
 
               <tr>
                  <td class="ta_r">Telefon:</td>
-                 <td class="ta_r">0676 5117052</td>
+                 <td class="ta_l">0676 5117052</td>
 
               </tr>
 
@@ -577,7 +575,7 @@
                  <td class="ta_r"><b>Verein:</b></td>
                  <td class="ta_l"><b>Union Vorchdorf</b></td>
               </tr>
-              <br>
+
               <tr>
                  <td class="ta_r">Uhrzeit:</td>
                  <td class="ta_l">9.00 Uhr</td>
@@ -644,7 +642,7 @@
                  <td class="ta_r"><b>Verein:</b></td>
                  <td class="ta_l"><b>Union Ohlsdorf</b></td>
               </tr>
-              <br>
+
               <tr>
                  <td class="ta_r">Uhrzeit:</td>
                  <td class="ta_l">9.00 Uhr</td>
@@ -711,7 +709,7 @@
                  <td class="ta_r"><b>Verein:</b></td>
                  <td class="ta_l"><b>ASK&Ouml; Traun</b></td>
               </tr>
-              <br>
+
               <tr>
                  <td class="ta_r">Uhrzeit:</td>
                  <td class="ta_l">10.00 Uhr</td>
