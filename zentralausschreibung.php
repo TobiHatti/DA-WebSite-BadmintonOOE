@@ -433,32 +433,32 @@
 
               <tr>
                  <td class="ta_r">Anschrift Halle:</td>
-                 <td class="ta_l">Eingang Kreuzfeldstra&szlig;e</td>
+                 <td class="ta_l">Dr. Adolf Schr&auml;rf-Stra&szlig;e 23, 4053 Haid</td>
               </tr>
 
               <tr>
                  <td class="ta_r">Anzahl Felder:</td>
-                 <td class="ta_l">7</td>
+                 <td class="ta_l">6 + 1 Einspielfeld</td>
               </tr>
 
               <tr>
                  <td class="ta_r">Turnierverantwortlicher:</td>
-                 <td class="ta_l">Herbert Koch</td>
+                 <td class="ta_l">Peter Krenmayr</td>
               </tr>
 
               <tr>
                  <td class="ta_r">Online-Anmeldung:</td>
-                 <td class="ta_l">Online &uuml;ber Tournament</td>
+                 <td class="ta_l"><a href="https://turnieranmeldung.at/">Online-Anmeldung</a></td>
               </tr>
 
               <tr>
                  <td class="ta_r">Nennung E-Mail:</td>
-                 <td class="ta_l"><a href="mailto: herbert.koch@gmx.at">herbert.koch@gmx.at</a></td>
+                 <td class="ta_l"><a href="mailto: kre@gmx.at">kre@gmx.at</a></td>
               </tr>
 
               <tr>
                  <td class="ta_r">Nennschluss:</td>
-                 <td class="ta_l">Montag, 12. November 2018</td>
+                 <td class="ta_l">Donnerstag, 29. November 2018</td>
               </tr>
 
               <tr>
@@ -573,7 +573,7 @@
         <table>
               <tr>
                  <td class="ta_r"><b>Verein:</b></td>
-                 <td class="ta_l"><b>Union Vorchdorf</b></td>
+                 <td class="ta_l"><b>Union Ohlsdorf</b></td>
               </tr>
 
               <tr>
@@ -761,6 +761,572 @@
               </tr>
         </table>
     </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <h1>2.O&Ouml;BV Doppel RLT-MD<br></h1>
+                <h2><span style="color: #000000">Sonntag, 24. Februar 2019</span></h2>
+
+        </div>
+
+        <table>
+              <tr>
+                 <td class="ta_r"><b>Verein:</b></td>
+                 <td class="ta_l"><b>ASK Nettingsdorf-Badminton/Racketlon</b></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Uhrzeit:</td>
+                 <td class="ta_l">10.00 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Auslosung:</td>
+                 <td class="ta_l">09.30 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Hallenname:</td>
+                 <td class="ta_l">Sporthalle Haid (Walter-Wimmer-Halle)</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anschrift Halle:</td>
+                 <td class="ta_l">Dr. Adolf Sch&auml,rf-Stra&szlig;e 23, 4053 Haid</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anzahl Felder:</td>
+                 <td class="ta_l">6 + 1 Einspielfeld</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Turnierverantwortlicher:</td>
+                 <td class="ta_l">Peter Krenmayr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennungen E-Mail:</td>
+                 <td class="ta_l"><a href="mailto: kre@gmx.at">kre@gmx.at</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anmeldung:</td>
+                 <td class="ta_l"><a href="https://turnieranmeldung.at/">Online-Anmeldung</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennschluss:</td>
+                 <td class="ta_l">Donnerstag, 21. Februar 2019</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Zusatzangaben:</td>
+                 <td class="ta_l">Buffet vorhanden</td>
+              </tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <h1>O&Ouml;MM Sch&uuml;ler<br></h1>
+                <h1>O&Ouml;MM Jugend<br></h1>
+                <h2><span style="color: #000000">Sonntag, 24. Februar 2019</span></h2>
+
+        </div>
+
+        <table>
+              <tr>
+                 <td class="ta_r"><b>Verein:</b></td>
+                 <td class="ta_l"><b>Union Ohlsdorf</b></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Uhrzeit:</td>
+                 <td class="ta_l">wird in der Ausschreibung bekanntgegeben</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Auslosung:</td>
+                 <td class="ta_l">Vorstandsitzung</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Hallenname:</td>
+                 <td class="ta_l">Turnsaal NMS Ohlsdorf</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anschrift Halle:</td>
+                 <td class="ta_l">Hauptstra&szlig;e 3, 4694 Ohlsdorf</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anzahl Felder:</td>
+                 <td class="ta_l">4</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennung Online:</td>
+                 <td class="ta_l"><a href="http://obv.tournamentsoftware.com/sport/tournament.aspx?id=3AD9E09D-D88B-4B35-BCBF-1DE72F7CE390">Online-Anmeldung</a></td>
+              </tr>
+
+        </table>
+    </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <h1>2.O&Ouml;BV U11/U13 RLT Rookie/Advanced<br></h1>
+                <h2><span style="color: #000000">Samstag, 2. M&auml;rz 2019</span></h2>
+
+        </div>
+
+        <table>
+              <tr>
+                 <td class="ta_r"><b>Verein:</b></td>
+                 <td class="ta_l"><b>Union Neuhofen ?</b></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Uhrzeit:</td>
+                 <td class="ta_l">9.00 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Auslosung:</td>
+                 <td class="ta_l">08.30 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Hallenname:</td>
+                 <td class="ta_l">Tennishalle Neuhofen</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anzahl Felder:</td>
+                 <td class="ta_l">9</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Turnierverantwortlicher:</td>
+                 <td class="ta_l">Andreas Rabel</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennungen E-Mail:</td>
+                 <td class="ta_l"><a href="mailto: rabel@badminton.at">rabel@badminton.at</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennschluss:</td>
+                 <td class="ta_l">Donnerstag, 28. Februar 2019</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Zusatzangaben:</td>
+                 <td class="ta_l">Buffet vorhanden</td>
+              </tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <h1>2.O&Ouml;BV U15/JGD RLT<br></h1>
+                <h2><span style="color: #000000">Samstag, 9. M&auml;rz 2019</span></h2>
+
+        </div>
+
+        <table>
+              <tr>
+                 <td class="ta_r"><b>Verein:</b></td>
+                 <td class="ta_l"><b>ASK&Ouml; Traun</b></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Uhrzeit:</td>
+                 <td class="ta_l">10.00 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Auslosung:</td>
+                 <td class="ta_l">09.30 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Hallenname:</td>
+                 <td class="ta_l">Bundesschulzentrum Traun</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anschrift Halle:</td>
+                 <td class="ta_l">Eingang Kreuzfeldstra&szlig;e </td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anzahl Felder:</td>
+                 <td class="ta_l">7</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Turnierverantwortlicher:</td>
+                 <td class="ta_l">Herbert Koch</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennungen E-Mail:</td>
+                 <td class="ta_l"><a href="mailto: herbert.koch@gmx.at">herbert.koch@gmx.at</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennschluss:</td>
+                 <td class="ta_l">Donnerstag, 07. M&auml;rz 2019</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Zusatzangaben:</td>
+                 <td class="ta_l">Buffet vorhanden</td>
+              </tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <h1>3.O&Ouml;BV Doppel RLT-HD/DD<br></h1>
+                <h2><span style="color: #000000">Sonntag, 31. M&auml;rz 2019</span></h2>
+
+        </div>
+
+        <table>
+              <tr>
+                 <td class="ta_r"><b>Verein:</b></td>
+                 <td class="ta_l"><b>ASK&Ouml; Linz</b></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Uhrzeit:</td>
+                 <td class="ta_l">10.00 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Auslosung:</td>
+                 <td class="ta_l">09.30 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Hallenname:</td>
+                 <td class="ta_l">Solar City</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anschrift Halle:</td>
+                 <td class="ta_l">Heliosalle 140-142, 4030 Linz</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anzahl Felder:</td>
+                 <td class="ta_l">6</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Turnierverantwortlicher:</td>
+                 <td class="ta_l">Manfred Peterseil</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Telefon:</td>
+                 <td class="ta_l">0664 8411881</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennungen E-Mail:</td>
+                 <td class="ta_l"><a href="mailto: manfred.peterseil@szl.linz.at">manfred.peterseil@szl.linz.at</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anmeldung:</td>
+                 <td class="ta_l"><a href="https://turnieranmeldung.at/">Online-Anmeldung</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennschluss:</td>
+                 <td class="ta_l">Donnerstag, 28. M&auml;rz 2019</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Zusatzangaben:</td>
+                 <td class="ta_l">Buffet vorhanden</td>
+              </tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <h1>4.O&Ouml;BV Doppel RLT-MD<br></h1>
+                <h2><span style="color: #000000">Sonntag, 28. April 2019</span></h2>
+
+        </div>
+
+        <table>
+              <tr>
+                 <td class="ta_r"><b>Verein:</b></td>
+                 <td class="ta_l"><b>ATV Andorf Badminton</b></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Uhrzeit:</td>
+                 <td class="ta_l">10.00 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Auslosung:</td>
+                 <td class="ta_l">09.30 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Hallenname:</td>
+                 <td class="ta_l">Sporthalle Andorf</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anschrift Halle:</td>
+                 <td class="ta_l">Hans-Holzstra&szlig;e 1, 4770 Andorf</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anzahl Felder:</td>
+                 <td class="ta_l">5</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Turnierverantwortlicher:</td>
+                 <td class="ta_l">Sabine Gumpoltsberger (0676 7121784)</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennungen E-Mail:</td>
+                 <td class="ta_l"><a href="mailto: bine_mayer@gmx.at">bine_mayer@gmx.at</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anmeldung:</td>
+                 <td class="ta_l"><a href="https://turnieranmeldung.at/">Online-Anmeldung</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennschluss:</td>
+                 <td class="ta_l">Donnerstag, 25. April 2019</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Zusatzangaben:</td>
+                 <td class="ta_l">Buffet vorhanden</td>
+              </tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <h1>7. Senior Masters<br></h1>
+                <h2><span style="color: #000000">Sa./So., 18./19. Mai 2019</span></h2>
+
+        </div>
+
+        <table>
+              <tr>
+                 <td class="ta_r"><b>Verein:</b></td>
+                 <td class="ta_l"><b>ASK&Ouml; Traun</b></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Uhrzeit:</td>
+                 <td class="ta_l">10.00 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Auslosung:</td>
+                 <td class="ta_l">09.30 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Hallenname:</td>
+                 <td class="ta_l">Bundesschulzentrum Traun</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anschrift Halle:</td>
+                 <td class="ta_l">Eingang Kreuzfeldstra&szlig;e</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anzahl Felder:</td>
+                 <td class="ta_l">7</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Turnierverantwortlicher:</td>
+                 <td class="ta_l">Harald Koch</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Telefon:</td>
+                 <td class="ta_l"></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anmeldung:</td>
+                 <td class="ta_l">wird noch bekanntgegeben</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennschluss:</td>
+                 <td class="ta_l">Montag, 13. Mai 2019</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Zusatzangaben:</td>
+                 <td class="ta_l">Buffet vorhanden</td>
+              </tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <h1>O&Ouml;BV U11/U13/U15 Hobby-Tunier<br></h1>
+                <h2><span style="color: #000000">Samstag, 25. Mai 2019</span></h2>
+
+        </div>
+
+        <table>
+              <tr>
+                 <td class="ta_r"><b>Verein:</b></td>
+                 <td class="ta_l"><b>Union Altm&uuml;nster</b></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Uhrzeit:</td>
+                 <td class="ta_l">10.00 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Auslosung:</td>
+                 <td class="ta_l">09.30 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Hallenname:</td>
+                 <td class="ta_l">Hauptschule Altm&uuml;nster</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anzahl Felder:</td>
+                 <td class="ta_l">4</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Turnierverantwortlicher:</td>
+                 <td class="ta_l">Peter Kickinger</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Telefon:</td>
+                 <td class="ta_l">0664 6150270</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">E-Mail:</td>
+                 <td class="ta_l"><a href="mailto: peter.kickinger@aon.at">peter.kickinger@aon.at</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennschluss:</td>
+                 <td class="ta_l">Donnerstag, 23. Mai 2019</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Zusatzangaben:</td>
+                 <td class="ta_l">Buffet vorhanden, teilnahmeberechtigt: keine Plazierung in &Ouml;RL (A)</td>
+              </tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <div class="za_box">
+        <div>
+                <h1>5.O&Ouml;BV Doppel RLT-HD/DD/MD<br></h1>
+                <h2><span style="color: #000000">Sonntag, 26. Mai 2019</span></h2>
+
+        </div>
+
+        <table>
+              <tr>
+                 <td class="ta_r"><b>Verein:</b></td>
+                 <td class="ta_l"><b>ASK&Ouml; Traun</b></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Uhrzeit:</td>
+                 <td class="ta_l">10.00 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Auslosung:</td>
+                 <td class="ta_l">09.30 Uhr</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Hallenname:</td>
+                 <td class="ta_l">Bundesschulzentrum Traun</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Hallen Anschrift:</td>
+                 <td class="ta_l">Eingang Kreuzfeldstra&szlig;e</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Anzahl Felder:</td>
+                 <td class="ta_l">7</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Turnierverantwortlicher:</td>
+                 <td class="ta_l">Herbert Koch</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">E-Mail:</td>
+                 <td class="ta_l"><a href="mailto: herbert.koch@gmx.at">herbert.koch@gmx.at</a></td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Nennschluss:</td>
+                 <td class="ta_l">Donnerstag, 23. Mai 2019</td>
+              </tr>
+
+              <tr>
+                 <td class="ta_r">Zusatzangaben:</td>
+                 <td class="ta_l">Buffet vorhanden</td>
+              </tr>
+        </table>
+    </div>
+
 
     ';
 
