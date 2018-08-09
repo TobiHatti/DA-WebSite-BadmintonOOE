@@ -230,6 +230,68 @@
        Bericht: Peter Lindner/UBC Neuhofen
     </p>
 
+    <br>
+    <br>
+
+    <p>
+       <h3>&Ouml;M Senioren 2010</h3>
+       Bericht &uuml;ber die <b>&Ouml;sterreichische Senioren Meisterschaft</b><br>
+       Judenburg, 27-28.November 2010-12-06
+    </p>
+
+    <p>
+       Aus Ober&ouml;sterreich sind folgende Spieler dort gewesen:
+    </p>
+
+    <p>
+       BSC 70 Linz: Ursula Edelm&uuml;ller Andreas B&ouml;hm<br>
+       Sabine Salzer Janos Halasz<br>
+       Harald Hochgatterer<br>
+       Wolfgang Sternberger
+    </p>
+
+    <p>
+      Nettingsdorf: Josef Handlechner<br>
+      Peter Krenmayr
+    </p>
+
+    <p>
+      Union Urfahr: Martin Grafinger<br>
+      Gerhard Mayr
+    </p>
+
+    <p>
+       Vorchdorf: Waltraud Kronsteiner<br>
+       Harald Starl
+    </p>
+
+    <p>
+      Die Ergebnisse:<br>
+      Hochgatterer H.: 1. Platz HE 35+ 1. Platz HD 35+ 2. Platz MX 35+<br>
+      B&ouml;hm A: 2. Platz HD 40+<br>
+      Halasz J: 3. Platz HE 60+<br>
+      Edelm&uuml;ller U: 2. Platz MX 35+
+    </p>
+
+    <p>
+      Handlechner J: 1. Platz HD 45+ 3/4. Platz HE 45+<br>
+      Krenmayr P: 1. Platz HD 45+ 1. Platz HE 45+
+    </p>
+
+    <p>
+      Mayr G: 2. Platz HD 40+ 3/4. Platz HE 45+
+    </p>
+
+    <p>
+      Starl H: 1. Platz HD 35+ 2. Platz HE 45+ 1. Platz MX 45+<br>
+      Kronsteiner W: 1. Platz DD 45+ 1. Platz DE 50+ 1. Platz MX 45+
+    </p>
+
+    <p>
+      Janos Halasz, Seniorenreferent des O&Ouml;BV
+    </p>
+
+
 
 
 
