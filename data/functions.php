@@ -70,39 +70,63 @@ function FileButton($name, $id, $multiple=0)
 function TextareaPlus($name, $id="editor", $placeholder="" ,$style="height: 300px;")
 {
     return '
-        <script src="/js/froala/de.js"></script>
 
-        <textarea name="'.$name.'" id="'.$id.'" style="'.$style.'">'.$placeholder.'</textarea>
+            <textarea name="content" id="edit" style="margin-top: 30px;" required>
 
-        <div id="edit"></div>
-        <script>
-            $(function() {
-                $("textarea#'.$id.'").froalaEditor({
-                    // Set the language code.
-                    language: "de"
-                })
-            });
-        </script>
+            </textarea>
 
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
-        <script type="text/javascript" src="/js/froala/froala_editor.min.js"></script>
+
+        <script type="text/javascript" src="/js/froala/froala_editor.min.js" ></script>
         <script type="text/javascript" src="/js/froala/plugins/align.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/char_counter.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/code_beautifier.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/code_view.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/colors.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/draggable.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/emoticons.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/entities.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/file.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/font_size.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/font_family.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/fullscreen.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/image.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/image_manager.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/line_breaker.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/inline_style.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/link.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/lists.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/paragraph_format.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/paragraph_style.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/quick_insert.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/quote.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/table.min.js"></script>
-        <script type="text/javascript" src="/js/froala/plugins/video.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/save.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/url.min.js"></script>
-        <script type="text/javascript" src="/js/froala/plugins/entities.min.js"></script>
+        <script type="text/javascript" src="/js/froala/plugins/video.min.js"></script>
+
+        <script>
+            $(function(){
+                $("#edit").froalaEditor()
+                .on("froalaEditor.image.beforeUpload", function (e, editor, files) {
+                  if (files.length) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                      var result = e.target.result;
+
+                      editor.image.insert(result, null, null, editor.image.get());
+                    };
+
+                    reader.readAsDataURL(files[0]);
+                  }
+
+                  return false;
+                })
+            });
+        </script>
     ';
 }
 

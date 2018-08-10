@@ -40,10 +40,17 @@
                     <link rel="stylesheet" href="/css/froala/froala_editor.css">
                     <link rel="stylesheet" href="/css/froala/froala_style.css">
                     <link rel="stylesheet" href="/css/froala/plugins/code_view.css">
+                    <link rel="stylesheet" href="/css/froala/plugins/colors.css">
+                    <link rel="stylesheet" href="/css/froala/plugins/emoticons.css">
                     <link rel="stylesheet" href="/css/froala/plugins/image_manager.css">
                     <link rel="stylesheet" href="/css/froala/plugins/image.css">
+                    <link rel="stylesheet" href="/css/froala/plugins/line_breaker.css">
                     <link rel="stylesheet" href="/css/froala/plugins/table.css">
+                    <link rel="stylesheet" href="/css/froala/plugins/char_counter.css">
                     <link rel="stylesheet" href="/css/froala/plugins/video.css">
+                    <link rel="stylesheet" href="/css/froala/plugins/fullscreen.css">
+                    <link rel="stylesheet" href="/css/froala/plugins/file.css">
+                    <link rel="stylesheet" href="/css/froala/plugins/quick_insert.css">
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
                 <!-- End of Froala -->
 
