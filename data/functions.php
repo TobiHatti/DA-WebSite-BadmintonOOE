@@ -67,13 +67,13 @@ function FileButton($name, $id, $multiple=0)
     ';
 }
 
-function TextareaPlus($name, $id="editor", $placeholder="" ,$style="height: 300px;")
+function TextareaPlus($name, $id="edit", $placeholder="")
 {
     return '
 
-            <textarea name="content" id="edit" style="margin-top: 30px;" required>
-
-            </textarea>
+        <textarea name="content" id="'.$id.'" style="margin-top: 30px;" required>
+        '.$placeholder.'
+        </textarea>
 
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -110,7 +110,7 @@ function TextareaPlus($name, $id="editor", $placeholder="" ,$style="height: 300p
 
         <script>
             $(function(){
-                $("#edit").froalaEditor()
+                $("#'.$id.'").froalaEditor()
                 .on("froalaEditor.image.beforeUpload", function (e, editor, files) {
                   if (files.length) {
                     var reader = new FileReader();

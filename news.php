@@ -20,9 +20,40 @@
             <h2 class="stagfade1">Neuen Artikel verfassen</h2>
             <form action="/news?check" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                 <br>
-                '.TextareaPlus("content","article","<h3>Artikel-Titel</h3>Hier den Artikel verfassen...","height:500px;").'
-                <br>
-                <button type="submit">Pr&uuml;fen und Fortfahren</button>
+                <div class="stagfade2">
+                    Verfassen Sie den Neues Artikel in dem untenstehenden Textfeld:<br>
+                    '.TextareaPlus("content","article","<h3>Artikel-Titel</h3>Hier den Artikel verfassen...").'
+                    <br>
+                    <hr>
+                </div>
+                <div class="stagfade3">
+                    <h3>Gallerie-Fotos</h3>
+                    <br>
+                    W&auml;hlen Sie ein oder Mehrere Fotos f&uuml;r diesen Bericht aus: <br>
+                    '.FileButton('gallery_images', 'gimg',true).'
+                    <br>
+                    <hr>
+                </div>
+                <div class="stagfade4">
+                    <h3>Tags</h3>
+                    <br>
+                        Hier kommen Tags hin
+                    <br>
+                    <hr>
+                </div>
+                <div class="stagfade5">
+                    <h3>Ver&ouml;ffentlichung</h3>
+                    <br>
+                    W&auml;hlen Sie den Zeitpunkt aus, zu dem der Artikel ver&ouml;ffentlicht werden soll (Standart: Sofort)
+                    <br>
+                    <i>Format: [TT.MM.JJJJ HH:MM]</i><br>
+                    <input type="datetime-local" name="release_date"/>
+                    <hr>
+                </div>
+                <div class="stagfade6">
+                    <br><br>
+                    <button type="submit">&#10148; Vorschau</button>
+                </div>
             </form>
         ';
     }
