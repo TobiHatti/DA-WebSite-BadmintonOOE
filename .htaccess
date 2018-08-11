@@ -1,5 +1,6 @@
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^news/artikel/([a-zA-Z0-9-]+)/?$ news.php?artikel=$1 [NC,QSA,L]
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
 RewriteRule (^|/)backup(/|$) - [F]
 RewriteRule (^|/)sass(/|$) - [F]
