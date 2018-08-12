@@ -18,7 +18,7 @@
     {
         echo '
             <h2 class="stagfade1">Neuen Artikel verfassen</h2>
-            <form action="/news?check" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+            <form action="/news?check" method="post" accept-charset="utf-8" enctype="multipart/form-data" onkeypress="return event.keyCode != 13;">
                 <br>
                 <div class="stagfade2">
                     Verfassen Sie den Neues Artikel in dem untenstehenden Textfeld:<br>
@@ -28,26 +28,27 @@
                 </div>
                 <div class="stagfade3">
                     <h3>Gallerie-Fotos</h3>
-                    <br>
-                    W&auml;hlen Sie ein oder Mehrere Fotos f&uuml;r diesen Bericht aus: <br>
+                    W&auml;hlen Sie ein oder mehrere Fotos f&uuml;r diesen Bericht aus: <br><br>
                     '.FileButton('gallery_images', 'gimg',true).'
                     <br>
                     <hr>
                 </div>
                 <div class="stagfade4">
                     <h3>Tags</h3>
-                    <br>
-                        Hier kommen Tags hin
+                        F&uuml;gen Sie dem Artikel Tags hinzu, um ihn schneller finden und sortieren zu k&ouml;nnen:<br><br>
+                        <input type="search" class="cel_l" id="tagText" placeholder="Tags eingeben... (Mit [Enter] best&auml;tigen)" onkeypress="return TagInsert(event)"/>
+
+                        <div class="tag_container" id="tagContainer">
+
+                        </div>
                     <br>
                     <hr>
                 </div>
                 <div class="stagfade5">
                     <h3>Ver&ouml;ffentlichung</h3>
-                    <br>
-                    W&auml;hlen Sie den Zeitpunkt aus, zu dem der Artikel ver&ouml;ffentlicht werden soll (Standart: Sofort)
-                    <br>
-                    <i>Format: [TT.MM.JJJJ HH:MM]</i><br>
-                    <input type="datetime-local" name="release_date"/>
+                    W&auml;hlen Sie den Zeitpunkt aus, zu dem der Artikel ver&ouml;ffentlicht werden soll (Standart: Sofort)<br>
+                    <i>Format: [TT.MM.JJJJ HH:MM]</i><br><br>
+                    <input type="date" name="release_date" class="cel_m"/>
                     <hr>
                 </div>
                 <div class="stagfade6">
@@ -98,10 +99,6 @@
             <hr>
             '.$article.'
             <hr>
-
-
-
-
         ';
     }
     else
