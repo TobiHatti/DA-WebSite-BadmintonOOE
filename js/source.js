@@ -47,3 +47,8 @@ function RmTag(tagID)
 
     document.getElementById("tagID" + tagID).remove();
 }
+
+function TagList()
+{
+
+}

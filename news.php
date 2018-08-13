@@ -62,6 +62,21 @@
                         F&uuml;gen Sie dem Artikel Tags hinzu, um ihn schneller finden und sortieren zu k&ouml;nnen:<br><br>
                         <input type="search" class="cel_l" id="tagText" placeholder="Tags eingeben... (Mit [Enter] best&auml;tigen)" onkeypress="return TagInsert(event)"/>
 
+                        <select onchange="TagList();">
+                            <option value="none" disabled selected>--- Kategorie Ausw&auml;hlen ---</option>
+                            <optgroup label="Hauptkategorien">
+                                <option value="">Bundesliga</option>
+                                <option value="">International</option>
+                                <option value="">Nachwuchs</option>
+                                <option value="">&Ouml;BV RLT</option>
+                                <option value="">&Ouml;M</option>
+                                <option value="">O&Ouml;BV RLT</option>
+                                <option value="">O&Ouml;M</option>
+                                <option value="">Top News</option>
+                                <option value="">Verbandsintern</option>
+                            </optgroup>
+                        </select>
+
                         <input type="hidden" id="tag_nr" value="1"/>
                         <input type="hidden" id="tag_str" name="tags"/>
 
