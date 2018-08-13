@@ -19,6 +19,20 @@
         $thumb = $_POST['thumbnail'];
         $author = $_SESSION['user_id'];
 
+        // In case the ID already exists, cycle
+        if(MySQLExists("SELECT * FROM news WHERE id = '$id'"))
+        {
+            $i=2;
+            do
+            {
+                $newID = $id.'-'.$i;
+                $i++;
+            }
+            while(MySQLExists("SELECT * FROM news WHERE id = '$newID'"));
+
+            $id = $newID;
+        }
+
         MySQLNonQuery("INSERT INTO news (id, author,tags,article,release_date,thumbnail) VALUES ('$id','$author','$tags','$article','$release','$thumb')") or die("<h1>Ein fehler ist aufgetreten</h1>");
 
         Redirect("/news/artikel/".$id);
@@ -28,15 +42,54 @@
 
     if(isset($_GET['artikel']))
     {
-        echo '<span style="color: #A9A9A9">'.date_format(date_create(fetch("news","release_date","id",$_GET['artikel'])),"d. F Y").'</span>|';
+        echo '
+        <div style="display:flex">
+            <div>
+            ';
 
-        foreach($tags = explode(';',fetch("news","tags","id",$_GET['artikel'])) as $tag)
-        {
-            if($tag != "" AND $tag != $tags[0]) echo ',&nbsp;&nbsp;<a href="/news/kategorie/'.$tag.'">'.$tag.'</a>';
-            if($tag == $tags[0]) echo '&nbsp;&nbsp;<a href="/news/kategorie/'.$tag.'">'.$tag.'</a>';
-        }
+            echo '<span style="color: #A9A9A9">'.date_format(date_create(fetch("news","release_date","id",$_GET['artikel'])),"d. F Y").'</span>|';
 
-        echo '<div class="fr-view fr-element">'.fetch("news","article","id",$_GET['artikel']).'</div>';
+            foreach($tags = explode('||',fetch("news","tags","id",$_GET['artikel'])) as $tag)
+            {
+                if($tag != "" AND $tag != $tags[0]) echo ',&nbsp;&nbsp;<a href="/news/kategorie/'.$tag.'">'.$tag.'</a>';
+                if($tag == $tags[0]) echo '&nbsp;&nbsp;<a href="/news/kategorie/'.$tag.'">'.$tag.'</a>';
+            }
+
+            echo '
+                <div class="fr-view fr-element">'.fetch("news","article","id",$_GET['artikel']).'</div>
+            </div>
+            <div>
+                <div class="home_tile_container_l stagfade1">
+                    <div class="home_tile_title">Neueste Beitr&auml;ge</div>
+                    <div class="home_tile_content">
+                        <ul>
+                            <li><a href="">Eintrag 1</a></li>
+                            <li><a href="">Eintrag 2</a></li>
+                            <li><a href="">Eintrag 3</a></li>
+                            <li><a href="">Eintrag 4</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="home_tile_container_l stagfade2">
+                    <div class="home_tile_title">Kategorien</div>
+                    <div class="home_tile_content">
+                        <ul>
+                            <li><a href="">Bundesliga</a></li>
+                            <li><a href="">International</a></li>
+                            <li><a href="">Nachwuchs</a></li>
+                            <li><a href="">&Ouml;BV RLT</a></li>
+                            <li><a href="">&Ouml;M</a></li>
+                            <li><a href="">O&Ouml;BV RLT</a></li>
+                            <li><a href="">O&Ouml;M</a></li>
+                            <li><a href="">Top News</a></li>
+                            <li><a href="">Verbandsintern</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>';
     }
     else if(isset($_GET['neu']))
     {
@@ -50,6 +103,9 @@
                     <br>
                     <hr>
                 </div>
+
+                <!--
+
                 <div class="stagfade3">
                     <h3>Gallerie-Fotos</h3>
                     W&auml;hlen Sie ein oder mehrere Fotos f&uuml;r diesen Bericht aus: <br><br>
@@ -57,23 +113,26 @@
                     <br>
                     <hr>
                 </div>
+
+                -->
+
                 <div class="stagfade4">
                     <h3>Tags</h3>
                         F&uuml;gen Sie dem Artikel Tags hinzu, um ihn schneller finden und sortieren zu k&ouml;nnen:<br><br>
                         <input type="search" class="cel_l" id="tagText" placeholder="Tags eingeben... (Mit [Enter] best&auml;tigen)" onkeypress="return TagInsert(event)"/>
 
-                        <select onchange="TagList();">
+                        <select onchange="TagList();" id="tagList">
                             <option value="none" disabled selected>--- Kategorie Ausw&auml;hlen ---</option>
                             <optgroup label="Hauptkategorien">
-                                <option value="">Bundesliga</option>
-                                <option value="">International</option>
-                                <option value="">Nachwuchs</option>
-                                <option value="">&Ouml;BV RLT</option>
-                                <option value="">&Ouml;M</option>
-                                <option value="">O&Ouml;BV RLT</option>
-                                <option value="">O&Ouml;M</option>
-                                <option value="">Top News</option>
-                                <option value="">Verbandsintern</option>
+                                <option value="Bundesliga">Bundesliga</option>
+                                <option value="International">International</option>
+                                <option value="Nachwuchs">Nachwuchs</option>
+                                <option value="&Ouml;BV RLT">&Ouml;BV RLT</option>
+                                <option value="&Ouml;M">&Ouml;M</option>
+                                <option value="O&Ouml;BV RLT">O&Ouml;BV RLT</option>
+                                <option value="O&Ouml;M">O&Ouml;M</option>
+                                <option value="Top News">Top News</option>
+                                <option value="Verbandsintern">Verbandsintern</option>
                             </optgroup>
                         </select>
 
@@ -150,7 +209,7 @@
             <span style="color: #A9A9A9">'.date_format(date_create($_POST['release_date']),"d. F Y").'</span>
             |';
 
-            foreach($tags = explode(';',$_POST['tags']) as $tag)
+            foreach($tags = explode('||',$_POST['tags']) as $tag)
             {
                 if($tag != "" AND $tag != $tags[0]) echo ',&nbsp;&nbsp;<a href="#">'.$tag.'</a>';
                 if($tag == $tags[0]) echo '&nbsp;&nbsp;<a href="#">'.$tag.'</a>';
