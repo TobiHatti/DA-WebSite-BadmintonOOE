@@ -10,9 +10,33 @@
     // /news/artikel/xy
     // "xy" can be a value between "0-9", "a-z", "A-Z" or a "-"
 
+    if(isset($_POST['publish']))
+    {
+        $id = $_POST['article_id'];
+        $article = $_POST['article'];
+        $tags = $_POST['tags'];
+        $release = $_POST['release_date'];
+        $thumb = $_POST['thumbnail'];
+        $author = $_SESSION['user_id'];
+
+        MySQLNonQuery("INSERT INTO news (id, author,tags,article,release_date,thumbnail) VALUES ('$id','$author','$tags','$article','$release','$thumb')") or die("<h1>Ein fehler ist aufgetreten</h1>");
+
+        Redirect("/news/artikel/".$id);
+
+    }
+
+
     if(isset($_GET['artikel']))
     {
-        echo '<h1 class="stagfade1">Artikel-Name</h1>';
+        echo '<span style="color: #A9A9A9">'.date_format(date_create(fetch("news","release_date","id",$_GET['artikel'])),"d. F Y").'</span>|';
+
+        foreach($tags = explode(';',fetch("news","tags","id",$_GET['artikel'])) as $tag)
+        {
+            if($tag != "" AND $tag != $tags[0]) echo ',&nbsp;&nbsp;<a href="/news/kategorie/'.$tag.'">'.$tag.'</a>';
+            if($tag == $tags[0]) echo '&nbsp;&nbsp;<a href="/news/kategorie/'.$tag.'">'.$tag.'</a>';
+        }
+
+        echo '<div class="fr-view fr-element">'.fetch("news","article","id",$_GET['artikel']).'</div>';
     }
     else if(isset($_GET['neu']))
     {
@@ -38,17 +62,19 @@
                         F&uuml;gen Sie dem Artikel Tags hinzu, um ihn schneller finden und sortieren zu k&ouml;nnen:<br><br>
                         <input type="search" class="cel_l" id="tagText" placeholder="Tags eingeben... (Mit [Enter] best&auml;tigen)" onkeypress="return TagInsert(event)"/>
 
-                        <div class="tag_container" id="tagContainer">
+                        <input type="hidden" id="tag_nr" value="1"/>
+                        <input type="hidden" id="tag_str" name="tags"/>
 
-                        </div>
+                        <div class="tag_container" id="tagContainer"></div>
                     <br>
                     <hr>
                 </div>
                 <div class="stagfade5">
                     <h3>Ver&ouml;ffentlichung</h3>
                     W&auml;hlen Sie den Zeitpunkt aus, zu dem der Artikel ver&ouml;ffentlicht werden soll (Standart: Sofort)<br>
-                    <i>Format: [TT.MM.JJJJ HH:MM]</i><br><br>
-                    <input type="date" name="release_date" class="cel_m"/>
+                    <i>Format: [TT.MM.JJJJ]</i><br><br>
+                    <input type="date" value="'.date("Y-m-d").'" id="relDate" name="release_date" class="cel_m"/>
+                    <button type="button" onclick="document.getElementById(\'relDate\').value=\''.date("Y-m-d").'\'">&#128197; Heute</button>
                     <hr>
                 </div>
                 <div class="stagfade6">
@@ -84,21 +110,50 @@
         $nameid = str_replace('&uuml;','ue',$nameid);
         $nameid = str_replace('&szlig;','ss',$nameid);
 
-        // Finds Thumbnail-Photo
+        // Finds Thumbnail-Photo (Encoded in Base64)
         $imgs = substr($article,strpos($article,'src="'));
         $tnepos = strpos($imgs,'" ');
         $imgs = str_replace('src="','',substr($imgs,0,$tnepos));
 
-        echo $nameid;
-        echo '<br>'.$imgs;
+        // Uploading images for Slideshow
+        $dir = "content/news/".$nameid."/";
+        if (!file_exists($dir) && !is_dir($dir)) {
+            mkdir($dir);
+            FileUpload($dir,"gallery_images");
+        }
+
+        // START OF PREVIEW
+
+        echo '<h2 class="stagfade1">Artikel-Vorschau</h2><hr>';
+
+        if($_FILES['gallery_images']['size'] == 0)
+        {
+            echo '<h2>Gallerie</h2><hr>';
+        }
 
         echo '
-            <img src="blob:https://production.wepen.at/7fbda8ad-b76e-4f2e-9ee3-aeaaced71579" alt="" />
-            <h2 class="stagfade1">Artikel-Vorschau</h2>
+            <span style="color: #A9A9A9">'.date_format(date_create($_POST['release_date']),"d. F Y").'</span>
+            |';
 
+            foreach($tags = explode(';',$_POST['tags']) as $tag)
+            {
+                if($tag != "" AND $tag != $tags[0]) echo ',&nbsp;&nbsp;<a href="#">'.$tag.'</a>';
+                if($tag == $tags[0]) echo '&nbsp;&nbsp;<a href="#">'.$tag.'</a>';
+            }
+
+            echo '
+            <div class="fr-view fr-element">'.$article.'</div>
             <hr>
-            '.$article.'
-            <hr>
+            <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+
+                <textarea name="article" style="display: none">'.$article.'</textarea>
+                <input type="hidden" value="'.$_POST['tags'].'" name="tags"/>
+                <input type="hidden" value="'.$_POST['release_date'].'" name="release_date"/>
+                <input type="hidden" value="'.$nameid.'" name="article_id"/>
+                <input type="hidden" value="'.$imgs.'" name="thumbnail"/>
+
+                <button type="submit" name="publish">'.(($_POST['release_date'] == date("Y-m-d")) ? 'Jetzt ver&ouml;ffentlichen' : 'Am '.date_format(date_create($_POST['release_date']),"d.m.Y").' ver&ouml;ffentlichen').'</button>
+            </form>
         ';
     }
     else

@@ -71,8 +71,8 @@ function TextareaPlus($name, $id="edit", $placeholder="")
 {
     return '
 
-        <textarea name="content" id="'.$id.'" style="margin-top: 30px;" required>
-        '.$placeholder.'
+        <textarea name="'.$name.'" id="'.$id.'" style="margin-top: 30px;" required>
+            '.$placeholder.'
         </textarea>
 
 

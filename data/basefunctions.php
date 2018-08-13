@@ -406,7 +406,7 @@ function FileUpload($path,$formId,$formats="",$limit="",$sql="")
                 else
                 {
                     if(move_uploaded_file($_FILES[$formId]["tmp_name"][$f], $path.$name)) $count++;
-                    MySQLNonQuery(str_replace('FNAME',$name,$sql));
+                    if($sql != "") MySQLNonQuery(str_replace('FNAME',$name,$sql));
                 }
             }
         }

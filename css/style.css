@@ -1348,16 +1348,17 @@ table.centered_content td {
 /* (S01)   News > Tags                                                               */
 /*===================================================================================*/
 .tag_container div {
-  border: 1px solid #416586;
-  background: #B9DDE9;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  border-radius: 5px;
-  margin: 3px;
-  padding: 0 10px 1px 5px;
   display: inline-block;
   vertical-align: top; }
+  .tag_container div div {
+    border: 1px solid #416586;
+    background: #B9DDE9;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    margin: 3px;
+    padding: 0 10px 1px 5px; }
 .tag_container a {
   cursor: pointer;
   text-decoration: none; }
