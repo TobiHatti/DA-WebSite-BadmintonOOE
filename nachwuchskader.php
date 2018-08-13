@@ -448,6 +448,21 @@
 
 
     </table>
+    <br>
+    <div>
+        <b>1.1-30.6.2018 g&uuml;ltig</b>
+    </div>
+    <br>
+    <p>
+        <b>Kaderkriterien:</b>
+      <ul>
+          <li>Speilst&auml;rke</li>
+          <li>Borg/BTZ Ambitionen</li>
+          <li>Regelm&auml;&szlig;iges Training mit Qualit&auml;t (3xWoche)</li>
+          <li>Entwicklungspotential</li>
+          <li>regelm&auml;&szlig;e Teilnahme an Tunieren</li>
+      </ul>
+    </p>
 
 
     ';
