@@ -265,11 +265,14 @@ body {
   body {
     margin: 0px;
     grid-template-columns: 1fr;
-    grid-template-rows: 30px 60px auto 150px;
+    grid-template-rows: 30px 100px auto 150px;
     grid-template-areas: "nav" "header" "main" "."; }
 
   footer {
-    width: 98%; } }
+    width: 98%; }
+
+  html {
+    font-size: 14pt; } }
 @media only screen and (min-width: 600px) {
   /* PORTRAIT TABLETS - LARGE PHONES */
   body {
@@ -1194,7 +1197,10 @@ table.centered_content td {
   display: block; }
 
 .home_news_article {
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  max-height: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis; }
 
 /*===================================================================================*/
 /* (A02) Home > Tiles                                                                */

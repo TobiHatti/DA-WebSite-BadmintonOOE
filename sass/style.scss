@@ -202,7 +202,7 @@ body{
     body{
         margin:0px;
         grid-template-columns: 1fr;
-        grid-template-rows: 30px 60px auto 150px;
+        grid-template-rows: 30px 100px auto 150px;
         grid-template-areas:
             "nav"
             "header"
@@ -212,6 +212,10 @@ body{
 
     footer{
         width: 98%;
+    }
+
+    html{
+        font-size: 14pt;
     }
 
 }
@@ -1236,6 +1240,9 @@ table.centered_content td{
 
 .home_news_article{
     margin-bottom: 20px;
+    max-height: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /*===================================================================================*/
@@ -1448,7 +1455,7 @@ table.centered_content td{
             background: $theme-medium-l;
             @include border-radius(5px);
             margin: 3px;
-            padding: 0 10px 1px 5px;     
+            padding: 0 10px 1px 5px;
         }
     }
 

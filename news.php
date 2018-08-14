@@ -120,7 +120,7 @@
                     <h3>Tags</h3>
                         F&uuml;gen Sie dem Artikel Tags hinzu, um ihn schneller finden und sortieren zu k&ouml;nnen:<br><br>
                         <input type="search" class="cel_l" id="tagText" placeholder="Tags eingeben... (Mit [Enter] best&auml;tigen)" onkeypress="return TagInsert(event)"/>
-
+                        oder
                         <select onchange="TagList();" id="tagList">
                             <option value="none" disabled selected>--- Kategorie Ausw&auml;hlen ---</option>
                             <optgroup label="Hauptkategorien">
@@ -200,10 +200,12 @@
 
         echo '<h2 class="stagfade1">Artikel-Vorschau</h2><hr>';
 
+        /*
         if($_FILES['gallery_images']['size'] == 0)
         {
             echo '<h2>Gallerie</h2><hr>';
         }
+        */
 
         echo '
             <span style="color: #A9A9A9">'.date_format(date_create($_POST['release_date']),"d. F Y").'</span>

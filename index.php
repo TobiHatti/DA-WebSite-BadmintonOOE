@@ -36,55 +36,45 @@
             <hr>
             <br>
             <div class="home_news_container">
-                <div class="home_news_article stagfade1">
-                    <div class="home_news_imagecontainer">
-                        <img src="/content/sample.jpg" alt="" class="home_news_image"/>
-                    </div>
-                    <div style="float:none;">
-                        <span style="font-size: 10pt;color: #808080">03. Oktober 2018 &#10649; Top-News , Vereinsintern</span>
-                        <h2>Zebrafink-News Teil 1</h2>
-                        Der Zebrafink (Taeniopygia guttata) ist eine Art der Familie der Prachtfinken,
-                        die als einzige der Gattung der Zebrafinken zugeordnet wird. Es werden zwei
-                        Unterarten unterschieden: Der australische Zebrafink, Taeniopygia guttata
-                        castanotis, ist ein in Deutschland sehr beliebter Ziervogel, der Timor-Zebrafink
-                        wird nur sehr selten gehalten oder gar gez&uuml;chtet.
-                    </div>
-                </div>
-                <div class="home_news_article stagfade2">
-                    <div class="home_news_imagecontainer">
-                        <img src="/content/sample2.jpg" alt="" class="home_news_image"/>
-                    </div>
-                    <div style="float:none;">
-                        <span style="font-size: 10pt;color: #808080">01. Oktober 2018 &#10649; Top-News , Vereinsintern</span>
-                        <h2>Zebrafink-News Teil 2</h2>
-                        Das Verbreitungsgebiet des Zebrafinks umfasst Australien
-                        und die Kleinen Sunda-Inseln. In Australien ist er lediglich
-                        nicht in den K&uuml;stenregionen im Norden, Osten und S&uuml;den zu finden.
-                        Auf Tasmanien kommt er dagegen als Wildvogel nicht vor. Von den Sunda-Inseln
-                        werden die Insel Timor sowie Sumba, Flores, Alor, Wetar sowie eine Reihe der
-                        kleineren Inseln besiedelt. Innerhalb dieses gro&szlig;en Verbreitungsgebietes werden zwei
-                        Unterarten unterschieden:
-                    </div>
-                </div>
-                <div class="home_news_article stagfade3">
-                    <div class="home_news_imagecontainer">
-                        <img src="/content/sample3.jpg" alt="" class="home_news_image"/>
-                    </div>
-                    <div style="float:none;">
-                        <span style="font-size: 10pt;color: #808080">15. September 2018 &#10649; Top-News , Vereinsintern</span>
-                        <h2>Zebrafink-News Teil 3</h2>
-                        Zebrafinken ern&auml;hren sich vor allem von Grassamen, aber auch von Samen zweikeimbl&auml;ttriger
-                        Pflanzen und Insekten, die sie auch im Flug erbeuten k&ouml;nnen. F&uuml;r die K&auml;fighaltung werden fertige
-                        Mischungen Exotenfutter angeboten. Sie bestehen aus unterschiedlichen Hirsesorten, Glanz- (Phalaris canariensis)
-                        und Nigersaat (Guizotia abyssinica). Zus&auml;tzlich sollten Mineralien und/oder Grit (zersto&szlig;ene Muschelschalen)
-                        gef&uuml;ttert werden. Als Gr&uuml;nfutter hat sich Salatgurke bew&auml;hrt. Sie enth&auml;lt Vitamin K, welches wichtig f&uuml;r die
-                        Blutgerinnung ist. Auch Vogelmiere wird gern genommen. Kopfsalat sollte vermieden werden,
-                        da der Schadstoffanteil zu hoch ist.
-                    </div>
-                </div>
-            </div>
-        </article>
+            ';
 
+            $i=1;
+            $today = date("Y-m-d");
+            $strSQL = "SELECT * FROM news WHERE release_date <= '$today' ORDER BY id DESC LIMIT 0,3";
+            $rs=mysqli_query($link,$strSQL);
+            while($row=mysqli_fetch_assoc($rs))
+            {
+                echo '
+                    <div class="home_news_article stagfade'.$i.'">
+                        <div class="home_news_imagecontainer">
+                            <a href="/news/artikel/'.$row['id'].'">
+                                <img src="'.(($row['thumbnail']=="") ? '/content/no-image.png' : $row['thumbnail'] ).'" alt="" class="home_news_image"/>
+                            </a>
+                        </div>
+                        <div style="float:none;">
+                            <span style="font-size: 10pt;color: #808080">'.date_format(date_create($row['release_date']),"d. F Y").' &#10649;</span>
+                            ';
+
+                            foreach($tags = explode('||',fetch("news","tags","id",$row['id'])) as $tag)
+                            {
+                                if($tag != "" AND $tag != $tags[0]) echo ',&nbsp;&nbsp;<a href="/news/kategorie/'.$tag.'">'.$tag.'</a>';
+                                if($tag == $tags[0]) echo '&nbsp;&nbsp;<a href="/news/kategorie/'.$tag.'">'.$tag.'</a>';
+                            }
+
+                            echo '
+                            <a href="/news/artikel/'.$row['id'].'"><h2>'.$row['id'].'</h2></a>
+                            '.strip_tags($row['article']).'
+                        </div>
+                    </div>
+                ';
+
+                $i++;
+            }
+
+            echo '
+
+                    </div>
+            </article>
 
         <aside>
            <div class="home_tile_wrapper">
