@@ -12,30 +12,32 @@
 
     if(isset($_POST['publish']))
     {
-        $id = $_POST['article_id'];
+        $article_url = $_POST['article_id'];
         $article = $_POST['article'];
         $tags = $_POST['tags'];
         $release = $_POST['release_date'];
         $thumb = $_POST['thumbnail'];
-        $author = $_SESSION['user_id'];
+        $title = $_POST['title'];
+        $author = (isset($_SESSION['user_id'])) ? $_SESSION['user_id'] : 0 ;
 
         // In case the ID already exists, cycle
-        if(MySQLExists("SELECT * FROM news WHERE id = '$id'"))
+        if(MySQLExists("SELECT * FROM news WHERE article_url = '$article_url'"))
         {
             $i=2;
             do
             {
-                $newID = $id.'-'.$i;
+                $newID = $article_url.'-'.$i;
                 $i++;
             }
-            while(MySQLExists("SELECT * FROM news WHERE id = '$newID'"));
+            while(MySQLExists("SELECT * FROM news WHERE article_url = '$newID'"));
 
-            $id = $newID;
+            $article_url = $newID;
         }
 
-        MySQLNonQuery("INSERT INTO news (id, author,tags,article,release_date,thumbnail) VALUES ('$id','$author','$tags','$article','$release','$thumb')") or die("<h1>Ein fehler ist aufgetreten</h1>");
+        MySQLNonQuery("INSERT INTO news (id,article_url,title, author,tags,article,release_date,thumbnail) VALUES ('','$article_url','$title','$author','$tags','$article','$release','$thumb')") or die("<h1>Ein fehler ist aufgetreten</h1>");
 
-        Redirect("/news/artikel/".$id);
+        Redirect("/news/artikel/".$article_url);
+        die();
 
     }
 
@@ -43,22 +45,22 @@
     if(isset($_GET['artikel']))
     {
         echo '
-        <div style="display:flex">
-            <div>
+        <div class="doublecol_singletile">
+            <article>
             ';
 
-            echo '<span style="color: #A9A9A9">'.date_format(date_create(fetch("news","release_date","id",$_GET['artikel'])),"d. F Y").'</span>|';
+            echo '<span style="color: #A9A9A9">'.date_format(date_create(fetch("news","release_date","article_url",$_GET['artikel'])),"d. F Y").'</span> |';
 
-            foreach($tags = explode('||',fetch("news","tags","id",$_GET['artikel'])) as $tag)
+            foreach($tags = explode('||',fetch("news","tags","article_url",$_GET['artikel'])) as $tag)
             {
                 if($tag != "" AND $tag != $tags[0]) echo ',&nbsp;&nbsp;<a href="/news/kategorie/'.$tag.'">'.$tag.'</a>';
-                if($tag == $tags[0]) echo '&nbsp;&nbsp;<a href="/news/kategorie/'.$tag.'">'.$tag.'</a>';
+                if($tag == $tags[0]) echo ' <a href="/news/kategorie/'.$tag.'">'.$tag.'</a>';
             }
 
             echo '
-                <div class="fr-view fr-element">'.fetch("news","article","id",$_GET['artikel']).'</div>
-            </div>
-            <div>
+                <div class="fr-view fr-element">'.fetch("news","article","article_url",$_GET['artikel']).'</div>
+            </article>
+            <aside>
                 <div class="home_tile_container_l stagfade1">
                     <div class="home_tile_title">Neueste Beitr&auml;ge</div>
                     <div class="home_tile_content">
@@ -88,8 +90,12 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </aside>
         </div>';
+    }
+    else if(isset($_GET['kategorie']))
+    {
+        echo '<h2 class="stagfade1">Kategorien</h2>';
     }
     else if(isset($_GET['neu']))
     {
@@ -99,7 +105,7 @@
                 <br>
                 <div class="stagfade2">
                     Verfassen Sie den Neues Artikel in dem untenstehenden Textfeld:<br>
-                    '.TextareaPlus("content","article","<h3>Artikel-Titel</h3>Hier den Artikel verfassen...").'
+                    '.TextareaPlus("content","article","<h2>Artikel-Titel</h2>Hier den Artikel verfassen...").'
                     <br>
                     <hr>
                 </div>
@@ -175,6 +181,7 @@
         $cpos = min(array_filter(array(intval($posh1),intval($posh2),intval($posh3),intval($posh4),intval($posh5),intval($posbr),intval($posp))));
 
         // Remove HTML-Tags, exchange whitespaces and so on.
+        $title = strip_tags(substr($article,0,$cpos));
         $nameid = str_replace(' ','-',strip_tags(substr($article,0,$cpos)));
         $nameid = str_replace('&Auml;','Ae',$nameid);
         $nameid = str_replace('&auml;','ae',$nameid);
@@ -184,17 +191,22 @@
         $nameid = str_replace('&uuml;','ue',$nameid);
         $nameid = str_replace('&szlig;','ss',$nameid);
 
+        // Remove everything but Alphanumeric letters and numbers and "-"
+        $nameid = preg_replace('/[^0-9A-Za-z-]/', '', $nameid);
+
         // Finds Thumbnail-Photo (Encoded in Base64)
         $imgs = substr($article,strpos($article,'src="'));
         $tnepos = strpos($imgs,'" ');
         $imgs = str_replace('src="','',substr($imgs,0,$tnepos));
 
+        /*
         // Uploading images for Slideshow
         $dir = "content/news/".$nameid."/";
         if (!file_exists($dir) && !is_dir($dir)) {
             mkdir($dir);
             FileUpload($dir,"gallery_images");
         }
+        */
 
         // START OF PREVIEW
 
@@ -227,6 +239,7 @@
                 <input type="hidden" value="'.$_POST['release_date'].'" name="release_date"/>
                 <input type="hidden" value="'.$nameid.'" name="article_id"/>
                 <input type="hidden" value="'.$imgs.'" name="thumbnail"/>
+                <input type="hidden" value="'.$title.'" name="title"/>
 
                 <button type="submit" name="publish">'.(($_POST['release_date'] == date("Y-m-d")) ? 'Jetzt ver&ouml;ffentlichen' : 'Am '.date_format(date_create($_POST['release_date']),"d.m.Y").' ver&ouml;ffentlichen').'</button>
             </form>

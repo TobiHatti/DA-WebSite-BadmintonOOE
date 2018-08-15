@@ -1,12 +1,46 @@
+###############################
+###############################
+##    Apache Server Config   ##
+##        KEEP ORDERED       ##
+###############################
+###############################
+
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
+
+###############################
+#         URL Rewrites        #
+###############################
+
+# Rewrite Rules for news.php
+RewriteRule ^news/neu news.php?neu [NC,QSA,L]
 RewriteRule ^news/artikel/([a-zA-Z0-9-]+)/?$ news.php?artikel=$1 [NC,QSA,L]
+RewriteRule ^news/kategorie/([a-zA-Z0-9-\s]+)/?$ news.php?kategorie=$1 [NC,QSA,L]
+
+#Ignore .php-Extension
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+###############################
+#    Forbidden Directories    #
+###############################
 RewriteRule (^|/)backup(/|$) - [F]
 RewriteRule (^|/)sass(/|$) - [F]
 RewriteRule (^|/)data(/|$) - [F]
+
+###############################
+#       Error Ducuments       #
+###############################
+# ERROR 400: Bad Request
 ErrorDocument 400 /400.php
+
+# ERROR 401: Unauthorised
 ErrorDocument 401 /401.php
+
+# ERROR 403: Forbidden
 ErrorDocument 403 /403.php
+
+# Error 404: Not Found
 ErrorDocument 404 /404.php
+
+# Error 500: Internal Server Error
 ErrorDocument 500 /500.php
