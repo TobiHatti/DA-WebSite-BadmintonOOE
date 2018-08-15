@@ -1352,6 +1352,51 @@ table.centered_content td {
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
+/*================================= R - OÍMM-Archiv =================================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*===================================================================================*/
+/* (R01)   OÍMM-Archiv > Table                                                       */
+/*===================================================================================*/
+.archiveTables {
+  text-align: center; }
+  .archiveTables table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: inline-table;
+    vertical-align: top;
+    margin: 8px 15px 8px 15px;
+    border-bottom: 1px solid #696969;
+    min-width: 425px; }
+    .archiveTables table tr:nth-child(1) th {
+      background: #F01B16;
+      color: #FFFFFF;
+      text-align: center;
+      font-size: 16pt; }
+    .archiveTables table tr:nth-child(2) td {
+      background: #013756;
+      color: #FFFFFF; }
+    .archiveTables table tr:nth-child(2n+1) {
+      background: #FFFFFF;
+      font-size: 11pt;
+      font-weight: lighter; }
+    .archiveTables table tr:nth-child(2n) {
+      background: #EBEBEB;
+      font-size: 11pt;
+      font-weight: lighter; }
+    .archiveTables table td {
+      padding: 3px 5px 3px 5px; }
+    .archiveTables table td:nth-child(3),
+    .archiveTables table td:nth-child(4),
+    .archiveTables table td:nth-child(5),
+    .archiveTables table td:nth-child(6),
+    .archiveTables table td:nth-child(9) {
+      text-align: right;
+      padding-left: 8px;
+      padding-right: 8px; }
+
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
 /*===================================== S - News ====================================*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
