@@ -22,6 +22,17 @@ if(isset($_POST['add_vorstand_member']))
     Redirect(ThisPage());
 }
 
+if(isset($_POST['add_tag']))
+{
+    $tag = $_POST['tag'];
+
+    $tagid = SReplace($tag);
+
+    MySQLNonQuery("INSERT INTO news_tags (id,name) VALUES ('$tagid','$tag')");
+
+    Redirect(ThisPage());
+}
+
 //=================================================================================
 //=================================================================================
 //      PAGE - SECTION
@@ -33,17 +44,8 @@ if(isset($_POST['add_vorstand_member']))
         <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
     ';
 
-    if(!isset($_GET['page']))
-    {
-        echo '<h3 class="stagfade2">Use temporarily for SQL/PHP Forms and Database insertions</h3> ';
 
-        echo '
-            <ul>
-                <li><a href="?page=vorstand">[SQL-INSERT]: Vorand</a></li>
-            </ul>
-        ';
-    }
-    else if(isset($_GET['page']) AND $_GET['page']=='vorstand')
+    if(isset($_GET['vorstand']))
     {
         echo '<h3 class="stagfade2">[SQL-INSERT]: Vorand</h3> ';
 
@@ -82,6 +84,33 @@ if(isset($_POST['add_vorstand_member']))
                     <td colspan=2><button type="submit" name="add_vorstand_member">Hinzuf&uuml;gen</button></td>
                 </tr>
             </table>
+        ';
+    }
+    else if(isset($_GET['tags']))
+    {
+        echo '<h3 class="stagfade2">[SQL-INSERT]: Vorand</h3> ';
+
+        echo '
+            <table>
+                <tr>
+                    <td>Tag-Name</td>
+                    <td><input type="text" name="tag"/></td>
+                </tr>
+                <tr>
+                    <td colspan=2><button type="submit" name="add_tag">Hinzuf&uuml;gen</button></td>
+                </tr>
+            </table>
+        ';
+    }
+    else
+    {
+        echo '<h3 class="stagfade2">Use temporarily for SQL/PHP Forms and Database insertions</h3> ';
+
+        echo '
+            <ul>
+                <li><a href="?vorstand">[SQL-INSERT]: Vorand</a></li>
+                <li><a href="?tags">[SQL-INSERT]: News-Tags</a></li>
+            </ul>
         ';
     }
 

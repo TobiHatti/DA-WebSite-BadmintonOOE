@@ -49,16 +49,10 @@
             <article>
             ';
 
-            echo '<span style="color: #A9A9A9">'.date_format(date_create(fetch("news","release_date","article_url",$_GET['artikel'])),"d. F Y").'</span> |';
-
-            foreach($tags = explode('||',fetch("news","tags","article_url",$_GET['artikel'])) as $tag)
-            {
-                if($tag != "" AND $tag != $tags[0]) echo ',&nbsp;&nbsp;<a href="/news/kategorie/'.$tag.'">'.$tag.'</a>';
-                if($tag == $tags[0]) echo ' <a href="/news/kategorie/'.$tag.'">'.$tag.'</a>';
-            }
-
             echo '
-                <div class="fr-view fr-element">'.fetch("news","article","article_url",$_GET['artikel']).'</div>
+                <span style="color: #A9A9A9">'.date_format(date_create(Fetch("news","release_date","article_url",$_GET['artikel'])),"d. F Y").' |</span>
+                '.ShowTags(Fetch("news","tags","article_url",$_GET['artikel'])).'
+                <div class="fr-view fr-element">'.Fetch("news","article","article_url",$_GET['artikel']).'</div>
             </article>
             <aside>
                 <div class="home_tile_container_l stagfade1">
@@ -95,7 +89,7 @@
     }
     else if(isset($_GET['kategorie']))
     {
-        echo '<h2 class="stagfade1">Kategorien</h2>';
+        echo '<h2 class="stagfade1">'.Fetch("news_tags","name","id",$_GET['kategorie']).'</h2>';
     }
     else if(isset($_GET['neu']))
     {
@@ -182,17 +176,7 @@
 
         // Remove HTML-Tags, exchange whitespaces and so on.
         $title = strip_tags(substr($article,0,$cpos));
-        $nameid = str_replace(' ','-',strip_tags(substr($article,0,$cpos)));
-        $nameid = str_replace('&Auml;','Ae',$nameid);
-        $nameid = str_replace('&auml;','ae',$nameid);
-        $nameid = str_replace('&Ouml;','Oe',$nameid);
-        $nameid = str_replace('&ouml;','oe',$nameid);
-        $nameid = str_replace('&Uuml;','Ue',$nameid);
-        $nameid = str_replace('&uuml;','ue',$nameid);
-        $nameid = str_replace('&szlig;','ss',$nameid);
-
-        // Remove everything but Alphanumeric letters and numbers and "-"
-        $nameid = preg_replace('/[^0-9A-Za-z-]/', '', $nameid);
+        $nameid = SReplace(strip_tags(substr($article,0,$cpos)));
 
         // Finds Thumbnail-Photo (Encoded in Base64)
         $imgs = substr($article,strpos($article,'src="'));

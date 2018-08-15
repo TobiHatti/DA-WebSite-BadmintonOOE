@@ -152,6 +152,10 @@ function PageContent($paragraph_index)
 
 function Loader()
 {
+    // DESCRIPTION:
+    // Custom PreLoader
+    // Triggered by onclick="LoadAnimation();"
+
     return '
         <center>
             <img src="/content/silhouette.png" alt="" class="ease10" style="height: 100px;" id="loadAnim1"/>
@@ -159,4 +163,25 @@ function Loader()
         </center>
     ';
 }
+
+function ShowTags($tagstr,$disableLinks = false)
+{
+    // DESCRIPTION:
+    // Lists all Tags with or without link of
+    // an article
+    // $tagstr          String of tags. Seperated by "||"
+    // $disableLinks    Enable/Disable links (default: false)
+
+    $retval = '';
+
+    foreach($tags = explode('||',$tagstr) as $tag)
+    {
+        if($tag != "" AND $tag != $tags[0]) $retval .= ',&nbsp;&nbsp;<a href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.Fetch("news_tags","name","id",$tag).'</a>';
+        if($tag == $tags[0]) $retval .= '<a href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.Fetch("news_tags","name","id",$tag).'</a>';
+    }
+
+   return $retval;
+}
+
+
 ?>
