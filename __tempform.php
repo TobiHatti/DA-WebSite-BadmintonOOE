@@ -33,6 +33,32 @@ if(isset($_POST['add_tag']))
     Redirect(ThisPage());
 }
 
+if(isset($_POST['add_archive_entry']))
+{
+    $title = $_POST['title'];
+    $year= $_POST['year'];
+
+    for($i=1;$i <= 7 ; $i++)
+    {
+        if($_POST['Pl'.$i] == "") break;
+
+        $Pl = $_POST['Pl'.$i];
+        $Verein = $_POST['Verein'.$i];
+        $Rd = $_POST['Rd'.$i];
+        $S = $_POST['S'.$i];
+        $U = $_POST['U'.$i];
+        $N = $_POST['N'.$i];
+        $Spiele = $_POST['Spiele'.$i];
+        $Satze = $_POST['Satze'.$i];
+        $Pkt = $_POST['Pkt'.$i];
+
+        MySQLNonQuery("INSERT INTO ooemm_archive (id,year,table_name,table_row,c_pl,c_verein,c_rd,c_s,c_u,c_n,c_spiele,c_satze,c_pkt) VALUES ('','$year','$title','$i','$Pl','$Verein','$Rd','$S','$U','$N','$Spiele','$Satze','$Pkt')");
+    }
+
+    Redirect(ThisPage());
+}
+
+
 //=================================================================================
 //=================================================================================
 //      PAGE - SECTION
@@ -88,7 +114,7 @@ if(isset($_POST['add_tag']))
     }
     else if(isset($_GET['tags']))
     {
-        echo '<h3 class="stagfade2">[SQL-INSERT]: Vorand</h3> ';
+        echo '<h3 class="stagfade2">[SQL-INSERT]: News-Tags</h3> ';
 
         echo '
             <table>
@@ -102,6 +128,130 @@ if(isset($_POST['add_tag']))
             </table>
         ';
     }
+    else if(isset($_GET['ooemm-archiv']))
+    {
+        echo '<h3 class="stagfade2">[SQL-INSERT]: OOEMM-Archive</h3> ';
+
+        echo '
+
+        <div class="archiveTables">
+            <select name="year">
+                <option value="2005/2006">2005/2006</option>
+                <option value="2004/2005">2004/2005</option>
+                <option value="2003/2004">2003/2004</option>
+                <option value="2002/2003">2002/2003</option>
+                <option value="2001/2002">2001/2002</option>
+                <option value="2000/2001">2000/2001</option>
+                <option value="1999/2000">1999/2000</option>
+            </select>
+
+            <table>
+                <tr>
+                    <th colspan=9><input placeholder="Titel" name="title"/></td>
+                </tr>
+                <tr>
+                    <td>Pl</td>
+                    <td>Verein</td>
+                    <td>Rd</td>
+                    <td>S</td>
+                    <td>U</td>
+                    <td>N</td>
+                    <td>Spiele</td>
+                    <td>S&auml;tze</td>
+                    <td>Pkt</td>
+                </tr>
+
+                <tr>
+                    <td><input class="cel_xxs" name="Pl1" placeholder="Pl"/></td>
+                    <td><input class="cel_s" name="Verein1" placeholder="Verein"/></td>
+                    <td><input class="cel_xxs" name="Rd1" placeholder="Rd"/></td>
+                    <td><input class="cel_xxs" name="S1" placeholder="S"/></td>
+                    <td><input class="cel_xxs" name="U1" placeholder="U"/></td>
+                    <td><input class="cel_xxs" name="N1" placeholder="N"/></td>
+                    <td><input class="cel_xs" name="Spiele1" placeholder="Spiele"/></td>
+                    <td><input class="cel_xs" name="Satze1" placeholder="S&auml;tze"/></td>
+                    <td><input class="cel_xxs" name="Pkt1" placeholder="Pkt"/></td>
+                </tr>
+
+                <tr>
+                    <td><input class="cel_xxs" name="Pl2" placeholder="Pl"/></td>
+                    <td><input class="cel_s" name="Verein2" placeholder="Verein"/></td>
+                    <td><input class="cel_xxs" name="Rd2" placeholder="Rd"/></td>
+                    <td><input class="cel_xxs" name="S2" placeholder="S"/></td>
+                    <td><input class="cel_xxs" name="U2" placeholder="U"/></td>
+                    <td><input class="cel_xxs" name="N2" placeholder="N"/></td>
+                    <td><input class="cel_xs" name="Spiele2" placeholder="Spiele"/></td>
+                    <td><input class="cel_xs" name="Satze2" placeholder="S&auml;tze"/></td>
+                    <td><input class="cel_xxs" name="Pkt2" placeholder="Pkt"/></td>
+                </tr>
+
+                <tr>
+                    <td><input class="cel_xxs" name="Pl3" placeholder="Pl"/></td>
+                    <td><input class="cel_s" name="Verein3" placeholder="Verein"/></td>
+                    <td><input class="cel_xxs" name="Rd3" placeholder="Rd"/></td>
+                    <td><input class="cel_xxs" name="S3" placeholder="S"/></td>
+                    <td><input class="cel_xxs" name="U3" placeholder="U"/></td>
+                    <td><input class="cel_xxs" name="N3" placeholder="N"/></td>
+                    <td><input class="cel_xs" name="Spiele3" placeholder="Spiele"/></td>
+                    <td><input class="cel_xs" name="Satze3" placeholder="S&auml;tze"/></td>
+                    <td><input class="cel_xxs" name="Pkt3" placeholder="Pkt"/></td>
+                </tr>
+
+                <tr>
+                    <td><input class="cel_xxs" name="Pl4" placeholder="Pl"/></td>
+                    <td><input class="cel_s" name="Verein4" placeholder="Verein"/></td>
+                    <td><input class="cel_xxs" name="Rd4" placeholder="Rd"/></td>
+                    <td><input class="cel_xxs" name="S4" placeholder="S"/></td>
+                    <td><input class="cel_xxs" name="U4" placeholder="U"/></td>
+                    <td><input class="cel_xxs" name="N4" placeholder="N"/></td>
+                    <td><input class="cel_xs" name="Spiele4" placeholder="Spiele"/></td>
+                    <td><input class="cel_xs" name="Satze4" placeholder="S&auml;tze"/></td>
+                    <td><input class="cel_xxs" name="Pkt4" placeholder="Pkt"/></td>
+                </tr>
+
+                <tr>
+                    <td><input class="cel_xxs" name="Pl5" placeholder="Pl"/></td>
+                    <td><input class="cel_s" name="Verein5" placeholder="Verein"/></td>
+                    <td><input class="cel_xxs" name="Rd5" placeholder="Rd"/></td>
+                    <td><input class="cel_xxs" name="S5" placeholder="S"/></td>
+                    <td><input class="cel_xxs" name="U5" placeholder="U"/></td>
+                    <td><input class="cel_xxs" name="N5" placeholder="N"/></td>
+                    <td><input class="cel_xs" name="Spiele5" placeholder="Spiele"/></td>
+                    <td><input class="cel_xs" name="Satze5" placeholder="S&auml;tze"/></td>
+                    <td><input class="cel_xxs" name="Pkt5" placeholder="Pkt"/></td>
+                </tr>
+
+                <tr>
+                    <td><input class="cel_xxs" name="Pl6" placeholder="Pl"/></td>
+                    <td><input class="cel_s" name="Verein6" placeholder="Verein"/></td>
+                    <td><input class="cel_xxs" name="Rd6" placeholder="Rd"/></td>
+                    <td><input class="cel_xxs" name="S6" placeholder="S"/></td>
+                    <td><input class="cel_xxs" name="U6" placeholder="U"/></td>
+                    <td><input class="cel_xxs" name="N6" placeholder="N"/></td>
+                    <td><input class="cel_xs" name="Spiele6" placeholder="Spiele"/></td>
+                    <td><input class="cel_xs" name="Satze6" placeholder="S&auml;tze"/></td>
+                    <td><input class="cel_xxs" name="Pkt6" placeholder="Pkt"/></td>
+                </tr>
+
+                <tr>
+                    <td><input class="cel_xxs" name="Pl7" placeholder="Pl"/></td>
+                    <td><input class="cel_s" name="Verein7" placeholder="Verein"/></td>
+                    <td><input class="cel_xxs" name="Rd7" placeholder="Rd"/></td>
+                    <td><input class="cel_xxs" name="S7" placeholder="S"/></td>
+                    <td><input class="cel_xxs" name="U7" placeholder="U"/></td>
+                    <td><input class="cel_xxs" name="N7" placeholder="N"/></td>
+                    <td><input class="cel_xs" name="Spiele7" placeholder="Spiele"/></td>
+                    <td><input class="cel_xs" name="Satze7" placeholder="S&auml;tze"/></td>
+                    <td><input class="cel_xxs" name="Pkt7" placeholder="Pkt"/></td>
+                </tr>
+
+
+            </table>
+        </div>
+
+        <button type="submit" name="add_archive_entry">Hinzuf&uuml;gen</button>
+        ';
+    }
     else
     {
         echo '<h3 class="stagfade2">Use temporarily for SQL/PHP Forms and Database insertions</h3> ';
@@ -110,6 +260,7 @@ if(isset($_POST['add_tag']))
             <ul>
                 <li><a href="?vorstand">[SQL-INSERT]: Vorand</a></li>
                 <li><a href="?tags">[SQL-INSERT]: News-Tags</a></li>
+                <li><a href="?ooemm-archiv">[SQL-INSERT]: OOEMM-Archiv</a></li>
             </ul>
         ';
     }

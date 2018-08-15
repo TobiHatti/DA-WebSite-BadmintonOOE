@@ -8,13 +8,14 @@
     // /news?artikel=xy
     // can be written as:
     // /news/artikel/xy
+    // /news/kategorie/xy
     // "xy" can be a value between "0-9", "a-z", "A-Z" or a "-"
 
     if(isset($_POST['publish']))
     {
         $article_url = $_POST['article_id'];
         $article = $_POST['article'];
-        $tags = $_POST['tags'];
+        $tags = SReplace($_POST['tags']);
         $release = $_POST['release_date'];
         $thumb = $_POST['thumbnail'];
         $title = $_POST['title'];
@@ -38,7 +39,6 @@
 
         Redirect("/news/artikel/".$article_url);
         die();
-
     }
 
 
@@ -70,17 +70,11 @@
                 <div class="home_tile_container_l stagfade2">
                     <div class="home_tile_title">Kategorien</div>
                     <div class="home_tile_content">
-                        <ul>
-                            <li><a href="">Bundesliga</a></li>
-                            <li><a href="">International</a></li>
-                            <li><a href="">Nachwuchs</a></li>
-                            <li><a href="">&Ouml;BV RLT</a></li>
-                            <li><a href="">&Ouml;M</a></li>
-                            <li><a href="">O&Ouml;BV RLT</a></li>
-                            <li><a href="">O&Ouml;M</a></li>
-                            <li><a href="">Top News</a></li>
-                            <li><a href="">Verbandsintern</a></li>
-
+                        <ul>';
+                            $strSQL = "SELECT * FROM news_tags";
+                            $rs=mysqli_query($link,$strSQL);
+                            while($row=mysqli_fetch_assoc($rs)) { echo '<li><a href="/news/kategorie/'.$row['id'].'">'.$row['name'].'</a></li>'; }
+                            echo '
                         </ul>
                     </div>
                 </div>
@@ -90,6 +84,7 @@
     else if(isset($_GET['kategorie']))
     {
         echo '<h2 class="stagfade1">'.Fetch("news_tags","name","id",$_GET['kategorie']).'</h2>';
+
     }
     else if(isset($_GET['neu']))
     {
@@ -124,15 +119,11 @@
                         <select onchange="TagList();" id="tagList">
                             <option value="none" disabled selected>--- Kategorie Ausw&auml;hlen ---</option>
                             <optgroup label="Hauptkategorien">
-                                <option value="Bundesliga">Bundesliga</option>
-                                <option value="International">International</option>
-                                <option value="Nachwuchs">Nachwuchs</option>
-                                <option value="&Ouml;BV RLT">&Ouml;BV RLT</option>
-                                <option value="&Ouml;M">&Ouml;M</option>
-                                <option value="O&Ouml;BV RLT">O&Ouml;BV RLT</option>
-                                <option value="O&Ouml;M">O&Ouml;M</option>
-                                <option value="Top News">Top News</option>
-                                <option value="Verbandsintern">Verbandsintern</option>
+                                ';
+                                $strSQL = "SELECT * FROM news_tags";
+                                $rs=mysqli_query($link,$strSQL);
+                                while($row=mysqli_fetch_assoc($rs)) { echo '<option value="'.$row['name'].'">'.$row['name'].'</option>'; }
+                                echo '
                             </optgroup>
                         </select>
 

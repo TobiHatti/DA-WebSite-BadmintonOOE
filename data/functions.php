@@ -176,8 +176,8 @@ function ShowTags($tagstr,$disableLinks = false)
 
     foreach($tags = explode('||',$tagstr) as $tag)
     {
-        if($tag != "" AND $tag != $tags[0]) $retval .= ',&nbsp;&nbsp;<a href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.Fetch("news_tags","name","id",$tag).'</a>';
-        if($tag == $tags[0]) $retval .= '<a href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.Fetch("news_tags","name","id",$tag).'</a>';
+        if($tag != "" AND $tag != $tags[0]) $retval .= ',&nbsp;&nbsp;<a href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.((Fetch("news_tags","name","id",$tag)!="") ? Fetch("news_tags","name","id",$tag) : $tag).'</a>';
+        if($tag == $tags[0]) $retval .= '<a href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.((Fetch("news_tags","name","id",$tag)!="") ? Fetch("news_tags","name","id",$tag) : $tag).'</a>';
     }
 
    return $retval;
