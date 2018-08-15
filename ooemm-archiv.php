@@ -113,7 +113,6 @@
                     <td>10</td>
                 </tr>
             </table>
-            <hr>
             <table>
                  <th colspan="9">2. Landesliga Nord</th>
                   <tr>
@@ -223,7 +222,6 @@
                     <td>7</td>
                 </tr>
             </table>
-            <hr>
             <table>
                   <th colspan="9">2. Landesliga S&uuml;d</th>
                   <tr>
@@ -333,7 +331,6 @@
 
                 </tr>
             </table>
-            <hr>
             <table>
                   <th colspan="9">1. Klasse Nord</th>
                   <tr>

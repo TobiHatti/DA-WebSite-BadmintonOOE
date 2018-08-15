@@ -69,7 +69,7 @@ function SReplace($string)
     // Formats a given string so it is save for URL-names etc.
     // $string  The string that should be formated
 
-    // Replacing "Ä,ä,Ö,ö,Ü,ü,ß" and "-"
+    // Replacing "Ä,ä,Ö,ö,Ü,ü,ß" and "-" (HTML-Characters)
     $sstr = str_replace(' ','-',$string);
     $sstr = str_replace('&Auml;','AE',$sstr);
     $sstr = str_replace('&auml;','ae',$sstr);
@@ -79,8 +79,17 @@ function SReplace($string)
     $sstr = str_replace('&uuml;','ue',$sstr);
     $sstr = str_replace('&szlig;','ss',$sstr);
 
+    // Replacing "Ä,ä,Ö,ö,Ü,ü,ß" (UTF-Characters/Database)
+    $sstr = str_replace('Ã„','AE',$sstr);
+    $sstr = str_replace('Ã¤','ae',$sstr);
+    $sstr = str_replace('Ã–','OE',$sstr);
+    $sstr = str_replace('Ã¶','oe',$sstr);
+    $sstr = str_replace('Ãœ','UE',$sstr);
+    $sstr = str_replace('Ã¼','ue',$sstr);
+    $sstr = str_replace('ÃŸ','ss',$sstr);
+
     // Remove everything but Alphanumeric letters and numbers and "-"
-    $sstr = preg_replace('/[^0-9A-Za-z-]/', '', $sstr);
+    $sstr = preg_replace('/[^0-9A-Za-z-\|]/', '', $sstr);
 
     return $sstr;
 }

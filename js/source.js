@@ -50,7 +50,6 @@ function RmTag(tagID)
 
 function TagList()
 {
-
     var listpre = document.getElementById("tagList");
     var tagText = listpre.options[listpre.selectedIndex].value;
     var tagStr = "||" + document.getElementById("tag_str").value;

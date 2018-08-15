@@ -1237,6 +1237,12 @@ table.centered_content td{
     height: 100px;
     border: 2px solid $theme-medium;
     margin-right:10px;
+    @include ease(0.2s)
+}
+
+.home_news_imagecontainer:hover{
+    border: 2px solid $font-color-ahover;
+    @include ease(0.1s)
 }
 
 .home_news_image{
