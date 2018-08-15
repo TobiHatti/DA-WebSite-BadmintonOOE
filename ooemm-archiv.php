@@ -432,7 +432,7 @@
 
                 </tr>
             </table>
-
+            <hr>
             <table>
                   <th colspan="9">2. Klasse Mitte</th>
                   <tr>
@@ -542,7 +542,7 @@
 
                 </tr>
             </table>
-
+            <hr>
             <table>
                   <th colspan="9">2. Klasse S&uuml;d</th>
                   <tr>
