@@ -84,6 +84,14 @@
     else if(isset($_GET['kategorie']))
     {
         echo '<h2 class="stagfade1">'.Fetch("news_tags","name","id",$_GET['kategorie']).'</h2>';
+        $tag = $_GET['kategorie'];
+
+        $strSQL = "SELECT * FROM news WHERE tags LIKE '%$tag%' ";
+        $rs=mysqli_query($link,$strSQL);
+        while($row=mysqli_fetch_assoc($rs))
+        {
+            echo $row['title'].'<br>';
+        }
 
     }
     else if(isset($_GET['neu']))
