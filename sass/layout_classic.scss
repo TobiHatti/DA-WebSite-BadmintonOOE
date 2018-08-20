@@ -336,3 +336,72 @@
 @supports not (grid-area: auto){
 
 }
+
+
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*================================== C - Preloader ==================================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+
+/*===================================================================================*/
+/* (C01) Preloader                                                                   */
+/*===================================================================================*/
+
+@supports (grid-area: auto){
+    #loader-wrapper {
+        box-shadow: $shadow-container;
+        z-index: 1000001;
+        background: #FFFFFF;
+        opacity: 0.9;
+        text-align:center;
+        min-height: 300px;
+
+        grid-area: main;
+
+        h3{
+            margin-top: 100px;
+        }
+
+    }
+}
+
+@supports not (grid-area: auto){
+    #loader-wrapper {
+        position: absolute;
+        left: 50%;
+        height:90%;
+        transform: translateX(-50%);
+        box-shadow: 0 0 20px #FFFFFF;
+        z-index: 1000001;
+        background-color: #FFFFFF;
+    }
+
+    @media only screen and (max-width: $media-smalllargephone){
+        #loader-wrapper {
+            width: 100%;
+            margin-top: 125px;
+        }
+    }
+
+    @media only screen and (min-width: $media-smalllargephone){
+        #loader-wrapper {
+            width: 69%;
+            margin-top: 115px;
+        }
+    }
+
+    @media only screen and (min-width: $media-tablet){
+        #loader-wrapper {
+            width: 78%;
+            margin-top: 125px;
+        }
+    }
+
+    @media only screen and (min-width: $media-desktop){
+        #loader-wrapper {
+            width: 69%;
+            margin-top: 155px;
+        }
+    }
+}
