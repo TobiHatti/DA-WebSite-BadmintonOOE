@@ -20,7 +20,7 @@
 
 
         // In Diese Funktion einfach den SQL-String mit den gerade erstellten Variablen eingeben
-        MySQLNonQuery("INSERT INTO users (fname,lname) VALUES ('$firstname','$lastname')");
+        MySQLNonQuery("INSERT INTO users (firstname,lastname) VALUES ('$firstname','$lastname')");
 
         // Man kann nach der SQL-Funktion noch folgendes machen, um einen Fehler/Misserfolg abzufangen und das Laden der Seite abzubrechen:
         // MySQLNonQuery("..bla...bla...bla...") or die("Ein fehler ist aufgetreten!");
