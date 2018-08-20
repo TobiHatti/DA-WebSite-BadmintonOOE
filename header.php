@@ -68,9 +68,33 @@
                     <script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
                 <!-- End of File Buttons -->
 
+                <!-- Preloader -->
+
+                <script>
+
+                    window.addEventListener("load", function(){
+                    	document.getElementById("loader-wrapper").remove();
+                    });
+                
+                    setTimeout(function() { document.getElementById("loader_msg").value="Lade." }, 800);
+                    setTimeout(function() { document.getElementById("loader_msg").value="Lade.." }, 1600);
+                    setTimeout(function() { document.getElementById("loader_msg").value="Lade..." }, 2400);
+                </script>
+
+                <!-- End of Preloader -->
+
+
+
+
             </head>
 
             <body>
+
+                <div id="loader-wrapper">
+                    <h3><output id="loader_msg">Lade</output></h3>
+                    <br><br><br><br><br>
+                    <center><div id="loader"></div></center>
+                </div>
 
                 <header>
 
@@ -175,6 +199,9 @@
                     </div>
 
                 </nav>
+
+
+
                 <main>
     ';
 
