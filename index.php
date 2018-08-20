@@ -38,28 +38,8 @@
             <div class="home_news_container">
             ';
 
-            $i=1;
             $today = date("Y-m-d");
-            $strSQL = "SELECT * FROM news WHERE release_date <= '$today' ORDER BY release_date AND id DESC LIMIT 0,3";
-            $rs=mysqli_query($link,$strSQL);
-            while($row=mysqli_fetch_assoc($rs))
-            {
-                echo '
-                    <div class="home_news_article stagfade'.$i++.'">
-                        <div class="home_news_imagecontainer">
-                            <a href="/news/artikel/'.$row['article_url'].'">
-                                <img src="'.(($row['thumbnail']=="") ? '/content/no-image.png' : $row['thumbnail'] ).'" alt="" class="home_news_image"/>
-                            </a>
-                        </div>
-                        <div style="float:none;">
-                            <span style="font-size: 10pt;color: #808080">'.date_format(date_create($row['release_date']),"d. F Y").' &#10649;</span>
-                            '.ShowTags($row['tags']).'
-                            <a href="/news/artikel/'.$row['article_url'].'"><h2>'.$row['title'].'</h2></a>
-                            '.str_replace($row['title'],'',strip_tags($row['article'],'<p><s><b><i><u><strong><em><span><sub><sup><a><pre><code><ol><li><ul>')).'
-                        </div>
-                    </div>
-                ';
-            }
+            echo NewsTile("SELECT * FROM news WHERE release_date <= '$today' ORDER BY release_date AND id DESC LIMIT 0,3");
 
             echo '
 

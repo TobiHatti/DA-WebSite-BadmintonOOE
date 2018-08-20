@@ -183,5 +183,78 @@ function ShowTags($tagstr,$disableLinks = false)
    return $retval;
 }
 
+function NewsTile($strSQL)
+{
+    require("mysql_connect.php");
+
+    $retval = '';
+    $i=1;
+    $rs=mysqli_query($link,$strSQL);
+    while($row=mysqli_fetch_assoc($rs))
+    {
+        $retval .= '
+            <div class="home_news_article stagfade'.$i++.'">
+                <div class="home_news_imagecontainer">
+                    <a href="/news/artikel/'.$row['article_url'].'">
+                        <img src="'.(($row['thumbnail']=="") ? '/content/no-image.png' : $row['thumbnail'] ).'" alt="" class="home_news_image"/>
+                    </a>
+                </div>
+                <div style="float:none;">
+                    <span style="font-size: 10pt;color: #808080">'.date_format(date_create($row['release_date']),"d. F Y").' &#10649;</span>
+                    '.ShowTags($row['tags']).'
+                    <a href="/news/artikel/'.$row['article_url'].'"><h2>'.$row['title'].'</h2></a>
+                    '.str_replace($row['title'],'',strip_tags($row['article'],'<p><s><b><i><u><strong><em><span><sub><sup><a><pre><code><ol><li><ul>')).'
+                </div>
+            </div>
+        ';
+    }
+
+    return $retval;
+}
+
+function Pager($sqlQuery,$entriesPerPage = 10)
+{
+    $retval = '';
+
+    $currentPage = (isset($_GET['page']) ? $_GET['page'] : 1 );
+    $entryCounts = MySQLCount($sqlQuery);
+
+    $pages = 0;
+
+    while($entryCounts > 0)
+    {
+        $pages++;
+        $entryCounts -= $entriesPerPage;
+    }
+
+    $back = ($currentPage == 1) ? true : false;
+    $next = ($currentPage >= $pages) ? true : false;
+
+    $retval .= '<div class="pager">';
+
+    $retval .= ($back) ? '<span style="color: #696969;">&#9664;&#9664;</span>' : '<span><a href="'.str_replace('?page='.$currentPage,'',ThisPage()).'?page=1">&#9664;&#9664;</a></span>' ;
+    $retval .= ($back) ? '<span style="color: #696969;">&#9664;</span>' : '<span><a href="'.str_replace('?page='.$currentPage,'',ThisPage()).'?page='.($currentPage-1).'">&#9664;</a></span>' ;
+
+    for($i=1;$i<=$pages;$i++)
+    {
+        $retval .= ($currentPage == $i) ? '<span style="color: #696969; font-size: 16pt;">'.$i.'</span>' : '<span style="font-size: 14pt;"><a href="'.str_replace('?page='.$currentPage,'',ThisPage()).'?page='.$i.'">'.$i.'</a></span>' ;
+    }
+
+    $retval .= ($next) ? '<span style="color: #696969;">&#9654;</span>' : '<span><a href="'.str_replace('?page='.$currentPage,'',ThisPage()).'?page='.($currentPage+1).'">&#9654;</a></span>' ;
+    $retval .= ($next) ? '<span style="color: #696969;">&#9654;&#9654;</span>' : '<span><a href="'.str_replace('?page='.$currentPage,'',ThisPage()).'?page='.($pages).'">&#9654;&#9654;</a></span>' ;
+
+    $retval .= '</div>';
+
+
+    /*
+    $retval .= '
+
+    <a href="">&#9664;</a>
+    <a href="">&#9654;</a>
+    <span style="letter-spacing: -5px;"><a href="">&#9654;&#9654;</a></span>';
+    */
+    return $retval;
+}
+
 
 ?>

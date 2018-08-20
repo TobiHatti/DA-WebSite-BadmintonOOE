@@ -26,6 +26,7 @@
     (Z03)   Headings
     (Z04)   Double-Column Classes
     (Z05)   Formating Classes
+    (Z06)   Pager
     ====== Y - Form-Elements ===============
     (Y01)   Buttons
     (Y02)   Textboxes
@@ -250,101 +251,7 @@
 /*===================================================================================*/
 /* (Z01) HTML-Structural-Tags                                                        */
 /*===================================================================================*/
-html {
-  font-family: Calibri, Arial, sans-serif;
-  font-size: 11pt;
-  background: linear-gradient(to bottom, #759ABD, #FFFFFF);
-  background-attachment: fixed;
-  height: 100%; }
-
-body {
-  display: grid; }
-
-@media only screen and (max-width: 600px) {
-  /* SMALL PHONES */
-  body {
-    margin: 0px;
-    grid-template-columns: 1fr;
-    grid-template-rows: 30px 100px auto 150px;
-    grid-template-areas: "nav" "header" "main" "."; }
-
-  footer {
-    width: 98%; }
-
-  html {
-    font-size: 14pt; } }
-@media only screen and (min-width: 600px) {
-  /* PORTRAIT TABLETS - LARGE PHONES */
-  body {
-    grid-template-columns: 1fr 5fr 1fr;
-    grid-template-rows: 15px 60px 38px auto 150px;
-    grid-template-areas: ". . ." ". header ." ". nav ." ". main ." ". . ."; }
-
-  footer {
-    width: 69%; } }
-@media only screen and (min-width: 768px) {
-  /* LANDSCAPE TABLETS */
-  body {
-    grid-template-columns: 1fr 8fr 1fr;
-    grid-template-rows: 15px 70px 38px auto 150px;
-    grid-template-areas: ". . ." ". header ." ". nav ." ". main ." ". . ."; }
-
-  footer {
-    width: 78%; } }
-@media only screen and (min-width: 992px) {
-  /* DESKTOP */
-  body {
-    grid-template-columns: 1fr 5fr 1fr;
-    grid-template-rows: 15px 100px 38px auto 150px;
-    grid-template-areas: ". . ." ". header ." ". nav ." ". main ." ". . ."; }
-
-  footer {
-    width: 69%; } }
-header {
-  grid-area: header;
-  background: #FFFFFF;
-  box-shadow: 0 0 2px 1px #828282;
-  padding: 10px 0 3px 25px; }
-
-nav {
-  grid-area: nav;
-  z-index: 1000;
-  background: #416586;
-  color: #FFFFFF;
-  box-shadow: 0 0 2px 1px #828282; }
-
-main {
-  grid-area: main;
-  background: #FFFFFF;
-  padding: 20px;
-  box-shadow: 0 0 2px 1px #828282;
-  word-break: break-word; }
-
-article {
-  grid-area: article;
-  background: #FFFFFF;
-  padding: 5px; }
-
-aside {
-  grid-area: aside;
-  background: #FFFFFF;
-  padding: 5px; }
-
-footer {
-  position: fixed;
-  z-index: -10;
-  border: 1px solid #FFFFFF;
-  -webkit-border-radius: 10px 10px 0 0;
-  -moz-border-radius: 10px 10px 0 0;
-  -ms-border-radius: 10px 10px 0 0;
-  border-radius: 10px 10px 0 0;
-  background: linear-gradient(to bottom, #B9DDE9, #FFFFFF);
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 0px;
-  text-align: center;
-  color: #444444; }
-
+/* See layout.scss */
 /*===================================================================================*/
 /* (Z02) Default HTML-Tags                                                           */
 /*===================================================================================*/
@@ -421,32 +328,7 @@ h5 {
 /* (Z04) Double-Column Classes                                                       */
 /*===================================================================================*/
 /*=== <main><div class="doublecol"><article></article><aside></aside></div></main> ==*/
-.doublecol, .doublecol_singletile {
-  display: grid; }
-
-@media only screen and (max-width: 1090px) {
-  .doublecol, .doublecol_singletile {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    grid-template-areas: "article" "aside"; }
-
-  article {
-    border-right: none;
-    border-bottom: 1px solid black; } }
-@media only screen and (min-width: 1090px) {
-  .doublecol {
-    grid-template-columns: 3fr 2fr;
-    grid-template-rows: 1fr;
-    grid-template-areas: "article aside"; }
-
-  .doublecol_singletile {
-    grid-template-columns: auto 250px;
-    grid-template-rows: 1fr;
-    grid-template-areas: "article aside"; }
-
-  article {
-    border-bottom: none;
-    border-right: 1px solid black; } }
+/* See layout.scss */
 /*===================================================================================*/
 /* (Z05) Formating-Classes                                                           */
 /*===================================================================================*/
@@ -455,6 +337,19 @@ h5 {
 
 .ta_r {
   text-align: right; }
+
+/*===================================================================================*/
+/* (Z06) Pager                                                         */
+/*===================================================================================*/
+.pager {
+  width: 100%;
+  text-align: center; }
+  .pager span {
+    display: inline;
+    vertical-align: middle;
+    margin: 0px 5px 0px 5px; }
+  .pager a {
+    text-decoration: none; }
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
@@ -1151,6 +1046,25 @@ input[type="week"]:focus {
 /*===================================================================================*/
 /* (X03) Footer-Contents                                                             */
 /*===================================================================================*/
+@keyframes sponsor_fade {
+  0% {
+    opacity: 0; }
+  5% {
+    opacity: 0; }
+  10% {
+    opacity: 1; }
+  90% {
+    opacity: 1; }
+  95% {
+    opacity: 0; }
+  100% {
+    opacity: 0; } }
+.footer_sponsor_container {
+  animation: sponsor_fade;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-delay: 0s; }
+
 .footer_sponsors {
   max-height: 50px;
   margin-left: 50px; }
@@ -1177,6 +1091,20 @@ table.centered_content td {
   -ms-transition: all 0.25s ease-in-out;
   -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out; }
+
+.ease50 {
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out; }
+
+.ease1s {
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -ms-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out; }
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/

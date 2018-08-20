@@ -14,7 +14,10 @@
     ====== $ -  SASS =======================
     ($01)   SASS > Imports
     ====== A -  HTML-Structural Tags ========
+    (A01)   HTML > html
+    (A01)   HTML > body
     (A01)   HTML > header
+    (A01)   HTML > nav
     (A02)   HTML > main
     (A03)   HTML > article
     (A04)   HTML > aside
@@ -47,11 +50,124 @@
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 
 /*===================================================================================*/
-/* (A01) HTML > header                                                               */
+/* (A01) HTML > html                                                               */
 /*===================================================================================*/
 
 @supports (grid-area: auto){
 
+    html{
+        font-family: Calibri, Arial, sans-serif;
+        font-size: 11pt;
+        background-attachment: fixed;
+        height:100%;
+    }
+
+    @media only screen and (max-width: $media-smalllargephone){
+        html{
+            font-size: 14pt;
+        }
+    }
+}
+
+@supports not (grid-area: auto){
+
+}
+
+/*===================================================================================*/
+/* (A01) HTML > body                                                               */
+/*===================================================================================*/
+
+@supports (grid-area: auto){
+
+    body{
+        display: grid;
+        margin: 0px;
+    }
+
+    @media only screen and (max-width: $media-smalllargephone){
+            body{
+            margin:0px;
+            grid-template-columns: 1fr;
+            grid-template-rows: 30px 100px auto 150px;
+            grid-template-areas:
+                "nav"
+                "header"
+                "main"
+                ".";
+        }
+    }
+
+    @media only screen and (min-width: $media-smalllargephone){
+        body{
+            grid-template-columns: 1fr 5fr 1fr;
+            grid-template-rows: 60px 38px auto 150px;
+            grid-template-areas:
+                "header header header"
+                "nav nav nav"
+                ". main ."
+                ". . .";
+        }
+    }
+
+    @media only screen and (min-width: $media-tablet){
+        body{
+            grid-template-columns: 1fr 8fr 1fr;
+            grid-template-rows: 70px 38px auto 150px;
+            grid-template-areas:
+                "header header header"
+                "nav nav nav"
+                ". main ."
+                ". . .";
+        }
+    }
+
+    @media only screen and (min-width: $media-desktop){
+        body{
+            grid-template-columns: 1fr 5fr 1fr;
+            grid-template-rows: 100px 38px auto 150px;
+            grid-template-areas:
+                "header header header"
+                "nav nav nav"
+                ". main ."
+                ". . .";
+        }
+    }
+
+}
+
+@supports not (grid-area: auto){
+
+}
+
+/*===================================================================================*/
+/* (A01) HTML > header                                                               */
+/*===================================================================================*/
+
+@supports (grid-area: auto){
+    header{
+        grid-area: header;
+
+        background: #8AC4FF;
+        padding: 10px 0 3px 25px;
+    }
+}
+
+@supports not (grid-area: auto){
+
+}
+
+/*===================================================================================*/
+/* (A02) HTML > nav                                                               */
+/*===================================================================================*/
+
+@supports (grid-area: auto){
+    nav{
+        grid-area: nav;
+
+        z-index: 1000;
+        background: $theme-dark;
+        color: #FFFFFF;
+    }
 }
 
 @supports not (grid-area: auto){
@@ -63,7 +179,13 @@
 /*===================================================================================*/
 
 @supports (grid-area: auto){
+    main{
+        grid-area: main;
 
+        background: #FFFFFF;
+        padding: 20px;
+        word-break: break-word;
+    }
 }
 
 @supports not (grid-area: auto){
@@ -75,7 +197,11 @@
 /*===================================================================================*/
 
 @supports (grid-area: auto){
-
+    article{
+        grid-area: article;
+        background: #FFFFFF;
+        padding:5px;
+    }
 }
 
 @supports not (grid-area: auto){
@@ -87,7 +213,11 @@
 /*===================================================================================*/
 
 @supports (grid-area: auto){
-
+    aside{
+        grid-area: aside;
+        background: #FFFFFF;
+        padding:5px;
+    }
 }
 
 @supports not (grid-area: auto){
@@ -99,7 +229,18 @@
 /*===================================================================================*/
 
 @supports (grid-area: auto){
-
+    footer{
+        position:fixed;
+        z-index: -10;
+        margin: 0px;
+        background: #4F4F4F;
+        color: #FFFFFF !important;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        text-align:center;
+        color: #444444;
+    }
 }
 
 @supports not (grid-area: auto){
@@ -116,8 +257,50 @@
 /* (B01) Custom > Double Column                                                      */
 /*===================================================================================*/
 
+/*=== <main><div class="doublecol"><article></article><aside></aside></div></main> ==*/ 
 @supports (grid-area: auto){
+    .doublecol, .doublecol_singletile{
+        display: grid;
+    }
 
+
+    @media only screen and (max-width: 1090px){
+        .doublecol, .doublecol_singletile{
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto;
+            grid-template-areas:
+               "article"
+               "aside";
+        }
+
+        article{
+            border-right: none;
+            border-bottom: 1px solid black;
+        }
+    }
+
+    @media only screen and (min-width: 1090px){
+        .doublecol{
+            grid-template-columns: 3fr 2fr;
+            grid-template-rows: 1fr;
+            grid-template-areas:
+               "article aside";
+
+        }
+
+        .doublecol_singletile{
+            grid-template-columns: auto 250px;
+            grid-template-rows: 1fr;
+            grid-template-areas:
+               "article aside";
+
+        }
+
+        article{
+            border-bottom: none;
+            border-right: 1px solid black;
+        }
+    }
 }
 
 @supports not (grid-area: auto){

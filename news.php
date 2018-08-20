@@ -59,11 +59,15 @@
                     <div class="home_tile_title">Neueste Beitr&auml;ge</div>
                     <div class="home_tile_content">
                         <ul>
-                            <li><a href="">Eintrag 1</a></li>
-                            <li><a href="">Eintrag 2</a></li>
-                            <li><a href="">Eintrag 3</a></li>
-                            <li><a href="">Eintrag 4</a></li>
-
+                            ';
+                            $today = date("Y-m-d");
+                            $strSQL = "SELECT * FROM news WHERE release_date <= '$today' ORDER BY release_date AND id DESC LIMIT 0,4";
+                            $rs=mysqli_query($link,$strSQL);
+                            while($row=mysqli_fetch_assoc($rs))
+                            {
+                                echo '<li><a href="/news/artikel/'.$row['article_url'].'">'.$row['title'].'</a></li>';
+                            }
+                            echo '
                         </ul>
                     </div>
                 </div>
@@ -83,16 +87,21 @@
     }
     else if(isset($_GET['kategorie']))
     {
-        echo '<h2 class="stagfade1">'.Fetch("news_tags","name","id",$_GET['kategorie']).'</h2>';
+        echo '
+            <h2 class="stagfade1">'.Fetch("news_tags","name","id",$_GET['kategorie']).'</h2>
+            <h5 class="stagfade2">Seite '.((isset($_GET['page'])) ? $_GET['page'] : 1 ).'</h5>
+            <br>
+        ';
         $tag = $_GET['kategorie'];
 
-        $strSQL = "SELECT * FROM news WHERE tags LIKE '%$tag%' ";
-        $rs=mysqli_query($link,$strSQL);
-        while($row=mysqli_fetch_assoc($rs))
-        {
-            echo $row['title'].'<br>';
-        }
+        $today = date("Y-m-d");
 
+        $entriesPerPage = 10;
+
+        $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
+
+        echo NewsTile("SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%$tag%' ORDER BY release_date AND id DESC LIMIT $offset,$entriesPerPage");
+        echo Pager("SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%$tag%'",$entriesPerPage);
     }
     else if(isset($_GET['neu']))
     {

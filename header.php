@@ -24,10 +24,10 @@
 
                 <!-- Own links -->
                     <link rel="stylesheet" type="text/css" href="/css/style.css?'.$revision.'">
-                    <link rel="stylesheet" type="text/css" href="/css/layout.css?'.$revision.'">
+                    <link rel="stylesheet" type="text/css" href="/css/layout_classic.css?'.$revision.'">
                     <link rel="stylesheet" type="text/css" href="/css/menu.css?'.$revision.'">
                     <link rel="stylesheet" type="text/css" href="/css/slide.css?'.$revision.'" />
-                    <link href="content/favicon.png" rel="icon" type="image/x-icon" />
+                    <link href="/content/favicon.png" rel="icon" type="image/x-icon" />
                 <!-- End own links -->
 
 
