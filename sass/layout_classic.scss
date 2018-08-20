@@ -57,7 +57,7 @@
 
     html{
         font-family: Calibri, Arial, sans-serif;
-        font-size: 11pt;
+        font-size: $font-size-default;
         background: linear-gradient(to bottom, $theme-dark-l, #FFFFFF);
         background-attachment: fixed;
         height:100%;
@@ -65,7 +65,7 @@
 
     @media only screen and (max-width: $media-smalllargephone){
         html{
-            font-size: 14pt;
+            font-size: $font-size-portable;
         }
     }
 }

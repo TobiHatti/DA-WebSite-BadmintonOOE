@@ -203,7 +203,7 @@ function NewsTile($strSQL)
                     <span style="font-size: 10pt;color: #808080">'.date_format(date_create($row['release_date']),"d. F Y").' &#10649;</span>
                     '.ShowTags($row['tags']).'
                     <a href="/news/artikel/'.$row['article_url'].'"><h2>'.$row['title'].'</h2></a>
-                    '.str_replace($row['title'],'',strip_tags($row['article'],'<p><s><b><i><u><strong><em><span><sub><sup><a><pre><code><ol><li><ul>')).'
+                    '.str_replace('<p></p>','',str_replace($row['title'],'',strip_tags($row['article'],'<p><s><b><i><u><strong><em><span><sub><sup><a><pre><code><ol><li><ul>'))).'
                 </div>
             </div>
         ';

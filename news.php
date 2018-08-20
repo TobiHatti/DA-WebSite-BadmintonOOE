@@ -92,6 +92,7 @@
             <h5 class="stagfade2">Seite '.((isset($_GET['page'])) ? $_GET['page'] : 1 ).'</h5>
             <br>
         ';
+        
         $tag = $_GET['kategorie'];
 
         $today = date("Y-m-d");

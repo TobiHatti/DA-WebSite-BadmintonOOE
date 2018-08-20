@@ -1129,9 +1129,14 @@ table.centered_content td{
 
 .home_news_article{
     margin-bottom: 20px;
-    max-height: 140px;
+    max-height: 142px;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    p{
+        margin-top: 0px;
+    }
+
 }
 
 /*===================================================================================*/
@@ -1419,3 +1424,32 @@ table.centered_content td{
     }
 
 }
+
+div.test_container {
+    $line-height: 1.4;
+    $lines-to-show : 3;
+
+    display: block;
+    display: -webkit-box;
+    max-width: 400px;
+    height: $font-size-default * $line-height * $lines-to-show;
+    margin: 0 auto;
+    font-size: $font-size-default;
+    line-height: $line-height;
+    -webkit-line-clamp: $lines-to-show;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+
+
+
+
+
+
+
+
+

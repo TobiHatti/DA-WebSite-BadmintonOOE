@@ -132,6 +132,9 @@
 /*===================================================================================*/
 /* ($04) Variables > Shadows                                                         */
 /*===================================================================================*/
+/*===================================================================================*/
+/* ($04) Variables > Font-Sizes                                                      */
+/*===================================================================================*/
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*============================= @ -  Fontfaces/Keyframes ============================*/
@@ -1144,9 +1147,11 @@ table.centered_content td {
 
 .home_news_article {
   margin-bottom: 20px;
-  max-height: 140px;
+  max-height: 142px;
   overflow: hidden;
   text-overflow: ellipsis; }
+  .home_news_article p {
+    margin-top: 0px; }
 
 /*===================================================================================*/
 /* (A02) Home > Tiles                                                                */
@@ -1359,5 +1364,18 @@ table.centered_content td {
 .tag_container a {
   cursor: pointer;
   text-decoration: none; }
+
+div.test_container {
+  display: block;
+  display: -webkit-box;
+  max-width: 400px;
+  height: 46.2pt;
+  margin: 0 auto;
+  font-size: 11pt;
+  line-height: 1.4;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis; }
 
 /*# sourceMappingURL=style.css.map */
