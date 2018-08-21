@@ -85,7 +85,7 @@ function Fetch($db,$get,$col,$like)
     require("mysql_connect.php");
 
     $retval = '';
-    $strSQL = "SELECT * FROM $db WHERE $col LIKE '$like'";
+    $strSQL = "SELECT $get FROM $db WHERE $col LIKE '$like'";
     $rs=mysqli_query($link,$strSQL);
     while($row=mysqli_fetch_assoc($rs)) $retval = $row[$get];
     mysqli_close($link);
@@ -103,7 +103,7 @@ function FetchCount($db,$col,$like)
 
     require("mysql_connect.php");
 
-    $strSQL = "SELECT * FROM $db WHERE $col LIKE '$like'";
+    $strSQL = "SELECT $col FROM $db WHERE $col LIKE '$like'";
     $rs=mysqli_query($link,$strSQL);
     $retval = mysqli_num_rows($rs);
     mysqli_close($link);

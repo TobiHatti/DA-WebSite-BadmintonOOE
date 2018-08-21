@@ -22,7 +22,7 @@
         $author = (isset($_SESSION['user_id'])) ? $_SESSION['user_id'] : 0 ;
 
         // In case the ID already exists, cycle
-        if(MySQLExists("SELECT * FROM news WHERE article_url = '$article_url'"))
+        if(MySQLExists("SELECT article_url FROM news WHERE article_url = '$article_url'"))
         {
             $i=2;
             do
@@ -30,7 +30,7 @@
                 $newID = $article_url.'-'.$i;
                 $i++;
             }
-            while(MySQLExists("SELECT * FROM news WHERE article_url = '$newID'"));
+            while(MySQLExists("SELECT article_url FROM news WHERE article_url = '$newID'"));
 
             $article_url = $newID;
         }
@@ -61,7 +61,7 @@
                         <ul>
                             ';
                             $today = date("Y-m-d");
-                            $strSQL = "SELECT * FROM news WHERE release_date <= '$today' ORDER BY release_date AND id DESC LIMIT 0,4";
+                            $strSQL = "SELECT article_url, title FROM news WHERE release_date <= '$today' ORDER BY release_date AND id DESC LIMIT 0,4";
                             $rs=mysqli_query($link,$strSQL);
                             while($row=mysqli_fetch_assoc($rs))
                             {
