@@ -16,19 +16,27 @@
     }
 
 
+    if(isset($_GET['neu']))
+    {
+        echo '
+            <h1 class="stagfade1">Fotogalierie</h1>
+            <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                <br>
+                <input type="text" placeholder="Album Name" name="album_name"/>
+                <br>
+                <br>
+                <br>
+                '.FileButton("images", "element-id", 1).'
+                <br>
+                <button type="submit" name="add_album" value="post-value">Album hinzuf&uuml;gen
+           </form>
+        ';
+    }
+    else
+    {
+        // Hier die Anzeige für die Gallerie
+    }
 
-    echo '<h1 class="stagfade1">Fotogalierie</h1>
-        <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-        <br>
-        <input type="text" placeholder="Album Name" name="album_name"/>
-        <br>
-        <br>
-        <br>
-        '.FileButton("images", "element-id", 1).'
-        <br>
-        <button type="submit" name="add_album" value="post-value">Album hinzuf&uuml;gen
-       </form>
-    ';
 
     include("footer.php");
 ?>
