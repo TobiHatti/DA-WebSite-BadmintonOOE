@@ -11,6 +11,7 @@
     // /news/kategorie/xy
     // "xy" can be a value between "0-9", "a-z", "A-Z" or a "-"
 
+
     if(isset($_POST['publish']))
     {
         $article_url = $_POST['article_id'];
@@ -45,54 +46,28 @@
     if(isset($_GET['artikel']))
     {
         echo '
-        <div class="doublecol_singletile">
-            <article>
-            ';
-
-            echo '
-                <span style="color: #A9A9A9">'.date_format(date_create(Fetch("news","release_date","article_url",$_GET['artikel'])),"d. F Y").' |</span>
-                '.ShowTags(Fetch("news","tags","article_url",$_GET['artikel'])).'
-                <div class="fr-view fr-element">'.Fetch("news","article","article_url",$_GET['artikel']).'</div>
-            </article>
-            <aside>
-                <div class="home_tile_container_l stagfade1">
-                    <div class="home_tile_title">Neueste Beitr&auml;ge</div>
-                    <div class="home_tile_content">
-                        <ul>
-                            ';
-                            $today = date("Y-m-d");
-                            $strSQL = "SELECT article_url, title FROM news WHERE release_date <= '$today' ORDER BY release_date AND id DESC LIMIT 0,4";
-                            $rs=mysqli_query($link,$strSQL);
-                            while($row=mysqli_fetch_assoc($rs))
-                            {
-                                echo '<li><a href="/news/artikel/'.$row['article_url'].'">'.$row['title'].'</a></li>';
-                            }
-                            echo '
-                        </ul>
-                    </div>
-                </div>
-                <div class="home_tile_container_l stagfade2">
-                    <div class="home_tile_title">Kategorien</div>
-                    <div class="home_tile_content">
-                        <ul>';
-                            $strSQL = "SELECT * FROM news_tags";
-                            $rs=mysqli_query($link,$strSQL);
-                            while($row=mysqli_fetch_assoc($rs)) { echo '<li><a href="/news/kategorie/'.$row['id'].'">'.$row['name'].'</a></li>'; }
-                            echo '
-                        </ul>
-                    </div>
-                </div>
-            </aside>
-        </div>';
+            <div class="doublecol_singletile">
+                <article>
+                    <span style="color: #A9A9A9">'.date_format(date_create(Fetch("news","release_date","article_url",$_GET['artikel'])),"d. F Y").' |</span>
+                    '.ShowTags(Fetch("news","tags","article_url",$_GET['artikel'])).'
+                    <div class="fr-view fr-element">'.Fetch("news","article","article_url",$_GET['artikel']).'</div>
+                </article>
+                <aside>
+                    '.NewsSidebar() .'
+                </aside>
+            </div>
+        ';
     }
     else if(isset($_GET['kategorie']))
     {
         echo '
-            <h2 class="stagfade1">'.Fetch("news_tags","name","id",$_GET['kategorie']).'</h2>
-            <h5 class="stagfade2">Seite '.((isset($_GET['page'])) ? $_GET['page'] : 1 ).'</h5>
-            <br>
+            <div class="doublecol_singletile">
+                <article>
+                    <h2 class="stagfade1">'.Fetch("news_tags","name","id",$_GET['kategorie']).'</h2>
+                    <h5 class="stagfade2">Seite '.((isset($_GET['page'])) ? $_GET['page'] : 1 ).'</h5>
+                    <br>
         ';
-        
+
         $tag = $_GET['kategorie'];
 
         $today = date("Y-m-d");
@@ -103,6 +78,15 @@
 
         echo NewsTile("SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%$tag%' ORDER BY release_date AND id DESC LIMIT $offset,$entriesPerPage");
         echo Pager("SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%$tag%'",$entriesPerPage);
+
+        echo '
+                </article>
+                <aside>
+                    '.NewsSidebar() .'
+                </aside>
+            </div>
+        ';
+
     }
     else if(isset($_GET['neu']))
     {
@@ -238,9 +222,88 @@
             </form>
         ';
     }
+    else if(isset($_GET['suche']))
+    {
+        if(isset($_POST['newsSearch']) AND $_POST['newsSearch']!='')
+        {
+            Redirect('/news?suche='.$_POST['newsSearch']);
+            die();
+        }
+
+        $searchValue = ((isset($_GET['suche'])) ? $_GET['suche'] : '' );
+
+        echo '
+            <div class="doublecol_singletile">
+                <article>
+        ';
+
+        if($searchValue != '')
+        {
+            echo '<h2 class="stagfade1">Suchergebnisse f&uuml;r <i>"'.$searchValue.'"</i></h2>';
+
+
+
+
+            if(MySQLCount("SELECT id FROM news WHERE title LIKE '%$searchValue%'")!=0)
+            {
+                $today = date("Y-m-d");
+                $entriesPerPage = 10;
+                $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
+
+
+                echo NewsTile("SELECT * FROM news WHERE release_date <= '$today' AND title LIKE '%$searchValue%' ORDER BY release_date AND id DESC LIMIT $offset,$entriesPerPage");
+                echo Pager("SELECT * FROM news WHERE release_date <= '$today' AND title LIKE '%$searchValue%'",$entriesPerPage);
+
+            }
+            else
+            {
+                echo '<br><br><i>Keine Ergebnisse gefunden.</i>';
+            }
+        }
+        else
+        {
+            echo '
+                <div style="text-align:center;">
+                    <h1 class="stagfade1">Kein Suchwert gegeben</h1>
+                    <br>
+                    <h2 class="stagfade2">Bitte geben Sie einen Suchwert in der Suchleiste ein.</h2>
+                </div>
+            ';
+        }
+
+        echo '
+                </article>
+                <aside>
+                    '.NewsSidebar() .'
+                </aside>
+            </div>
+        ';
+    }
     else
     {
-        echo '<h1 class="stagfade1">Artikel-&Uuml;bersicht</h1>';
+        echo '
+            <div class="doublecol_singletile">
+                <article>
+                    <h1 class="stagfade1">Neueste News</h1>
+                    <br>
+        ';
+
+        $today = date("Y-m-d");
+
+        $entriesPerPage = 10;
+
+        $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
+
+        echo NewsTile("SELECT * FROM news WHERE release_date <= '$today' ORDER BY release_date AND id DESC LIMIT $offset,$entriesPerPage");
+        echo Pager("SELECT * FROM news WHERE release_date <= '$today'",$entriesPerPage);
+
+        echo '
+                </article>
+                <aside>
+                    '.NewsSidebar() .'
+                </aside>
+            </div>
+        ';
     }
 
 

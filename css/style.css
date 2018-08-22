@@ -1034,17 +1034,13 @@ input[type="week"]:focus {
 
   .mobile_searchtrigger_container, .mobile_searchbar_container {
     display: none; } }
-.searchbar::placeholder {
+.searchbar_container .searchbar::placeholder {
   color: #FFFFFF;
   opacity: 0.5; }
 
-.searchbar:-ms-input-placeholder {
+.searchbar_container .searchbar:focus::placeholder {
   color: #FFFFFF;
-  opacity: 0.5; }
-
-.searchbar::-ms-input-placeholder {
-  color: #FFFFFF;
-  opacity: 0.5; }
+  opacity: 0.8; }
 
 /*===================================================================================*/
 /* (X03) Footer-Contents                                                             */

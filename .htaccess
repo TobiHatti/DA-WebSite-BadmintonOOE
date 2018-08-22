@@ -15,6 +15,8 @@ RewriteCond %{REQUEST_FILENAME} !-f
 # Rewrite Rules for news.php
 RewriteRule ^news/neu news.php?neu [NC,QSA,L]
 RewriteRule ^news/artikel/([a-zA-Z0-9-]+)/?$ news.php?artikel=$1 [NC,QSA,L]
+RewriteRule ^news/suche news.php?suche [NC,QSA,L]
+#RewriteRule ^news/suche/([a-zA-Z0-9-]+)/?$ news.php?suche=$1 [NC,QSA,L]
 RewriteRule ^news/kategorie/([a-zA-Z0-9-\s]+)/?$ news.php?kategorie=$1 [NC,QSA,L]
 
 #Ignore .php-Extension
