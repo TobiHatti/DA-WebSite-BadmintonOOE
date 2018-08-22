@@ -135,6 +135,9 @@
 /*===================================================================================*/
 /* ($04) Variables > Font-Sizes                                                      */
 /*===================================================================================*/
+/*===================================================================================*/
+/* ($04) Variables > Preloader                                                       */
+/*===================================================================================*/
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*============================= @ -  Fontfaces/Keyframes ============================*/
@@ -342,7 +345,7 @@ h5 {
   text-align: right; }
 
 /*===================================================================================*/
-/* (Z06) Pager                                                         */
+/* (Z06) Pager                                                                       */
 /*===================================================================================*/
 .pager {
   width: 100%;
@@ -353,6 +356,57 @@ h5 {
     margin: 0px 5px 0px 5px; }
   .pager a {
     text-decoration: none; }
+
+/*===================================================================================*/
+/* (Z07) Preloader                                                                   */
+/*===================================================================================*/
+@keyframes loader-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+#loader {
+  display: block;
+  top: 100px;
+  width: 100px;
+  height: 100px;
+  margin: -75px 0 0 -75px;
+  margin-right: -75px;
+  border: 3px solid transparent;
+  border-top-color: #416586;
+  border-radius: 50%;
+  -webkit-animation: loader-spin  2s  linear infinite;
+  animation: loader-spin  2s linear infinite; }
+
+#loader:before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 3px solid transparent;
+  border-top-color: #FF0000;
+  border-radius: 50%;
+  -webkit-animation: loader-spin  3s linear infinite;
+  animation: loader-spin n 3s linear infinite; }
+
+#loader:after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border: 3px solid transparent;
+  border-top-color: #416586;
+  border-radius: 50%;
+  -webkit-animation: loader-spin  1.5s linear infinite;
+  animation: loader-spin  1.5s linear infinite; }
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
@@ -1337,6 +1391,18 @@ table.centered_content td {
       padding-left: 8px;
       padding-right: 8px; }
 
+/*===================================================================================*/
+/* (R02)   OÍMM-Archiv > Thumbnail-Table                                             */
+/*===================================================================================*/
+.archive_table_thumb div {
+  display: inline;
+  vertical-align: top;
+  width: 200px;
+  border: 1px solid red; }
+  .archive_table_thumb div span {
+    width: 200px;
+    background: red; }
+
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*===================================== S - News ====================================*/
@@ -1361,53 +1427,27 @@ table.centered_content td {
   cursor: pointer;
   text-decoration: none; }
 
-#loader {
-  display: block;
-  top: 100px;
-  width: 100px;
-  height: 100px;
-  margin: -75px 0 0 -75px;
-  margin-right: -75px;
-  border: 3px solid transparent;
-  border-top-color: #416586;
-  border-radius: 50%;
-  -webkit-animation: loader-spin  2s  linear infinite;
-  animation: loader-spin  2s linear infinite; }
+/*
+@keyframes federball_flyby{
+    0%{
+        left: -100px;
+    }
 
-#loader:before {
-  content: "";
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  right: 5px;
-  bottom: 5px;
-  border: 3px solid transparent;
-  border-top-color: #FF0000;
-  border-radius: 50%;
-  -webkit-animation: loader-spin  3s linear infinite;
-  animation: loader-spin n 3s linear infinite; }
+    100%{
+        left: 2000px;
+    }
 
-#loader:after {
-  content: "";
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
-  border: 3px solid transparent;
-  border-top-color: #416586;
-  border-radius: 50%;
-  -webkit-animation: loader-spin  1.5s linear infinite;
-  animation: loader-spin  1.5s linear infinite; }
+}
 
-@keyframes loader-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  100% {
-    -webkit-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    transform: rotate(360deg); } }
+.fbfly{
+    position: fixed;
+    left: -200px;
+    top:200px;
+    height: 200px;
+    transform: rotate(-90deg);
+    @include animation(federball_flyby, 5s, 1, 0s);
+
+}
+*/
 
 /*# sourceMappingURL=style.css.map */

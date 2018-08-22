@@ -291,7 +291,7 @@ h5{
 }
 
 /*===================================================================================*/
-/* (Z06) Pager                                                         */
+/* (Z06) Pager                                                                       */
 /*===================================================================================*/
 
 .pager{
@@ -310,6 +310,69 @@ h5{
     }
 }
 
+
+/*===================================================================================*/
+/* (Z07) Preloader                                                                   */
+/*===================================================================================*/
+
+@keyframes loader-spin {
+    0%   {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+
+    }
+}
+
+#loader {
+        display: block;
+        top: 100px;
+        width:$loader-size;
+        height:$loader-size;
+        margin:-75px 0 0 -75px;
+        margin-right: -75px;
+        border: 3px solid transparent;
+        border-top-color: $theme-dark ;
+        border-radius:50%;
+
+        -webkit-animation: loader-spin  2s  linear infinite;
+        animation: loader-spin  2s linear infinite;
+}
+
+#loader:before {
+        content:"";
+        position:absolute;
+        top:5px;
+        left:5px;
+        right:5px;
+        bottom:5px;
+        border: 3px solid transparent ;
+        border-top-color: $theme-accent;
+        border-radius:50%;
+
+        -webkit-animation: loader-spin  3s linear infinite;
+        animation: loader-spin n 3s linear infinite;
+}
+
+#loader:after {
+        content:"";
+        position:absolute;
+        top:15px;
+        left:15px;
+        right:15px;
+        bottom:15px;
+        border: 3px solid transparent ;
+        border-top-color: $theme-dark ;
+        border-radius:50%;
+
+        -webkit-animation: loader-spin  1.5s linear infinite;
+        animation: loader-spin  1.5s linear infinite;
+}
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
@@ -1021,7 +1084,7 @@ input[type="week"]:focus{
 }
 
 .searchbar_container .searchbar:focus::placeholder{
-    color: #FFFFFF;  
+    color: #FFFFFF;
     opacity: 0.8;
 }
 
@@ -1391,6 +1454,28 @@ table.centered_content td{
     }
 }
 
+/*===================================================================================*/
+/* (R02)   OÖMM-Archiv > Thumbnail-Table                                             */
+/*===================================================================================*/
+
+.archive_table_thumb{
+
+    div{
+        display: inline;
+        vertical-align: top;
+        width: 200px;
+
+        span{
+            width: 200px;
+            background: red;
+        }
+
+
+        border: 1px solid red;
+    }
+
+}
+
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*===================================== S - News ====================================*/
@@ -1424,71 +1509,37 @@ table.centered_content td{
 
 
 
-$loader-size:100px;
 
 
 
 
-#loader {
-        display: block;
-        top: 100px;
-        width:$loader-size;
-        height:$loader-size;
-        margin:-75px 0 0 -75px;
-        margin-right: -75px;
-        border: 3px solid transparent;
-        border-top-color: $theme-dark ;
-        border-radius:50%;
 
-        -webkit-animation: loader-spin  2s  linear infinite;
-        animation: loader-spin  2s linear infinite;
-}
 
-#loader:before {
-        content:"";
-        position:absolute;
-        top:5px;
-        left:5px;
-        right:5px;
-        bottom:5px;
-        border: 3px solid transparent ;
-        border-top-color: $theme-accent;
-        border-radius:50%;
 
-        -webkit-animation: loader-spin  3s linear infinite;
-        animation: loader-spin n 3s linear infinite;
-}
 
-#loader:after {
-        content:"";
-        position:absolute;
-        top:15px;
-        left:15px;
-        right:15px;
-        bottom:15px;
-        border: 3px solid transparent ;
-        border-top-color: $theme-dark ;
-        border-radius:50%;
 
-        -webkit-animation: loader-spin  1.5s linear infinite;
-        animation: loader-spin  1.5s linear infinite;
-}
-
-@keyframes loader-spin {
-    0%   {
-        -webkit-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        transform: rotate(0deg);
+/*
+@keyframes federball_flyby{
+    0%{
+        left: -100px;
     }
-    100% {
-        -webkit-transform: rotate(360deg);
-        -ms-transform: rotate(360deg);
-        transform: rotate(360deg);
 
+    100%{
+        left: 2000px;
     }
+
 }
 
+.fbfly{
+    position: fixed;
+    left: -200px;
+    top:200px;
+    height: 200px;
+    transform: rotate(-90deg);
+    @include animation(federball_flyby, 5s, 1, 0s);
 
+}
+*/
 
 
 
