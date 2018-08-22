@@ -1,29 +1,4 @@
 <?php
-function PreventAutoScroll()
-{
-    // DESCRIPTION:
-    // When using CSS-Targets, a <a href="#anchor"> is required.
-    // To prevent the page from jumping to the anchor and therefor putting
-    // it on top of the page, the <a>-Tag needs to contain the following event:
-    // onclick="bgenScroll();"
-
-    return '
-        <script language="JavaScript" type="text/javascript">
-            //Prevent Autoscroll for target-anchors
-            function bgenScroll() {
-             if (window.pageYOffset!= null){
-              st=window.pageYOffset+"";
-             }
-             if (document.body.scrollWidth!= null){
-              if (document.body.scrollTop){
-              st=document.body.scrollTop;
-              }
-              st=document.documentElement.scrollTop;
-             }
-              setTimeout("window.scroll(0,st)",10);
-            }
-        </script>';
-}
 
 function Checkbox($name, $id, $checked = 0)
 {
@@ -227,32 +202,64 @@ function Pager($sqlQuery,$entriesPerPage = 10)
         $entryCounts -= $entriesPerPage;
     }
 
+    // What does this line below? It checks if the url contains a "?page=x" or a "&page=x" and replaces it with "?page=" or "&page=", depending on if a "?" already exists inside the manipulated URL
+    $URLEx = (SubStringFind(str_replace('?page='.$currentPage,'',str_replace('&page='.$currentPage,'',ThisPage())),'?') ? (str_replace('?page='.$currentPage,'',str_replace('&page='.$currentPage,'',ThisPage())).'&page=') : (str_replace('?page='.$currentPage,'',str_replace('&page='.$currentPage,'',ThisPage())).'?page='));
+
     $back = ($currentPage == 1) ? true : false;
     $next = ($currentPage >= $pages) ? true : false;
 
     $retval .= '<div class="pager">';
 
-    $retval .= ($back) ? '<span style="color: #696969;">&#9664;&#9664;</span>' : '<span><a href="'.str_replace('?page='.$currentPage,'',ThisPage()).'?page=1">&#9664;&#9664;</a></span>' ;
-    $retval .= ($back) ? '<span style="color: #696969;">&#9664;</span>' : '<span><a href="'.str_replace('?page='.$currentPage,'',ThisPage()).'?page='.($currentPage-1).'">&#9664;</a></span>' ;
+    $retval .= ($back) ? '<span style="color: #696969;" title="Zur ersten Seite">&#9664;&#9664;</span>' : '<span title="Zur ersten Seite"><a href="'.$URLEx.'1">&#9664;&#9664;</a></span>' ;
+    $retval .= ($back) ? '<span style="color: #696969;" title="Zur vorherigen Seite">&#9664;</span>' : '<span title="Zur vorherigen Seite"><a href="'.$URLEx.($currentPage-1).'">&#9664;</a></span>' ;
 
     for($i=1;$i<=$pages;$i++)
     {
-        $retval .= ($currentPage == $i) ? '<span style="color: #696969; font-size: 16pt;">'.$i.'</span>' : '<span style="font-size: 14pt;"><a href="'.str_replace('?page='.$currentPage,'',ThisPage()).'?page='.$i.'">'.$i.'</a></span>' ;
+        $retval .= ($currentPage == $i) ? '<span title="Zu Seite '.$i.'" style="color: #696969; font-size: 16pt;">'.$i.'</span>' : '<span title="Zu Seite '.$i.'" style="font-size: 14pt;"><a href="'.$URLEx.$i.'">'.$i.'</a></span>' ;
     }
 
-    $retval .= ($next) ? '<span style="color: #696969;">&#9654;</span>' : '<span><a href="'.str_replace('?page='.$currentPage,'',ThisPage()).'?page='.($currentPage+1).'">&#9654;</a></span>' ;
-    $retval .= ($next) ? '<span style="color: #696969;">&#9654;&#9654;</span>' : '<span><a href="'.str_replace('?page='.$currentPage,'',ThisPage()).'?page='.($pages).'">&#9654;&#9654;</a></span>' ;
+    $retval .= ($next) ? '<span title="Zur n&auml;chsten Seite" style="color: #696969;">&#9654;</span>' : '<span title="Zur n&auml;chsten Seite"><a href="'.$URLEx.($currentPage+1).'">&#9654;</a></span>' ;
+    $retval .= ($next) ? '<span  title="Zur letzten Seite" style="color: #696969;">&#9654;&#9654;</span>' : '<span title="Zur letzten Seite"><a href="'.$URLEx.$pages.'">&#9654;&#9654;</a></span>' ;
 
     $retval .= '</div>';
 
+    return $retval;
+}
 
-    /*
-    $retval .= '
+function NewsSidebar()
+{
+    require("mysql_connect.php");
 
-    <a href="">&#9664;</a>
-    <a href="">&#9654;</a>
-    <span style="letter-spacing: -5px;"><a href="">&#9654;&#9654;</a></span>';
-    */
+    $retval ='
+        <div class="home_tile_container_l stagfade1">
+            <div class="home_tile_title">Neueste Beitr&auml;ge</div>
+            <div class="home_tile_content">
+                <ul>
+                    ';
+                    $today = date("Y-m-d");
+                    $strSQL = "SELECT article_url, title FROM news WHERE release_date <= '$today' ORDER BY release_date AND id DESC LIMIT 0,4";
+                    $rs=mysqli_query($link,$strSQL);
+                    while($row=mysqli_fetch_assoc($rs))
+                    {
+                        $retval .= '<li><a href="/news/artikel/'.$row['article_url'].'">'.$row['title'].'</a></li>';
+                    }
+                    $retval .= '
+                </ul>
+            </div>
+        </div>
+        <div class="home_tile_container_l stagfade2">
+            <div class="home_tile_title">Kategorien</div>
+            <div class="home_tile_content">
+                <ul>';
+                    $strSQL = "SELECT * FROM news_tags";
+                    $rs=mysqli_query($link,$strSQL);
+                    while($row=mysqli_fetch_assoc($rs)) { $retval .= '<li><a href="/news/kategorie/'.$row['id'].'">'.$row['name'].'</a></li>'; }
+                    $retval .= '
+                </ul>
+            </div>
+        </div>
+    ';
+
     return $retval;
 }
 

@@ -1015,20 +1015,17 @@ input[type="week"]:focus{
     }
 }
 
-.searchbar::placeholder {
+.searchbar_container .searchbar::placeholder{
     color: #FFFFFF;
     opacity: 0.5;
 }
 
-.searchbar:-ms-input-placeholder {
-    color: #FFFFFF;
-    opacity: 0.5;
+.searchbar_container .searchbar:focus::placeholder{
+    color: #FFFFFF;  
+    opacity: 0.8;
 }
 
-.searchbar::-ms-input-placeholder {
-    color: #FFFFFF;
-    opacity: 0.5;
-}
+
 
 /*===================================================================================*/
 /* (X03) Footer-Contents                                                             */

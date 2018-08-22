@@ -10,13 +10,11 @@
 
     require("data/functions.php");
 
-    echo PreventAutoScroll();
     //MySQLPDSave("d");
 
-    $revision = 2;
+    $revision = 3;
 
-    echo '
-        <!DOCTYPE html>
+    echo '<!DOCTYPE html>
         <html>
             <head>
                 <meta charset="utf-8">
@@ -69,18 +67,15 @@
                 <!-- End of File Buttons -->
 
                 <!-- Preloader -->
-
                 <script>
-
                     window.addEventListener("load", function(){
                     	document.getElementById("loader-wrapper").remove();
                     });
-                
+
                     setTimeout(function() { document.getElementById("loader_msg").value="Lade." }, 800);
                     setTimeout(function() { document.getElementById("loader_msg").value="Lade.." }, 1600);
                     setTimeout(function() { document.getElementById("loader_msg").value="Lade..." }, 2400);
                 </script>
-
                 <!-- End of Preloader -->
 
 
@@ -182,9 +177,13 @@
                         </ul>
 
                         <!-- Standard Search-Bar -->
+
                         <div class="searchbar_container">
-                            <input class="searchbar" name="" type="text" placeholder="Suchen...">
+                            <form action="/news/suche" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                                <input class="searchbar" name="newsSearch" type="search" placeholder="Suchen...">
+                            </form>
                         </div>
+
 
                         <!-- Mobile Search-Bar -->
                         <div class="mobile_searchtrigger_container">
@@ -195,13 +194,12 @@
 
                     <!-- Search-Bar Mobile version -->
                     <div class="mobile_searchbar_container" id="searchpop">
-                        <div style="vertical-align:top; display:block;"><input type="text" class="mobile_searchbar"/><a href="#"><img src="/content/cross.png" style="height:18px;margin-bottom:-3px;margin-left: 8px;" alt="" /></a></div>
+                        <form action="/news/suche" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                            <div style="vertical-align:top; display:block;"><input name="newsSearch" type="search" class="mobile_searchbar"/><a href="#"><img src="/content/cross.png" style="height:18px;margin-bottom:-3px;margin-left: 8px;" alt="" /></a></div>
+                        </form>
                     </div>
 
                 </nav>
-
-
-
                 <main>
     ';
 
