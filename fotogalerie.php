@@ -1,6 +1,6 @@
 <?php
     require("header.php");
-    PageTitle("Fotogalierie");
+    PageTitle("Fotogalerie");
 
 
      if(isset($_POST['add_album']))
@@ -19,7 +19,7 @@
     if(isset($_GET['neu']))
     {
         echo '
-            <h1 class="stagfade1">Fotogalierie</h1>
+            <h1 class="stagfade1">Fotogallerie</h1>
             <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                 <br>
                 <input type="text" placeholder="Album Name" name="album_name"/>
@@ -34,7 +34,31 @@
     }
     else
     {
-        // Hier die Anzeige für die Gallerie
+         $strSQL = "SELECT * FROM fotogalerie";
+         $rs=mysqli_query($link,$strSQL);
+         while($row=mysqli_fetch_assoc($rs))
+        {
+         echo'
+          <div class="gallery_album">
+            <div>
+  	            <img src=""/>
+                    </div>
+                <div>
+                    <h3> '.$row['AlbumName'].'</h3>
+                    <p>
+                    	Beschreibung hier
+                    </p>
+                </div>
+            </div>
+
+            ';
+        }
+
+
+
+
+
+       ';
     }
 
 
