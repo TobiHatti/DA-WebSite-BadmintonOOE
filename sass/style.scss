@@ -1460,20 +1460,47 @@ table.centered_content td{
 
 .archive_table_thumb{
 
-    div{
-        display: inline;
+    a{
+        display: inline-table;
         vertical-align: top;
-        width: 200px;
 
-        span{
-            width: 200px;
-            background: red;
-        }
-
-
-        border: 1px solid red;
+        text-decoration: none;
     }
 
+    table{
+        width: 150px;
+        border-spacing: 0;
+        border-collapse: collapse;
+        border-bottom: 1px solid #696969;
+        margin: 15px 10px 0px 10px;
+
+        @include ease(0.2s);
+
+        th{
+            text-align: center;
+            background: #F01B16;
+            color: #FFFFFF;
+            border-bottom: 5px solid #013756;
+        }
+
+        td{
+            color: #000000;
+            font-weight: lighter;
+        }
+
+        tr:nth-child(2n){
+            background: #FFFFFF;
+        }
+
+        tr:nth-child(2n+1){
+            background: #EBEBEB;
+        }
+
+    }
+
+    table:hover{
+        box-shadow: 0 10px 10px -3px #000000;
+    }
 }
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/

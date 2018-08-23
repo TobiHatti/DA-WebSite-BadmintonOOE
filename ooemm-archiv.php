@@ -16,6 +16,7 @@
         while($row=mysqli_fetch_assoc($rs))
         {
             echo '
+                <a name="'.$row['table_name'].'"></a>
                 <table>
                     <tr>
                         <th colspan=9>'.$row['table_name'].'</th>
@@ -77,13 +78,37 @@
 
             <hr>
 
-            <div class="archive_table_thumb">
-                <div>
-                    <span>2007/2006</span>
-                    <br>
-           
+            <h4>&Auml;ltere Eintr&auml;ge</h4>
+
+            <center>
+                <div class="archive_table_thumb">
+                    ';
+
+                    $strSQL = "SELECT DISTINCT year FROM ooemm_archive ORDER BY year DESC";
+                    $rs=mysqli_query($link,$strSQL);
+                    while($row=mysqli_fetch_assoc($rs))
+                    {
+                        echo '
+                            <a href="/ooemm-archiv/jahr/'.str_replace('/','-',$row['year']).'">
+                                <table>
+                                    <tr><th>'.$row['year'].'</th></tr>
+                                    ';
+
+                                    $year = $row['year'];
+                                    $strSQLT = "SELECT DISTINCT table_name FROM ooemm_archive WHERE year = '$year' ORDER BY table_name ASC";
+                                    $rsT=mysqli_query($link,$strSQLT);
+                                    while($rowT=mysqli_fetch_assoc($rsT))
+                                    {
+                                        echo '<tr><td><a href="/ooemm-archiv/jahr/'.str_replace('/','-',$row['year']).'#'.$rowT['table_name'].'">'.$rowT['table_name'].'</a></td></tr>';
+                                    }
+                                    echo '
+                                </table>
+                            </a>
+                        ';
+                    }
+                    echo '
                 </div>
-            </div>
+            </center>
         ';
     }
 
