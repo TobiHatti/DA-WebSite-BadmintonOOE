@@ -1354,6 +1354,21 @@ table.centered_content td {
 /*===================================================================================*/
 /* (Q01)   News-Archiv > Date Selectors                                              */
 /*===================================================================================*/
+.archive_year_selection a img {
+  width: 30px;
+  margin: 5px;
+  margin-bottom: -12.5px;
+  cursor: pointer;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+  border-radius: 50%; }
+.archive_year_selection a img:hover {
+  box-shadow: 0 0 5px 2px #3B9EBF; }
+.archive_year_selection button:focus {
+  border: none; }
 .archive_year_selection .year_container {
   display: inline-block;
   vertical-align: middle;
@@ -1377,6 +1392,12 @@ table.centered_content td {
       width: 100px;
       font-weight: lighter;
       text-decoration: none; }
+      .archive_year_selection .year_container .year_slider a span {
+        color: #F01B16; }
+
+.archive_month_selection a {
+  display: inline-block;
+  margin: 0 8px 0 8px; }
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
