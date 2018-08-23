@@ -1,6 +1,6 @@
 <?php
     require("header.php");
-    PageTitle("Sch&uuml;ler / Jugend");
+    PageTitle("Sch\u00fcler / Jugend");
 
     echo '<h1 class="stagfade1">Sch&uuml;ler / Jugend</h1>
 

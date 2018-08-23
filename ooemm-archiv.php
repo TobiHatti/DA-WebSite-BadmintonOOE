@@ -1,6 +1,6 @@
 <?php
     require("header.php");
-    PageTitle("O&Ouml;MM-Archiv");
+    PageTitle("O\u00d6MM-Archiv");
 
     echo '<h1 class="stagfade1">O&Ouml;MM-Archiv</h1>';
 

@@ -106,7 +106,7 @@
                             <li class="active"><a href="#">Verband</a>
                                 <ul>
                                     <li><a href="/vorstand">Vorstand</a></li>
-                                    <li><a href="/satzungen">Satzung & Ordnungen</a></li>
+                                    <li><a href="/satzung">Satzung & Ordnungen</a></li>
                                     <li><a href="/vereine">Vereine</a></li>
                                     <li><a href="/links">Links</a></li>
                                     <li><a href="/downloads">Downloads</a></li>

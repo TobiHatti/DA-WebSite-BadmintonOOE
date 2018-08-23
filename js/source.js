@@ -5,7 +5,7 @@ function bgenScroll()
     // To prevent the page from jumping to the anchor and therefor putting
     // it on top of the page, the <a>-Tag needs to contain the following event:
     // onclick="bgenScroll();"
-    
+
     if (window.pageYOffset!= null)
     {
         st=window.pageYOffset+"";
@@ -96,4 +96,28 @@ function TagList()
     }
     document.getElementById("tagList").value="none";
 
+}
+
+function ListMoveRight()
+{
+    if(document.getElementById("offsetIdx").value < 0)
+    {
+    var offsetIndex = parseInt(document.getElementById("offsetIdx").value) + parseInt(1);
+    var scrollWidth = document.getElementById("scrollWidth").value;
+
+    document.getElementById("offsetIdx").value = offsetIndex;
+
+    document.getElementById("YearSlider").style.marginLeft = (offsetIndex * scrollWidth) + "px";
+    }
+
+}
+
+function ListMoveLeft()
+{
+    var offsetIndex = parseInt(document.getElementById("offsetIdx").value) - parseInt(1);
+    var scrollWidth = document.getElementById("scrollWidth").value;
+
+    document.getElementById("offsetIdx").value = offsetIndex;
+
+    document.getElementById("YearSlider").style.marginLeft = (offsetIndex * scrollWidth) + "px";
 }

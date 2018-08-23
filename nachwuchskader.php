@@ -1,6 +1,6 @@
 <?php
     require("header.php");
-    PageTitle("OÖ Nachwuchskader");
+    PageTitle("O\u00d6 Nachwuchskader");
 
     echo '<h1 class="stagfade1">O&Ouml; Nachwuchskader</h1>
 
