@@ -1394,14 +1394,35 @@ table.centered_content td {
 /*===================================================================================*/
 /* (R02)   OÍMM-Archiv > Thumbnail-Table                                             */
 /*===================================================================================*/
-.archive_table_thumb div {
-  display: inline;
+.archive_table_thumb a {
+  display: inline-table;
   vertical-align: top;
-  width: 200px;
-  border: 1px solid red; }
-  .archive_table_thumb div span {
-    width: 200px;
-    background: red; }
+  text-decoration: none; }
+.archive_table_thumb table {
+  width: 150px;
+  border-spacing: 0;
+  border-collapse: collapse;
+  border-bottom: 1px solid #696969;
+  margin: 15px 10px 0px 10px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out; }
+  .archive_table_thumb table th {
+    text-align: center;
+    background: #F01B16;
+    color: #FFFFFF;
+    border-bottom: 5px solid #013756; }
+  .archive_table_thumb table td {
+    color: #000000;
+    font-weight: lighter; }
+  .archive_table_thumb table tr:nth-child(2n) {
+    background: #FFFFFF; }
+  .archive_table_thumb table tr:nth-child(2n+1) {
+    background: #EBEBEB; }
+.archive_table_thumb table:hover {
+  box-shadow: 0 10px 10px -3px #000000; }
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/

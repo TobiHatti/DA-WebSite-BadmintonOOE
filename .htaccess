@@ -18,6 +18,7 @@ RewriteRule ^news/artikel/([a-zA-Z0-9-]+)/?$ news.php?artikel=$1 [NC,QSA,L]
 RewriteRule ^news/suche news.php?suche [NC,QSA,L]
 #RewriteRule ^news/suche/([a-zA-Z0-9-]+)/?$ news.php?suche=$1 [NC,QSA,L]
 RewriteRule ^news/kategorie/([a-zA-Z0-9-\s]+)/?$ news.php?kategorie=$1 [NC,QSA,L]
+RewriteRule ^ooemm-archiv/jahr/([a-zA-Z0-9-\s]+)/?$ ooemm-archiv.php?jahr=$1 [NC,QSA,L]
 
 #Ignore .php-Extension
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
