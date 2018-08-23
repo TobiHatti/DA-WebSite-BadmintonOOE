@@ -1348,6 +1348,38 @@ table.centered_content td {
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
+/*================================= Q - News-Archiv =================================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*===================================================================================*/
+/* (Q01)   News-Archiv > Date Selectors                                              */
+/*===================================================================================*/
+.archive_year_selection .year_container {
+  display: inline-block;
+  vertical-align: middle;
+  width: 50%;
+  overflow: hidden; }
+  .archive_year_selection .year_container .year_slider {
+    height: 40px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: left;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out; }
+    .archive_year_selection .year_container .year_slider a {
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+      font-size: 25pt;
+      width: 100px;
+      font-weight: lighter;
+      text-decoration: none; }
+
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
 /*================================= R - OÍMM-Archiv =================================*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
