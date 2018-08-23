@@ -1401,8 +1401,25 @@ table.centered_content td{
 
 .archive_year_selection{
 
+    a{
+        img{
+            width: 30px;
+            margin: 5px;
+            margin-bottom:-12.5px;
+            cursor:pointer;
+            @include ease(0.1s);
+            border-radius: 50%;
+        }
 
+        img:hover{
+            box-shadow: 0 0 5px 2px $theme-medium;
+        }
 
+    }
+
+    button:focus{
+        border:none;
+    }
 
     .year_container{
         display: inline-block;
@@ -1414,7 +1431,6 @@ table.centered_content td{
 
 
         .year_slider{
-
             height: 40px;
             overflow: hidden;
             white-space: nowrap;
@@ -1430,9 +1446,22 @@ table.centered_content td{
                 width:100px;
                 font-weight: lighter;
                 text-decoration:none;
+
+                span{
+                    color:$font-color-ahover;
+                }
+
             }
         }
     }
+}
+
+.archive_month_selection{
+    a{
+        display: inline-block;
+        margin: 0 8px 0 8px;
+    }
+
 }
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
