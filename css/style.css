@@ -1359,12 +1359,45 @@ table.centered_content td {
   margin: 10px 10px 30px 10px; }
   .gallery_album .image_preview {
     display: inline-block;
-    vertical-align: top; }
+    vertical-align: top;
+    width: 300px; }
     .gallery_album .image_preview img {
       margin: 2px; }
+    .gallery_album .image_preview img:first-child:nth-last-child(1),
+    .gallery_album .image_preview img:first-child:nth-last-child(1) ~ img {
+      width: 100%; }
+    .gallery_album .image_preview img:first-child:nth-last-child(2),
+    .gallery_album .image_preview img:first-child:nth-last-child(2) ~ img {
+      width: 48%; }
+    .gallery_album .image_preview img:first-child:nth-last-child(3),
+    .gallery_album .image_preview img:first-child:nth-last-child(3) ~ img {
+      width: 48%; }
+    .gallery_album .image_preview img:first-child:nth-last-child(4),
+    .gallery_album .image_preview img:first-child:nth-last-child(4) ~ img {
+      width: 48%; }
+    .gallery_album .image_preview img:first-child:nth-last-child(5),
+    .gallery_album .image_preview img:first-child:nth-last-child(5) ~ img {
+      width: 32%; }
+    .gallery_album .image_preview img:first-child:nth-last-child(6),
+    .gallery_album .image_preview img:first-child:nth-last-child(6) ~ img {
+      width: 32%; }
+    .gallery_album .image_preview img:first-child:nth-last-child(7),
+    .gallery_album .image_preview img:first-child:nth-last-child(7) ~ img {
+      width: 32%; }
+    .gallery_album .image_preview img:first-child:nth-last-child(8),
+    .gallery_album .image_preview img:first-child:nth-last-child(8) ~ img {
+      width: 32%; }
+    .gallery_album .image_preview img:first-child:nth-last-child(9),
+    .gallery_album .image_preview img:first-child:nth-last-child(9) ~ img {
+      width: 32%; }
   .gallery_album .album_description {
     display: inline-block;
     vertical-align: top; }
+    .gallery_album .album_description h3 {
+      margin-top: 10px;
+      margin-left: 15px; }
+    .gallery_album .album_description p {
+      margin-left: 20px; }
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/

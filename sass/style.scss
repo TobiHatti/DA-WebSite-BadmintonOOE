@@ -1406,16 +1406,49 @@ table.centered_content td{
     .image_preview{
         display: inline-block;
         vertical-align: top;
+        width: 300px;
 
         img{
             margin: 2px;
         }
+
+        @for $i from 1 through 1 {
+            img:first-child:nth-last-child(#{$i}),
+            img:first-child:nth-last-child(#{$i}) ~ img {
+                width: 100%;
+            }
+        }
+
+        @for $i from 2 through 4 {
+            img:first-child:nth-last-child(#{$i}),
+            img:first-child:nth-last-child(#{$i}) ~ img {
+                width: 48%;
+            }
+        }
+
+        @for $i from 5 through 9 {
+            img:first-child:nth-last-child(#{$i}),
+            img:first-child:nth-last-child(#{$i}) ~ img {
+                width: 32%;
+            }
+        }
+
+
 
     }
 
     .album_description{
         display: inline-block;
         vertical-align: top;
+
+        h3{
+            margin-top: 10px;
+            margin-left: 15px;
+        }
+
+        p{
+            margin-left: 20px;
+        }
     }
 
 }
