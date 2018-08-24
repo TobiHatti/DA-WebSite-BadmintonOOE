@@ -1360,7 +1360,7 @@ table.centered_content td {
   .gallery_album .image_preview {
     display: inline-block;
     vertical-align: top;
-    width: 300px; }
+    width: 200px; }
     .gallery_album .image_preview img {
       margin: 2px; }
     .gallery_album .image_preview img:first-child:nth-last-child(1),
@@ -1377,19 +1377,19 @@ table.centered_content td {
       width: 48%; }
     .gallery_album .image_preview img:first-child:nth-last-child(5),
     .gallery_album .image_preview img:first-child:nth-last-child(5) ~ img {
-      width: 32%; }
+      width: 31%; }
     .gallery_album .image_preview img:first-child:nth-last-child(6),
     .gallery_album .image_preview img:first-child:nth-last-child(6) ~ img {
-      width: 32%; }
+      width: 31%; }
     .gallery_album .image_preview img:first-child:nth-last-child(7),
     .gallery_album .image_preview img:first-child:nth-last-child(7) ~ img {
-      width: 32%; }
+      width: 31%; }
     .gallery_album .image_preview img:first-child:nth-last-child(8),
     .gallery_album .image_preview img:first-child:nth-last-child(8) ~ img {
-      width: 32%; }
+      width: 31%; }
     .gallery_album .image_preview img:first-child:nth-last-child(9),
     .gallery_album .image_preview img:first-child:nth-last-child(9) ~ img {
-      width: 32%; }
+      width: 31%; }
   .gallery_album .album_description {
     display: inline-block;
     vertical-align: top; }

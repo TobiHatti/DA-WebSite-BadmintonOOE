@@ -1406,7 +1406,7 @@ table.centered_content td{
     .image_preview{
         display: inline-block;
         vertical-align: top;
-        width: 300px;
+        width: 200px;
 
         img{
             margin: 2px;
@@ -1429,7 +1429,7 @@ table.centered_content td{
         @for $i from 5 through 9 {
             img:first-child:nth-last-child(#{$i}),
             img:first-child:nth-last-child(#{$i}) ~ img {
-                width: 32%;
+                width: 31%;
             }
         }
 
