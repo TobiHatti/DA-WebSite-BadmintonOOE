@@ -1356,40 +1356,53 @@ table.centered_content td {
 /*===================================================================================*/
 .gallery_album {
   background: linear-gradient(to right, #C4E3ED, #F2F2F2);
-  margin: 10px 10px 30px 10px; }
+  margin: 10px 10px 30px 10px;
+  box-shadow: none;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out; }
   .gallery_album .image_preview {
     display: inline-block;
     vertical-align: top;
     width: 200px; }
-    .gallery_album .image_preview img {
-      margin: 2px; }
     .gallery_album .image_preview img:first-child:nth-last-child(1),
     .gallery_album .image_preview img:first-child:nth-last-child(1) ~ img {
-      width: 100%; }
+      width: 98%;
+      margin: 2%; }
     .gallery_album .image_preview img:first-child:nth-last-child(2),
     .gallery_album .image_preview img:first-child:nth-last-child(2) ~ img {
-      width: 48%; }
+      width: 48%;
+      margin: 1%; }
     .gallery_album .image_preview img:first-child:nth-last-child(3),
     .gallery_album .image_preview img:first-child:nth-last-child(3) ~ img {
-      width: 48%; }
+      width: 48%;
+      margin: 1%; }
     .gallery_album .image_preview img:first-child:nth-last-child(4),
     .gallery_album .image_preview img:first-child:nth-last-child(4) ~ img {
-      width: 48%; }
+      width: 48%;
+      margin: 1%; }
     .gallery_album .image_preview img:first-child:nth-last-child(5),
     .gallery_album .image_preview img:first-child:nth-last-child(5) ~ img {
-      width: 31%; }
+      width: 31%;
+      margin: 1.16666666%; }
     .gallery_album .image_preview img:first-child:nth-last-child(6),
     .gallery_album .image_preview img:first-child:nth-last-child(6) ~ img {
-      width: 31%; }
+      width: 31%;
+      margin: 1.16666666%; }
     .gallery_album .image_preview img:first-child:nth-last-child(7),
     .gallery_album .image_preview img:first-child:nth-last-child(7) ~ img {
-      width: 31%; }
+      width: 31%;
+      margin: 1.16666666%; }
     .gallery_album .image_preview img:first-child:nth-last-child(8),
     .gallery_album .image_preview img:first-child:nth-last-child(8) ~ img {
-      width: 31%; }
+      width: 31%;
+      margin: 1.16666666%; }
     .gallery_album .image_preview img:first-child:nth-last-child(9),
     .gallery_album .image_preview img:first-child:nth-last-child(9) ~ img {
-      width: 31%; }
+      width: 31%;
+      margin: 1.16666666%; }
   .gallery_album .album_description {
     display: inline-block;
     vertical-align: top; }
@@ -1398,6 +1411,55 @@ table.centered_content td {
       margin-left: 15px; }
     .gallery_album .album_description p {
       margin-left: 20px; }
+
+.gallery_album:hover {
+  box-shadow: 0 10px 10px -3px #000000; }
+
+.gallery_image_thumb {
+  width: 200px;
+  overflow: hidden;
+  background: linear-gradient(to top, #63B4CF, #C4E3ED);
+  box-shadow: 0 5px 5px -2px #000000;
+  display: inline-block;
+  vertical-align: top;
+  margin: 5px;
+  height: 170px;
+  -webkit-transition: all 0.15s ease-in-out;
+  -moz-transition: all 0.15s ease-in-out;
+  -ms-transition: all 0.15s ease-in-out;
+  -o-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out; }
+  .gallery_image_thumb img {
+    display: block;
+    margin: 5%;
+    margin-bottom: 3px;
+    width: 90%;
+    box-shadow: 0 0 6px 1px #000000;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out; }
+  .gallery_image_thumb p {
+    margin: 0;
+    margin-left: 5%;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #000000; }
+  .gallery_image_thumb span {
+    font-weight: lighter;
+    padding-left: 10px;
+    font-size: 9pt;
+    color: #696969; }
+
+.gallery_image_thumb:hover {
+  box-shadow: 0 5px 8px -2px #000000; }
+  .gallery_image_thumb:hover img {
+    width: 96%;
+    margin: 2%;
+    margin-bottom: 3px;
+    box-shadow: none;
+    border: none; }
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
