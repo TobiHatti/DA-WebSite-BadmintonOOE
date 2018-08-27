@@ -1402,20 +1402,19 @@ table.centered_content td{
 .gallery_album{
     background: linear-gradient(to right, $theme-bright-l, #F2F2F2);
     margin: 10px 10px 30px 10px;
+    box-shadow: none;
+    @include ease(0.1s);
 
     .image_preview{
         display: inline-block;
         vertical-align: top;
         width: 200px;
 
-        img{
-            margin: 2px;
-        }
-
         @for $i from 1 through 1 {
             img:first-child:nth-last-child(#{$i}),
             img:first-child:nth-last-child(#{$i}) ~ img {
-                width: 100%;
+                width: 98%;
+                margin: 2%;
             }
         }
 
@@ -1423,6 +1422,7 @@ table.centered_content td{
             img:first-child:nth-last-child(#{$i}),
             img:first-child:nth-last-child(#{$i}) ~ img {
                 width: 48%;
+                margin: 1%;
             }
         }
 
@@ -1430,11 +1430,9 @@ table.centered_content td{
             img:first-child:nth-last-child(#{$i}),
             img:first-child:nth-last-child(#{$i}) ~ img {
                 width: 31%;
+                margin: 1.16666666%
             }
         }
-
-
-
     }
 
     .album_description{
@@ -1449,6 +1447,59 @@ table.centered_content td{
         p{
             margin-left: 20px;
         }
+    }
+
+}
+
+.gallery_album:hover{
+    box-shadow: 0 10px 10px -3px #000000;
+}
+
+.gallery_image_thumb{
+    width: 200px;
+    overflow: hidden;
+    background: linear-gradient(to top, $theme-bright, $theme-bright-l);
+    box-shadow: 0 5px 5px -2px #000000;
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px;
+    height: 170px;
+    @include ease(0.15s); 
+
+    img{
+        display: block;
+        margin:5%;
+        margin-bottom: 3px;
+        width: 90%;
+        box-shadow: 0 0 6px 1px #000000;
+        @include ease(0.1s);
+    }
+
+    p{
+        margin: 0;
+        margin-left:5%;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #000000;
+    }
+
+    span{
+        font-weight: lighter;
+        padding-left: 10px;
+        font-size: 9pt;
+        color: #696969;
+    }
+
+}
+
+.gallery_image_thumb:hover{
+    box-shadow: 0 5px 8px -2px #000000;
+    img{
+        width: 96%;
+        margin: 2%;
+        margin-bottom: 3px;
+        box-shadow: none;
+        border: none;
     }
 
 }
