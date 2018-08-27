@@ -17,11 +17,11 @@
                         ';
                         for($y = date("Y"); $y >= date("Y")-10;$y--)
                         {
-                            echo '<a href="#">'.(($y == $year) ? ('<span>'.$y.'</span>') : $y ).'</a>';
+                            echo '<a onclick="ArchiveSelectYear('.$y.');">'.(($y == $year) ? ('<span>'.$y.'</span>') : $y ).'</a>';
                         }
+
                         echo '
                     </div>
-
                 </div>
                 <a onclick="ListMoveLeft();"><img src="/content/right.png" alt=""/></a>
 
@@ -30,25 +30,28 @@
             </div>
             <hr style="margin-bottom:3px;">
             <div class="archive_month_selection">
-                <a href="#">J&auml;nner</a>
-                <a href="#">Februar</a>
-                <a href="#">M&auml;rz</a>
-                <a href="#">April</a>
-                <a href="#">Mai</a>
-                <a href="#">Juni</a>
-                <a href="#">Juli</a>
-                <a href="#">August</a>
-                <a href="#">September</a>
-                <a href="#">Oktober</a>
-                <a href="#">November</a>
-                <a href="#">Dezember</a>
+                <a onclick="ArchiveSelectMonth(01);">J&auml;nner</a>
+                <a onclick="ArchiveSelectMonth(02);">Februar</a>
+                <a onclick="ArchiveSelectMonth(03);">M&auml;rz</a>
+                <a onclick="ArchiveSelectMonth(04);">April</a>
+                <a onclick="ArchiveSelectMonth(05);">Mai</a>
+                <a onclick="ArchiveSelectMonth(06);">Juni</a>
+                <a onclick="ArchiveSelectMonth(07);">Juli</a>
+                <a onclick="ArchiveSelectMonth(08);">August</a>
+                <a onclick="ArchiveSelectMonth(09);">September</a>
+                <a onclick="ArchiveSelectMonth(10);">Oktober</a>
+                <a onclick="ArchiveSelectMonth(11);">November</a>
+                <a onclick="ArchiveSelectMonth(12);">Dezember</a>
             </div>
+
+            <input type="" id="selectedYear" value="'.date("Y").'"/>
+            <input type="" id="selectedMonth" value="'.date("m").'"/>
             <hr style="margin-top:3px;">
 
 
-            <br><br>
+            <br>
 
-            <iframe src="news-archiv-content" frameborder="1">
+            <iframe src="news-archiv-content?year='.date("Y").'&month='.date("m").'" class="news_archive_iframe" id="archiveFrame">
             </iframe>
         </center>
 

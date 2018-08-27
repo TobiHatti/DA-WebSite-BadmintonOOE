@@ -1464,7 +1464,7 @@ table.centered_content td{
     vertical-align: top;
     margin: 5px;
     height: 170px;
-    @include ease(0.15s); 
+    @include ease(0.15s);
 
     img{
         display: block;
@@ -1561,6 +1561,7 @@ table.centered_content td{
                 width:100px;
                 font-weight: lighter;
                 text-decoration:none;
+                cursor: pointer; 
 
                 span{
                     color:$font-color-ahover;
@@ -1575,8 +1576,14 @@ table.centered_content td{
     a{
         display: inline-block;
         margin: 0 8px 0 8px;
+        cursor: pointer;
     }
 
+}
+
+.news_archive_iframe{
+    width: 100%;
+    border: 1px solid $theme-dark;
 }
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
