@@ -1506,13 +1506,19 @@ table.centered_content td {
       font-size: 25pt;
       width: 100px;
       font-weight: lighter;
-      text-decoration: none; }
+      text-decoration: none;
+      cursor: pointer; }
       .archive_year_selection .year_container .year_slider a span {
         color: #F01B16; }
 
 .archive_month_selection a {
   display: inline-block;
-  margin: 0 8px 0 8px; }
+  margin: 0 8px 0 8px;
+  cursor: pointer; }
+
+.news_archive_iframe {
+  width: 100%;
+  border: 1px solid #416586; }
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/

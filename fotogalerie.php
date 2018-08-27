@@ -82,7 +82,10 @@
 
         ';
 
-        $strSQL = "SELECT * FROM fotogalerie";
+        $entriesPerPage = 10;
+        $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
+
+        $strSQL = "SELECT * FROM fotogalerie LIMIT $offset,$entriesPerPage";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
         {
@@ -129,6 +132,12 @@
                 </a>
             ';
         }
+
+
+
+
+        echo Pager("SELECT * FROM fotogalerie",$entriesPerPage);
+
     }
 
 

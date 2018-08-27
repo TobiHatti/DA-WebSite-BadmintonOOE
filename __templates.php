@@ -16,6 +16,21 @@
 
         <hr>
 
+        <h2>Pager</h2>
+        ';
+
+        $entriesPerPage = 10;
+        $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
+
+        // sql-query
+        $strSQL = "SELECT * FROM ..... LIMIT $offset,$entriesPerPage";
+
+        echo Pager("SELECT * FROM ......",$entriesPerPage);
+
+        echo '
+
+
+
     ';
 
     include("footer.php");

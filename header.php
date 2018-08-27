@@ -1,5 +1,7 @@
 <?php
     session_start();
+    setlocale (LC_ALL, 'de_DE.UTF-8', 'de_DE@euro', 'de_DE', 'de', 'ge', 'de_DE.ISO_8859-1', 'German_Germany');
+
     require("data/mysql_connect.php");
 
     require("data/extension.lib.php");
@@ -11,6 +13,8 @@
     require("data/functions.php");
 
     //MySQLPDSave("d");
+
+
 
     $revision = 3;
 

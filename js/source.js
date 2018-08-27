@@ -121,3 +121,23 @@ function ListMoveLeft()
 
     document.getElementById("YearSlider").style.marginLeft = (offsetIndex * scrollWidth) + "px";
 }
+
+function ArchiveSelectYear(year)
+{
+    document.getElementById("selectedYear").value = year;
+    UpdateArchiveFrame();
+}
+
+function ArchiveSelectMonth(month)
+{
+    document.getElementById("selectedMonth").value = month;
+    UpdateArchiveFrame();
+}
+
+function UpdateArchiveFrame()
+{
+    var month = document.getElementById("selectedMonth").value;
+    var year = document.getElementById("selectedYear").value;
+
+    document.getElementById("archiveFrame").src = "news-archiv-content?year=" + year + "&month=" + month;
+}
