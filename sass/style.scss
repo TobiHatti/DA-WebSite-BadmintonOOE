@@ -619,6 +619,7 @@ input[type=checkbox].slidecheckbox{
     background: grey;
     display: block;
     @include border-radius(100px);
+    @include ease(0.05s);
     position: relative;
 }
 
@@ -1507,7 +1508,7 @@ table.centered_content td{
 
 .gallery_image_thumb:hover{
     box-shadow: 0 5px 8px -2px #000000;
-    background: #FFFFFF; 
+    background: #FFFFFF;
     img{
         width: 96%;
         margin: 2%;
