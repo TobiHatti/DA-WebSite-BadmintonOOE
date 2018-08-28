@@ -8,9 +8,13 @@
         $albumName = $_POST['album_name'];
         $albumUrl = SReplace($_POST['album_name']);
         $today = date("Y-m-d");
+        $album_description=$_POST['description'];
+        $album_ort=$_POST['OrtAlbum'];
+        $album_date=$_POST['DateAlbum'];
+        $download = (isset($_POST['download'])) ? 1 : 0 ;
         $user = $_SESSION['user_id'];
 
-        MySQLNonQuery("INSERT INTO fotogalerie (id, album_url, album_name, creation_date, author) VALUES ('','$albumUrl','$albumName','$today','$user')");
+        MySQLNonQuery("INSERT INTO fotogalerie (id, album_url, album_name, album_description, event_location, event_date, allowDownload, creation_date, author) VALUES ('','$albumUrl','$albumName','$album_description','$album_ort','$album_date','$download','$today','$user')");
 
         $albID = Fetch("fotogalerie","id","album_name",$albumName);
         FileUpload("content/gallery/".$albumUrl."/", "images" ,"","","INSERT INTO gallery_images (id,album_id,image) VALUES ('','$albID','FNAME')");
@@ -26,7 +30,7 @@
                 <input type="text" placeholder="Album Name" name="album_name"/>
                 <br>
                 <br>
-                '.TextareaPlus("post-name", "description", "Beschreibung hier eingeben").'
+                '.TextareaPlus("description", "description", "Beschreibung hier eingeben").'
                 <br>
                 <br>
                 <input type="text" placeholder="Ort" name="OrtAlbum"/>
@@ -35,9 +39,9 @@
                 <input type="date" name="DateAlbum"/>
                 <br>
                 <br>
-                '.FileButton("images", "element-id", 1).'
+                '.FileButton("images", "images", 1).'
                 <br>
-                '.Checkbox("download","element-id",0).'Download Datei
+                '.Checkbox("download","download",0).'Download Datei
                 <br>
                 <br>
                 <button type="submit" name="add_album" value="post-value">Album hinzuf&uuml;gen
@@ -51,6 +55,9 @@
 
         $album_path = $_GET['album'];
         $album_name = Fetch("fotogalerie","album_name","album_url",$_GET['album']);
+
+
+
 
         echo '
             <div class="gallery_image_thumb">
@@ -83,7 +90,7 @@
             CSS-Anpassen (Tobi)<br>
             <br>
             <u>Fotogalerie: Fotovorschau:</u><br>
-            SQL-Abfrage f&uuml;r ausgew&auml;hltes Album erstellen<br>
+            SQL-Abfrage f&uuml;r ausgew&auml;hltes Album erstellen&#10004;<br>
             Fotos anzeigen lassen<br>
             Pager hinzuf&uuml;gen (Tobi)<br>
             Download-Button<br>
@@ -138,6 +145,12 @@
                             <h3> '.$row['album_name'].'</h3>
                             <p>
                                 '.$row['album_description'].'
+                            </p>
+                            <p>
+                                '.$row['event_location'].'
+                            </p>
+                            <p>
+                                 '.$row['event_date'].'
                             </p>
                         </div>
                     </div>
