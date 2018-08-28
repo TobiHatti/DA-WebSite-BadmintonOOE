@@ -1575,11 +1575,10 @@ table.centered_content td{
                 font-weight: lighter;
                 text-decoration:none;
                 cursor: pointer;
+            }
 
-                span{
-                    color:$font-color-ahover;
-                }
-
+            a.active{
+                color: #000000;
             }
         }
     }
@@ -1591,6 +1590,14 @@ table.centered_content td{
         margin: 0 8px 0 8px;
         cursor: pointer;
         text-decoration: none;
+    }
+
+    a.invalid{
+        color: #696969;
+        cursor: default;
+    }
+    a.active{
+        color: #000000;
     }
 
 }

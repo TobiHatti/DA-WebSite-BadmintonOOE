@@ -124,13 +124,162 @@ function ListMoveLeft()
 
 function ArchiveSelectYear(year)
 {
+    var lastSelection = document.getElementById("selectedYear").value;
+
     document.getElementById("selectedYear").value = year;
+
+    document.getElementById("year" + lastSelection).classList.remove("active");
+    document.getElementById("year" + year).classList.add("active");
+
+    var validMonths = document.getElementById("valMonth_" + year).value
+
+
+    if(validMonths.includes("|01|"))
+    {
+        document.getElementById("month1").className = "";
+        document.getElementById("month1").onclick = function() { ArchiveSelectMonth(01); }
+    }
+    else
+    {
+        document.getElementById("month1").className = "invalid";
+        document.getElementById("month1").onclick = "";
+    }
+
+    if(validMonths.includes("|02|"))
+    {
+        document.getElementById("month2").className = "";
+        document.getElementById("month2").onclick = function() { ArchiveSelectMonth(02); }
+    }
+    else
+    {
+        document.getElementById("month2").className = "invalid";
+        document.getElementById("month2").onclick = "";
+    }
+
+    if(validMonths.includes("|03|"))
+    {
+        document.getElementById("month3").className = "";
+        document.getElementById("month3").onclick = function() { ArchiveSelectMonth(03); }
+    }
+    else
+    {
+        document.getElementById("month3").className = "invalid";
+        document.getElementById("month3").onclick = "";
+    }
+
+    if(validMonths.includes("|04|"))
+    {
+        document.getElementById("month4").className = "";
+        document.getElementById("month4").onclick = function() { ArchiveSelectMonth(04); }
+    }
+    else
+    {
+        document.getElementById("month4").className = "invalid";
+        document.getElementById("month4").onclick = "";
+    }
+
+    if(validMonths.includes("|05|"))
+    {
+        document.getElementById("month5").className = "";
+        document.getElementById("month5").onclick = function() { ArchiveSelectMonth(05); }
+    }
+    else
+    {
+        document.getElementById("month5").className = "invalid";
+        document.getElementById("month5").onclick = "";
+    }
+
+    if(validMonths.includes("|06|"))
+    {
+        document.getElementById("month6").className = "";
+        document.getElementById("month6").onclick = function() { ArchiveSelectMonth(06); }
+    }
+    else
+    {
+        document.getElementById("month6").className = "invalid";
+        document.getElementById("month6").onclick = "";
+    }
+
+    if(validMonths.includes("|07|"))
+    {
+        document.getElementById("month7").className = "";
+        document.getElementById("month7").onclick = function() { ArchiveSelectMonth(07); }
+    }
+    else
+    {
+        document.getElementById("month7").className = "invalid";
+        document.getElementById("month7").onclick = "";
+    }
+
+    if(validMonths.includes("|08|"))
+    {
+        document.getElementById("month8").className = "";
+        document.getElementById("month8").onclick = function() { ArchiveSelectMonth(08); }
+    }
+    else
+    {
+        document.getElementById("month8").className = "invalid";
+        document.getElementById("month8").onclick = "";
+    }
+
+    if(validMonths.includes("|09|"))
+    {
+        document.getElementById("month9").className = "";
+        document.getElementById("month9").onclick = function() { ArchiveSelectMonth(09); }
+    }
+    else
+    {
+        document.getElementById("month9").className = "invalid";
+        document.getElementById("month9").onclick = "";
+    }
+
+    if(validMonths.includes("|10|"))
+    {
+        document.getElementById("month10").className = "";
+        document.getElementById("month10").onclick = function() { ArchiveSelectMonth(10); }
+    }
+    else
+    {
+        document.getElementById("month10").className = "invalid";
+        document.getElementById("month10").onclick = "";
+    }
+
+    if(validMonths.includes("|11|"))
+    {
+        document.getElementById("month11").className = "";
+        document.getElementById("month11").onclick = function() { ArchiveSelectMonth(11); }
+    }
+    else
+    {
+        document.getElementById("month11").className = "invalid";
+        document.getElementById("month11").onclick = "";
+    }
+
+    if(validMonths.includes("|12|"))
+    {
+        document.getElementById("month12").className = "";
+        document.getElementById("month12").onclick = function() { ArchiveSelectMonth(12); }
+    }
+    else
+    {
+        document.getElementById("month12").className = "invalid";
+        document.getElementById("month12").onclick = "";
+    }
+
+
     UpdateArchiveFrame();
+
 }
 
 function ArchiveSelectMonth(month)
 {
+    var lastSelection = document.getElementById("selectedMonth").value;
+
     document.getElementById("selectedMonth").value = month;
+
+    document.getElementById("month" + lastSelection).classList.remove("active");   
+    document.getElementById("month" + month).classList.add("active");
+
     UpdateArchiveFrame();
 }
 
@@ -141,6 +290,8 @@ function UpdateArchiveFrame()
 
     if(document.getElementById("showDetail").checked) check = 1;
     else check = 0;
+
+
 
     document.getElementById("archiveFrame").src = "news-archiv-content?year=" + year + "&month=" + month + "&detail=" + check;
 

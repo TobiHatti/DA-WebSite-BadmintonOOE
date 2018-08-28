@@ -43,11 +43,16 @@
         {
             echo '
                 <li>
-                    <a target="_parent" href="/news/artikel/'.$row['article_url'].'">'.$row['title'].'</a>
+                    '.date_format(date_create($row['release_date']),"d. F Y").' - <a target="_parent" href="/news/artikel/'.$row['article_url'].'">'.$row['title'].'</a>
                 </li>
             ';
         }
         echo '</ul>';
+    }
+
+    if(MySQLCount("SELECT * FROM news WHERE release_date LIKE '$dateStr%'")==0)
+    {
+        echo '<h4>Keine ergebnisse</h4>';
     }
 
     echo '</div>';
