@@ -71,4 +71,24 @@ function DeleteFolder($path)
     rmdir($path);
 }
 
+function Base64toIMG($base64img,$path)
+{
+    // DESCRIPTION
+    // Converts a Base64 string into a file
+    // $base64img   String inside the src="" part of an image tag
+    // $path        Upload path. e.g. "content/"
+    // return       File Path
+
+    if(!is_dir($path)) mkdir($path, 0750);
+
+    $base64img = str_replace('data:image/png;base64,', '', $base64img);
+    $base64img = str_replace('data:image/jpeg;base64,', '', $base64img);
+    $base64img = str_replace(' ', '+', $base64img);
+    $data = base64_decode($base64img);
+    $file = $path . uniqid() . '.png';
+    $success = file_put_contents($file, $data);
+    //print $success ? $file : 'Unable to save the file.';
+    return '/'.$file;
+}
+
 ?>

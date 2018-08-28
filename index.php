@@ -39,7 +39,7 @@
             ';
 
             $today = date("Y-m-d");
-            echo NewsTile("SELECT article, article_url, thumbnail, release_date, title, tags FROM news WHERE release_date <= '$today' ORDER BY release_date AND id DESC LIMIT 0,3");
+            echo NewsTile("SELECT article, article_url, thumbnail, release_date, title, tags FROM news WHERE release_date <= '$today' ORDER BY release_date DESC LIMIT 0,3");
 
             echo '
 

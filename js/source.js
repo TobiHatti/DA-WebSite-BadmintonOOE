@@ -139,5 +139,19 @@ function UpdateArchiveFrame()
     var month = document.getElementById("selectedMonth").value;
     var year = document.getElementById("selectedYear").value;
 
-    document.getElementById("archiveFrame").src = "news-archiv-content?year=" + year + "&month=" + month;
+    if(document.getElementById("showDetail").checked) check = 1;
+    else check = 0;
+
+    document.getElementById("archiveFrame").src = "news-archiv-content?year=" + year + "&month=" + month + "&detail=" + check;
+
+    document.getElementById("loaderSprite").style.opacity = 1;
+
+    setTimeout(function() {
+        document.getElementById("loaderSprite").style.opacity = 0;
+    }, 800);
+
+}
+
+function ResizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
 }
