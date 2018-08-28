@@ -25,7 +25,7 @@
 
     $dateStr = $y.'-'.str_pad($m, 2, "0", STR_PAD_LEFT).'-';
 
-    echo '<h1 class="stagfade1">'.strftime("%B %Y",strtotime($y.'-'.($m+1).'-0')).'</h1>';
+    echo '<h1 class="stagfade1">'.str_replace('ä','&auml;',strftime("%B %Y",strtotime($y.'-'.($m+1).'-0'))).'</h1>';
 
 
     echo '<div class="iframe_content stagfade2">';
