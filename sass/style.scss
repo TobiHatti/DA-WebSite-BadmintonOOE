@@ -234,6 +234,7 @@ code{
 /*===================================================================================*/
 
 h1{
+    font-family: Calibri, Arial, sans-serif;
     font-size: 22pt;
     font-weight: lighter;
     letter-spacing: -1px;
@@ -242,6 +243,7 @@ h1{
 }
 
 h2{
+    font-family: Calibri, Arial, sans-serif;
     font-size: 19pt;
     font-weight: lighter;
     letter-spacing: -1px;
@@ -250,6 +252,7 @@ h2{
 }
 
 h3{
+    font-family: Calibri, Arial, sans-serif;
     font-size: 17pt;
     font-weight: lighter;
     letter-spacing: -1px;
@@ -258,6 +261,7 @@ h3{
 }
 
 h4{
+    font-family: Calibri, Arial, sans-serif;
     font-size: 15pt;
     font-weight: normal;
     color: $font-color-hIV;
@@ -265,6 +269,7 @@ h4{
 }
 
 h5{
+    font-family: Calibri, Arial, sans-serif;
     font-size: 12pt;
     font-weight: normal;
     color: $font-color-hV;
@@ -1152,6 +1157,14 @@ table.centered_content td{
     @include ease(1s);
 }
 
+/*===================================================================================*/
+/* (X06) iframes                                                                     */
+/*===================================================================================*/
+
+.iframe_content{
+    font-family: Calibri, Arial, sans-serif;
+}
+
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*================================      A - HOME     ================================*/
@@ -1561,7 +1574,7 @@ table.centered_content td{
                 width:100px;
                 font-weight: lighter;
                 text-decoration:none;
-                cursor: pointer; 
+                cursor: pointer;
 
                 span{
                     color:$font-color-ahover;
@@ -1577,13 +1590,15 @@ table.centered_content td{
         display: inline-block;
         margin: 0 8px 0 8px;
         cursor: pointer;
+        text-decoration: none;
     }
 
 }
 
 .news_archive_iframe{
     width: 100%;
-    border: 1px solid $theme-dark;
+
+    border:none;
 }
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/

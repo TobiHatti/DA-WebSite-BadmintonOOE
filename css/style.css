@@ -298,6 +298,7 @@ code {
 /* (Z03) Headings                                                                    */
 /*===================================================================================*/
 h1 {
+  font-family: Calibri, Arial, sans-serif;
   font-size: 22pt;
   font-weight: lighter;
   letter-spacing: -1px;
@@ -305,6 +306,7 @@ h1 {
   margin: 2px 0 2px 0; }
 
 h2 {
+  font-family: Calibri, Arial, sans-serif;
   font-size: 19pt;
   font-weight: lighter;
   letter-spacing: -1px;
@@ -312,6 +314,7 @@ h2 {
   margin: 2px 0 2px 0; }
 
 h3 {
+  font-family: Calibri, Arial, sans-serif;
   font-size: 17pt;
   font-weight: lighter;
   letter-spacing: -1px;
@@ -319,12 +322,14 @@ h3 {
   margin: 2px 0 2px 0; }
 
 h4 {
+  font-family: Calibri, Arial, sans-serif;
   font-size: 15pt;
   font-weight: normal;
   color: #F01B16;
   margin: 2px 0 2px 0; }
 
 h5 {
+  font-family: Calibri, Arial, sans-serif;
   font-size: 12pt;
   font-weight: normal;
   color: #F01B16;
@@ -1159,6 +1164,12 @@ table.centered_content td {
   -o-transition: all 1s ease-in-out;
   transition: all 1s ease-in-out; }
 
+/*===================================================================================*/
+/* (X06) iframes                                                                     */
+/*===================================================================================*/
+.iframe_content {
+  font-family: Calibri, Arial, sans-serif; }
+
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*================================      A - HOME     ================================*/
@@ -1514,11 +1525,12 @@ table.centered_content td {
 .archive_month_selection a {
   display: inline-block;
   margin: 0 8px 0 8px;
-  cursor: pointer; }
+  cursor: pointer;
+  text-decoration: none; }
 
 .news_archive_iframe {
   width: 100%;
-  border: 1px solid #416586; }
+  border: none; }
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/

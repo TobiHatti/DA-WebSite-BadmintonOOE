@@ -44,14 +44,20 @@
                 <a onclick="ArchiveSelectMonth(12);">Dezember</a>
             </div>
 
-            <input type="" id="selectedYear" value="'.date("Y").'"/>
-            <input type="" id="selectedMonth" value="'.date("m").'"/>
+            <input type="hidden" id="selectedYear" value="'.date("Y").'"/>
+            <input type="hidden" id="selectedMonth" value="'.date("m").'"/>
             <hr style="margin-top:3px;">
 
 
-            <br>
+            <img src="/content/loadersprite.gif" alt="" style="height: 80px; opacity: 0;" id="loaderSprite" class="ease50"/>
 
-            <iframe src="news-archiv-content?year='.date("Y").'&month='.date("m").'" class="news_archive_iframe" id="archiveFrame">
+            <table style="float: right;">
+                <tr>
+                    <td style="padding-top: 20px;">Detailansicht</td>
+                    <td>'.Checkbox("","showDetail",0,"UpdateArchiveFrame();").'</td>
+                </tr>
+            </table>
+            <iframe style="margin-top: -50px;" onload="ResizeIframe(this)" src="news-archiv-content?year='.date("Y").'&month='.date("m").'&detail=0" class="news_archive_iframe" id="archiveFrame">
             </iframe>
         </center>
 

@@ -171,10 +171,14 @@
         $title = strip_tags(substr($article,0,$cpos));
         $nameid = SReplace(strip_tags(substr($article,0,$cpos)));
 
-        // Finds Thumbnail-Photo (Encoded in Base64)
+        $path = "content/news/$nameid/";
+        $article = ArticleImgFilter($article,$path);
+
+        // Finds Thumbnail-Photo
         $imgs = substr($article,strpos($article,'src="'));
         $tnepos = strpos($imgs,'" ');
         $imgs = str_replace('src="','',substr($imgs,0,$tnepos));
+
 
         /*
         // Uploading images for Slideshow

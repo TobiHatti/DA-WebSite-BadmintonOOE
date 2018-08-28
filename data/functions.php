@@ -1,6 +1,6 @@
 <?php
 
-function Checkbox($name, $id, $checked = 0)
+function Checkbox($name, $id, $checked = 0,$onchange="")
 {
     // DESCRIPTION:
     // Returns a Checkbox Form-Element
@@ -8,7 +8,7 @@ function Checkbox($name, $id, $checked = 0)
     // $id      Unique ID. Required since it uses a label
     // $checked Default: 0. Sets the checkbox to checked (1)
 
-    return '<input type="checkbox" name="'.$name.'" id="'.$id.'" class="slidecheckbox" '.(($checked) ? 'checked' : '').'/><label class="checkbox_toggle_lable" for="'.$id.'">Toggle</label>';
+    return '<input type="checkbox" name="'.$name.'" id="'.$id.'" onchange="'.$onchange.'" class="slidecheckbox" '.(($checked) ? 'checked' : '').'/><label class="checkbox_toggle_lable" for="'.$id.'">Toggle</label>';
 }
 
 function RadioButton($title, $name, $checked = 0)
@@ -139,7 +139,7 @@ function Loader()
     ';
 }
 
-function ShowTags($tagstr,$disableLinks = false)
+function ShowTags($tagstr,$disableLinks = false, $targetTop = false)
 {
     // DESCRIPTION:
     // Lists all Tags with or without link of
@@ -151,14 +151,14 @@ function ShowTags($tagstr,$disableLinks = false)
 
     foreach($tags = explode('||',$tagstr) as $tag)
     {
-        if($tag != "" AND $tag != $tags[0]) $retval .= ',&nbsp;&nbsp;<a href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.((Fetch("news_tags","name","id",$tag)!="") ? Fetch("news_tags","name","id",$tag) : $tag).'</a>';
-        if($tag == $tags[0]) $retval .= '<a href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.((Fetch("news_tags","name","id",$tag)!="") ? Fetch("news_tags","name","id",$tag) : $tag).'</a>';
+        if($tag != "" AND $tag != $tags[0]) $retval .= ',&nbsp;&nbsp;<a '.(($targetTop) ? 'target="_top"' : '').' href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.((Fetch("news_tags","name","id",$tag)!="") ? Fetch("news_tags","name","id",$tag) : $tag).'</a>';
+        if($tag == $tags[0]) $retval .= '<a '.(($targetTop) ? 'target="_top"' : '').' href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.((Fetch("news_tags","name","id",$tag)!="") ? Fetch("news_tags","name","id",$tag) : $tag).'</a>';
     }
 
    return $retval;
 }
 
-function NewsTile($strSQL)
+function NewsTile($strSQL, $targetTop = false)
 {
     require("mysql_connect.php");
 
@@ -170,15 +170,15 @@ function NewsTile($strSQL)
         $retval .= '
             <div class="home_news_article stagfade'.$i++.'">
                 <div class="home_news_imagecontainer">
-                    <a href="/news/artikel/'.$row['article_url'].'">
+                    <a '.(($targetTop) ? 'target="_top"' : '').' href="/news/artikel/'.$row['article_url'].'">
                         <img src="'.(($row['thumbnail']=="") ? '/content/no-image.png' : $row['thumbnail'] ).'" alt="" class="home_news_image"/>
                     </a>
                 </div>
                 <div style="float:none;">
                     <span style="font-size: 10pt;color: #808080">'.date_format(date_create($row['release_date']),"d. F Y").' &#10649;</span>
-                    '.ShowTags($row['tags']).'
-                    <a href="/news/artikel/'.$row['article_url'].'"><h2>'.$row['title'].'</h2></a>
-                    '.str_replace('<p></p>','',str_replace($row['title'],'',strip_tags($row['article'],'<p><s><b><i><u><strong><em><span><sub><sup><a><pre><code><ol><li><ul>'))).'
+                    '.ShowTags($row['tags'],false,$targetTop).'
+                    <a '.(($targetTop) ? 'target="_top"' : '').' href="/news/artikel/'.$row['article_url'].'"><h2>'.$row['title'].'</h2></a>
+                    '.str_replace('<p></p>',' ',str_replace($row['title'],'',strip_tags($row['article'],'<p><s><b><i><u><strong><em><span><sub><sup><a><pre><code><ol><li><ul>'))).'
                 </div>
             </div>
         ';
@@ -237,7 +237,7 @@ function NewsSidebar()
                 <ul>
                     ';
                     $today = date("Y-m-d");
-                    $strSQL = "SELECT article_url, title FROM news WHERE release_date <= '$today' ORDER BY release_date AND id DESC LIMIT 0,4";
+                    $strSQL = "SELECT article_url, title FROM news WHERE release_date <= '$today' ORDER BY release_date DESC LIMIT 0,4";
                     $rs=mysqli_query($link,$strSQL);
                     while($row=mysqli_fetch_assoc($rs))
                     {
@@ -261,6 +261,43 @@ function NewsSidebar()
     ';
 
     return $retval;
+}
+
+function ArticleImgFilter($article,$path)
+{
+    // DESCRIPTION:
+    // Filters out images (BASE64) from the article,
+    // uploads them to the server and replaces the
+    // article with image paths
+    // $article     Article to be filtered
+    // $path        Path to the news-directory
+
+
+    // Change the default image tags
+    // Only required for the following loop
+    $article = str_replace('src="data:image/','SRCX="DATA:IMAGE/',$article);
+
+    // Run as long as Base64 images are detected
+    while(SubStringFind($article,'SRCX="DATA:IMAGE/'))
+    {
+        // Find and extract the first found Base64 Code
+        $img_start_pos = substr($article,strpos($article,'SRCX="'));
+        $img_end_pos = strpos($img_start_pos,'" ');
+        $img_string = str_replace('SRCX="','',substr($img_start_pos,0,$img_end_pos));
+
+        // Change string so it can be converted
+        $img_string_to_path = str_replace('DATA:IMAGE','data:image',$img_string);
+
+        //Convert from Base64 to PNG and Upload to Server
+        $img_path = Base64toIMG($img_string_to_path,$path);
+
+        // replace Base64 image with image-path and change back
+        // the first found src-identifier
+        $article = str_replace($img_string,$img_path,$article);
+        $article = str_replace_first("SRCX", "src", $article);
+    }
+
+    return $article;
 }
 
 
