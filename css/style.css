@@ -658,6 +658,11 @@ input[type=checkbox].slidecheckbox {
   -moz-border-radius: 100px;
   -ms-border-radius: 100px;
   border-radius: 100px;
+  -webkit-transition: all 0.05s ease-in-out;
+  -moz-transition: all 0.05s ease-in-out;
+  -ms-transition: all 0.05s ease-in-out;
+  -o-transition: all 0.05s ease-in-out;
+  transition: all 0.05s ease-in-out;
   position: relative; }
 
 .checkbox_toggle_lable:after {
