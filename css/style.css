@@ -1429,7 +1429,7 @@ table.centered_content td {
 .gallery_image_thumb {
   width: 200px;
   overflow: hidden;
-  background: linear-gradient(to top, #63B4CF, #C4E3ED);
+  background: #F5F5F5;
   box-shadow: 0 5px 5px -2px #000000;
   display: inline-block;
   vertical-align: top;
@@ -1464,7 +1464,8 @@ table.centered_content td {
     color: #696969; }
 
 .gallery_image_thumb:hover {
-  box-shadow: 0 5px 8px -2px #000000; }
+  box-shadow: 0 5px 8px -2px #000000;
+  background: #FFFFFF; }
   .gallery_image_thumb:hover img {
     width: 96%;
     margin: 2%;

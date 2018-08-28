@@ -175,7 +175,7 @@ function NewsTile($strSQL, $targetTop = false)
                     </a>
                 </div>
                 <div style="float:none;">
-                    <span style="font-size: 10pt;color: #808080">'.date_format(date_create($row['release_date']),"d. F Y").' &#10649;</span>
+                    <span style="font-size: 10pt;color: #808080">'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['release_date']))).' &#10649;</span>
                     '.ShowTags($row['tags'],false,$targetTop).'
                     <a '.(($targetTop) ? 'target="_top"' : '').' href="/news/artikel/'.$row['article_url'].'"><h2>'.$row['title'].'</h2></a>
                     '.str_replace('<p></p>',' ',str_replace($row['title'],'',strip_tags($row['article'],'<p><s><b><i><u><strong><em><span><sub><sup><a><pre><code><ol><li><ul>'))).'
