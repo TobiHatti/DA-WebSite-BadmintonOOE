@@ -1519,14 +1519,19 @@ table.centered_content td {
       font-weight: lighter;
       text-decoration: none;
       cursor: pointer; }
-      .archive_year_selection .year_container .year_slider a span {
-        color: #F01B16; }
+    .archive_year_selection .year_container .year_slider a.active {
+      color: #000000; }
 
 .archive_month_selection a {
   display: inline-block;
   margin: 0 8px 0 8px;
   cursor: pointer;
   text-decoration: none; }
+.archive_month_selection a.invalid {
+  color: #696969;
+  cursor: default; }
+.archive_month_selection a.active {
+  color: #000000; }
 
 .news_archive_iframe {
   width: 100%;
