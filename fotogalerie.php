@@ -26,10 +26,22 @@
                 <input type="text" placeholder="Album Name" name="album_name"/>
                 <br>
                 <br>
+                '.TextareaPlus("post-name", "description", "Beschreibung hier eingeben").'
+                <br>
+                <br>
+                <input type="text" placeholder="Ort" name="OrtAlbum"/>
+                <br>
+                <br>
+                <input type="date" name="DateAlbum"/>
+                <br>
                 <br>
                 '.FileButton("images", "element-id", 1).'
                 <br>
+                '.Checkbox("download","element-id",0).'Download Datei
+                <br>
+                <br>
                 <button type="submit" name="add_album" value="post-value">Album hinzuf&uuml;gen
+
            </form>
         ';
     }
@@ -60,10 +72,10 @@
         echo '
             <b><u>ToDo Fotogalerie:</u></b><br><br>
             <u>PHP-Form:</u><br>
-            Checkbox "Herunterladen erlauben"<br>
-            Textarea f&uuml;r Beschreibung (Tobi (JavaScript-Textarea))<br>
-            Textfeld f&uuml;r Ort<br>
-            Textfeld f&uuml;r Event-Datum<br>
+            Checkbox "Herunterladen erlauben"&#10004;<br>
+            Textarea f&uuml;r Beschreibung (Tobi (JavaScript-Textarea))&#10004;<br>
+            Textfeld f&uuml;r Ort&#10004;<br>
+            Textfeld f&uuml;r Event-Datum&#10004;<br>
             Tag-Funktion einf&uuml;gen (Tobi)<br>
             <br>
             <u>Fotogalerie: Alben:</u><br>
