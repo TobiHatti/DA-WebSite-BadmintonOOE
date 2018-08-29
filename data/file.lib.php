@@ -20,6 +20,8 @@ function FileUpload($path,$formId,$formats="",$limit="",$sql="")
     // $limit       Upload Size Limit, xKB, xMB, xGB. Default 10MB
     // $sql         Insert Filename in Database. Filename = FNAME
 
+    $path = (StartsWith($path, '/')) ? ltrim($path,'/') : $path ;
+
     $format_restriction = ($formats=='') ? false : true;
     $valid_formats = explode(',',$formats);
 
@@ -63,6 +65,8 @@ function DeleteFolder($path)
     // DESCRIPTION
     // Deletes a folder and everything it contains
 
+    $path = (StartsWith($path, '/')) ? ltrim($path,'/') : $path ;
+
     $files = glob($path.'*');
     foreach($files as $file)
     {
@@ -79,6 +83,8 @@ function Base64toIMG($base64img,$path)
     // $path        Upload path. e.g. "content/"
     // return       File Path
 
+    $path = (StartsWith($path, '/')) ? ltrim($path,'/') : $path ;
+
     if(!is_dir($path)) mkdir($path, 0750);
 
     $base64img = str_replace('data:image/png;base64,', '', $base64img);
@@ -89,6 +95,65 @@ function Base64toIMG($base64img,$path)
     $success = file_put_contents($file, $data);
     //print $success ? $file : 'Unable to save the file.';
     return '/'.$file;
+}
+
+function ResizeImage($path,$output,$maxWidth, $maxHeight)
+{
+    $path = (StartsWith($path, '/')) ? ltrim($path,'/') : $path ;
+
+    list($width, $height) = getimagesize($path);
+
+    if($width > $height) $factor = $width / $maxWidth;
+    else $factor = $height / $maxHeight;
+
+
+    $newwidth = $width / $factor;
+    $newheight = $height / $factor;
+
+    if(exif_imagetype($path) == IMAGETYPE_JPEG)
+    {
+        $source = imagecreatefromjpeg($path);
+    }
+    else if (exif_imagetype($path) == IMAGETYPE_PNG)
+    {
+        $source = imagecreatefrompng($path);
+    }
+
+    $thumb = imagecreatetruecolor($newwidth, $newheight);
+
+
+    imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+    imagejpeg($thumb,$output);
+
+}
+
+function CropImage($path, $output, $width, $height)
+{
+    $path = (StartsWith($path, '/')) ? ltrim($path,'/') : $path ;
+
+    $x = 0;
+    $y = 0;
+
+    list($cwidth, $cheight) = getimagesize($path);
+
+    /*
+    // Not possible due to negative values not beeing supported
+    if($cwidth < $width) $xoff = ($width - $cwidth) / 2;
+    if($height > $cheight) $yoff = (($height - $cheight) / 2);
+
+    $x += $xoff;
+    $y += $yoff;
+    */
+
+    $im = imagecreatefromjpeg($path);
+    $im2 = imagecrop($im, ['x' => $x, 'y' => $y, 'width' => $width, 'height' => $height]);
+    if ($im2 !== FALSE)
+    {
+        imagejpeg($im2, $output);
+        imagedestroy($im2);
+    }
+    imagedestroy($im);
 }
 
 ?>

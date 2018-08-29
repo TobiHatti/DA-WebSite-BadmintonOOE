@@ -1097,7 +1097,7 @@ table.centered_content td {
   padding: 2px 2px 5px 3px; }
 
 /*===================================================================================*/
-/* (A02) Home > Modern News-Tiles                                                                */
+/* (A02) Home > Modern News-Tiles                                                    */
 /*===================================================================================*/
 .mdrn_news_tile_container {
   overflow: hidden; }
@@ -1114,6 +1114,7 @@ table.centered_content td {
     font-weight: bold; }
   .mdrn_news_tile .tag_overlay {
     position: absolute;
+    text-align: left;
     background: #FFD700;
     bottom: 10px;
     left: 0px;

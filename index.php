@@ -43,7 +43,7 @@
 
                     $today = date("Y-m-d");
                     // Only Top-News
-                    echo NewsTile("SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%Top-News%' ORDER BY release_date DESC LIMIT 0,3");
+                    echo NewsTile("SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%Top-News%' ORDER BY release_date DESC, id DESC LIMIT 0,3");
 
                     echo '
 
@@ -223,12 +223,21 @@
                         <div id="wowslider-container1">
                             <div class="ws_images">
                                 <ul>
-                                    <li>
-                                        <img src="/content/news/Hobbynachwuchsturnier-in-Altmuenster/5b8556fc07fd9.png" title="Title 01" id="wows1_0"/>
-                                    </li>
-                                    <li>
-                                        <img src="/content/news/Mit-neuem-Schwung-in-die-Saison-2018-19/5b8557d50d4dc.png"  title="Title 02" id="wows1_1"/>
-                                    </li>
+                                    ';
+
+                                    $i=1;
+                                    $strSQL = "SELECT * FROM news ORDER BY release_date DESC, id DESC LIMIT 0,3";
+                                    $rs=mysqli_query($link,$strSQL);
+                                    while($row=mysqli_fetch_assoc($rs))
+                                    {
+                                        echo '
+                                        <li>
+                                            <img src="/content/news/_slideshow/slide'.$i++.'.jpg" title="'.$row['title'].'" id="wows1_0"/>
+                                        </li>
+                                        ';
+                                    }
+
+                                    echo '
                                 </ul>
                             </div>
                             <div class="ws_bullets">
@@ -249,7 +258,7 @@
                 <aside>
                     <h2>Nachwuchs</h2>
                     <hr>
-                    '.NewsTileSlim("SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%Nachwuchs%' ORDER BY release_date DESC LIMIT 0,3").'
+                    '.NewsTileSlim("SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%Nachwuchs%' ORDER BY release_date DESC, id DESC LIMIT 0,3").'
                 </aside>
             </div>
             <br>
@@ -260,7 +269,7 @@
                 ';
 
                 $i=2;
-                $strSQL = "SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%Top-News%' ORDER BY release_date DESC LIMIT 0,3";
+                $strSQL = "SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%Top-News%' ORDER BY release_date DESC, id DESC LIMIT 0,5";
                 $rs=mysqli_query($link,$strSQL);
                 while($row=mysqli_fetch_assoc($rs))
                 {
