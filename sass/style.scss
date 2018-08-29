@@ -1087,7 +1087,7 @@ table.centered_content td{
 }
 
 /*===================================================================================*/
-/* (A02) Home > Modern News-Tiles                                                                */
+/* (A02) Home > Modern News-Tiles                                                    */
 /*===================================================================================*/
 
 .mdrn_news_tile_container{
@@ -1109,6 +1109,7 @@ table.centered_content td{
 
     .tag_overlay{
         position: absolute;
+        text-align: left;
         background: $theme-accentII;
         bottom: 10px;
         left: 0px;
