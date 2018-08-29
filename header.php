@@ -26,7 +26,7 @@
 
                 <!-- Own links -->
                     <link rel="stylesheet" type="text/css" href="/css/style.css?'.$revision.'">
-                    <link rel="stylesheet" type="text/css" href="/css/layout_classic.css?'.$revision.'">
+                    <link rel="stylesheet" type="text/css" href="/css/layout_modern.css">
                     <link rel="stylesheet" type="text/css" href="/css/menu.css?'.$revision.'">
                     <link rel="stylesheet" type="text/css" href="/css/slide.css?'.$revision.'" />
                     <link href="/content/favicon.png" rel="icon" type="image/x-icon" />
@@ -89,6 +89,15 @@
 
             <body>
 
+                <div style="position: fixed; top: 0px; right: 0px; background: #333333; color: #FFFFFF;">
+                    <table>
+                        <tr>
+                            <td style="padding-top: 20px;">Classic/Modern</td><td>'.Checkbox("","toggle_theme",0,"ToggleTheme();").'</td>
+                        </tr>
+                    </table>
+
+                </div>
+
                 <div id="loader-wrapper">
                     <h3><output id="loader_msg">Lade</output></h3>
                     <br><br><br><br><br>
@@ -96,113 +105,113 @@
                 </div>
 
                 <header>
-
-                    <img src="/content/logo.png" alt="O&Ouml;. Badminton-Verband" class="header_logo"/>
-                    <img src="/content/babolat.png" alt="" class="header_sponsor"/>
+                    <div class="header_logo"></div>
+                    <div class="header_sponsor"></div>
                     '.((isset($_SESSION['user_id'])) ? '<div class="logout_bar">Angemeldet als '.$_SESSION['username'].' - <a href="/logout">Abmelden</a></div>' : '').'
                 </header>
 
                 <nav>
-                    <div id="cssmenu">
-                        <ul>
-                            <li><a href="/">Startseite</a></li>
+                    <div class="dropdown_menu_container">
+                        <div id="cssmenu">
+                            <ul>
+                                <li><a href="/">Startseite</a></li>
 
-                            <li class="active"><a href="#">Verband</a>
-                                <ul>
-                                    <li><a href="/vorstand">Vorstand</a></li>
-                                    <li><a href="/satzung">Satzung & Ordnungen</a></li>
-                                    <li><a href="/vereine">Vereine</a></li>
-                                    <li><a href="/links">Links</a></li>
-                                    <li><a href="/downloads">Downloads</a></li>
-                                </ul>
-                            </li>
+                                <li class="active"><a href="#">Verband</a>
+                                    <ul>
+                                        <li><a href="/vorstand">Vorstand</a></li>
+                                        <li><a href="/satzung">Satzung & Ordnungen</a></li>
+                                        <li><a href="/vereine">Vereine</a></li>
+                                        <li><a href="/links">Links</a></li>
+                                        <li><a href="/downloads">Downloads</a></li>
+                                    </ul>
+                                </li>
 
-                            <li class="active"><a href="#">Spielbetrieb</a>
-                                <ul>
-                                    <li><a href="#">O&Ouml;MM <span style="float:right; color: #FFFFFF;">&#10148;</span></a>
-                                        <ul>
-                                            <li><a href="/allgemeine-klasse">Allg. Klasse</a></li>
-                                            <li><a href="/schueler-jugend">Sch&uuml;ler / Jugend</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Ranglisten <span style="float:right; color: #FFFFFF;">&#10148;</span></a>
-                                        <ul>
-                                            <li><a href="/ooebv-ranglisten.php">O&Ouml;BV-Ranglisten</a></li>
-                                            <li><a target="_blank" href="http://www.badminton.at">&Ouml;BV-Ranglisten</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="/zentralausschreibung">Zentralausschreibung</a></li>
-                                    <li><a href="/senioren">Senioren</a></li>
-                                    <li><a href="/schriedsrichter">Schiedsrichter</a></li>
-                                </ul>
-                            </li>
+                                <li class="active"><a href="#">Spielbetrieb</a>
+                                    <ul>
+                                        <li><a href="#">O&Ouml;MM <span style="float:right; color: #FFFFFF;">&#10148;</span></a>
+                                            <ul>
+                                                <li><a href="/allgemeine-klasse">Allg. Klasse</a></li>
+                                                <li><a href="/schueler-jugend">Sch&uuml;ler / Jugend</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Ranglisten <span style="float:right; color: #FFFFFF;">&#10148;</span></a>
+                                            <ul>
+                                                <li><a href="/ooebv-ranglisten.php">O&Ouml;BV-Ranglisten</a></li>
+                                                <li><a target="_blank" href="http://www.badminton.at">&Ouml;BV-Ranglisten</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="/zentralausschreibung">Zentralausschreibung</a></li>
+                                        <li><a href="/senioren">Senioren</a></li>
+                                        <li><a href="/schriedsrichter">Schiedsrichter</a></li>
+                                    </ul>
+                                </li>
 
-                            <li class="active"><a href="#">Nachwuchs</a>
-                                <ul>
-                                    <li><a href="/nachwuchskader">O&Ouml; Nachwuchskader</a></li>
-                                    <li><a href="/trainingszeiten">Trainingszeiten BNLZ-Nord</a></li>
-                                    <li><a href="/fotogalerie">Fotogalerie</a></li>
-                                </ul>
-                            </li>
+                                <li class="active"><a href="#">Nachwuchs</a>
+                                    <ul>
+                                        <li><a href="/nachwuchskader">O&Ouml; Nachwuchskader</a></li>
+                                        <li><a href="/trainingszeiten">Trainingszeiten BNLZ-Nord</a></li>
+                                        <li><a href="/fotogalerie">Fotogalerie</a></li>
+                                    </ul>
+                                </li>
 
-                            <li class="active"><a href="#">Archiv</a>
-                                <ul>
-                                    <li><a href="/jahresberichte">Jahresberichte</a></li>
-                                    <li><a href="/news-archiv">News-Archiv</a></li>
-                                    <li><a href="/ooemm-archiv">O&Ouml;MM-Archiv <span style="float:right; color: #FFFFFF;">&#10148;</span></a>
-                                        <ul>
-                                            <li><a href="/ooemm-archiv.php?jahr=2005-2006">2005/2006</a></li>
-                                            <li><a href="/ooemm-archiv.php?jahr=2004-2005">2004/2005</a></li>
-                                            <li><a href="/ooemm-archiv.php?jahr=2003-2004">2003/2004</a></li>
-                                            <li><a href="/ooemm-archiv.php?jahr=2002-2003">2002/2003</a></li>
-                                            <li><a href="/ooemm-archiv.php?jahr=2001-2002">2001/2002</a></li>
-                                            <li><a href="/ooemm-archiv.php?jahr=2000-2001">2000/2001</a></li>
-                                            <li><a href="/ooemm-archiv.php?jahr=1999-2000">1999/2000</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
+                                <li class="active"><a href="#">Archiv</a>
+                                    <ul>
+                                        <li><a href="/jahresberichte">Jahresberichte</a></li>
+                                        <li><a href="/news-archiv">News-Archiv</a></li>
+                                        <li><a href="/ooemm-archiv">O&Ouml;MM-Archiv <span style="float:right; color: #FFFFFF;">&#10148;</span></a>
+                                            <ul>
+                                                <li><a href="/ooemm-archiv.php?jahr=2005-2006">2005/2006</a></li>
+                                                <li><a href="/ooemm-archiv.php?jahr=2004-2005">2004/2005</a></li>
+                                                <li><a href="/ooemm-archiv.php?jahr=2003-2004">2003/2004</a></li>
+                                                <li><a href="/ooemm-archiv.php?jahr=2002-2003">2002/2003</a></li>
+                                                <li><a href="/ooemm-archiv.php?jahr=2001-2002">2001/2002</a></li>
+                                                <li><a href="/ooemm-archiv.php?jahr=2000-2001">2000/2001</a></li>
+                                                <li><a href="/ooemm-archiv.php?jahr=1999-2000">1999/2000</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
 
-                            ';
-
-                            if(isset($_SESSION['user_id']))   // Condition: Check if user can edit any element of the page
-                            {
-                                echo '
-                                    <li class="active"><a href="#">| Verwaltung</a>
-                                        <ul>
-                                            <li><a href="#">News-Artikel hinzuf&uuml;gen</a></li>
-                                        </ul>
-                                    </li>
                                 ';
-                            }
 
-                            echo '
+                                if(isset($_SESSION['user_id']))   // Condition: Check if user can edit any element of the page
+                                {
+                                    echo '
+                                        <li class="active"><a href="#">| Verwaltung</a>
+                                            <ul>
+                                                <li><a href="#">News-Artikel hinzuf&uuml;gen</a></li>
+                                            </ul>
+                                        </li>
+                                    ';
+                                }
 
-                        </ul>
+                                echo '
 
-                        <!-- Standard Search-Bar -->
+                            </ul>
 
-                        <div class="searchbar_container">
+                            <!-- Standard Search-Bar -->
+
+                            <div class="searchbar_container">
+                                <form action="/news/suche" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                                    <input class="searchbar" name="newsSearch" type="search" placeholder="Suchen...">
+                                </form>
+                            </div>
+
+
+                            <!-- Mobile Search-Bar -->
+                            <div class="mobile_searchtrigger_container">
+                                <a href="#searchpop" onclick="bgenScroll();"><button class="searchbar_trigger"><center><img src="/content/search.png" style="height:22px;" alt="" /></center></button></a>
+                            </div>
+
+                        </div>
+
+                        <!-- Search-Bar Mobile version -->
+                        <div class="mobile_searchbar_container" id="searchpop">
                             <form action="/news/suche" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-                                <input class="searchbar" name="newsSearch" type="search" placeholder="Suchen...">
+                                <div style="vertical-align:top; display:block;"><input name="newsSearch" type="search" class="mobile_searchbar"/><a href="#"><img src="/content/cross.png" style="height:18px;margin-bottom:-3px;margin-left: 8px;" alt="" /></a></div>
                             </form>
                         </div>
-
-
-                        <!-- Mobile Search-Bar -->
-                        <div class="mobile_searchtrigger_container">
-                            <a href="#searchpop" onclick="bgenScroll();"><button class="searchbar_trigger"><center><img src="/content/search.png" style="height:22px;" alt="" /></center></button></a>
-                        </div>
-
                     </div>
-
-                    <!-- Search-Bar Mobile version -->
-                    <div class="mobile_searchbar_container" id="searchpop">
-                        <form action="/news/suche" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-                            <div style="vertical-align:top; display:block;"><input name="newsSearch" type="search" class="mobile_searchbar"/><a href="#"><img src="/content/cross.png" style="height:18px;margin-bottom:-3px;margin-left: 8px;" alt="" /></a></div>
-                        </form>
-                    </div>
-
                 </nav>
                 <main>
                 <!--

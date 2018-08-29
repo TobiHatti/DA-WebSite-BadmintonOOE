@@ -168,10 +168,10 @@ function NewsTile($strSQL, $targetTop = false)
     while($row=mysqli_fetch_assoc($rs))
     {
         $retval .= '
-            <div class="home_news_article stagfade'.$i++.'">
-                <div class="home_news_imagecontainer">
+            <div class="news_article stagfade'.$i++.'">
+                <div class="news_imagecontainer">
                     <a '.(($targetTop) ? 'target="_top"' : '').' href="/news/artikel/'.$row['article_url'].'">
-                        <img src="'.(($row['thumbnail']=="") ? '/content/no-image.png' : $row['thumbnail'] ).'" alt="" class="home_news_image"/>
+                        <img src="'.(($row['thumbnail']=="") ? '/content/no-image.png' : $row['thumbnail'] ).'" alt="" class="news_image"/>
                     </a>
                 </div>
                 <div style="float:none;">

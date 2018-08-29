@@ -19,6 +19,7 @@
     ($01)   SASS > Imports
     ====== @ -  Fontfaces/Keyframes ========
     (@01)   Keyframes > Staggered Fade
+    (@02)   Keyframes > Preloader
     ====== Z - General =====================
     (Z01)   HTML-Structural-Tags
     (Z02)   Default HTML-Tags
@@ -43,9 +44,10 @@
     (X02)   Searchbar
     (X03)   Footer-Contents
     (X04)   Tables
+    (X05)   Animation-Easing
+    (X06)   iframes
     ====== A - Home ========================
-    (A01)   Home > News-Feed
-    (A02)   Home > Tiles
+    (A01)   Home > Tiles
     ====== B - Vorstand ====================
     (B01)   Vorstand > User-Tiles
     (B02)   Vorstand > Additional Info
@@ -64,12 +66,18 @@
     ====== M - Nachwuchskader ==============
     ====== N - Trainingszeiten =============
     ====== O - Fotogalierie ================
+    (O01)   Fotogallerie > Alben
+    (O02)   Fotogallerie > Thumbnails
     ====== P - Jahresberichte ==============
     ====== Q - News-Archiv =================
+    (Q01)   News-Archiv > Date Selectors
+    (Q02)   News-Archiv > iframe
     ====== R - OÖMM-Archiv =================
-
+    (R01)   OÖMM-Archiv > Table
+    (R02)   OÖMM-Archiv > Thumbnail-Table
     ====== S - News ========================
-
+    (S01)   News > Tags
+    (S02)   News > Tile
 
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -176,6 +184,24 @@
     @include animation(stag_fade_in_7, 1s, 1, 0s);
 }
 
+/*===================================================================================*/
+/* (@02) Keyframes > Preloader                                                       */
+/*===================================================================================*/
+
+@keyframes loader-spin {
+    0%   {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+
+    }
+}
+
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*================================   Z - GENERAL     ================================*/
@@ -219,7 +245,7 @@ ul{
 }
 
 ul li{
-    list-style-image: url('bullet.png');
+    list-style-image: url('dbullet.png');
     list-style-position: outside;
     margin-top:4px;
 }
@@ -315,69 +341,6 @@ h5{
     }
 }
 
-
-/*===================================================================================*/
-/* (Z07) Preloader                                                                   */
-/*===================================================================================*/
-
-@keyframes loader-spin {
-    0%   {
-        -webkit-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(360deg);
-        -ms-transform: rotate(360deg);
-        transform: rotate(360deg);
-
-    }
-}
-
-#loader {
-        display: block;
-        top: 100px;
-        width:$loader-size;
-        height:$loader-size;
-        margin:-75px 0 0 -75px;
-        margin-right: -75px;
-        border: 3px solid transparent;
-        border-top-color: $theme-dark ;
-        border-radius:50%;
-
-        -webkit-animation: loader-spin  2s  linear infinite;
-        animation: loader-spin  2s linear infinite;
-}
-
-#loader:before {
-        content:"";
-        position:absolute;
-        top:5px;
-        left:5px;
-        right:5px;
-        bottom:5px;
-        border: 3px solid transparent ;
-        border-top-color: $theme-accent;
-        border-radius:50%;
-
-        -webkit-animation: loader-spin  3s linear infinite;
-        animation: loader-spin n 3s linear infinite;
-}
-
-#loader:after {
-        content:"";
-        position:absolute;
-        top:15px;
-        left:15px;
-        right:15px;
-        bottom:15px;
-        border: 3px solid transparent ;
-        border-top-color: $theme-dark ;
-        border-radius:50%;
-
-        -webkit-animation: loader-spin  1.5s linear infinite;
-        animation: loader-spin  1.5s linear infinite;
-}
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
@@ -971,130 +934,13 @@ input[type="week"]:focus{
 /* (X01) Header-Contents                                                             */
 /*===================================================================================*/
 
-.header_logo{
-    height: 100%;
-
-}
-
-.header_sponsor{
-    height: 100%;
-    max-height:100px;
-    float:right;
-    margin-right: 20px;
-}
-
-.logout_bar{
-    color: #FFFFFF;
-    position: fixed;
-    top:0px;
-    right:0px;
-    background: $theme-dark;
-    padding: 3px;
-    box-shadow: 0px 0px 6px 3px $theme-dark ;
-}
-
-@media only screen and (max-width: $media-smalllargephone){
-    .logout_bar{
-        top:38px;
-    }
-}
+/* See layout.scss */
 
 /*===================================================================================*/
 /* (X02) Searchbar                                                                   */
 /*===================================================================================*/
 
-@media only screen and (max-width: $search-thrs){
-    .searchbar_container{
-        display:none;
-    }
-
-    .mobile_searchtrigger_container{
-        position: absolute;
-        right: 8px;
-        top: 2px;
-    }
-
-    .mobile_searchtrigger_container .searchbar_trigger{
-        border:none;
-        background: #507CA5;
-        padding: 3px 1px 1px 1px;
-        width: 35px;
-        box-shadow: inset 0 0 2px 1px #375572;
-    }
-
-    .mobile_searchbar_container{
-        display: none;
-        height: 0px;
-        @include ease(0.5s);
-    }
-
-    .mobile_searchbar_container:target{
-        display: inline-block;
-        background: #416586;
-        width: 100%;
-        height: 38px;
-        z-index: 300000;
-        padding: 5px;
-        @include box-sizing(border-box);
-        @include ease(0.5s);
-    }
-
-    .mobile_searchbar_container .mobile_searchbar{
-        width:90%;
-        line-height: 26px;
-        font-size:14pt;
-        padding: 0px;
-        border:none;
-        box-shadow: inset 0 0 2px 1px #375572;
-        background: #507CA5;
-        color: #FFFFFF;
-        padding-left: 5px;
-        @include box-sizing(border-box);
-    }
-
-    .mobile_searchbar_container .mobile_searchbar:focus{
-        border: none;
-        color: #FFFFFF;
-    }
-}
-
-@media only screen and (min-width: $search-thrs){
-    .searchbar_container{
-        position: absolute;
-        right: 8px;
-        top: 5px;
-    }
-
-    .searchbar_container .searchbar{
-        float: right;
-        border: none;
-        background: $theme-dark-b;
-        color: #FFFFFF;
-        padding-left: 5px;
-        box-shadow: inset 0 0 2px 1px $theme-dark-d;
-    }
-
-    .searchbar_container .searchbar:focus{
-        border: none;
-        color: #FFFFFF;
-    }
-
-    .mobile_searchtrigger_container, .mobile_searchbar_container{
-        display:none;
-    }
-}
-
-.searchbar_container .searchbar::placeholder{
-    color: #FFFFFF;
-    opacity: 0.5;
-}
-
-.searchbar_container .searchbar:focus::placeholder{
-    color: #FFFFFF;
-    opacity: 0.8;
-}
-
-
+/* See layout.scss */
 
 /*===================================================================================*/
 /* (X03) Footer-Contents                                                             */
@@ -1173,48 +1019,7 @@ table.centered_content td{
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 
 /*===================================================================================*/
-/* (A01) Home > News-Feed                                                            */
-/*===================================================================================*/
-
-.home_news_container{
-    width: 100%;
-}
-
-.home_news_imagecontainer{
-    float:left;
-
-    height: 100px;
-    border: 2px solid $theme-medium;
-    margin-right:10px;
-    @include ease(0.2s)
-}
-
-.home_news_imagecontainer:hover{
-    border: 2px solid $font-color-ahover;
-    @include ease(0.1s)
-}
-
-.home_news_image{
-    max-height: 100px;
-    max-width: 180px;
-    margin: auto;
-    display: block;
-}
-
-.home_news_article{
-    margin-bottom: 20px;
-    max-height: 142px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    p{
-        margin-top: 0px;
-    }
-
-}
-
-/*===================================================================================*/
-/* (A02) Home > Tiles                                                                */
+/* (A01) Home > Tiles                                                                */
 /*===================================================================================*/
 .home_tile_wrapper{
     display: grid;
@@ -1469,6 +1274,10 @@ table.centered_content td{
     box-shadow: 0 10px 10px -3px #000000;
 }
 
+/*===================================================================================*/
+/* (O02)   Fotogallerie > Thumbnails                                                 */
+/*===================================================================================*/
+
 .gallery_image_thumb{
     width: 200px;
     overflow: hidden;
@@ -1603,6 +1412,10 @@ table.centered_content td{
     }
 
 }
+
+/*===================================================================================*/
+/* (Q02)   News-Archiv > iframe                                                      */
+/*===================================================================================*/
 
 .news_archive_iframe{
     width: 100%;
@@ -1754,43 +1567,43 @@ table.centered_content td{
     }
 }
 
+/*===================================================================================*/
+/* (S02)   News > Tile                                                               */
+/*===================================================================================*/
 
-
-
-
-
-
-
-
-
-
-
-
-/*
-@keyframes federball_flyby{
-    0%{
-        left: -100px;
-    }
-
-    100%{
-        left: 2000px;
-    }
-
+.news_container{
+    width: 100%;
 }
 
-.fbfly{
-    position: fixed;
-    left: -200px;
-    top:200px;
-    height: 200px;
-    transform: rotate(-90deg);
-    @include animation(federball_flyby, 5s, 1, 0s);
+.news_imagecontainer{
+    float:left;
 
+    height: 100px;
+    border: 2px solid $theme-medium;
+    margin-right:10px;
+    @include ease(0.2s)
 }
-*/
 
+.news_imagecontainer:hover{
+    border: 2px solid $font-color-ahover;
+    @include ease(0.1s)
+}
 
+.news_image{
+    max-height: 100px;
+    max-width: 180px;
+    margin: auto;
+    display: block;
+}
 
+.news_article{
+    margin-bottom: 20px;
+    max-height: 142px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
-
+    p{
+        margin-top: 0px;
+    }
+}
 
