@@ -48,6 +48,7 @@
     (X06)   iframes
     ====== A - Home ========================
     (A01)   Home > Tiles
+    (A01)   Home > Modern News-Tiles
     ====== B - Vorstand ====================
     (B01)   Vorstand > User-Tiles
     (B02)   Vorstand > Additional Info
@@ -1085,6 +1086,55 @@ table.centered_content td{
     padding: 2px 2px 5px 3px;
 }
 
+/*===================================================================================*/
+/* (A02) Home > Modern News-Tiles                                                                */
+/*===================================================================================*/
+
+.mdrn_news_tile_container{
+    overflow: hidden;
+}
+
+.mdrn_news_tile{
+    display: inline-block;
+    vertical-align: top;
+    margin: 20px;
+    width: 200px;
+
+    .img_tag_container{
+        position: relative;
+        text-align: center;
+        color: #000000;
+        font-weight: bold;
+    }
+
+    .tag_overlay{
+        position: absolute;
+        background: $theme-accentII;
+        bottom: 10px;
+        left: 0px;
+        overflow: hidden;
+        border-left: 3px solid $theme-medium;
+        padding-left: 2px;
+        padding-right: 3px;
+    }
+
+    img{
+        width: 100%;
+    }
+
+    b{
+        font-size: 13pt;
+        font-weight: 700;
+    }
+
+    p{
+        background: -webkit-linear-gradient(#000000, #000000, #000000, #FFFFFF);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+}
+
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*================================   B - Vorstand    ================================*/
@@ -1575,26 +1625,6 @@ table.centered_content td{
     width: 100%;
 }
 
-.news_imagecontainer{
-    float:left;
-
-    height: 100px;
-    border: 2px solid $theme-medium;
-    margin-right:10px;
-    @include ease(0.2s)
-}
-
-.news_imagecontainer:hover{
-    border: 2px solid $font-color-ahover;
-    @include ease(0.1s)
-}
-
-.news_image{
-    max-height: 100px;
-    max-width: 180px;
-    margin: auto;
-    display: block;
-}
 
 .news_article{
     margin-bottom: 20px;
@@ -1604,6 +1634,59 @@ table.centered_content td{
 
     p{
         margin-top: 0px;
+    }
+
+    .news_imagecontainer{
+        float:left;
+
+        height: 100px;
+        border: 2px solid $theme-medium;
+        margin-right:10px;
+        @include ease(0.2s);
+
+        .news_image{
+            max-height: 100px;
+            max-width: 180px;
+            margin: auto;
+            display: block;
+        }
+    }
+
+    .news_imagecontainer:hover{
+        border: 2px solid $font-color-ahover;
+        @include ease(0.1s);
+    }
+}
+
+
+.news_article_slim{
+    margin-bottom: 20px;
+    max-height: 142px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    p{
+        margin-top: 0px;
+    }
+
+    .news_imagecontainer{
+        float: left;
+        height: 80px;
+        border: 2px solid $theme-medium;
+        margin-right:10px;
+        @include ease(0.2s);
+
+        .news_image{
+            max-height: 80px;
+            max-width: 160px;
+            margin: auto;
+            display: block;
+        }
+    }
+
+    .news_imagecontainer:hover{
+        border: 2px solid $font-color-ahover;
+        @include ease(0.1s);
     }
 }
 
