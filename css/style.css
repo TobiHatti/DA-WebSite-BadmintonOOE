@@ -49,6 +49,7 @@
     (X06)   iframes
     ====== A - Home ========================
     (A01)   Home > Tiles
+    (A01)   Home > Modern News-Tiles
     ====== B - Vorstand ====================
     (B01)   Vorstand > User-Tiles
     (B02)   Vorstand > Additional Info
@@ -1095,6 +1096,41 @@ table.centered_content td {
 .home_tile_content {
   padding: 2px 2px 5px 3px; }
 
+/*===================================================================================*/
+/* (A02) Home > Modern News-Tiles                                                                */
+/*===================================================================================*/
+.mdrn_news_tile_container {
+  overflow: hidden; }
+
+.mdrn_news_tile {
+  display: inline-block;
+  vertical-align: top;
+  margin: 20px;
+  width: 200px; }
+  .mdrn_news_tile .img_tag_container {
+    position: relative;
+    text-align: center;
+    color: #000000;
+    font-weight: bold; }
+  .mdrn_news_tile .tag_overlay {
+    position: absolute;
+    background: #FFD700;
+    bottom: 10px;
+    left: 0px;
+    overflow: hidden;
+    border-left: 3px solid #3B9EBF;
+    padding-left: 2px;
+    padding-right: 3px; }
+  .mdrn_news_tile img {
+    width: 100%; }
+  .mdrn_news_tile b {
+    font-size: 13pt;
+    font-weight: 700; }
+  .mdrn_news_tile p {
+    background: -webkit-linear-gradient(#000000, #000000, #000000, #FFFFFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; }
+
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*================================   B - Vorstand    ================================*/
@@ -1486,31 +1522,6 @@ table.centered_content td {
 .news_container {
   width: 100%; }
 
-.news_imagecontainer {
-  float: left;
-  height: 100px;
-  border: 2px solid #3B9EBF;
-  margin-right: 10px;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -ms-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out; }
-
-.news_imagecontainer:hover {
-  border: 2px solid #F01B16;
-  -webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  -ms-transition: all 0.1s ease-in-out;
-  -o-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out; }
-
-.news_image {
-  max-height: 100px;
-  max-width: 180px;
-  margin: auto;
-  display: block; }
-
 .news_article {
   margin-bottom: 20px;
   max-height: 142px;
@@ -1518,5 +1529,57 @@ table.centered_content td {
   text-overflow: ellipsis; }
   .news_article p {
     margin-top: 0px; }
+  .news_article .news_imagecontainer {
+    float: left;
+    height: 100px;
+    border: 2px solid #3B9EBF;
+    margin-right: 10px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; }
+    .news_article .news_imagecontainer .news_image {
+      max-height: 100px;
+      max-width: 180px;
+      margin: auto;
+      display: block; }
+  .news_article .news_imagecontainer:hover {
+    border: 2px solid #F01B16;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out; }
+
+.news_article_slim {
+  margin-bottom: 20px;
+  max-height: 142px;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+  .news_article_slim p {
+    margin-top: 0px; }
+  .news_article_slim .news_imagecontainer {
+    float: left;
+    height: 80px;
+    border: 2px solid #3B9EBF;
+    margin-right: 10px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; }
+    .news_article_slim .news_imagecontainer .news_image {
+      max-height: 80px;
+      max-width: 160px;
+      margin: auto;
+      display: block; }
+  .news_article_slim .news_imagecontainer:hover {
+    border: 2px solid #F01B16;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out; }
 
 /*# sourceMappingURL=style.css.map */

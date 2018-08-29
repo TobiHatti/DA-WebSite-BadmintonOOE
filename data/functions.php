@@ -187,6 +187,34 @@ function NewsTile($strSQL, $targetTop = false)
     return $retval;
 }
 
+function NewsTileSlim($strSQL, $targetTop = false)
+{
+    require("mysql_connect.php");
+
+    $retval = '';
+    $i=1;
+    $rs=mysqli_query($link,$strSQL);
+    while($row=mysqli_fetch_assoc($rs))
+    {
+        $retval .= '
+            <div class="news_article_slim stagfade'.$i++.'">
+                <div class="news_imagecontainer">
+                    <a '.(($targetTop) ? 'target="_top"' : '').' href="/news/artikel/'.$row['article_url'].'">
+                        <img src="'.(($row['thumbnail']=="") ? '/content/no-image.png' : $row['thumbnail'] ).'" alt="" class="news_image"/>
+                    </a>
+                </div>
+                <div>
+                    '.ShowTags($row['tags'],false,$targetTop).'
+                    <a '.(($targetTop) ? 'target="_top"' : '').' href="/news/artikel/'.$row['article_url'].'"><h3>'.$row['title'].'</h3></a>
+                    <span style="font-size: 10pt;color: #808080">'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['release_date']))).'</span>
+                </div>
+            </div>
+        ';
+    }
+
+    return $retval;
+}
+
 function Pager($sqlQuery,$entriesPerPage = 10)
 {
     $retval = '';
