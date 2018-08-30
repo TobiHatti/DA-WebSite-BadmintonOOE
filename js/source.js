@@ -455,3 +455,28 @@ function UpdateArchiveFrame()
         document.getElementById("loaderSprite").style.opacity = 0;
     }, 800);
 }
+
+
+
+function CopySliderTitle()
+{
+    var list = document.getElementsByClassName("ws-title")[0];
+    document.getElementById("slider_news_title").value = list.getElementsByTagName("SPAN")[0].innerHTML;
+    var currentTitle = list.getElementsByTagName("SPAN")[0].innerHTML;
+
+    if(document.getElementById("slideTitle1").value == currentTitle)
+    {
+        document.getElementById("sliderDate").value = document.getElementById("slideDate1").value;
+        document.getElementById("sliderLink").href = "/news/artikel/" + document.getElementById("slideLink1").value;
+    }
+    if(document.getElementById("slideTitle2").value == currentTitle)
+    {
+        document.getElementById("sliderDate").value = document.getElementById("slideDate2").value;
+        document.getElementById("sliderLink").href = "/news/artikel/" + document.getElementById("slideLink2").value;
+    }
+    if(document.getElementById("slideTitle3").value == currentTitle)
+    {
+        document.getElementById("sliderDate").value = document.getElementById("slideDate3").value;
+        document.getElementById("sliderLink").href = "/news/artikel/" + document.getElementById("slideLink3").value;
+    }
+}
