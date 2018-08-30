@@ -115,14 +115,34 @@ function PageTitle($string)
     echo '<script>document.title = "'.$string.' | O\u00d6. Badmintonverband";</script>';
 }
 
-function PageContent($paragraph_index)
+function FroalaContent($content)
+{
+    return '<div class="fr-view fr-element">'.$content.'</div>';
+}
+
+function PageContent($paragraph_index,$allowEdit=false)
 {
     // DESCRIPTION:
     // Gets the text/description for the current page
     // With $paragraph_index, several entries can be saved in one page.
 
-    $page = ThisPage();
-    return nl2br(MySQLSkalar("SELECT text AS x FROM page_content WHERE page = '$page' AND paragraph_index = '$paragraph_index'"));
+    $page = ThisPage("!editContent");
+    $content = nl2br(MySQLSkalar("SELECT text AS x FROM page_content WHERE page = '$page' AND paragraph_index = '$paragraph_index'"));
+
+    if(!$allowEdit)
+    {
+        $retval = FroalaContent($content);
+    }
+    else if(($allowEdit AND !isset($_GET['editContent'])) OR ($allowEdit AND isset($_GET['editContent']) AND $_GET['editContent']!=$paragraph_index))
+    {
+        $retval = FroalaContent($content).'<p style="margin: 0;"><a href="'.ThisPage('+editContent='.$paragraph_index).'">Bearbeiten</a></p>';
+    }
+    else if($allowEdit AND isset($_GET['editContent']) AND $_GET['editContent']==$paragraph_index)
+    {
+        $retval = TextareaPlus("contentEdit","contentEdit",$content).'<br><button type="submit" name="changeContent" value="'.$page.'||'.$paragraph_index.'">&Auml;ndern</button>';
+    }
+
+    return $retval;
 }
 
 function Loader()
