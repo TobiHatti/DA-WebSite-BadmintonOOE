@@ -51,23 +51,34 @@
     }
     else if(isset($_GET['album']))
     {
-        echo '<h1 class="stagfade1">'.Fetch("fotogalerie","album_name","album_url",$_GET['album']).'</h1>';
+       echo '
+       <h1 class="stagfade1">'.Fetch("fotogalerie","album_name","album_url",$_GET['album']).'</h1>
+       <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+       <br>
+       <button type="button">Download</button>
+       ';
 
         $album_path = $_GET['album'];
         $album_name = Fetch("fotogalerie","album_name","album_url",$_GET['album']);
+        $album_id = Fetch("fotogalerie","id","album_url",$_GET['album']);
         $i=1;
 
-        // Hier SQL-Query schleife mit untenstehendem echo für jedes Foto:
+        $strSQL = "SELECT * FROM gallery_images WHERE album_id='$album_id'";
+        $rs=mysqli_query($link,$strSQL);
+        while($row=mysqli_fetch_assoc($rs))
+        {
+           // Hier SQL-Query schleife mit untenstehendem echo für jedes Foto:
 
 
         echo '
+        <br>
             <a href="#galleryView">
                 <div class="gallery_image_thumb">
-                    <img src="/content/gallery/'.$_GET['album'].'/ASMN6466.JPG" alt="" />
+                    <img src="/content/gallery/'.$_GET['album'].'/'.$row['image'].'" alt="" />
                     <p>
-                        Test-Galerie (1)
+                        '.$album_name.'
                         <br>
-                        <span>ASMN6466.JPG</span>
+                        <span>'.$row['image'].'</span>
                     </p>
                 </div>
             </a>
@@ -84,7 +95,7 @@
                 </div>
             </div>
         ';
-
+        }
 
     }
     else
@@ -106,7 +117,7 @@
             <br>
             <u>Fotogalerie: Fotovorschau:</u><br>
             SQL-Abfrage f&uuml;r ausgew&auml;hltes Album erstellen&#10004;<br>
-            Fotos anzeigen lassen<br>
+            Fotos anzeigen lassen&#10004;<br>
             Pager hinzuf&uuml;gen (Tobi)<br>
             Download-Button<br>
             Foto-Anzeige - [CSS-Target] (Tobi)
