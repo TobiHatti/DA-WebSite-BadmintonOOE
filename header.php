@@ -177,9 +177,10 @@
                                 if(isset($_SESSION['user_id']))   // Condition: Check if user can edit any element of the page
                                 {
                                     echo '
-                                        <li class="active"><a href="#">| Verwaltung</a>
+                                        <li class="active"><a href="#">Verwaltung</a>
                                             <ul>
-                                                <li><a href="#">News-Artikel hinzuf&uuml;gen</a></li>
+                                                <li><a href="/news/neu">Neuer News-Artikel</a></li>
+                                                <li><a href="/fotogalerie/neu">Neue Fotogalerie</a></li>
                                             </ul>
                                         </li>
                                     ';

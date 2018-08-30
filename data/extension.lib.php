@@ -20,14 +20,88 @@ function Redirect($path,$delay=0)
     echo '<meta http-equiv="refresh" content="'.$delay.'; url='.$path.'" />';
 }
 
-function ThisPage()
+function ThisPage($urlex = '')
 {
     // DESCRIPTION:
     // Can be used in the "action"-argument of a <form>-Tag
     // or in combination with the Redirect()-Function
+    // $urlex   Add or remove a part of the URL
+    //          "+name=value"   Adds something to the URL
+    //          "-name=value"   Removes something from the URL
+    //          "!name"         Removes the Get-Query that starts with "name"
     // Returns the current pagename
 
-    return  basename($_SERVER["REQUEST_URI"], '.php');
+    $thisPage = basename($_SERVER["REQUEST_URI"], '.php');
+
+    if($urlex != '')
+    {
+        if(StartsWith($urlex, '+'))
+        {
+            $nUrl = ltrim($urlex,'+');
+            if(SubStringFind($thisPage,'?'))
+            {
+                $thisPage .= "&".$nUrl;
+            }
+            else
+            {
+                $thisPage .= "?".$nUrl;
+            }
+        }
+        if(StartsWith($urlex, '-'))
+        {
+            $nUrl = ltrim($urlex,'-');
+            $pageParts = explode('?',$thisPage);
+
+            if(isset($pageParts[1]))
+            {
+                $getParts = explode('&',$pageParts[1]);
+                $newPage = $pageParts[0];
+
+                $firstAddition = true;
+                foreach ($getParts as $g)
+                {
+                    if($g != $nUrl)
+                    {
+                        if($firstAddition)
+                        {
+                            $newPage .= '?'.$g;
+                            $firstAddition = false;
+                        }
+                        else $newPage .= '&'.$g;
+                    }
+                }
+                $thisPage = $newPage;
+            }
+        }
+        if(StartsWith($urlex, '!'))
+        {
+            $nUrl = ltrim($urlex,'!');
+            $pageParts = explode('?',$thisPage);
+
+            if(isset($pageParts[1]))
+            {
+                $getParts = explode('&',$pageParts[1]);
+                $newPage = $pageParts[0];
+
+                $firstAddition = true;
+                foreach ($getParts as $g)
+                {
+                    if(!SubStringFind($g,$nUrl))
+                    {
+                        if($firstAddition)
+                        {
+                            $newPage .= '?'.$g;
+                            $firstAddition = false;
+                        }
+                        else $newPage .= '&'.$g;
+                    }
+                }
+                $thisPage = $newPage;
+            }
+        }
+    }
+
+    return  $thisPage;
 }
 
 function GDate($format,$date="")
