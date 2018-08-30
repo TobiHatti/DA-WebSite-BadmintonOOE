@@ -1404,6 +1404,8 @@ table.centered_content td{
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        max-width: 80%;
+        max-height: 85%;
     }
 
 
@@ -1435,15 +1437,16 @@ table.centered_content td{
     box-shadow: 0 5px 5px -2px #000000;
     display: inline-block;
     vertical-align: top;
-    margin: 5px;
+    margin: 10px;
     height: 170px;
     @include ease(0.15s);
 
     img{
         display: block;
-        margin:5%;
+        margin:5px;
         margin-bottom: 3px;
-        width: 90%;
+        max-width: 190px;
+        max-height: 120px;
         box-shadow: 0 0 6px 1px #000000;
         @include ease(0.1s);
     }
@@ -1453,11 +1456,14 @@ table.centered_content td{
         margin-left:5%;
         margin-bottom: 5px;
         font-weight: bold;
+        text-align: left;
         color: #000000;
     }
 
     span{
         font-weight: lighter;
+        text-align: left;
+        font-style: italic;
         padding-left: 10px;
         font-size: 9pt;
         color: #696969;
@@ -1469,15 +1475,15 @@ table.centered_content td{
     box-shadow: 0 5px 8px -2px #000000;
     background: #FFFFFF;
     img{
-        width: 96%;
-        margin: 2%;
+        margin: 0;
+        max-width: 200px;
+        max-height: 130px;
         margin-bottom: 3px;
         box-shadow: none;
         border: none;
     }
 
 }
-
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*================================= Q - News-Archiv =================================*/
