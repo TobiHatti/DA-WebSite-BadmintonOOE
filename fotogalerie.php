@@ -55,18 +55,33 @@
 
         $album_path = $_GET['album'];
         $album_name = Fetch("fotogalerie","album_name","album_url",$_GET['album']);
+        $i=1;
 
-
+        // Hier SQL-Query schleife mit untenstehendem echo für jedes Foto:
 
 
         echo '
-            <div class="gallery_image_thumb">
-                <img src="/content/gallery/'.$_GET['album'].'/ASMN6466.JPG" alt="" />
-                <p>
-                    Test-Galerie (1)
-                    <br>
-                    <span>ASMN6466.JPG</span>
-                </p>
+            <a href="#galleryView">
+                <div class="gallery_image_thumb">
+                    <img src="/content/gallery/'.$_GET['album'].'/ASMN6466.JPG" alt="" />
+                    <p>
+                        Test-Galerie (1)
+                        <br>
+                        <span>ASMN6466.JPG</span>
+                    </p>
+                </div>
+            </a>
+
+            <div class="gallery_view_wrapper" id="galleryView" >
+                <a href="#">
+                    <div class="gallery_view_container"></div>
+                </a>
+                <div class="image_container">
+                    <a href="#"><img src="/content/cross2.png" alt="" class="close_cross"/></a>
+                    <a><img src="/content/left.png" alt="" class="back"/></a>
+                    <a><img src="/content/right.png" alt="" class="next"/></a>
+                    <img src="/content/news/Trainingstagebuch-ndash-Jinan-Provinz-Shandong-China-2018/5b8715b8f17cf.png" alt="" class="gallery_image"/>
+                </div>
             </div>
         ';
 
