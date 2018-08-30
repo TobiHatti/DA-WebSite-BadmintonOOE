@@ -56,7 +56,10 @@
         $album_path = $_GET['album'];
         $album_name = Fetch("fotogalerie","album_name","album_url",$_GET['album']);
 
-
+        $strSQL = "SELECT * FROM fotogalerie LIMIT $offset,$entriesPerPage";
+        $rs=mysqli_query($link,$strSQL);
+        while($row=mysqli_fetch_assoc($rs))
+        {
 
 
         echo '
@@ -69,7 +72,7 @@
                 </p>
             </div>
         ';
-
+       }
 
     }
     else
