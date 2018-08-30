@@ -135,7 +135,8 @@
 @supports (grid-area: auto) {
   body {
     display: grid;
-    margin: 0; }
+    margin: 0;
+    margin-bottom: 20px; }
 
   @media only screen and (max-width: 600px) {
     body {

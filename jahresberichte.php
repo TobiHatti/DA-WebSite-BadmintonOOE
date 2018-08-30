@@ -5,7 +5,7 @@
     echo '<h1 class="stagfade1">Jahresberichte</h1>
 
     <p>
-       '.PageContent('1').'
+       '.PageContent('1',CheckPermission("ChangeContent")).'
     </p>
 
 

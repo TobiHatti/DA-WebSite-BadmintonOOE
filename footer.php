@@ -64,7 +64,7 @@
                 <br>
 
 
-
+                <br>
                 <span style="color: #696969">&copy; Copyright 2018 Tobias Hattinger & Paul Luger</span> | <a href="impressum">Impressum</a>
             </footer>
         </body>

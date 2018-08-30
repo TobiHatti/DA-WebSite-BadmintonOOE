@@ -11,6 +11,7 @@
     require("data/string.lib.php");
 
     require("data/functions.php");
+    require("data/multipagepost.php");
 
     MySQLPDSave("d");
 
@@ -107,7 +108,7 @@
                 <header>
                     <div class="header_logo"></div>
                     <div class="header_sponsor"></div>
-                    '.((isset($_SESSION['user_id'])) ? '<div class="logout_bar">Angemeldet als '.$_SESSION['username'].' - <a href="/logout">Abmelden</a></div>' : '').'
+                    '.((isset($_SESSION['userID'])) ? '<div class="logout_bar">Angemeldet als '.$_SESSION['username'].' - <a href="/logout">Abmelden</a></div>' : '').'
                 </header>
 
                 <nav>
@@ -174,7 +175,7 @@
 
                                 ';
 
-                                if(isset($_SESSION['user_id']))   // Condition: Check if user can edit any element of the page
+                                if(isset($_SESSION['userID']))   // Condition: Check if user can edit any element of the page
                                 {
                                     echo '
                                         <li class="active"><a href="#">Verwaltung</a>
