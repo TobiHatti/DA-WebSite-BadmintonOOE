@@ -6,19 +6,7 @@
 
     <div class="links_container">
         <p>
-           '.PageContent('1').'
-        </p>
-
-        <p>
-          '.PageContent('2').'
-        </p>
-
-        <p>
-          '.PageContent('3').'
-        </p>
-
-        <p>
-          '.PageContent('4').'
+           '.PageContent('1',CheckPermission("ChangeContent")).'
         </p>
     </div>
 

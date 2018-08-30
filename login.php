@@ -8,7 +8,7 @@
 
         if(MySQLExists("SELECT * FROM users WHERE email = '$email' AND password = '$pswd'"))
         {
-            $_SESSION['user_id'] = Fetch("users","id","email",$email);
+            $_SESSION['userID'] = Fetch("users","id","email",$email);
             $_SESSION['username'] = Fetch("users","username","email",$email);
             Redirect("/");
         }

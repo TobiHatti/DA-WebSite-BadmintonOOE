@@ -9,5 +9,5 @@
         setcookie("user_id",'',time() - 3600);
     }
 
-    echo '<meta http-equiv="refresh" content="0; url=/" />';
+    echo '<script>window.history.back();</script>';
 ?>

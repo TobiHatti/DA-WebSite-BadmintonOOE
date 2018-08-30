@@ -135,14 +135,38 @@ function PageContent($paragraph_index,$allowEdit=false)
     }
     else if(($allowEdit AND !isset($_GET['editContent'])) OR ($allowEdit AND isset($_GET['editContent']) AND $_GET['editContent']!=$paragraph_index))
     {
-        $retval = FroalaContent($content).'<p style="margin: 0;"><a href="'.ThisPage('+editContent='.$paragraph_index).'">Bearbeiten</a></p>';
+        $retval = FroalaContent($content).'<p style="margin: 0;"><a href="'.ThisPage('+editContent='.$paragraph_index).'"> &#9998; Bearbeiten</a></p>';
     }
     else if($allowEdit AND isset($_GET['editContent']) AND $_GET['editContent']==$paragraph_index)
     {
-        $retval = TextareaPlus("contentEdit","contentEdit",$content).'<br><button type="submit" name="changeContent" value="'.$page.'||'.$paragraph_index.'">&Auml;ndern</button>';
+        $retval = '<form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">'.TextareaPlus("contentEdit","contentEdit",$content).'<br><button type="submit" name="changeContent" value="'.$page.'||'.$paragraph_index.'">&Auml;ndern</button type="button"><a href="'.ThisPage("!editContent").'"><button type="button">Abbrechen</button></a><form>';
     }
 
+
     return $retval;
+}
+
+function CheckPermission($permission)
+{
+    // DESCRIPTION
+    // Checks if the given permission is true/false
+    // for the logged in user
+    // $permission  Permission-Keyword
+
+
+
+    if(!isset($_SESSION['userID'])) return false;
+    else
+    {
+        $uid = $_SESSION['userID'];
+
+        // Check Permission-Database and get the propper value
+        // NOT FINALISED
+        return true;
+    }
+
+
+
 }
 
 function Loader()
