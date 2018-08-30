@@ -224,7 +224,8 @@
                             <div class="ws_images">
                                 <ul>
                                     ';
-
+                                    // 3 SQL-Queries are required for the slider to work in the best way.
+                                    // Bundeling some queries can slow the slider down and skip slides
                                     $i=1;
                                     $strSQL = "SELECT * FROM news ORDER BY release_date DESC, id DESC LIMIT 0,3";
                                     $rs=mysqli_query($link,$strSQL);
@@ -232,9 +233,11 @@
                                     {
                                         echo '
                                         <li>
-                                            <img src="/content/news/_slideshow/slide'.$i++.'.jpg" title="'.$row['title'].'" id="wows1_0"/>
+                                            <img src="/content/news/_slideshow/slide'.$i.'.jpg" title="'.$row['title'].'" id="wows1_'.($i-1).'"/>
                                         </li>
                                         ';
+
+                                        $i++;
                                     }
 
                                     echo '
@@ -242,8 +245,17 @@
                             </div>
                             <div class="ws_bullets">
                                 <div>
-                                    <a href="#" title="5b8556fc07fd9"><span><img src="/content/news/Hobbynachwuchsturnier-in-Altmuenster/5b8556fc07fd9.png" alt="Title 01" height="48px"/>1</span></a>
-                                    <a href="#" title="5b8557d50d4dc"><span><img src="/content/news/Mit-neuem-Schwung-in-die-Saison-2018-19/5b8557d50d4dc.png" alt="Title 02" height="48px"/>2</span></a>
+                                    ';
+
+                                    $i=1;
+                                    $strSQL = "SELECT * FROM news ORDER BY release_date DESC, id DESC LIMIT 0,3";
+                                    $rs=mysqli_query($link,$strSQL);
+                                    while($row=mysqli_fetch_assoc($rs))
+                                    {
+                                        echo '<a href="#" title="'.$row['title'].'"><span><img src="/content/news/_slideshow/slide'.$i.'.jpg" alt="'.$row['title'].'" height="48px"/>'.$i++.'</span></a>';
+                                    }
+
+                                    echo '
                                 </div>
                             </div>
                             <div class="ws_shadow"></div>
@@ -252,8 +264,30 @@
                         <script type="text/javascript" src="/js/script.js"></script>
                     </center>
 
-                    <h1 style="color: #000000;">News-Artikel Titel</h1>
-                    <a href="#">Top News</a>, <a href="#">Verbandsintern</a> / <span style="color: #A9A9A9">30. Mai 2018</span>
+                    ';
+
+                    $i=1;
+                    $strSQL = "SELECT * FROM news ORDER BY release_date DESC, id DESC LIMIT 0,3";
+                    $rs=mysqli_query($link,$strSQL);
+                    while($row=mysqli_fetch_assoc($rs))
+                    {
+                        echo '
+                            <input type="hidden" id="slideTitle'.$i.'" value="'.$row['title'].'">
+                            <input type="hidden" id="slideDate'.$i.'" value="'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['release_date']))).'">
+                            <input type="hidden" id="slideLink'.$i++.'" value="'.$row['article_url'].'">
+                        ';
+                    }
+
+                    echo '
+
+                    <script>
+                        window.setInterval(function(){
+                            CopySliderTitle();
+                        }, 500);
+                    </script>
+
+                    <a href="" id="sliderLink"><h1 style="color: #000000; height: 36px; overflow: hidden;"><output id="slider_news_title">News-Artikel Titel</output></h1></a>
+                    <span style="color: #A9A9A9"><output id="sliderDate"></output></span>
                 </article>
                 <aside>
                     <h2>Nachwuchs</h2>
@@ -280,9 +314,13 @@
                                 <div class="tag_overlay">'.ShowTags($row['tags']).'</div>
                             </div>
                             <a href="/news/artikel/'.$row['article_url'].'"><b>'.$row['title'].'</b></a>
-                            <p>
+                            <p></p>
+                            <span>
+                            '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['release_date']))).':&nbsp;
+                            </span>
+                            <div class="p">
                             '.TrimText(str_replace('</p><p>',' ',str_replace('<br>',' ',str_replace($row['title'],'',$row['article']))), 120) .'<br>
-                            </p>
+                            </div>
                             <a href="/news/artikel/'.$row['article_url'].'">&#9654; Mehr lesen</a>
                         </div>
                     ';

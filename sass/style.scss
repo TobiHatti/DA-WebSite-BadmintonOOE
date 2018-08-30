@@ -1128,7 +1128,14 @@ table.centered_content td{
         font-weight: 700;
     }
 
-    p{
+    span{
+        float: left;
+        color: #696969;
+        font-style: italic;
+    }
+
+    div.p{
+        float: none;
         background: -webkit-linear-gradient(#000000, #000000, #000000, #FFFFFF);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
