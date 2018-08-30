@@ -56,46 +56,60 @@
        <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
        <br>
        <button type="button">Download</button>
+       <br>
+       <center>
        ';
 
         $album_path = $_GET['album'];
         $album_name = Fetch("fotogalerie","album_name","album_url",$_GET['album']);
         $album_id = Fetch("fotogalerie","id","album_url",$_GET['album']);
-        $i=1;
 
-        $strSQL = "SELECT * FROM gallery_images WHERE album_id='$album_id'";
+
+        $entriesPerPage = 50;
+        $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
+
+        $i= 1 + ((isset($_GET['page'])) ? $_GET['page']-1 : 0 )*$entriesPerPage;
+        $strSQL = "SELECT * FROM gallery_images WHERE album_id = '$album_id' LIMIT $offset,$entriesPerPage";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
         {
            // Hier SQL-Query schleife mit untenstehendem echo für jedes Foto:
 
 
-        echo '
-        <br>
-            <a href="#galleryView">
-                <div class="gallery_image_thumb">
-                    <img src="/content/gallery/'.$_GET['album'].'/'.$row['image'].'" alt="" />
-                    <p>
-                        '.$album_name.'
-                        <br>
-                        <span>'.$row['image'].'</span>
-                    </p>
-                </div>
-            </a>
+            echo '
+                <a href="#galleryView" onclick="SelectGalleryImage('.$i.');">
+                    <div class="gallery_image_thumb">
+                        <center><img src="/content/gallery/'.$_GET['album'].'/'.$row['image'].'" alt="" id="galleryImg'.$i.'"/></center>
+                        <p>
+                            '.$album_name.' ('.$i++.')
+                            <br>
+                            <span>'.$row['image'].'</span>
+                        </p>
+                    </div>
+                </a>
 
+
+            ';
+        }
+
+        echo '
+        </center>
             <div class="gallery_view_wrapper" id="galleryView" >
                 <a href="#">
                     <div class="gallery_view_container"></div>
                 </a>
                 <div class="image_container">
                     <a href="#"><img src="/content/cross2.png" alt="" class="close_cross"/></a>
-                    <a><img src="/content/left.png" alt="" class="back"/></a>
-                    <a><img src="/content/right.png" alt="" class="next"/></a>
-                    <img src="/content/news/Trainingstagebuch-ndash-Jinan-Provinz-Shandong-China-2018/5b8715b8f17cf.png" alt="" class="gallery_image"/>
+                    <a><img src="/content/left.png" alt="" class="back" onclick="SelectLastImage();"/></a>
+                    <a><img src="/content/right.png" alt="" class="next" onclick="SelectNextImage();"/></a>
+                    <img src="" alt="" class="gallery_image" id="galleryFullSized"/>
                 </div>
             </div>
+
+            <input type="hidden" id="currentImageID"/>
         ';
-        }
+
+        echo Pager("SELECT * FROM gallery_images WHERE album_id = '$album_id'",$entriesPerPage);
 
     }
     else
@@ -112,15 +126,15 @@
             Tag-Funktion einf&uuml;gen (Tobi)<br>
             <br>
             <u>Fotogalerie: Alben:</u><br>
-            Pager hinzuf&uuml;gen (Tobi)<br>
-            CSS-Anpassen (Tobi)<br>
+            Pager hinzuf&uuml;gen (Tobi)&#10004;<br>
+            CSS-Anpassen (Tobi)&#10004;<br>
             <br>
             <u>Fotogalerie: Fotovorschau:</u><br>
             SQL-Abfrage f&uuml;r ausgew&auml;hltes Album erstellen&#10004;<br>
             Fotos anzeigen lassen&#10004;<br>
-            Pager hinzuf&uuml;gen (Tobi)<br>
+            Pager hinzuf&uuml;gen (Tobi)&#10004;<br>
             Download-Button<br>
-            Foto-Anzeige - [CSS-Target] (Tobi)
+            Foto-Anzeige - [CSS-Target] (Tobi)&#10004;
 
             <br><br><br>
 

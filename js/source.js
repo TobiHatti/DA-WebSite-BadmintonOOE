@@ -480,3 +480,29 @@ function CopySliderTitle()
         document.getElementById("sliderLink").href = "/news/artikel/" + document.getElementById("slideLink3").value;
     }
 }
+
+
+function SelectGalleryImage(imageID)
+{
+    var selectedImg = document.getElementById("galleryImg" + imageID).src;
+    document.getElementById("galleryFullSized").src = selectedImg;
+    document.getElementById("currentImageID").value = imageID;
+}
+
+function SelectNextImage()
+{
+    var selectedImgId = parseInt(document.getElementById("currentImageID").value);
+    var selectedImg = document.getElementById("galleryImg" + (selectedImgId+1)).src;
+
+    document.getElementById("galleryFullSized").src = selectedImg;
+    document.getElementById("currentImageID").value = selectedImgId + 1;
+}
+
+function SelectLastImage()
+{
+    var selectedImgId = parseInt(document.getElementById("currentImageID").value);
+    var selectedImg = document.getElementById("galleryImg" + (selectedImgId-1)).src;
+
+    document.getElementById("galleryFullSized").src = selectedImg;
+    document.getElementById("currentImageID").value = selectedImgId - 1;
+}
