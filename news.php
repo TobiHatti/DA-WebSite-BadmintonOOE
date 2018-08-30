@@ -38,6 +38,23 @@
 
         MySQLNonQuery("INSERT INTO news (id,article_url,title, author,tags,article,release_date,thumbnail) VALUES ('','$article_url','$title','$author','$tags','$article','$release','$thumb')") or die("<h1>Ein fehler ist aufgetreten</h1>");
 
+        // Changing the News-Slider in Index
+        $i=1;
+        $today = date("Y-m-d");
+        $strSQL = "SELECT * FROM news WHERE release_date <= '$today' ORDER BY release_date DESC, id DESC LIMIT 0,3";
+        $rs=mysqli_query($link,$strSQL);
+        while($row=mysqli_fetch_assoc($rs))
+        {
+            $articleUrl = $row['article_url'];
+            $thumbnail = $row['thumbnail'];
+
+            ResizeImage($thumbnail,"content/news/_slideshow/slide".$i."_temp.jpg",480, 273);
+
+            CropImage("content/news/_slideshow/slide".$i."_temp.jpg", "content/news/_slideshow/slide".$i.".jpg", "480", "273");
+
+            $i++;
+        }
+
         Redirect("/news/artikel/".$article_url);
         die();
     }
@@ -76,7 +93,7 @@
 
         $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
 
-        echo NewsTile("SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%$tag%' ORDER BY release_date AND id DESC LIMIT $offset,$entriesPerPage");
+        echo NewsTile("SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%$tag%' ORDER BY release_date DESC, id DESC LIMIT $offset,$entriesPerPage");
         echo Pager("SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%$tag%'",$entriesPerPage);
 
         echo '
@@ -255,7 +272,7 @@
                 $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
 
 
-                echo NewsTile("SELECT * FROM news WHERE release_date <= '$today' AND title LIKE '%$searchValue%' ORDER BY release_date AND id DESC LIMIT $offset,$entriesPerPage");
+                echo NewsTile("SELECT * FROM news WHERE release_date <= '$today' AND title LIKE '%$searchValue%' ORDER BY release_date DESC, id DESC LIMIT $offset,$entriesPerPage");
                 echo Pager("SELECT * FROM news WHERE release_date <= '$today' AND title LIKE '%$searchValue%'",$entriesPerPage);
 
             }
@@ -298,7 +315,7 @@
 
         $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
 
-        echo NewsTile("SELECT * FROM news WHERE release_date <= '$today' ORDER BY release_date AND id DESC LIMIT $offset,$entriesPerPage");
+        echo NewsTile("SELECT * FROM news WHERE release_date <= '$today' ORDER BY release_date DESC, id DESC LIMIT $offset,$entriesPerPage");
         echo Pager("SELECT * FROM news WHERE release_date <= '$today'",$entriesPerPage);
 
         echo '

@@ -30,6 +30,10 @@
                 <b>Advanced Textarea with text-editor</b><br>
                 <i><a target="_blank" href="https://www.froala.com">Fraola</a></i>
             </li>
+            <li>
+                <b>Icon Set</b><br>
+                <i><a target="_blank" href="https://fontawesome.com">Font Awesome</a></i>
+            </li>
         </ul>
     ';
 

@@ -33,6 +33,28 @@ if(isset($_POST['add_tag']))
     Redirect(ThisPage());
 }
 
+if(isset($_POST['add_verein']))
+{
+    $verband = $_POST['verein'];
+    $kennzahl = $_POST['kennzahl'];
+    $dachverband = $_POST['dachverband'];
+    $website = 'http://'.$_POST['website'];
+    $name = $_POST['name'];
+    $street = $_POST['street'];
+    $city = $_POST['city'];
+    $email = $_POST['email'];
+    $label1 = $_POST['label1'];
+    $label2 = $_POST['label2'];
+    $label3 = $_POST['label3'];
+    $phone1 = $_POST['phone1'];
+    $phone2 = $_POST['phone2'];
+    $phone3 = $_POST['phone3'];
+
+    MySQLNonQuery("INSERT INTO vereine (id, name, kennzahl, dachverband, website, contact_name, contact_street, contact_city, contact_email, contact_phoneLabel1, contact_phone1, contact_phoneLabel2, contact_phone2, contact_phoneLabel3, contact_phone3) VALUES (NULL, '$verband', '$kennzahl', '$dachverband', '$website', '$name', '$street', '$city', '$email', '$label1', '$phone1', '$label2', '$phone2', '$label3', '$phone3')");
+
+    Redirect(ThisPage());
+}
+
 if(isset($_POST['add_archive_entry']))
 {
     $title = $_POST['title'];
@@ -252,6 +274,80 @@ if(isset($_POST['add_archive_entry']))
         <button type="submit" name="add_archive_entry">Hinzuf&uuml;gen</button>
         ';
     }
+    else if(isset($_GET['vereine']))
+    {
+        echo '<h3 class="stagfade2">[SQL-INSERT]: Vereine</h3> ';
+
+        echo '
+            <table>
+                <tr>
+                    <td>Verein:</td>
+                    <td><input type="text" name="verein"/></td>
+                </tr>
+                <tr>
+                    <td>Kennzahl:</td>
+                    <td><input type="number" name="kennzahl"/></td>
+                </tr>
+                <tr>
+                    <td>Dachverband:</td>
+                    <td><input type="text" name="dachverband"/></td>
+                </tr>
+                <tr>
+                    <td>Website:</td>
+                    <td><input type="text" name="website"/></td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" name="name"/></td>
+                </tr>
+                <tr>
+                    <td>Stra&szlig;e:</td>
+                    <td><input type="text" name="street"/></td>
+                </tr>
+                <tr>
+                    <td>Stadt:</td>
+                    <td><input type="text" name="city"/></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="email" name="email"/></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="label1">
+                            <option value="Mobil">Mobil</option>
+                            <option value="Telefon Privat">Telefon Privat</option>
+                            <option value="Telefon Firma">Telefon Firma</option>
+                        </select>
+                    </td>
+                    <td><input type="text" name="phone1"/></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="label2">
+                            <option value="Mobil">Mobil</option>
+                            <option value="Telefon Privat">Telefon Privat</option>
+                            <option value="Telefon Firma">Telefon Firma</option>
+                        </select>
+                    </td>
+                    <td><input type="text" name="phone2"/></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="label3">
+                            <option value="Mobil">Mobil</option>
+                            <option value="Telefon Privat">Telefon Privat</option>
+                            <option value="Telefon Firma">Telefon Firma</option>
+                        </select>
+                    </td>
+                    <td><input type="text" name="phone3"/></td>
+                </tr>
+                <tr>
+                    <td colspan=2><button type="submit" name="add_verein">Hinzuf&uuml;gen</button></td>
+                </tr>
+            </table>
+        ';
+    }
     else
     {
         echo '<h3 class="stagfade2">Use temporarily for SQL/PHP Forms and Database insertions</h3> ';
@@ -261,6 +357,7 @@ if(isset($_POST['add_archive_entry']))
                 <li><a href="?vorstand">[SQL-INSERT]: Vorand</a></li>
                 <li><a href="?tags">[SQL-INSERT]: News-Tags</a></li>
                 <li><a href="?ooemm-archiv">[SQL-INSERT]: OOEMM-Archiv</a></li>
+                <li><a href="?vereine">[SQL-INSERT]: Vereine</a></li>
             </ul>
         ';
     }

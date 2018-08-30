@@ -25,6 +25,15 @@
     (A05)   HTML > footer
     ====== B - Custom-Structural Tags =======
     (B01)   Custom > Double Column
+    ====== C - Header Contents ==============
+    (C01)   Header > Logo
+    (C02)   Header > Sponsor
+    (C03)   Header > Logout Bar
+    ====== D - Nav Contents =================
+    (D01)   Nav > Menu
+    (D02)   Nav > Searchbar
+    ====== Z - Other ========================
+    (Z01)   Other > Preloader
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -45,11 +54,15 @@
 
     Content:
     ====== $ -  SASS: Variables ===============
-    ($00)   Variables > Media-Threshold
-    ($01)   Variables > Theme-Colors
-    ($02)   Variables > Selector-Colors
-    ($03)   Variables > Font-Colors
-    ($04)   Variables > Shadows
+    ($01)   Variables > Media-Threshold
+    ($02)   Variables > Theme-Colors
+    ($03)   Variables > Selector-Colors
+    ($04)   Variables > Menu
+    ($05)   Variables > Form-Colors
+    ($06)   Variables > Font-Colors
+    ($07)   Variables > Shadows
+    ($08)   Variables > Font-Sizes
+    ($09)   Variables > Preloader
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -61,43 +74,49 @@
 /*-------------------------------|||----------------|||------------------------------*/
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*===================================================================================*/
-/* ($00) Variables > Media-Threshold                                                 */
+/* ($01) Variables > Media-Threshold                                                 */
 /*===================================================================================*/
 /*===================================================================================*/
-/* ($01) Variables > Theme-Colors                                                    */
+/* ($02) Variables > Theme-Colors                                                    */
 /*===================================================================================*/
 /* darker */
 /* default */
 /* brighter */
 /* lighter */
 /*===================================================================================*/
-/* ($02) Variables > Selector-Colors                                                 */
+/* ($03) Variables > Selector-Colors                                                 */
 /*===================================================================================*/
 /*===================================================================================*/
-/* ($03) Variables > Menu                                                            */
+/* ($04) Variables > Menu                                                            */
 /*===================================================================================*/
 /*===================================================================================*/
-/* ($03) Variables > Form-Colors                                                     */
+/* ($05) Variables > Form-Colors                                                     */
 /*===================================================================================*/
 /*===================================================================================*/
-/* ($03) Variables > Font-Colors                                                     */
+/* ($06) Variables > Font-Colors                                                     */
 /*===================================================================================*/
 /*===================================================================================*/
-/* ($04) Variables > Shadows                                                         */
+/* ($07) Variables > Shadows                                                         */
 /*===================================================================================*/
 /*===================================================================================*/
-/* ($04) Variables > Font-Sizes                                                      */
+/* ($08) Variables > Font-Sizes                                                      */
 /*===================================================================================*/
 /*===================================================================================*/
-/* ($04) Variables > Preloader                                                       */
+/* ($09) Variables > Preloader                                                       */
 /*===================================================================================*/
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*============================= A -  HTML-Structural Tags ===========================*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+.indexContentClassic {
+  display: block; }
+
+.indexContentModern {
+  display: none; }
+
 /*===================================================================================*/
-/* (A01) HTML > html                                                               */
+/* (A01) HTML > html                                                                 */
 /*===================================================================================*/
 @supports (grid-area: auto) {
   html {
@@ -111,7 +130,7 @@
     html {
       font-size: 14pt; } } }
 /*===================================================================================*/
-/* (A01) HTML > body                                                               */
+/* (A01) HTML > body                                                                 */
 /*===================================================================================*/
 @supports (grid-area: auto) {
   body {
@@ -148,7 +167,7 @@
     box-shadow: 0 0 2px 1px #828282;
     padding: 10px 0 3px 25px; } }
 /*===================================================================================*/
-/* (A02) HTML > nav                                                               */
+/* (A02) HTML > nav                                                                  */
 /*===================================================================================*/
 @supports (grid-area: auto) {
   nav {
@@ -158,7 +177,7 @@
     color: #FFFFFF;
     box-shadow: 0 0 2px 1px #828282; } }
 /*===================================================================================*/
-/* (A02) HTML > main                                                               */
+/* (A02) HTML > main                                                                 */
 /*===================================================================================*/
 @supports (grid-area: auto) {
   main {
@@ -168,7 +187,7 @@
     box-shadow: 0 0 2px 1px #828282;
     word-break: break-word; } }
 /*===================================================================================*/
-/* (A03) HTML > article                                                               */
+/* (A03) HTML > article                                                              */
 /*===================================================================================*/
 @supports (grid-area: auto) {
   article {
@@ -176,7 +195,7 @@
     background: #FFFFFF;
     padding: 5px; } }
 /*===================================================================================*/
-/* (A04) HTML > aside                                                               */
+/* (A04) HTML > aside                                                                */
 /*===================================================================================*/
 @supports (grid-area: auto) {
   aside {
@@ -252,11 +271,155 @@
       border-right: 1px solid black; } } }
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
-/*================================== C - Preloader ==================================*/
+/*=============================== C - Header Contents ===============================*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*===================================================================================*/
-/* (C01) Preloader                                                                   */
+/* (C01)   Header > Logo                                                             */
+/*===================================================================================*/
+.header_logo {
+  height: 100%;
+  width: 550px;
+  background-image: url(../content/logo.png);
+  background-repeat: no-repeat;
+  background-size: auto 90px;
+  background-position: 10px;
+  float: left; }
+
+/*===================================================================================*/
+/* (C02)   Header > Sponsor                                                          */
+/*===================================================================================*/
+.header_sponsor {
+  height: 100%;
+  width: 220px;
+  float: right;
+  background-image: url(../content/sponsors/babolat.png);
+  background-repeat: no-repeat;
+  background-size: auto 50px;
+  background-position: 0 20px; }
+
+/*===================================================================================*/
+/* (C03)   Header > Logout Bar                                                       */
+/*===================================================================================*/
+.logout_bar {
+  color: #FFFFFF;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  background: #416586;
+  padding: 3px;
+  box-shadow: 0px 0px 6px 3px #416586; }
+
+@media only screen and (max-width: 600px) {
+  .logout_bar {
+    top: 38px; } }
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*================================= D - Nav Contents ================================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*===================================================================================*/
+/* (D01)   Nav > Menu                                                                */
+/*===================================================================================*/
+#cssmenu {
+  background: #416586; }
+
+/*===================================================================================*/
+/* (D02)   Nav > Searchbar                                                           */
+/*===================================================================================*/
+@media only screen and (max-width: 850px) {
+  .searchbar_container {
+    display: none; }
+
+  .mobile_searchtrigger_container {
+    position: absolute;
+    right: 8px;
+    top: 2px; }
+
+  .mobile_searchtrigger_container .searchbar_trigger {
+    border: none;
+    background: #507CA5;
+    padding: 3px 1px 1px 1px;
+    width: 35px;
+    box-shadow: inset 0 0 2px 1px #375572; }
+
+  .mobile_searchbar_container {
+    display: none;
+    height: 0px;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out; }
+
+  .mobile_searchbar_container:target {
+    display: inline-block;
+    background: #416586;
+    width: 100%;
+    height: 38px;
+    z-index: 300000;
+    padding: 5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out; }
+
+  .mobile_searchbar_container .mobile_searchbar {
+    width: 90%;
+    line-height: 26px;
+    font-size: 14pt;
+    padding: 0px;
+    border: none;
+    box-shadow: inset 0 0 2px 1px #375572;
+    background: #507CA5;
+    color: #FFFFFF;
+    padding-left: 5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+
+  .mobile_searchbar_container .mobile_searchbar:focus {
+    border: none;
+    color: #FFFFFF; } }
+@media only screen and (min-width: 850px) {
+  .searchbar_container {
+    position: absolute;
+    right: 8px;
+    top: 5px; }
+
+  .searchbar_container .searchbar {
+    float: right;
+    border: none;
+    background: #507CA5;
+    color: #FFFFFF;
+    padding-left: 5px;
+    box-shadow: inset 0 0 2px 1px #375572; }
+
+  .searchbar_container .searchbar:focus {
+    border: none;
+    color: #FFFFFF; }
+
+  .mobile_searchtrigger_container, .mobile_searchbar_container {
+    display: none; } }
+.searchbar_container .searchbar::placeholder {
+  color: #FFFFFF;
+  opacity: 0.5; }
+
+.searchbar_container .searchbar:focus::placeholder {
+  color: #FFFFFF;
+  opacity: 0.8; }
+
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*==================================== Z - Other ====================================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*===================================================================================*/
+/* (Z01)   Other > Preloader                                                         */
 /*===================================================================================*/
 @supports (grid-area: auto) {
   #loader-wrapper {
@@ -295,5 +458,43 @@
     #loader-wrapper {
       width: 69%;
       margin-top: 155px; } } }
+#loader {
+  display: block;
+  top: 100px;
+  width: 100px;
+  height: 100px;
+  margin: -75px 0 0 -75px;
+  margin-right: -75px;
+  border: 3px solid transparent;
+  border-top-color: #416586;
+  border-radius: 50%;
+  -webkit-animation: loader-spin  2s  linear infinite;
+  animation: loader-spin  2s linear infinite; }
+
+#loader:before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 3px solid transparent;
+  border-top-color: #FF0000;
+  border-radius: 50%;
+  -webkit-animation: loader-spin  3s linear infinite;
+  animation: loader-spin n 3s linear infinite; }
+
+#loader:after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border: 3px solid transparent;
+  border-top-color: #416586;
+  border-radius: 50%;
+  -webkit-animation: loader-spin  1.5s linear infinite;
+  animation: loader-spin  1.5s linear infinite; }
 
 /*# sourceMappingURL=layout_classic.css.map */

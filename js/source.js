@@ -1,3 +1,42 @@
+/*
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+///////////////////////////////////////////////////////////////////////////////////////
+
+    Content:
+    ====== Z - General ====================
+    (Z01)   General > bgenScroll
+    (Z02) 	General > LoadAnimation
+    (Z03) 	General > ChangeFrameLink
+    (Z04) 	General > ResizeIframe
+    (Z05) 	General > ToggleTheme
+    ====== A - News =======================
+    (A01) 	News > TagInsert
+    (A02) 	News > RmTag
+    (A03) 	News > TagList
+    ====== B - News-Archiv ================
+    (B01) 	News-Archiv > ListMoveRight
+    (B02) 	News-Archiv > ListMoveLeft
+    (B03) 	News-Archiv > ArchiveSelectYear
+    (B04) 	News-Archiv > ArchiveSelectMonth
+    (B05) 	News-Archiv > UpdateArchiveFrame 
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+///////////////////////////////////////////////////////////////////////////////////////
+*/
+
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*=================================== Z - General ===================================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+
+/*===================================================================================*/
+/* (Z01) General > bgenScroll                                                        */
+/*===================================================================================*/
+
 function bgenScroll()
 {
     // DESCRIPTION:
@@ -22,19 +61,79 @@ function bgenScroll()
     setTimeout("window.scroll(0,st)",10);
 }
 
-function ChangeFrameLink(loc)
-{
-    document.getElementById("chframe").src = loc;
-}
+/*===================================================================================*/
+/* (Z02) General > LoadAnimation                                                     */
+/*===================================================================================*/
 
 function LoadAnimation()
 {
+    // DESCRIPTION:
+    // Required for PHP-Function Loader();
+    // For more info, see functions.php
+
     document.getElementById("loadAnim1").style.opacity=0.3;
     document.getElementById("loadAnim2").style.opacity=1;
 }
 
+/*===================================================================================*/
+/* (Z03) General > ChangeFrameLink                                                   */
+/*===================================================================================*/
+
+function ChangeFrameLink(loc)
+{
+    // DESCRIPTION:
+    // Chnages the link of an iframe
+    // Required: frame-id: chframe
+    // var loc  iframe-URL
+
+    document.getElementById("chframe").src = loc;
+}
+
+/*===================================================================================*/
+/* (Z04) General > ResizeIframe                                                      */
+/*===================================================================================*/
+
+function ResizeIframe(obj)
+{
+    // DESCRIPTION:
+    // Auto resize the height
+    // of an iframe to its contents
+    // height.
+    // include onload="ResizeIframe(this);" in iframe
+
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+}
+
+/*===================================================================================*/
+/* (Z05) General > ToggleTheme                                                      */
+/*===================================================================================*/
+
+function ToggleTheme()
+{
+    // DESCRIPTION:
+    // Changes between the Classic
+    // and the modern Theme
+
+    if(document.getElementById("toggle_theme").checked) document.querySelector("link[href='/css/layout_modern.css']").href = "/css/layout_classic.css";
+    else document.querySelector("link[href='/css/layout_classic.css']").href = "/css/layout_modern.css";
+}
+
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*===================================== A - News ====================================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+
+/*===================================================================================*/
+/* (A01) News > TagInsert                                                            */
+/*===================================================================================*/
+
 function TagInsert(e)
 {
+    // DESCRIPTION:
+    // Adds the in the textbox written tag to the tag-list
+    // Submits onEnter
+
     var tagText = document.getElementById("tagText").value;
     var tagStr = "||" + document.getElementById("tag_str").value;
 
@@ -60,8 +159,15 @@ function TagInsert(e)
     }
 }
 
+/*===================================================================================*/
+/* (A02) News > RmTag                                                                */
+/*===================================================================================*/
+
 function RmTag(tagID)
 {
+    // DESCRIPTION:
+    // Removes a tag from the tag-list
+
     var tagText = document.getElementById("tagVal" + tagID).value;
 
     var oldStr = document.getElementById("tag_str").value;
@@ -72,8 +178,16 @@ function RmTag(tagID)
     document.getElementById("tagID" + tagID).remove();
 }
 
+/*===================================================================================*/
+/* (A03) News > TagList                                                              */
+/*===================================================================================*/
+
 function TagList()
 {
+    // DESCRIPTION:
+    // Adds the in the selectbox chosen tag to the tag-list
+    // Submits onClick
+
     var listpre = document.getElementById("tagList");
     var tagText = listpre.options[listpre.selectedIndex].value;
     var tagStr = "||" + document.getElementById("tag_str").value;
@@ -98,8 +212,22 @@ function TagList()
 
 }
 
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*================================= B - News-Archiv =================================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+
+/*===================================================================================*/
+/* (B01) News-Archiv > ListMoveRight                                                 */
+/*===================================================================================*/
+
 function ListMoveRight()
 {
+    // DESCRIPTION:
+    // Moves the Year-Selection list
+    // to the right
+
     if(document.getElementById("offsetIdx").value < 0)
     {
     var offsetIndex = parseInt(document.getElementById("offsetIdx").value) + parseInt(1);
@@ -109,11 +237,18 @@ function ListMoveRight()
 
     document.getElementById("YearSlider").style.marginLeft = (offsetIndex * scrollWidth) + "px";
     }
-
 }
+
+/*===================================================================================*/
+/* (B02) News-Archiv > ListMoveLeft                                                  */
+/*===================================================================================*/
 
 function ListMoveLeft()
 {
+    // DESCRIPTION:
+    // Moves the Year-Selection list
+    // to the left
+
     var offsetIndex = parseInt(document.getElementById("offsetIdx").value) - parseInt(1);
     var scrollWidth = document.getElementById("scrollWidth").value;
 
@@ -122,8 +257,16 @@ function ListMoveLeft()
     document.getElementById("YearSlider").style.marginLeft = (offsetIndex * scrollWidth) + "px";
 }
 
+/*===================================================================================*/
+/* (B03) News-Archiv > ArchiveSelectYear                                             */
+/*===================================================================================*/
+
 function ArchiveSelectYear(year)
 {
+    // DESCRIPTION:
+    // Selects the year and
+    // checks valid months
+
     var lastSelection = document.getElementById("selectedYear").value;
 
     document.getElementById("selectedYear").value = year;
@@ -266,13 +409,18 @@ function ArchiveSelectYear(year)
         document.getElementById("month12").onclick = "";
     }
 
-
     UpdateArchiveFrame();
-
 }
+
+/*===================================================================================*/
+/* (B04) News-Archiv > ArchiveSelectMonth                                            */
+/*===================================================================================*/
 
 function ArchiveSelectMonth(month)
 {
+    // DESCRIPTION:
+    // Selects the month
+
     var lastSelection = document.getElementById("selectedMonth").value;
 
     document.getElementById("selectedMonth").value = month;
@@ -283,15 +431,21 @@ function ArchiveSelectMonth(month)
     UpdateArchiveFrame();
 }
 
+/*===================================================================================*/
+/* (B05) News-Archiv > UpdateArchiveFrame                                            */
+/*===================================================================================*/
+
 function UpdateArchiveFrame()
 {
+    // DESCRIPTION:
+    // Updates the iframe and refreshes
+    // its content
+
     var month = document.getElementById("selectedMonth").value;
     var year = document.getElementById("selectedYear").value;
 
     if(document.getElementById("showDetail").checked) check = 1;
     else check = 0;
-
-
 
     document.getElementById("archiveFrame").src = "news-archiv-content?year=" + year + "&month=" + month + "&detail=" + check;
 
@@ -300,9 +454,29 @@ function UpdateArchiveFrame()
     setTimeout(function() {
         document.getElementById("loaderSprite").style.opacity = 0;
     }, 800);
-
 }
 
-function ResizeIframe(obj) {
-    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+
+
+function CopySliderTitle()
+{
+    var list = document.getElementsByClassName("ws-title")[0];
+    document.getElementById("slider_news_title").value = list.getElementsByTagName("SPAN")[0].innerHTML;
+    var currentTitle = list.getElementsByTagName("SPAN")[0].innerHTML;
+
+    if(document.getElementById("slideTitle1").value == currentTitle)
+    {
+        document.getElementById("sliderDate").value = document.getElementById("slideDate1").value;
+        document.getElementById("sliderLink").href = "/news/artikel/" + document.getElementById("slideLink1").value;
+    }
+    if(document.getElementById("slideTitle2").value == currentTitle)
+    {
+        document.getElementById("sliderDate").value = document.getElementById("slideDate2").value;
+        document.getElementById("sliderLink").href = "/news/artikel/" + document.getElementById("slideLink2").value;
+    }
+    if(document.getElementById("slideTitle3").value == currentTitle)
+    {
+        document.getElementById("sliderDate").value = document.getElementById("slideDate3").value;
+        document.getElementById("sliderLink").href = "/news/artikel/" + document.getElementById("slideLink3").value;
+    }
 }

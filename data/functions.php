@@ -115,14 +115,34 @@ function PageTitle($string)
     echo '<script>document.title = "'.$string.' | O\u00d6. Badmintonverband";</script>';
 }
 
-function PageContent($paragraph_index)
+function FroalaContent($content)
+{
+    return '<div class="fr-view fr-element">'.$content.'</div>';
+}
+
+function PageContent($paragraph_index,$allowEdit=false)
 {
     // DESCRIPTION:
     // Gets the text/description for the current page
     // With $paragraph_index, several entries can be saved in one page.
 
-    $page = ThisPage();
-    return nl2br(MySQLSkalar("SELECT text AS x FROM page_content WHERE page = '$page' AND paragraph_index = '$paragraph_index'"));
+    $page = ThisPage("!editContent");
+    $content = nl2br(MySQLSkalar("SELECT text AS x FROM page_content WHERE page = '$page' AND paragraph_index = '$paragraph_index'"));
+
+    if(!$allowEdit)
+    {
+        $retval = FroalaContent($content);
+    }
+    else if(($allowEdit AND !isset($_GET['editContent'])) OR ($allowEdit AND isset($_GET['editContent']) AND $_GET['editContent']!=$paragraph_index))
+    {
+        $retval = FroalaContent($content).'<p style="margin: 0;"><a href="'.ThisPage('+editContent='.$paragraph_index).'">Bearbeiten</a></p>';
+    }
+    else if($allowEdit AND isset($_GET['editContent']) AND $_GET['editContent']==$paragraph_index)
+    {
+        $retval = TextareaPlus("contentEdit","contentEdit",$content).'<br><button type="submit" name="changeContent" value="'.$page.'||'.$paragraph_index.'">&Auml;ndern</button>';
+    }
+
+    return $retval;
 }
 
 function Loader()
@@ -168,10 +188,10 @@ function NewsTile($strSQL, $targetTop = false)
     while($row=mysqli_fetch_assoc($rs))
     {
         $retval .= '
-            <div class="home_news_article stagfade'.$i++.'">
-                <div class="home_news_imagecontainer">
+            <div class="news_article stagfade'.$i++.'">
+                <div class="news_imagecontainer">
                     <a '.(($targetTop) ? 'target="_top"' : '').' href="/news/artikel/'.$row['article_url'].'">
-                        <img src="'.(($row['thumbnail']=="") ? '/content/no-image.png' : $row['thumbnail'] ).'" alt="" class="home_news_image"/>
+                        <img src="'.(($row['thumbnail']=="") ? '/content/no-image.png' : $row['thumbnail'] ).'" alt="" class="news_image"/>
                     </a>
                 </div>
                 <div style="float:none;">
@@ -179,6 +199,34 @@ function NewsTile($strSQL, $targetTop = false)
                     '.ShowTags($row['tags'],false,$targetTop).'
                     <a '.(($targetTop) ? 'target="_top"' : '').' href="/news/artikel/'.$row['article_url'].'"><h2>'.$row['title'].'</h2></a>
                     '.str_replace('<p></p>',' ',str_replace($row['title'],'',strip_tags($row['article'],'<p><s><b><i><u><strong><em><span><sub><sup><a><pre><code><ol><li><ul>'))).'
+                </div>
+            </div>
+        ';
+    }
+
+    return $retval;
+}
+
+function NewsTileSlim($strSQL, $targetTop = false)
+{
+    require("mysql_connect.php");
+
+    $retval = '';
+    $i=1;
+    $rs=mysqli_query($link,$strSQL);
+    while($row=mysqli_fetch_assoc($rs))
+    {
+        $retval .= '
+            <div class="news_article_slim stagfade'.$i++.'">
+                <div class="news_imagecontainer">
+                    <a '.(($targetTop) ? 'target="_top"' : '').' href="/news/artikel/'.$row['article_url'].'">
+                        <img src="'.(($row['thumbnail']=="") ? '/content/no-image.png' : $row['thumbnail'] ).'" alt="" class="news_image"/>
+                    </a>
+                </div>
+                <div>
+                    '.ShowTags($row['tags'],false,$targetTop).'
+                    <a '.(($targetTop) ? 'target="_top"' : '').' href="/news/artikel/'.$row['article_url'].'"><h3>'.$row['title'].'</h3></a>
+                    <span style="font-size: 10pt;color: #808080">'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['release_date']))).'</span>
                 </div>
             </div>
         ';

@@ -5,10 +5,10 @@
     echo '
         <h1 class="stagfade1">Vorstand</h1>
 
-        <p>'.PageContent('1').'</p>
+        <p>'.PageContent('1',true).'</p>
         <br>
         ';
-        
+
         $strSQL = "SELECT * FROM vorstand WHERE darstellung = 'box'";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
