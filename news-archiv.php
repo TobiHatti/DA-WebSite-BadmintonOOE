@@ -106,12 +106,18 @@
 
             <hr style="margin-top:3px;">
 
+            ';
 
-            <img src="/content/loadersprite.gif" alt="" style="height: 80px; opacity: 0;" id="loaderSprite" class="ease50"/>
+            if(GetProperty("EnablePreloaderArchive"))
+            {
+                echo '<img src="/content/loadersprite.gif" alt="" style="height: 80px; opacity: 0;" id="loaderSprite" class="ease50"/>';
+            }
+
+            echo '
 
             <table style="float: right;">
                 <tr>
-                    <td style="padding-top: 20px;">Detailansicht</td>
+                    <td>Detailansicht</td>
                     <td>'.Checkbox("","showDetail",0,"UpdateArchiveFrame();").'</td>
                 </tr>
             </table>

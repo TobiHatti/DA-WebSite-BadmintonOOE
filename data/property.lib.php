@@ -20,7 +20,7 @@ function SetProperty($key,$value)
     // $key     Keyword of the property (e.g. keyword="site_name" returns "My Cool Website")
     // $value   The value the property should take
 
-    if(fetch_count("settings","setting",$key) != 0) MySQLNonQuery("UPDATE settings SET value = '$value' WHERE setting = '$key'");
+    if(FetchCount("settings","setting",$key) != 0) MySQLNonQuery("UPDATE settings SET value = '$value' WHERE setting = '$key'");
     else MySQLNonQuery("INSERT INTO settings (setting,value) VALUES ('$key','$value')");
 }
 

@@ -142,23 +142,23 @@
     body {
       margin: 0px;
       grid-template-columns: 1fr;
-      grid-template-rows: 30px 100px auto 150px;
+      grid-template-rows: 30px 120px auto 150px;
       grid-template-areas: "nav" "header" "main" "."; } }
   @media only screen and (min-width: 600px) {
     body {
-      grid-template-columns: 1fr 5fr 1fr;
-      grid-template-rows: 15px 60px 38px auto 150px;
-      grid-template-areas: ". . ." ". header ." ". nav ." ". main ." ". . ."; } }
+      grid-template-columns: 1fr;
+      grid-template-rows: 80px 38px auto 150px;
+      grid-template-areas: "header" "nav" "main" "."; } }
   @media only screen and (min-width: 768px) {
     body {
-      grid-template-columns: 1fr 8fr 1fr;
-      grid-template-rows: 15px 70px 38px auto 150px;
-      grid-template-areas: ". . ." ". header ." ". nav ." ". main ." ". . ."; } }
+      grid-template-columns: 1fr;
+      grid-template-rows: 100px 38px auto 150px;
+      grid-template-areas: "header" "nav" "main" "."; } }
   @media only screen and (min-width: 992px) {
     body {
-      grid-template-columns: 1fr 5fr 1fr;
+      grid-template-columns: 1fr;
       grid-template-rows: 150px 38px auto 150px;
-      grid-template-areas: "header header header" "nav nav nav" "main main main" ". . ."; } } }
+      grid-template-areas: "header" "nav" "main" "."; } } }
 /*===================================================================================*/
 /* (A01) HTML > header                                                               */
 /*===================================================================================*/
@@ -191,9 +191,24 @@
     grid-area: main;
     background: #FFFFFF;
     padding: 20px;
-    padding-left: 14.28%;
-    padding-right: 14.28%;
-    word-break: break-word; } }
+    word-break: break-word; }
+
+  @media only screen and (max-width: 600px) {
+    main {
+      padding-left: 15px;
+      padding-right: 15px; } }
+  @media only screen and (min-width: 600px) {
+    main {
+      padding-left: 15%;
+      padding-right: 15%; } }
+  @media only screen and (min-width: 768px) {
+    main {
+      padding-left: 10%;
+      padding-right: 10%; } }
+  @media only screen and (min-width: 992px) {
+    main {
+      padding-left: 15%;
+      padding-right: 15%; } } }
 /*===================================================================================*/
 /* (A03) HTML > article                                                              */
 /*===================================================================================*/
@@ -271,25 +286,58 @@
 /*===================================================================================*/
 .header_logo {
   height: 100%;
-  width: 610px;
   background-image: url(../content/logo2.png);
   background-repeat: no-repeat;
   background-size: auto 100px;
   background-position: 10px;
   float: left; }
 
+@media only screen and (max-width: 600px) {
+  .header_logo {
+    background-size: auto 80px;
+    width: 490px; } }
+@media only screen and (min-width: 600px) {
+  .header_logo {
+    background-size: auto 60px;
+    width: 370px; } }
+@media only screen and (min-width: 768px) {
+  .header_logo {
+    background-size: auto 65px;
+    width: 400px; } }
+@media only screen and (min-width: 992px) {
+  .header_logo {
+    background-size: auto 100px;
+    width: 610px; } }
 /*===================================================================================*/
 /* (C02)   Header > Sponsor                                                          */
 /*===================================================================================*/
 .header_sponsor {
   height: 100%;
-  width: 300px;
   float: right;
   background-image: url(../content/sponsors/babolat2.png);
-  background-repeat: no-repeat;
-  background-size: auto 60px;
-  background-position: 0 30px; }
+  background-repeat: no-repeat; }
 
+@media only screen and (max-width: 600px) {
+  /* Hide logo on small devices due to space limitations */
+  .header_sponsor {
+    background-size: 0 0;
+    background-position: 0 0;
+    width: 0px; } }
+@media only screen and (min-width: 600px) {
+  .header_sponsor {
+    background-size: auto 30px;
+    background-position: 0 20px;
+    width: 150px; } }
+@media only screen and (min-width: 768px) {
+  .header_sponsor {
+    background-size: auto 40px;
+    background-position: 0 22px;
+    width: 200px; } }
+@media only screen and (min-width: 992px) {
+  .header_sponsor {
+    background-size: auto 60px;
+    background-position: 0 30px;
+    width: 300px; } }
 /*===================================================================================*/
 /* (C03)   Header > Logout Bar                                                       */
 /*===================================================================================*/

@@ -195,9 +195,7 @@
                                     </ul>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
                 </aside>
             </div>
@@ -212,6 +210,10 @@
 
     $today = date("Y-m-d");
 
+    $sliderLimit = GetProperty("SliderImageCount");
+    $nachwuchsLimit = GetProperty("NewsAmountStartpageNW");
+    $newsLimit = GetProperty("NewsAmountStartpageTN");
+
     echo '
         <div class="indexContentModern">
             <div class="doublecol">
@@ -224,16 +226,18 @@
                             <div class="ws_images">
                                 <ul>
                                     ';
+                                    //RefreshSliderContent();
                                     // 3 SQL-Queries are required for the slider to work in the best way.
                                     // Bundeling some queries can slow the slider down and skip slides
                                     $i=1;
-                                    $strSQL = "SELECT * FROM news ORDER BY release_date DESC, id DESC LIMIT 0,3";
+                                    $refreshID = uniqid();
+                                    $strSQL = "SELECT * FROM news ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
                                     $rs=mysqli_query($link,$strSQL);
                                     while($row=mysqli_fetch_assoc($rs))
                                     {
                                         echo '
                                         <li>
-                                            <img src="/content/news/_slideshow/slide'.$i.'.jpg" title="'.$row['title'].'" id="wows1_'.($i-1).'"/>
+                                            <img src="/content/news/_slideshow/slide_'.$i.'.jpg?'.$refreshID.'" title="'.$row['title'].'" id="wows1_'.($i-1).'"/>
                                         </li>
                                         ';
 
@@ -248,11 +252,11 @@
                                     ';
 
                                     $i=1;
-                                    $strSQL = "SELECT * FROM news ORDER BY release_date DESC, id DESC LIMIT 0,3";
+                                    $strSQL = "SELECT * FROM news ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
                                     $rs=mysqli_query($link,$strSQL);
                                     while($row=mysqli_fetch_assoc($rs))
                                     {
-                                        echo '<a href="#" title="'.$row['title'].'"><span><img src="/content/news/_slideshow/slide'.$i.'.jpg" alt="'.$row['title'].'" height="48px"/>'.$i++.'</span></a>';
+                                        echo '<a href="#" title="'.$row['title'].'"><span><img src="/content/news/_slideshow/slide_'.$i.'.jpg?'.$refreshID.'" alt="'.$row['title'].'" height="48px"/>'.$i++.'</span></a>';
                                     }
 
                                     echo '
@@ -267,7 +271,7 @@
                     ';
 
                     $i=1;
-                    $strSQL = "SELECT * FROM news ORDER BY release_date DESC, id DESC LIMIT 0,3";
+                    $strSQL = "SELECT * FROM news ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
                     $rs=mysqli_query($link,$strSQL);
                     while($row=mysqli_fetch_assoc($rs))
                     {
@@ -292,7 +296,7 @@
                 <aside>
                     <h2>Nachwuchs</h2>
                     <hr>
-                    '.NewsTileSlim("SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%Nachwuchs%' ORDER BY release_date DESC, id DESC LIMIT 0,3").'
+                    '.NewsTileSlim("SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%Nachwuchs%' ORDER BY release_date DESC, id DESC LIMIT 0,$nachwuchsLimit").'
                 </aside>
             </div>
             <br>
@@ -303,7 +307,7 @@
                 ';
 
                 $i=2;
-                $strSQL = "SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%Top-News%' ORDER BY release_date DESC, id DESC LIMIT 0,5";
+                $strSQL = "SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%Top-News%' ORDER BY release_date DESC, id DESC LIMIT 0,$newsLimit";
                 $rs=mysqli_query($link,$strSQL);
                 while($row=mysqli_fetch_assoc($rs))
                 {
