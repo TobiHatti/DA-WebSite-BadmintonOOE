@@ -619,7 +619,7 @@ select:focus {
 input[type=checkbox].slidecheckbox {
   height: 0;
   width: 0;
-  visibility: hidden; }
+  display: none; }
 
 .checkbox_toggle_lable {
   cursor: pointer;
@@ -632,11 +632,11 @@ input[type=checkbox].slidecheckbox {
   -moz-border-radius: 100px;
   -ms-border-radius: 100px;
   border-radius: 100px;
-  -webkit-transition: all 0.05s ease-in-out;
-  -moz-transition: all 0.05s ease-in-out;
-  -ms-transition: all 0.05s ease-in-out;
-  -o-transition: all 0.05s ease-in-out;
-  transition: all 0.05s ease-in-out;
+  -webkit-transition: all 0.15s ease-in-out;
+  -moz-transition: all 0.15s ease-in-out;
+  -ms-transition: all 0.15s ease-in-out;
+  -o-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
   position: relative; }
 
 .checkbox_toggle_lable:after {
@@ -908,6 +908,7 @@ input[type="week"]:focus {
 /*===================================================================================*/
 /* (Y10) FormElements > Custom Element-Lenghts                                       */
 /*===================================================================================*/
+/* Custom Element Lenghts : Width */
 .cel_xxs {
   width: 25px; }
 
@@ -944,6 +945,18 @@ input[type="week"]:focus {
 .cel_75 {
   width: 75%; }
 
+/* Custom Element Lenghts : Height */
+.cel_h10 {
+  height: 10px;
+  line-height: 10px;
+  padding: 0; }
+
+.cel_h20 {
+  height: 20px;
+  line-height: 20px;
+  padding: 0; }
+
+/* Custom Element Lenghts : Font-Size */
 .cel_f13 {
   font-size: 13pt; }
 
@@ -1151,8 +1164,9 @@ table.centered_content td {
 .vmember_container {
   display: inline-block;
   vertical-align: top;
+  text-align: left;
   width: 150px;
-  margin: 8px 8px 3px 8px;
+  margin: 15px 15px 5px 15px;
   border-bottom: 2px solid #63B4CF;
   -webkit-border-radius: 0 0 15px 15px;
   -moz-border-radius: 0 0 15px 15px;
@@ -1734,6 +1748,24 @@ table.centered_content td {
     min-height: 600px;
     display: inline-block;
     vertical-align: top;
-    width: 100%; }
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll; }
+
+/*===================================================================================*/
+/* (T02)   Einstellungen > Tabelle                                                   */
+/*===================================================================================*/
+.settingTable {
+  border-collapse: collapse; }
+  .settingTable tr:nth-child(4n + 1) {
+    background: #FFFFFF;
+    border-top: 1px solid #CCCCCC; }
+  .settingTable tr:nth-child(4n + 2) {
+    background: #EEEEEE; }
+  .settingTable tr:nth-child(4n + 3) {
+    background: #C4E3ED;
+    border-top: 1px solid #CCCCCC; }
+  .settingTable tr:nth-child(4n + 4) {
+    background: #B9DDE9; }
 
 /*# sourceMappingURL=style.css.map */

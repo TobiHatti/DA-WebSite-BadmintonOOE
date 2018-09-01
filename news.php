@@ -39,21 +39,7 @@
         MySQLNonQuery("INSERT INTO news (id,article_url,title, author,tags,article,release_date,thumbnail) VALUES ('','$article_url','$title','$author','$tags','$article','$release','$thumb')") or die("<h1>Ein fehler ist aufgetreten</h1>");
 
         // Changing the News-Slider in Index
-        $i=1;
-        $today = date("Y-m-d");
-        $strSQL = "SELECT * FROM news WHERE release_date <= '$today' ORDER BY release_date DESC, id DESC LIMIT 0,3";
-        $rs=mysqli_query($link,$strSQL);
-        while($row=mysqli_fetch_assoc($rs))
-        {
-            $articleUrl = $row['article_url'];
-            $thumbnail = $row['thumbnail'];
-
-            ResizeImage($thumbnail,"content/news/_slideshow/slide".$i."_temp.jpg",480, 273);
-
-            CropImage("content/news/_slideshow/slide".$i."_temp.jpg", "content/news/_slideshow/slide".$i.".jpg", "480", "273");
-
-            $i++;
-        }
+        RefreshSliderContent();
 
         Redirect("/news/artikel/".$article_url);
         die();
@@ -62,18 +48,23 @@
 
     if(isset($_GET['artikel']))
     {
+        MySQLNonQuery("UPDATE news SET views = views + 1 WHERE article_url = '".$_GET['artikel']."'");
+
         echo '
             <div class="doublecol_singletile">
                 <article>
                     <span style="color: #A9A9A9">'.date_format(date_create(Fetch("news","release_date","article_url",$_GET['artikel'])),"d. F Y").' |</span>
                     '.ShowTags(Fetch("news","tags","article_url",$_GET['artikel'])).'
                     <div class="fr-view fr-element">'.Fetch("news","article","article_url",$_GET['artikel']).'</div>
+                    <span>'.Fetch("news","views","article_url",$_GET['artikel']).' Aufrufe</span>
                 </article>
                 <aside>
                     '.NewsSidebar() .'
                 </aside>
             </div>
         ';
+
+        MySQLNonQuery("UPDATE news SET views = views + 1 WHERE article_url = '".$_GET['artikel']."'");
     }
     else if(isset($_GET['kategorie']))
     {
@@ -89,7 +80,7 @@
 
         $today = date("Y-m-d");
 
-        $entriesPerPage = 10;
+        $entriesPerPage = GetProperty("PagerSizeNews");
 
         $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
 
@@ -268,7 +259,7 @@
             if(MySQLCount("SELECT id FROM news WHERE title LIKE '%$searchValue%'")!=0)
             {
                 $today = date("Y-m-d");
-                $entriesPerPage = 10;
+                $entriesPerPage = GetProperty("PagerSizeNews");
                 $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
 
 
@@ -311,7 +302,7 @@
 
         $today = date("Y-m-d");
 
-        $entriesPerPage = 10;
+        $entriesPerPage = GetProperty("PagerSizeNews");
 
         $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
 

@@ -7,6 +7,7 @@
 
         <p>'.PageContent('1',CheckPermission("ChangeContent")).'</p>
         <br>
+        <center>
         ';
 
         $strSQL = "SELECT * FROM vorstand WHERE darstellung = 'box'";
@@ -35,6 +36,7 @@
         }
 
         echo '
+        </center>
         <hr style="margin: 10px 0 10px 0">
         <center>
         ';

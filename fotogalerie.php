@@ -41,7 +41,7 @@
                 <br>
                 '.FileButton("images", "images", 1).'
                 <br>
-                '.Checkbox("download","download",0).'Download Datei
+                '.Checkbox("download","download",0).'Download Erlauben
                 <br>
                 <br>
                 <button type="submit" name="add_album" value="post-value">Album hinzuf&uuml;gen
@@ -65,7 +65,7 @@
         $album_id = Fetch("fotogalerie","id","album_url",$_GET['album']);
 
 
-        $entriesPerPage = 50;
+        $entriesPerPage = GetProperty("PagerSizeGalleryImage");
         $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
 
         $i= 1 + ((isset($_GET['page'])) ? $_GET['page']-1 : 0 )*$entriesPerPage;
@@ -141,7 +141,7 @@
 
         ';
 
-        $entriesPerPage = 10;
+        $entriesPerPage = GetProperty("PagerSizeGalleryAlbum");
         $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
 
         $strSQL = "SELECT * FROM fotogalerie LIMIT $offset,$entriesPerPage";

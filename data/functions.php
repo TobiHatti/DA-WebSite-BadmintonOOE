@@ -304,6 +304,8 @@ function NewsSidebar()
 {
     require("mysql_connect.php");
 
+    $sidebarLimit = GetProperty("NewsAmountTile");
+
     $retval ='
         <div class="home_tile_container_l stagfade1">
             <div class="home_tile_title">Neueste Beitr&auml;ge</div>
@@ -311,7 +313,7 @@ function NewsSidebar()
                 <ul>
                     ';
                     $today = date("Y-m-d");
-                    $strSQL = "SELECT article_url, title FROM news WHERE release_date <= '$today' ORDER BY release_date DESC LIMIT 0,4";
+                    $strSQL = "SELECT article_url, title FROM news WHERE release_date <= '$today' ORDER BY release_date DESC LIMIT 0,$sidebarLimit";
                     $rs=mysqli_query($link,$strSQL);
                     while($row=mysqli_fetch_assoc($rs))
                     {
@@ -376,13 +378,105 @@ function ArticleImgFilter($article,$path)
 
 function SettingOption($type ,$title, $description, $postname, $id, $checkedValue = 0)
 {
-    return '
+    $retval = '
         <tr>
-            <td style="padding-top: '.(($type=="C") ?  18 : 0 ).'px;">'.$title.'</td>
-            <td>'.(($type=="C") ? Checkbox($postname,$id,$checkedValue) : (($type=="T") ? ('<input type="text" id="'.$id.'" name="'.$postname.'" value="'.$checkedValue.'">') : (($type=="N") ? ('<input type="number" id="'.$id.'" name="'.$postname.'" value="'.$checkedValue.'">') : ''))).'</td>
-            <td style="padding-top: '.(($type=="C") ?  18 : 0 ).'px;">'.$description.'</td>
+            <td>'.$title.'</td>
+            <td>
+    ';
+
+    if($type=="C")
+    {
+        $retval .= Checkbox($postname,$id,$checkedValue,'CheckChange'.$id.'();').'
+            <input type="checkbox" id="changeCheck'.$id.'" '.(($checkedValue) ? 'checked' : '').' hidden/>
+
+            <script>
+                function CheckChange'.$id.'()
+                {
+                    var settVal = document.getElementById("'.$id.'").checked;
+                    var contVal = document.getElementById("changeCheck'.$id.'").checked;
+
+                    if(settVal != contVal) document.getElementById("submitRow'.$id.'").style.display = "table-row";
+                    else document.getElementById("submitRow'.$id.'").style.display = "none";
+                }
+            </script>
+        ';
+    }
+    if($type=="T")
+    {
+        $retval .= '
+            <input type="text"   id="'.$id.'" name="'.$postname.'" value="'.$checkedValue.'" oninput="CheckChange'.$id.'();">
+            <input type="hidden" id="changeCheck'.$id.'" value="'.$checkedValue.'"/>
+
+            <script>
+                function CheckChange'.$id.'()
+                {
+                    var settVal = document.getElementById("'.$id.'").value;
+                    var contVal = document.getElementById("changeCheck'.$id.'").value;
+
+                    if(settVal != contVal) document.getElementById("submitRow'.$id.'").style.display = "table-row";
+                    else document.getElementById("submitRow'.$id.'").style.display = "none";
+                }
+            </script>
+        ';
+    }
+    if($type=="N")
+    {
+        $retval .= '
+            <input type="number" id="'.$id.'" name="'.$postname.'" value="'.$checkedValue.'" oninput="CheckChange'.$id.'();">
+            <input type="hidden" id="changeCheck'.$id.'" value="'.$checkedValue.'"/>
+
+            <script>
+                function CheckChange'.$id.'()
+                {
+                    var settVal = document.getElementById("'.$id.'").value;
+                    var contVal = document.getElementById("changeCheck'.$id.'").value;
+
+                    if(settVal != contVal) document.getElementById("submitRow'.$id.'").style.display = "table-row";
+                    else document.getElementById("submitRow'.$id.'").style.display = "none";
+                }
+            </script>
+        ';
+    }
+
+
+    $retval .= '
+            </td>
+            <td>'.$description.'</td>
+        </tr>
+        <tr id="submitRow'.$id.'" style="display: none;">
+            <td colspan="3"><button class="cel_m cel_h20">&Auml;nderungen Speichern</button></td>
         </tr>
     ';
+
+
+
+    return $retval;
+}
+
+function RefreshSliderContent()
+{
+    require("mysql_connect.php");
+    
+    $i=1;
+    $sliderImages = '';
+    $sliderLimit = GetProperty("SliderImageCount");
+    $today = date("Y-m-d");
+    $strSQL = "SELECT * FROM news WHERE release_date <= '$today' ORDER BY release_date DESC, id DESC LIMIT 0,3";
+    $rs=mysqli_query($link,$strSQL);
+    while($row=mysqli_fetch_assoc($rs))
+    {
+        $uniqID = uniqid();
+        $articleUrl = $row['article_url'];
+        $thumbnail = $row['thumbnail'];
+
+        $secureSize = 10;
+        $qualityMultiplier = 2;
+
+        ResizeImage($thumbnail,"content/news/_slideshow/slide_temp_$i.jpg",(480 + $secureSize) * $qualityMultiplier , (273 + $secureSize) * $qualityMultiplier);
+        CropImage("content/news/_slideshow/slide_temp_$i.jpg", "content/news/_slideshow/slide_$i.jpg", (480) * $qualityMultiplier , (273) * $qualityMultiplier);
+
+        $i++;
+    }
 }
 
 
