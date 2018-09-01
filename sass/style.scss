@@ -1744,7 +1744,6 @@ table.centered_content td{
 
     .news_imagecontainer{
         float:left;
-
         height: 100px;
         border: 2px solid $theme-medium;
         margin-right:10px;
@@ -1796,3 +1795,67 @@ table.centered_content td{
     }
 }
 
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*================================ T - Einstellungen ================================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+
+/*===================================================================================*/
+/* (T01)   Einstellungen > Container                                                 */
+/*===================================================================================*/
+
+.settings_content{
+    min-height: 600px;
+    display: flex;
+
+    .menu{
+        min-height: 600px;
+        display: inline-block;
+        vertical-align: top;
+        width: 200px;
+        background: $modern-dark;
+        background: linear-gradient(to bottom, #333333 0%,#333333 50%,#ffffff 100%);
+
+        span{
+            font-size: 16pt;
+            color: #FFFFFF;
+            line-height: 40px;
+            padding-left: 60px;
+        }
+
+        a{
+            text-decoration: none;
+
+            li{
+                color: #FFFFFF;
+                list-style: none;
+                font-size: 14pt;
+                font-weight: lighter;
+                width: 100%;
+                height: 40px;
+                line-height: 40px;
+                border-left: 5px solid $theme-bright;
+                padding-left: 10px;
+                @include box-sizing(border-box);
+                @include ease(0.3s);
+                cursor: pointer;
+            }
+
+            li:hover{
+                background: #444444;
+                padding-left: 15px;
+                border-left: 5px solid $theme-bright-l;
+                @include ease(0.1s);
+            }
+        }
+    }
+
+    iframe{
+        min-height: 600px;
+        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+    }
+
+}

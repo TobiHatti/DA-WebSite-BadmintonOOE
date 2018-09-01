@@ -135,7 +135,7 @@ function PageContent($paragraph_index,$allowEdit=false)
     }
     else if(($allowEdit AND !isset($_GET['editContent'])) OR ($allowEdit AND isset($_GET['editContent']) AND $_GET['editContent']!=$paragraph_index))
     {
-        $retval = FroalaContent($content).'<p style="margin: 0;"><a href="'.ThisPage('+editContent='.$paragraph_index).'"> &#9998; Bearbeiten</a></p>';
+        $retval = FroalaContent($content).EditButton(ThisPage('+editContent='.$paragraph_index));
     }
     else if($allowEdit AND isset($_GET['editContent']) AND $_GET['editContent']==$paragraph_index)
     {
@@ -144,6 +144,11 @@ function PageContent($paragraph_index,$allowEdit=false)
 
 
     return $retval;
+}
+
+function EditButton($link)
+{
+    return '<p style="margin: 0;"><a href="'.$link.'"> &#9998; Bearbeiten</a></p>';
 }
 
 function CheckPermission($permission)
@@ -164,9 +169,6 @@ function CheckPermission($permission)
         // NOT FINALISED
         return true;
     }
-
-
-
 }
 
 function Loader()
@@ -370,6 +372,17 @@ function ArticleImgFilter($article,$path)
     }
 
     return $article;
+}
+
+function SettingOption($type ,$title, $description, $postname, $id, $checkedValue = 0)
+{
+    return '
+        <tr>
+            <td style="padding-top: '.(($type=="C") ?  18 : 0 ).'px;">'.$title.'</td>
+            <td>'.(($type=="C") ? Checkbox($postname,$id,$checkedValue) : (($type=="T") ? ('<input type="text" id="'.$id.'" name="'.$postname.'" value="'.$checkedValue.'">') : (($type=="N") ? ('<input type="number" id="'.$id.'" name="'.$postname.'" value="'.$checkedValue.'">') : ''))).'</td>
+            <td style="padding-top: '.(($type=="C") ?  18 : 0 ).'px;">'.$description.'</td>
+        </tr>
+    ';
 }
 
 
