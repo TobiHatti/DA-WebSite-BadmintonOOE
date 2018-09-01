@@ -286,7 +286,7 @@
                         }, 500);
                     </script>
 
-                    <a href="" id="sliderLink"><h1 style="color: #000000; height: 36px; overflow: hidden;"><output id="slider_news_title">News-Artikel Titel</output></h1></a>
+                    <h1><a href="" id="sliderLink"><output id="slider_news_title" style="color: #000000; height: 36px; overflow: hidden;">News-Artikel Titel</output></a></h1>
                     <span style="color: #A9A9A9"><output id="sliderDate"></output></span>
                 </article>
                 <aside>
