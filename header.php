@@ -63,6 +63,9 @@
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
                 <!-- End of Froala -->
 
+                <!-- jsColor-->
+                    <script src="/js/jscolor.js"></script>
+                <!-- End of jsColor -->
 
                 <!-- File Buttons -->
                     <!--[if IE]>
