@@ -563,3 +563,9 @@ function CopyZADate()
 
     document.getElementById("zaDate").value = dayNames[dayIndex] + ', ' + day + '. ' + monthNames[monthIndex] + ' ' + year;
 }
+
+
+function JSColorUpdate(jscolor)
+{
+    document.getElementById('app_preview').style.backgroundColor = '#' + jscolor
+}

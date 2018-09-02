@@ -42,6 +42,26 @@ function FileButton($name, $id, $multiple=0)
     ';
 }
 
+function ColorPicker($name, $id, $text, $value, $lifeChangeId="",$DOMproperty="style.color")
+{
+    // DESCRIPTION:
+    // Returns a Color-Picker Form-Element
+    // $name            Form-Element-Name
+    // $id              Unique ID. Required
+    // $text            Text inside the Button
+    // $value           Color-Value (Hex)
+    // $lifeChangeId    ID of the element to which the color should instantly be applied
+    // $DOMproperty     DOM-Property to set the target that should be changed
+
+    $idu = uniqid();
+
+    return '
+        '.(($lifeChangeId != "") ? ('<script> function JSColorUpdate'.$idu.'(jscolor) { document.getElementById("'.$lifeChangeId.'").'.$DOMproperty.' = "#" + jscolor } </script>') : '').'
+        <input name="'.$name.'" type="hidden" id="'.$id.'" value="'.$value.'">
+        <button class="jscolor {'.(($lifeChangeId != "") ? ('onFineChange:\'JSColorUpdate'.$idu.'(this)\',') : '').'valueElement: \''.$id.'\',width:260, height:200, position:\'right\',borderColor:\'#FFF\', insetColor:\'#FFF\', backgroundColor:\'#666\'}" value="'.$value.'">'.$text.'</button>
+    ';
+}
+
 function TextareaPlus($name, $id="edit", $placeholder="")
 {
     return '
