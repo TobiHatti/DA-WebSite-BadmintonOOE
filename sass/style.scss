@@ -38,7 +38,8 @@
     (Y08)   File Selector
     (Y09)   Date/Time Selectors
     (Y10)   Custom Element-Lengths
-    (Y11)   Custom Element-Classes
+    (Y11)   Custom Element-Formats
+    (Y12)   Custom Element-Classes
     ====== X - General Classes ==============
     (X01)   Header-Contents
     (X02)   Searchbar
@@ -349,6 +350,11 @@ h5{
 /*-------------------------------|||----------------|||------------------------------*/
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 
+input, textarea, select{
+    font-family: Calibri, Arial, sans-serif;
+    font-size: 12pt;
+}
+
 /*===================================================================================*/
 /* (Y01) FormElements > Buttons                                                      */
 /*===================================================================================*/
@@ -539,7 +545,7 @@ textarea{
     color: #000000;
     display: inline-block;
     outline: none;
-    font-family: Calivr, Arial, sans-serif;
+    font-family: Calibri, Arial, sans-serif;
     @include box-sizing(border-box);
     @include ease(0.1s);
 }
@@ -837,6 +843,7 @@ input[type="week"]{
     color: #000000;
     display: inline-block;
     outline: none;
+    font-family: Arial, Helvetica, sans-serif;
     @include box-sizing(border-box);
     @include ease(0.1s);
 }
@@ -917,6 +924,12 @@ input[type="week"]:focus{
     padding: 0;
 }
 
+.cel_h25{
+    height: 25px;
+    line-height: 25px;
+    padding: 0;
+}
+
 /* Custom Element Lenghts : Font-Size */
 
 .cel_f13{
@@ -932,7 +945,34 @@ input[type="week"]:focus{
 }
 
 /*===================================================================================*/
-/* (Y11) FormElements > Custom Element-Classes                                       */
+/* (Y11) FormElements > Custom Element-Formats                                       */
+/*===================================================================================*/
+
+
+.cef_nobg{
+    background: none;
+}
+
+.cef_brdb{
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+}
+
+.cef_slim{
+    font-weight: lighter !important;
+}
+
+.cef_nomg{
+    margin: 0 !important;
+}
+
+.cef_nopd{
+    padding: 0 !important;
+}
+
+/*===================================================================================*/
+/* (Y12) FormElements > Custom Element-Classes                                       */
 /*===================================================================================*/
 
 .codeprev{
@@ -1889,16 +1929,20 @@ table.centered_content td{
     tr:nth-child(4n + 1){
         background: #FFFFFF;
         border-top: 1px solid #CCCCCC;
+        height: 50px;
     }
     tr:nth-child(4n + 2){
         background: #EEEEEE;
+        height: 30px;
     }
     tr:nth-child(4n + 3){
         background: $theme-bright-l;
         border-top: 1px solid #CCCCCC;
+        height: 50px;
     }
     tr:nth-child(4n + 4){
         background: $theme-medium-l;
+        height: 30px;
     }
 
 }

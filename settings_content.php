@@ -10,6 +10,26 @@
 
     require("data/functions.php");
 
+
+    if(isset($_POST['updateSetting']))
+    {
+        // Update Property
+        if($_POST[$_POST['updateSetting'].'_inputType'] == "C")
+        {
+            $checked = (isset($_POST[$_POST['updateSetting'].'_val'])) ? 1 : 0;
+            SetProperty($_POST['updateSetting'],  $checked);
+        }
+        else SetProperty($_POST['updateSetting'],  $_POST[$_POST['updateSetting'].'_val']);
+
+
+        // Additional operation (special Cases)
+        if($_POST['updateSetting']=="SliderImageCount") RefreshSliderContent();
+
+        Redirect(ThisPage());
+        die();
+    }
+
+
     echo '
         <!DOCTYPE html>
         <html>
@@ -28,18 +48,26 @@
     {
         if($_GET['topic'] == 'Unsorted')
         {
+            $sliderAnimations = array();
+            $strSQL = "SELECT * FROM slides ORDER BY name ASC";
+            $rs=mysqli_query($link,$strSQL);
+            while($row=mysqli_fetch_assoc($rs)) array_push($sliderAnimations, $row['filename']);
+
             echo '
-                <table class="settingTable">
-                    '.SettingOption("N","SliderImageCount", "Anzahl an Bildern die bei Slider auf Startseite angezeigt werden", "post-name", "sopt".$i++ , GetProperty("SliderImageCount")).'
-                    '.SettingOption("C","EnablePreloader", "Preloader Aktivieren", "post-name", "sopt".$i++ , GetProperty("EnablePreloader")).'
-                    '.SettingOption("C","EnablePreloaderArchive", "Preloader Aktivieren im News-Archiv", "post-name", "sopt".$i++ , GetProperty("EnablePreloaderArchive")).'
-                    '.SettingOption("N","PagerSizeNews", "Pager-Gr&ouml;&szlig;e bei News-Listen", "post-name", "sopt".$i++ , GetProperty("PagerSizeNews")).'
-                    '.SettingOption("N","PagerSizeGalleryAlbum", "Pager-Gr&ouml;&szlig;e bei Fotogalerie-Alben", "post-name", "sopt".$i++ , GetProperty("PagerSizeGalleryAlbum")).'
-                    '.SettingOption("N","PagerSizeGalleryImage", "Pager-Gr&ouml;&szlig;e bei Fotogalerie-Fotos", "post-name", "sopt".$i++ , GetProperty("PagerSizeGalleryImage")).'
-                    '.SettingOption("N","NewsAmountStartpageTN", "Menge an Artikeln die auf der Startseite unter \"Neuigkeiten\" angezeigt werden", "post-name", "sopt".$i++ , GetProperty("NewsAmountStartpageTN")).'
-                    '.SettingOption("N","NewsAmountStartpageNW", "Menge an Artikeln die auf der Startseite unter \"Nachwuchs\" angezeigt werden", "post-name", "sopt".$i++ , GetProperty("NewsAmountStartpageNW")).'
-                    '.SettingOption("N","NewsAmountTile", "Menge an Artikeln die in der Seitenleiste unter \"Neueste Beitr&auml;ge\" angezeigt werden", "post-name", "sopt".$i++ , GetProperty("NewsAmountTile")).'
-                </table>
+                <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                    <table class="settingTable">
+                        '.SettingOption("N","SliderImageCount", "Anzahl an Bildern die bei Slider auf Startseite angezeigt werden", "SliderImageCount", "sopt".$i++).'
+                        '.SettingOption("C","EnablePreloader", "Preloader Aktivieren", "EnablePreloader", "sopt".$i++).'
+                        '.SettingOption("C","EnablePreloaderArchive", "Preloader Aktivieren im News-Archiv", "EnablePreloaderArchive", "sopt".$i++).'
+                        '.SettingOption("N","PagerSizeNews", "Pager-Gr&ouml;&szlig;e bei News-Listen", "PagerSizeNews", "sopt".$i++).'
+                        '.SettingOption("N","PagerSizeGalleryAlbum", "Pager-Gr&ouml;&szlig;e bei Fotogalerie-Alben", "PagerSizeGalleryAlbum", "sopt".$i++).'
+                        '.SettingOption("N","PagerSizeGalleryImage", "Pager-Gr&ouml;&szlig;e bei Fotogalerie-Fotos", "PagerSizeGalleryImage", "sopt".$i++).'
+                        '.SettingOption("N","NewsAmountStartpageTN", "Menge an Artikeln die auf der Startseite unter \"Neuigkeiten\" angezeigt werden", "NewsAmountStartpageTN", "sopt".$i++).'
+                        '.SettingOption("N","NewsAmountStartpageNW", "Menge an Artikeln die auf der Startseite unter \"Nachwuchs\" angezeigt werden", "NewsAmountStartpageNW", "sopt".$i++).'
+                        '.SettingOption("N","NewsAmountTile", "Menge an Artikeln die in der Seitenleiste unter \"Neueste Beitr&auml;ge\" angezeigt werden", "NewsAmountTile", "sopt".$i++).'
+                        '.SettingOption("S","SliderAnimation", "Slider-Animation auf Startseite", "SliderAnimation", "sopt".$i++,$sliderAnimations).'
+                    </table>
+                </form>
             ';
         }
 

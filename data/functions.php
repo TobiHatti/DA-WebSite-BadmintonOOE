@@ -376,7 +376,7 @@ function ArticleImgFilter($article,$path)
     return $article;
 }
 
-function SettingOption($type ,$title, $description, $postname, $id, $checkedValue = 0)
+function SettingOption($type ,$title, $description, $property, $id, $selectArray='')
 {
     $retval = '
         <tr>
@@ -386,9 +386,8 @@ function SettingOption($type ,$title, $description, $postname, $id, $checkedValu
 
     if($type=="C")
     {
-        $retval .= Checkbox($postname,$id,$checkedValue,'CheckChange'.$id.'();').'
-            <input type="checkbox" id="changeCheck'.$id.'" '.(($checkedValue) ? 'checked' : '').' hidden/>
-
+        $retval .= Checkbox($property.'_val',$id,GetProperty($property),'CheckChange'.$id.'();').'
+            <input type="checkbox" id="changeCheck'.$id.'" '.((GetProperty($property)) ? 'checked' : '').' hidden/>
             <script>
                 function CheckChange'.$id.'()
                 {
@@ -404,9 +403,8 @@ function SettingOption($type ,$title, $description, $postname, $id, $checkedValu
     if($type=="T")
     {
         $retval .= '
-            <input type="text"   id="'.$id.'" name="'.$postname.'" value="'.$checkedValue.'" oninput="CheckChange'.$id.'();">
-            <input type="hidden" id="changeCheck'.$id.'" value="'.$checkedValue.'"/>
-
+            <input type="text"   id="'.$id.'" name="'.$property.'_val" value="'.GetProperty($property).'" oninput="CheckChange'.$id.'();">
+            <input type="hidden" id="changeCheck'.$id.'" value="'.GetProperty($property).'"/>
             <script>
                 function CheckChange'.$id.'()
                 {
@@ -422,13 +420,39 @@ function SettingOption($type ,$title, $description, $postname, $id, $checkedValu
     if($type=="N")
     {
         $retval .= '
-            <input type="number" id="'.$id.'" name="'.$postname.'" value="'.$checkedValue.'" oninput="CheckChange'.$id.'();">
-            <input type="hidden" id="changeCheck'.$id.'" value="'.$checkedValue.'"/>
-
+            <input type="number" id="'.$id.'" name="'.$property.'_val" class="cel_xs" value="'.GetProperty($property).'" oninput="CheckChange'.$id.'();">
+            <input type="hidden" id="changeCheck'.$id.'" value="'.GetProperty($property).'"/>
             <script>
                 function CheckChange'.$id.'()
                 {
                     var settVal = document.getElementById("'.$id.'").value;
+                    var contVal = document.getElementById("changeCheck'.$id.'").value;
+
+                    if(settVal != contVal) document.getElementById("submitRow'.$id.'").style.display = "table-row";
+                    else document.getElementById("submitRow'.$id.'").style.display = "none";
+                }
+            </script>
+        ';
+    }
+    if($type=="S")
+    {
+        $retval .= '<select name="'.$property.'_val" id="'.$id.'" onchange="CheckChange'.$id.'();">';
+
+        foreach($selectArray as $opt)
+        {
+            $retval.= '<option value="'.$opt.'" '.((GetProperty($property) == $opt) ? 'selected' : '').'>'.Fetch("slides","name","filename",$opt).'</option>';
+        }
+
+        $retval .= '
+            </select>
+            <input type="hidden" id="changeCheck'.$id.'" value="'.GetProperty($property).'"/>
+            <script>
+                function CheckChange'.$id.'()
+                {
+
+                    var listpre = document.getElementById("'.$id.'");
+                    var settVal = listpre.options[listpre.selectedIndex].value;
+
                     var contVal = document.getElementById("changeCheck'.$id.'").value;
 
                     if(settVal != contVal) document.getElementById("submitRow'.$id.'").style.display = "table-row";
@@ -444,7 +468,11 @@ function SettingOption($type ,$title, $description, $postname, $id, $checkedValu
             <td>'.$description.'</td>
         </tr>
         <tr id="submitRow'.$id.'" style="display: none;">
-            <td colspan="3"><button class="cel_m cel_h20">&Auml;nderungen Speichern</button></td>
+            <td colspan="3">
+                <input type="hidden" name="'.$property.'_inputType" value="'.$type.'"/>
+                <button type="submit" class="cel_m cel_h25" name="updateSetting" value="'.$property.'">&Auml;nderungen Speichern</button>
+                <button type="button" class="cel_m cel_h25">Zur&uuml;cksetzen</button>
+            </td>
         </tr>
     ';
 
@@ -461,7 +489,7 @@ function RefreshSliderContent()
     $sliderImages = '';
     $sliderLimit = GetProperty("SliderImageCount");
     $today = date("Y-m-d");
-    $strSQL = "SELECT * FROM news WHERE release_date <= '$today' ORDER BY release_date DESC, id DESC LIMIT 0,3";
+    $strSQL = "SELECT * FROM news WHERE release_date <= '$today' ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
     $rs=mysqli_query($link,$strSQL);
     while($row=mysqli_fetch_assoc($rs))
     {
