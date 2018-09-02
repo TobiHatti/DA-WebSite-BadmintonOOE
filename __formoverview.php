@@ -59,6 +59,11 @@
                     <td><textarea spellcheck="false" class="codeprev" style="color: #FF8C00;"><input type="color"/></textarea></td>
                 </tr>
                 <tr>
+                    <td>color+</td>
+                    <td>'.ColorPicker("","picker1","Farbe w&auml;hlen", "#FFD700") .'</td>
+                    <td><textarea spellcheck="false" class="codeprev" style="color: #8A2BE2;">&apos;.ColorPicker("post-name", "element-id", "Farbe w&auml;hlen", "#FFD700").&apos; //PHP-Function. Description > functions.php</textarea></td>
+                </tr>
+                <tr>
                     <td>checkbox</td>
                     <td>'.Checkbox("","check1").'</td>
                     <td><textarea spellcheck="false" class="codeprev" style="color: #8A2BE2;">&apos;.Checkbox("post-name","element-id",0).&apos; //PHP-Function. Description > functions.php</textarea></td>
