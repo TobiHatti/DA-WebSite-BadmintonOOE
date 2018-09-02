@@ -4,7 +4,7 @@
 
     echo '<h1 class="stagfade1">O&Ouml; Nachwuchskader</h1>
 
-    <table>
+    <table style="display: inline-table; verticla-align: top;">
         <tr>
 
            <td><span style="color: #FF0000"><b>Burschen U19 - 2000-2001<b></span></td>
@@ -275,7 +275,7 @@
     </table>
 
     
-    <table>
+    <table style="display: inline-table; verticla-align: top;">
         <tr>
             <td><span style="color: #000099"><b>M&auml;dchen U15 - 2004-2005</b></span></td>
             <td><span style="color: #FF0000"><b>Burschen U13 - 2006-2007</b></span></td>

@@ -187,6 +187,7 @@
                                             <ul>
                                                 <li><a href="/news/neu">Neuer News-Artikel</a></li>
                                                 <li><a href="/fotogalerie/neu">Neue Fotogalerie</a></li>
+                                                <li><a href="/kalender/neu">Termin-Manager</a></li>
                                                 <li><a href="/settings"><hr>Seiten-Einstellungen</a></li>
                                             </ul>
                                         </li>

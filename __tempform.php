@@ -348,6 +348,92 @@ if(isset($_POST['add_archive_entry']))
             </table>
         ';
     }
+    else if(isset($_GET['za']))
+    {
+        echo '<h3 class="stagfade2">[SQL-INSERT]: Zentralausschreibungen</h3> ';
+
+        echo '
+
+
+            <h3>Zentralausschreibung erstellen</h3>
+
+
+            <select name="" id="zaKategory" onchange="SelectZAKategory();">
+                <option value="Landesmeisterschaft" style="color: #FF0000">Landesmeisterschaft</option>
+                <option value="Doppelturniere" style="color: #20B2AA">Doppelturniere</option>
+                <option value="Nachwuchs" style="color: #FFA500">Nachwuchs</option>
+                <option value="Schueler-Jugend" style="color: #9400D3">Sch&uuml;ler/Jugend</option>
+                <option value="Senioren" style="color: #32CD32">Senioren</option>
+            </select>
+
+
+            <div class="za_box">
+                <div>
+                    <input type="text" placeholder="Titel Zeile 1" style="color: #FF0000" class="cel_f18 cel_l cef_nobg cef_brdb" id="zaTitleLine1" value=""><br>
+                    <input type="text" placeholder="Titel Zeile 2 (opt.)" style="color: #FF0000" class="cel_f18 cel_l cef_nobg cef_brdb" id="zaTitleLine2" value="">
+
+                    <input type="text" class="cel_f15 cel_l cef_nobg cef_brdb" placeholder="Datum" value="" id="zaDate">
+                    <input type="date" onchange = "CopyZADate();" id="datePick"/>
+                </div>
+
+                <table>
+                      <tr>
+                         <td class="ta_r"><b>Verein:</b></td>
+                         <td class="ta_l"><b><input type="text" class="cef_nobg cef_brdb cef_nomg cef_nopd"/></b></td>
+                      </tr>
+                      <tr>
+                         <td class="ta_r">Uhrzeit:</td>
+                         <td class="ta_l"><input type="time" class="cef_nobg cef_brdb cef_nomg cef_nopd"/> Uhr</td>
+                      </tr>
+
+                      <tr>
+                         <td class="ta_r">Auslosung:</td>
+                         <td class="ta_l"><input type="time" class="cef_nobg cef_brdb cef_nomg cef_nopd"/> Uhr</td>
+                      </tr>
+
+                      <tr>
+                         <td class="ta_r">Hallenname:</td>
+                         <td class="ta_l"><input type="text" class="cef_nobg cef_brdb cef_nomg cef_nopd"/></td>
+                      </tr>
+
+                      <tr>
+                         <td class="ta_r">Anschrift Halle:</td>
+                         <td class="ta_l"><input type="text" class="cef_nobg cef_brdb cef_nomg cef_nopd"/></td>
+                      </tr>
+
+                      <tr>
+                         <td class="ta_r">Anzahl Felder:</td>
+                         <td class="ta_l"><input type="text" class="cef_nobg cef_brdb cef_nomg cef_nopd"/></td>
+                      </tr>
+
+                      <tr>
+                         <td class="ta_r">Turnierverantwortlicher:</td>
+                         <td class="ta_l"><input type="text" class="cef_nobg cef_brdb cef_nomg cef_nopd"/></td>
+                      </tr>
+
+                      <tr>
+                         <td class="ta_r">Telefon:</td>
+                         <td class="ta_l"><input type="text" class="cef_nobg cef_brdb cef_nomg cef_nopd"/></td>
+                      </tr>
+
+                      <tr>
+                         <td class="ta_r">Nennungen E-Mail:</td>
+                         <td class="ta_l"><input type="text" class="cef_nobg cef_brdb cef_nomg cef_nopd"/></td>
+                      </tr>
+
+                      <tr>
+                         <td class="ta_r">Nennschluss:</td>
+                         <td class="ta_l"><input type="text" class="cef_nobg cef_brdb cef_nomg cef_nopd"/></td>
+                      </tr>
+
+                      <tr>
+                         <td class="ta_r">Zusatzangaben:</td>
+                         <td class="ta_l"><input type="text" class="cef_nobg cef_brdb cef_nomg cef_nopd"/></td>
+                      </tr>
+                </table>
+            </div>
+        ';
+    }
     else
     {
         echo '<h3 class="stagfade2">Use temporarily for SQL/PHP Forms and Database insertions</h3> ';
@@ -358,6 +444,7 @@ if(isset($_POST['add_archive_entry']))
                 <li><a href="?tags">[SQL-INSERT]: News-Tags</a></li>
                 <li><a href="?ooemm-archiv">[SQL-INSERT]: OOEMM-Archiv</a></li>
                 <li><a href="?vereine">[SQL-INSERT]: Vereine</a></li>
+                <li><a href="?za">[SQL-INSERT]: Zentralausschreibungen</a></li>
             </ul>
         ';
     }

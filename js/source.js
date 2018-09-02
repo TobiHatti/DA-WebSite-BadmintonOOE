@@ -506,3 +506,60 @@ function SelectLastImage()
     document.getElementById("galleryFullSized").src = selectedImg;
     document.getElementById("currentImageID").value = selectedImgId - 1;
 }
+
+function SelectZAKategory()
+{
+    var listpre = document.getElementById("zaKategory");
+    var kategory = listpre.options[listpre.selectedIndex].value;
+
+
+    if(kategory == "Landesmeisterschaft")
+    {
+        document.getElementById("zaTitleLine1").style.color = "#FF0000";
+        document.getElementById("zaTitleLine2").style.color = "#FF0000";
+    }
+    else if(kategory == "Doppelturniere")
+    {
+        document.getElementById("zaTitleLine1").style.color = "#20B2AA";
+        document.getElementById("zaTitleLine2").style.color = "#20B2AA";
+    }
+    else if(kategory == "Nachwuchs")
+    {
+        document.getElementById("zaTitleLine1").style.color = "#FFA500";
+        document.getElementById("zaTitleLine2").style.color = "#FFA500";
+    }
+    else if(kategory == "Schueler-Jugend")
+    {
+        document.getElementById("zaTitleLine1").style.color = "#9400D3";
+        document.getElementById("zaTitleLine2").style.color = "#9400D3";
+    }
+    else if(kategory == "Senioren")
+    {
+        document.getElementById("zaTitleLine1").style.color = "#32CD32";
+        document.getElementById("zaTitleLine2").style.color = "#32CD32";
+    }
+}
+
+function CopyZADate()
+{
+    var date = new Date(document.getElementById("datePick").value);
+
+    var monthNames = [
+        "J\u00e4nner", "Februar", "M\u00e4rz",
+        "April", "Mai", "Juni", "Juli",
+        "August", "September", "Oktober",
+        "November", "Dezember"
+    ];
+
+    var dayNames = [
+        "Sonntag","Montag","Dienstag","Mittwoch",
+        "Donnerstag","Freitag","Samstag"
+    ];
+
+    var dayIndex = date.getDay();
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+
+    document.getElementById("zaDate").value = dayNames[dayIndex] + ', ' + day + '. ' + monthNames[monthIndex] + ' ' + year;
+}

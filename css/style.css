@@ -39,7 +39,8 @@
     (Y08)   File Selector
     (Y09)   Date/Time Selectors
     (Y10)   Custom Element-Lengths
-    (Y11)   Custom Element-Classes
+    (Y11)   Custom Element-Formats
+    (Y12)   Custom Element-Classes
     ====== X - General Classes ==============
     (X01)   Header-Contents
     (X02)   Searchbar
@@ -392,6 +393,10 @@ h5 {
 /*================================ Y - Form-Elements ================================*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+input, textarea, select {
+  font-family: Calibri, Arial, sans-serif;
+  font-size: 12pt; }
+
 /*===================================================================================*/
 /* (Y01) FormElements > Buttons                                                      */
 /*===================================================================================*/
@@ -580,7 +585,7 @@ textarea {
   color: #000000;
   display: inline-block;
   outline: none;
-  font-family: Calivr, Arial, sans-serif;
+  font-family: Calibri, Arial, sans-serif;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -888,6 +893,7 @@ input[type="week"] {
   color: #000000;
   display: inline-block;
   outline: none;
+  font-family: Arial, Helvetica, sans-serif;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -956,6 +962,11 @@ input[type="week"]:focus {
   line-height: 20px;
   padding: 0; }
 
+.cel_h25 {
+  height: 25px;
+  line-height: 25px;
+  padding: 0; }
+
 /* Custom Element Lenghts : Font-Size */
 .cel_f13 {
   font-size: 13pt; }
@@ -967,7 +978,27 @@ input[type="week"]:focus {
   font-size: 18pt; }
 
 /*===================================================================================*/
-/* (Y11) FormElements > Custom Element-Classes                                       */
+/* (Y11) FormElements > Custom Element-Formats                                       */
+/*===================================================================================*/
+.cef_nobg {
+  background: none; }
+
+.cef_brdb {
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important; }
+
+.cef_slim {
+  font-weight: lighter !important; }
+
+.cef_nomg {
+  margin: 0 !important; }
+
+.cef_nopd {
+  padding: 0 !important; }
+
+/*===================================================================================*/
+/* (Y12) FormElements > Custom Element-Classes                                       */
 /*===================================================================================*/
 .codeprev {
   width: 750px;
@@ -1759,13 +1790,17 @@ table.centered_content td {
   border-collapse: collapse; }
   .settingTable tr:nth-child(4n + 1) {
     background: #FFFFFF;
-    border-top: 1px solid #CCCCCC; }
+    border-top: 1px solid #CCCCCC;
+    height: 50px; }
   .settingTable tr:nth-child(4n + 2) {
-    background: #EEEEEE; }
+    background: #EEEEEE;
+    height: 30px; }
   .settingTable tr:nth-child(4n + 3) {
     background: #C4E3ED;
-    border-top: 1px solid #CCCCCC; }
+    border-top: 1px solid #CCCCCC;
+    height: 50px; }
   .settingTable tr:nth-child(4n + 4) {
-    background: #B9DDE9; }
+    background: #B9DDE9;
+    height: 30px; }
 
 /*# sourceMappingURL=style.css.map */

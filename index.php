@@ -265,7 +265,7 @@
                             <div class="ws_shadow"></div>
                         </div>
                         <script type="text/javascript" src="/js/wowslider.js"></script>
-                        <script type="text/javascript" src="/js/slides/glassParallax.js"></script>
+                        <script type="text/javascript" src="/js/slides/'.GetProperty("SliderAnimation").'"></script>
                     </center>
 
                     ';

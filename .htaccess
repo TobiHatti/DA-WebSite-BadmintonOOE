@@ -21,6 +21,7 @@ RewriteRule ^news/kategorie/([a-zA-Z0-9-]+)/?$ news.php?kategorie=$1 [NC,QSA,L]
 RewriteRule ^ooemm-archiv/jahr/([a-zA-Z0-9-]+)/?$ ooemm-archiv.php?jahr=$1 [NC,QSA,L]
 RewriteRule ^fotogalerie/album/([a-zA-Z0-9-]+)/?$ fotogalerie.php?album=$1 [NC,QSA,L]
 RewriteRule ^fotogalerie/neu fotogalerie.php?neu [NC,QSA,L]
+RewriteRule ^kalender/neu kalender.php?neu [NC,QSA,L]
 
 #Ignore .php-Extension
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
