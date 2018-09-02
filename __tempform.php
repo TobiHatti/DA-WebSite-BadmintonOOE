@@ -353,27 +353,34 @@ if(isset($_POST['add_archive_entry']))
         echo '<h3 class="stagfade2">[SQL-INSERT]: Zentralausschreibungen</h3> ';
 
         echo '
-
+            <br><br>
 
             <h3>Zentralausschreibung erstellen</h3>
+            <br>
 
-
-            <select name="" id="zaKategory" onchange="SelectZAKategory();">
+            <select name="" id="zaKategory" onchange="SelectZAKategory();" class="cel_m">
                 <option value="Landesmeisterschaft" style="color: #FF0000">Landesmeisterschaft</option>
                 <option value="Doppelturniere" style="color: #20B2AA">Doppelturniere</option>
                 <option value="Nachwuchs" style="color: #FFA500">Nachwuchs</option>
                 <option value="Schueler-Jugend" style="color: #9400D3">Sch&uuml;ler/Jugend</option>
                 <option value="Senioren" style="color: #32CD32">Senioren</option>
             </select>
-
+            <br>
+            <input type="date" onchange = "CopyZADate();" id="datePick" class="cel_m"/>
+            <br><br>
+            <input type="text" placeholder="Titel Zeile 1" class="cel_m" id="zaTitleLineIn1" value=""><br>
+            <input type="text" placeholder="Titel Zeile 2 (optional)" class="cel_m" id="zaTitleLineIn1" value="">
 
             <div class="za_box">
                 <div>
-                    <input type="text" placeholder="Titel Zeile 1" style="color: #FF0000" class="cel_f18 cel_l cef_nobg cef_brdb" id="zaTitleLine1" value=""><br>
-                    <input type="text" placeholder="Titel Zeile 2 (opt.)" style="color: #FF0000" class="cel_f18 cel_l cef_nobg cef_brdb" id="zaTitleLine2" value="">
 
-                    <input type="text" class="cel_f15 cel_l cef_nobg cef_brdb" placeholder="Datum" value="" id="zaDate">
-                    <input type="date" onchange = "CopyZADate();" id="datePick"/>
+                    <h1>
+                        <output style="color: #FF0000" class="cel_l cef_nobg cef_brdb" id="zaTitleLineOut1">sdf</output>
+                        <br>
+                        <output style="color: #FF0000" class="cel_l cef_nobg cef_brdb" id="zaTitleLineOut2"></output>
+                    </h1>
+                    <output class="cel_f15" id="zaDate"></output>
+
                 </div>
 
                 <table>
