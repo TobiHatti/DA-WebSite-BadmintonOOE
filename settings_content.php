@@ -143,6 +143,19 @@
                         <td>Artikel l&ouml;schen</td>
                     </tr>
                     <tr><td colspan="2"><hr></td></tr>
+                    <tr>
+                        <td><b>AddZA</b></td>
+                        <td>Zentralausschreibung hinzuf&uuml;gen</td>
+                    </tr>
+                    <tr>
+                        <td><b>EditZA</b></td>
+                        <td>Zentralausschreibung bearbeiten</td>
+                    </tr>
+                    <tr>
+                        <td><b>DeleteZA</b></td>
+                        <td>Zentralausschreibung l&ouml;schen</td>
+                    </tr>
+                    <tr><td colspan="2"><hr></td></tr>
                 </table>
             ';
         }

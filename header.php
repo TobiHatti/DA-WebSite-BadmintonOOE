@@ -11,6 +11,7 @@
     require("data/string.lib.php");
 
     require("data/functions.php");
+    require("data/editfunctions.php");
     require("data/multipagepost.php");
 
     MySQLPDSave("d");
@@ -188,10 +189,11 @@
                                     echo '
                                         <li class="active"><a href="#">Verwaltung</a>
                                             <ul>
-                                                <li><a href="/news/neu">Neuer News-Artikel</a></li>
-                                                <li><a href="/fotogalerie/neu">Neue Fotogalerie</a></li>
-                                                <li><a href="/kalender/neu">Termin-Manager</a></li>
-                                                <li><a href="/settings"><hr>Seiten-Einstellungen</a></li>
+                                                <li><a style="width: 200px;" href="/news/neu">Neuer News-Artikel</a></li>
+                                                <li><a style="width: 200px;" href="/fotogalerie/neu">Neue Fotogalerie</a></li>
+                                                <li><a style="width: 200px;" href="/zentralausschreibung/neu">Neue Zentralausschreibung</a></li>
+                                                <li><a style="width: 200px;" href="/kalender/neu">Termin-Manager</a></li>
+                                                <li><a style="width: 200px;" href="/settings"><hr>Seiten-Einstellungen</a></li>
                                             </ul>
                                         </li>
                                     ';

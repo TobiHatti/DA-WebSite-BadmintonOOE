@@ -971,6 +971,11 @@ input[type="week"]:focus{
     padding: 0 !important;
 }
 
+.cef_warning{
+    background: #FF0000;
+
+}
+
 /*===================================================================================*/
 /* (Y12) FormElements > Custom Element-Classes                                       */
 /*===================================================================================*/
@@ -1302,6 +1307,7 @@ table.centered_content td{
     display: inline-flex;
     width: 100%;
     padding: 10px;
+    @include box-sizing(border-box);
 
     .za_title{
         width:30%;

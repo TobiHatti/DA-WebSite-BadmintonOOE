@@ -66,7 +66,7 @@ function TextareaPlus($name, $id="edit", $placeholder="")
 {
     return '
 
-        <textarea name="'.$name.'" id="'.$id.'" style="margin-top: 30px;" required>
+        <textarea name="'.$name.'" id="'.$id.'" style="margin-top: 30px;display:none" required>
             '.$placeholder.'
         </textarea>
 
@@ -146,7 +146,9 @@ function PageContent($paragraph_index,$allowEdit=false)
     // Gets the text/description for the current page
     // With $paragraph_index, several entries can be saved in one page.
 
-    $page = ThisPage("!editContent");
+    // !editContent for PageContent()-function
+    // !editSC for Special Containers
+    $page = ThisPage("!editSC","!editContent");
     $content = nl2br(MySQLSkalar("SELECT text AS x FROM page_content WHERE page = '$page' AND paragraph_index = '$paragraph_index'"));
 
     if(!$allowEdit)
@@ -155,7 +157,7 @@ function PageContent($paragraph_index,$allowEdit=false)
     }
     else if(($allowEdit AND !isset($_GET['editContent'])) OR ($allowEdit AND isset($_GET['editContent']) AND $_GET['editContent']!=$paragraph_index))
     {
-        $retval = FroalaContent($content).EditButton(ThisPage('+editContent='.$paragraph_index));
+        $retval = FroalaContent($content).EditButton(ThisPage("!editSC","editContent",'+editContent='.$paragraph_index));
     }
     else if($allowEdit AND isset($_GET['editContent']) AND $_GET['editContent']==$paragraph_index)
     {
@@ -168,7 +170,17 @@ function PageContent($paragraph_index,$allowEdit=false)
 
 function EditButton($link)
 {
-    return '<p style="margin: 0;"><a href="'.$link.'"> &#9998; Bearbeiten</a></p>';
+    return '<p style="margin: 0 3px 0 3px;"><a href="'.$link.'"> &#9998; Bearbeiten</a></p>';
+}
+
+function AddButton($link)
+{
+    return '<p style="margin: 0 3px 0 3px;"><a href="'.$link.'"> &#65291; Hinzuf&uuml;gen</a></p>';
+}
+
+function DeleteButton($permissionSuffix,$table,$id)
+{
+    return ' <p style="margin: 0 3px 0 3px;"><a style="color: red;" href="/delete/'.$table.'/'.$permissionSuffix.'/'.$id.'"> &#65291; L&ouml;schen</a></p> ';
 }
 
 function CheckPermission($permission)
