@@ -2,6 +2,19 @@
 
 require("header.php");
 
+    if(isset($_POST['add_termin']))
+    {
+      $terminName = $_POST['termin_titel'];
+      $description = $_POST['description_date'];
+      $termin_date=$_POST['date_termin'];
+      $termin_place=$_POST['place'];
+      $termin_time=$_POST['time'];
+      $termin_color=$_POST['color'];
+
+      MySQLNonQuery("INSERT INTO agenda (id, titel, description, date, place, time, color) VALUES ('','$terminName','$description','$termin_date','$termin_place','$termin_time','$termin_color')");
+
+    }
+
 
     if(isset($_GET['neu']))
     {
@@ -34,6 +47,8 @@ require("header.php");
                        <span style="color: #40E0D0">T&uuml;rkis</span>&#8680; Doppelturniere
                    </span>
                 </p>
+                <br>
+                <button type="submit" name="add_termin" value="post-value">Termin hinzuf&uuml;gen
 
             </form>
         ';
