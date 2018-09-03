@@ -515,35 +515,33 @@ function SelectZAKategory()
 
     if(kategory == "Landesmeisterschaft")
     {
-        document.getElementById("zaTitleLine1").style.color = "#FF0000";
-        document.getElementById("zaTitleLine2").style.color = "#FF0000";
+        document.getElementById("zaTitleLineOut1").style.color = "#FF0000";
+        document.getElementById("zaTitleLineOut2").style.color = "#FF0000";
     }
-    else if(kategory == "Doppelturniere")
+    else if(kategory == "Doppelturnier")
     {
-        document.getElementById("zaTitleLine1").style.color = "#20B2AA";
-        document.getElementById("zaTitleLine2").style.color = "#20B2AA";
+        document.getElementById("zaTitleLineOut1").style.color = "#20B2AA";
+        document.getElementById("zaTitleLineOut2").style.color = "#20B2AA";
     }
     else if(kategory == "Nachwuchs")
     {
-        document.getElementById("zaTitleLine1").style.color = "#FFA500";
-        document.getElementById("zaTitleLine2").style.color = "#FFA500";
+        document.getElementById("zaTitleLineOut1").style.color = "#FFA500";
+        document.getElementById("zaTitleLineOut2").style.color = "#FFA500";
     }
-    else if(kategory == "Schueler-Jugend")
+    else if(kategory == "SchuelerJugend")
     {
-        document.getElementById("zaTitleLine1").style.color = "#9400D3";
-        document.getElementById("zaTitleLine2").style.color = "#9400D3";
+        document.getElementById("zaTitleLineOut1").style.color = "#9400D3";
+        document.getElementById("zaTitleLineOut2").style.color = "#9400D3";
     }
     else if(kategory == "Senioren")
     {
-        document.getElementById("zaTitleLine1").style.color = "#32CD32";
-        document.getElementById("zaTitleLine2").style.color = "#32CD32";
+        document.getElementById("zaTitleLineOut1").style.color = "#32CD32";
+        document.getElementById("zaTitleLineOut2").style.color = "#32CD32";
     }
 }
 
 function CopyZADate()
 {
-    var date = new Date(document.getElementById("datePick").value);
-
     var monthNames = [
         "J\u00e4nner", "Februar", "M\u00e4rz",
         "April", "Mai", "Juni", "Juli",
@@ -551,19 +549,98 @@ function CopyZADate()
         "November", "Dezember"
     ];
 
+    var monthNamesS = [
+        "Jan", "Feb", "M\u00e4r",
+        "Apr", "Mai", "Jun", "Jul",
+        "Aug", "Sep", "Okt",
+        "Nov", "Dez"
+    ];
+
     var dayNames = [
         "Sonntag","Montag","Dienstag","Mittwoch",
         "Donnerstag","Freitag","Samstag"
     ];
 
-    var dayIndex = date.getDay();
-    var day = date.getDate();
-    var monthIndex = date.getMonth();
-    var year = date.getFullYear();
+    var dayNamesS = [
+        "So","Mo","Di","Mi","Do","Fr","Sa"
+    ];
 
-    document.getElementById("zaDate").value = dayNames[dayIndex] + ', ' + day + '. ' + monthNames[monthIndex] + ' ' + year;
+    var date1 = new Date(document.getElementById("datePick1").value);
+    var date2 = new Date(document.getElementById("datePick2").value);
+
+
+    if(document.getElementById("chTimespan").checked)
+    {
+        document.getElementById("rwTimespan").style.display = "table-row";
+        document.getElementById("outTimespan").value = "Von: ";
+
+        var dayIndex1 = date1.getDay();
+        var day1 = date1.getDate();
+        var dayIndex2 = date2.getDay();
+        var day2 = date2.getDate();
+        var monthIndex1 = date1.getMonth();
+        var monthIndex2 = date2.getMonth();
+        var year = date1.getFullYear();
+
+        if(day1 == day2-1)
+        {
+            document.getElementById("zaDate").value = dayNamesS[dayIndex1] + '/' + dayNamesS[dayIndex2] +  ', ' + day1 + './' + day2 + '. ' + monthNames[monthIndex1] + ' ' + year;
+        }
+        else
+        {
+            if(monthIndex1 == monthIndex2)
+            {
+                document.getElementById("zaDate").value = dayNamesS[dayIndex1] + ' ' + day1 + '. - ' + dayNamesS[dayIndex2] + ' ' + day2 + '. ' + monthNames[monthIndex1] + ' ' + year;
+            }
+            else
+            {
+                document.getElementById("zaDate").value = dayNamesS[dayIndex1] + ' ' + day1 + '. ' + monthNamesS[monthIndex1] + ' - ' + dayNamesS[dayIndex2] + ' ' + day2 + '. ' + monthNamesS[monthIndex2] + ' ' + year;
+            }
+        }
+    }
+    else
+    {
+        document.getElementById("rwTimespan").style.display = "none";
+        document.getElementById("outTimespan").value = "";
+
+        var dayIndex = date1.getDay();
+        var day = date1.getDate();
+        var monthIndex = date1.getMonth();
+        var year = date1.getFullYear();
+
+        document.getElementById("zaDate").value = dayNames[dayIndex] +  ', ' + day + '. ' + monthNames[monthIndex] + ' ' + year;
+    }
+
+
 }
 
+function CopyZATitle()
+{
+    document.getElementById("zaTitleLineOut1").value = document.getElementById("zaTitleLineIn1").value;
+    document.getElementById("zaTitleLineOut2").value = document.getElementById("zaTitleLineIn2").value;
+}
+
+function ChangeZAExtraData(idx)
+{
+    if(document.getElementById("chid" + idx).checked) document.getElementById("edat" + idx).style.display = "table-row";
+    else document.getElementById("edat" + idx).style.display = "none";
+}
+
+function DisableZAOption(idx)
+{
+    document.getElementById("edat" + idx).style.display = "none";
+    document.getElementById("chid" + idx).checked = false;
+}
+
+function UpdateZAVerein()
+{
+    var listpre = document.getElementById("vereinSelection");
+    var selected = listpre.options[listpre.selectedIndex].value;
+
+    document.getElementById("verein_in").value = selected;
+    document.getElementById("vereinSelection").selectedIndex = "0";
+
+}
 
 function JSColorUpdate(jscolor)
 {
