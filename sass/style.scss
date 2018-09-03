@@ -1303,24 +1303,31 @@ table.centered_content td{
     width: 100%;
     padding: 10px;
 
-    div{
+    .za_title{
         width:30%;
         padding: 15px;
         background: linear-gradient(to right, $theme-bright-l, #F2F2F2);
     }
 
-    table{
+    .za_data{
         width:70%;
         background: #F2F2F2;
 
-        td{
-            padding: 3px 0 3px 10px;
-        }
+        table{
+            
+            td{
+                padding: 3px 0 3px 10px;
+            }
 
-        td:nth-child(2){
-            color: #696969;
-        }
+            td:nth-child(1){
+                width: 200px;
+            }
 
+            td:nth-child(2){
+                color: #696969;
+                width: 400px;
+            }
+        }
     }
 }
 

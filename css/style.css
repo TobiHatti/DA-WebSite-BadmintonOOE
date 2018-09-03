@@ -1266,17 +1266,20 @@ table.centered_content td {
   display: inline-flex;
   width: 100%;
   padding: 10px; }
-  .za_box div {
+  .za_box .za_title {
     width: 30%;
     padding: 15px;
     background: linear-gradient(to right, #C4E3ED, #F2F2F2); }
-  .za_box table {
+  .za_box .za_data {
     width: 70%;
     background: #F2F2F2; }
-    .za_box table td {
+    .za_box .za_data table td {
       padding: 3px 0 3px 10px; }
-    .za_box table td:nth-child(2) {
-      color: #696969; }
+    .za_box .za_data table td:nth-child(1) {
+      width: 200px; }
+    .za_box .za_data table td:nth-child(2) {
+      color: #696969;
+      width: 400px; }
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/

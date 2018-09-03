@@ -77,7 +77,99 @@ if(isset($_POST['add_archive_entry']))
         MySQLNonQuery("INSERT INTO ooemm_archive (id,year,table_name,table_row,c_pl,c_verein,c_rd,c_s,c_u,c_n,c_spiele,c_satze,c_pkt) VALUES ('','$year','$title','$i','$Pl','$Verein','$Rd','$S','$U','$N','$Spiele','$Satze','$Pkt')");
     }
 
+
+}
+
+if(isset($_POST['updateZA']))
+{
+    $kategorie = $_POST['kategorie'];
+
+    $title1 = $_POST['title1'];
+    $title2 = $_POST['title2'];
+
+    $date1 = $_POST['date1'];
+    $date2 = $_POST['date2'];
+    $chTimespan = (isset($_POST['ch_timespan']) ? 1 : 0 );
+
+    $chVerein = (isset($_POST['ch_verein']) ? 1 : 0 );
+    $chUhrzeit = (isset($_POST['ch_uhrzeit']) ? 1 : 0 );
+    $chAuslosung = (isset($_POST['ch_auslosung']) ? 1 : 0 );
+    $chHallenname = (isset($_POST['ch_hallenname']) ? 1 : 0 );
+    $chAnschriftHalle = (isset($_POST['ch_anschrift_halle']) ? 1 : 0 );
+    $chAnzahlFelder = (isset($_POST['ch_anzahl_felder']) ? 1 : 0 );
+    $chTurnierverantwortlicher = (isset($_POST['ch_turnierverantwortlicher']) ? 1 : 0 );
+    $chOberschiedsrichter = (isset($_POST['ch_oberschiedsrichter']) ? 1 : 0 );
+    $chTelefon = (isset($_POST['ch_telefon']) ? 1 : 0 );
+    $chAnmeldungOnline = (isset($_POST['ch_anmeldung_online']) ? 1 : 0 );
+    $chAnmeldungEmail = (isset($_POST['ch_anmeldung_email']) ? 1 : 0 );
+    $chNennungenEmail = (isset($_POST['ch_nennungen_email']) ? 1 : 0 );
+    $chNennschluss = (isset($_POST['ch_nennschluss']) ? 1 : 0 );
+    $chZusatzangaben = (isset($_POST['ch_zusatzangaben']) ? 1 : 0 );
+
+    $Verein = $_POST['verein'];
+    $Uhrzeit = $_POST['uhrzeit'];
+    $Auslosung = $_POST['auslosung'];
+    $Hallenname = $_POST['hallenname'];
+    $AnschriftHalle = $_POST['anschrift_halle'];
+    $AnzahlFelder = $_POST['anzahl_felder'];
+    $Turnierverantwortlicher = $_POST['turnierverantwortlicher'];
+    $Oberschiedsrichter = $_POST['oberschiedsrichter'];
+    $Telefon = $_POST['telefon'];
+    $AnmeldungOnline = $_POST['anmeldung_online'];
+    $AnmeldungEmail = $_POST['anmeldung_email'];
+    $NennungenEmail = $_POST['nennungen_email'];
+    $Nennschluss = $_POST['nennschluss'];
+    $Zusatzangaben = $_POST['zusatzangaben'];
+
+    if($_POST['postType']=="new")
+    {
+        MySQLNonQuery("INSERT INTO zentralausschreibungen (id,kategorie) VALUES ('','newfield')");
+        $zaID = Fetch("zentralausschreibungen","id","kategorie","newfield");
+    }
+    else $zaID = $_POST['updateZA'];
+
+    $updateSQL = "
+        UPDATE zentralausschreibungen SET
+        kategorie = '$kategorie',
+        title_line1 = '$title1',
+        title_line2 = '$title2',
+        date_begin = '$date1',
+        date_end = '$date2',
+        act_timespan = '$chTimespan',
+        act_verein = '$chVerein',
+        verein = '$Verein',
+        act_uhrzeit = '$chUhrzeit',
+        uhrzeit = '$Uhrzeit',
+        act_auslosung = '$chAuslosung',
+        auslosung = '$Auslosung',
+        act_hallenname = '$chHallenname',
+        hallenname = '$Hallenname',
+        act_anschrift_halle = '$chAnschriftHalle',
+        anschrift_halle = '$AnschriftHalle',
+        act_anzahl_felder = '$chAnzahlFelder',
+        anzahl_felder = '$AnzahlFelder',
+        act_turnierverantwortlicher = '$chTurnierverantwortlicher',
+        turnierverantwortlicher = '$Turnierverantwortlicher',
+        act_oberschiedsrichter = '$chOberschiedsrichter',
+        oberschiedsrichter = '$Oberschiedsrichter',
+        act_telefon = '$chTelefon',
+        telefon = '$Telefon',
+        act_anmeldung_online = '$chAnmeldungOnline',
+        anmeldung_online = '$AnmeldungOnline',
+        act_anmeldung_email = '$chAnmeldungEmail',
+        anmeldung_email = '$AnmeldungEmail',
+        act_nennungen_email = '$chNennungenEmail',
+        nennungen_email = '$NennungenEmail',
+        act_nennschluss = '$chNennschluss',
+        nennschluss = '$Nennschluss',
+        act_zusatzangaben = '$chZusatzangaben',
+        zusatzangaben = '$Zusatzangaben'
+        WHERE id = '$zaID';
+    ";
+    MySQLNonQuery($updateSQL);
+
     Redirect(ThisPage());
+    die();
 }
 
 
@@ -350,6 +442,8 @@ if(isset($_POST['add_archive_entry']))
     }
     else if(isset($_GET['za']))
     {
+        $i=1;
+        $j=8;
         echo '<h3 class="stagfade2">[SQL-INSERT]: Zentralausschreibungen</h3> ';
 
         echo '
@@ -358,87 +452,239 @@ if(isset($_POST['add_archive_entry']))
             <h3>Zentralausschreibung erstellen</h3>
             <br>
 
-            <select name="" id="zaKategory" onchange="SelectZAKategory();" class="cel_m">
-                <option value="Landesmeisterschaft" style="color: #FF0000">Landesmeisterschaft</option>
-                <option value="Doppelturniere" style="color: #20B2AA">Doppelturniere</option>
-                <option value="Nachwuchs" style="color: #FFA500">Nachwuchs</option>
-                <option value="Schueler-Jugend" style="color: #9400D3">Sch&uuml;ler/Jugend</option>
-                <option value="Senioren" style="color: #32CD32">Senioren</option>
-            </select>
-            <br>
-            <input type="date" onchange = "CopyZADate();" id="datePick" class="cel_m"/>
-            <br><br>
-            <input type="text" placeholder="Titel Zeile 1" class="cel_m" id="zaTitleLineIn1" value=""><br>
-            <input type="text" placeholder="Titel Zeile 2 (optional)" class="cel_m" id="zaTitleLineIn1" value="">
+            <script>
+                window.onload = function() {
+                  CopyZADate();
+                };
+            </script>
+
+
+            <table style="display:inline-table">
+                <tr>
+                    <td>Kategorie:</td>
+                    <td colspan=2>
+                        <select name="kategorie" id="zaKategory" onchange="SelectZAKategory();" class="cel_m" tabindex="1">
+                            <option value="Landesmeisterschaft" style="color: #FF0000">Landesmeisterschaft</option>
+                            <option value="Doppelturnier" style="color: #20B2AA">Doppelturnier</option>
+                            <option value="Nachwuchs" style="color: #FFA500">Nachwuchs</option>
+                            <option value="SchuelerJugend" style="color: #9400D3">Sch&uuml;ler/Jugend</option>
+                            <option value="Senioren" style="color: #32CD32">Senioren</option>
+                        </select>
+                    </td>
+                    <td>Beschreibung</td>
+                    <td>
+                        <input name="title1" type="text" oninput="CopyZATitle();" placeholder="Titel Zeile 1" class="cel_m" id="zaTitleLineIn1" value="" tabindex="4">
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Datum: </b><output id="outTimespan"></output></td>
+                    <td colspan=2><input name="date1" type="date" onchange="CopyZADate();" id="datePick1" class="cel_m" value="'.date("Y-m-d").'" tabindex="2"/></td>
+                    <td></td>
+                    <td><input name="title2" type="text" oninput="CopyZATitle();" placeholder="Titel Zeile 2 (optional)" class="cel_m" id="zaTitleLineIn2" value="" tabindex="5"></td>
+                </tr>
+                <tr id="rwTimespan" style="display: none">
+                    <td class="ta_r">Bis: </td>
+                    <td colspan=2><input name="date2" type="date" onchange = "CopyZADate();" id="datePick2" class="cel_m" value="'.(date("Y-m-d",strtotime(date("Y-m-d")."+1 days"))).'" tabindex="3"/></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>'.Checkbox("ch_timespan","chTimespan",0,"CopyZADate();").'</td>
+                    <td>Zeitpsanne</td>
+                </tr>
+            </table>
+
+
+            <table style="display:inline-table">
+                <tr>
+                    <td>'.Checkbox("ch_verein","chid".$i,1,"ChangeZAExtraData(".$i++.");").'</td>
+                    <td>Verein</td>
+                    <td>'.Checkbox("ch_oberschiedsrichter","chid".$j,1,"ChangeZAExtraData(".$j++.");").'</td>
+                    <td>Oberschiedsrichter</td>
+                </tr>
+                <tr>
+                    <td>'.Checkbox("ch_uhrzeit","chid".$i,1,"ChangeZAExtraData(".$i++.");").'</td>
+                    <td>Uhrzeit</td>
+                    <td>'.Checkbox("ch_telefon","chid".$j,1,"ChangeZAExtraData(".$j++.");").'</td>
+                    <td>Telefon</td>
+                </tr>
+                <tr>
+                    <td>'.Checkbox("ch_auslosung","chid".$i,1,"ChangeZAExtraData(".$i++.");").'</td>
+                    <td>Auslosung</td>
+                    <td>'.Checkbox("ch_anmeldung_online","chid".$j,1,"ChangeZAExtraData(".$j++.");").'</td>
+                    <td>Anmeldung Online</td>
+                </tr>
+                <tr>
+                    <td>'.Checkbox("ch_hallenname","chid".$i,1,"ChangeZAExtraData(".$i++.");").'</td>
+                    <td>Hallenname</td>
+                    <td>'.Checkbox("ch_anmeldung_email","chid".$j,1,"ChangeZAExtraData(".$j++.");").'</td>
+                    <td>Anmeldung E-Mail</td>
+                </tr>
+                <tr>
+                    <td>'.Checkbox("ch_anschrift_halle","chid".$i,1,"ChangeZAExtraData(".$i++.");").'</td>
+                    <td>Anschrift Halle</td>
+                    <td>'.Checkbox("ch_nennungen_email","chid".$j,1,"ChangeZAExtraData(".$j++.");").'</td>
+                    <td>Nennungen E-Mail</td>
+                </tr>
+                <tr>
+                    <td>'.Checkbox("ch_anzahl_felder","chid".$i,1,"ChangeZAExtraData(".$i++.");").'</td>
+                    <td>Anzahl Felder</td>
+                    <td>'.Checkbox("ch_nennschluss","chid".$j,1,"ChangeZAExtraData(".$j++.");").'</td>
+                    <td>Nennschluss</td>
+                </tr>
+                <tr>
+                    <td>'.Checkbox("ch_turnierverantwortlicher","chid".$i,1,"ChangeZAExtraData(".$i++.");").'</td>
+                    <td>Turnierverantwortlicher</td>
+                    <td>'.Checkbox("ch_zusatzangaben","chid".$j,1,"ChangeZAExtraData(".$j++.");").'</td>
+                    <td>Zusatzangaben</td>
+                </tr>
+            </table>
+
+            ';
+
+            $i=1;
+
+            echo '
+
 
             <div class="za_box">
-                <div>
+                <div class="za_title">
 
                     <h1>
-                        <output style="color: #FF0000" class="cel_l cef_nobg cef_brdb" id="zaTitleLineOut1">sdf</output>
+                        <output style="color: #FF0000" class="cel_l cef_nobg cef_brdb" id="zaTitleLineOut1">Titel/Beschreibung</output>
                         <br>
                         <output style="color: #FF0000" class="cel_l cef_nobg cef_brdb" id="zaTitleLineOut2"></output>
                     </h1>
                     <output class="cel_f15" id="zaDate"></output>
 
                 </div>
+                <div class="za_data">
+                    <table>
+                        <tr id="edat'.$i.'">
+                            <td class="ta_r"><b>Verein:</b></td>
+                            <td class="ta_l">
+                                <a onclick="DisableZAOption('.$i++.');" style="color: #696969; text-decoration: none;" title="Feld entfernen">&#128473;</a>
+                                <b><input name="verein" type="text" class="cel_m cef_nobg cef_brdb cef_nomg cef_nopd" id="verein_in"/></b>
+                                <select id="vereinSelection" onchange="UpdateZAVerein();" style="width: 40px;" class="cef_nomg cef_nopd">
+                                    <option value="" disabled selected>&#9660; Verein&nbsp;&nbsp;ausw&auml;hlen</option>
+                                    ';
+                                    $strSQL = "SELECT * FROM vereine";
+                                    $rs=mysqli_query($link,$strSQL);
+                                    while($row=mysqli_fetch_assoc($rs))
+                                    {
+                                        echo '<option value="'.$row['verein'].' '.$row['ort'].'">'.$row['verein'].' <b>'.$row['ort'].'</b></option>';
+                                    }
+                                    echo '
+                                </select>
+                            </td>
+                        </tr>
+                        <tr id="edat'.$i.'">
+                            <td class="ta_r">Uhrzeit:</td>
+                            <td class="ta_l">
+                                <a onclick="DisableZAOption('.$i++.');" style="color: #696969; text-decoration: none;" title="Feld entfernen">&#128473;</a>
+                                <input name="uhrzeit" type="text" class="cel_m cef_nobg cef_brdb cef_nomg cef_nopd"/>
+                            </td>
+                        </tr>
 
-                <table>
-                      <tr>
-                         <td class="ta_r"><b>Verein:</b></td>
-                         <td class="ta_l"><b><input type="text" class="cef_nobg cef_brdb cef_nomg cef_nopd"/></b></td>
-                      </tr>
-                      <tr>
-                         <td class="ta_r">Uhrzeit:</td>
-                         <td class="ta_l"><input type="time" class="cef_nobg cef_brdb cef_nomg cef_nopd"/> Uhr</td>
-                      </tr>
+                        <tr id="edat'.$i.'">
+                            <td class="ta_r">Auslosung:</td>
+                            <td class="ta_l">
+                                <a onclick="DisableZAOption('.$i++.');" style="color: #696969; text-decoration: none;" title="Feld entfernen">&#128473;</a>
+                                <input name="auslosung" type="text" class="cel_m cef_nobg cef_brdb cef_nomg cef_nopd"/>
+                            </td>
+                        </tr>
 
-                      <tr>
-                         <td class="ta_r">Auslosung:</td>
-                         <td class="ta_l"><input type="time" class="cef_nobg cef_brdb cef_nomg cef_nopd"/> Uhr</td>
-                      </tr>
+                        <tr id="edat'.$i.'">
+                            <td class="ta_r">Hallenname:</td>
+                            <td class="ta_l">
+                                <a onclick="DisableZAOption('.$i++.');" style="color: #696969; text-decoration: none;" title="Feld entfernen">&#128473;</a>
+                                <input name="hallenname" type="text" class="cel_m cef_nobg cef_brdb cef_nomg cef_nopd"/>
+                            </td>
+                        </tr>
 
-                      <tr>
-                         <td class="ta_r">Hallenname:</td>
-                         <td class="ta_l"><input type="text" class="cef_nobg cef_brdb cef_nomg cef_nopd"/></td>
-                      </tr>
+                        <tr id="edat'.$i.'">
+                            <td class="ta_r">Anschrift Halle:</td>
+                            <td class="ta_l">
+                                <a onclick="DisableZAOption('.$i++.');" style="color: #696969; text-decoration: none;" title="Feld entfernen">&#128473;</a>
+                                <input name="anschrift_halle" type="text" class="cel_m cef_nobg cef_brdb cef_nomg cef_nopd"/>
+                            </td>
+                        </tr>
 
-                      <tr>
-                         <td class="ta_r">Anschrift Halle:</td>
-                         <td class="ta_l"><input type="text" class="cef_nobg cef_brdb cef_nomg cef_nopd"/></td>
-                      </tr>
+                        <tr id="edat'.$i.'">
+                            <td class="ta_r">Anzahl Felder:</td>
+                            <td class="ta_l">
+                                <a onclick="DisableZAOption('.$i++.');" style="color: #696969; text-decoration: none;" title="Feld entfernen">&#128473;</a>
+                                <input name="anzahl_felder" type="text" class="cel_m cef_nobg cef_brdb cef_nomg cef_nopd"/>
+                            </td>
+                        </tr>
 
-                      <tr>
-                         <td class="ta_r">Anzahl Felder:</td>
-                         <td class="ta_l"><input type="text" class="cef_nobg cef_brdb cef_nomg cef_nopd"/></td>
-                      </tr>
+                        <tr id="edat'.$i.'">
+                            <td class="ta_r">Turnierverantwortlicher:</td>
+                            <td class="ta_l">
+                                <a onclick="DisableZAOption('.$i++.');" style="color: #696969; text-decoration: none;" title="Feld entfernen">&#128473;</a>
+                                <input name="turnierverantwortlicher" type="text" class="cel_m cef_nobg cef_brdb cef_nomg cef_nopd"/>
+                            </td>
+                        </tr>
 
-                      <tr>
-                         <td class="ta_r">Turnierverantwortlicher:</td>
-                         <td class="ta_l"><input type="text" class="cef_nobg cef_brdb cef_nomg cef_nopd"/></td>
-                      </tr>
+                        <tr id="edat'.$i.'">
+                            <td class="ta_r">Oberschiedsrichter:</td>
+                            <td class="ta_l">
+                                <a onclick="DisableZAOption('.$i++.');" style="color: #696969; text-decoration: none;" title="Feld entfernen">&#128473;</a>
+                                <input name="oberschiedsrichter" type="text" class="cel_m cef_nobg cef_brdb cef_nomg cef_nopd"/>
+                            </td>
+                        </tr>
 
-                      <tr>
-                         <td class="ta_r">Telefon:</td>
-                         <td class="ta_l"><input type="text" class="cef_nobg cef_brdb cef_nomg cef_nopd"/></td>
-                      </tr>
+                        <tr id="edat'.$i.'">
+                            <td class="ta_r">Telefon:</td>
+                            <td class="ta_l">
+                                <a onclick="DisableZAOption('.$i++.');" style="color: #696969; text-decoration: none;" title="Feld entfernen">&#128473;</a>
+                                <input name="telefon" type="text" class="cel_m cef_nobg cef_brdb cef_nomg cef_nopd"/>
+                            </td>
+                        </tr>
 
-                      <tr>
-                         <td class="ta_r">Nennungen E-Mail:</td>
-                         <td class="ta_l"><input type="text" class="cef_nobg cef_brdb cef_nomg cef_nopd"/></td>
-                      </tr>
+                        <tr id="edat'.$i.'">
+                            <td class="ta_r">Anmeldung Online:</td>
+                            <td class="ta_l">
+                                <a onclick="DisableZAOption('.$i++.');" style="color: #696969; text-decoration: none;" title="Feld entfernen">&#128473;</a>
+                                <input name="anmeldung_online" type="text" class="cel_m cef_nobg cef_brdb cef_nomg cef_nopd"/>
+                            </td>
+                        </tr>
 
-                      <tr>
-                         <td class="ta_r">Nennschluss:</td>
-                         <td class="ta_l"><input type="text" class="cef_nobg cef_brdb cef_nomg cef_nopd"/></td>
-                      </tr>
+                        <tr id="edat'.$i.'">
+                            <td class="ta_r">Anmeldung E-Mail:</td>
+                            <td class="ta_l">
+                                <a onclick="DisableZAOption('.$i++.');" style="color: #696969; text-decoration: none;" title="Feld entfernen">&#128473;</a>
+                                <input name="anmeldung_email" type="text" class="cel_m cef_nobg cef_brdb cef_nomg cef_nopd"/>
+                            </td>
+                        </tr>
 
-                      <tr>
-                         <td class="ta_r">Zusatzangaben:</td>
-                         <td class="ta_l"><input type="text" class="cef_nobg cef_brdb cef_nomg cef_nopd"/></td>
-                      </tr>
-                </table>
+                        <tr id="edat'.$i.'">
+                            <td class="ta_r">Nennungen E-Mail:</td>
+                            <td class="ta_l">
+                                <a onclick="DisableZAOption('.$i++.');" style="color: #696969; text-decoration: none;" title="Feld entfernen">&#128473;</a>
+                                <input name="nennungen_email" type="text" class="cel_m cef_nobg cef_brdb cef_nomg cef_nopd"/>
+                            </td>
+                        </tr>
+
+                        <tr id="edat'.$i.'">
+                            <td class="ta_r">Nennschluss:</td>
+                            <td class="ta_l">
+                                <a onclick="DisableZAOption('.$i++.');" style="color: #696969; text-decoration: none;" title="Feld entfernen">&#128473;</a>
+                                <input name="nennschluss" type="date" class="cel_m cef_nobg cef_brdb cef_nomg cef_nopd"/>
+                            </td>
+                        </tr>
+
+                        <tr id="edat'.$i.'">
+                            <td class="ta_r">Zusatzangaben:</td>
+                            <td class="ta_l">
+                                <a onclick="DisableZAOption('.$i++.');" style="color: #696969; text-decoration: none;" title="Feld entfernen">&#128473;</a>
+                                <input name="zusatzangaben" type="text" class="cel_m cef_nobg cef_brdb cef_nomg cef_nopd"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
+            <input type="hidden" name="postType" value="new"/>
+            <button type="submit" name="updateZA">Aktualisieren</button>
         ';
     }
     else
