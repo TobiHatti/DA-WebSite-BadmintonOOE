@@ -33,11 +33,16 @@ function EditZA($id='')
                                 <td>Kategorie:</td>
                                 <td colspan=2>
                                     <select name="kategorie" id="zaKategory" onchange="SelectZAKategory();" class="cel_m" tabindex="1">
-                                        <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Landesmeisterschaft") ? 'selected' : '').' value="Landesmeisterschaft" style="color: #FF0000">Landesmeisterschaft</option>
-                                        <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Doppelturnier") ? 'selected' : '').' value="Doppelturnier" style="color: #20B2AA">Doppelturnier</option>
-                                        <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Nachwuchs") ? 'selected' : '').' value="Nachwuchs" style="color: #FFA500">Nachwuchs</option>
-                                        <option '.((isset($row['kategorie']) AND $row['kategorie'] == "SchuelerJugend") ? 'selected' : '').' value="SchuelerJugend" style="color: #9400D3">Sch&uuml;ler/Jugend</option>
-                                        <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Senioren") ? 'selected' : '').' value="Senioren" style="color: #32CD32">Senioren</option>
+                                        <optgroup label="Gro&szlig;e Felder">
+                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Landesmeisterschaft") ? 'selected' : '').' value="Landesmeisterschaft" style="color: '.GetProperty("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
+                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Doppelturnier") ? 'selected' : '').' value="Doppelturnier" style="color: '.GetProperty("ColorDoppelturnier").'">Doppelturnier</option>
+                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Nachwuchs") ? 'selected' : '').' value="Nachwuchs" style="color: '.GetProperty("ColorNachwuchs").'">Nachwuchs</option>
+                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "SchuelerJugend") ? 'selected' : '').' value="SchuelerJugend" style="color: '.GetProperty("ColorSchuelerJugend").'">Sch&uuml;ler/Jugend</option>
+                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Senioren") ? 'selected' : '').' value="Senioren" style="color: '.GetProperty("ColorSenioren").'">Senioren</option>
+                                        </optgroup>
+                                        <optgroup label="Kleine Felder">
+                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Training") ? 'selected' : '').' value="Training" style="color: '.GetProperty("ColorTraining").'">Training</option>
+                                        </optgroup>
                                     </select>
                                 </td>
                                 <td>Beschreibung</td>
@@ -63,7 +68,7 @@ function EditZA($id='')
                         </table>
 
 
-                        <table style="display:inline-table">
+                        <table style="display:inline-table" id="zaOptions">
                             <tr>
                                 <td>'.Checkbox("ch_verein","chid".$i,((isset($row['act_verein'])) ? $row['act_verein'] : 1),"ChangeZAExtraData(".$i++.");").'</td>
                                 <td>Verein</td>
@@ -112,7 +117,7 @@ function EditZA($id='')
                     $i=1;
 
                     $retval .= '
-                        <div class="za_box">
+                        <div class="za_box" id="zaFieldL">
                             <div class="za_title">
 
                                 <h1>
@@ -249,6 +254,26 @@ function EditZA($id='')
                                 </table>
                             </div>
                         </div>
+                        <div class="za_box" id="zaFieldS" style="display:none;">
+                            <div class="za_title">
+                                <h3>
+                                    <output style="color: '.GetProperty("ColorTraining").'" class="cel_l cef_nobg cef_brdb" id="zaTitleLineOutS">Titel/Beschreibung</output>
+                                </h3>
+
+                            </div>
+                            <div class="za_data">
+                                <table>
+                                    <tr>
+                                        <td>Datum:</td>
+                                        <td><output id="zaDateS"></output> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ort:</td>
+                                        <td><input name="location" type="text" class="cel_m cef_nobg cef_brdb cef_nomg cef_nopd" value="'.((isset($row['location'])) ? $row['location'] : '').'"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                         <input type="hidden" name="postType" value="update"/>
                         <button type="submit" name="updateZA" value="'.$row['id'].'">Aktualisieren</button>
                         <a href="'.ThisPage("!editSC","!#edit").'"><button type="button">&Auml;nderungen verwerfen</button></a>
@@ -276,11 +301,16 @@ function EditZA($id='')
                         <td>Kategorie:</td>
                         <td colspan=2>
                             <select name="kategorie" id="zaKategory" onchange="SelectZAKategory();" class="cel_m" tabindex="1">
-                                <option value="Landesmeisterschaft" style="color: #FF0000">Landesmeisterschaft</option>
-                                <option value="Doppelturnier" style="color: #20B2AA">Doppelturnier</option>
-                                <option value="Nachwuchs" style="color: #FFA500">Nachwuchs</option>
-                                <option value="SchuelerJugend" style="color: #9400D3">Sch&uuml;ler/Jugend</option>
-                                <option value="Senioren" style="color: #32CD32">Senioren</option>
+                                <optgroup label="Gro&szlig;e Felder">
+                                    <option value="Landesmeisterschaft" style="color: '.GetProperty("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
+                                    <option value="Doppelturnier" style="color: '.GetProperty("ColorDoppelturnier").'">Doppelturnier</option>
+                                    <option value="Nachwuchs" style="color: '.GetProperty("ColorNachwuchs").'">Nachwuchs</option>
+                                    <option value="SchuelerJugend" style="color: '.GetProperty("ColorSchuelerJugend").'">Sch&uuml;ler/Jugend</option>
+                                    <option value="Senioren" style="color: '.GetProperty("ColorSenioren").'">Senioren</option>
+                                </optgroup>
+                                <optgroup label="Kleine Felder">
+                                    <option value="Training" style="color: '.GetProperty("ColorTraining").'">Training</option>
+                                </optgroup>
                             </select>
                         </td>
                         <td>Beschreibung</td>
@@ -306,7 +336,7 @@ function EditZA($id='')
                 </table>
 
 
-                <table style="display:inline-table">
+                <table style="display:inline-table" id="zaOptions">
                     <tr>
                         <td>'.Checkbox("ch_verein","chid".$i,1,"ChangeZAExtraData(".$i++.");").'</td>
                         <td>Verein</td>
@@ -358,7 +388,7 @@ function EditZA($id='')
                 echo '
 
 
-                <div class="za_box">
+                <div class="za_box" id="zaFieldL">
                     <div class="za_title">
                         <h1>
                             <output style="color: #FF0000" class="cel_l cef_nobg cef_brdb" id="zaTitleLineOut1">Titel/Beschreibung</output>
@@ -493,6 +523,28 @@ function EditZA($id='')
                         </table>
                     </div>
                 </div>
+
+                <div class="za_box" id="zaFieldS" style="display:none;">
+                    <div class="za_title">
+                        <h3>
+                            <output style="color: '.GetProperty("ColorTraining").'" class="cel_l cef_nobg cef_brdb" id="zaTitleLineOutS">Titel/Beschreibung</output>
+                        </h3>
+
+                    </div>
+                    <div class="za_data">
+                        <table>
+                            <tr>
+                                <td>Datum:</td>
+                                <td><output id="zaDateS"></output> </td>
+                            </tr>
+                            <tr>
+                                <td>Ort:</td>
+                                <td><input name="location" type="text" class="cel_m cef_nobg cef_brdb cef_nomg cef_nopd"/></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
                 <input type="hidden" name="postType" value="new"/>
                 <button type="submit" name="updateZA">Eintragen</button>
             </form>

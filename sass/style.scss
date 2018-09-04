@@ -1302,17 +1302,13 @@ table.centered_content td{
 /* (J01)   ZA > Containers                                                           */
 /*===================================================================================*/
 
-
 .za_box{
-    display: inline-flex;
     width: 100%;
     padding: 10px;
     @include box-sizing(border-box);
 
     .za_title{
-        width:30%;
         padding: 15px;
-        background: linear-gradient(to right, $theme-bright-l, #F2F2F2);
     }
 
     .za_data{
@@ -1320,22 +1316,77 @@ table.centered_content td{
         background: #F2F2F2;
 
         table{
-            
+
             td{
                 padding: 3px 0 3px 10px;
             }
 
             td:nth-child(1){
-                width: 200px;
+                text-align: right;
             }
 
             td:nth-child(2){
                 color: #696969;
-                width: 400px;
+                text-align: left;
             }
         }
     }
 }
+
+@media only screen and (max-width: 1110px){
+    .za_box{
+        display: block;
+
+        .za_title{
+            width:100%;
+            background: linear-gradient(to bottom, $theme-bright-l, #F2F2F2);
+            @include box-sizing(border-box);
+        }
+
+        .za_data{
+            width:100%;
+
+            table{
+                width:100%;
+                td:nth-child(1){
+                    width: 50%;
+                }
+
+                td:nth-child(2){
+                    width: 50%;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 1110px){
+    .za_box{
+        display: inline-flex;
+
+        .za_title{
+            width:30%;
+            background: linear-gradient(to right, $theme-bright-l, #F2F2F2);
+        }
+
+        .za_data{
+            width:70%;
+
+            table{
+                td:nth-child(1){
+                    width: 200px;
+                }
+
+                td:nth-child(2){
+                    width: 400px;
+                }
+            }
+        }
+    }
+
+
+}
+
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
