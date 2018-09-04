@@ -43,6 +43,8 @@
         $Nennschluss = $_POST['nennschluss'];
         $Zusatzangaben = $_POST['zusatzangaben'];
 
+        $Location = $_POST['location'];
+
         if($_POST['postType']=="new")
         {
             MySQLNonQuery("INSERT INTO zentralausschreibungen (id,kategorie) VALUES ('','newfield')");
@@ -85,7 +87,8 @@
             act_nennschluss = '$chNennschluss',
             nennschluss = '$Nennschluss',
             act_zusatzangaben = '$chZusatzangaben',
-            zusatzangaben = '$Zusatzangaben'
+            zusatzangaben = '$Zusatzangaben',
+            location = '$Location'
             WHERE id = '$zaID';
         ";
         MySQLNonQuery($updateSQL);
@@ -108,7 +111,7 @@
 
         if(CheckPermission("AddZA"))
         {
-            echo AddButton(ThisPage("!editSC","!#edit","+neu"));  
+            echo AddButton(ThisPage("!editSC","!#edit","+neu"));
         }
 
 
@@ -188,165 +191,203 @@
                 }
                 else
                 {
-                    echo '
-                        <div class="za_box">
-                            <div class="za_title">
-                                <h1 style="color: '.GetProperty("Color".$row['kategorie']).'">'.$row['title_line1'].'<br>'.$row['title_line2'].'</h1>
-                                <h2><span style="color: #000000">'.$dateStr.'</span></h2>
+                    if($row['size']=='full')
+                    {
+                        echo '
+                            <div class="za_box">
+                                <div class="za_title">
+                                    <h1 style="color: '.GetProperty("Color".$row['kategorie']).'">'.$row['title_line1'].'<br>'.$row['title_line2'].'</h1>
+                                    <h2><span style="color: #000000">'.$dateStr.'</span></h2>
+                                </div>
+                                <div class="za_data">
+                                    <table>
+                        ';
+
+                        if($row['act_verein'])
+                        {
+                            echo '
+                                <tr>
+                                    <td class="ta_r"><b>Verein:</b></td>
+                                    <td class="ta_l"><b>'.$row['verein'].'</b></td>
+                                </tr>
+                            ';
+                        }
+                        if($row['act_uhrzeit'])
+                        {
+                            echo '
+                                <tr>
+                                    <td class="ta_r">Uhrzeit:</td>
+                                    <td class="ta_l">'.$row['uhrzeit'].'</td>
+                                </tr>
+                            ';
+                        }
+                        if($row['act_auslosung'])
+                        {
+                            echo '
+                                <tr>
+                                    <td class="ta_r">Auslosung:</td>
+                                    <td class="ta_l">'.$row['auslosung'].'</td>
+                                </tr>
+                            ';
+                        }
+                        if($row['act_hallenname'])
+                        {
+                            echo '
+                                <tr>
+                                    <td class="ta_r">Hallenname:</td>
+                                    <td class="ta_l">'.$row['hallenname'].'</td>
+                                </tr>
+                            ';
+                        }
+                        if($row['act_anschrift_halle'])
+                        {
+                            echo '
+                                <tr>
+                                    <td class="ta_r">Anschrift Halle:</td>
+                                    <td class="ta_l">'.$row['anschrift_halle'].'</td>
+                                </tr>
+                            ';
+                        }
+                        if($row['act_anzahl_felder'])
+                        {
+                            echo '
+                                <tr>
+                                    <td class="ta_r">Anzahl Felder:</td>
+                                    <td class="ta_l">'.$row['anzahl_felder'].'</td>
+                                </tr>
+                            ';
+                        }
+                        if($row['act_turnierverantwortlicher'])
+                        {
+                            echo '
+                                <tr>
+                                    <td class="ta_r">Turnierverantwortlicher:</td>
+                                    <td class="ta_l">'.$row['turnierverantwortlicher'].'</td>
+                                </tr>
+                            ';
+                        }
+                        if($row['act_oberschiedsrichter'])
+                        {
+                            echo '
+                                <tr>
+                                    <td class="ta_r">Oberschiedsrichter:</td>
+                                    <td class="ta_l">'.$row['oberschiedsrichter'].'</td>
+                                </tr>
+                            ';
+                        }
+                        if($row['act_telefon'])
+                        {
+                            echo '
+                                <tr>
+                                    <td class="ta_r">Telefon:</td>
+                                    <td class="ta_l">'.$row['telefon'].'</td>
+                                </tr>
+                            ';
+                        }
+                        if($row['act_anmeldung_online'])
+                        {
+                            echo '
+                                <tr>
+                                    <td class="ta_r">Anmeldung Online:</td>
+                                    <td class="ta_l"><a href="'.$row['anmeldung_online'].'" target="_blank"><b><i>Online-Anmeldung</i></b></a></td>
+                                </tr>
+                            ';
+                        }
+                        if($row['act_anmeldung_email'])
+                        {
+                            echo '
+                                <tr>
+                                    <td class="ta_r">Anmeldung E-Mail:</td>
+                                    <td class="ta_l"><a href="mailto: '.$row['anmeldung_email'].'">'.$row['anmeldung_email'].'</a></td>
+                                </tr>
+                            ';
+                        }
+                        if($row['act_nennungen_email'])
+                        {
+                            echo '
+                                <tr>
+                                    <td class="ta_r">Nennungen E-Mail:</td>
+                                    <td class="ta_l"><a href="mailto: '.$row['nennungen_email'].'">'.$row['nennungen_email'].'</a></td>
+                                </tr>
+                            ';
+                        }
+                        if($row['act_nennschluss'])
+                        {
+                            echo '
+                                <tr>
+                                    <td class="ta_r">Nennschluss:</td>
+                                    <td class="ta_l">'.str_replace('ä','&auml;',strftime("%A, %d. %B %Y",strtotime($row['nennschluss']))).'</td>
+                                </tr>
+                            ';
+                        }
+                        if($row['act_zusatzangaben'])
+                        {
+                            echo '
+                                <tr>
+                                    <td class="ta_r">Zusatzangaben:</td>
+                                    <td class="ta_l">'.$row['zusatzangaben'].'</td>
+                                </tr>
+                            ';
+                        }
+
+                        echo '
+                                    </table>
+
+                        ';
+
+                        if(CheckPermission("EditZA"))
+                        {
+                            echo '<span style="float: right;"> '.EditButton(ThisPage("!editContent","!editSC","+editSC=".$row['id'],"#edit")).' </span>';
+                        }
+
+                        if(CheckPermission("DeleteZA"))
+                        {
+                            echo '<span style="float: right;"> '.DeleteButton("ZA","zentralausschreibungen",$row['id']).' </span>';
+                        }
+
+                        echo '
+                                </div>
                             </div>
-                            <div class="za_data">
-                                <table>
-                    ';
+                        ';
 
-                    if($row['act_verein'])
+                    }
+                    else
                     {
                         echo '
-                            <tr>
-                                <td class="ta_r"><b>Verein:</b></td>
-                                <td class="ta_l"><b>'.$row['verein'].'</b></td>
-                            </tr>
-                        ';
-                    }
-                    if($row['act_uhrzeit'])
-                    {
-                        echo '
-                            <tr>
-                                <td class="ta_r">Uhrzeit:</td>
-                                <td class="ta_l">'.$row['uhrzeit'].'</td>
-                            </tr>
-                        ';
-                    }
-                    if($row['act_auslosung'])
-                    {
-                        echo '
-                            <tr>
-                                <td class="ta_r">Auslosung:</td>
-                                <td class="ta_l">'.$row['auslosung'].'</td>
-                            </tr>
-                        ';
-                    }
-                    if($row['act_hallenname'])
-                    {
-                        echo '
-                            <tr>
-                                <td class="ta_r">Hallenname:</td>
-                                <td class="ta_l">'.$row['hallenname'].'</td>
-                            </tr>
-                        ';
-                    }
-                    if($row['act_anschrift_halle'])
-                    {
-                        echo '
-                            <tr>
-                                <td class="ta_r">Anschrift Halle:</td>
-                                <td class="ta_l">'.$row['anschrift_halle'].'</td>
-                            </tr>
-                        ';
-                    }
-                    if($row['act_anzahl_felder'])
-                    {
-                        echo '
-                            <tr>
-                                <td class="ta_r">Anzahl Felder:</td>
-                                <td class="ta_l">'.$row['anzahl_felder'].'</td>
-                            </tr>
-                        ';
-                    }
-                    if($row['act_turnierverantwortlicher'])
-                    {
-                        echo '
-                            <tr>
-                                <td class="ta_r">Turnierverantwortlicher:</td>
-                                <td class="ta_l">'.$row['turnierverantwortlicher'].'</td>
-                            </tr>
-                        ';
-                    }
-                    if($row['act_oberschiedsrichter'])
-                    {
-                        echo '
-                            <tr>
-                                <td class="ta_r">Oberschiedsrichter:</td>
-                                <td class="ta_l">'.$row['oberschiedsrichter'].'</td>
-                            </tr>
-                        ';
-                    }
-                    if($row['act_telefon'])
-                    {
-                        echo '
-                            <tr>
-                                <td class="ta_r">Telefon:</td>
-                                <td class="ta_l">'.$row['telefon'].'</td>
-                            </tr>
-                        ';
-                    }
-                    if($row['act_anmeldung_online'])
-                    {
-                        echo '
-                            <tr>
-                                <td class="ta_r">Anmeldung Online:</td>
-                                <td class="ta_l"><a href="'.$row['anmeldung_online'].'" target="_blank"><b><i>Online-Anmeldung</i></b></a></td>
-                            </tr>
-                        ';
-                    }
-                    if($row['act_anmeldung_email'])
-                    {
-                        echo '
-                            <tr>
-                                <td class="ta_r">Anmeldung E-Mail:</td>
-                                <td class="ta_l"><a href="mailto: '.$row['anmeldung_email'].'">'.$row['anmeldung_email'].'</a></td>
-                            </tr>
-                        ';
-                    }
-                    if($row['act_nennungen_email'])
-                    {
-                        echo '
-                            <tr>
-                                <td class="ta_r">Nennungen E-Mail:</td>
-                                <td class="ta_l"><a href="mailto: '.$row['nennungen_email'].'">'.$row['nennungen_email'].'</a></td>
-                            </tr>
-                        ';
-                    }
-                    if($row['act_nennschluss'])
-                    {
-                        echo '
-                            <tr>
-                                <td class="ta_r">Nennschluss:</td>
-                                <td class="ta_l">'.str_replace('ä','&auml;',strftime("%A, %d. %B %Y",strtotime($row['nennschluss']))).'</td>
-                            </tr>
-                        ';
-                    }
-                    if($row['act_zusatzangaben'])
-                    {
-                        echo '
-                            <tr>
-                                <td class="ta_r">Zusatzangaben:</td>
-                                <td class="ta_l">'.$row['zusatzangaben'].'</td>
-                            </tr>
-                        ';
-                    }
+                            <div class="za_box">
+                                <div class="za_title">
+                                    <h3 style="color: '.GetProperty("Color".$row['kategorie']).'">'.$row['title_line1'].'</h3>
 
-                    echo '
-                                </table>
+                                </div>
+                                <div class="za_data">
+                                    <table>
+                                        <tr>
+                                            <td>Datum:</td>
+                                            <td>'.$dateStr.'</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ort:</td>
+                                            <td>'.$row['location'].'</td>
+                                        </tr>
+                                    </table>
+                                    ';
 
-                    ';
+                                    if(CheckPermission("EditZA"))
+                                    {
+                                        echo '<span style="float: right;"> '.EditButton(ThisPage("!editContent","!editSC","+editSC=".$row['id'],"#edit")).' </span>';
+                                    }
 
-                    if(CheckPermission("EditZA"))
-                    {
-                        echo '<span style="float: right;"> '.EditButton(ThisPage("!editContent","!editSC","+editSC=".$row['id'],"#edit")).' </span>';
-                    }
+                                    if(CheckPermission("DeleteZA"))
+                                    {
+                                        echo '<span style="float: right;"> '.DeleteButton("ZA","zentralausschreibungen",$row['id']).' </span>';
+                                    }
 
-                    if(CheckPermission("DeleteZA"))
-                    {
-                        echo '<span style="float: right;"> '.DeleteButton("ZA","zentralausschreibungen",$row['id']).' </span>';
-                    }
-
-                    echo '
+                                     echo '
+                                </div>
                             </div>
-                        </div>
-                    ';
+                        ';
+                    }
                 }
-
-
             }
         }
     }

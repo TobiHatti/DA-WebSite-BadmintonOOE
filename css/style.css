@@ -1266,27 +1266,53 @@ table.centered_content td {
 /* (J01)   ZA > Containers                                                           */
 /*===================================================================================*/
 .za_box {
-  display: inline-flex;
   width: 100%;
   padding: 10px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
   .za_box .za_title {
-    width: 30%;
-    padding: 15px;
-    background: linear-gradient(to right, #C4E3ED, #F2F2F2); }
+    padding: 15px; }
   .za_box .za_data {
     width: 70%;
     background: #F2F2F2; }
     .za_box .za_data table td {
       padding: 3px 0 3px 10px; }
     .za_box .za_data table td:nth-child(1) {
-      width: 200px; }
+      text-align: right; }
     .za_box .za_data table td:nth-child(2) {
       color: #696969;
-      width: 400px; }
+      text-align: left; }
 
+@media only screen and (max-width: 1110px) {
+  .za_box {
+    display: block; }
+    .za_box .za_title {
+      width: 100%;
+      background: linear-gradient(to bottom, #C4E3ED, #F2F2F2);
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box; }
+    .za_box .za_data {
+      width: 100%; }
+      .za_box .za_data table {
+        width: 100%; }
+        .za_box .za_data table td:nth-child(1) {
+          width: 50%; }
+        .za_box .za_data table td:nth-child(2) {
+          width: 50%; } }
+@media only screen and (min-width: 1110px) {
+  .za_box {
+    display: inline-flex; }
+    .za_box .za_title {
+      width: 30%;
+      background: linear-gradient(to right, #C4E3ED, #F2F2F2); }
+    .za_box .za_data {
+      width: 70%; }
+      .za_box .za_data table td:nth-child(1) {
+        width: 200px; }
+      .za_box .za_data table td:nth-child(2) {
+        width: 400px; } }
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*================================= O - Fotogallerie ================================*/

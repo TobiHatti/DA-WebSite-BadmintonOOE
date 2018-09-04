@@ -304,32 +304,34 @@
                 <h3>Neuigkeiten</h3>
                 <hr>
                 <div class="mdrn_news_tile_container">
-                ';
-
-                $i=2;
-                $strSQL = "SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%Top-News%' ORDER BY release_date DESC, id DESC LIMIT 0,$newsLimit";
-                $rs=mysqli_query($link,$strSQL);
-                while($row=mysqli_fetch_assoc($rs))
-                {
-                    echo '
-                        <div class="mdrn_news_tile stagfade'.$i++.'">
-                            <div class="img_tag_container">
-                                <a href="/news/artikel/'.$row['article_url'].'"><img src="'.$row['thumbnail'].'" alt=""/></a>
-                                <div class="tag_overlay">'.ShowTags($row['tags']).'</div>
-                            </div>
-                            <a href="/news/artikel/'.$row['article_url'].'"><b>'.$row['title'].'</b></a>
-                            <p></p>
-                            <span>
-                            '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['release_date']))).':&nbsp;
-                            </span>
-                            <div class="p">
-                            '.TrimText(str_replace('</p><p>',' ',str_replace('<br>',' ',str_replace($row['title'],'',$row['article']))), 120) .'<br>
-                            </div>
-                            <a href="/news/artikel/'.$row['article_url'].'">&#9654; Mehr lesen</a>
-                        </div>
+                    <center>
                     ';
-                }
-                echo '
+
+                    $i=2;
+                    $strSQL = "SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%Top-News%' ORDER BY release_date DESC, id DESC LIMIT 0,$newsLimit";
+                    $rs=mysqli_query($link,$strSQL);
+                    while($row=mysqli_fetch_assoc($rs))
+                    {
+                        echo '
+                            <div class="mdrn_news_tile stagfade'.$i++.'">
+                                <div class="img_tag_container">
+                                    <a href="/news/artikel/'.$row['article_url'].'"><img src="'.$row['thumbnail'].'" alt=""/></a>
+                                    <div class="tag_overlay">'.ShowTags($row['tags']).'</div>
+                                </div>
+                                <a href="/news/artikel/'.$row['article_url'].'"><b>'.$row['title'].'</b></a>
+                                <p></p>
+                                <span>
+                                '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['release_date']))).':&nbsp;
+                                </span>
+                                <div class="p">
+                                '.TrimText(str_replace('</p><p>',' ',str_replace('<br>',' ',str_replace($row['title'],'',$row['article']))), 120) .'<br>
+                                </div>
+                                <a href="/news/artikel/'.$row['article_url'].'">&#9654; Mehr lesen</a>
+                            </div>
+                        ';
+                    }
+                    echo '
+                    </center>
                 </div>
                 <br>
                 <h3>Development</h3>

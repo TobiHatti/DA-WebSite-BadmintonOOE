@@ -538,6 +538,24 @@ function SelectZAKategory()
         document.getElementById("zaTitleLineOut1").style.color = "#32CD32";
         document.getElementById("zaTitleLineOut2").style.color = "#32CD32";
     }
+
+    if(kategory == "Training")
+    {
+        document.getElementById("zaOptions").style.display = "none";
+        document.getElementById("zaTitleLineIn2").style.display = "none";
+
+        document.getElementById("zaFieldS").style.display = "inline-flex";
+        document.getElementById("zaFieldL").style.display = "none";
+    }
+    else
+    {
+        document.getElementById("zaOptions").style.display = "inline-table";
+        document.getElementById("zaTitleLineIn2").style.display = "block";
+
+        document.getElementById("zaFieldL").style.display = "inline-flex";
+        document.getElementById("zaFieldS").style.display = "none";
+    }
+
 }
 
 function CopyZADate()
@@ -585,16 +603,19 @@ function CopyZADate()
         if(day1 == day2-1)
         {
             document.getElementById("zaDate").value = dayNamesS[dayIndex1] + '/' + dayNamesS[dayIndex2] +  ', ' + day1 + './' + day2 + '. ' + monthNames[monthIndex1] + ' ' + year;
+            document.getElementById("zaDateS").value = dayNamesS[dayIndex1] + '/' + dayNamesS[dayIndex2] +  ', ' + day1 + './' + day2 + '. ' + monthNames[monthIndex1] + ' ' + year;
         }
         else
         {
             if(monthIndex1 == monthIndex2)
             {
                 document.getElementById("zaDate").value = dayNamesS[dayIndex1] + ' ' + day1 + '. - ' + dayNamesS[dayIndex2] + ' ' + day2 + '. ' + monthNames[monthIndex1] + ' ' + year;
+                document.getElementById("zaDateS").value = dayNamesS[dayIndex1] + ' ' + day1 + '. - ' + dayNamesS[dayIndex2] + ' ' + day2 + '. ' + monthNames[monthIndex1] + ' ' + year;
             }
             else
             {
                 document.getElementById("zaDate").value = dayNamesS[dayIndex1] + ' ' + day1 + '. ' + monthNamesS[monthIndex1] + ' - ' + dayNamesS[dayIndex2] + ' ' + day2 + '. ' + monthNamesS[monthIndex2] + ' ' + year;
+                document.getElementById("zaDateS").value = dayNamesS[dayIndex1] + ' ' + day1 + '. ' + monthNamesS[monthIndex1] + ' - ' + dayNamesS[dayIndex2] + ' ' + day2 + '. ' + monthNamesS[monthIndex2] + ' ' + year;
             }
         }
     }
@@ -608,6 +629,7 @@ function CopyZADate()
         var monthIndex = date1.getMonth();
         var year = date1.getFullYear();
 
+        document.getElementById("zaDateS").value = dayNames[dayIndex] +  ', ' + day + '. ' + monthNames[monthIndex] + ' ' + year;
         document.getElementById("zaDate").value = dayNames[dayIndex] +  ', ' + day + '. ' + monthNames[monthIndex] + ' ' + year;
     }
 
@@ -617,6 +639,7 @@ function CopyZADate()
 function CopyZATitle()
 {
     document.getElementById("zaTitleLineOut1").value = document.getElementById("zaTitleLineIn1").value;
+    document.getElementById("zaTitleLineOutS").value = document.getElementById("zaTitleLineIn1").value;
     document.getElementById("zaTitleLineOut2").value = document.getElementById("zaTitleLineIn2").value;
 }
 
