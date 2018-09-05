@@ -57,6 +57,26 @@ require("header.php");
     else
     {
         // Anzeige des Normalen Terminkalenders
+        echo'<h4>Liste der Termine</h4>';
+        $strSQL = "SELECT DISTINCT * FROM agenda";
+        $rs=mysqli_query($link,$strSQL);
+        while($row=mysqli_fetch_assoc($rs))
+        {
+            echo'
+
+            <div>
+               <hr>
+               <span>Titel: '.$row['titel'].' <br> Datum: '.$row['date'].' <br> Zeit: '.$row['time'].'</span>
+               <p>'.$row['description'].'</p>
+               <hr>
+
+            </div>
+
+
+
+
+            ';
+        }
     }
 
 
