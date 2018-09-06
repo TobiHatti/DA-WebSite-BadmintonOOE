@@ -34,13 +34,14 @@
     (Y03)   Textarea
     (Y04)   Selectbox
     (Y05)   Checkbox
-    (Y06)   Radio Button
-    (Y07)   Range Slider
-    (Y08)   File Selector
-    (Y09)   Date/Time Selectors
-    (Y10)   Custom Element-Lengths
-    (Y11)   Custom Element-Formats
-    (Y12)   Custom Element-Classes
+    (Y06)   Togglebox
+    (Y07)   Radio Button
+    (Y08)   Range Slider
+    (Y09)   File Selector
+    (Y10)   Date/Time Selectors
+    (Y11)   Custom Element-Lengths
+    (Y12)   Custom Element-Formats
+    (Y13)   Custom Element-Classes
     ====== X - General Classes ==============
     (X01)   Header-Contents
     (X02)   Searchbar
@@ -670,7 +671,58 @@ input.slidecheckbox:checked + .checkbox_toggle_lable:after {
   transform: translateX(-100%); }
 
 /*===================================================================================*/
-/* (Y06) FormElements > Radio Button                                                 */
+/* (Y06) FormElements > Togglebox                                                     */
+/*===================================================================================*/
+input[type=checkbox].togglecheckbox {
+  height: 0;
+  width: 0;
+  display: none; }
+
+.checkbox_toggle2_lable {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 50px;
+  height: 25px;
+  background: #3B9EBF;
+  display: block;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  border-radius: 100px;
+  -webkit-transition: all 0.15s ease-in-out;
+  -moz-transition: all 0.15s ease-in-out;
+  -ms-transition: all 0.15s ease-in-out;
+  -o-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  position: relative; }
+
+.checkbox_toggle2_lable:after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 15px;
+  height: 15px;
+  background: #fff;
+  -webkit-border-radius: 90px;
+  -moz-border-radius: 90px;
+  -ms-border-radius: 90px;
+  border-radius: 90px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out; }
+
+input.togglecheckbox:checked + .checkbox_toggle2_lable {
+  background: #3B9EBF; }
+
+input.togglecheckbox:checked + .checkbox_toggle2_lable:after {
+  left: calc(100% - 5px);
+  transform: translateX(-100%); }
+
+/*===================================================================================*/
+/* (Y07) FormElements > Radio Button                                                 */
 /*===================================================================================*/
 .radiolabel {
   display: block;
@@ -722,7 +774,7 @@ input.slidecheckbox:checked + .checkbox_toggle_lable:after {
   background: white; }
 
 /*===================================================================================*/
-/* (Y07) FormElements > Range Slider                                                 */
+/* (Y08) FormElements > Range Slider                                                 */
 /*===================================================================================*/
 input[type=range]::-webkit-slider-thumb {
   box-shadow: 1px 1px 1px #000000;
@@ -835,7 +887,7 @@ input[type=range]::-moz-range-track {
   border: 0px solid #3B9EBF; }
 
 /*===================================================================================*/
-/* (Y08) FormElements > File Selectors                                               */
+/* (Y09) FormElements > File Selectors                                               */
 /*===================================================================================*/
 input[type="file"] {
   width: 0.1px;
@@ -880,7 +932,7 @@ input[type="file"] + label:hover {
   color: #FFFF99; }
 
 /*===================================================================================*/
-/* (Y09) FormElements > Date/Time Selectors                                          */
+/* (Y10) FormElements > Date/Time Selectors                                          */
 /*===================================================================================*/
 input[type="date"],
 input[type="datetime-local"],
@@ -912,7 +964,7 @@ input[type="week"]:focus {
   color: #416586; }
 
 /*===================================================================================*/
-/* (Y10) FormElements > Custom Element-Lenghts                                       */
+/* (Y11) FormElements > Custom Element-Lenghts                                       */
 /*===================================================================================*/
 /* Custom Element Lenghts : Width */
 .cel_xxs {
@@ -978,7 +1030,7 @@ input[type="week"]:focus {
   font-size: 18pt; }
 
 /*===================================================================================*/
-/* (Y11) FormElements > Custom Element-Formats                                       */
+/* (Y12) FormElements > Custom Element-Formats                                       */
 /*===================================================================================*/
 .cef_nobg {
   background: none; }
@@ -1001,7 +1053,7 @@ input[type="week"]:focus {
   background: #FF0000; }
 
 /*===================================================================================*/
-/* (Y12) FormElements > Custom Element-Classes                                       */
+/* (Y13) FormElements > Custom Element-Classes                                       */
 /*===================================================================================*/
 .codeprev {
   width: 750px;
@@ -1731,7 +1783,8 @@ table.centered_content td {
   margin-bottom: 20px;
   max-height: 142px;
   overflow: hidden;
-  text-overflow: ellipsis; }
+  text-overflow: ellipsis;
+  text-align: left; }
   .news_article_slim p {
     margin-top: 0px; }
   .news_article_slim .news_imagecontainer {
@@ -1837,5 +1890,304 @@ table.centered_content td {
   .settingTable tr:nth-child(4n + 4) {
     background: #B9DDE9;
     height: 30px; }
+
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*=================================== U - Kalender ==================================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*===================================================================================*/
+/* (U01)   Kalender > List                                                           */
+/*===================================================================================*/
+/*===================================================================================*/
+/* (U01)   Kalender > iFrame                                                         */
+/*===================================================================================*/
+.calender_iframe {
+  width: 100%; }
+
+/*===================================================================================*/
+/* (U03)   Kalender > Graphic Calendar                                               */
+/*===================================================================================*/
+.calendar_table {
+  position: absolute;
+  text-align: center;
+  border-collapse: collapse;
+  width: 90%;
+  left: 5%; }
+  .calendar_table td {
+    width: 14.25%; }
+  .calendar_table tr:nth-child(1) td:nth-child(1),
+  .calendar_table tr:nth-child(1) td:nth-child(3) {
+    background: #B9DDE9; }
+  .calendar_table tr:nth-child(1) td:nth-child(2) {
+    background: #3B9EBF; }
+    .calendar_table tr:nth-child(1) td:nth-child(2) b {
+      color: #FFFFFF;
+      font-weight: normal;
+      font-size: 18pt; }
+  .calendar_table tr:nth-child(2) td:nth-child(1),
+  .calendar_table tr:nth-child(2) td:nth-child(3) {
+    background: #C4E3ED; }
+  .calendar_table tr:nth-child(2) td:nth-child(2) {
+    background: #63B4CF; }
+    .calendar_table tr:nth-child(2) td:nth-child(2) b {
+      color: #FFFFFF;
+      font-weight: normal;
+      font-size: 16pt; }
+  .calendar_table tr:nth-child(3) td {
+    border: 1px solid #C4E3ED;
+    height: 100px;
+    vertical-align: top;
+    text-align: left; }
+    .calendar_table tr:nth-child(3) td span {
+      text-align: left;
+      margin: 3px;
+      width: 100%; }
+    .calendar_table tr:nth-child(3) td div {
+      border: 2px outset black;
+      border-radius: 5px;
+      margin: 3px;
+      background: linear-gradient(to bottom, #DDDDDD 33%, #DEDEDE 66%, #DDDDDD 100%);
+      padding-left: 3px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -ms-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out; }
+    .calendar_table tr:nth-child(3) td div:hover {
+      border-color: #3B9EBF;
+      box-shadow: 0 3px 4px 0 #000000; }
+  .calendar_table tr:nth-child(3) .blank {
+    background: #E8E8E8; }
+  .calendar_table tr:nth-child(3) .accent1 {
+    background: #F0FBFF; }
+  .calendar_table tr:nth-child(3) .accent2 {
+    background: #FFFFFF; }
+  .calendar_table tr:nth-child(3) .today {
+    background: #FFFFF0; }
+  .calendar_table tr:nth-child(4) td {
+    border: 1px solid #C4E3ED;
+    height: 100px;
+    vertical-align: top;
+    text-align: left; }
+    .calendar_table tr:nth-child(4) td span {
+      text-align: left;
+      margin: 3px;
+      width: 100%; }
+    .calendar_table tr:nth-child(4) td div {
+      border: 2px outset black;
+      border-radius: 5px;
+      margin: 3px;
+      background: linear-gradient(to bottom, #DDDDDD 33%, #DEDEDE 66%, #DDDDDD 100%);
+      padding-left: 3px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -ms-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out; }
+    .calendar_table tr:nth-child(4) td div:hover {
+      border-color: #3B9EBF;
+      box-shadow: 0 3px 4px 0 #000000; }
+  .calendar_table tr:nth-child(4) .blank {
+    background: #E8E8E8; }
+  .calendar_table tr:nth-child(4) .accent1 {
+    background: #F0FBFF; }
+  .calendar_table tr:nth-child(4) .accent2 {
+    background: #FFFFFF; }
+  .calendar_table tr:nth-child(4) .today {
+    background: #FFFFF0; }
+  .calendar_table tr:nth-child(5) td {
+    border: 1px solid #C4E3ED;
+    height: 100px;
+    vertical-align: top;
+    text-align: left; }
+    .calendar_table tr:nth-child(5) td span {
+      text-align: left;
+      margin: 3px;
+      width: 100%; }
+    .calendar_table tr:nth-child(5) td div {
+      border: 2px outset black;
+      border-radius: 5px;
+      margin: 3px;
+      background: linear-gradient(to bottom, #DDDDDD 33%, #DEDEDE 66%, #DDDDDD 100%);
+      padding-left: 3px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -ms-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out; }
+    .calendar_table tr:nth-child(5) td div:hover {
+      border-color: #3B9EBF;
+      box-shadow: 0 3px 4px 0 #000000; }
+  .calendar_table tr:nth-child(5) .blank {
+    background: #E8E8E8; }
+  .calendar_table tr:nth-child(5) .accent1 {
+    background: #F0FBFF; }
+  .calendar_table tr:nth-child(5) .accent2 {
+    background: #FFFFFF; }
+  .calendar_table tr:nth-child(5) .today {
+    background: #FFFFF0; }
+  .calendar_table tr:nth-child(6) td {
+    border: 1px solid #C4E3ED;
+    height: 100px;
+    vertical-align: top;
+    text-align: left; }
+    .calendar_table tr:nth-child(6) td span {
+      text-align: left;
+      margin: 3px;
+      width: 100%; }
+    .calendar_table tr:nth-child(6) td div {
+      border: 2px outset black;
+      border-radius: 5px;
+      margin: 3px;
+      background: linear-gradient(to bottom, #DDDDDD 33%, #DEDEDE 66%, #DDDDDD 100%);
+      padding-left: 3px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -ms-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out; }
+    .calendar_table tr:nth-child(6) td div:hover {
+      border-color: #3B9EBF;
+      box-shadow: 0 3px 4px 0 #000000; }
+  .calendar_table tr:nth-child(6) .blank {
+    background: #E8E8E8; }
+  .calendar_table tr:nth-child(6) .accent1 {
+    background: #F0FBFF; }
+  .calendar_table tr:nth-child(6) .accent2 {
+    background: #FFFFFF; }
+  .calendar_table tr:nth-child(6) .today {
+    background: #FFFFF0; }
+  .calendar_table tr:nth-child(7) td {
+    border: 1px solid #C4E3ED;
+    height: 100px;
+    vertical-align: top;
+    text-align: left; }
+    .calendar_table tr:nth-child(7) td span {
+      text-align: left;
+      margin: 3px;
+      width: 100%; }
+    .calendar_table tr:nth-child(7) td div {
+      border: 2px outset black;
+      border-radius: 5px;
+      margin: 3px;
+      background: linear-gradient(to bottom, #DDDDDD 33%, #DEDEDE 66%, #DDDDDD 100%);
+      padding-left: 3px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -ms-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out; }
+    .calendar_table tr:nth-child(7) td div:hover {
+      border-color: #3B9EBF;
+      box-shadow: 0 3px 4px 0 #000000; }
+  .calendar_table tr:nth-child(7) .blank {
+    background: #E8E8E8; }
+  .calendar_table tr:nth-child(7) .accent1 {
+    background: #F0FBFF; }
+  .calendar_table tr:nth-child(7) .accent2 {
+    background: #FFFFFF; }
+  .calendar_table tr:nth-child(7) .today {
+    background: #FFFFF0; }
+  .calendar_table tr:nth-child(8) td {
+    border: 1px solid #C4E3ED;
+    height: 100px;
+    vertical-align: top;
+    text-align: left; }
+    .calendar_table tr:nth-child(8) td span {
+      text-align: left;
+      margin: 3px;
+      width: 100%; }
+    .calendar_table tr:nth-child(8) td div {
+      border: 2px outset black;
+      border-radius: 5px;
+      margin: 3px;
+      background: linear-gradient(to bottom, #DDDDDD 33%, #DEDEDE 66%, #DDDDDD 100%);
+      padding-left: 3px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -ms-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out; }
+    .calendar_table tr:nth-child(8) td div:hover {
+      border-color: #3B9EBF;
+      box-shadow: 0 3px 4px 0 #000000; }
+  .calendar_table tr:nth-child(8) .blank {
+    background: #E8E8E8; }
+  .calendar_table tr:nth-child(8) .accent1 {
+    background: #F0FBFF; }
+  .calendar_table tr:nth-child(8) .accent2 {
+    background: #FFFFFF; }
+  .calendar_table tr:nth-child(8) .today {
+    background: #FFFFF0; }
+
+.calender_info_wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: -10000px;
+  z-index: 100000; }
+  .calender_info_wrapper .calender_info_bg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 100000;
+    opacity: 0;
+    cursor: default;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; }
+  .calender_info_wrapper .info_container {
+    position: absolute;
+    width: 50%;
+    height: 60%;
+    background: #FFFFFF;
+    left: 25%;
+    top: 20%;
+    box-shadow: 0 0 40px 5px #000000;
+    z-index: 100001;
+    opacity: 0;
+    padding: 20px;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out; }
+  .calender_info_wrapper .close_cross {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 30px;
+    height: 30px; }
+
+.calender_info_wrapper:target {
+  left: 0px; }
+  .calender_info_wrapper:target .calender_info_bg {
+    opacity: 1; }
+  .calender_info_wrapper:target .info_container {
+    opacity: 1; }
 
 /*# sourceMappingURL=style.css.map */

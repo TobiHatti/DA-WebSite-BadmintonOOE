@@ -84,7 +84,7 @@
                 <div style="position: fixed; bottom: 0px; right: 0px; color: #696969;">
                     <table>
                         <tr>
-                            <td>Classic/Modern</td><td>'.Checkbox("","toggle_theme",0,"ToggleTheme();").'</td>
+                            <td>Modern / Classic</td><td>'.Togglebox("","toggle_theme",0,"ToggleTheme();").'</td>
                         </tr>
                     </table>
 

@@ -101,7 +101,7 @@ function ResizeIframe(obj)
     // height.
     // include onload="ResizeIframe(this);" in iframe
 
-    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 100 + 'px';
 }
 
 /*===================================================================================*/
@@ -668,4 +668,18 @@ function UpdateZAVerein()
 function JSColorUpdate(jscolor)
 {
     document.getElementById('app_preview').style.backgroundColor = '#' + jscolor
+}
+
+function ChangeCalenderStyle()
+{
+    if(document.getElementById("changeListStyle").checked)
+    {
+        document.getElementById("CalenderList").style.display = "none";
+        document.getElementById("CalenderGraphic").style.display = "block";
+    }
+    else
+    {
+        document.getElementById("CalenderList").style.display = "block";
+        document.getElementById("CalenderGraphic").style.display = "none";
+    }
 }

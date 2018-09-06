@@ -33,13 +33,14 @@
     (Y03)   Textarea
     (Y04)   Selectbox
     (Y05)   Checkbox
-    (Y06)   Radio Button
-    (Y07)   Range Slider
-    (Y08)   File Selector
-    (Y09)   Date/Time Selectors
-    (Y10)   Custom Element-Lengths
-    (Y11)   Custom Element-Formats
-    (Y12)   Custom Element-Classes
+    (Y06)   Togglebox
+    (Y07)   Radio Button
+    (Y08)   Range Slider
+    (Y09)   File Selector
+    (Y10)   Date/Time Selectors
+    (Y11)   Custom Element-Lengths
+    (Y12)   Custom Element-Formats
+    (Y13)   Custom Element-Classes
     ====== X - General Classes ==============
     (X01)   Header-Contents
     (X02)   Searchbar
@@ -615,7 +616,50 @@ input.slidecheckbox:checked + .checkbox_toggle_lable:after {
 }
 
 /*===================================================================================*/
-/* (Y06) FormElements > Radio Button                                                 */
+/* (Y06) FormElements > Togglebox                                                     */
+/*===================================================================================*/
+
+input[type=checkbox].togglecheckbox{
+    height: 0;
+    width: 0;
+    display: none;
+}
+
+.checkbox_toggle2_lable {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 50px;
+    height: 25px;
+    background: $theme-medium;
+    display: block;
+    @include border-radius(100px);
+    @include ease(0.15s);
+    position: relative;
+}
+
+.checkbox_toggle2_lable:after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    @include border-radius(90px);
+    @include ease(0.3s);
+}
+
+input.togglecheckbox:checked + .checkbox_toggle2_lable {
+    background: $theme-medium;
+}
+
+input.togglecheckbox:checked + .checkbox_toggle2_lable:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+}
+
+/*===================================================================================*/
+/* (Y07) FormElements > Radio Button                                                 */
 /*===================================================================================*/
 
 .radiolabel {
@@ -670,7 +714,7 @@ input.slidecheckbox:checked + .checkbox_toggle_lable:after {
 }
 
 /*===================================================================================*/
-/* (Y07) FormElements > Range Slider                                                 */
+/* (Y08) FormElements > Range Slider                                                 */
 /*===================================================================================*/
 
 input[type=range]::-webkit-slider-thumb {
@@ -776,7 +820,7 @@ input[type=range]::-moz-range-track {
 }
 
 /*===================================================================================*/
-/* (Y08) FormElements > File Selectors                                               */
+/* (Y09) FormElements > File Selectors                                               */
 /*===================================================================================*/
 
 input[type="file"] {
@@ -829,7 +873,7 @@ input[type="file"] + label:hover {
 }
 
 /*===================================================================================*/
-/* (Y09) FormElements > Date/Time Selectors                                          */
+/* (Y10) FormElements > Date/Time Selectors                                          */
 /*===================================================================================*/
 
 input[type="date"],
@@ -858,7 +902,7 @@ input[type="week"]:focus{
 }
 
 /*===================================================================================*/
-/* (Y10) FormElements > Custom Element-Lenghts                                       */
+/* (Y11) FormElements > Custom Element-Lenghts                                       */
 /*===================================================================================*/
 
 /* Custom Element Lenghts : Width */
@@ -945,7 +989,7 @@ input[type="week"]:focus{
 }
 
 /*===================================================================================*/
-/* (Y11) FormElements > Custom Element-Formats                                       */
+/* (Y12) FormElements > Custom Element-Formats                                       */
 /*===================================================================================*/
 
 
@@ -977,7 +1021,7 @@ input[type="week"]:focus{
 }
 
 /*===================================================================================*/
-/* (Y12) FormElements > Custom Element-Classes                                       */
+/* (Y13) FormElements > Custom Element-Classes                                       */
 /*===================================================================================*/
 
 .codeprev{
@@ -1529,8 +1573,6 @@ table.centered_content td{
         max-width: 80%;
         max-height: 85%;
     }
-
-
 }
 
 
@@ -1891,9 +1933,11 @@ table.centered_content td{
     max-height: 142px;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: left;
 
     p{
         margin-top: 0px;
+
     }
 
     .news_imagecontainer{
@@ -2007,6 +2051,186 @@ table.centered_content td{
     tr:nth-child(4n + 4){
         background: $theme-medium-l;
         height: 30px;
+    }
+
+}
+
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*=================================== U - Kalender ==================================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+
+/*===================================================================================*/
+/* (U01)   Kalender > List                                                           */
+/*===================================================================================*/
+
+/*===================================================================================*/
+/* (U01)   Kalender > iFrame                                                         */
+/*===================================================================================*/
+
+.calender_iframe{
+    width: 100%;
+}
+
+/*===================================================================================*/
+/* (U03)   Kalender > Graphic Calendar                                               */
+/*===================================================================================*/
+
+.calendar_table{
+    position: absolute;
+    text-align: center;
+    border-collapse: collapse;
+    width: 90%;
+    left: 5%;
+
+
+
+    td{
+        width: 14.25%;
+    }
+
+    tr:nth-child(1){
+        td:nth-child(1),
+        td:nth-child(3){
+            background: $theme-medium-l;
+        }
+        td:nth-child(2){
+            background: $theme-medium;
+            b{
+                color: #FFFFFF;
+                font-weight: normal;
+                font-size: 18pt;
+            }
+
+        }
+    }
+
+    tr:nth-child(2){
+        td:nth-child(1),
+        td:nth-child(3){
+            background: $theme-bright-l;
+        }
+        td:nth-child(2){
+            background: $theme-bright;
+            b{
+                color: #FFFFFF;
+                font-weight: normal;
+                font-size: 16pt;
+            }
+        }
+    }
+
+    @for $i from 3 through 8 {
+        tr:nth-child(#{$i}){
+            td{
+                border: 1px solid $theme-bright-l;
+                height: 100px;
+                vertical-align: top;
+                text-align: left;
+
+                span{
+                    text-align: left;
+                    margin: 3px;
+                    width: 100%;
+                }
+
+                div{
+                    border: 2px outset black;
+                    border-radius: 5px;
+                    margin: 3px;
+                    background:linear-gradient(to bottom, #DDDDDD 33%,#DEDEDE 66%,#DDDDDD 100%);
+                    padding-left: 3px;
+
+                    @include box-sizing(border-box);
+                    @include ease(0.2s);
+                }
+
+                div:hover{
+                    border-color: $theme-medium;
+                    box-shadow: 0 3px 4px 0 #000000;
+                }
+
+            }
+
+            .blank{
+                background: #E8E8E8;
+            }
+
+            .accent1{
+                background: #F0FBFF;
+            }
+
+            .accent2{
+                background: #FFFFFF;
+            }
+
+            .today{
+                background: #FFFFF0;
+            }
+
+        }
+    }
+}
+
+
+
+.calender_info_wrapper{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: -10000px;
+    z-index: 100000;
+
+    .calender_info_bg{
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        z-index: 100000;
+        opacity: 0;
+        cursor: default;
+        @include ease(0.2s);
+    }
+
+    .info_container{
+        position: absolute;
+        width: 50%;
+        height: 60%;
+        background: #FFFFFF;
+        left: 25%;
+        top:20%;
+        box-shadow: 0 0 40px 5px #000000;
+        z-index: 100001;
+        opacity: 0;
+        padding: 20px;
+        @include ease(0.5s);
+    }
+
+
+    .close_cross{
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 30px;
+        height: 30px;
+    }
+
+}
+
+
+
+.calender_info_wrapper:target{
+    left: 0px;
+
+    .calender_info_bg{
+        opacity: 1;
+    }
+
+    .info_container{
+        opacity: 1;
     }
 
 }

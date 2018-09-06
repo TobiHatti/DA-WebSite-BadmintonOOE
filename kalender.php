@@ -4,14 +4,17 @@ require("header.php");
 
     if(isset($_POST['add_termin']))
     {
-      $terminName = $_POST['termin_titel'];
-      $description = $_POST['description_date'];
-      $termin_date=$_POST['date_termin'];
-      $termin_place=$_POST['place'];
-      $termin_time=$_POST['time'];
-      $termin_color=$_POST['color'];
+        $terminName = $_POST['termin_titel'];
+        $description = $_POST['description_date'];
+        $termin_date=$_POST['date_termin'];
+        $termin_place=$_POST['place'];
+        $termin_time=$_POST['time'];
+        $termin_color=$_POST['color'];
 
-      MySQLNonQuery("INSERT INTO agenda (id, titel, description, date, place, time, color) VALUES ('','$terminName','$description','$termin_date','$termin_place','$termin_time','$termin_color')");
+        MySQLNonQuery("INSERT INTO agenda (id, titel, description, date, place, time, color) VALUES ('','$terminName','$description','$termin_date','$termin_place','$termin_time','$termin_color')");
+
+        Redirect(ThisPage());
+        die();
 
     }
 
@@ -56,29 +59,36 @@ require("header.php");
     }
     else
     {
-        // Anzeige des Normalen Terminkalenders
-        echo'<h4>Liste der Termine</h4>';
-        $strSQL = "SELECT DISTINCT * FROM agenda";
-        $rs=mysqli_query($link,$strSQL);
-        while($row=mysqli_fetch_assoc($rs))
-        {
-            echo'
+        echo '<div style="float:right;"><table><tr><td>Liste / Kalender</td><td>'.Togglebox("","changeListStyle",1,"ChangeCalenderStyle();").'</td></tr></table></div><br>';
 
-            <div>
-               <hr>
-               <span>Titel: '.$row['titel'].' <br> Datum: '.$row['date'].' <br> Zeit: '.$row['time'].'</span>
-               <p>'.$row['description'].'</p>
-               <hr>
+        echo'
+            <div id="CalenderList" style="display:none;">
+            <h3>Liste der Termine</h3>
+        ';
 
-            </div>
+            $strSQL = "SELECT * FROM agenda";
+            $rs=mysqli_query($link,$strSQL);
+            while($row=mysqli_fetch_assoc($rs))
+            {
+                echo'
+                    <div>
+                       <hr>
+                       <span>Titel: '.$row['titel'].' <br> Datum: '.$row['date'].' <br> Zeit: '.$row['time'].'</span>
+                       <p>'.$row['description'].'</p>
+                    </div>
+                ';
+            }
+
+        echo '
+        </div>
+        <div id="CalenderGraphic" style="display:block;">
+            <h3>Kalender</h3>
+            <iframe src="/graphic_calendar" frameborder="0" onload="ResizeIframe(this);" class="calender_iframe"></iframe>
+        </div>
+        ';
 
 
-
-
-            ';
-        }
     }
-
 
 include("footer.php");
 

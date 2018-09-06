@@ -11,6 +11,17 @@ function Checkbox($name, $id, $checked = 0,$onchange="")
     return '<input type="checkbox" name="'.$name.'" id="'.$id.'" onchange="'.$onchange.'" class="slidecheckbox" '.(($checked) ? 'checked' : '').'/><label class="checkbox_toggle_lable" for="'.$id.'">Toggle</label>';
 }
 
+function Togglebox($name, $id, $checked = 0,$onchange="")
+{
+    // DESCRIPTION:
+    // Returns a Checkbox Form-Element
+    // $name    Form-Element-Name
+    // $id      Unique ID. Required since it uses a label
+    // $checked Default: 0. Sets the checkbox to checked (1)
+
+    return '<input type="checkbox" name="'.$name.'" id="'.$id.'" onchange="'.$onchange.'" class="togglecheckbox" '.(($checked) ? 'checked' : '').'/><label class="checkbox_toggle2_lable" for="'.$id.'">Toggle</label>';
+}
+
 function RadioButton($title, $name, $checked = 0)
 {
     // DESCRIPTION:
