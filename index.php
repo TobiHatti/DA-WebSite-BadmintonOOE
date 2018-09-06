@@ -304,7 +304,6 @@
                 <h3>Neuigkeiten</h3>
                 <hr>
                 <div class="mdrn_news_tile_container">
-                    <center>
                     ';
 
                     $i=2;
@@ -331,7 +330,6 @@
                         ';
                     }
                     echo '
-                    </center>
                 </div>
                 <br>
                 <h3>Development</h3>

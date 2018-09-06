@@ -119,22 +119,12 @@
         echo '
             <b><u>ToDo Fotogalerie:</u></b><br><br>
             <u>PHP-Form:</u><br>
-            Checkbox "Herunterladen erlauben"&#10004;<br>
-            Textarea f&uuml;r Beschreibung (Tobi (JavaScript-Textarea))&#10004;<br>
-            Textfeld f&uuml;r Ort&#10004;<br>
-            Textfeld f&uuml;r Event-Datum&#10004;<br>
             Tag-Funktion einf&uuml;gen (Tobi)<br>
             <br>
             <u>Fotogalerie: Alben:</u><br>
-            Pager hinzuf&uuml;gen (Tobi)&#10004;<br>
-            CSS-Anpassen (Tobi)&#10004;<br>
             <br>
             <u>Fotogalerie: Fotovorschau:</u><br>
-            SQL-Abfrage f&uuml;r ausgew&auml;hltes Album erstellen&#10004;<br>
-            Fotos anzeigen lassen&#10004;<br>
-            Pager hinzuf&uuml;gen (Tobi)&#10004;<br>
             Download-Button<br>
-            Foto-Anzeige - [CSS-Target] (Tobi)&#10004;
 
             <br><br><br>
 

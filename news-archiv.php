@@ -117,8 +117,8 @@
 
             <table style="float: right;">
                 <tr>
-                    <td>Detailansicht</td>
-                    <td>'.Checkbox("","showDetail",0,"UpdateArchiveFrame();").'</td>
+                    <td>Liste / Detail</td>
+                    <td>'.Togglebox("","showDetail",0,"UpdateArchiveFrame();").'</td>
                 </tr>
             </table>
             <iframe style="margin-top: -50px;" onload="ResizeIframe(this)" src="news-archiv-content?year='.date("Y").'&month='.date("m").'&detail=0" class="news_archive_iframe" id="archiveFrame">
