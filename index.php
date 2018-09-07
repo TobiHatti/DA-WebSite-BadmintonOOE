@@ -332,6 +332,41 @@
                     echo '
                 </div>
                 <br>
+
+                <div class="tripple_container">
+                    <div>
+                        <h3>&Ouml;BV News</h3>
+                        <hr>
+                    </div>
+                    <div>
+                        <h3>Meisterschaft</h3>
+                        <hr>
+                        Hallo
+                    </div>
+                    <div>
+                        <h3>Ranglisten</h3>
+                        <hr>
+                    </div>
+                </div>
+
+
+                <div class="double_container">
+
+                    <div style="text-align: center; min-width: 330px;">
+                        <h3 style="text-align: left;">Termine</h3>
+                        <hr>
+                        <iframe src="/graphic_calendar_thumb" frameborder="0" style="height: 250px; width: 320px;" scrolling="no"></iframe>
+                    </div>
+                    <div>
+                        <h3>Veranstaltungen</h3>
+                        <hr>
+                        <center>
+                            <iframe width="420px" height="240" src="https://www.youtube.com/embed/_FpDVKgfTHs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </center>
+                    </div>
+                </div>
+
+
                 <h3>Development</h3>
                 <hr>
                 <ul>
@@ -350,15 +385,6 @@
                     <li><a href="__formintro2">PHP-Forms - Werte Laden</a></li>
                 </ul>
 
-                <br>
-                <h3>Meisterschaften/Ranglisten</h3>
-                <hr>
-
-
-
-                <br>
-                <h3>Veranstaltungen</h3>
-                <hr>
             </div>
         </div>
     ';

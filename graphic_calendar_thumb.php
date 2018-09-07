@@ -62,20 +62,23 @@
 
     // fill days array
     // valid days contain data, invalid days are left blank
+
+    $calcDate = $yr.'-'.str_pad($mo,2,0,STR_PAD_LEFT).'-'.str_pad($da,2,0,STR_PAD_LEFT);
+
     $j=1;
     for ($i=$offset;$i<=($offset+$nd-1);$i++)
     {
         $day = $j++;
         $date = $yr.'-'.str_pad($mo,2,0,STR_PAD_LEFT).'-'.str_pad($day,2,0,STR_PAD_LEFT);
-        $days[$i]['out']= $day.'.';
+        $days[$i]['out']= '<a target="_parent" href="/kalender/datum/'.$date.'">'.$day.'.</a>';
         $days[$i]['dat']= $date;
     }
 
-    $calcDate = $yr.'-'.str_pad($mo,2,0,STR_PAD_LEFT).'-'.str_pad($da,2,0,STR_PAD_LEFT);
+
 
     // output table
     echo '
-            <table class="calendar_table">
+            <table class="calendar_table_s">
             <tr>
                 <td colspan="1"><a href="?day='.date('Y-m-d', mktime(0,0,0,$mo,$da,$yr-1)).'">&laquo;</a></td>
                 <td colspan="5"><b>'.$yr.'</b></td>
@@ -104,17 +107,17 @@
 
             echo '
                 <td class="'.$accent.' '.$today.'" style="font-weight: '.$style.'">
-                <span>'.$days[$curr]['out'].' '.((date("Y-m-d") == $days[$curr]['dat']) ? ' - Heute' : '').'</span>
+                <span>'.$days[$curr]['out'].'</span>
             ';
 
             $curDate = $days[$curr]['dat'];
-            $strSQL = "SELECT id,titel,kategorie FROM agenda WHERE date = '$curDate'";
+            $strSQL = "SELECT id,titel,kategorie,date FROM agenda WHERE date = '$curDate' LIMIT 0,1";
             $rs=mysqli_query($link,$strSQL);
             while($row=mysqli_fetch_assoc($rs))
             {
                 echo '
-                    <a href="#calenderInfo'.$row['id'].'" onclick="SelectGalleryImage('.$i.');" style="text-decoration:none;">
-                        <div style="color: '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '#000000').';">&#9679; '.$row['titel'].'</div>
+                    <a target="_parent" style="text-decoration:none;" href="/kalender/event/'.$row['id'].'">
+                        <span style="cursor: help;color: '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '#000000').';" title="'.$row['titel'].'">&#9679;</span>
                     </a>
                 ';
             }
@@ -129,30 +132,6 @@
     echo '
         </table>
     ';
-
-    $datePart = $yr.'-'.str_pad($mo,2,0,STR_PAD_LEFT).'-';
-
-    $strSQL = "SELECT * FROM agenda WHERE date LIKE '$datePart%'";
-    $rs=mysqli_query($link,$strSQL);
-    while($row=mysqli_fetch_assoc($rs))
-    {
-
-        echo '
-            <div class="calender_info_wrapper" id="calenderInfo'.$row['id'].'">
-                <a href="#c">
-                    <div class="calender_info_bg"></div>
-                </a>
-                <div class="info_container">
-                    <a href="#c"><img src="/content/cross2.png" alt="" class="close_cross"/></a>
-                    <div style="border-left: 3px solid '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '').'; padding-left: 5px;">
-                        <h2><u>'.$row['titel'].'</u></h2>
-                        <h4>'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['date']))).'</h4>
-                        <h4>'.date_format(date_create($row['time']),"H:i").' Uhr</h4>
-                    </div>
-                </div>
-            </div>
-        ';
-    }
 
     echo '
                 </div>

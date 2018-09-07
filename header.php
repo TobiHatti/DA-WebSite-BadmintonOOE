@@ -76,11 +76,19 @@
                 <!-- End of File Buttons -->
 
 
+                <!-- Header-Parallax -->
+                    <script>
+                        window.addEventListener("scroll", function(e) {
+                            var scrOffset = (window.scrollY/3) + 360;
+                            document.getElementById("htmlheader").style.backgroundPosition = "0px " + (scrOffset) + "px";
+                        });
+                    </script>
+                <!-- End of Header-Parallax -->
+
 
             </head>
 
             <body>
-
                 <div style="position: fixed; bottom: 0px; right: 0px; color: #696969;">
                     <table>
                         <tr>
@@ -114,7 +122,7 @@
                 }
 
                 echo '
-                <header>
+                <header id="htmlheader">
                     <div class="header_logo"></div>
                     <div class="header_sponsor"></div>
                     '.((isset($_SESSION['userID'])) ? '<div class="logout_bar">Angemeldet als '.$_SESSION['username'].' - <a href="/logout">Abmelden</a></div>' : '').'

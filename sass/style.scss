@@ -1117,6 +1117,62 @@ table.centered_content td{
 
 .iframe_content{
     font-family: Calibri, Arial, sans-serif;
+    @include box-sizing(border-box);
+}
+
+/*===================================================================================*/
+/* (X07) Containers                                                                  */
+/*===================================================================================*/
+
+.tripple_container{
+    width: 100%;
+    display: block;
+
+    div{
+        display: inline-block;
+        vertical-align: top;
+        @include box-sizing(border-box);
+    }
+
+    @media only screen and (max-width: 850px){
+        div{
+            width: 100%;
+        }
+    }
+
+    @media only screen and (min-width: 850px){
+        div{
+            width: 33%;
+        }
+    }
+}
+
+.double_container{
+    width: 100%;
+    display: block;
+    text-align: center;
+    @include box-sizing(border-box);
+
+    div{
+        display: inline-block;
+        vertical-align: top;
+        text-align: left;
+        @include box-sizing(border-box);
+    }
+
+    @media only screen and (max-width: 850px){
+        div{
+            width: 100%;
+        }
+    }
+
+    @media only screen and (min-width: 850px){
+        div{
+            width: 49%;
+            // because 50% + 50% = 100.5%
+            // I love CSS...
+        }
+    }
 }
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
@@ -1198,11 +1254,13 @@ table.centered_content td{
 
 .mdrn_news_tile_container{
     overflow: hidden;
+    text-align: center;
 }
 
 .mdrn_news_tile{
     display: inline-block;
     vertical-align: top;
+    text-align: left;
     margin: 20px;
     width: 200px;
 
@@ -1248,6 +1306,8 @@ table.centered_content td{
     }
 
 }
+
+
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
@@ -2104,6 +2164,7 @@ table.centered_content td{
             }
 
         }
+
     }
 
     tr:nth-child(2){
@@ -2136,10 +2197,10 @@ table.centered_content td{
                 }
 
                 div{
-                    border: 2px outset black;
+                    border: 1px outset $theme-bright;
                     border-radius: 5px;
                     margin: 3px;
-                    background:linear-gradient(to bottom, #DDDDDD 33%,#DEDEDE 66%,#DDDDDD 100%);
+                    background:linear-gradient(to bottom, #DDDDDD 33%,#E8E8E8 66%,#DDDDDD 100%);
                     padding-left: 3px;
 
                     @include box-sizing(border-box);
@@ -2233,4 +2294,107 @@ table.centered_content td{
         opacity: 1;
     }
 
+}
+
+
+/*===================================================================================*/
+/* (U04)   Kalender > Graphic Calendar (Small)                                       */
+/*===================================================================================*/
+
+.calendar_table_s{
+    position: absolute;
+    text-align: center;
+    border-collapse: collapse;
+    width: 100%;
+    left: 0;
+    top: 0;
+
+    @include box-sizing(border-box);
+
+    td{
+        width: 14.25%;
+    }
+
+    tr:nth-child(1){
+        td:nth-child(1),
+        td:nth-child(3){
+            background: $theme-medium-l;
+        }
+        td:nth-child(2){
+            background: $theme-medium;
+            b{
+                color: #FFFFFF;
+                font-weight: normal;
+                font-size: 16pt;
+            }
+
+        }
+
+    }
+
+    tr:nth-child(2){
+        td:nth-child(1),
+        td:nth-child(3){
+            background: $theme-bright-l;
+        }
+        td:nth-child(2){
+            background: $theme-bright;
+            b{
+                color: #FFFFFF;
+                font-weight: normal;
+                font-size: 14pt;
+            }
+        }
+    }
+
+    @for $i from 3 through 8 {
+        tr:nth-child(#{$i}){
+            td{
+                border: 1px solid $theme-bright-l;
+                height: 25px;
+                vertical-align: top;
+                text-align: left;
+
+                span{
+                    text-align: left;
+                    margin: 0;
+                    width: 100%;
+                }
+
+                div{
+                    border: 1px outset $theme-bright;
+                    border-radius: 5px;
+                    margin: 3px;
+                    background:linear-gradient(to bottom, #DDDDDD 33%,#E8E8E8 66%,#DDDDDD 100%);
+                    padding-left: 3px;
+
+                    @include box-sizing(border-box);
+                    @include ease(0.2s);
+                }
+
+                div:hover{
+                    border-color: $theme-medium;
+                    box-shadow: 0 3px 4px 0 #000000;
+                }
+
+            }
+
+            .blank{
+                background: #E8E8E8;
+            }
+
+            .accent1{
+                background: #F0FBFF;
+            }
+
+            .accent2{
+                background: #FFFFFF;
+            }
+
+            .today{
+                background: #FFFFF0;
+            }
+
+        }
+    }
 }
