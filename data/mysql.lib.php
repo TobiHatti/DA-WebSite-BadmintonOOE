@@ -127,7 +127,7 @@ function MySQLSave($buname)
     error_reporting(0);
     set_time_limit(0);
 
-    // ab hier nichts mehr ändern
+    // ab hier nichts mehr ändern     
     $conn = mysql_connect($dbhost, $dbuser, $dbpwd) or die(mysql_error());
     mysql_select_db($dbname);
     $f = fopen($dbbackup, "w");

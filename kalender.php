@@ -9,9 +9,9 @@ require("header.php");
         $termin_date=$_POST['date_termin'];
         $termin_place=$_POST['place'];
         $termin_time=$_POST['time'];
-        $termin_color=$_POST['color'];
+        $termin_kategorie=$_POST['kategorie'];
 
-        MySQLNonQuery("INSERT INTO agenda (id, titel, description, date, place, time, color) VALUES ('','$terminName','$description','$termin_date','$termin_place','$termin_time','$termin_color')");
+        MySQLNonQuery("INSERT INTO agenda (id, titel, description, date, place, time,kategorie) VALUES ('','$terminName','$description','$termin_date','$termin_place','$termin_time','$termin_kategorie')");
 
         Redirect(ThisPage());
         die();
@@ -21,35 +21,35 @@ require("header.php");
 
     if(isset($_GET['neu']))
     {
-        // PHP-Form zum eintragen neuer Termine
         echo'
         <h1 class="stagfade1">Neuer Termin</h1>
             <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                 <br>
-                <input type="text" placeholder="Termin Titel" name="termin_titel"/>
+                <input type="text" class="cel_l" placeholder="Titel" name="termin_titel" required/>
                 <br>
-                <textarea name="description_date" placeholder="">Termin Beschreibung</textarea>
+                <textarea class="cel_l" name="description_date" placeholder="Beschreibung" style="resize: vertical;"></textarea>
                 <br>
-                <input type="date" name="date_termin"/>
+                <input type="date" class="cel_l" name="date_termin" required/>
                 <br>
-                <input type="text" placeholder="Ort" name="place"/>
+                <input type="text" class="cel_l" placeholder="Ort" name="place"/>
                 <br>
-                <input type="time" name="time"/>
+                <input type="time" class="cel_l" name="time" required/>
                 <br>
-                <input type="color" name="color"/>
-                <p>
-                    <span style="font-size: 14pt">
-                       <span style="color: #FF4500">Orange </span>&#8680; Nachwuchs
-                       <br>
-                       <span style="color: #008000">Gr&uuml;n</span>&#8680; Senioren
-                       <br>
-                       <span style="color: #800080">Lila</span>&#8680; Sch&uuml;er/Jugend
-                       <br>
-                       <span style="color: #FF0000">Rot</span>&#8680; Meisterschaft
-                       <br>
-                       <span style="color: #40E0D0">T&uuml;rkis</span>&#8680; Doppelturniere
-                   </span>
-                </p>
+                <select class="cel_l" name="kategorie" id="classKat">
+                    <option value="" disabled selected>--- Kategorie ausw&auml;hlen ---</option>
+                    <option value="">Anderes</option>
+                    <option value="Landesmeisterschaft" style="color: '.GetProperty("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
+                    <option value="Doppelturnier" style="color: '.GetProperty("ColorDoppelturnier").'">Doppelturnier</option>
+                    <option value="Nachwuchs" style="color: '.GetProperty("ColorNachwuchs").'">Nachwuchs</option>
+                    <option value="SchuelerJugend" style="color: '.GetProperty("ColorSchuelerJugend").'">Sch&uuml;ler/Jugend</option>
+                    <option value="Senioren" style="color: '.GetProperty("ColorSenioren").'">Senioren</option>
+                    <option value="Training" style="color: '.GetProperty("ColorTraining").'">Training</option>
+                </select>
+                <br>
+
+
+                <br>
+                <br>
                 <br>
                 <button type="submit" name="add_termin" value="post-value">Termin hinzuf&uuml;gen
 
