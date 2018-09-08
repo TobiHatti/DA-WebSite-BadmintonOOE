@@ -116,8 +116,19 @@
             while($row=mysqli_fetch_assoc($rs))
             {
                 echo '
-                    <a target="_parent" style="text-decoration:none;" href="/kalender/event/'.$row['id'].'">
+                    <a target="_parent" style="text-decoration:none;" href="/kalender/event/AG'.$row['id'].'">
                         <span style="cursor: help;color: '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '#000000').';" title="'.$row['titel'].'">&#9679;</span>
+                    </a>
+                ';
+            }
+
+            $strSQL = "SELECT * FROM zentralausschreibungen WHERE date_begin = '$curDate' LIMIT 0,1";
+            $rs=mysqli_query($link,$strSQL);
+            while($row=mysqli_fetch_assoc($rs))
+            {
+                echo '
+                    <a target="_parent" style="text-decoration:none;" href="/kalender/event/ZA'.$row['id'].'">
+                        <span style="cursor: help;color: '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '#000000').';" title="'.$row['title_line1'].'">&#9679;</span>
                     </a>
                 ';
             }

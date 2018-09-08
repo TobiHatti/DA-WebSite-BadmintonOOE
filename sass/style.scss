@@ -2182,7 +2182,16 @@ table.centered_content td{
         }
     }
 
-    @for $i from 3 through 8 {
+    tr:nth-child(3){
+        td:nth-child(even){
+            background: $theme-bright-l;
+        }
+        td:nth-child(odd){
+            background: $theme-medium-l;
+        }
+    }
+
+    @for $i from 4 through 9 {
         tr:nth-child(#{$i}){
             td{
                 border: 1px solid $theme-bright-l;
@@ -2228,6 +2237,20 @@ table.centered_content td{
 
             .today{
                 background: #FFFFF0;
+            }
+
+            @keyframes fadeoutCalendar{
+                0%{
+                    background: #FFD700;
+                }
+
+                100%{
+                    background: none;
+                }
+            }
+
+            .selected{
+                @include animation(fadeoutCalendar,1s,1,0s);
             }
 
         }
@@ -2394,7 +2417,6 @@ table.centered_content td{
             .today{
                 background: #FFFFF0;
             }
-
         }
     }
 }

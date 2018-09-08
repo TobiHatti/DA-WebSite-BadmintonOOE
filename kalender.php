@@ -59,6 +59,8 @@ require("header.php");
     }
     else
     {
+        $frameExtension = (isset($_GET['datum'])) ? ('?datum='.$_GET['datum']) : ((isset($_GET['event'])) ? ('#calenderInfo'.$_GET['event']) : '');
+
         echo '<div style="float:right;"><table><tr><td>Liste / Kalender</td><td>'.Togglebox("","changeListStyle",1,"ChangeCalenderStyle();").'</td></tr></table></div><br>';
 
         echo'
@@ -83,7 +85,7 @@ require("header.php");
         </div>
         <div id="CalenderGraphic" style="display:block;">
             <h3>Kalender</h3>
-            <iframe src="/graphic_calendar" frameborder="0" onload="ResizeIframe(this);" class="calender_iframe"></iframe>
+            <iframe src="/graphic_calendar'.$frameExtension.'" frameborder="0" onload="ResizeIframe(this);" class="calender_iframe"></iframe>
         </div>
         ';
 

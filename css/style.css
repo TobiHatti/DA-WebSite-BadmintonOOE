@@ -1979,40 +1979,10 @@ table.centered_content td {
       color: #FFFFFF;
       font-weight: normal;
       font-size: 16pt; }
-  .calendar_table tr:nth-child(3) td {
-    border: 1px solid #C4E3ED;
-    height: 100px;
-    vertical-align: top;
-    text-align: left; }
-    .calendar_table tr:nth-child(3) td span {
-      text-align: left;
-      margin: 3px;
-      width: 100%; }
-    .calendar_table tr:nth-child(3) td div {
-      border: 1px outset #63B4CF;
-      border-radius: 5px;
-      margin: 3px;
-      background: linear-gradient(to bottom, #DDDDDD 33%, #E8E8E8 66%, #DDDDDD 100%);
-      padding-left: 3px;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      -webkit-transition: all 0.2s ease-in-out;
-      -moz-transition: all 0.2s ease-in-out;
-      -ms-transition: all 0.2s ease-in-out;
-      -o-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out; }
-    .calendar_table tr:nth-child(3) td div:hover {
-      border-color: #3B9EBF;
-      box-shadow: 0 3px 4px 0 #000000; }
-  .calendar_table tr:nth-child(3) .blank {
-    background: #E8E8E8; }
-  .calendar_table tr:nth-child(3) .accent1 {
-    background: #F0FBFF; }
-  .calendar_table tr:nth-child(3) .accent2 {
-    background: #FFFFFF; }
-  .calendar_table tr:nth-child(3) .today {
-    background: #FFFFF0; }
+  .calendar_table tr:nth-child(3) td:nth-child(even) {
+    background: #C4E3ED; }
+  .calendar_table tr:nth-child(3) td:nth-child(odd) {
+    background: #B9DDE9; }
   .calendar_table tr:nth-child(4) td {
     border: 1px solid #C4E3ED;
     height: 100px;
@@ -2047,6 +2017,16 @@ table.centered_content td {
     background: #FFFFFF; }
   .calendar_table tr:nth-child(4) .today {
     background: #FFFFF0; }
+@keyframes fadeoutCalendar {
+  0% {
+    background: #FFD700; }
+  100% {
+    background: none; } }
+  .calendar_table tr:nth-child(4) .selected {
+    animation: fadeoutCalendar;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-delay: 0s; }
   .calendar_table tr:nth-child(5) td {
     border: 1px solid #C4E3ED;
     height: 100px;
@@ -2081,6 +2061,16 @@ table.centered_content td {
     background: #FFFFFF; }
   .calendar_table tr:nth-child(5) .today {
     background: #FFFFF0; }
+@keyframes fadeoutCalendar {
+  0% {
+    background: #FFD700; }
+  100% {
+    background: none; } }
+  .calendar_table tr:nth-child(5) .selected {
+    animation: fadeoutCalendar;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-delay: 0s; }
   .calendar_table tr:nth-child(6) td {
     border: 1px solid #C4E3ED;
     height: 100px;
@@ -2115,6 +2105,16 @@ table.centered_content td {
     background: #FFFFFF; }
   .calendar_table tr:nth-child(6) .today {
     background: #FFFFF0; }
+@keyframes fadeoutCalendar {
+  0% {
+    background: #FFD700; }
+  100% {
+    background: none; } }
+  .calendar_table tr:nth-child(6) .selected {
+    animation: fadeoutCalendar;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-delay: 0s; }
   .calendar_table tr:nth-child(7) td {
     border: 1px solid #C4E3ED;
     height: 100px;
@@ -2149,6 +2149,16 @@ table.centered_content td {
     background: #FFFFFF; }
   .calendar_table tr:nth-child(7) .today {
     background: #FFFFF0; }
+@keyframes fadeoutCalendar {
+  0% {
+    background: #FFD700; }
+  100% {
+    background: none; } }
+  .calendar_table tr:nth-child(7) .selected {
+    animation: fadeoutCalendar;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-delay: 0s; }
   .calendar_table tr:nth-child(8) td {
     border: 1px solid #C4E3ED;
     height: 100px;
@@ -2183,6 +2193,60 @@ table.centered_content td {
     background: #FFFFFF; }
   .calendar_table tr:nth-child(8) .today {
     background: #FFFFF0; }
+@keyframes fadeoutCalendar {
+  0% {
+    background: #FFD700; }
+  100% {
+    background: none; } }
+  .calendar_table tr:nth-child(8) .selected {
+    animation: fadeoutCalendar;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-delay: 0s; }
+  .calendar_table tr:nth-child(9) td {
+    border: 1px solid #C4E3ED;
+    height: 100px;
+    vertical-align: top;
+    text-align: left; }
+    .calendar_table tr:nth-child(9) td span {
+      text-align: left;
+      margin: 3px;
+      width: 100%; }
+    .calendar_table tr:nth-child(9) td div {
+      border: 1px outset #63B4CF;
+      border-radius: 5px;
+      margin: 3px;
+      background: linear-gradient(to bottom, #DDDDDD 33%, #E8E8E8 66%, #DDDDDD 100%);
+      padding-left: 3px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -ms-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out; }
+    .calendar_table tr:nth-child(9) td div:hover {
+      border-color: #3B9EBF;
+      box-shadow: 0 3px 4px 0 #000000; }
+  .calendar_table tr:nth-child(9) .blank {
+    background: #E8E8E8; }
+  .calendar_table tr:nth-child(9) .accent1 {
+    background: #F0FBFF; }
+  .calendar_table tr:nth-child(9) .accent2 {
+    background: #FFFFFF; }
+  .calendar_table tr:nth-child(9) .today {
+    background: #FFFFF0; }
+@keyframes fadeoutCalendar {
+  0% {
+    background: #FFD700; }
+  100% {
+    background: none; } }
+  .calendar_table tr:nth-child(9) .selected {
+    animation: fadeoutCalendar;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-delay: 0s; }
 
 .calender_info_wrapper {
   position: fixed;
