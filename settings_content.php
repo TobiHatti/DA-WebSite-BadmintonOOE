@@ -66,6 +66,7 @@
                         '.SettingOption("N","NewsAmountStartpageNW", "Menge an Artikeln die auf der Startseite unter \"Nachwuchs\" angezeigt werden", "NewsAmountStartpageNW", "sopt".$i++).'
                         '.SettingOption("N","NewsAmountTile", "Menge an Artikeln die in der Seitenleiste unter \"Neueste Beitr&auml;ge\" angezeigt werden", "NewsAmountTile", "sopt".$i++).'
                         '.SettingOption("S","SliderAnimation", "Slider-Animation auf Startseite", "SliderAnimation", "sopt".$i++,$sliderAnimations).'
+                        '.SettingOption("C","ShowZAinAG", "Zentralausschreibungen in Terminplaner anzeigen", "ShowZAinAG", "sopt".$i++).'
                     </table>
                 </form>
             ';
@@ -154,6 +155,19 @@
                     <tr>
                         <td><b>DeleteZA</b></td>
                         <td>Zentralausschreibung l&ouml;schen</td>
+                    </tr>
+                    <tr><td colspan="2"><hr></td></tr>
+                    <tr>
+                        <td><b>AddVorstand</b></td>
+                        <td>Vorstand-Mitglied hinzuf&uuml;gen</td>
+                    </tr>
+                    <tr>
+                        <td><b>EditVorstand</b></td>
+                        <td>Vorstand-Mitglied bearbeiten</td>
+                    </tr>
+                    <tr>
+                        <td><b>DeleteVorstand</b></td>
+                        <td>Vorstand-Mitglied l&ouml;schen</td>
                     </tr>
                     <tr><td colspan="2"><hr></td></tr>
                 </table>
