@@ -14,10 +14,61 @@
         $download = (isset($_POST['download'])) ? 1 : 0 ;
         $user = $_SESSION['user_id'];
 
+
         MySQLNonQuery("INSERT INTO fotogalerie (id, album_url, album_name, album_description, event_location, event_date, allowDownload, creation_date, author) VALUES ('','$albumUrl','$albumName','$album_description','$album_ort','$album_date','$download','$today','$user')");
 
         $albID = Fetch("fotogalerie","id","album_name",$albumName);
         FileUpload("content/gallery/".$albumUrl."/", "images" ,"","","INSERT INTO gallery_images (id,album_id,image) VALUES ('','$albID','FNAME')");
+    }
+
+    if(isset($_POST['download_zip']))
+    {
+        $album_path = $_POST['download_zip'];
+        $album_name = Fetch("fotogalerie","album_name","album_url",$album_path);
+        $album_id = Fetch("fotogalerie","id","album_url",$album_path);
+
+        //Zip-Ordner erstellen
+
+        $verzeichnis = 'content/gallery/'.$album_path;
+        $zip_name = "AlbumDownload.zip";
+
+        // Verzeichnis auslesen
+        $dateien = array_slice(scanDir($verzeichnis), 2);
+
+        // Neue Instanz der ZipArchive Klasse erzeugen
+        $zip = new ZipArchive;
+
+        if (!file_exists($zip_name)) {
+         // Zip-Archiv erstellen
+         $status = $zip->open($zip_name, ZipArchive::CREATE);
+        }
+        else {
+         // Zip-Archiv überschreiben
+         $status = $zip->open($zip_name, ZipArchive::OVERWRITE);
+        }
+
+        if ($status) {
+
+         // Dateien ins Zip-Archiv einfügen
+         foreach ($dateien as $datei) {
+          $zip->addFile($verzeichnis . $datei, $datei);
+         }
+
+        // Zip-Archiv schließen
+         $zip->close();
+
+         if (file_exists($zip_name)) {
+
+          // Dateigröße ermitteln
+          $info = stat($zip_name);
+          echo '
+            <a href="' . $zip_name . '" download>' . $zip_name . '</a> - ' .
+            number_format(round($info["size"] / 1024 ,1), 2, ",", ".") .' KB
+          ';
+         }
+        }
+
+
     }
 
 
@@ -55,7 +106,7 @@
        <h1 class="stagfade1">'.Fetch("fotogalerie","album_name","album_url",$_GET['album']).'</h1>
        <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
        <br>
-       <button type="button">Download</button>
+       <button type="submit" name="download_zip" value="'.$_GET['album'].'">Download</button>
        <br>
        <center>
        ';
@@ -114,7 +165,7 @@
     }
     else
     {
-        echo '<h1 class="stagfade1">Fotogallerie</h1>';
+        echo '<h1 class="stagfade1">Fotogalerie</h1>';
 
         echo '
             <b><u>ToDo Fotogalerie:</u></b><br><br>
