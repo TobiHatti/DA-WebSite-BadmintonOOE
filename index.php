@@ -335,8 +335,9 @@
 
                 <div class="tripple_container">
                     <div>
-                        <h3>&Ouml;BV News</h3>
+                        <h3><img src="/content/rss.png" alt="" style="width:20px; height: 20px; margin-bottom:-2px; margin-right: 5px;"/>&Ouml;BV News</h3>
                         <hr>
+                        <script language="javascript" src="http://www.badminton.at/files/rss/badminton_news.php"></script>
                     </div>
                     <div>
                         <h3>Meisterschaft</h3>
