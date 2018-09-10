@@ -73,11 +73,11 @@ function ColorPicker($name, $id, $text, $value, $lifeChangeId="",$DOMproperty="s
     ';
 }
 
-function TextareaPlus($name, $id="edit", $placeholder="")
+function TextareaPlus($name, $id="edit", $placeholder="",$required = false)
 {
     return '
 
-        <textarea name="'.$name.'" id="'.$id.'" style="margin-top: 30px;display:none" required>
+        <textarea name="'.$name.'" id="'.$id.'" style="margin-top: 30px;display:none" '.($required ? 'required' : '').'>
             '.$placeholder.'
         </textarea>
 
@@ -181,17 +181,17 @@ function PageContent($paragraph_index,$allowEdit=false)
 
 function EditButton($link)
 {
-    return '<p style="margin: 0 3px 0 3px;"><a href="'.$link.'"> &#9998; Bearbeiten</a></p>';
+    return '<a style="margin: 0px 3px" href="'.$link.'"> &#9998; Bearbeiten</a>';
 }
 
 function AddButton($link)
 {
-    return '<p style="margin: 0 3px 0 3px;"><a href="'.$link.'"> &#65291; Hinzuf&uuml;gen</a></p>';
+    return '<a style="margin: 0px 3px" href="'.$link.'"> &#65291; Hinzuf&uuml;gen</a>';
 }
 
 function DeleteButton($permissionSuffix,$table,$id)
 {
-    return ' <p style="margin: 0 3px 0 3px;"><a style="color: red;" href="/delete/'.$table.'/'.$permissionSuffix.'/'.$id.'"> &#65291; L&ouml;schen</a></p> ';
+    return '<a style="margin: 0px 3px; color: red;" href="/delete/'.$table.'/'.$permissionSuffix.'/'.$id.'"> &#10006; L&ouml;schen</a>';
 }
 
 function CheckPermission($permission)

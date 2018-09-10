@@ -184,7 +184,7 @@
                 }
                 else $dateStr = $dayNames[$dayIndex1].', '.$day1.'. '.$monthNames[$monthIndex1].' '.$year;
 
-                if(isset($_GET['editSC']) AND $_GET['editSC']==$row['id'])
+                if(isset($_GET['editSC']) AND $_GET['editSC']==$row['id'] AND CheckPermission("EditZA"))
                 {
                     echo '<a name="edit"></a>';
                     echo EditZA($row['id']);

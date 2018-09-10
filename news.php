@@ -96,15 +96,15 @@
         ';
 
     }
-    else if(isset($_GET['neu']))
+    else if(CheckPermission("AddNews") AND isset($_GET['neu']))
     {
         echo '
             <h2 class="stagfade1">Neuen Artikel verfassen</h2>
+            <hr>
             <form action="/news?check" method="post" accept-charset="utf-8" enctype="multipart/form-data" onkeypress="return event.keyCode != 13;">
-                <br>
                 <div class="stagfade2">
-                    Verfassen Sie den Neues Artikel in dem untenstehenden Textfeld:<br>
-                    '.TextareaPlus("content","article","<h2>Artikel-Titel</h2>Hier den Artikel verfassen...").'
+                    <p>Verfassen Sie den neuen Artikel in dem untenstehenden Textfeld:</p>
+                    '.TextareaPlus("content","article","<h2>Artikel-Titel</h2>Hier den Artikel verfassen...",true).'
                     <br>
                     <hr>
                 </div>
@@ -121,7 +121,7 @@
 
                 -->
 
-                <div class="stagfade4">
+                <div class="stagfade3">
                     <h3>Tags</h3>
                         F&uuml;gen Sie dem Artikel Tags hinzu, um ihn schneller finden und sortieren zu k&ouml;nnen:<br><br>
                         <input type="search" class="cel_l" id="tagText" placeholder="Tags eingeben... (Mit [Enter] best&auml;tigen)" onkeypress="return TagInsert(event)"/>
@@ -144,7 +144,7 @@
                     <br>
                     <hr>
                 </div>
-                <div class="stagfade5">
+                <div class="stagfade4">
                     <h3>Ver&ouml;ffentlichung</h3>
                     W&auml;hlen Sie den Zeitpunkt aus, zu dem der Artikel ver&ouml;ffentlicht werden soll (Standart: Sofort)<br>
                     <i>Format: [TT.MM.JJJJ]</i><br><br>
@@ -152,14 +152,14 @@
                     <button type="button" onclick="document.getElementById(\'relDate\').value=\''.date("Y-m-d").'\'">&#128197; Heute</button>
                     <hr>
                 </div>
-                <div class="stagfade6">
+                <div class="stagfade5">
                     <br><br>
                     <button type="submit">&#10148; Vorschau</button>
                 </div>
             </form>
         ';
     }
-    else if(isset($_GET['check']))
+    else if(CheckPermission("AddNews") AND isset($_GET['check']))
     {
         $article = $_POST['content'];
 

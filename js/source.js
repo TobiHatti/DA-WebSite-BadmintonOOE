@@ -212,6 +212,37 @@ function TagList()
 
 }
 
+
+function LoadTags()
+{
+    // DESCRIPTION:
+    // Loads existing Tags
+    // Use for Edit
+
+    var tagList = document.getElementById("tag_str").value;
+    var tagArray = tagList.split("||");
+
+    var block_to_insert ;
+    var container_block ;
+    var tag_nr = document.getElementById("tag_nr").value;
+
+    for(var i=0 ; i < tagArray.length ; i++)
+    {
+        if(tagArray[i]!="")
+        {
+            tag_nr++;
+
+            block_to_insert = document.createElement( 'div' );
+            block_to_insert.innerHTML = '<div id="tagID' + tag_nr + '"><input type="hidden" id="tagVal' + tag_nr + '" value="' + tagArray[i] + '"/><a onclick="RmTag(' + tag_nr + ');">&#128500;</a>&nbsp;' + tagArray[i] + '</div>';
+
+            container_block = document.getElementById( 'tagContainer' );
+            container_block.appendChild( block_to_insert );
+        }
+    }
+
+    document.getElementById("tag_nr").value = parseInt(tag_nr);
+}
+
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*================================= B - News-Archiv =================================*/
@@ -486,6 +517,7 @@ function SelectGalleryImage(imageID)
 {
     var selectedImg = document.getElementById("galleryImg" + imageID).src;
     document.getElementById("galleryFullSized").src = selectedImg;
+    if(document.getElementById("galleryAllowDownload").value=="1") document.getElementById("galleryDownload").href = selectedImg;
     document.getElementById("currentImageID").value = imageID;
 }
 
@@ -681,5 +713,19 @@ function ChangeCalenderStyle()
     {
         document.getElementById("CalenderList").style.display = "block";
         document.getElementById("CalenderGraphic").style.display = "none";
+    }
+}
+
+function ChangeDateLocActive(e)
+{
+    if(!e.checked)
+    {
+        document.getElementById("galdate").disabled = true;
+        document.getElementById("gallocation").disabled = true;
+    }
+    else
+    {
+        document.getElementById("galdate").disabled = false;
+        document.getElementById("gallocation").disabled = false;
     }
 }
