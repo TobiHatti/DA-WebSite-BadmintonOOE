@@ -38,7 +38,7 @@ function RadioButton($title, $name, $checked = 0)
     ';
 }
 
-function FileButton($name, $id, $multiple=0)
+function FileButton($name, $id, $multiple=false)
 {
     // DESCRIPTION:
     // Returns a File-Upload Form-Element
@@ -179,19 +179,19 @@ function PageContent($paragraph_index,$allowEdit=false)
     return $retval;
 }
 
-function EditButton($link)
+function EditButton($link,$short = false)
 {
-    return '<a style="margin: 0px 3px" href="'.$link.'"> &#9998; Bearbeiten</a>';
+    return '<a style="margin: 0px 3px" href="'.$link.'"> &#9998; '.((!$short) ? 'Bearbeiten' : '').'</a>';
 }
 
-function AddButton($link)
+function AddButton($link,$short = false)
 {
-    return '<a style="margin: 0px 3px" href="'.$link.'"> &#65291; Hinzuf&uuml;gen</a>';
+    return '<a style="margin: 0px 3px" href="'.$link.'"> &#65291; '.((!$short) ? 'Hinzuf&uuml;gen' : '').'</a>';
 }
 
-function DeleteButton($permissionSuffix,$table,$id)
+function DeleteButton($permissionSuffix,$table,$id,$short = false)
 {
-    return '<a style="margin: 0px 3px; color: red;" href="/delete/'.$table.'/'.$permissionSuffix.'/'.$id.'"> &#10006; L&ouml;schen</a>';
+    return '<a style="margin: 0px 3px; color: red;" href="/delete/'.$table.'/'.$permissionSuffix.'/'.$id.'"> &#10006; '.((!$short) ? 'L&ouml;schen' : '').' </a>';
 }
 
 function CheckPermission($permission)
@@ -200,8 +200,6 @@ function CheckPermission($permission)
     // Checks if the given permission is true/false
     // for the logged in user
     // $permission  Permission-Keyword
-
-
 
     if(!isset($_SESSION['userID'])) return false;
     else
