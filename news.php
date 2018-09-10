@@ -12,7 +12,7 @@
     // "xy" can be a value between "0-9", "a-z", "A-Z" or a "-"
 
 
-    if(isset($_POST['publish']))
+    if(isset($_POST['publish']) AND CheckPermission("AddNews"))
     {
         $article_url = $_POST['article_id'];
         $article = $_POST['article'];
@@ -20,7 +20,7 @@
         $release = $_POST['release_date'];
         $thumb = $_POST['thumbnail'];
         $title = $_POST['title'];
-        $author = (isset($_SESSION['user_id'])) ? $_SESSION['user_id'] : 0 ;
+        $author = (isset($_SESSION['userID'])) ? $_SESSION['userID'] : 0 ;
 
         // In case the ID already exists, cycle
         if(MySQLExists("SELECT article_url FROM news WHERE article_url = '$article_url'"))
@@ -45,26 +45,120 @@
         die();
     }
 
+    if(isset($_POST['updateArticle']) AND CheckPermission("EditNews"))
+    {
+        $id = $_POST['updateArticle'];
+        $article = $_POST['article'];
+        $tags = SReplace($_POST['tags']);
+        $release = $_POST['release_date'];
+
+        list($article,$nameid,$thumb,$title) = ArticlePreProcessRoutine($article);
+
+        $strSQL = "UPDATE news SET title = '$title',article_url = '$nameid' , tags = '$tags', article = '$article', release_date = '$release', thumbnail = '$thumb' WHERE id = '$id'";
+        MySQLNonQuery($strSQL);
+
+        Redirect("/news/artikel/".$nameid);
+        die();
+    }
+
 
     if(isset($_GET['artikel']))
     {
-        MySQLNonQuery("UPDATE news SET views = views + 1 WHERE article_url = '".$_GET['artikel']."'");
+        if(isset($_GET['editSC']) AND CheckPermission("EditNews"))
+        {
+            $id = $_GET['editSC'];
+            $strSQL = "SELECT * FROM news WHERE id = '$id'";
+            $rs=mysqli_query($link,$strSQL);
+            while($row=mysqli_fetch_assoc($rs))
+            {
+                echo '
+                    <h2 class="stagfade1">Artikel bearbeiten</h2>
+                    <form action="/news" method="post" accept-charset="utf-8" enctype="multipart/form-data" onkeypress="return event.keyCode != 13;">
+                        <div class="stagfade2">
+                            <hr>
+                            <p>Verfassen Sie den neuen Artikel in dem untenstehenden Textfeld:</p>
+                            '.TextareaPlus("article","content",$row['article']).'
+                            <br>
+                            <hr>
+                        </div>
 
-        echo '
-            <div class="doublecol_singletile">
-                <article>
-                    <span style="color: #A9A9A9">'.date_format(date_create(Fetch("news","release_date","article_url",$_GET['artikel'])),"d. F Y").' |</span>
-                    '.ShowTags(Fetch("news","tags","article_url",$_GET['artikel'])).'
-                    <div class="fr-view fr-element">'.Fetch("news","article","article_url",$_GET['artikel']).'</div>
-                    <span>'.Fetch("news","views","article_url",$_GET['artikel']).' Aufrufe</span>
-                </article>
-                <aside>
-                    '.NewsSidebar() .'
-                </aside>
-            </div>
-        ';
+                        <div class="stagfade3">
+                        <h3>Tags</h3>
+                            F&uuml;gen Sie dem Artikel Tags hinzu, um ihn schneller finden und sortieren zu k&ouml;nnen:<br><br>
+                            <input type="search" class="cel_l" id="tagText" placeholder="Tags eingeben... (Mit [Enter] best&auml;tigen)" onkeypress="return TagInsert(event)"/>
+                            oder
+                            <select onchange="TagList();" id="tagList">
+                                <option value="none" disabled selected>--- Kategorie Ausw&auml;hlen ---</option>
+                                <optgroup label="Hauptkategorien">
+                                    ';
+                                    $strSQLT = "SELECT * FROM news_tags";
+                                    $rsT=mysqli_query($link,$strSQLT);
+                                    while($rowT=mysqli_fetch_assoc($rsT)) { echo '<option value="'.$rowT['name'].'">'.$rowT['name'].'</option>'; }
+                                    echo '
+                                </optgroup>
+                            </select>
 
-        MySQLNonQuery("UPDATE news SET views = views + 1 WHERE article_url = '".$_GET['artikel']."'");
+                            <script>
+                                window.onload = function () {
+                                    LoadTags();
+                                }
+                            </script>
+
+                            <input type="hidden" id="tag_nr" value="1"/>
+                            <input type="hidden" id="tag_str" name="tags" value="'.$row['tags'].'"/>
+
+                            <div class="tag_container" id="tagContainer"></div>
+                            <br>
+                            <hr>
+                        </div>
+                        <div class="stagfade4">
+                            <h3>Ver&ouml;ffentlichung</h3>
+                            W&auml;hlen Sie den Zeitpunkt aus, zu dem der Artikel ver&ouml;ffentlicht werden soll:<br>
+                            <i>Format: [TT.MM.JJJJ]</i><br><br>
+                            <input type="date" value="'.$row['release_date'].'" id="relDate" name="release_date" class="cel_m"/>
+                            <button type="button" onclick="document.getElementById(\'relDate\').value=\''.date("Y-m-d").'\'">&#128197; Heute</button>
+                            <hr>
+                        </div>
+                        <div class="stagfade5">
+                            <br><br>
+                            <button type="submit" name="updateArticle" value="'.$row['id'].'">&#8635; Aktualisieren</button>
+                        </div>
+                    </form>
+                ';
+            }
+        }
+        else
+        {
+            MySQLNonQuery("UPDATE news SET views = views + 1 WHERE article_url = '".$_GET['artikel']."'");
+            $id = Fetch("news","id","article_url",$_GET['artikel']);
+
+            echo '
+                <div class="doublecol_singletile">
+                    <article>
+                        <span style="color: #A9A9A9">'.date_format(date_create(Fetch("news","release_date","article_url",$_GET['artikel'])),"d. F Y").' |</span>
+                        '.ShowTags(Fetch("news","tags","article_url",$_GET['artikel'])).'
+                        <div class="fr-view fr-element">'.Fetch("news","article","article_url",$_GET['artikel']).'</div>
+                        <span>'.Fetch("news","views","article_url",$_GET['artikel']).' Aufrufe</span><br><br>
+                        ';
+
+                        if(CheckPermission("EditNews"))
+                        {
+                            echo '<span style="float: left;"> '.EditButton(ThisPage("!editContent","!editSC","+editSC=$id")).' </span>';
+                        }
+
+                        if(CheckPermission("DeleteNews"))
+                        {
+                            echo '<span style="float: left;"> '.DeleteButton("News","news",$id).' </span>';
+                        }
+
+                        echo '
+                    </article>
+                    <aside>
+                        '.NewsSidebar() .'
+                    </aside>
+                </div>
+            ';
+        }
     }
     else if(isset($_GET['kategorie']))
     {
@@ -96,7 +190,7 @@
         ';
 
     }
-    else if(CheckPermission("AddNews") AND isset($_GET['neu']))
+    else if(isset($_GET['neu']) AND CheckPermission("AddNews"))
     {
         echo '
             <h2 class="stagfade1">Neuen Artikel verfassen</h2>
@@ -159,54 +253,15 @@
             </form>
         ';
     }
-    else if(CheckPermission("AddNews") AND isset($_GET['check']))
+    else if(isset($_GET['check']) AND CheckPermission("AddNews") )
     {
         $article = $_POST['content'];
 
-        // Finds out the title of the article
-        $posh1 = strpos($article,'</h1>');
-        $posh2 = strpos($article,'</h2>');
-        $posh3 = strpos($article,'</h3>');
-        $posh4 = strpos($article,'</h4>');
-        $posh5 = strpos($article,'</h5>');
-        $posbr = strpos($article,'</p>');
-        $posp = strpos($article,'<br>');
-
-        // Converts values to array, filters it and finds the right lenght of the title
-        $cpos = min(array_filter(array(intval($posh1),intval($posh2),intval($posh3),intval($posh4),intval($posh5),intval($posbr),intval($posp))));
-
-        // Remove HTML-Tags, exchange whitespaces and so on.
-        $title = strip_tags(substr($article,0,$cpos));
-        $nameid = SReplace(strip_tags(substr($article,0,$cpos)));
-
-        $path = "content/news/$nameid/";
-        $article = ArticleImgFilter($article,$path);
-
-        // Finds Thumbnail-Photo
-        $imgs = substr($article,strpos($article,'src="'));
-        $tnepos = strpos($imgs,'" ');
-        $imgs = str_replace('src="','',substr($imgs,0,$tnepos));
-
-
-        /*
-        // Uploading images for Slideshow
-        $dir = "content/news/".$nameid."/";
-        if (!file_exists($dir) && !is_dir($dir)) {
-            mkdir($dir);
-            FileUpload($dir,"gallery_images");
-        }
-        */
+        list($article,$nameid,$imgs,$title) = ArticlePreProcessRoutine($article);
 
         // START OF PREVIEW
 
         echo '<h2 class="stagfade1">Artikel-Vorschau</h2><hr>';
-
-        /*
-        if($_FILES['gallery_images']['size'] == 0)
-        {
-            echo '<h2>Gallerie</h2><hr>';
-        }
-        */
 
         echo '
             <span style="color: #A9A9A9">'.date_format(date_create($_POST['release_date']),"d. F Y").'</span>
