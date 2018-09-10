@@ -1506,41 +1506,62 @@ table.centered_content td{
     background: linear-gradient(to right, $theme-bright-l, #F2F2F2);
     margin: 10px 10px 30px 10px;
     box-shadow: none;
+    position: relative;
     @include ease(0.1s);
 
     .image_preview{
-        display: inline-block;
         vertical-align: top;
         width: 200px;
 
         @for $i from 1 through 1 {
             img:first-child:nth-last-child(#{$i}),
             img:first-child:nth-last-child(#{$i}) ~ img {
-                width: 98%;
+                max-width: 98%;
                 margin: 2%;
+                max-height: 150px;
             }
         }
 
         @for $i from 2 through 4 {
             img:first-child:nth-last-child(#{$i}),
             img:first-child:nth-last-child(#{$i}) ~ img {
-                width: 48%;
+                max-width: 48%;
                 margin: 1%;
+                max-height: 100px;
             }
         }
 
         @for $i from 5 through 9 {
             img:first-child:nth-last-child(#{$i}),
             img:first-child:nth-last-child(#{$i}) ~ img {
-                width: 31%;
-                margin: 1.16666666%
+                max-width: 31%;
+                margin: 1.16666666%;
+                max-height: 80px;
             }
+        }
+    }
+
+
+    @media only screen and (max-width: 800px){
+        .image_preview{
+            display: none;
+        }
+    }
+
+    @media only screen and (min-width: 800px){
+        .image_preview{
+            display: inline-block;
         }
     }
 
     .album_description{
         display: inline-block;
         vertical-align: top;
+        position: absolute;
+        top: 0px;
+        right:0px;
+        bottom: 0px;
+        left: 200px;
 
         h3{
             margin-top: 10px;
@@ -1549,7 +1570,18 @@ table.centered_content td{
 
         p{
             margin-left: 20px;
+            font-size: 13pt;
+            color: #000000;
         }
+
+        .dateloc{
+            position: absolute;
+            bottom: 0px;
+            margin-left: 20px;
+            color: #696969;
+            font-style: italic;
+        }
+
     }
 
 }
@@ -1594,8 +1626,8 @@ table.centered_content td{
 
     .close_cross{
         position: absolute;
-        top: 0px;
-        right: 0px;
+        top: 10px;
+        right: 10px;
         width: 40px;
         height: 40px;
     }
@@ -1618,6 +1650,12 @@ table.centered_content td{
         top:50%;
         border-radius: 50%;
         @include ease(0.2s);
+    }
+
+    button{
+        position: absolute;
+        top: 10px;
+        right: 60px;
     }
 
     .next:hover,

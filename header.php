@@ -41,7 +41,7 @@
 
 
                 <!-- External Links/Scripts -->
-                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
                     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
                 <!-- End of External Links/Scripts -->
 

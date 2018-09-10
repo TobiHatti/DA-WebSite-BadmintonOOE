@@ -1422,59 +1422,87 @@ table.centered_content td {
   background: linear-gradient(to right, #C4E3ED, #F2F2F2);
   margin: 10px 10px 30px 10px;
   box-shadow: none;
+  position: relative;
   -webkit-transition: all 0.1s ease-in-out;
   -moz-transition: all 0.1s ease-in-out;
   -ms-transition: all 0.1s ease-in-out;
   -o-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out; }
   .gallery_album .image_preview {
-    display: inline-block;
     vertical-align: top;
     width: 200px; }
     .gallery_album .image_preview img:first-child:nth-last-child(1),
     .gallery_album .image_preview img:first-child:nth-last-child(1) ~ img {
-      width: 98%;
-      margin: 2%; }
+      max-width: 98%;
+      margin: 2%;
+      max-height: 150px; }
     .gallery_album .image_preview img:first-child:nth-last-child(2),
     .gallery_album .image_preview img:first-child:nth-last-child(2) ~ img {
-      width: 48%;
-      margin: 1%; }
+      max-width: 48%;
+      margin: 1%;
+      max-height: 100px; }
     .gallery_album .image_preview img:first-child:nth-last-child(3),
     .gallery_album .image_preview img:first-child:nth-last-child(3) ~ img {
-      width: 48%;
-      margin: 1%; }
+      max-width: 48%;
+      margin: 1%;
+      max-height: 100px; }
     .gallery_album .image_preview img:first-child:nth-last-child(4),
     .gallery_album .image_preview img:first-child:nth-last-child(4) ~ img {
-      width: 48%;
-      margin: 1%; }
+      max-width: 48%;
+      margin: 1%;
+      max-height: 100px; }
     .gallery_album .image_preview img:first-child:nth-last-child(5),
     .gallery_album .image_preview img:first-child:nth-last-child(5) ~ img {
-      width: 31%;
-      margin: 1.16666666%; }
+      max-width: 31%;
+      margin: 1.16666666%;
+      max-height: 80px; }
     .gallery_album .image_preview img:first-child:nth-last-child(6),
     .gallery_album .image_preview img:first-child:nth-last-child(6) ~ img {
-      width: 31%;
-      margin: 1.16666666%; }
+      max-width: 31%;
+      margin: 1.16666666%;
+      max-height: 80px; }
     .gallery_album .image_preview img:first-child:nth-last-child(7),
     .gallery_album .image_preview img:first-child:nth-last-child(7) ~ img {
-      width: 31%;
-      margin: 1.16666666%; }
+      max-width: 31%;
+      margin: 1.16666666%;
+      max-height: 80px; }
     .gallery_album .image_preview img:first-child:nth-last-child(8),
     .gallery_album .image_preview img:first-child:nth-last-child(8) ~ img {
-      width: 31%;
-      margin: 1.16666666%; }
+      max-width: 31%;
+      margin: 1.16666666%;
+      max-height: 80px; }
     .gallery_album .image_preview img:first-child:nth-last-child(9),
     .gallery_album .image_preview img:first-child:nth-last-child(9) ~ img {
-      width: 31%;
-      margin: 1.16666666%; }
+      max-width: 31%;
+      margin: 1.16666666%;
+      max-height: 80px; }
+  @media only screen and (max-width: 800px) {
+    .gallery_album .image_preview {
+      display: none; } }
+  @media only screen and (min-width: 800px) {
+    .gallery_album .image_preview {
+      display: inline-block; } }
   .gallery_album .album_description {
     display: inline-block;
-    vertical-align: top; }
+    vertical-align: top;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 200px; }
     .gallery_album .album_description h3 {
       margin-top: 10px;
       margin-left: 15px; }
     .gallery_album .album_description p {
-      margin-left: 20px; }
+      margin-left: 20px;
+      font-size: 13pt;
+      color: #000000; }
+    .gallery_album .album_description .dateloc {
+      position: absolute;
+      bottom: 0px;
+      margin-left: 20px;
+      color: #696969;
+      font-style: italic; }
 
 .gallery_album:hover {
   box-shadow: 0 10px 10px -3px #000000; }
@@ -1517,8 +1545,8 @@ table.centered_content td {
     transition: all 0.5s ease-in-out; }
   .gallery_view_wrapper .close_cross {
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 10px;
+    right: 10px;
     width: 40px;
     height: 40px; }
   .gallery_view_wrapper .next {
@@ -1545,6 +1573,10 @@ table.centered_content td {
     -ms-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out; }
+  .gallery_view_wrapper button {
+    position: absolute;
+    top: 10px;
+    right: 60px; }
   .gallery_view_wrapper .next:hover,
   .gallery_view_wrapper .back:hover {
     box-shadow: 0 0 5px 5px #3B9EBF; }

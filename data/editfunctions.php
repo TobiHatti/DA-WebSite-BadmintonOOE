@@ -554,4 +554,80 @@ function EditZA($id='')
     return $retval;
 }
 
+
+function EditGallery($id)
+{
+    require("mysql_connect.php");
+
+    $strSQL = "SELECT * FROM fotogalerie WHERE id = '$id'";
+    $rs=mysqli_query($link,$strSQL);
+    while($row=mysqli_fetch_assoc($rs))
+    {
+        echo'
+            <div class="gallery_album">
+                <center>
+                    <table style="width: 90%;">
+                        <tr>
+                            <td class="ta_r">Titel</td>
+                            <td><input type="text" class="cel_100" value="'.$row['album_name'].'"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan=2>'.TextareaPlus("description","description",$row['album_description']).'<br></td>
+                        </tr>
+                        <tr>
+                            <td class="ta_r">Ort/Datum anzeigen</td>
+                            <td>'.Checkbox("showDateLoc","dateloc",$row['show_dateloc']).'</td>
+                        </tr>
+                        <tr>
+                            <td class="ta_r">Ort</td>
+                            <td><input type="text" value="'.$row['event_location'].'"/></td>
+                        </tr>
+                        <tr>
+                            <td class="ta_r">Datum</td>
+                            <td><input type="date" value="'.$row['event_date'].'"/></td>
+                        </tr>
+                        <tr>
+                            <td class="ta_r">Tags</td>
+                            <td>
+                                <input type="search" class="cel_l" id="tagText" placeholder="Tags eingeben... (Mit [Enter] best&auml;tigen)" onkeypress="return TagInsert(event)"/>
+                                oder
+                                <select onchange="TagList();" id="tagList">
+                                    <option value="none" disabled selected>--- Kategorie Ausw&auml;hlen ---</option>
+                                    <optgroup label="Hauptkategorien">
+                                        ';
+                                        $strSQLT = "SELECT * FROM news_tags";
+                                        $rsT=mysqli_query($link,$strSQLT);
+                                        while($rowT=mysqli_fetch_assoc($rsT)) { echo '<option value="'.$rowT['name'].'">'.$rowT['name'].'</option>'; }
+                                        echo '
+                                    </optgroup>
+                                </select>
+
+                                <input type="hidden" id="tag_nr" value="1"/>
+                                <input type="hidden" id="tag_str" name="tags" value="'.$row['tags'].'"/>
+
+                                <div class="tag_container" id="tagContainer"></div>
+
+                                <script>
+                                    window.onload = function () {
+                                        LoadTags();
+                                    }
+                                </script>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="ta_r">Download erlauben</td>
+                            <td>'.Checkbox("enableDownload","endownload",$row['allowDownload']).'</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <button type="submit" name="updateGallery" value="'.$id.'">Aktualisieren</button>
+                    <a href="/fotogalerie"><button type="button">&Auml;nderungen verwerfen</button></a>
+                </center>
+            </div>
+        ';
+    }
+}
+
+
 ?>
