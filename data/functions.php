@@ -22,6 +22,7 @@ function Togglebox($name, $id, $checked = 0,$onchange="",$sessionName="")
     return '
         <script>
             $(window).on("load", function () {
+                if(window.sessionStorage.getItem("'.$sessionName.'")==null) window.sessionStorage.setItem("'.$sessionName.'",'.$checked.');
                 CheckToggleSession("'.$id.'","'.$sessionName.'");
                 '.$onchange.'
             });
@@ -584,6 +585,61 @@ function RefreshSliderContent()
 
         $i++;
     }
+}
+
+function ExportCSVAgenda($db,$id="",$multiple="")
+{
+    // DESCRIPTION:
+    // Exports a csv-file that can later be imported into a calendar
+    // $db    zentralausschreibungen/agenda
+    // $id          id of the entry
+    // $multiple    export an entire month/year (format = 2018-02 / 2018)
+
+    $inhalt = "Subject;Start Date;Start Time;End Date;End Time;All Day Event;Description;Location;Private\r\n";
+    $path = "content/calendar-export/";
+
+    require("mysql_connect.php");
+
+    if($multiple == "")
+    {
+        $strSQL = "SELECT * FROM $db WHERE id = '$id'";
+        $rs=mysqli_query($link,$strSQL);
+        while($row=mysqli_fetch_assoc($rs))
+        {
+            if($db == 'agenda')
+            {
+                $inhalt .= $row['titel'].';'.$row['date'].';'.$row['time'].';;;FALSE;'.$row['description'].';'.$row['place'].';FALSE'."\r\n";
+                $filename = "Termin-".$row['date'].".csv";
+            }
+            else
+            {
+                $inhalt .= $row['title_line1'].$row['title_line2'].';'.$row['date_begin'].';;;;FALSE;;'.$row['hallenname'].' - '.$row['anschrift_halle'].';FALSE'."\r\n";
+                $filename = "Termin-".$row['date_begin'].".csv";
+            }
+        }
+
+        $handle = fopen ($path.$filename, 'w');
+    }
+    else
+    {
+        if($db == 'agenda') $strSQL = "SELECT * FROM $db WHERE date LIKE '$multiple%'";
+        else $strSQL = "SELECT * FROM $db WHERE date_begin LIKE '$multiple%'";
+
+        $rs=mysqli_query($link,$strSQL);
+        while($row=mysqli_fetch_assoc($rs))
+        {
+            if($db == 'agenda') $inhalt .= $row['titel'].';'.$row['date'].';'.$row['time'].';;;FALSE;'.$row['description'].';'.$row['place'].';FALSE'."\r\n";
+            else $inhalt .= $row['title_line1'].$row['title_line2'].';'.$row['date_begin'].';;;;FALSE;;'.$row['hallenname'].' - '.$row['anschrift_halle'].';FALSE'."\r\n";
+        }
+
+        $filename = "Termine-".$multiple.".csv";
+        $handle = fopen ($path.$filename, 'w');
+    }
+
+    fwrite ($handle, $inhalt);
+    fclose ($handle);
+
+    return $path.$filename;
 }
 
 
