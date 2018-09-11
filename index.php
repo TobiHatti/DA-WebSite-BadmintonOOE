@@ -286,7 +286,7 @@
 
                     <script>
                         window.setInterval(function(){
-                            CopySliderTitle();
+                            CopySliderTitle('.$sliderLimit.');
                         }, 500);
                     </script>
 

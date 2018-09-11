@@ -17,8 +17,9 @@
         <!DOCTYPE html>
         <html>
             <head>
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
                 <link rel="stylesheet" type="text/css" href="/css/style.css">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
                 <meta charset="utf-8">
             </head>
             <body>
@@ -234,6 +235,7 @@
                         else
                         {
                             echo '
+                            <a href="#exportAG'.$row['id'].'"><button style="float: right; margin-right: 20px;"><i class="fas fa-file-export"></i> Exportieren</button></a>
                             <h2><u>'.$row['titel'].'</u></h2>
                             <h4>'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['date']))).'</h4>
                             <h4>'.date_format(date_create($row['time']),"H:i").' Uhr</h4>
@@ -260,6 +262,25 @@
                 </div>
             </div>
         ';
+
+        echo '
+            <div class="calender_export_wrapper" id="exportAG'.$row['id'].'">
+                <a href="#c">
+                    <div class="calender_info_bg"></div>
+                </a>
+                <div class="info_container">
+                    <h3>Exportieren</h3>
+                    <center>
+                        <form action="/kalender" method="post" accept-charset="utf-8" enctype="multipart/form-data" target="_top">
+                            <button type="submit" class="cel_m" name="export_csv" value="AG'.$row['id'].'"><i class="fa fa-file-excel-o" style="float: left;"></i> Als .csv Exportieren</button>
+                            <br>
+                            <button type="submit" class="cel_m" name="export_ics" value="AG'.$row['id'].'"><i class="fas fa-file" style="float: left;"></i>Als .ics Exportieren</button>
+                        </form>
+                    </center>
+                </div>
+            </div>
+
+        ';
     }
 
     $strSQL = "SELECT * FROM zentralausschreibungen WHERE date_begin LIKE '$datePart%'";
@@ -275,6 +296,7 @@
                 <div class="info_container">
                     <a href="#c"><img src="/content/cross2.png" alt="" class="close_cross"/></a>
                     <div style="border-left: 3px solid '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '').'; padding-left: 5px;">
+                        <a href="#exportZA'.$row['id'].'"><button style="float: right; margin-right: 20px;"><i class="fas fa-file-export"></i> Exportieren</button></a>
                         <span style="color: #696969"><i>Zentralausschreibung</i></span>
                         <h2><u>'.$row['title_line1'].'<br>'.$row['title_line2'].'</u></h2>
                         <h4>'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['date_begin']))).'</h4>
@@ -441,6 +463,26 @@
                     </div>
                 </div>
             </div>
+        ';
+
+
+        echo '
+            <div class="calender_export_wrapper" id="exportZA'.$row['id'].'">
+                <a href="#c">
+                    <div class="calender_info_bg"></div>
+                </a>
+                <div class="info_container">
+                    <h3>Exportieren</h3>
+                    <center>
+                        <form action="/kalender" method="post" accept-charset="utf-8" enctype="multipart/form-data" target="_top">
+                            <button type="submit" class="cel_m" name="export_csv" value="ZA'.$row['id'].'"><i class="fa fa-file-excel-o" style="float: left;"></i> Als .csv Exportieren</button>
+                            <br>
+                            <button type="submit" class="cel_m" name="export_ics" value="ZA'.$row['id'].'"><i class="fas fa-file" style="float: left;"></i>Als .ics Exportieren</button>
+                        </form>
+                    </center>
+                </div>
+            </div>
+
         ';
     }
 

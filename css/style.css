@@ -2344,6 +2344,52 @@ table.centered_content td {
   .calender_info_wrapper:target .info_container {
     opacity: 1; }
 
+.calender_export_wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: -10000px;
+  z-index: 100000; }
+  .calender_export_wrapper .calender_info_bg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 100000;
+    opacity: 0;
+    cursor: default;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; }
+  .calender_export_wrapper .info_container {
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    background: #FFFFFF;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 40%;
+    box-shadow: 0 0 40px 5px #000000;
+    z-index: 100001;
+    opacity: 0;
+    padding: 20px;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out; }
+
+.calender_export_wrapper:target {
+  left: 0px; }
+  .calender_export_wrapper:target .calender_info_bg {
+    opacity: 1; }
+  .calender_export_wrapper:target .info_container {
+    opacity: 1; }
+
 /*===================================================================================*/
 /* (U04)   Kalender > Graphic Calendar (Small)                                       */
 /*===================================================================================*/

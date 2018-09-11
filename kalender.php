@@ -44,6 +44,37 @@ require("header.php");
         die();
     }
 
+    if(isset($_POST['export_csv']))
+    {
+        if(StartsWith($_POST['export_csv'], 'MZA'))
+        {
+            $multiple = str_replace('MZA','',$_POST['export_csv']);
+            $path = ExportCSVAgenda("zentralausschreibungen","",$multiple);
+        }
+        else if(StartsWith($_POST['export_csv'], 'MAG'))
+        {
+            $multiple = str_replace('MAG','',$_POST['export_csv']);
+            $path = ExportCSVAgenda("agenda","",$multiple);
+        }
+        else if(StartsWith($_POST['export_csv'], 'ZA'))
+        {
+            $id = str_replace('ZA','',$_POST['export_csv']);
+            $path = ExportCSVAgenda("zentralausschreibungen",$id);
+        }
+        else if(StartsWith($_POST['export_csv'], 'AG'))
+        {
+            $id = str_replace('AG','',$_POST['export_csv']);
+            $path = ExportCSVAgenda("agenda",$id);
+        }
+
+        Redirect("/forceDownload?file=".urlencode($path));
+    }
+
+    if(isset($_POST['export_ics']))
+    {
+
+    }
+
 
     if(isset($_GET['neu']) AND CheckPermission("AddDate"))
     {
