@@ -14,7 +14,7 @@
     require("data/editfunctions.php");
     require("data/multipagepost.php");
 
-    //MySQLPDSave("d");
+    MySQLPDSave("d");
 
 
 
@@ -89,16 +89,24 @@
             </head>
 
             <body>
-                <div style="position: fixed; bottom: 0px; right: 0px; color: #696969;">
-                    <table>
-                        <tr>
-                            <td>Modern / Classic</td><td>'.Togglebox("","toggle_theme",0,"ToggleTheme();").'</td>
-                        </tr>
-                    </table>
-
-                </div>
 
                 ';
+
+                // Only show Theme-Switch on Startpage
+                if(ThisPage()=="")
+                {
+                    echo '
+                        <div style="position: fixed; bottom: 0px; right: 0px; color: #696969;">
+                            <table>
+                                <tr>
+                                    <td>Modern / Classic</td><td>'.Togglebox("","toggle_theme",0,"ToggleTheme();","CheckTheme").'</td>
+                                </tr>
+                            </table>
+                        </div>
+                    ';
+                }
+
+
 
                 if(GetProperty("EnablePreloader"))
                 {
@@ -200,7 +208,7 @@
                                                 <li><a style="width: 200px;" href="/news/neu">Neuer News-Artikel</a></li>
                                                 <li><a style="width: 200px;" href="/fotogalerie/neu">Neue Fotogalerie</a></li>
                                                 <li><a style="width: 200px;" href="/zentralausschreibung/neu">Neue Zentralausschreibung</a></li>
-                                                <li><a style="width: 200px;" href="/kalender/neu">Termin-Manager</a></li>
+                                                <li><a style="width: 200px;" href="/kalender/neu">Neuen Termin anlegen</a></li>
                                                 <li><a style="width: 200px;" href="/settings"><hr>Seiten-Einstellungen</a></li>
                                             </ul>
                                         </li>

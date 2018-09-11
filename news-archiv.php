@@ -13,9 +13,8 @@
 
                         ';
 
-
-
-                        for($y = date("Y"); $y >= date("Y")-10;$y--)
+                        $first_article = explode('-',MySQLSkalar("SELECT release_date AS x FROM news ORDER BY release_date DESC"));
+                        for($y = date("Y"); $y >= $first_article[0];$y--)
                         {
                             echo '<a onclick="ArchiveSelectYear('.$y.');" id="year'.$y.'">'.$y.'</a>';
 

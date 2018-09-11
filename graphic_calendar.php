@@ -1,4 +1,5 @@
 <?php
+    session_start();
     setlocale (LC_ALL, 'de_DE.UTF-8', 'de_DE@euro', 'de_DE', 'de', 'ge', 'de_DE.ISO_8859-1', 'German_Germany');
     error_reporting(E_ALL ^ E_NOTICE);
 
@@ -176,12 +177,85 @@
                 <div class="info_container">
                     <a href="#c"><img src="/content/cross2.png" alt="" class="close_cross"/></a>
                     <div style="border-left: 3px solid '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '').'; padding-left: 5px;">
-                        <h2><u>'.$row['titel'].'</u></h2>
-                        <h4>'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['date']))).'</h4>
-                        <h4>'.date_format(date_create($row['time']),"H:i").' Uhr</h4>
-                        <p>
-                            '.$row['description'].'
-                        </p>
+                        ';
+
+                        if(isset($_GET['edit']) AND $_GET['edit']==$row['id'] AND CheckPermission("EditDate"))
+                        {
+                            echo '
+                                <h2>Termin bearbeiten</h2>
+                                <hr>
+
+
+                                <form action="/kalender" method="post" accept-charset="utf-8" enctype="multipart/form-data" target="_top" class="stagfade2">
+                                    <table>
+                                        <tr>
+                                            <td class="ta_r">Titel</td>
+                                            <td><input value="'.$row['titel'].'" type="text" class="cel_l" placeholder="Titel" name="termin_titel" required/></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ta_r">Beschreibung</td>
+                                            <td><textarea class="cel_l" name="description_date" placeholder="Beschreibung" style="resize: vertical;">'.$row['description'].'</textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ta_r">Datum</td>
+                                            <td><input value="'.$row['date'].'" type="date" class="cel_l" name="date_termin" required/></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ta_r">Ort</td>
+                                            <td><input value="'.$row['place'].'" type="text" class="cel_l" placeholder="Ort" name="place"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ta_r">Uhrzeit</td>
+                                            <td><input value="'.$row['time'].'" type="time" class="cel_l" name="time" required/></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ta_r">Kategorie</td>
+                                            <td>
+                                            <select class="cel_l" name="kategorie" id="classKat">
+                                                <option '.(($row['kategorie']=="Anderes") ? 'selected' : '').' value="">Anderes</option>
+                                                <option '.(($row['kategorie']=="Landesmeisterschaft") ? 'selected' : '').' value="Landesmeisterschaft" style="color: '.GetProperty("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
+                                                <option '.(($row['kategorie']=="Doppelturnier") ? 'selected' : '').' value="Doppelturnier" style="color: '.GetProperty("ColorDoppelturnier").'">Doppelturnier</option>
+                                                <option '.(($row['kategorie']=="Nachwuchs") ? 'selected' : '').' value="Nachwuchs" style="color: '.GetProperty("ColorNachwuchs").'">Nachwuchs</option>
+                                                <option '.(($row['kategorie']=="SchuelerJugend") ? 'selected' : '').' value="SchuelerJugend" style="color: '.GetProperty("ColorSchuelerJugend").'">Sch&uuml;ler/Jugend</option>
+                                                <option '.(($row['kategorie']=="Senioren") ? 'selected' : '').' value="Senioren" style="color: '.GetProperty("ColorSenioren").'">Senioren</option>
+                                                <option '.(($row['kategorie']=="Training") ? 'selected' : '').' value="Training" style="color: '.GetProperty("ColorTraining").'">Training</option>
+                                            </select>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <br>
+                                    <br>
+                                    <button type="submit" name="update_termin" value="'.$row['id'].'" class="stagfade3">Termin aktualisieren</button>
+
+                                </form>
+                            ';
+                        }
+                        else
+                        {
+                            echo '
+                            <h2><u>'.$row['titel'].'</u></h2>
+                            <h4>'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['date']))).'</h4>
+                            <h4>'.date_format(date_create($row['time']),"H:i").' Uhr</h4>
+                            <p>
+                                '.$row['description'].'
+                            </p>
+
+                            ';
+
+                            if(CheckPermission("EditDate"))
+                            {
+                                echo '<span> '.EditButton("/kalender/event/AG".$row['id']."/".$row['date']."?editSC=".$row['id'],false,true).' </span>';
+                            }
+
+                            if(CheckPermission("DeleteDate"))
+                            {
+                                echo '<span> '.DeleteButton("Date","agenda",$row['id'],false,true).' </span>';
+                            }
+                        }
+
+                        echo '
+
                     </div>
                 </div>
             </div>

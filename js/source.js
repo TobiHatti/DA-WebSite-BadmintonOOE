@@ -708,13 +708,19 @@ function ChangeCalenderStyle()
     {
         document.getElementById("CalenderList").style.display = "none";
         document.getElementById("CalenderGraphic").style.display = "block";
+
+        window.sessionStorage.setItem("toggleCalendar",1);
     }
     else
     {
         document.getElementById("CalenderList").style.display = "block";
         document.getElementById("CalenderGraphic").style.display = "none";
+
+        window.sessionStorage.setItem("toggleCalendar",0);
     }
 }
+
+
 
 function ChangeDateLocActive(e)
 {
@@ -729,3 +735,14 @@ function ChangeDateLocActive(e)
         document.getElementById("gallocation").disabled = false;
     }
 }
+
+
+function CheckToggleSession(buttonElement, sessionName)
+{
+    // WARNING: Only possible for 1 Toggleswitch per page
+    var sessVal = window.sessionStorage.getItem(sessionName);
+
+    if(sessVal == 1) document.getElementById(buttonElement).checked = true;
+    else document.getElementById(buttonElement).checked = false;
+}
+

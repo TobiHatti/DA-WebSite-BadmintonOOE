@@ -62,6 +62,7 @@
                         '.SettingOption("N","PagerSizeNews", "Pager-Gr&ouml;&szlig;e bei News-Listen", "PagerSizeNews", "sopt".$i++).'
                         '.SettingOption("N","PagerSizeGalleryAlbum", "Pager-Gr&ouml;&szlig;e bei Fotogalerie-Alben", "PagerSizeGalleryAlbum", "sopt".$i++).'
                         '.SettingOption("N","PagerSizeGalleryImage", "Pager-Gr&ouml;&szlig;e bei Fotogalerie-Fotos", "PagerSizeGalleryImage", "sopt".$i++).'
+                        '.SettingOption("N","PagerSizeCalendar", "Pager-Gr&ouml;&szlig;e bei Kalender (Liste)", "PagerSizeCalendar", "sopt".$i++).'
                         '.SettingOption("N","NewsAmountStartpageTN", "Menge an Artikeln die auf der Startseite unter \"Neuigkeiten\" angezeigt werden", "NewsAmountStartpageTN", "sopt".$i++).'
                         '.SettingOption("N","NewsAmountStartpageNW", "Menge an Artikeln die auf der Startseite unter \"Nachwuchs\" angezeigt werden", "NewsAmountStartpageNW", "sopt".$i++).'
                         '.SettingOption("N","NewsAmountTile", "Menge an Artikeln die in der Seitenleiste unter \"Neueste Beitr&auml;ge\" angezeigt werden", "NewsAmountTile", "sopt".$i++).'
@@ -168,6 +169,19 @@
                     <tr>
                         <td><b>DeleteVorstand</b></td>
                         <td>Vorstand-Mitglied l&ouml;schen</td>
+                    </tr>
+                    <tr><td colspan="2"><hr></td></tr>
+                    <tr>
+                        <td><b>AddDate</b></td>
+                        <td>Termin hinzuf&uuml;gen</td>
+                    </tr>
+                    <tr>
+                        <td><b>EditDate</b></td>
+                        <td>Termin bearbeiten</td>
+                    </tr>
+                    <tr>
+                        <td><b>DeleteDate</b></td>
+                        <td>Termin l&ouml;schen</td>
                     </tr>
                     <tr><td colspan="2"><hr></td></tr>
                 </table>
