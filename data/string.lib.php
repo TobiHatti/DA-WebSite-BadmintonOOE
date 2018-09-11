@@ -121,6 +121,16 @@ function TrimText($input, $length, $ellipses = true, $strip_html = true)
     return $trimmed_text;
 }
 
+function NBSPClean($string)
+{
+    // DESCRIPTION:
+    // Removes access &nbsp; from string
+
+    $string = preg_replace ( "!\s++!u", ' ', $string);
+
+    return $string;
+}
+
 function str_replace_first($search, $replace, $subject)
 {
     $search = '/'.preg_quote($search, '/').'/';

@@ -11,7 +11,7 @@ function Checkbox($name, $id, $checked = 0,$onchange="")
     return '<input type="checkbox" name="'.$name.'" id="'.$id.'" onchange="'.$onchange.'" class="slidecheckbox" '.(($checked) ? 'checked' : '').'/><label class="checkbox_toggle_lable" for="'.$id.'">Toggle</label>';
 }
 
-function Togglebox($name, $id, $checked = 0,$onchange="")
+function Togglebox($name, $id, $checked = 0,$onchange="",$sessionName="")
 {
     // DESCRIPTION:
     // Returns a Checkbox Form-Element
@@ -19,7 +19,16 @@ function Togglebox($name, $id, $checked = 0,$onchange="")
     // $id      Unique ID. Required since it uses a label
     // $checked Default: 0. Sets the checkbox to checked (1)
 
-    return '<input type="checkbox" name="'.$name.'" id="'.$id.'" onchange="'.$onchange.'" class="togglecheckbox" '.(($checked) ? 'checked' : '').'/><label class="checkbox_toggle2_lable" for="'.$id.'">Toggle</label>';
+    return '
+        <script>
+            $(window).on("load", function () {
+                CheckToggleSession("'.$id.'","'.$sessionName.'");
+                '.$onchange.'
+            });
+        </script>
+
+        <input type="checkbox" name="'.$name.'" id="'.$id.'" onchange="'.$onchange.'" class="togglecheckbox" '.(($checked) ? 'checked' : '').'/><label class="checkbox_toggle2_lable" for="'.$id.'">Toggle</label>
+    ';
 }
 
 function RadioButton($title, $name, $checked = 0)
@@ -179,19 +188,19 @@ function PageContent($paragraph_index,$allowEdit=false)
     return $retval;
 }
 
-function EditButton($link,$short = false)
+function EditButton($link,$short = false,$targetTop = false)
 {
-    return '<a style="margin: 0px 3px" href="'.$link.'"> &#9998; '.((!$short) ? 'Bearbeiten' : '').'</a>';
+    return '<a '.(($targetTop) ? 'target="_top"' : '').' style="margin: 0px 3px" href="'.$link.'"> &#9998; '.((!$short) ? 'Bearbeiten' : '').'</a>';
 }
 
-function AddButton($link,$short = false)
+function AddButton($link,$short = false,$targetTop = false)
 {
-    return '<a style="margin: 0px 3px" href="'.$link.'"> &#65291; '.((!$short) ? 'Hinzuf&uuml;gen' : '').'</a>';
+    return '<a '.(($targetTop) ? 'target="_top"' : '').' style="margin: 0px 3px" href="'.$link.'"> &#65291; '.((!$short) ? 'Hinzuf&uuml;gen' : '').'</a>';
 }
 
-function DeleteButton($permissionSuffix,$table,$id,$short = false)
+function DeleteButton($permissionSuffix,$table,$id,$short = false,$targetTop = false)
 {
-    return '<a style="margin: 0px 3px; color: red;" href="/delete/'.$table.'/'.$permissionSuffix.'/'.$id.'"> &#10006; '.((!$short) ? 'L&ouml;schen' : '').' </a>';
+    return '<a '.(($targetTop) ? 'target="_top"' : '').' style="margin: 0px 3px; color: red;" href="/delete/'.$table.'/'.$permissionSuffix.'/'.$id.'"> &#10006; '.((!$short) ? 'L&ouml;schen' : '').' </a>';
 }
 
 function CheckPermission($permission)
@@ -265,7 +274,7 @@ function NewsTile($strSQL, $targetTop = false)
                     <span style="font-size: 10pt;color: #808080">'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['release_date']))).' &#10649;</span>
                     '.ShowTags($row['tags'],false,$targetTop).'
                     <a '.(($targetTop) ? 'target="_top"' : '').' href="/news/artikel/'.$row['article_url'].'"><h2>'.$row['title'].'</h2></a>
-                    '.str_replace('<p></p>',' ',str_replace($row['title'],'',strip_tags($row['article'],'<p><s><b><i><u><strong><em><span><sub><sup><a><pre><code><ol><li><ul>'))).'
+                    '.NBSPClean(str_replace('<p></p>',' ',str_replace($row['title'],'',strip_tags($row['article'],'<p><s><b><i><u><strong><em><span><sub><sup><a><pre><code><ol><li><ul>')))).'
                 </div>
             </div>
         ';

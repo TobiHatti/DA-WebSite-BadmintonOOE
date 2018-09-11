@@ -116,7 +116,7 @@
             while($row=mysqli_fetch_assoc($rs))
             {
                 echo '
-                    <a target="_parent" style="text-decoration:none;" href="/kalender/event/AG'.$row['id'].'">
+                    <a target="_parent" style="text-decoration:none;" href="/kalender/event/AG'.$row['id'].'/'.$row['date'].'">
                         <span style="cursor: help;color: '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '#000000').';" title="'.$row['titel'].'">&#9679;</span>
                     </a>
                 ';
@@ -127,7 +127,7 @@
             while($row=mysqli_fetch_assoc($rs))
             {
                 echo '
-                    <a target="_parent" style="text-decoration:none;" href="/kalender/event/ZA'.$row['id'].'">
+                    <a target="_parent" style="text-decoration:none;" href="/kalender/event/ZA'.$row['id'].'/'.$row['date_begin'].'">
                         <span style="cursor: help;color: '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '#000000').';" title="'.$row['title_line1'].'">&#9679;</span>
                     </a>
                 ';

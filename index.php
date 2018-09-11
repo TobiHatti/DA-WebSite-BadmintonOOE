@@ -323,7 +323,7 @@
                                 '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['release_date']))).':&nbsp;
                                 </span>
                                 <div class="p">
-                                '.TrimText(str_replace('</p><p>',' ',str_replace('<br>',' ',str_replace($row['title'],'',$row['article']))), 120) .'<br>
+                                '.TrimText(str_replace('</p><p>',' ',str_replace('<br>',' ',NBSPClean(str_replace($row['title'],'',$row['article'])))), 120) .'<br>
                                 </div>
                                 <a href="/news/artikel/'.$row['article_url'].'">&#9654; Mehr lesen</a>
                             </div>
@@ -354,7 +354,7 @@
                 <div class="double_container">
 
                     <div style="text-align: center; min-width: 330px;">
-                        <h3 style="text-align: left;">Termine</h3>
+                        <a href="/kalender"><h3 style="text-align: left;">Termine</h3></a>
                         <hr>
                         <iframe src="/graphic_calendar_thumb" frameborder="0" style="height: 250px; width: 320px;" scrolling="no"></iframe>
                     </div>
