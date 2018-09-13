@@ -42,6 +42,29 @@ function MySQLSkalar($strSQL)
     return $retval;
 }
 
+function MySQLRow($table, $strSQL)
+{
+    require("mysql_connect.php");
+    $fields = '';
+
+
+
+    $strSQLC = "SHOW COLUMNS FROM $table";
+    $rsC=mysqli_query($link,$strSQLC);
+    while($rowC=mysqli_fetch_assoc($rsC))
+    {
+        $fields.=$row['Field'];
+    }
+
+    $retval = array();
+
+    $rs=mysqli_query($link,$strSQL);
+    while($row=mysqli_fetch_assoc($rs))
+    {
+     array_push($retval,$row[$row['Field']]);
+    }
+}
+
 function MySQLCount($strSQL)
 {
     // DESCRIPTION:
