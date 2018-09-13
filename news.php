@@ -289,63 +289,6 @@
             </form>
         ';
     }
-    else if(isset($_GET['suche']))
-    {
-        if(isset($_POST['newsSearch']) AND $_POST['newsSearch']!='')
-        {
-            Redirect('/news?suche='.$_POST['newsSearch']);
-            die();
-        }
-
-        $searchValue = ((isset($_GET['suche'])) ? $_GET['suche'] : '' );
-
-        echo '
-            <div class="doublecol_singletile">
-                <article>
-        ';
-
-        if($searchValue != '')
-        {
-            echo '<h2 class="stagfade1">Suchergebnisse f&uuml;r <i>"'.$searchValue.'"</i></h2>';
-
-
-
-
-            if(MySQLCount("SELECT id FROM news WHERE title LIKE '%$searchValue%'")!=0)
-            {
-                $today = date("Y-m-d");
-                $entriesPerPage = GetProperty("PagerSizeNews");
-                $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
-
-
-                echo NewsTile("SELECT * FROM news WHERE release_date <= '$today' AND title LIKE '%$searchValue%' ORDER BY release_date DESC, id DESC LIMIT $offset,$entriesPerPage");
-                echo Pager("SELECT * FROM news WHERE release_date <= '$today' AND title LIKE '%$searchValue%'",$entriesPerPage);
-
-            }
-            else
-            {
-                echo '<br><br><i>Keine Ergebnisse gefunden.</i>';
-            }
-        }
-        else
-        {
-            echo '
-                <div style="text-align:center;">
-                    <h1 class="stagfade1">Kein Suchwert gegeben</h1>
-                    <br>
-                    <h2 class="stagfade2">Bitte geben Sie einen Suchwert in der Suchleiste ein.</h2>
-                </div>
-            ';
-        }
-
-        echo '
-                </article>
-                <aside>
-                    '.NewsSidebar() .'
-                </aside>
-            </div>
-        ';
-    }
     else
     {
         echo '

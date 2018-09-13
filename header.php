@@ -223,8 +223,8 @@
                             <!-- Standard Search-Bar -->
 
                             <div class="searchbar_container">
-                                <form action="/news/suche" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-                                    <input class="searchbar" name="newsSearch" type="search" placeholder="Suchen...">
+                                <form action="/suche" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                                    <input class="searchbar" name="searchVal" type="search" placeholder="Suchen...">
                                 </form>
                             </div>
 
@@ -238,8 +238,8 @@
 
                         <!-- Search-Bar Mobile version -->
                         <div class="mobile_searchbar_container" id="searchpop">
-                            <form action="/news/suche" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-                                <div style="vertical-align:top; display:block;"><input name="newsSearch" type="search" class="mobile_searchbar"/><a href="#"><img src="/content/cross.png" style="height:18px;margin-bottom:-3px;margin-left: 8px;" alt="" /></a></div>
+                            <form action="/suche" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                                <div style="vertical-align:top; display:block;"><input name="searchVal" type="search" class="mobile_searchbar"/><a href="#"><img src="/content/cross.png" style="height:18px;margin-bottom:-3px;margin-left: 8px;" alt="" /></a></div>
                             </form>
                         </div>
                     </div>

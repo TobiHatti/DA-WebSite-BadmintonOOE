@@ -642,5 +642,10 @@ function ExportCSVAgenda($db,$id="",$multiple="")
     return $path.$filename;
 }
 
+function SeachTile($kategory, $id)
+{
+    return $kategory.': '.$id.'<br>';
+}
+
 
 ?>

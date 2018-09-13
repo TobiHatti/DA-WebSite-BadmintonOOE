@@ -275,7 +275,7 @@
                             <button type="submit" class="cel_m" name="export_csv" value="AG'.$row['id'].'"><i class="fa fa-file-excel-o" style="float: left;"></i> Als .csv Exportieren</button>
                             <br>
                             <button type="submit" class="cel_m" name="export_ics" value="AG'.$row['id'].'"><i class="fas fa-file" style="float: left;"></i>Als .ics Exportieren</button>
-                        </form>
+                        </form>                                                 
                     </center>
                 </div>
             </div>
