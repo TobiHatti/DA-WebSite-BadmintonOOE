@@ -340,9 +340,93 @@ function Pager($sqlQuery,$entriesPerPage = 10,$customURL="")
     $retval .= ($back) ? '<span style="color: #696969;" title="Zur ersten Seite">&#9664;&#9664;</span>' : '<span title="Zur ersten Seite"><a href="'.$URLEx.'1">&#9664;&#9664;</a></span>' ;
     $retval .= ($back) ? '<span style="color: #696969;" title="Zur vorherigen Seite">&#9664;</span>' : '<span title="Zur vorherigen Seite"><a href="'.$URLEx.($currentPage-1).'">&#9664;</a></span>' ;
 
-    for($i=1;$i<=$pages;$i++)
+    if($pages > 7)
     {
-        $retval .= ($currentPage == $i) ? '<span title="Zu Seite '.$i.'" style="color: #696969; font-size: 16pt;">'.$i.'</span>' : '<span title="Zu Seite '.$i.'" style="font-size: 14pt;"><a href="'.$URLEx.$i.'">'.$i.'</a></span>' ;
+        $showEllipsisLeft = true;
+        $showEllipsisRight = true;
+        // Propper page display at the ends of each sides
+        // beginning of list
+        if($currentPage == 1)
+        {
+            $startPage = 1;
+            $endPage = $currentPage + 6;
+            $showEllipsisLeft = false;
+        }
+        else if($currentPage == 2)
+        {
+            $startPage = 1;
+            $endPage = $currentPage + 5;
+            $showEllipsisLeft = false;
+        }
+        else if($currentPage == 3)
+        {
+            $startPage = 1;
+            $endPage = $currentPage + 4;
+            $showEllipsisLeft = false;
+        }
+        else if($currentPage == 4)
+        {
+            $startPage = 1;
+            $endPage = $currentPage + 3;
+            $showEllipsisLeft = false;
+        }
+        // end of list
+        else if($currentPage == $pages)
+        {
+            $startPage = $currentPage - 6;
+            $endPage = $currentPage;
+            $showEllipsisRight = false;
+        }
+        else if($currentPage == $pages - 1)
+        {
+            $startPage = $currentPage - 5;
+            $endPage = $currentPage + 1;
+            $showEllipsisRight = false;
+        }
+        else if($currentPage == $pages - 2)
+        {
+            $startPage = $currentPage - 4;
+            $endPage = $currentPage + 2;
+            $showEllipsisRight = false;
+        }
+        else if($currentPage == $pages - 3)
+        {
+            $startPage = $currentPage - 3;
+            $endPage = $currentPage + 3;
+            $showEllipsisRight = false;
+        }
+        // default
+        else
+        {
+            $startPage = $currentPage - 3;
+            $endPage = $currentPage + 3;
+        }
+
+        // Show ellipsis and first pages left
+        if($showEllipsisLeft)
+        {
+            if($currentPage - 5 > 1) $retval .= '<span title="Zu Seite 1" style="font-size: 14pt;"><a href="'.$URLEx.'1">1</a></span><span title="Zu Seite 2" style="font-size: 14pt;"><a href="'.$URLEx.'2">2</a></span>';
+            $retval .= '<span style="color: #696969; font-size: 16pt;">...</span>';
+        }
+
+        for($i=$startPage;$i<=$endPage;$i++)
+        {
+            $retval .= ($currentPage == $i) ? '<span title="Zu Seite '.$i.'" style="color: #696969; font-size: 16pt;">'.$i.'</span>' : '<span title="Zu Seite '.$i.'" style="font-size: 14pt;"><a href="'.$URLEx.$i.'">'.$i.'</a></span>' ;
+        }
+
+        // Show ellipsis and last pages right 
+        if($showEllipsisRight)
+        {
+            $retval .= '<span style="color: #696969; font-size: 16pt;">...</span>';
+            if($currentPage + 5 < $pages) $retval .= '<span title="Zu Seite '.($pages-1).'" style="font-size: 14pt;"><a href="'.$URLEx.($pages-1).'">'.($pages-1).'</a></span><span title="Zu Seite '.$pages.'" style="font-size: 14pt;"><a href="'.$URLEx.$pages.'">'.$pages.'</a></span>';
+        }
+    }
+    else
+    {
+        for($i=1;$i<=$pages;$i++)
+        {
+            $retval .= ($currentPage == $i) ? '<span title="Zu Seite '.$i.'" style="color: #696969; font-size: 16pt;">'.$i.'</span>' : '<span title="Zu Seite '.$i.'" style="font-size: 14pt;"><a href="'.$URLEx.$i.'">'.$i.'</a></span>' ;
+        }
     }
 
     $retval .= ($next) ? '<span title="Zur n&auml;chsten Seite" style="color: #696969;">&#9654;</span>' : '<span title="Zur n&auml;chsten Seite"><a href="'.$URLEx.($currentPage+1).'">&#9654;</a></span>' ;

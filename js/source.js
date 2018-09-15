@@ -512,6 +512,8 @@ function SelectGalleryImage(imageID)
     document.getElementById("galleryFullSized").src = selectedImg;
     if(document.getElementById("galleryAllowDownload").value=="1") document.getElementById("galleryDownload").href = selectedImg;
     document.getElementById("currentImageID").value = imageID;
+
+    document.getElementById("galleryDeleteLink").href="/delete/gallery_images/Gallery/" + imageID;
 }
 
 function SelectNextImage()

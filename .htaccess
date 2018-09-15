@@ -33,7 +33,7 @@ RewriteRule ^suche/([a-zA-Z0-9-]+)/(.*)/([0-9]+)/?$/?$/?$ /suche.php?suche=$2&ka
 RewriteRule ^suche/([a-zA-Z0-9-]+)/(.*)/?$/?$ /suche.php?suche=$2&kategorie=$1 [B,PT]
 
 
-RewriteRule ^delete/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/?$/?$/?$ delete.php?t=$1&s=$2&i=$3 [NC,QSA,L]
+RewriteRule ^delete/(.*)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-]+)/?$/?$/?$ delete.php?t=$1&s=$2&i=$3 [NC,QSA,L]
 
 
 

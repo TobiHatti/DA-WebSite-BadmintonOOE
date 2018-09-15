@@ -53,6 +53,17 @@
         die();
     }
 
+    if(isset($_POST['addMoreImg']))
+     {
+        $albID = $_POST['addMoreImg'];
+        $albumUrl = $_POST['album_url'];
+
+        FileUpload("content/gallery/".$albumUrl."/", "addImages" ,"","","INSERT INTO gallery_images (id,album_id,image) VALUES ('','$albID','FNAME')");
+
+        Redirect(ThisPage("!#"));
+        die();
+    }
+
     if(isset($_POST['download_zip']))
     {
         $album_path = $_POST['download_zip'];
@@ -163,9 +174,34 @@
     {
        echo '
        <h1 class="stagfade1">'.Fetch("fotogalerie","album_name","album_url",$_GET['album']).'</h1>
-       <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+       <form action="'.ThisPage("!#").'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
        <br>
        ';
+
+       if(CheckPermission("AddGallery"))
+       {
+            echo '
+                <a href="#addImages"><button type="button"><b>&#65291;</b> Weitere Fotos hinzuf&uuml;gen</button></a>
+
+                <div class="gallery_addimg_wrapper" id="addImages">
+                    <a href="#c">
+                        <div class="gallery_addimg_bg"></div>
+                    </a>
+                    <div class="info_container">
+                        <h3>Weitere Fotos hinzuf&uuml;gen</h3>
+                        F&uuml;gen Sie weitere Fotos zu dieser Galerie hinzu:
+                        <br><br>
+                        <center>
+                            <form action="'.ThisPage("!#").'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                                '.FileButton("addImages","addImg", true).'
+                                <input type="hidden" value="'.$_GET['album'].'" name="album_url"/>
+                                <button type="submit" name="addMoreImg" value="'.Fetch("fotogalerie","id","album_url",$_GET['album']).'">Fotos hinzuf&uuml;gen</button>
+                            </form>
+                        </center>
+                    </div>
+                </div>
+            ';
+       }
 
        $allowDownload = Fetch("fotogalerie","allowDownload","album_url",$_GET['album']);
 
@@ -189,9 +225,6 @@
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
         {
-           // Hier SQL-Query schleife mit untenstehendem echo für jedes Foto:
-
-
             echo '
                 <a href="#galleryView" onclick="SelectGalleryImage('.$i.');">
                     <div class="gallery_image_thumb">
@@ -221,6 +254,14 @@
                     <input type="hidden" value="'.$allowDownload.'" id="galleryAllowDownload"/>
                     '.(($allowDownload) ? '<a href="" id="galleryDownload" download><button type="button" title="Bild Herunterladen"><i class="fa fa-download"></i></button></a>' : '').'
                     <img src="" alt="" class="gallery_image" id="galleryFullSized"/>
+                    ';
+
+                    if(CheckPermission("DeleteGallery"))
+                    {
+                        echo '<span style="position: absolute; bottom: 5px; right: 5px;"><a style="margin: 0px 3px; color: red;" href="/delete/gallery_images/Gallery/0" id="galleryDeleteLink"> &#10006;L&ouml;schen</a></span>';
+                    }
+
+                    echo '
                 </div>
             </div>
 
