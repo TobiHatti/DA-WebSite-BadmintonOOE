@@ -1,5 +1,6 @@
 <?php
     require("header.php");
+    PageTitle("Suche");
 
     if(!isset($_GET['suche']))
     {
@@ -20,28 +21,28 @@
                 $strSQL = "
                     SELECT
                     id AS isNews, NULL AS isZA, NULL AS isFotogalerie, NULL AS isAgenda,
-                    title AS searchField
+                    release_date AS date
                     FROM news
                     WHERE title LIKE '%$searchValue%'
                     UNION ALL
                     SELECT
                     NULL AS isNews, id AS isZA, NULL AS isFotogalerie, NULL AS isAgenda,
-                    CONCAT_WS(' ', title_line1, title_line2) AS searchField
+                    date_begin AS date
                     FROM zentralausschreibungen
                     WHERE CONCAT_WS(' ', title_line1, title_line2) LIKE '%$searchValue%'
                     UNION ALL
                     SELECT
                     NULL AS isNews, NULL AS isZA, id AS isFotogalerie, NULL AS isAgenda,
-                    album_name AS searchField
+                    event_date AS date
                     FROM fotogalerie
                     WHERE album_name LIKE '%$searchValue%'
                     UNION ALL
                     SELECT
                     NULL AS isNews, NULL AS isZA, NULL AS isFotogalerie, id AS isAgenda,
-                    CONCAT_WS(' ', titel, description) AS searchField
+                    date AS date
                     FROM agenda
                     WHERE CONCAT_WS(' ', titel, description) LIKE '%$searchValue%'
-                    ORDER BY searchField ASC
+                    ORDER BY date DESC
                 ";
             }
             else if($_GET['kategorie'] AND $_GET['kategorie'] == 'News')
@@ -49,10 +50,10 @@
                 $strSQL = "
                     SELECT
                     id AS isNews, NULL AS isZA, NULL AS isFotogalerie, NULL AS isAgenda,
-                    title AS searchField
+                    release_date AS date
                     FROM news
                     WHERE title LIKE '%$searchValue%'
-                    ORDER BY searchField ASC
+                    ORDER BY date DESC
                 ";
             }
             else if($_GET['kategorie'] AND $_GET['kategorie'] == 'Zentralausschreibungen')
@@ -60,10 +61,10 @@
                 $strSQL = "
                     SELECT
                     NULL AS isNews, id AS isZA, NULL AS isFotogalerie, NULL AS isAgenda,
-                    CONCAT_WS(' ', title_line1, title_line2) AS searchField
+                    date_begin AS date
                     FROM zentralausschreibungen
                     WHERE CONCAT_WS(' ', title_line1, title_line2) LIKE '%$searchValue%'
-                    ORDER BY searchField ASC
+                    ORDER BY date DESC
                 ";
             }
             else if($_GET['kategorie'] AND $_GET['kategorie'] == 'Fotogalerie')
@@ -71,10 +72,10 @@
                 $strSQL = "
                     SELECT
                     NULL AS isNews, NULL AS isZA, id AS isFotogalerie, NULL AS isAgenda,
-                    album_name AS searchField
+                    event_date AS date
                     FROM fotogalerie
                     WHERE album_name LIKE '%$searchValue%'
-                    ORDER BY searchField ASC
+                    ORDER BY date DESC
                 ";
             }
             else if($_GET['kategorie'] AND $_GET['kategorie'] == 'Kalender')
@@ -82,25 +83,37 @@
                 $strSQL = "
                     SELECT
                     NULL AS isNews, NULL AS isZA, NULL AS isFotogalerie, id AS isAgenda,
-                    CONCAT_WS(' ', titel, description) AS searchField
+                    date AS date
                     FROM agenda
                     WHERE CONCAT_WS(' ', titel, description) LIKE '%$searchValue%'
-                    ORDER BY searchField ASC
+                    ORDER BY date DESC
                 ";
             }
             else Redirect("/suche/Alle/".$_GET['suche']);
 
-             echo '
+
+
+            echo '
                 <div style="float: right">
-                Suchen in:
-                <select id="ChaneSearchSubject" onchange="SetSearchRange();">
-                    <option '.(($_GET['kategorie']=='Alle') ? 'selected' : '' ).' value="Alle">Alle</option>
-                    <option '.(($_GET['kategorie']=='News') ? 'selected' : '' ).' value="News">News</option>
-                    <option '.(($_GET['kategorie']=='Zentralausschreibungen') ? 'selected' : '' ).' value="Zentralausschreibungen">Zentralausschreibungen</option>
-                    <option '.(($_GET['kategorie']=='Fotogalerie') ? 'selected' : '' ).' value="Fotogalerie">Fotogalerie</option>
-                    <option '.(($_GET['kategorie']=='Kalender') ? 'selected' : '' ).' value="Kalender">Kalender</option>
+                    Suchen in:
+                    <select id="ChangeSearchSubject" onchange="SetSearchSettings();">
+                        <option '.(($_GET['kategorie']=='Alle') ? 'selected' : '' ).' value="Alle">Alle</option>
+                        <option '.(($_GET['kategorie']=='News') ? 'selected' : '' ).' value="News">News</option>
+                        <option '.(($_GET['kategorie']=='Zentralausschreibungen') ? 'selected' : '' ).' value="Zentralausschreibungen">Zentralausschreibungen</option>
+                        <option '.(($_GET['kategorie']=='Fotogalerie') ? 'selected' : '' ).' value="Fotogalerie">Fotogalerie</option>
+                        <option '.(($_GET['kategorie']=='Kalender') ? 'selected' : '' ).' value="Kalender">Kalender</option>
+                    </select>
+                    <input type="hidden" id="seachVal" value="'.$searchValue.'"/>
+                </div>
+
+                <div style="float: left">
+                Eintr&auml;ge pro Seite:
+                <select id="ChangeSearchLimit" onchange="SetSearchSettings();">
+                    <option '.((isset($_GET['limit']) AND $_GET['limit']=='10') ? 'selected' : '' ).' value="10">10</option>
+                    <option '.((isset($_GET['limit']) AND $_GET['limit']=='25') ? 'selected' : '' ).' value="25">25</option>
+                    <option '.((isset($_GET['limit']) AND $_GET['limit']=='50') ? 'selected' : '' ).' value="50">50</option>
+                    <option '.((isset($_GET['limit']) AND $_GET['limit']=='100') ? 'selected' : '' ).' value="100">100</option>
                 </select>
-                <input type="hidden" id="seachVal" value="'.$searchValue.'"/>
                 </div>
                 <br><br>
             ';
@@ -113,14 +126,10 @@
             else
             {
                 $today = date("Y-m-d");
-                $entriesPerPage = GetProperty("PagerSizeSearch");
+                $entriesPerPage = isset($_GET['limit']) ? $_GET['limit'] : GetProperty("PagerSizeSearch");
                 $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
 
-
-
-
-
-                $rs=mysqli_query($link,$strSQL);
+                $rs=mysqli_query($link,$strSQL." LIMIT $offset,$entriesPerPage");
                 while($row=mysqli_fetch_assoc($rs))
                 {
                     if($row['isNews'] != NULL)
@@ -141,7 +150,8 @@
                     }
                 }
 
-                echo Pager($strSQL,$entriesPerPage);
+                $customURL = '/suche?suche='.$searchValue.'&kategorie='.$_GET['kategorie'].'&limit='.$entriesPerPage.((isset($_GET['page'])) ? ('&page='.$_GET['page']) : '');
+                echo Pager($strSQL,$entriesPerPage,$customURL);
             }
         }
         else

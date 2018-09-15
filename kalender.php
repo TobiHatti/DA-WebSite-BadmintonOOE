@@ -1,6 +1,7 @@
 <?php
 
-require("header.php");
+    require("header.php");
+    PageTitle("Kalender");
 
     if(isset($_POST['add_termin']))
     {

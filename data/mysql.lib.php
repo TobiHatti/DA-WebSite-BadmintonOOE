@@ -133,6 +133,36 @@ function FetchCount($db,$col,$like)
     return $retval;
 }
 
+function FetchArray($db,$col,$like)
+{
+    // DESCRIPTION:
+    // Returns the row of a table as an array
+    // behaves like a standart SQL-SELECT-Query
+    // Use with the same keys as in the database:
+    // e.g: $values['id']
+    // $db      Name of the table
+    // $col     For "WHERE"-Argument: =Where this column...
+    // $like    ...is this value
+
+    require("mysql_connect.php");
+
+    $fields=array();
+    $vals=array();
+
+    $strSQL = "SHOW COLUMNS FROM $db";
+    $rs=mysqli_query($link,$strSQL);
+    while($row=mysqli_fetch_assoc($rs)) array_push($fields,$row['Field']);
+
+    $strSQL = "SELECT * FROM $db WHERE $col LIKE '$like'";
+    $rs=mysqli_query($link,$strSQL);
+    while($row=mysqli_fetch_assoc($rs))
+    {
+        foreach($fields as $field)  array_push($vals,$row[$field]);
+    }
+
+    return array_combine($fields,$vals);
+}
+
 function MySQLSave($buname)
 {
     // DESCRIPTION:
