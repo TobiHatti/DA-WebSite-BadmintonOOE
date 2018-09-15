@@ -312,9 +312,11 @@ function NewsTileSlim($strSQL, $targetTop = false)
     return $retval;
 }
 
-function Pager($sqlQuery,$entriesPerPage = 10)
+function Pager($sqlQuery,$entriesPerPage = 10,$customURL="")
 {
     $retval = '';
+
+    $thisPage = ($customURL == "") ? ThisPage() : $customURL;
 
     $currentPage = (isset($_GET['page']) ? $_GET['page'] : 1 );
     $entryCounts = MySQLCount($sqlQuery);
@@ -328,7 +330,7 @@ function Pager($sqlQuery,$entriesPerPage = 10)
     }
 
     // What does this line below? It checks if the url contains a "?page=x" or a "&page=x" and replaces it with "?page=" or "&page=", depending on if a "?" already exists inside the manipulated URL
-    $URLEx = (SubStringFind(str_replace('?page='.$currentPage,'',str_replace('&page='.$currentPage,'',ThisPage())),'?') ? (str_replace('?page='.$currentPage,'',str_replace('&page='.$currentPage,'',ThisPage())).'&page=') : (str_replace('?page='.$currentPage,'',str_replace('&page='.$currentPage,'',ThisPage())).'?page='));
+    $URLEx = (SubStringFind(str_replace('?page='.$currentPage,'',str_replace('&page='.$currentPage,'',$thisPage)),'?') ? (str_replace('?page='.$currentPage,'',str_replace('&page='.$currentPage,'',$thisPage)).'&page=') : (str_replace('?page='.$currentPage,'',str_replace('&page='.$currentPage,'',$thisPage)).'?page='));
 
     $back = ($currentPage == 1) ? true : false;
     $next = ($currentPage >= $pages) ? true : false;
@@ -644,7 +646,240 @@ function ExportCSVAgenda($db,$id="",$multiple="")
 
 function SeachTile($kategory, $id)
 {
-    return $kategory.': '.$id.'<br>';
+    if($kategory=="News")
+    {
+        $val = FetchArray("news","id",$id);
+
+        echo '
+            <a href="/news/artikel/'.$val['article_url'].'" style="text-decoration: none;">
+                <div class="search_tile">
+                    <div class="prevImg">
+                        <img src="'.$val['thumbnail'].'" alt="" />
+                    </div>
+                    <div class="content_s">
+                        <i>News</i><br>
+                        <h3>'.$val['title'].'</h3>
+                        <p>
+                            <span>'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($val['release_date']))).': </span>'.TrimText(str_replace('</p><p>','<br>',NBSPClean(str_replace($val['title'],'',$val['article']))), 400) .'
+                        </p>
+                    </div>
+                </div>
+            </a>
+        ';
+
+    }
+    else if($kategory=="Zentralausschreibungen")
+    {
+        $val = FetchArray("zentralausschreibungen","id",$id);
+
+        echo '
+            <a href="/zentralausschreibung#'.SReplace($val['title_line1'].' '.$val['title_line2']).'" style="text-decoration: none;">
+                <div class="search_tile">
+                    <div class="content_l">
+                        <div class="double_container">
+                            <div>
+                                <i>Zentralausschreibungen</i><br>
+                                <h2 style="color: '.GetProperty("Color".$val['kategorie']).'">'.$val['title_line1'].'</h2>
+                                <h2 style="color: '.GetProperty("Color".$val['kategorie']).'">'.$val['title_line2'].'</h2>
+                                <h3 style="color: #000000">'.str_replace('ä','&auml;',strftime("%A, %d. %B %Y",strtotime($val['date_begin']))).'</h3>
+                            </div>
+                            <div>
+                                <p>
+                                    '.ShowZATable($id).'
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        ';
+    }
+    else if($kategory=="Fotogalerie")
+    {
+        $val = FetchArray("fotogalerie","id",$id);
+
+        echo '
+            <a href="/fotogalerie/album/'.$val['album_url'].'" style="text-decoration: none;">
+                <div class="search_tile">
+                    <div class="prevImg">
+                        <img src="/content/gallery/'.$val['album_url'].'/'.Fetch("gallery_images","image","album_id",$id).'" alt="" />
+                    </div>
+                    <div class="content_s">
+                        <i>Fotogalerie</i><br>
+                        <h3>'.$val['album_name'].'</h3>
+                        <p>
+                            <span>'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($val['event_date']))).': </span>
+                            '.str_replace('<p>','',str_replace('</p>','',$val['album_description'])).'
+                        </p>
+                    </div>
+                </div>
+            </a>
+        ';
+    }
+    else if($kategory=="Kalender")
+    {
+        $val = FetchArray("agenda","id",$id);
+
+        echo '
+            <a href="/kalender/event/AG'.$id.'/'.$val['date'].'" style="text-decoration: none;">
+                <div class="search_tile">
+                    <div class="content_l">
+                        <div class="double_container">
+                            <div>
+                                <i>Kalender</i><br>
+                                <h2 style="color: '.GetProperty("Color".$val['kategorie']).'">'.$val['titel'].'</h2>
+                                <h3 style="color: #000000">'.str_replace('ä','&auml;',strftime("%A, %d. %B %Y",strtotime($val['date']))).'</h3>
+                                <h3 style="color: #000000">'.date_format(date_create($val['time']), "H:i").' Uhr</h3>
+                            </div>
+                            <div>
+                                <p>
+                                    '.$val['description'].'
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        ';
+    }
+}
+
+function ShowZATable($id)
+{
+    $row = FetchArray("zentralausschreibungen","id",$id);
+
+    $retval = '<table>';
+
+    if($row['act_verein'])
+    {
+        $retval .= '
+            <tr>
+                <td class="ta_r"><b>Verein:</b></td>
+                <td class="ta_l"><b>'.$row['verein'].'</b></td>
+            </tr>
+        ';
+    }
+    if($row['act_uhrzeit'])
+    {
+        $retval .= '
+            <tr>
+                <td class="ta_r">Uhrzeit:</td>
+                <td class="ta_l">'.$row['uhrzeit'].'</td>
+            </tr>
+        ';
+    }
+    if($row['act_auslosung'])
+    {
+        $retval .= '
+            <tr>
+                <td class="ta_r">Auslosung:</td>
+                <td class="ta_l">'.$row['auslosung'].'</td>
+            </tr>
+        ';
+    }
+    if($row['act_hallenname'])
+    {
+        $retval .= '
+            <tr>
+                <td class="ta_r">Hallenname:</td>
+                <td class="ta_l">'.$row['hallenname'].'</td>
+            </tr>
+        ';
+    }
+    if($row['act_anschrift_halle'])
+    {
+        $retval .= '
+            <tr>
+                <td class="ta_r">Anschrift Halle:</td>
+                <td class="ta_l">'.$row['anschrift_halle'].'</td>
+            </tr>
+        ';
+    }
+    if($row['act_anzahl_felder'])
+    {
+        $retval .= '
+            <tr>
+                <td class="ta_r">Anzahl Felder:</td>
+                <td class="ta_l">'.$row['anzahl_felder'].'</td>
+            </tr>
+        ';
+    }
+    if($row['act_turnierverantwortlicher'])
+    {
+        $retval .= '
+            <tr>
+                <td class="ta_r">Turnierverantwortlicher:</td>
+                <td class="ta_l">'.$row['turnierverantwortlicher'].'</td>
+            </tr>
+        ';
+    }
+    if($row['act_oberschiedsrichter'])
+    {
+        $retval .= '
+            <tr>
+                <td class="ta_r">Oberschiedsrichter:</td>
+                <td class="ta_l">'.$row['oberschiedsrichter'].'</td>
+            </tr>
+        ';
+    }
+    if($row['act_telefon'])
+    {
+        $retval .= '
+            <tr>
+                <td class="ta_r">Telefon:</td>
+                <td class="ta_l">'.$row['telefon'].'</td>
+            </tr>
+        ';
+    }
+    if($row['act_anmeldung_online'])
+    {
+        $retval .= '
+            <tr>
+                <td class="ta_r">Anmeldung Online:</td>
+                <td class="ta_l"><a href="'.$row['anmeldung_online'].'" target="_blank"><b><i>Online-Anmeldung</i></b></a></td>
+            </tr>
+        ';
+    }
+    if($row['act_anmeldung_email'])
+    {
+        $retval .= '
+            <tr>
+                <td class="ta_r">Anmeldung E-Mail:</td>
+                <td class="ta_l"><a href="mailto: '.$row['anmeldung_email'].'">'.$row['anmeldung_email'].'</a></td>
+            </tr>
+        ';
+    }
+    if($row['act_nennungen_email'])
+    {
+        $retval .= '
+            <tr>
+                <td class="ta_r">Nennungen E-Mail:</td>
+                <td class="ta_l"><a href="mailto: '.$row['nennungen_email'].'">'.$row['nennungen_email'].'</a></td>
+            </tr>
+        ';
+    }
+    if($row['act_nennschluss'])
+    {
+        $retval .= '
+            <tr>
+                <td class="ta_r">Nennschluss:</td>
+                <td class="ta_l">'.str_replace('ä','&auml;',strftime("%A, %d. %B %Y",strtotime($row['nennschluss']))).'</td>
+            </tr>
+        ';
+    }
+    if($row['act_zusatzangaben'])
+    {
+        $retval .= '
+            <tr>
+                <td class="ta_r">Zusatzangaben:</td>
+                <td class="ta_l">'.$row['zusatzangaben'].'</td>
+            </tr>
+        ';
+    }
+
+    $retval .= '</table>';
+
+    return $retval;
 }
 
 

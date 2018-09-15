@@ -739,13 +739,15 @@ function CheckToggleSession(buttonElement, sessionName)
     else document.getElementById(buttonElement).checked = false;
 }
 
-function SetSearchRange()
+function SetSearchSettings()
 {
-    var listpre = document.getElementById("ChaneSearchSubject");
-    var selected = listpre.options[listpre.selectedIndex].value;
+    var listpre = document.getElementById("ChangeSearchSubject");
+    var subject = listpre.options[listpre.selectedIndex].value;
+
+    var listpre = document.getElementById("ChangeSearchLimit");
+    var limit = listpre.options[listpre.selectedIndex].value;
 
     var search = document.getElementById("seachVal").value;
 
-    window.location.replace("/suche/" + selected + "/" + search);
+    window.location.replace("/suche/" + subject + "/" + search + "/" + limit);
 }
-

@@ -82,6 +82,9 @@
     ====== S - News ========================
     (S01)   News > Tags
     (S02)   News > Tile
+    ====== U - Suche =======================
+    (U01)   Suche > Container
+
 
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -2627,5 +2630,72 @@ table.centered_content td {
     background: #FFFFFF; }
   .calendar_table_s tr:nth-child(8) .today {
     background: #FFFFF0; }
+
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*==================================== U - Suche ====================================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*===================================================================================*/
+/* (U01)   Suche > Container                                                         */
+/*===================================================================================*/
+.search_tile {
+  width: 100%;
+  background: linear-gradient(to right, #C4E3ED, #F2F2F2);
+  display: flex;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out; }
+  .search_tile .prevImg {
+    min-width: 200px;
+    min-height: 100%;
+    position: relative;
+    overflow: hidden;
+    padding: 5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+    .search_tile .prevImg img {
+      min-width: 200px;
+      max-width: 100%;
+      max-height: 120px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      text-align: center; }
+  .search_tile .content_s {
+    vertical-align: top;
+    padding: 5px;
+    padding-left: 20px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+  .search_tile .content_l {
+    width: 100%;
+    display: inline-block;
+    padding: 5px;
+    vertical-align: top;
+    color: #000000;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+  .search_tile i {
+    color: #696969;
+    font-style: italic; }
+  .search_tile p {
+    color: #000000; }
+    .search_tile p span {
+      color: #696969; }
+
+.search_tile:hover {
+  box-shadow: 0 10px 10px -3px #000000; }
 
 /*# sourceMappingURL=style.css.map */
