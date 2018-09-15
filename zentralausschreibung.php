@@ -159,7 +159,7 @@
         while($rowt=mysqli_fetch_assoc($rst))
         {
             $date = $rowt['date'];
-            echo '<a name="'.$date.'"></a>';
+            echo '<a name="'.$date.'">&nbsp;</a>';
 
             $strSQL = "SELECT * FROM zentralausschreibungen WHERE date_begin LIKE '$date%' ORDER BY date_begin ASC";
             $rs=mysqli_query($link,$strSQL);
@@ -184,11 +184,11 @@
                 }
                 else $dateStr = $dayNames[$dayIndex1].', '.$day1.'. '.$monthNames[$monthIndex1].' '.$year;
 
-                echo '<a name="'.SReplace($row['title_line1'].' '.$row['title_line2']).'"></a>';
+                echo '<a name="'.SReplace($row['title_line1'].' '.$row['title_line2']).'">&nbsp;</a>';
 
                 if(isset($_GET['editSC']) AND $_GET['editSC']==$row['id'] AND CheckPermission("EditZA"))
                 {
-                    echo '<a name="edit"></a>';
+                    echo '<a name="edit">&nbsp;</a>';
                     echo EditZA($row['id']);
                 }
                 else

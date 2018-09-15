@@ -187,13 +187,13 @@
                                         <li><a href="/news-archiv">News-Archiv</a></li>
                                         <li><a href="/ooemm-archiv">O&Ouml;MM-Archiv <span style="float:right; color: #FFFFFF;">&#10148;</span></a>
                                             <ul>
-                                                <li><a href="/ooemm-archiv.php?jahr=2005-2006">2005/2006</a></li>
-                                                <li><a href="/ooemm-archiv.php?jahr=2004-2005">2004/2005</a></li>
-                                                <li><a href="/ooemm-archiv.php?jahr=2003-2004">2003/2004</a></li>
-                                                <li><a href="/ooemm-archiv.php?jahr=2002-2003">2002/2003</a></li>
-                                                <li><a href="/ooemm-archiv.php?jahr=2001-2002">2001/2002</a></li>
-                                                <li><a href="/ooemm-archiv.php?jahr=2000-2001">2000/2001</a></li>
-                                                <li><a href="/ooemm-archiv.php?jahr=1999-2000">1999/2000</a></li>
+                                                <li><a href="/ooemm-archiv/jahr/2005-2006">2005/2006</a></li>
+                                                <li><a href="/ooemm-archiv/jahr/2004-2005">2004/2005</a></li>
+                                                <li><a href="/ooemm-archiv/jahr/2003-2004">2003/2004</a></li>
+                                                <li><a href="/ooemm-archiv/jahr/2002-2003">2002/2003</a></li>
+                                                <li><a href="/ooemm-archiv/jahr/2001-2002">2001/2002</a></li>
+                                                <li><a href="/ooemm-archiv/jahr/2000-2001">2000/2001</a></li>
+                                                <li><a href="/ooemm-archiv/jahr/1999-2000">1999/2000</a></li>
                                             </ul>
                                         </li>
                                     </ul>

@@ -216,6 +216,47 @@
 
     echo '
         <div class="indexContentModern">
+    ';
+
+
+    if(GetProperty("ShowTodaysEvents") AND MySQLExists("SELECT id FROM zentralausschreibungen WHERE date_begin = '$today'"))
+    {
+        $zaVal = FetchArray("zentralausschreibungen","date_begin",$today);
+
+        echo '
+            <h2>Heute, am '.str_replace('ä','&auml;',strftime("%A den %d. %B %Y",strtotime($today))).':</h2>
+            <hr>
+            <div class="todays_event tripple_container">
+                <div>
+                    <span>Zentralausschreibung:</span>
+                </div>
+                <div>
+                    <h4 style="color: '.GetProperty("Color".$zaVal['kategorie']).'">'.$zaVal['title_line1'].'</h4>
+                    <h4 style="color: '.GetProperty("Color".$zaVal['kategorie']).'">'.$zaVal['title_line2'].'</h4>
+                </div>
+                <div>
+                    <center>
+                        <table>
+                            <tr>
+                                <td class="ta_r"><b>Verein:</b></td>
+                                <td class="ta_l">'.$zaVal['verein'].'</td>
+                            </tr>
+                            <tr>
+                                <td class="ta_r"><b>Uhrzeit:</b></td>
+                                <td class="ta_l">'.$zaVal['uhrzeit'].'</td>
+                            </tr>
+                            <tr>
+                                <td colspan=2 style="text-align: center;"><a href="/zentralausschreibung#'.SReplace($zaVal['title_line1'].' '.$zaVal['title_line2']).'">Weitere Infos &#9654;</a></td>
+                            </tr>
+                        </table>
+                    </center>
+                </div>
+            </div>
+
+        ';
+    }
+
+    echo '
             <div class="doublecol">
                 <article>
                     <h2>News</h2>
