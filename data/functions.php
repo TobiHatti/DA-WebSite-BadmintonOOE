@@ -275,7 +275,7 @@ function NewsTile($strSQL, $targetTop = false)
                     <span style="font-size: 10pt;color: #808080">'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['release_date']))).' &#10649;</span>
                     '.ShowTags($row['tags'],false,$targetTop).'
                     <a '.(($targetTop) ? 'target="_top"' : '').' href="/news/artikel/'.$row['article_url'].'"><h2>'.$row['title'].'</h2></a>
-                    '.NBSPClean(str_replace('<p></p>',' ',str_replace($row['title'],'',strip_tags($row['article'],'<p><s><b><i><u><strong><em><span><sub><sup><a><pre><code><ol><li><ul>')))).'
+                    '.TrimText(NBSPClean(str_replace('<p></p>',' ',str_replace($row['title'],'',strip_tags($row['article'],'<p><s><b><i><u><strong><em><span><sub><sup><a><pre><code><ol><li><ul>')))), 400).'
                 </div>
             </div>
         ';
@@ -744,7 +744,7 @@ function SeachTile($kategory, $id)
                         <i>News</i><br>
                         <h3>'.$val['title'].'</h3>
                         <p>
-                            <span>'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($val['release_date']))).': </span>'.TrimText(str_replace('</p><p>','<br>',NBSPClean(str_replace($val['title'],'',$val['article']))), 400) .'
+                            <span>'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($val['release_date']))).': </span>'.TrimText(str_replace('</p><p>','<br>',NBSPClean(str_replace($val['title'],'',$val['article']))), 400).'
                         </p>
                     </div>
                 </div>

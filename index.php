@@ -376,22 +376,99 @@
 
                 <div class="tripple_container">
                     <div>
-                        <h3><img src="/content/rss.png" alt="" style="width:20px; height: 20px; margin-bottom:-2px; margin-right: 5px;"/>&Ouml;BV News</h3>
+                        <h3>Meisterschaft [WIP]</h3>
                         <hr>
-                        <script language="javascript" src="http://www.badminton.at/files/rss/badminton_news.php"></script>
+                        <center>
+                            <br>
+                            <select name="" id="Meisterschaft" onchange="RedirectListLink(\'Meisterschaft\');">
+                                <option value="" selected disabled>&#9135;&#9135; Tabelle Ausw&auml;hlen &#9135;&#9135;</option>
+                                <option value="http://obv.tournamentsoftware.com/sport/draw.aspx?id=D99AEEED-819E-4D1D-9648-4FE568AB2777&draw=1">1. Bundesliga</option>
+                                <option value="http://obv.tournamentsoftware.com/sport/draw.aspx?id=D99AEEED-819E-4D1D-9648-4FE568AB2777&draw=2">2. Bundesliga</option>
+                                <option value="http://obv.tournamentsoftware.com/sport/draw.aspx?id=7E6C0314-C641-4A5D-93D8-52C3E0EE981D&draw=3">1. Landesliga</option>
+                                <option value="http://obv.tournamentsoftware.com/sport/draw.aspx?id=7E6C0314-C641-4A5D-93D8-52C3E0EE981D&draw=5">2. Landesliga Nord</option>
+                                <option value="http://obv.tournamentsoftware.com/sport/draw.aspx?id=7E6C0314-C641-4A5D-93D8-52C3E0EE981D&draw=6">2. Landesliga S&uuml;d</option>
+                                <option value="http://obv.tournamentsoftware.com/sport/draw.aspx?id=7E6C0314-C641-4A5D-93D8-52C3E0EE981D&draw=7">Bezirksliga Nord</option>
+                                <option value="http://obv.tournamentsoftware.com/sport/draw.aspx?id=7E6C0314-C641-4A5D-93D8-52C3E0EE981D&draw=8">Bezirksliga S&uuml;d</option>
+                                <option value="http://obv.tournamentsoftware.com/sport/draw.aspx?id=7E6C0314-C641-4A5D-93D8-52C3E0EE981D&draw=1">1. Klasse Nord</option>
+                                <option value="http://obv.tournamentsoftware.com/sport/draw.aspx?id=7E6C0314-C641-4A5D-93D8-52C3E0EE981D&draw=2">1. Klasse S&uuml;d</option>
+                                <option value="http://obv.tournamentsoftware.com/sport/draw.aspx?id=7E6C0314-C641-4A5D-93D8-52C3E0EE981D&draw=4">2. Klasse</option>
+                                <option value="http://obv.tournamentsoftware.com/sport/events.aspx?id=C5983872-69F8-4E1B-A463-CB1DB1323A39&tlt=1">SCH-JGD-O&Ouml;MM</option>
+                            </select>
+                            <br>
+                            <table>
+                                <tr>
+                                    <td><b>Pl</b></td>
+                                    <td><b>Mannschaft</b></td>
+                                    <td><b>Sp</b></td>
+                                    <td><b>Pkt</b></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right;">1</td>
+                                    <td>BSC 70 Linz 2</td>
+                                    <td style="text-align:center;">10</td>
+                                    <td style="text-align:center;">28</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right;">2</td>
+                                    <td>Union Oaschdorf</td>
+                                    <td style="text-align:center;">10</td>
+                                    <td style="text-align:center;">25</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right;">3</td>
+                                    <td>U. W-garsten 1</td>
+                                    <td style="text-align:center;">10</td>
+                                    <td style="text-align:center;">21</td>
+
+                                </tr>
+                                 <tr>
+                                    <td style="text-align:right;">4</td>
+                                    <td>ASK&Ouml; Traun 2</td>
+                                    <td style="text-align:center;">10</td>
+                                    <td style="text-align:center;">20</td>
+                                </tr>
+                                 <tr>
+                                    <td style="text-align:right;">5</td>
+                                    <td>UBC Vorchdorf 2</td>
+                                    <td style="text-align:center;">10</td>
+                                    <td style="text-align:center;">14</td>
+                                </tr>
+                                 <tr>
+                                    <td style="text-align:right;">6</td>
+                                    <td>UBC Neuhofen 1</td>
+                                    <td style="text-align:center;">10</td>
+                                    <td style="text-align:center;">12</td>
+                                </tr>
+                            </table>
+                        </center>
                     </div>
                     <div>
-                        <h3>Meisterschaft</h3>
+                        <h3>Ranglisten [WIP]</h3>
                         <hr>
-                        Hallo
+                        <br>
+                        <center>
+                            <select name="" id="">
+                                <option value="" selected disabled>&#9135;&#9135; Rangliste Ausw&auml;hlen &#9135;&#9135;</option>
+                                <option value="">O&Ouml;BV DD Allg. Klasse</option>
+                                <option value="">O&Ouml;BV HD Allg. Klasse</option>
+                                <option value="">O&Ouml;BV Mixed Allg. Klasse</option>
+                                <option value="">&Ouml;BV DE Allg. Klasse</option>
+                                <option value="">&Ouml;BV HE Allg. Klasse</option>
+                                <option value="">&Ouml;BV DD Allg. Klasse</option>
+                                <option value="">&Ouml;BV HD Allg. Klasse</option>
+                                <option value="">&Ouml;BV Mixed Allg. Klasse</option>
+                            </select>
+                            <br><br>
+                            <img src="/content/ooebv.png" alt="" width="100px;"/>
+                        </center>
                     </div>
                     <div>
-                        <h3>Ranglisten</h3>
+                        <h3>Links [WIP]</h3>
                         <hr>
                     </div>
                 </div>
-
-
+                <br><br><br>
                 <div class="double_container">
 
                     <div style="text-align: center; min-width: 330px;">
@@ -400,14 +477,27 @@
                         <iframe src="/graphic_calendar_thumb" frameborder="0" style="height: 250px; width: 320px;" scrolling="no"></iframe>
                     </div>
                     <div>
+                        <h3><img src="/content/rss.png" alt="" style="width:20px; height: 20px; margin-bottom:-2px; margin-right: 5px;"/>&Ouml;BV News</h3>
+                        <hr>
+                        <center>
+                            <div style="max-width: 500px; min-width: 300px;">
+                                <script language="javascript" src="http://www.badminton.at/files/rss/badminton_news.php"></script>
+                            </div>
+                        </center>
+                    </div>
+                </div>
+                <br><br><br>
+                <div>
                         <h3>Veranstaltungen</h3>
                         <hr>
                         <center>
                             <iframe width="420px" height="240" src="https://www.youtube.com/embed/_FpDVKgfTHs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                         </center>
                     </div>
-                </div>
 
+                <hr>
+                <hr>
+                <hr>
 
                 <h3>Development</h3>
                 <hr>

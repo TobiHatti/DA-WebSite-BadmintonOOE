@@ -753,3 +753,13 @@ function SetSearchSettings()
 
     window.location.replace("/suche/" + subject + "/" + search + "/" + limit);
 }
+
+function RedirectListLink(id)
+{
+    var listpre = document.getElementById(id);
+    var link = listpre.options[listpre.selectedIndex].value;
+
+    document.getElementById(id).selectedIndex = "0";
+
+    window.open(link,'_blank');
+}
