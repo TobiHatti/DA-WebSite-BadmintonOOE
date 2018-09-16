@@ -194,6 +194,7 @@
                         <center>
                             <form action="'.ThisPage("!#").'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                                 '.FileButton("addImages","addImg", true).'
+                                <br>
                                 <input type="hidden" value="'.$_GET['album'].'" name="album_url"/>
                                 <button type="submit" name="addMoreImg" value="'.Fetch("fotogalerie","id","album_url",$_GET['album']).'">Fotos hinzuf&uuml;gen</button>
                             </form>

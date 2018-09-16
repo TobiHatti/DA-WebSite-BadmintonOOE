@@ -1133,6 +1133,7 @@ table.centered_content td{
 
     div{
         display: inline-block;
+        overflow: hidden;
         vertical-align: top;
         @include box-sizing(border-box);
     }
@@ -1159,6 +1160,7 @@ table.centered_content td{
     div{
         display: inline-block;
         vertical-align: top;
+        overflow: hidden;  
         text-align: left;
         @include box-sizing(border-box);
     }

@@ -1157,6 +1157,7 @@ table.centered_content td {
   display: block; }
   .tripple_container div {
     display: inline-block;
+    overflow: hidden;
     vertical-align: top;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -1178,6 +1179,7 @@ table.centered_content td {
   .double_container div {
     display: inline-block;
     vertical-align: top;
+    overflow: hidden;
     text-align: left;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
