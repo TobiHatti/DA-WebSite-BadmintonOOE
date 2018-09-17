@@ -227,9 +227,9 @@
         while($row=mysqli_fetch_assoc($rs))
         {
             echo '
-                <a href="#galleryView" onclick="SelectGalleryImage('.$i.');">
+                <a href="#galleryView" onclick="SelectGalleryImage('.$row['id'].');">
                     <div class="gallery_image_thumb">
-                        <center><img src="/content/gallery/'.$_GET['album'].'/'.$row['image'].'" alt="" id="galleryImg'.$i.'"/></center>
+                        <center><img src="/content/gallery/'.$_GET['album'].'/'.$row['image'].'" alt="" id="galleryImg'.$row['id'].'"/></center>
                         <p>
                             '.$album_name.' ('.$i++.')
                             <br>

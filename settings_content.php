@@ -54,6 +54,9 @@
             while($row=mysqli_fetch_assoc($rs)) array_push($sliderAnimations, $row['filename']);
 
             echo '
+                <b>Entwicklernotiz: Kategorien noch richtig einordnen!</b>
+                <br><br>
+
                 <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                     <table class="settingTable">
                         '.SettingOption("N","SliderImageCount", "Anzahl an Bildern die bei Slider auf Startseite angezeigt werden", "SliderImageCount", "sopt".$i++).'
@@ -81,9 +84,161 @@
         }
         else if($_GET['topic'] == 'Nutzer')
         {
-            echo '
+            if(isset($_GET['user']))
+            {
+                $uDat = FetchArray("users","id",$_GET['user']);
+                echo '<h3>Nutzerdaten von <i>'.$uDat['firstname'].' '.$uDat['lastname'].'</i></h3>';
 
-            ';
+                echo '<i>List Permissions here</i>';
+            }
+            else if(isset($_GET['register']))
+            {
+                echo '
+                    <h2>Nutzer eintragen</h2>
+                    <br>
+
+                    <h3>Allgemeines</h3>
+                    <hr>
+                    <center>
+                        <table>
+                            <tr>
+                                <td class="ta_r">Anrede:</td>
+                                <td>'.RadioButton("Herr","sex").'</td>
+                                <td> '.RadioButton("Frau","sex").'</td>
+                            </tr>
+                            <tr>
+                                <td class="ta_r">Vorname: </td>
+                                <td colspan=2><input type="text" placeholder="Vorname"/></td>
+                            </tr>
+                            <tr>
+                                <td class="ta_r">Nachname: </td>
+                                <td colspan=2><input type="text" placeholder="Nachname"/></td>
+                            </tr>
+                            <tr>
+                                <td class="ta_r">E-Mail: </td>
+                                <td colspan=2><input type="text" placeholder="E-Mail"/></td>
+                            </tr>
+                            <tr>
+                                <td class="ta_r">Passwort: </td>
+                                <td colspan=2><input type="text" placeholder="Passwort"/></td>
+                            </tr>
+                            <tr>
+                                <td class="ta_r">(Wiederholen) Passwort: </td>
+                                <td colspan=2><input type="text" placeholder="Passwort"/></td>
+                            </tr>
+                        </table>
+                    </center>
+                    <h3>Rechte</h3>
+                    <hr>
+
+                    <center>
+
+                        <table style="width: 60%;">
+                            <tr><td colspan=6><h4>Generelles</h4></td></tr>
+                            <tr>
+                                <td style="width: 50px;">'.Checkbox("1","1e").'</td>
+                                <td>Inhalte &auml;ndern</td>
+                                <td style="width: 50px;">'.Checkbox("2","2e").'</td>
+                                <td>Einstellungen &auml;ndern</td>
+                                <td style="width: 50px;">'.Checkbox("3","3e").'</td>
+                                <td>Sponsoren &auml;ndern</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50px;">'.Checkbox("1","1f").'</td>
+                                <td>Nutzer verwalten</td>
+                                <td style="width: 50px;">'.Checkbox("2","2f").'</td>
+                                <td>Rechte verwalten</td>
+                            </tr>
+                        </table>
+                        <br><br>
+                        <table style="width: 50%;">
+                            <tr><td colspan=6><h4>News</h4></td></tr>
+                            <tr>
+                                <td style="width: 50px;">'.Checkbox("1","1").'</td>
+                                <td>Erstellen</td>
+                                <td style="width: 50px;">'.Checkbox("2","2").'</td>
+                                <td>Bearbeiten</td>
+                                <td style="width: 50px;">'.Checkbox("3","3").'</td>
+                                <td>L&ouml;schen</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <table style="width: 50%;">
+                            <tr><td colspan=6><h4>Zentralausschreibungen</h4></td></tr>
+                            <tr>
+                                <td style="width: 50px;">'.Checkbox("1","1a").'</td>
+                                <td>Erstellen</td>
+                                <td style="width: 50px;">'.Checkbox("2","2a").'</td>
+                                <td>Bearbeiten</td>
+                                <td style="width: 50px;">'.Checkbox("3","3a").'</td>
+                                <td>L&ouml;schen</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <table style="width: 50%;">
+                            <tr><td colspan=6><h4>Termine</h4></td></tr>
+                            <tr>
+                                <td style="width: 50px;">'.Checkbox("1","1b").'</td>
+                                <td>Erstellen</td>
+                                <td style="width: 50px;">'.Checkbox("2","2b").'</td>
+                                <td>Bearbeiten</td>
+                                <td style="width: 50px;">'.Checkbox("3","3b").'</td>
+                                <td>L&ouml;schen</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <table style="width: 50%;">
+                            <tr><td colspan=6><h4>Fotogalerie</h4></td></tr>
+                            <tr>
+                                <td style="width: 50px;">'.Checkbox("1","1c").'</td>
+                                <td>Erstellen</td>
+                                <td style="width: 50px;">'.Checkbox("2","2c").'</td>
+                                <td>Bearbeiten</td>
+                                <td style="width: 50px;">'.Checkbox("3","3c").'</td>
+                                <td>L&ouml;schen</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <table style="width: 50%;">
+                            <tr><td colspan=6><h4>Vorstand</h4></td></tr>
+                            <tr>
+                                <td style="width: 50px;">'.Checkbox("1","1d").'</td>
+                                <td>Erstellen</td>
+                                <td style="width: 50px;">'.Checkbox("2","2d").'</td>
+                                <td>Bearbeiten</td>
+                                <td style="width: 50px;">'.Checkbox("3","3d").'</td>
+                                <td>L&ouml;schen</td>
+                            </tr>
+                        </table>
+                        <br>
+
+
+                    </center>
+
+
+                ';
+            }
+            else
+            {
+                echo '
+                    <h3>Neuen Nutzer eintragen</h3>
+                    <hr>
+                    <a href="/settings_content?topic=Nutzer&register"><button type="button">Nutzer Registrieren</button></a>
+
+                    <br><br>
+                    <h3>Aktuelle Nutzer</h3>
+                    <hr>
+                    <ul>
+                ';
+
+                $strSQL = "SELECT * FROM users";
+                $rs=mysqli_query($link,$strSQL);
+                while($row=mysqli_fetch_assoc($rs))
+                {
+                    echo '<a href="/settings_content?topic=Nutzer&user='.$row['id'].'"><li>'.$row['firstname'].' '.$row['lastname'].' <span style="color: #696969">['.$row['email'].']</span></li></a>';
+                }
+                echo '</ul>';
+            }
         }
         else if($_GET['topic'] == 'Startseite')
         {
@@ -91,7 +246,7 @@
 
             ';
         }
-        else if($_GET['topic'] == 'Permissions')
+        else if($_GET['topic'] == 'Rechte')
         {
             echo '
                 <table>
