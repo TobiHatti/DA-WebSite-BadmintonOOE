@@ -34,6 +34,14 @@
                 <b>Icon Set</b><br>
                 <i><a target="_blank" href="https://fontawesome.com">Font Awesome</a></i>
             </li>
+            <li>
+                <b>Excel-File creator</b><br>
+                <i><a target="_blank" href="https://github.com/PHPOffice/PHPExcel">PHPExcel</a></i>
+            </li>
+            <li>
+                <b>Excel-File creator (Version 2)</b><br>
+                <i><a target="_blank" href="https://github.com/PHPOffice/PhpSpreadsheet ">PHPSpreadsheet</a></i>
+            </li>
         </ul>
     ';
 
