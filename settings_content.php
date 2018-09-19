@@ -103,8 +103,8 @@
                         <table>
                             <tr>
                                 <td class="ta_r">Anrede:</td>
-                                <td>'.RadioButton("Herr","sex").'</td>
-                                <td> '.RadioButton("Frau","sex").'</td>
+                                <td>'.RadioButton("Herr","sex",1).'</td>
+                                <td>'.RadioButton("Frau","sex").'</td>
                             </tr>
                             <tr>
                                 <td class="ta_r">Vorname: </td>
