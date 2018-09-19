@@ -141,9 +141,9 @@
                     <div class="dropdown_menu_container">
                         <div id="cssmenu">
                             <ul>
-                                <li><a href="/">Startseite</a></li>
+                                <li><a href="/" style="cursor: pointer">Startseite</a></li>
 
-                                <li class="active"><a href="#">Verband</a>
+                                <li class="active" style="cursor: default;"><a href="#">Verband</a>
                                     <ul>
                                         <li><a href="/vorstand">Vorstand</a></li>
                                         <li><a href="/satzung">Satzung & Ordnungen</a></li>
@@ -155,13 +155,13 @@
 
                                 <li class="active"><a href="#">Spielbetrieb</a>
                                     <ul>
-                                        <li><a href="#">O&Ouml;MM <span style="float:right; color: #FFFFFF;">&#10148;</span></a>
+                                        <li><a href="#" style="cursor: default">O&Ouml;MM <span style="float:right; color: #FFFFFF;">&#10148;</span></a>
                                             <ul>
                                                 <li><a href="/allgemeine-klasse">Allg. Klasse</a></li>
                                                 <li><a href="/schueler-jugend">Sch&uuml;ler / Jugend</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="#">Ranglisten <span style="float:right; color: #FFFFFF;">&#10148;</span></a>
+                                        <li><a href="#" style="cursor: default">Ranglisten <span style="float:right; color: #FFFFFF;">&#10148;</span></a>
                                             <ul>
                                                 <li><a href="/ooebv-ranglisten.php">O&Ouml;BV-Ranglisten</a></li>
                                                 <li><a target="_blank" href="http://www.badminton.at">&Ouml;BV-Ranglisten</a></li>

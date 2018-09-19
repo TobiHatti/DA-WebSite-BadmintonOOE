@@ -71,6 +71,11 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
+#cssmenu ul li a {
+  cursor: default; }
+#cssmenu ul li ul a {
+  cursor: pointer; }
+
 #cssmenu:after,
 #cssmenu > ul:after {
   content: ".";
