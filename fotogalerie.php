@@ -229,7 +229,12 @@
             echo '
                 <a href="#galleryView" onclick="SelectGalleryImage('.$row['id'].');">
                     <div class="gallery_image_thumb">
-                        <center><img src="/content/gallery/'.$_GET['album'].'/'.$row['image'].'" alt="" id="galleryImg'.$row['id'].'"/></center>
+                        <center>
+                            <div class="image_container">
+                                <div class="expand_icon"><img src="/content/expand.png" alt=""/></div>
+                                <img src="/content/gallery/'.$_GET['album'].'/'.$row['image'].'" alt="" id="galleryImg'.$row['id'].'"/>
+                            </div>
+                        </center>
                         <p>
                             '.$album_name.' ('.$i++.')
                             <br>
