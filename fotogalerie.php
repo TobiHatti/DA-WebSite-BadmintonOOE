@@ -97,9 +97,9 @@
             <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data" onkeypress="return event.keyCode != 13;">
                 <div class="stagfade2">
                     <p>Vergeben Sie einen Namen und bei wunsch auch eine Beschreibung an das Album:</p>
-                    <input type="text" placeholder="Titel" name="album_name" class="cel_100"/>
+                    <input type="text" placeholder="Titel" name="album_name" class="cel_100" reqiured/>
                     <br><br>
-                    '.TextareaPlus("description", "description").'
+                    '.TextareaPlus("description", "description","",true).'
                     <br>
                     <hr>
                 </div>

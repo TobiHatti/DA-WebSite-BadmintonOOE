@@ -90,7 +90,7 @@
                     </tr>
                     <tr>
                         <td class="ta_r">Beschreibung</td>
-                        <td><textarea class="cel_l" name="description_date" placeholder="Beschreibung" style="resize: vertical;"></textarea></td>
+                        <td><textarea class="cel_l" name="description_date" placeholder="Beschreibung" style="resize: vertical;" require></textarea></td>
                     </tr>
                     <tr>
                         <td class="ta_r">Datum</td>

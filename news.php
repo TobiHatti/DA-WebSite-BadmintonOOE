@@ -77,7 +77,7 @@
                         <div class="stagfade2">
                             <hr>
                             <p>Verfassen Sie den neuen Artikel in dem untenstehenden Textfeld:</p>
-                            '.TextareaPlus("article","content",$row['article']).'
+                            '.TextareaPlus("article","content",$row['article'], true).'
                             <br>
                             <hr>
                         </div>
@@ -115,7 +115,7 @@
                             <h3>Ver&ouml;ffentlichung</h3>
                             W&auml;hlen Sie den Zeitpunkt aus, zu dem der Artikel ver&ouml;ffentlicht werden soll:<br>
                             <i>Format: [TT.MM.JJJJ]</i><br><br>
-                            <input type="date" value="'.$row['release_date'].'" id="relDate" name="release_date" class="cel_m"/>
+                            <input type="date" value="'.$row['release_date'].'" id="relDate" name="release_date" class="cel_m" required/>
                             <button type="button" onclick="document.getElementById(\'relDate\').value=\''.date("Y-m-d").'\'">&#128197; Heute</button>
                             <hr>
                         </div>
