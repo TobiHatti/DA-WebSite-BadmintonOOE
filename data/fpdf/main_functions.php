@@ -1,6 +1,6 @@
 <?php
-    require('data/fpdf/fpdf.php');
-    require('data/fpdf/makefont/makefont.php');
+    require('fpdf.php');
+    require('../data/fpdf/makefont/makefont.php');
 
     class PDF extends FPDF
     {
@@ -12,8 +12,8 @@
         // Page header
         function Header()
         {
-            $this->Image('files/content/'.GetProperty("company_logo"),130,10,60);
-            $this->Ln(25);
+            //$this->Image('../content/ooebv.png',130,10,30);
+            //$this->Ln(25);
         }
 
         // Page footer
@@ -42,7 +42,7 @@
             // Page number
             $this->Cell(0,5,'Seite '.$this->PageNo().'/{nb}',0,1,'C');
             //$this->Cell(0,5,'Seite 1/1',0,1,'C');
-            $this->Cell(0,5,((GetProperty("allow_tax_deduct")) ? 'Dies ist keine Rechnung nach § 11 UStG, daher ist der Käufer nicht zum Vorsteuerabzug berechtigt!' : ''),0,1,'C');
+            $this->Cell(0,5,'Footer Text',0,1,'C');
         }
 
         function WriteHTML($html)
