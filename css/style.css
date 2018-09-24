@@ -1272,7 +1272,8 @@ table.centered_content td {
     padding-left: 2px;
     padding-right: 3px; }
   .mdrn_news_tile img {
-    width: 100%; }
+    max-width: 100%;
+    max-height: 110px; }
   .mdrn_news_tile b {
     font-size: 13pt;
     font-weight: 700; }
