@@ -15,6 +15,10 @@
     $color2G = 100;
     $color2B = 155;
 
+    $colorMarkR = 255;
+    $colorMarkG = 255;
+    $colorMarkB = 0;
+
     // Initialisation
     $pdf = new PDF();
     $pdf->AliasNbPages();
@@ -73,9 +77,11 @@
     $pdf->Ln();
     // End of Section Header
 
-    // Table Header
     $pdf->SetFont('Arial','B',9);
+    $pdf->Cell(190,5,"Herren",$showBorders,1,'L');
 
+    // Table Header
+    $pdf->SetFont('Arial','BU',9);
     $pdf->Cell(8,5,"",$showBorders,0,'L');
     $pdf->Cell(30,5,"Nachname",$showBorders,0,'L');
     $pdf->Cell(30,5,"Vorname",$showBorders,0,'L');
@@ -86,13 +92,14 @@
     $pdf->Cell(40,5,"",$showBorders,1,'C');
     // End of Table Header
 
-    $pdf->Cell(190,5,"Herren",$showBorders,1,'L');
 
 
 
-    $pdf->SetFont('Arial','',9);
-    for($i=1;$i<20;$i++)
+
+
+    for($i=1;$i<5;$i++)
     {
+        $pdf->SetFont('Arial','',9);
         $pdf->Cell(8,5,$i.'.',$showBorders,0,'R');
         $pdf->Cell(30,5,"Gumpoltsberger",$showBorders,0,'L');
         $pdf->Cell(30,5,"Jean-Christoph",$showBorders,0,'L');
@@ -102,6 +109,39 @@
         $pdf->Cell(32,5,"14.10.2016",$showBorders,0,'C');
         $pdf->Cell(40,5,"0664/8411881",$showBorders,1,'C');
     }
+
+    for($i=1;$i<5;$i++)
+    {
+        $pdf->SetFont('Arial','B',9);
+        $pdf->SetFillColor($color2R ,$color2G,$color2B);
+        $pdf->Cell(8,5,$i.'.',$showBorders,0,'R',true);
+        $pdf->Cell(30,5,"Gumpoltsberger",$showBorders,0,'L',true);
+        $pdf->Cell(30,5,"Jean-Christoph",$showBorders,0,'L',true);
+        $pdf->Cell(18,5,"80402",$showBorders,0,'C',true);
+        $pdf->Cell(12,5,"2",$showBorders,0,'C',true);
+        $pdf->Cell(20,5,"301",$showBorders,0,'C',true);
+        $pdf->Cell(32,5,"14.10.2016",$showBorders,0,'C',true);
+        $pdf->Cell(40,5,"0664/8411881",$showBorders,1,'C',true);
+    }
+
+
+    for($i=1;$i<5;$i++)
+    {
+        $pdf->SetFont('Arial','',9);
+        $pdf->SetFillColor($colorMarkR ,$colorMarkG,$colorMarkB);
+        $pdf->Cell(8,5,$i.'.',$showBorders,0,'R');
+        $pdf->Cell(30,5,"Gumpoltsberger",$showBorders,0,'L');
+        $pdf->Cell(30,5,"Jean-Christoph",$showBorders,0,'L');
+        $pdf->Cell(18,5,"80402",$showBorders,0,'C');
+        $pdf->Cell(12,5,"2",$showBorders,0,'C');
+        $pdf->Cell(20,5,"301",$showBorders,0,'C');
+        $pdf->SetFont('Arial','B',9);
+        $pdf->Cell(32,5,"14.10.2016",$showBorders,0,'C',true);
+        $pdf->SetFont('Arial','',9);
+        $pdf->Cell(40,5,"0664/8411881",$showBorders,1,'C');
+    }
+
+
 
 
 
