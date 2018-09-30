@@ -655,7 +655,7 @@ function RefreshSliderContent()
     $sliderImages = '';
     $sliderLimit = GetProperty("SliderImageCount");
     $today = date("Y-m-d");
-    $strSQL = "SELECT * FROM news WHERE release_date <= '$today' ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
+    $strSQL = "SELECT * FROM news WHERE release_date <= '$today' AND thumbnail NOT LIKE '' ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
     $rs=mysqli_query($link,$strSQL);
     while($row=mysqli_fetch_assoc($rs))
     {
@@ -682,7 +682,7 @@ function ExportCSVAgenda($db,$id="",$multiple="")
     // $multiple    export an entire month/year (format = 2018-02 / 2018)
 
     $inhalt = "Subject;Start Date;Start Time;End Date;End Time;All Day Event;Description;Location;Private\r\n";
-    $path = "content/calendar-export/";
+    $path = "files/kalendar/";
 
     require("mysql_connect.php");
 
@@ -966,5 +966,34 @@ function ShowZATable($id)
     return $retval;
 }
 
+
+function TagSelector($phpFormName)
+{
+    require('mysql_connect.php');
+
+    $retval = '
+        <input type="search" class="cel_l" id="tagText" placeholder="Tags eingeben... (Mit [Enter] best&auml;tigen)" onkeypress="return TagInsert(event)"/>
+        oder
+        <select onchange="TagList();" id="tagList">
+            <option value="none" disabled selected>--- Kategorie Ausw&auml;hlen ---</option>
+            <optgroup label="Hauptkategorien">
+    ';
+
+    $strSQL = "SELECT * FROM news_tags";
+    $rs=mysqli_query($link,$strSQL);
+    while($row=mysqli_fetch_assoc($rs)) { $retval .= '<option value="'.$row['name'].'##'.$row['id'].'">'.$row['name'].'</option>'; }
+
+    $retval .= '
+            </optgroup>
+        </select>
+
+        <input type="hidden" id="tag_nr" value="1"/>
+        <input type="hidden" id="tag_str" name="'.$phpFormName.'"/>
+
+        <div class="tag_container" id="tagContainer"></div>
+    ';
+
+    return $retval;
+}
 
 ?>

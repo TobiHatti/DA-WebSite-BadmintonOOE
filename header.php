@@ -93,22 +93,6 @@
 
                 ';
 
-                // Only show Theme-Switch on Startpage
-                if(ThisPage()=="")
-                {
-                    echo '
-                        <div style="position: fixed; bottom: 0px; right: 0px; color: #696969;">
-                            <table>
-                                <tr>
-                                    <td>Modern / Classic</td><td>'.Togglebox("","toggle_theme",0,"ToggleTheme();","CheckTheme").'</td>
-                                </tr>
-                            </table>
-                        </div>
-                    ';
-                }
-
-
-
                 if(GetProperty("EnablePreloader"))
                 {
                     echo '
@@ -133,8 +117,21 @@
                 echo '
                 <header id="htmlheader">
                     <div class="header_logo"></div>
-                    <div class="header_sponsor"></div>
-                    '.((isset($_SESSION['userID'])) ? '<div class="logout_bar">Angemeldet als '.$_SESSION['username'].' - <a href="/logout">Abmelden</a></div>' : '').'
+                    <!-- <div class="header_sponsor"></div> -->
+                    ';
+
+                    if(isset($_SESSION['userID']))
+                    {
+                        echo '<div class="quickNav"><img src="/content/favicon.png" alt="" style="margin-bottom: -3px; margin-right: 8px;"/>';
+
+
+                        if(CheckPermission("AddNews")) echo '<a href="/news/neu">News hinzuf&uuml;gen</a> | ';
+                        if(CheckPermission("AddGallery")) echo '<a href="/fotogalerie/neu">Galerie hinzuf&uuml;gen</a> | ';
+                        if(CheckPermission("AddDate")) echo '<a href="/kalender/neu">Termin hinzuf&uuml;gen</a> | ';
+
+                        echo '<span style="float:right">Angemeldet als '.$_SESSION['username'].' - <a href="/logout"><u>Abmelden</u></a></span></div>';
+                    }
+                    echo '
                 </header>
 
                 <nav>
@@ -185,17 +182,7 @@
                                     <ul>
                                         <li><a href="/jahresberichte">Jahresberichte</a></li>
                                         <li><a href="/news-archiv">News-Archiv</a></li>
-                                        <li><a href="/ooemm-archiv">O&Ouml;MM-Archiv <span style="float:right; color: #FFFFFF;">&#10148;</span></a>
-                                            <ul>
-                                                <li><a href="/ooemm-archiv/jahr/2005-2006">2005/2006</a></li>
-                                                <li><a href="/ooemm-archiv/jahr/2004-2005">2004/2005</a></li>
-                                                <li><a href="/ooemm-archiv/jahr/2003-2004">2003/2004</a></li>
-                                                <li><a href="/ooemm-archiv/jahr/2002-2003">2002/2003</a></li>
-                                                <li><a href="/ooemm-archiv/jahr/2001-2002">2001/2002</a></li>
-                                                <li><a href="/ooemm-archiv/jahr/2000-2001">2000/2001</a></li>
-                                                <li><a href="/ooemm-archiv/jahr/1999-2000">1999/2000</a></li>
-                                            </ul>
-                                        </li>
+                                        <li><a href="/ooemm-archiv">O&Ouml;MM-Archiv</a></li>
                                     </ul>
                                 </li>
 
