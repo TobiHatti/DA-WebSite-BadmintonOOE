@@ -283,7 +283,7 @@
                         $strSQL = "SELECT id AS isAgenda, NULL AS isZA, titel AS title, date FROM agenda
                         WHERE date >= '$today'
                         UNION ALL
-                        SELECT NULL AS isAgenda, id AS isZA, title_line1 AS title, date_begin AS date FROM zentralausschreibungen
+                        SELECT NULL AS isAgenda, id AS isZA, CONCAT_WS(' ', title_line1, title_line2) AS title, date_begin AS date FROM zentralausschreibungen
                         WHERE date_begin >= '$today'
                         ORDER BY date ASC
                         LIMIT 0,3";

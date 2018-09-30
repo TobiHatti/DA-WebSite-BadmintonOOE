@@ -33,6 +33,19 @@ if(isset($_POST['add_tag']))
     Redirect(ThisPage());
 }
 
+if(isset($_POST['add_nwk']))
+{
+    $fn = $_POST['firstname'];
+    $ln = $_POST['lastname'];
+    $gender = $_POST['gender'];
+    $birthyear = $_POST['birthyear'];
+    $club = $_POST['club'];
+
+    MySQLNonQuery("INSERT INTO nachwuchskader (id,firstname,lastname,gender,club,birthyear) VALUES ('','$fn','$ln','$gender','$club','$birthyear')");
+
+    Redirect(ThisPage());
+}
+
 if(isset($_POST['add_verein']))
 {
     $verband = $_POST['verein'];
@@ -238,6 +251,41 @@ if(isset($_POST['updateZA']))
                 </tr>
                 <tr>
                     <td colspan=2><button type="submit" name="add_tag">Hinzuf&uuml;gen</button></td>
+                </tr>
+            </table>
+        ';
+    }
+    else if(isset($_GET['nwk']))
+    {
+        echo '<h3 class="stagfade2">[SQL-INSERT]: Nachwuchskader</h3> ';
+
+        echo '
+            <table>
+                <tr>
+                    <td>Geschlecht</td>
+                    <td>
+                        <input type="radio" name="gender" value="M"> M&auml;nnlich
+                        <input type="radio" name="gender" value="W"> Weiblich
+                    </td>
+                </tr>
+                <tr>
+                    <td>Vorname</td>
+                    <td><input type="text" name="firstname"/></td>
+                </tr>
+                <tr>
+                    <td>Nachname</td>
+                    <td><input type="text" name="lastname"/></td>
+                </tr>
+                <tr>
+                    <td>Geburtsjahr</td>
+                    <td><input type="number" name="birthyear"/></td>
+                </tr>
+                <tr>
+                    <td>Verein</td>
+                    <td><input type="text" name="club"/></td>
+                </tr>
+                <tr>
+                    <td colspan=2><button type="submit" name="add_nwk">Hinzuf&uuml;gen</button></td>
                 </tr>
             </table>
         ';
@@ -698,6 +746,7 @@ if(isset($_POST['updateZA']))
                 <li><a href="?ooemm-archiv">[SQL-INSERT]: OOEMM-Archiv</a></li>
                 <li><a href="?vereine">[SQL-INSERT]: Vereine</a></li>
                 <li><a href="?za">[SQL-INSERT]: Zentralausschreibungen</a></li>
+                <li><a href="?nwk">[SQL-INSERT]: Nachwuchskader</a></li>
             </ul>
         ';
     }
