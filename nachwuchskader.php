@@ -112,7 +112,7 @@
     <br><br>
     <h3 style="color: red">M&auml;dchen U13 ('.(date("Y") - 12).' - '.(date("Y") - 11).')</h3>
     ';
-    $strSQL = "SELECT * FROM nachwuchskader WHERE gender = 'W' AND birthyear <= '$maxYear'";
+    $strSQL = "SELECT * FROM nachwuchskader WHERE gender = 'W' AND birthyear >= '$minYear'";
     $rs=mysqli_query($link,$strSQL);
     while($row=mysqli_fetch_assoc($rs))
     {

@@ -773,3 +773,9 @@ function RedirectListLink(id)
 
     window.open(link,'_blank');
 }
+
+function AddContentToTextarea(insertValElementId)
+{
+    var content = document.getElementsByClassName("fr-element")[0].innerHTML;
+    document.getElementsByClassName("fr-element fr-view")[0].innerHTML = content + document.getElementById(insertValElementId).value;
+}

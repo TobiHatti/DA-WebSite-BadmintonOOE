@@ -69,6 +69,12 @@
                     <script src="/js/jscolor.js"></script>
                 <!-- End of jsColor -->
 
+                <!-- HTML2Canvas-->
+                    <script src="/js/html2canvas.js"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://html2canvas.hertzen.com/build/html2canvas.js"></script>
+                <!-- End of HTML2Canvas -->
+
                 <!-- File Buttons -->
                     <!--[if IE]>
                     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -232,9 +238,6 @@
                     </div>
                 </nav>
                 <main>
-                <!--
-                <img src="/content/federball_sample1.jpg" alt="" class="fbfly"/>
-                -->
     ';
 
 ?>
