@@ -275,7 +275,7 @@
                             <button type="submit" class="cel_m" name="export_csv" value="AG'.$row['id'].'"><i class="fa fa-file-excel-o" style="float: left;"></i> Als .csv Exportieren</button>
                             <br>
                             <button type="submit" class="cel_m" name="export_ics" value="AG'.$row['id'].'"><i class="fas fa-file" style="float: left;"></i>Als .ics Exportieren</button>
-                        </form>                                                 
+                        </form>
                     </center>
                 </div>
             </div>
@@ -289,11 +289,11 @@
     {
 
         echo '
-            <div class="calender_info_wrapper" id="calenderInfoZA'.$row['id'].'">
+            <div class="modal_wrapper" id="calenderInfoZA'.$row['id'].'">
                 <a href="#c">
-                    <div class="calender_info_bg"></div>
+                    <div class="modal_bg"></div>
                 </a>
-                <div class="info_container">
+                <div class="modal_container" style="width: 50%; height: 60%;">
                     <a href="#c"><img src="/content/cross2.png" alt="" class="close_cross"/></a>
                     <div style="border-left: 3px solid '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '').'; padding-left: 5px;">
                         <a href="#exportZA'.$row['id'].'"><button style="float: right; margin-right: 30px;"><i class="fas fa-file-export"></i> Exportieren</button></a>
@@ -333,11 +333,11 @@
 
 
         echo '
-            <div class="calender_export_wrapper" id="exportZA'.$row['id'].'">
+            <div class="modal_wrapper" id="exportZA'.$row['id'].'">
                 <a href="#c">
-                    <div class="calender_info_bg"></div>
+                    <div class="modal_bg"></div>
                 </a>
-                <div class="info_container">
+                <div class="modal_container" style="width: 200px; height: 100px;">
                     <h3>Exportieren</h3>
                     <center>
                         <form action="/kalender" method="post" accept-charset="utf-8" enctype="multipart/form-data" target="_top">

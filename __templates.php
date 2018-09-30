@@ -29,7 +29,23 @@
 
         echo '
 
+        <hr>
 
+        <h2>Modal</h2>
+
+        <a href="#modalID1"><button type="button">Open Modal</button></a>
+
+
+        <div class="modal_wrapper" id="modalID1">
+            <a href="#c">
+                <div class="modal_bg"></div>
+            </a>
+            <div class="modal_container" style="width: 50%; height: 40%;">
+
+
+
+            </div>
+        </div>
 
     ';
 

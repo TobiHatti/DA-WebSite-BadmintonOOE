@@ -198,9 +198,39 @@
             <form action="/news?check" method="post" accept-charset="utf-8" enctype="multipart/form-data" onkeypress="return event.keyCode != 13;">
                 <div class="stagfade2">
                     <p>Verfassen Sie den neuen Artikel in dem untenstehenden Textfeld:</p>
+                    <a href="#imageMaker"><button type="button" style="float: right; margin-top: -40px;">Bild-Ersteller</button></a>
                     '.TextareaPlus("content","article","<h2>Artikel-Titel</h2>Hier den Artikel verfassen...",true).'
                     <br>
                     <hr>
+                </div>
+
+                <div class="modal_wrapper" id="imageMaker">
+                    <a href="#c">
+                        <div class="modal_bg"></div>
+                    </a>
+                    <div class="modal_container" style="width: 50%; height: 60%;">
+                        <h3>Bild-Ersteller</h3>
+
+                        Vorlagen:
+                        <select id="">
+                            <option value="" selected disabled>--- Ausw&auml;hlen ---</option>
+                            <option value="Ankuendigungen">Ank&uuml;ndigungen</option>
+                        </select>
+                        <br>
+                        <iframe src="/newsimagecreator" frameborder="1" style="width: 100%; height: 70%;">
+
+                        ';
+
+                        $insertString = "
+                        <img src='/content/header.jpg' style='width: 400px;'/>
+                        ";
+
+                        echo '
+
+                        <input type="hidden" value="'.$insertString.'" id="insertContent"/>
+                        <a href="#"><button type="button" onclick="AddContentToTextarea(\'insertContent\');">AddStuff</button></a>
+
+                    </div>
                 </div>
 
                 <!--

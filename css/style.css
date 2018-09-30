@@ -28,6 +28,7 @@
     (Z04)   Double-Column Classes
     (Z05)   Formating Classes
     (Z06)   Pager
+    (Z06)   Modal
     ====== Y - Form-Elements ===============
     (Y01)   Buttons
     (Y02)   Textboxes
@@ -391,6 +392,75 @@ h5 {
     margin: 0px 5px 0px 5px; }
   .pager a {
     text-decoration: none; }
+
+/*===================================================================================*/
+/* (Z07) Modal                                                                       */
+/*===================================================================================*/
+.modal_wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: -10000px;
+  z-index: 100000; }
+  .modal_wrapper .modal_bg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 100000;
+    opacity: 0;
+    cursor: default;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; }
+  .modal_wrapper .modal_container {
+    position: absolute;
+    background: #FFFFFF;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 20%;
+    box-shadow: 0 0 40px 5px #000000;
+    z-index: 100001;
+    opacity: 0;
+    padding: 20px;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out; }
+  .modal_wrapper .close_cross {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    padding: 4px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out; }
+  .modal_wrapper .close_cross:hover {
+    border: 2px solid black;
+    transform: rotate(90deg);
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; }
+
+.modal_wrapper:target {
+  left: 0px; }
+  .modal_wrapper:target .modal_bg {
+    opacity: 1; }
+  .modal_wrapper:target .modal_container {
+    opacity: 1; }
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
@@ -1444,7 +1514,8 @@ table.centered_content td {
   border: 1px solid #3B9EBF;
   border-radius: 0 25% 0 25%;
   overflow: hidden;
-  margin: 5px; }
+  margin: 5px;
+  background: linear-gradient(to left, #C4E3ED 10%, #FFFFFF 70%); }
   .nwkaderCard img {
     height: 80px;
     margin: 0;
@@ -2434,119 +2505,6 @@ table.centered_content td {
     animation-duration: 1s;
     animation-iteration-count: 1;
     animation-delay: 0s; }
-
-.calender_info_wrapper {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  left: -10000px;
-  z-index: 100000; }
-  .calender_info_wrapper .calender_info_bg {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    z-index: 100000;
-    opacity: 0;
-    cursor: default;
-    -webkit-transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
-    -ms-transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out; }
-  .calender_info_wrapper .info_container {
-    position: absolute;
-    width: 50%;
-    height: 60%;
-    background: #FFFFFF;
-    left: 25%;
-    top: 20%;
-    box-shadow: 0 0 40px 5px #000000;
-    z-index: 100001;
-    opacity: 0;
-    padding: 20px;
-    -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    -ms-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out; }
-  .calender_info_wrapper .close_cross {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 20px;
-    height: 20px;
-    padding: 4px;
-    border: 2px solid transparent;
-    border-radius: 50%;
-    -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    -ms-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out; }
-  .calender_info_wrapper .close_cross:hover {
-    border: 2px solid black;
-    transform: rotate(90deg);
-    -webkit-transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
-    -ms-transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out; }
-
-.calender_info_wrapper:target {
-  left: 0px; }
-  .calender_info_wrapper:target .calender_info_bg {
-    opacity: 1; }
-  .calender_info_wrapper:target .info_container {
-    opacity: 1; }
-
-.calender_export_wrapper {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  left: -10000px;
-  z-index: 100000; }
-  .calender_export_wrapper .calender_info_bg {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    z-index: 100000;
-    opacity: 0;
-    cursor: default;
-    -webkit-transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
-    -ms-transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out; }
-  .calender_export_wrapper .info_container {
-    position: absolute;
-    width: 200px;
-    height: 100px;
-    background: #FFFFFF;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 40%;
-    box-shadow: 0 0 40px 5px #000000;
-    z-index: 100001;
-    opacity: 0;
-    padding: 20px;
-    -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    -ms-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out; }
-
-.calender_export_wrapper:target {
-  left: 0px; }
-  .calender_export_wrapper:target .calender_info_bg {
-    opacity: 1; }
-  .calender_export_wrapper:target .info_container {
-    opacity: 1; }
 
 /*===================================================================================*/
 /* (U04)   Kalender > Graphic Calendar (Small)                                       */
