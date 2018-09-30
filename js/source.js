@@ -148,7 +148,7 @@ function TagInsert(e)
             document.getElementById("tag_nr").value = parseInt(tag_nr) + 1;
 
             block_to_insert = document.createElement( 'div' );
-            block_to_insert.innerHTML = '<div id="tagID' + tag_nr + '"><input type="hidden" id="tagVal' + tag_nr + '" value="' + tagText + '"/><a onclick="RmTag(' + tag_nr + ');">&#128500;</a>&nbsp;' + tagText + '</div>';
+            block_to_insert.innerHTML = '<div id="tagID' + tag_nr + '"><input type="hidden" id="tagVal' + tag_nr + '" value="' + tagText + '"/><a onclick="RmTag(' + tag_nr + ',\'' + tagText + '\',\'' + tagText + '\');">&#128500;</a>&nbsp;' + tagText + '</div>';
 
             container_block = document.getElementById( 'tagContainer' );
             container_block.appendChild( block_to_insert );
@@ -163,15 +163,19 @@ function TagInsert(e)
 /* (A02) News > RmTag                                                                */
 /*===================================================================================*/
 
-function RmTag(tagID)
+function RmTag(tagID,tagText,tagValue)
 {
     // DESCRIPTION:
     // Removes a tag from the tag-list
 
-    var tagText = document.getElementById("tagVal" + tagID).value;
-
+    // Remove
+    // a) Custom Tags and Tags without special letters
     var oldStr = document.getElementById("tag_str").value;
     var newStr = oldStr.replace(tagText + "||","");
+
+    // b) Tags with custom letters
+    var oldStr = document.getElementById("tag_str").value;
+    var newStr = oldStr.replace(tagValue + "||","");
 
     document.getElementById("tag_str").value = newStr;
 
@@ -189,8 +193,14 @@ function TagList()
     // Submits onClick
 
     var listpre = document.getElementById("tagList");
-    var tagText = listpre.options[listpre.selectedIndex].value;
+    var tagComb = listpre.options[listpre.selectedIndex].value;
     var tagStr = "||" + document.getElementById("tag_str").value;
+
+
+    tagArray = tagComb.split('##');
+
+    tagText = tagArray[0];
+    tagValue = tagArray[1];
 
     if(tagStr.replace("||" + tagText + "||") == ("||" + document.getElementById("tag_str").value))
     {
@@ -201,12 +211,12 @@ function TagList()
         document.getElementById("tag_nr").value = parseInt(tag_nr) + 1;
 
         block_to_insert = document.createElement( 'div' );
-        block_to_insert.innerHTML = '<div id="tagID' + tag_nr + '"><input type="hidden" id="tagVal' + tag_nr + '" value="' + tagText + '"/><a onclick="RmTag(' + tag_nr + ');">&#128500;</a>&nbsp;' + tagText + '</div>';
+        block_to_insert.innerHTML = '<div id="tagID' + tag_nr + '"><input type="hidden" id="tagVal' + tag_nr + '" value="' + tagText + '"/><a onclick="RmTag(' + tag_nr + ',\'' + tagText + '\',\'' + tagValue + '\');">&#128500;</a>&nbsp;' + tagText + '</div>';
 
         container_block = document.getElementById( 'tagContainer' );
         container_block.appendChild(block_to_insert);
 
-        document.getElementById("tag_str").value = document.getElementById("tag_str").value + tagText + '||';
+        document.getElementById("tag_str").value = document.getElementById("tag_str").value + tagValue + '||';
     }
     document.getElementById("tagList").value="none";
 

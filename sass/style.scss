@@ -1654,18 +1654,18 @@ table.centered_content td{
         position: absolute;
         top: 10px;
         right: 10px;
-        width: 30px;
-        height: 30px;
+        width: 20px;
+        height: 20px;
         padding: 4px;
 
-        border: 3px solid transparent;
+        border: 2px solid transparent;
         border-radius: 50%;
 
         @include ease(0.5s);
     }
 
     .close_cross:hover{
-        border: 3px solid black;
+        border: 2px solid black;
         transform: rotate(90deg);
         @include ease(0.2s);
     }
@@ -2485,18 +2485,18 @@ table.centered_content td{
         position: absolute;
         top: 10px;
         right: 10px;
-        width: 30px;
-        height: 30px;
+        width: 20px;
+        height: 20px;
         padding: 4px;
 
-        border: 3px solid transparent;
+        border: 2px solid transparent;
         border-radius: 50%;
 
         @include ease(0.5s);
     }
 
     .close_cross:hover{
-        border: 3px solid black;
+        border: 2px solid black;
         transform: rotate(90deg);
         @include ease(0.2s);
     }

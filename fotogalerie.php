@@ -126,23 +126,7 @@
                 <div class="stagfade4">
                     <h3>Tags</h3>
                         F&uuml;gen Sie dem Album Tags hinzu, um es schneller finden und sortieren zu k&ouml;nnen:<br><br>
-                        <input type="search" class="cel_l" id="tagText" placeholder="Tags eingeben... (Mit [Enter] best&auml;tigen)" onkeypress="return TagInsert(event)"/>
-                        oder
-                        <select onchange="TagList();" id="tagList">
-                            <option value="none" disabled selected>--- Kategorie Ausw&auml;hlen ---</option>
-                            <optgroup label="Hauptkategorien">
-                                ';
-                                $strSQL = "SELECT * FROM news_tags";
-                                $rs=mysqli_query($link,$strSQL);
-                                while($row=mysqli_fetch_assoc($rs)) { echo '<option value="'.$row['name'].'">'.$row['name'].'</option>'; }
-                                echo '
-                            </optgroup>
-                        </select>
-
-                        <input type="hidden" id="tag_nr" value="1"/>
-                        <input type="hidden" id="tag_str" name="tags"/>
-
-                        <div class="tag_container" id="tagContainer"></div>
+                        '.TagSelector('tags').'
                     <br>
                     <hr>
                 </div>

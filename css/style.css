@@ -1565,10 +1565,10 @@ table.centered_content td {
     position: absolute;
     top: 10px;
     right: 10px;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     padding: 4px;
-    border: 3px solid transparent;
+    border: 2px solid transparent;
     border-radius: 50%;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
@@ -1576,7 +1576,7 @@ table.centered_content td {
     -o-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out; }
   .gallery_view_wrapper .close_cross:hover {
-    border: 3px solid black;
+    border: 2px solid black;
     transform: rotate(90deg);
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
@@ -2446,10 +2446,10 @@ table.centered_content td {
     position: absolute;
     top: 10px;
     right: 10px;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     padding: 4px;
-    border: 3px solid transparent;
+    border: 2px solid transparent;
     border-radius: 50%;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
@@ -2457,7 +2457,7 @@ table.centered_content td {
     -o-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out; }
   .calender_info_wrapper .close_cross:hover {
-    border: 3px solid black;
+    border: 2px solid black;
     transform: rotate(90deg);
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
