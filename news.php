@@ -212,23 +212,23 @@
                         <h3>Bild-Ersteller</h3>
 
                         Vorlagen:
-                        <select id="">
+                        <select onchange="ChangeNewsImageCreatorLink();" id="themeSelector">
                             <option value="" selected disabled>--- Ausw&auml;hlen ---</option>
-                            <option value="Ankuendigungen">Ank&uuml;ndigungen</option>
+                            ';
+                            $strSQL = "SELECT * FROM news_templates ORDER BY name ASC";
+                            $rs=mysqli_query($link,$strSQL);
+                            while($row=mysqli_fetch_assoc($rs))
+                            {
+                                echo '<option value="'.$row['id'].'">'.$row['name'].'</option> ';
+                            }
+                            echo '
                         </select>
-                        <br>
-                        <iframe src="/newsimagecreator" frameborder="1" style="width: 100%; height: 70%;">
+                         oder: 
+                        <a href="/news-vorlagen">Neue Vorlage erstellen</a>
+                        <br><br>
+                        <iframe src="/newsimagecreator" frameborder="0" style="width: 100%; height: 88%;" id="imageCreatorFrame"></iframe>
 
-                        ';
 
-                        $insertString = "
-                        <img src='/content/header.jpg' style='width: 400px;'/>
-                        ";
-
-                        echo '
-
-                        <input type="hidden" value="'.$insertString.'" id="insertContent"/>
-                        <a href="#"><button type="button" onclick="AddContentToTextarea(\'insertContent\');">AddStuff</button></a>
 
                     </div>
                 </div>

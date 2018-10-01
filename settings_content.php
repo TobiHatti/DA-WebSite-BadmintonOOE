@@ -34,7 +34,10 @@
         <!DOCTYPE html>
         <html>
             <head>
-                <link rel="stylesheet" type="text/css" href="/css/style.css">
+    ';
+        require("headerlinks.php");
+
+    echo '
             </head>
             <body>
                 <h2 class="stagfade1">'.((isset($_GET['topic'])) ? $_GET['topic'] : '').'</h2><br>

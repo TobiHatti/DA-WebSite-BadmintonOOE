@@ -779,3 +779,38 @@ function AddContentToTextarea(insertValElementId)
     var content = document.getElementsByClassName("fr-element")[0].innerHTML;
     document.getElementsByClassName("fr-element fr-view")[0].innerHTML = content + document.getElementById(insertValElementId).value;
 }
+
+
+function ConvertDiv2Base64Src(divID,exportSrcId)
+{
+    // Requires HTML2Canvas
+    html2canvas(document.getElementById(divID)).then(function(canvas) {
+        var base64image = canvas.toDataURL("image/png");
+
+        document.getElementById(exportSrcId).src = base64image;
+    });
+}
+
+function ConvertDiv2Base64Froala(divID)
+{
+    // Requires HTML2Canvas
+    html2canvas(document.getElementById(divID)).then(function(canvas) {
+        var base64image = canvas.toDataURL("image/png");
+
+        var froalaContent = window.parent.document.getElementsByClassName("fr-element")[0].innerHTML;
+        window.parent.document.getElementsByClassName("fr-element fr-view")[0].innerHTML = froalaContent + '<img src="' + base64image + '" alt="" style="width: 300px;"/>';
+    });
+}
+
+function ChangeNewsImageCreatorLink()
+{
+    var listpre = document.getElementById("themeSelector");
+    var template = listpre.options[listpre.selectedIndex].value;
+
+    document.getElementById("imageCreatorFrame").src = "/newsimagecreator?template=" + template;
+}
+
+function CopyTextToSpan(e,spanID)
+{
+    document.getElementById(spanID).innerHTML = e.value;
+}
