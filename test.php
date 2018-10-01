@@ -1,27 +1,40 @@
-<html>
+<script src="/js/html2canvas.js"></script>
+<script src="/js/download.js"></script>
 
-<head>
-    <script type="text/javascript" language="javascript" src="js/canvas2image.js"></script>
-    <script type="text/javascript" language="javascript" src="js/base64.js"></script>
-    <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
-    <script type="text/javascript">
-        function to_png(){
-            Canvas2Image.saveAsPNG(document.getElementsByTagName("CANVAS")[0]);
-        }
-        function to_jpg(){
-            Canvas2Image.saveAsJPEG(document.getElementsByTagName("CANVAS")[0]);
-        }
-    </script>
-</head>
+<body id="createImage">
 
-<body>
-    <div>
-        <button onclick="to_jpg()">Save as JPEG</button>
+
+    <div id="testDiv" style="width: 100px; height: 100px; background: lime;">
+
+        Hallo
+        <h3>I BIN COOL</h3>
     </div>
-    <div>
-        <button onclick="to_png()">Save as PNG</button>
-    </div>
-    <canvas width="800" height="500" style="display: block;"></canvas>
+
+    <button onclick="ConvertDiv2Base64('testDiv','imagePaste');">Paste</button>
 </body>
 
-</html>
+<script type="text/javascript">
+
+function ConvertDiv2Base64Src(divID,exportSrcId)
+{
+    html2canvas(document.getElementById(divID)).then(function(canvas) {
+        var base64image = canvas.toDataURL("image/png");
+
+        document.getElementById(exportSrcId).src = base64image;
+    });
+}
+
+function ConvertDiv2Base64Src(divID,exportSrcId)
+{
+    html2canvas(document.getElementById(divID)).then(function(canvas) {
+        var base64image = canvas.toDataURL("image/png");
+
+        document.getElementById(exportSrcId).src = base64image;
+    });
+}
+
+
+</script>
+
+
+<img src="" alt="" id="imagePaste" style="border: 5px solid red"/>

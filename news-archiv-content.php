@@ -10,12 +10,9 @@
 
     require("data/functions.php");
 
-    echo '
-        <head>
-            <link rel="stylesheet" type="text/css" href="/css/style.css">
-        </head>
-
-    ';
+    echo '<head>';
+    require("headerlinks.php");
+    echo '</head>';
 
 
 
