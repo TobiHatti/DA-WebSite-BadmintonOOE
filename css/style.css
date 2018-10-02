@@ -462,6 +462,46 @@ h5 {
   .modal_wrapper:target .modal_container {
     opacity: 1; }
 
+/*===================================================================================*/
+/* (Z08) Grab Items                                                                       */
+/*===================================================================================*/
+.dragItem {
+  cursor: grab;
+  white-space: nowrap;
+  overflow: visible;
+  border-left: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  padding: 0 0 2px 2px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out; }
+
+.dragItem:hover {
+  cursor: grab;
+  white-space: nowrap;
+  overflow: visible;
+  border-left: 1px solid gray;
+  border-bottom: 1px solid gray;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out; }
+
+.dragItem:active {
+  cursor: grabbing;
+  white-space: nowrap;
+  overflow: visible;
+  border-left: 1px solid #3B9EBF;
+  border-bottom: 1px solid #3B9EBF;
+  -webkit-transition: all 0s ease-in-out;
+  -moz-transition: all 0s ease-in-out;
+  -ms-transition: all 0s ease-in-out;
+  -o-transition: all 0s ease-in-out;
+  transition: all 0s ease-in-out; }
+
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*================================ Y - Form-Elements ================================*/

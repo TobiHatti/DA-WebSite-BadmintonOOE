@@ -425,6 +425,38 @@ h5{
     }
 }
 
+/*===================================================================================*/
+/* (Z08) Grab Items                                                                       */
+/*===================================================================================*/
+
+.dragItem{
+    cursor: grab;
+    white-space: nowrap;
+    overflow: visible;
+    border-left: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    padding: 0 0 2px 2px;
+    @include ease(0.2s);
+}
+
+.dragItem:hover{
+    cursor: grab;
+    white-space: nowrap;
+    overflow: visible;
+    border-left: 1px solid gray;
+    border-bottom: 1px solid gray;
+     @include ease(0.1s);
+}
+
+.dragItem:active{
+    cursor: grabbing;
+    white-space: nowrap;
+    overflow: visible;
+    border-left: 1px solid $theme-medium;
+    border-bottom: 1px solid $theme-medium;
+    @include ease(0.0s);
+}
+
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 /*-------------------------------|||----------------|||------------------------------*/
 /*================================ Y - Form-Elements ================================*/

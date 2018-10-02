@@ -20,7 +20,9 @@
         <!-- External Links/Scripts -->
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+
+            <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <!-- End of External Links/Scripts -->
 
 
@@ -48,7 +50,6 @@
 
         <!-- HTML2Canvas-->
             <script src="/js/html2canvas.js"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
         <!-- End of HTML2Canvas -->
 
         <!-- File Buttons -->
@@ -67,6 +68,7 @@
                 });
             </script>
         <!-- End of Header-Parallax -->
+
 
     ';
 

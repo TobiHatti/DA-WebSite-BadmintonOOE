@@ -814,3 +814,58 @@ function CopyTextToSpan(e,spanID)
 {
     document.getElementById(spanID).innerHTML = e.value;
 }
+
+function ChangeFontSize(e,divID)
+{
+    document.getElementById(divID).style.fontSize = e.value + "pt";
+}
+
+function ChangeImageSize(e,divID)
+{
+    document.getElementById(divID).style.width = e.value + "px";
+}
+
+function ReadURLDivBG(input,outputDiv)
+{
+    //input = this
+
+
+    if (input.files && input.files[0])
+    {
+        var reader = new FileReader();
+        reader.onload = function (e)
+        {
+            document.getElementById(outputDiv).style.backgroundImage = "url('" + e.target.result + "')";
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function ReadURL(input,outputImg)
+{
+    //input = this
+
+    if (input.files && input.files[0])
+    {
+        var reader = new FileReader();
+        reader.onload = function (e)
+        {
+            $('#' + outputImg)
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function ShowHideElement(e,elementId)
+{
+    if(e.checked) document.getElementById(elementId).style.display = "block";
+    else document.getElementById(elementId).style.display = "none";
+}
+
+function ShowHideBGImage(e,divID)
+{
+    if(e.checked) document.getElementById(divID).style.backgroundImage = "";
+    else document.getElementById(divID).style.backgroundImage = "url(\'content/newstemplates/testtemplate.jpg\')";
+
+}
