@@ -33,14 +33,7 @@
         if($val['actText3']) echo '<span id="textField3" style="position:absolute; top: '.$val['t3_y'].'px; left: '.$val['t3_x'].'px; font-size: '.$val['t3_size'].'pt; color: '.$val['t3_color'].';">Text #3</span>';
         if($val['actImg']) echo '<img src="/content/newstemplates/img/'.$val['img_file'].'" style="position: absolute; top: '.$val['img_y'].'; left: '.$val['img_x'].'; width: '.$val['img_size'].';" />';
 
-        echo '
 
-        $(document).ready(function(){
-            $("#d_text1").draggable( {containment: "#box_frame", scroll: false} );
-            $("#d_text2").draggable( {containment: "#box_frame", scroll: false} );
-        });
-
-        ';
 
         echo '</div>';
 
