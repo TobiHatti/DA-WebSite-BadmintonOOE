@@ -828,14 +828,13 @@ function ChangeImageSize(e,divID)
 function ReadURLDivBG(input,outputDiv)
 {
     //input = this
-
-
     if (input.files && input.files[0])
     {
         var reader = new FileReader();
         reader.onload = function (e)
         {
             document.getElementById(outputDiv).style.backgroundImage = "url('" + e.target.result + "')";
+            document.getElementById("saveOutput").value = e.target.result;
         };
         reader.readAsDataURL(input.files[0]);
     }
@@ -865,7 +864,132 @@ function ShowHideElement(e,elementId)
 
 function ShowHideBGImage(e,divID)
 {
-    if(e.checked) document.getElementById(divID).style.backgroundImage = "";
-    else document.getElementById(divID).style.backgroundImage = "url(\'content/newstemplates/testtemplate.jpg\')";
+    var saveImg = document.getElementById("saveOutput").value;
 
+    if(e.checked)
+    {
+        document.getElementById(divID).style.backgroundImage = "";
+    }
+    else
+    {
+        document.getElementById(divID).style.backgroundImage = "url('" + saveImg + "')";
+        document.getElementById(divID).style.backgroundSize = "cover";
+    }
+
+}
+
+function ShowElement(elementID)
+{
+    document.getElementById(elementID).style.display = "block";
+
+}
+
+function ToggleSwitch(switchID)
+{
+    if(document.getElementById(switchID).checked) document.getElementById(switchID).checked = false;
+    else document.getElementById(switchID).checked = true;
+}
+
+function ActivateSwitch(switchID)
+{
+    document.getElementById(switchID).checked = true;
+}
+
+function TemplatesUpdateBGRows()
+{
+    if(document.getElementById("chBg").checked)
+    {
+        document.getElementById("bgColorRowBGImage").style.display = "none";
+
+        document.getElementById("bgColorRowGradientCheck").style.display = "table-row";
+
+        if(document.getElementById("toggleBgStyle").checked)
+        {
+            document.getElementById("bgColorRowPicker1").style.display = "table-row";
+            document.getElementById("bgColorRowGPicker2").style.display = "table-row";
+            document.getElementById("bgColorRowGradientDirections").style.display = "table-row";
+        }
+        else
+        {
+            document.getElementById("bgColorRowPicker1").style.display = "table-row";
+            document.getElementById("bgColorRowGPicker2").style.display = "none";
+            document.getElementById("bgColorRowGradientDirections").style.display = "none";
+        }
+    }
+    else
+    {
+        document.getElementById("bgColorRowBGImage").style.display = "table-row";
+
+        document.getElementById("bgColorRowGradientCheck").style.display = "none";
+        document.getElementById("bgColorRowPicker1").style.display = "none";
+        document.getElementById("bgColorRowGPicker2").style.display = "none";
+        document.getElementById("bgColorRowGradientDirections").style.display = "none";
+    }
+
+}
+
+function GetCssValuePrefix()
+{
+    var rtrnVal = '';//default to standard syntax
+    var prefixes = ['-o-', '-ms-', '-moz-', '-webkit-'];
+
+    // Create a temporary DOM object for testing
+    var dom = document.createElement('div');
+
+    for (var i = 0; i < prefixes.length; i++)
+    {
+        // Attempt to set the style
+        dom.style.background = prefixes[i] + 'linear-gradient(#000000, #ffffff)';
+
+        // Detect if the style was successfully set
+        if (dom.style.background)
+        {
+            rtrnVal = prefixes[i];
+        }
+    }
+
+    dom = null;
+    delete dom;
+
+    return rtrnVal;
+}
+
+function TemplatesSetBGColor()
+{
+    var listpre = document.getElementById("bgGradientOrientation");
+    var orientation = listpre.options[listpre.selectedIndex].value;
+
+    var orientationParts = orientation.split("||");
+
+    var orientation1 = orientationParts[0];
+    var orientation2 = orientationParts[1];
+
+    var colorOne = "#" + document.getElementById("colorBG1").value;
+    var colorTwo = "#" + document.getElementById("colorBG2").value;
+
+    if(document.getElementById("toggleBgStyle").checked)
+    {
+        $('#creatorContainer').css({
+            background:  GetCssValuePrefix() + "gradient(linear, " + orientation1 + ", " + orientation2 + ", from(" + colorOne + "), to(" + colorTwo + "))"
+        });
+    }
+    else
+    {
+        document.getElementById("creatorContainer").style.background = colorOne;
+    }
+}
+
+function TemplatesGetPosition()
+{
+    document.getElementById("outT1x").value = document.getElementById("dragT1").style.left;
+    document.getElementById("outT1y").value = document.getElementById("dragT1").style.top;
+
+    document.getElementById("outT2x").value = document.getElementById("dragT2").style.left;
+    document.getElementById("outT2y").value = document.getElementById("dragT2").style.top;
+
+    document.getElementById("outT3x").value = document.getElementById("dragT3").style.left;
+    document.getElementById("outT3y").value = document.getElementById("dragT3").style.top;
+
+    document.getElementById("outImgx").value = document.getElementById("dragImg").style.left;
+    document.getElementById("outImgy").value = document.getElementById("dragImg").style.top;
 }
