@@ -79,8 +79,10 @@ function ColorPicker($name, $id, $text, $value, $lifeChangeId="",$DOMproperty="s
     return '
         '.(($lifeChangeId != "") ? ('<script> function JSColorUpdate'.$idu.'(jscolor) { document.getElementById("'.$lifeChangeId.'").'.$DOMproperty.' = "#" + jscolor } </script>') : '').'
         <input name="'.$name.'" type="hidden" id="'.$id.'" value="'.$value.'" '.(($onchange!="") ? ('onchange="'.$onchange.'"') : '').'>
-        <button class="jscolor {'.(($lifeChangeId != "") ? ('onFineChange:\'JSColorUpdate'.$idu.'(this)\',') : '').'valueElement: \''.$id.'\',width:260, height:200, position:\'right\',borderColor:\'#FFF\', insetColor:\'#FFF\', backgroundColor:\'#666\'}" value="'.$value.'">'.$text.'</button>
+        <button class="jscolor {'.(($lifeChangeId != "") ? ('onFineChange:\'JSColorUpdate'.$idu.'(this);\',') : '').'valueElement: \''.$id.'\',width:260, height:200, position:\'right\',borderColor:\'#FFF\', insetColor:\'#FFF\', backgroundColor:\'#666\'}" value="'.$value.'">'.$text.'</button>
     ';
+
+
 }
 
 function TextareaPlus($name, $id="edit", $placeholder="",$required = false)
@@ -189,19 +191,19 @@ function PageContent($paragraph_index,$allowEdit=false)
     return $retval;
 }
 
-function EditButton($link,$short = false,$targetTop = false)
+function EditButton($link,$short = false,$targetTop = false,$customText = "")
 {
-    return '<a '.(($targetTop) ? 'target="_top"' : '').' style="margin: 0px 3px" href="'.$link.'"> &#9998; '.((!$short) ? 'Bearbeiten' : '').'</a>';
+    return '<a '.(($targetTop) ? 'target="_top"' : '').' style="margin: 0px 3px" href="'.$link.'"> &#9998; '.((!$short) ? (($customText!="") ? $customText : 'Bearbeiten') : '').'</a>';
 }
 
-function AddButton($link,$short = false,$targetTop = false)
+function AddButton($link,$short = false,$targetTop = false,$customText = "")
 {
-    return '<a '.(($targetTop) ? 'target="_top"' : '').' style="margin: 0px 3px" href="'.$link.'"> &#65291; '.((!$short) ? 'Hinzuf&uuml;gen' : '').'</a>';
+    return '<a '.(($targetTop) ? 'target="_top"' : '').' style="margin: 0px 3px" href="'.$link.'"> &#65291; '.((!$short) ? (($customText!="") ? $customText : 'Hinzuf&uuml;gen') : '').'</a>';
 }
 
-function DeleteButton($permissionSuffix,$table,$id,$short = false,$targetTop = false)
+function DeleteButton($permissionSuffix,$table,$id,$short = false,$targetTop = false,$customText = "")
 {
-    return '<a '.(($targetTop) ? 'target="_top"' : '').' style="margin: 0px 3px; color: red;" href="/delete/'.$table.'/'.$permissionSuffix.'/'.$id.'"> &#10006; '.((!$short) ? 'L&ouml;schen' : '').' </a>';
+    return '<a '.(($targetTop) ? 'target="_top"' : '').' style="margin: 0px 3px; color: red;" href="/delete/'.$table.'/'.$permissionSuffix.'/'.$id.'"> &#10006; '.((!$short) ? (($customText!="") ? $customText : 'L&ouml;schen') : '').' </a>';
 }
 
 function CheckPermission($permission)

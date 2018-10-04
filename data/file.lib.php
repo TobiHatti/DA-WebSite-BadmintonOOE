@@ -9,7 +9,7 @@
 //      •DeleteFolder   (return: void)                                              *
 //***********************************************************************************
 
-function FileUpload($path,$formId,$formats="",$limit="",$sql="")
+function FileUpload($path,$formId,$formats="",$limit="",$sql="",$customName="")
 {
     // DESCRIPTION:
     // Required for File-Uploads
@@ -52,7 +52,16 @@ function FileUpload($path,$formId,$formats="",$limit="",$sql="")
                 }
                 else
                 {
-                    if(move_uploaded_file($_FILES[$formId]["tmp_name"][$f], $path.$name)) $count++;
+                    if(move_uploaded_file($_FILES[$formId]["tmp_name"][$f], $path.$name))
+                    {
+                        if($customName!="")
+                        {
+                            $extension = pathinfo($path.$name, PATHINFO_EXTENSION);
+                            rename($path.$name, $path.$customName.'.'.$extension);
+                            $name = $customName.'.'.$extension;
+                        }
+                        $count++;
+                    }
                     if($sql != "") MySQLNonQuery(str_replace('FNAME',$name,$sql));
                 }
             }

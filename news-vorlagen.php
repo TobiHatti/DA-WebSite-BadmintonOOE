@@ -46,12 +46,10 @@
 
         MySQLNonQuery($strSQL);
 
-        echo $strSQL;
+        FileUpload("content/newstemplates/img/","templateLogo","","","UPDATE news_templates SET pathImg = 'FNAME' WHERE id = '$id'",uniqid());
+        FileUpload("content/newstemplates/","templateBackground","","","UPDATE news_templates SET bgPath = 'FNAME' WHERE id = '$id'",uniqid());
 
-        FileUpload("content/newstemplates/img/","templateLogo","","","UPDATE news_templates SET pathImg = 'FNAME' WHERE id = '$id'");
-        FileUpload("content/newstemplates/","templateBackground","","","UPDATE news_templates SET bgPath = 'FNAME' WHERE id = '$id'");
-
-        Redirect("/news/neu");
+        Redirect("/news/neu#imageMaker");
         die();
     }
 
@@ -93,12 +91,12 @@
                 <div style="min-width: 640px;">
                     <center>
                         <span style="float: left;">&#128712; Elemente mit Maus verschieben</span>
-                        <div id="creatorContainer" style=" border: 1px solid black; color: #FFFFFF; position: relative; width: 640px; height: 360px; background-size: cover; background: #87CEFA">
+                        <div id="creatorContainer" style=" border: 1px solid black; color: #FFFFFF; position: relative; width: 640px; height: 360px; background-size: cover; background: #E0FFFF">
 
-                            <div id="dragT1" class="dragItem" style="position: relative; width: 30px; white-space: nowrap; overflow: visible; top: 40px; left: 20px;"><span id="dragContent1" style="color: #F01B16; font-size: 26pt;">Beispiel-Text #1</span></div>
-                            <div id="dragT2" class="dragItem" style="position: relative; width: 30px; white-space: nowrap; overflow: visible; top: 100px; left: 60px;"><span id="dragContent2" style="color: #F01B16; font-size: 18pt;">Beispiel-Text #2</span></div>
-                            <div id="dragT3" class="dragItem" style="position: relative; width: 30px; white-space: nowrap; overflow: visible; top: 160px; left: 100px;"><span id="dragContent3" style="color: #F01B16; font-size: 18pt;">Beispiel-Text #3</span></div>
-                            <div id="dragImg" class="dragItem" style="position: relative; width: 30px; white-space: nowrap; overflow: visible; top: 10px; left: 380px; display: none"><img id="dragContent4" style="width: 200px;" src="/content/not-found.png" alt="" /></div>
+                            <div id="dragT1" class="dragItem" style="position: absolute; width: 30px; white-space: nowrap; overflow: visible; top: 40px; left: 20px;"><span id="dragContent1" style="color: #F01B16; font-size: 26pt;">Beispiel-Text #1</span></div>
+                            <div id="dragT2" class="dragItem" style="position: absolute; width: 30px; white-space: nowrap; overflow: visible; top: 100px; left: 60px;"><span id="dragContent2" style="color: #F01B16; font-size: 18pt;">Beispiel-Text #2</span></div>
+                            <div id="dragT3" class="dragItem" style="position: absolute; width: 30px; white-space: nowrap; overflow: visible; top: 160px; left: 100px;"><span id="dragContent3" style="color: #F01B16; font-size: 18pt;">Beispiel-Text #3</span></div>
+                            <div id="dragImg" class="dragItem" style="position: absolute; width: 30px; white-space: nowrap; overflow: visible; top: 10px; left: 380px; display: none"><img id="dragContent4" style="width: 200px;" src="/content/not-found.png" alt="" /></div>
                         </div>
                     </center>
                     <br>
@@ -190,12 +188,12 @@
 
                         <tr id="bgColorRowPicker1">
                             <td class="ta_r">Farbe 1</td>
-                            <td>'.ColorPicker("colorBG1", "colorBG1", "Farbe wählen", "#F01B16","","","TemplatesSetBGColor();").'</td>
+                            <td>'.ColorPicker("colorBG1", "colorBG1", "Farbe wählen", "#E0FFFF","","","TemplatesSetBGColor();").'</td>
                         </tr>
 
                         <tr id="bgColorRowGPicker2">
                             <td class="ta_r">Farbe 2</td>
-                            <td>'.ColorPicker("colorBG2", "colorBG2", "Farbe wählen", "#F01B16","","","TemplatesSetBGColor();").'</td>
+                            <td>'.ColorPicker("colorBG2", "colorBG2", "Farbe wählen", "#E0FFFF","","","TemplatesSetBGColor();").'</td>
                         </tr>
 
                         <tr id="bgColorRowGradientDirections">
