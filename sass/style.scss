@@ -2757,6 +2757,7 @@ table.centered_content td{
 
     p{
         color: #000000;
+
         span{
             color: #696969;
         }
@@ -2769,5 +2770,40 @@ table.centered_content td{
 }
 
 
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*================================ V - Spielerreihung ===============================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 
+.dragSortList_posNumbers{
+    padding: 0;
+    display: inline-block;
+    li{
+        width: 25px;
+        line-height: 20px;
+        text-align: right;
+        padding-right: 5px;
+        list-style: none;
+        background: linear-gradient(to left top, $theme-vibrant-bright-l, #FFFFFF);
+        border: 1px solid $theme-vibrant-medium;
+        border-radius: 10px 0 0 0;
+    }
 
+}
+
+.dragSortList_values{
+    padding: 0;
+    display: inline-block;
+    li{
+        width: 150px;
+        line-height: 20px;
+        text-align: left;
+        padding-right: 5px;
+        list-style: none;
+        background: linear-gradient(to right, $theme-vibrant-bright-l, #FFFFFF);
+        border: 1px solid $theme-vibrant-medium;
+        border-radius: 0 8px 8px 0;
+    }
+
+}
