@@ -2851,4 +2851,35 @@ table.centered_content td {
 .search_tile:hover {
   box-shadow: 0 10px 10px -3px #000000; }
 
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*================================ V - Spielerreihung ===============================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+.dragSortList_posNumbers {
+  padding: 0;
+  display: inline-block; }
+  .dragSortList_posNumbers li {
+    width: 25px;
+    line-height: 20px;
+    text-align: right;
+    padding-right: 5px;
+    list-style: none;
+    background: linear-gradient(to left top, #D1EEF5, #FFFFFF);
+    border: 1px solid #0099C7;
+    border-radius: 10px 0 0 0; }
+
+.dragSortList_values {
+  padding: 0;
+  display: inline-block; }
+  .dragSortList_values li {
+    width: 150px;
+    line-height: 20px;
+    text-align: left;
+    padding-right: 5px;
+    list-style: none;
+    background: linear-gradient(to right, #D1EEF5, #FFFFFF);
+    border: 1px solid #0099C7;
+    border-radius: 0 8px 8px 0; }
+
 /*# sourceMappingURL=style.css.map */
