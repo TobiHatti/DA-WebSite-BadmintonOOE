@@ -40,6 +40,9 @@ RewriteRule ^suche/([a-zA-Z0-9-]+)/(.*)/?$/?$ /suche.php?suche=$2&kategorie=$1 [
 # Rewrite Rules for verein-info.php
 RewriteRule ^verein-info/mitglieder verein-info.php?mitglieder [NC,QSA,L]
 
+# Rewrite Rules for spielerreihung.php
+RewriteRule ^verein-info/mitglieder verein-info.php?mitglieder [NC,QSA,L]
+
 # Rewrite Rules for delete.php
 RewriteRule ^delete/(.*)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-]+)/?$/?$/?$ delete.php?t=$1&s=$2&i=$3 [NC,QSA,L]
 
