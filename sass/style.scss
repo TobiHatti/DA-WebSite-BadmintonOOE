@@ -87,6 +87,8 @@
     ====== V - Verein-Info =================
     (V01)   VInfo > MemberInfo
     (V02)   VInfo > Spielerreihung
+    ====== V - Spielerreihung ==============
+    (W01)   Spielerreihung > Drag'n'Drop
 
 
 
@@ -2784,10 +2786,50 @@ table.centered_content td{
 /* (V01)   VInfo > MemberInfo                                                        */
 /*===================================================================================*/
 
+.member_info{
+    display: inline-flex;
+    width: 300px;
+    height: 90px;
+    padding: 0px 0px;
+    border: 1px solid $theme-medium;
+    border-radius: 0 15% 0 15%;
+    overflow: hidden;
+    margin: 5px;
+    background: linear-gradient(to left, $theme-bright-l 10%, #FFFFFF 70%);
 
+    img{
+        height: 90px;
+        margin: 0;
+        margin-right: 3px;
+    }
+
+    table{
+        display: inline-table;
+        vertical-align: middle;
+
+        td:nth-child(1){
+            text-align: right;
+            width: 100px;
+            color: #444444;
+        }
+
+        td:nth-child(2){
+            text-align: left;
+            padding-left: 5px;
+            width: 150px;
+        }
+
+    }
+}
+
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*==============================  W - Spielerreihung ================================*/
+/*-------------------------------|||----------------|||------------------------------*/
+/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
 
 /*===================================================================================*/
-/* (V02)   VInfo > Spielerreihung                                                    */
+/* (W01)   Spielerreihung > Drag'n'Drop Sorter                                       */
 /*===================================================================================*/
 
 .dragSortList_posNumbers{
