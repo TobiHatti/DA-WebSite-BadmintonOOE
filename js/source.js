@@ -993,3 +993,44 @@ function TemplatesGetPosition()
     document.getElementById("outImgx").value = document.getElementById("dragImg").style.left;
     document.getElementById("outImgy").value = document.getElementById("dragImg").style.top;
 }
+
+function CopyOptionToTextbox(e,textboxID)
+{
+    document.getElementById(textboxID).value = e.options[e.selectedIndex].value;
+    e.selectedIndex = "0";
+}
+
+function EMailCheck(e,output,button)
+{
+    var email = e.value;
+    var re = /\S+@\S+\.\S+/;
+    var mail_ok = false;
+
+    mail_ok = re.test(email);
+
+    if(mail_ok == true || e.value == "")
+    {
+        document.getElementById(output).value = " ";
+        document.getElementById(button).disabled = false;
+    }
+    else
+    {
+        document.getElementById(output).value = "Geben Sie eine g\u00fcltige E-Mail Adresse ein!";
+        document.getElementById(button).disabled = true;
+    }
+}
+
+function CheckPasswordPair(e, pairID, output, button)
+{
+    if(e.value == document.getElementById(pairID).value)
+    {
+        document.getElementById(output).value = " ";
+        document.getElementById(button).disabled = false;
+    }
+    else
+    {
+        document.getElementById(output).value = "Passw\u00f6rter sind nicht identisch!";
+        document.getElementById(button).disabled = true;
+    }
+}
+
