@@ -12,6 +12,9 @@
             $( "#sortable" ).disableSelection();
         } );
 
+        window.setInterval(function(){
+            CheckListState();
+        }, 100);
 
         function CheckListState()
         {
@@ -28,11 +31,11 @@
             }
         }
 
-        window.setInterval(function(){
-            CheckListState();
-        }, 100);
+
 
     </script>
+
+
 
     <ul class="dragSortList_posNumbers">
         <li>1</li>
@@ -43,7 +46,6 @@
         <li>6</li>
         <li>7</li>
     </ul>
-
     <ul class="dragSortList_values" id="sortable">
         <li>Item 1</li>
         <li>Item 2</li>
@@ -55,9 +57,7 @@
     </ul>
 
 
-    <br><br><br>
-
-    <textarea id="output"></textarea>
+    <textarea id="" style="display: block;"></textarea>
 
 
     ';

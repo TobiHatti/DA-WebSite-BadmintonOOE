@@ -8,8 +8,12 @@
 
         if(MySQLExists("SELECT * FROM users WHERE email = '$email' AND password = '$pswd'"))
         {
-            $_SESSION['userID'] = Fetch("users","id","email",$email);
-            $_SESSION['username'] = Fetch("users","username","email",$email);
+            $userData = FetchArray("users","email",$email);
+
+            $_SESSION['userID'] = $userData['id'];
+            $_SESSION['firstname'] = $userData['firstname'];
+            $_SESSION['lastname'] = $userData['lastname'];
+            $_SESSION['rank'] = $userData['rank'];
             Redirect("/");
         }
         else Redirect(str_replace('?err','',ThisPage()).'?err');

@@ -32,7 +32,7 @@ function Togglebox($name, $id, $checked = 0,$onchange="",$sessionName="")
     ';
 }
 
-function RadioButton($title, $name, $checked = 0)
+function RadioButton($title, $name, $checked = 0,$value="")
 {
     // DESCRIPTION:
     // Returns a Radio-Button Form-Element
@@ -42,7 +42,7 @@ function RadioButton($title, $name, $checked = 0)
 
     return '
         <label class="radiolabel">'.$title.'
-            <input type="radio" name="'.$name.'" '.(($checked) ? 'checked' : '').'>
+            <input type="radio" value="'.$value.'" name="'.$name.'" '.(($checked) ? 'checked' : '').'>
             <span class="radiocheckmark"></span>
         </label>
     ';
@@ -213,7 +213,7 @@ function CheckPermission($permission)
     // for the logged in user
     // $permission  Permission-Keyword
 
-    if(!isset($_SESSION['userID'])) return false;
+    if(!isset($_SESSION['userID']) OR $_SESSION['rank']!="administrative") return false;
     else
     {
         $uid = $_SESSION['userID'];
@@ -222,6 +222,15 @@ function CheckPermission($permission)
         // NOT FINALISED
         return true;
     }
+}
+
+function CheckRank()
+{
+    if(isset($_SESSION['rank']) AND $_SESSION['rank'] == Fetch("users","rank","id",$_SESSION['userID']))
+    {
+        return $_SESSION['rank'];
+    }
+    else return "user";
 }
 
 function Loader()
@@ -996,6 +1005,13 @@ function TagSelector($phpFormName)
     ';
 
     return $retval;
+}
+
+function Age($birthDate)
+{
+    $age = date_diff(date_create($birthDate), date_create('now'))->y;
+
+    return $age;
 }
 
 ?>

@@ -29,6 +29,23 @@
         die();
     }
 
+    if(isset($_POST['addUserClubManager']))
+    {
+        $email = $_POST['email'];
+        $password = hash('sha256',hash('sha256',$_POST['password']."salt")."pepper");
+        $club = $_POST['club'];
+
+        MySQLNonQuery("INSERT INTO users (id,rank,club,email,password) VALUES ('','clubmanager','$club','$email','$password')");
+
+        Redirect(ThisPage("+newUserAdded"));
+        die();
+    }
+
+    if(isset($_POST['addUserAdministrative']))
+    {
+
+    }
+
 
     echo '
         <!DOCTYPE html>
@@ -40,8 +57,8 @@
     echo '
             </head>
             <body>
-                <h2 class="stagfade1">'.((isset($_GET['topic'])) ? $_GET['topic'] : '').'</h2><br>
-                <div class="iframe_content stagfade2">
+                <div class="iframe_content stagfade1">
+                <h2 class="stagfade2">'.((isset($_GET['topic'])) ? $_GET['topic'] : '').'</h2>
     ';
 
     $i=0;
@@ -90,11 +107,11 @@
             if(isset($_GET['user']))
             {
                 $uDat = FetchArray("users","id",$_GET['user']);
-                echo '<h3>Nutzerdaten von <i>'.$uDat['firstname'].' '.$uDat['lastname'].'</i></h3>';
+                echo '<br><h3>Nutzerdaten von <i>'.$uDat['firstname'].' '.$uDat['lastname'].'</i></h3>';
 
                 echo '<i>List Permissions here</i>';
             }
-            else if(isset($_GET['register']))
+            else if(isset($_GET['administrative']))
             {
                 echo '
                     <h2>Nutzer eintragen</h2>
@@ -214,11 +231,62 @@
                             </tr>
                         </table>
                         <br>
-
-
                     </center>
+                ';
+            }
+            else if(isset($_GET['clubmanager']))
+            {
+                if(isset($_GET['newUserAdded'])) echo '<center><span style="color: #32CD32">Nutzer wurde hinzugef&uuml;gt!</span></center>';
 
+                echo '
+                    <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                        <center>
+                            <table>
+                                <tr>
+                                    <td class="ta_r">E-Mail: </td>
+                                    <td colspan=2>
+                                        <input type="email" placeholder="E-Mail" name="email" oninput="EMailCheck(this,\'outMailMessage\',\'submitButton\');" required/><br>
+                                        <span style="color: red"><output id="outMailMessage"></output></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ta_r">Passwort: </td>
+                                    <td colspan=2>
+                                        <input type="password" placeholder="Passwort" name="password" id="pswd1" oninput="CheckPasswordPair(this,\'pswd2\',\'outPswdMessage\',\'submitButton\')" required/><br>
+                                        <span style="color: red"><output id="outPswdMessage"></output></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ta_r">(Wiederholen) Passwort: </td>
+                                    <td colspan=2><input type="password" placeholder="Passwort" id="pswd2" oninput="CheckPasswordPair(this,\'pswd1\',\'outPswdMessage\',\'submitButton\')" required/></td>
+                                </tr>
+                                <tr><td colspan=2><br></td></tr>
+                                <tr>
+                                    <td class="ta_r">Verein:<br>&nbsp;</td>
+                                    <td colspan=2>
+                                    <select name="club" class="cel_m" required>
+                                        <option value="" selected disabled>--- Verein Ausw&auml;hlen ---</option>
+                                        ';
 
+                                        $strSQL = "SELECT verein, ort, kennzahl FROM vereine ORDER BY kennzahl ASC";
+                                        $rs=mysqli_query($link,$strSQL);
+                                        while($row=mysqli_fetch_assoc($rs)) echo '<option value="'.$row['kennzahl'].'">'.$row['kennzahl'].' - '.$row['verein'].' '.$row['ort'].'</option>';
+
+                                        echo '
+                                    </select><br>
+                                    Verein nicht gefunden? <a href="/vereine/neu">Hier neuen Verein anlegen</a>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+
+                            Der Nutzer kann nach der ersten Anmeldung das Passwort &auml;ndern
+
+                            <br><br>
+
+                            <button type="submit" name="addUserClubManager" id="submitButton">Vereins-Account erstellen</button>
+                        </center>
+                    </form>
                 ';
             }
             else
@@ -226,7 +294,8 @@
                 echo '
                     <h3>Neuen Nutzer eintragen</h3>
                     <hr>
-                    <a href="/settings_content?topic=Nutzer&register"><button type="button">Nutzer Registrieren</button></a>
+                    <a href="/settings_content?topic=Nutzer&administrative"><button type="button">Verwaltungs-Account erstellen</button></a>
+                    <a href="/settings_content?topic=Nutzer&clubmanager"><button type="button">Vereins-Account erstellen</button></a>
 
                     <br><br>
                     <h3>Aktuelle Nutzer</h3>

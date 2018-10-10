@@ -60,17 +60,31 @@
                     <!-- <div class="header_sponsor"></div> -->
                     ';
 
-                    if(isset($_SESSION['userID']))
+                    if(isset($_SESSION['userID']) AND CheckRank() == "administrative")
                     {
-                        echo '<div class="quickNav"><img src="/content/favicon.png" alt="" style="margin-bottom: -3px; margin-right: 8px;"/>';
+                        echo '<div class="quickNav">Seitenverwaltung<img src="/content/favicon.png" alt="" style="margin-bottom: -3px; margin-right: 8px; margin-left: 8px;"/>';
 
 
                         if(CheckPermission("AddNews")) echo '<a href="/news/neu">News hinzuf&uuml;gen</a> | ';
                         if(CheckPermission("AddGallery")) echo '<a href="/fotogalerie/neu">Galerie hinzuf&uuml;gen</a> | ';
                         if(CheckPermission("AddDate")) echo '<a href="/kalender/neu">Termin hinzuf&uuml;gen</a> | ';
 
-                        echo '<span style="float:right">Angemeldet als '.$_SESSION['username'].' - <a href="/logout"><u>Abmelden</u></a></span></div>';
+                        echo '<span style="float:right">Angemeldet als '.$_SESSION['firstname'].' '.$_SESSION['lastname'].' - <a href="/logout"><u>Abmelden</u></a></span></div>';
                     }
+
+                    if(isset($_SESSION['userID']) AND CheckRank() == "clubmanager")
+                    {
+                        echo '<div class="quickNav">Vereinsverwaltung<img src="/content/favicon.png" alt="" style="margin-bottom: -3px; margin-right: 8px; margin-left: 8px;"/>';
+
+
+                        if(CheckPermission("AddNews")) echo '<a href="/news/neu">News hinzuf&uuml;gen</a> | ';
+                        if(CheckPermission("AddGallery")) echo '<a href="/fotogalerie/neu">Galerie hinzuf&uuml;gen</a> | ';
+                        if(CheckPermission("AddDate")) echo '<a href="/kalender/neu">Termin hinzuf&uuml;gen</a> | ';
+
+                        echo '<span style="float:right">Angemeldet als '.$_SESSION['firstname'].' '.$_SESSION['lastname'].' - <a href="/logout"><u>Abmelden</u></a></span></div>';
+                    }
+
+
                     echo '
                 </header>
 
@@ -128,7 +142,7 @@
 
                                 ';
 
-                                if(isset($_SESSION['userID']))   // Condition: Check if user can edit any element of the page
+                                if(isset($_SESSION['userID']) AND CheckRank() == "administrative")      // Condition: Check if user can edit any element of the page
                                 {
                                     echo '
                                         <li class="active"><a href="#">Verwaltung</a>
@@ -138,6 +152,19 @@
                                                 <li><a style="width: 200px;" href="/zentralausschreibung/neu">Neue Zentralausschreibung</a></li>
                                                 <li><a style="width: 200px;" href="/kalender/neu">Neuen Termin anlegen</a></li>
                                                 <li><a style="width: 200px;" href="/settings"><hr>Seiten-Einstellungen</a></li>
+                                            </ul>
+                                        </li>
+                                    ';
+                                }
+
+                                if(isset($_SESSION['userID']) AND CheckRank() == "clubmanager")      // Condition: Check if user can edit any element of the page
+                                {
+                                    echo '
+                                        <li class="active"><a href="#">Verein</a>
+                                            <ul>
+                                                <li><a style="width: 200px;" href="/verein-info">Ihr Verein</a></li>
+                                                <li><a style="width: 200px;" href="/verein-info/mitglieder">Mitglieder</a></li>
+                                                <li><a style="width: 200px;" href="/spielerreihung">Spielerreihung</a></li>
                                             </ul>
                                         </li>
                                     ';
