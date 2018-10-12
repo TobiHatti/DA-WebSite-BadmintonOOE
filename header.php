@@ -81,7 +81,10 @@
                         if(CheckPermission("AddGallery")) echo '<a href="/fotogalerie/neu">Galerie hinzuf&uuml;gen</a> | ';
                         if(CheckPermission("AddDate")) echo '<a href="/kalender/neu">Termin hinzuf&uuml;gen</a> | ';
 
-                        echo '<span style="float:right">Angemeldet als '.$_SESSION['firstname'].' '.$_SESSION['lastname'].' - <a href="/logout"><u>Abmelden</u></a></span></div>';
+                        $headerClubID = Fetch("users","club","id",$_SESSION['userID']);
+                        $headerClubData = FetchArray("vereine","kennzahl",$headerClubID);
+
+                        echo '<span style="float:right">'.$headerClubData['verein'].' '.$headerClubData['ort'].' - <a href="/logout"><u>Abmelden</u></a></span></div>';
                     }
 
 
