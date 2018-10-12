@@ -475,13 +475,14 @@
     right:0px;
     background: $modern-dark;
     padding: 3px;
+    z-index: 999999;
 
     a{
         color: #FFFFFF;
     }
 
     a:hover{
-        color: $font-color-ahover; 
+        color: $font-color-ahover;
     }
 
     span{

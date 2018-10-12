@@ -348,7 +348,8 @@
   left: 0px;
   right: 0px;
   background: #333333;
-  padding: 3px; }
+  padding: 3px;
+  z-index: 999999; }
   .quickNav a {
     color: #FFFFFF; }
   .quickNav a:hover {
