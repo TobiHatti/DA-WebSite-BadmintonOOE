@@ -33,6 +33,9 @@ RewriteRule ^kalender/datum/([a-zA-Z0-9-]+)/?$ kalender.php?datum=$1 [NC,QSA,L]
 # Rewrite Rules for zentralausschreibungen.php
 RewriteRule ^zentralausschreibung/neu zentralausschreibung.php?neu [NC,QSA,L]
 
+# Rewrite Rules for zentralausschreibungen.php
+RewriteRule ^schiedsrichter/seite/([a-zA-Z0-9-]+)/?$ schiedsrichter.php?seite=$1 [NC,QSA,L]
+
 # Rewrite Rules for suche.php
 RewriteRule ^suche/([a-zA-Z0-9-]+)/(.*)/([0-9]+)/?$/?$/?$ /suche.php?suche=$2&kategorie=$1&limit=$3 [B,PT]
 RewriteRule ^suche/([a-zA-Z0-9-]+)/(.*)/?$/?$ /suche.php?suche=$2&kategorie=$1 [B,PT]

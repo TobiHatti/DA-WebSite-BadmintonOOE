@@ -460,6 +460,29 @@ function Pager($sqlQuery,$entriesPerPage = 10,$customURL="")
     return $retval;
 }
 
+function ManualPager()
+{
+    $amt = func_num_args();
+    $links = func_get_args();
+
+    $retval = '<div class="pager">';
+
+    $retval .= '<span title="Zur ersten Seite"><a href="'.$links[0].'">&#9664;&#9664;</a></span>';
+
+    $i=0;
+    foreach($links as $link)
+    {
+        $retval .= '<span title="Zu Seite '.($i + 1).'" style="color: #696969; font-size: 16pt;"><a href="'.$links[$i].'">'.($i++ + 1).'</a></span>';
+    }
+
+    $retval .= '<span title="Zur letzten Seite"><a href="'.$links[$amt-1].'">&#9654;&#9654;</a></span>';
+
+    $retval .= '</div>';
+
+    return $retval;
+
+}
+
 function NewsSidebar()
 {
     require("mysql_connect.php");

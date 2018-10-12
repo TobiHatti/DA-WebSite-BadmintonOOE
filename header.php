@@ -123,7 +123,8 @@
                                         </li>
                                         <li><a href="/zentralausschreibung">Zentralausschreibung</a></li>
                                         <li><a href="/senioren">Senioren</a></li>
-                                        <li><a href="/schriedsrichter">Schiedsrichter</a></li>
+                                        <li><a href="/schiedsrichter">Schiedsrichter</a></li>
+                                        <li><a href="/spielregeln">Spielregeln</a></li>
                                     </ul>
                                 </li>
 
