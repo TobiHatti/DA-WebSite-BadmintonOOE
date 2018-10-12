@@ -11,6 +11,18 @@ function Checkbox($name, $id, $checked = 0,$onchange="")
     return '<input type="checkbox" name="'.$name.'" id="'.$id.'" onchange="'.$onchange.'" class="slidecheckbox" '.(($checked) ? 'checked' : '').'/><label class="checkbox_toggle_lable" for="'.$id.'">Toggle</label>';
 }
 
+function Tickbox($name, $id, $text, $checked = 0,$onchange="")
+{
+    // DESCRIPTION:
+    // Returns a Checkbox Form-Element
+    // $name    Form-Element-Name
+    // $id      Unique ID. Required since it uses a label
+    // $text    Text shown next to the Tickbox
+    // $checked Default: 0. Sets the checkbox to checked (1)
+
+    return '<div class="tickbox"><input type="checkbox" name="'.$name.'" id="'.$id.'" onchange="'.$onchange.'" '.(($checked) ? 'checked' : '').'/><label for="'.$id.'">'.$text.'</label></div>';
+}
+
 function Togglebox($name, $id, $checked = 0,$onchange="",$sessionName="")
 {
     // DESCRIPTION:
