@@ -36,13 +36,14 @@
     (Y04)   Selectbox
     (Y05)   Checkbox
     (Y06)   Togglebox
-    (Y07)   Radio Button
-    (Y08)   Range Slider
-    (Y09)   File Selector
-    (Y10)   Date/Time Selectors
-    (Y11)   Custom Element-Lengths
-    (Y12)   Custom Element-Formats
-    (Y13)   Custom Element-Classes
+    (Y07)   Tickbox
+    (Y08)   Radio Button
+    (Y09)   Range Slider
+    (Y10)   File Selector
+    (Y11)   Date/Time Selectors
+    (Y12)   Custom Element-Lengths
+    (Y13)   Custom Element-Formats
+    (Y14)   Custom Element-Classes
     ====== X - General Classes ==============
     (X01)   Header-Contents
     (X02)   Searchbar
@@ -789,7 +790,7 @@ input.slidecheckbox:checked + .checkbox_toggle_lable:after {
   transform: translateX(-100%); }
 
 /*===================================================================================*/
-/* (Y06) FormElements > Togglebox                                                     */
+/* (Y06) FormElements > Togglebox                                                    */
 /*===================================================================================*/
 input[type=checkbox].togglecheckbox {
   height: 0;
@@ -840,7 +841,70 @@ input.togglecheckbox:checked + .checkbox_toggle2_lable:after {
   transform: translateX(-100%); }
 
 /*===================================================================================*/
-/* (Y07) FormElements > Radio Button                                                 */
+/* (Y07) FormElements > Tickbox                                                      */
+/*===================================================================================*/
+.tickbox {
+  margin: 5px 0px 5px 0px; }
+  .tickbox [type="checkbox"]:not(:checked),
+  .tickbox [type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px; }
+  .tickbox [type="checkbox"]:not(:checked) + label,
+  .tickbox [type="checkbox"]:checked + label {
+    position: relative;
+    padding-left: 1.95em;
+    cursor: pointer; }
+  .tickbox [type="checkbox"]:not(:checked) + label:before,
+  .tickbox [type="checkbox"]:checked + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.25em;
+    height: 1.25em;
+    border: 1px solid #333333;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); }
+  .tickbox [type="checkbox"]:not(:checked) + label:after,
+  .tickbox [type="checkbox"]:checked + label:after {
+    content: '\2713\0020';
+    position: absolute;
+    top: .15em;
+    left: .22em;
+    font-size: 1.3em;
+    line-height: 0.8;
+    color: #0099C7;
+    transition: all .2s;
+    font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', Arial; }
+  .tickbox [type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+    transform: scale(0); }
+  .tickbox [type="checkbox"]:checked + label:after {
+    opacity: 1;
+    transform: scale(1); }
+  .tickbox [type="checkbox"]:disabled:not(:checked) + label:before,
+  .tickbox [type="checkbox"]:disabled:checked + label:before {
+    box-shadow: none;
+    border-color: #bbb;
+    background-color: #ddd; }
+  .tickbox [type="checkbox"]:disabled:checked + label:after {
+    color: #999; }
+  .tickbox [type="checkbox"]:disabled + label {
+    color: #aaa; }
+  .tickbox [type="checkbox"]:checked:hover + label:before,
+  .tickbox [type="checkbox"]:not(:checked):hover + label:before {
+    border: 1px solid #3B9EBF; }
+  .tickbox label:hover:before {
+    border: 1px solid #3B9EBF;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; }
+
+/*===================================================================================*/
+/* (Y08) FormElements > Radio Button                                                 */
 /*===================================================================================*/
 .radiolabel {
   display: block;
@@ -893,7 +957,7 @@ input.togglecheckbox:checked + .checkbox_toggle2_lable:after {
   background: white; }
 
 /*===================================================================================*/
-/* (Y08) FormElements > Range Slider                                                 */
+/* (Y09) FormElements > Range Slider                                                 */
 /*===================================================================================*/
 input[type=range]::-webkit-slider-thumb {
   box-shadow: 1px 1px 1px #000000;
@@ -1006,7 +1070,7 @@ input[type=range]::-moz-range-track {
   border: 0px solid #3B9EBF; }
 
 /*===================================================================================*/
-/* (Y09) FormElements > File Selectors                                               */
+/* (Y10) FormElements > File Selectors                                               */
 /*===================================================================================*/
 input[type="file"] {
   width: 0.1px;
@@ -1051,7 +1115,7 @@ input[type="file"] + label:hover {
   color: #FFFF99; }
 
 /*===================================================================================*/
-/* (Y10) FormElements > Date/Time Selectors                                          */
+/* (Y11) FormElements > Date/Time Selectors                                          */
 /*===================================================================================*/
 input[type="date"],
 input[type="datetime-local"],
@@ -1083,7 +1147,7 @@ input[type="week"]:focus {
   color: #416586; }
 
 /*===================================================================================*/
-/* (Y11) FormElements > Custom Element-Lenghts                                       */
+/* (Y12) FormElements > Custom Element-Lenghts                                       */
 /*===================================================================================*/
 /* Custom Element Lenghts : Width */
 .cel_xxs {
@@ -1149,7 +1213,7 @@ input[type="week"]:focus {
   font-size: 18pt; }
 
 /*===================================================================================*/
-/* (Y12) FormElements > Custom Element-Formats                                       */
+/* (Y13) FormElements > Custom Element-Formats                                       */
 /*===================================================================================*/
 .cef_nobg {
   background: none; }
@@ -1172,7 +1236,7 @@ input[type="week"]:focus {
   background: #FF0000; }
 
 /*===================================================================================*/
-/* (Y13) FormElements > Custom Element-Classes                                       */
+/* (Y14) FormElements > Custom Element-Classes                                       */
 /*===================================================================================*/
 .codeprev {
   width: 750px;
@@ -2904,7 +2968,7 @@ table.centered_content td {
   display: inline-block; }
   .dragSortList_posNumbers li {
     width: 25px;
-    line-height: 20px;
+    line-height: 25px;
     text-align: right;
     padding-right: 5px;
     list-style: none;
@@ -2916,10 +2980,32 @@ table.centered_content td {
   padding: 0;
   display: inline-block; }
   .dragSortList_values li {
-    width: 150px;
-    line-height: 20px;
+    cursor: grab;
+    width: 200px;
+    line-height: 25px;
     text-align: left;
-    padding-right: 5px;
+    padding-left: 5px;
+    list-style: none;
+    background: linear-gradient(to right, #D1EEF5, #FFFFFF);
+    border: 1px solid #0099C7;
+    border-radius: 0 8px 8px 0;
+    -webkit-transition: box-shadow 0.15s ease-in-out;
+    -moz-transition: box-shadow 0.15s ease-in-out;
+    -ms-transition: box-shadow 0.15s ease-in-out;
+    -o-transition: box-shadow 0.15s ease-in-out;
+    transition: box-shadow 0.15s ease-in-out; }
+  .dragSortList_values li:active {
+    cursor: grabbing;
+    box-shadow: 0 0 20px 0px #000000; }
+
+.dragSortListStatic_values {
+  padding: 0;
+  display: inline-block; }
+  .dragSortListStatic_values li {
+    width: 200px;
+    line-height: 25px;
+    text-align: left;
+    padding-left: 5px;
     list-style: none;
     background: linear-gradient(to right, #D1EEF5, #FFFFFF);
     border: 1px solid #0099C7;
