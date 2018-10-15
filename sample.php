@@ -50,5 +50,6 @@ require("header.php");
         </form>
     ';
 
+include("footer.php");
 
 ?>
