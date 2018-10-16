@@ -4,7 +4,7 @@
 
      if(isset($_POST['start_import']))
      {
-       $row = 1;
+       /*$row = 1;
        if (($handle = fopen("test.csv", "r")) !== FALSE) {
            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                $num = count($data);
@@ -15,6 +15,57 @@
                 }
             }
             fclose($handle);
+        }*/
+
+        class Csv2Array{
+          public $file="C:\xampp\htdocs\Badminton\test.csv";
+          public $header;
+          private $lines;
+          private $position;
+
+          function __construct($file)
+          {
+            $this->file = $file;
+            $this->readLines();
+            $this->readHeader();
+            $this->position = 1;
+          }
+
+
+
+          private function readHeader()
+          {
+               $this->header = split(';',$this->lines[0]);
+          }
+
+          public function getNextRow()
+          {
+            if($this->lines[$this->position])
+            {
+             $line = split(';',$this->lines[$this->position]);
+             $columnposition = 0;
+             foreach($this->header as $column)
+             {
+             $res[$column] = $line[$columnposition];
+             $columnposition++;
+             }
+                $this->position++;
+            }
+                return $res;
+          }
+
+          private function readLines()
+          {
+            if($handle = fopen($this->file, "r"))
+            {
+                $this->lines=file($this->file);
+                return true;
+            }
+            else
+            {
+            return false;
+            }
+          }
         }
     }
 
@@ -26,6 +77,31 @@
 
         <button type="submit" name="start_import" class="stagfade3">Importiere CSV</button>
         </form>
+        <table>
+          <thead>
+            <tr>
+        ';
+        <?php
+                foreach($csv2array->header as $column){
+                  echo "<td>".$column."</td>";
+                }
+              ?>
+        echo'
+            </tr>
+          </thead>
+          <tbody>
+        ';'
+            <?PHP
+              while($row = $csv2array->getNextRow()){
+                echo "<tr>";
+                  foreach($row as $column){
+                    echo "<td>".$column."</td>";
+                  }
+                echo "</tr>";
+              }
+            ?>
+          </tbody>
+        </table>
 
 
     ';
