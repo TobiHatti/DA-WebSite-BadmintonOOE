@@ -81,17 +81,27 @@
           <thead>
             <tr>
         ';
-        <?php
-                foreach($csv2array->header as $column){
-                  echo "<td>".$column."</td>";
-                }
-              ?>
-        echo'
+
+
+
+
+
+
+    if(isset($_POST['start_import']))
+    {
+      <?php>
+
+      <?>
+        foreach($csv2array->header as $column){
+          echo "<td>".$column."</td>";
+        }
+
+
             </tr>
           </thead>
           <tbody>
-        ';'
-            <?PHP
+
+
               while($row = $csv2array->getNextRow()){
                 echo "<tr>";
                   foreach($row as $column){
@@ -99,12 +109,10 @@
                   }
                 echo "</tr>";
               }
-            ?>
+
           </tbody>
         </table>
-
-
-    ';
+    }
 
     include("footer.php");
 
