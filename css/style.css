@@ -386,6 +386,9 @@ h5 {
 .ta_r {
   text-align: right; }
 
+.ta_c {
+  text-align: center; }
+
 /*===================================================================================*/
 /* (Z06) Pager                                                                       */
 /*===================================================================================*/
@@ -2981,7 +2984,7 @@ table.centered_content td {
   display: inline-block; }
   .dragSortList_values li {
     cursor: grab;
-    width: 200px;
+    width: 250px;
     line-height: 25px;
     text-align: left;
     padding-left: 5px;
@@ -3002,7 +3005,7 @@ table.centered_content td {
   padding: 0;
   display: inline-block; }
   .dragSortListStatic_values li {
-    width: 200px;
+    width: 250px;
     line-height: 25px;
     text-align: left;
     padding-left: 5px;
@@ -3010,5 +3013,50 @@ table.centered_content td {
     background: linear-gradient(to right, #D1EEF5, #FFFFFF);
     border: 1px solid #0099C7;
     border-radius: 0 8px 8px 0; }
+
+.reihungFold {
+  position: relative; }
+  .reihungFold .infoContainer {
+    position: absolute;
+    left: 50px;
+    top: -45px;
+    display: none;
+    width: 230px;
+    height: 200px;
+    background: #FFFFFF;
+    box-shadow: 0 0 15px 2px #303030;
+    overflow: visible;
+    cursor: default;
+    font-size: 12pt;
+    padding: 5px;
+    opacity: 0;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; }
+  .reihungFold .infoContainer:before {
+    position: absolute;
+    content: "";
+    transform: rotate(45deg);
+    display: block;
+    background: #FFFFFF;
+    width: 15px;
+    height: 15px;
+    top: 50px;
+    left: -8px; }
+  .reihungFold .infoContainer:after {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 50px;
+    height: 40px;
+    left: -50px;
+    top: 35px; }
+
+.reihungFold:hover .infoContainer,
+.infoContainer:hover .infoContainer {
+  display: block;
+  opacity: 1; }
 
 /*# sourceMappingURL=style.css.map */
