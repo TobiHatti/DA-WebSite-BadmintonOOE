@@ -1048,3 +1048,10 @@ function CheckSortableListState(ulListID,outputID)
         output.value = output.value + (i+1) + "##" + myListItems[i].value + "||";
     }
 }
+
+function RedirectSelectBox(e,linkBase)
+{
+    var selectedOption = e.options[e.selectedIndex].value;
+
+    window.location.replace(linkBase + selectedOption);
+}

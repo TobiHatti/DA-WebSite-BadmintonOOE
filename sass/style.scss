@@ -334,6 +334,10 @@ h5{
     text-align: right;
 }
 
+.ta_c{
+    text-align: center;
+}
+
 /*===================================================================================*/
 /* (Z06) Pager                                                                       */
 /*===================================================================================*/
@@ -2938,7 +2942,7 @@ $listItemHeight: 25px;
 
     li{
         cursor: grab;
-        width: 200px;
+        width: 250px;
         line-height: $listItemHeight;
         text-align: left;
         padding-left: 5px;
@@ -2962,7 +2966,7 @@ $listItemHeight: 25px;
     display: inline-block;
 
     li{
-        width: 200px;
+        width: 250px;
         line-height: $listItemHeight;
         text-align: left;
         padding-left: 5px;
@@ -2970,5 +2974,61 @@ $listItemHeight: 25px;
         background: linear-gradient(to right, $theme-vibrant-bright-l, #FFFFFF);
         border: 1px solid $theme-vibrant-medium;
         border-radius: 0 8px 8px 0;
+    }
+}
+
+.reihungFold{
+    position: relative;
+    .infoContainer{
+        position: absolute;
+        left: 50px;
+        top: -45px;
+        display: none;
+        width: 230px;
+        height: 200px;
+        background: #FFFFFF;
+        box-shadow: 0 0 15px 2px #303030;
+        overflow: visible;
+        cursor: default;
+        font-size: 12pt;
+        padding: 5px;
+        opacity: 0;
+        @include ease(0.2s);
+
+    }
+
+    // arrow icon
+    .infoContainer:before{
+        position: absolute;
+        content: "";
+        transform: rotate(45deg);
+        display: block;
+        background: #FFFFFF;
+        width: 15px;
+        height: 15px;
+        top: 50px;
+        left: -8px;
+
+    }
+
+    // cursor bridge (only for better usage)
+    .infoContainer:after{
+        position: absolute;
+        content: "";
+        display: block;
+        //background: orange;
+        width: 50px;
+        height: 40px;
+        left: -50px;
+        top: 35px;
+    }
+
+}
+
+.reihungFold:hover,
+.infoContainer:hover{
+    .infoContainer{
+        display: block;
+        opacity: 1;
     }
 }
