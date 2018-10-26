@@ -21,6 +21,7 @@
 
     if(CheckRank() == "clubmanager")
     {
+        $club = Fetch("users","club","id",$_SESSION['userID']);
         if(isset($_GET['mitglieder']))
         {
             if(isset($_GET['neu']))
@@ -75,7 +76,7 @@
 
                 ';
 
-                $strSQL = "SELECT * FROM members ORDER BY birthdate DESC";
+                $strSQL = "SELECT * FROM members WHERE club = '$club' ORDER BY birthdate DESC";
                 $rs=mysqli_query($link,$strSQL);
                 while($row=mysqli_fetch_assoc($rs))
                 {
@@ -123,7 +124,7 @@
 
             ';
 
-            $strSQL = "SELECT * FROM members ORDER BY birthdate DESC";
+            $strSQL = "SELECT * FROM members WHERE club = '$club' ORDER BY birthdate DESC";
                 $rs=mysqli_query($link,$strSQL);
                 while($row=mysqli_fetch_assoc($rs))
                 {

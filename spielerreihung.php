@@ -344,7 +344,7 @@
                                     '.$row['number'].' - '.$row['firstname'].' '.$row['lastname'].'
                                     <span style="float: right; font-size: 8pt; padding-right: 4px;" class="reihungFold">
                                         Mehr &raquo;
-                                        <div class="infoContainer">
+                                        <div class="infoContainerSmall">
                                             <table>
                                                 <tr>
                                                     <td class="ta_r">Team: </td>

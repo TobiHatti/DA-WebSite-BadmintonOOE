@@ -11,7 +11,7 @@ function Checkbox($name, $id, $checked = 0,$onchange="")
     return '<input type="checkbox" name="'.$name.'" id="'.$id.'" onchange="'.$onchange.'" class="slidecheckbox" '.(($checked) ? 'checked' : '').'/><label class="checkbox_toggle_lable" for="'.$id.'">Toggle</label>';
 }
 
-function Tickbox($name, $id, $text, $checked = 0,$onchange="")
+function Tickbox($name, $id, $text, $checked = false,$onchange="")
 {
     // DESCRIPTION:
     // Returns a Checkbox Form-Element
