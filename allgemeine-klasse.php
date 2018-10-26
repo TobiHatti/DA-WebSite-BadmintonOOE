@@ -5,7 +5,7 @@
     echo '<h1 class="stagfade1">Allgemeine Klasse</h1>
 
 
-    <a href="spielerrangliste/2017-2018">Spielerrangliste 2017-2018</a>
+    <a href="spielerrangliste/2017-2018/alle">Spielerrangliste 2017-2018</a>
 
 
 

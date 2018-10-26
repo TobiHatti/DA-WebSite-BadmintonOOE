@@ -47,7 +47,7 @@ RewriteRule ^verein-info/mitglieder verein-info.php?mitglieder [NC,QSA,L]
 RewriteRule ^spielerreihung/bearbeiten spielerreihung.php?bearbeiten [NC,QSA,L]
 
 # Rewrite Rules for spielerrangliste.php
-RewriteRule ^spielerrangliste/([a-zA-Z0-9-]+)/?$ spielerrangliste.php?year=$1 [NC,QSA,L]
+RewriteRule ^spielerrangliste/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/?$/?$ spielerrangliste.php?year=$1&club=$2 [NC,QSA,L]
 
 # Rewrite Rules for delete.php
 RewriteRule ^delete/(.*)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-]+)/?$/?$/?$ delete.php?t=$1&s=$2&i=$3 [NC,QSA,L]
