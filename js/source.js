@@ -1055,3 +1055,39 @@ function RedirectSelectBox(e,linkBase)
 
     window.location.replace(linkBase + selectedOption);
 }
+
+function RedirectSelectBoxSpielerrangliste(e,linkBase)
+{
+    var selectedOption = e.options[e.selectedIndex].value;
+
+    if(selectedOption == "multi") document.getElementById("clubToggleList").style.display = "table-row";
+    else
+    {
+        document.getElementById("clubToggleList").style.display = "none";
+        window.location.replace(linkBase + selectedOption);
+    }
+}
+
+
+function UpdateClubList(e,club)
+{
+    var list = document.getElementById("customList");
+
+    if(e.checked)
+    {
+
+        list.value = list.value + club + "-";
+    }
+    else
+    {
+        list.value = list.value.replace(club + '-','')
+    }
+}
+
+function RedirectCustomClubList(linkBase)
+{
+    var selectedClubs = document.getElementById("customList").value;
+    selectedClubs = selectedClubs.substring(0, selectedClubs.length - 1);
+
+    window.location.replace(linkBase + "M" + selectedClubs);
+}
