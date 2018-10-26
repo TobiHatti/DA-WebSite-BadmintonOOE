@@ -37,44 +37,14 @@
     else if(isset($_GET['neu']) AND CheckPermission("AddNews"))
     {
         echo '
-            <h2 class="stagfade1">Neuen Artikel verfassen</h2>
+            <h2 class="stagfade1">Spieler des Monats Artikel verfassen</h2>
             <hr>
             <form action="/news?check" method="post" accept-charset="utf-8" enctype="multipart/form-data" onkeypress="return event.keyCode != 13;">
                 <div class="stagfade2">
                     <p>Verfassen Sie den neuen Artikel in dem untenstehenden Textfeld:</p>
-                    <a href="#imageMaker"><button type="button" style="float: right; margin-top: -40px;">Bild-Ersteller</button></a>
                     '.TextareaPlus("content","article","<h2>Artikel-Titel</h2>Hier den Artikel verfassen...",true).'
                     <br>
                     <hr>
-                </div>
-
-                <div class="modal_wrapper" id="imageMaker">
-                    <a href="#c">
-                        <div class="modal_bg"></div>
-                    </a>
-                    <div class="modal_container" style="width: 50%; height: 60%;">
-                        <h3>Bild-Ersteller</h3>
-
-                        Vorlagen:
-                        <select onchange="ChangeNewsImageCreatorLink();" id="themeSelector">
-                            <option value="" selected disabled>--- Ausw&auml;hlen ---</option>
-                            ';
-                            $strSQL = "SELECT * FROM news_templates ORDER BY name ASC";
-                            $rs=mysqli_query($link,$strSQL);
-                            while($row=mysqli_fetch_assoc($rs))
-                            {
-                                echo '<option value="'.$row['id'].'">'.$row['name'].'</option> ';
-                            }
-                            echo '
-                        </select>
-                         oder:
-                        <a href="/news-vorlagen">Neue Vorlage erstellen</a>
-                        <br><br>
-                        <iframe src="/newsimagecreator" frameborder="0" style="width: 100%; height: 88%;" id="imageCreatorFrame"></iframe>
-
-
-
-                    </div>
                 </div>
 
                 <!--
@@ -89,21 +59,7 @@
 
                 -->
 
-                <div class="stagfade3">
-                    <h3>Tags</h3>
-                        F&uuml;gen Sie dem Artikel Tags hinzu, um ihn schneller finden und sortieren zu k&ouml;nnen:<br><br>
-                        '.TagSelector('tags').'
-                    <br>
-                    <hr>
-                </div>
-                <div class="stagfade4">
-                    <h3>Ver&ouml;ffentlichung</h3>
-                    W&auml;hlen Sie den Zeitpunkt aus, zu dem der Artikel ver&ouml;ffentlicht werden soll (Standart: Sofort)<br>
-                    <i>Format: [TT.MM.JJJJ]</i><br><br>
-                    <input type="date" value="'.date("Y-m-d").'" id="relDate" name="release_date" class="cel_m"/>
-                    <button type="button" onclick="document.getElementById(\'relDate\').value=\''.date("Y-m-d").'\'">&#128197; Heute</button>
-                    <hr>
-                </div>
+                
                 <div class="stagfade5">
                     <br><br>
                     <button type="submit">&#10148; Vorschau</button>
