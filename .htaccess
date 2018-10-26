@@ -18,6 +18,9 @@ RewriteRule ^news/artikel/([a-zA-Z0-9-]+)/?$ news.php?artikel=$1 [NC,QSA,L]
 RewriteRule ^news/suche news.php?suche [NC,QSA,L]
 RewriteRule ^news/kategorie/([a-zA-Z0-9-]+)/?$ news.php?kategorie=$1 [NC,QSA,L]
 
+# Rewrite Rules for gamerofmonth.php
+RewriteRule ^gamerofmonth/neu gamerofmonth.php?neu [NC,QSA,L]
+
 # Rewrite Rules for ooem-archiv.php
 RewriteRule ^ooemm-archiv/jahr/([a-zA-Z0-9-]+)/?$ ooemm-archiv.php?jahr=$1 [NC,QSA,L]
 
