@@ -55,6 +55,11 @@ RewriteRule ^spielerrangliste/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/?$/?$ spielerrangl
 # Rewrite Rules for delete.php
 RewriteRule ^delete/(.*)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-]+)/?$/?$/?$ delete.php?t=$1&s=$2&i=$3 [NC,QSA,L]
 
+# Rewrite Rules for filecreators
+RewriteRule ^spielerrangliste/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/pdf/?$/?$ filecreators/pdf-spielerrangliste.php?year=$1&club=$2 [NC,QSA,L]
+RewriteRule ^spielerrangliste/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/xls/?$/?$ filecreators/xls-spielerrangliste.php?year=$1&club=$2 [NC,QSA,L]
+RewriteRule ^spielerrangliste/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/csv/?$/?$ filecreators/csv-spielerrangliste.php?year=$1&club=$2 [NC,QSA,L]
+
 
 #Ignore .php-Extension
 RewriteRule ^([^\.]+)$ $1.php [NC,L]

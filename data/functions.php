@@ -1049,4 +1049,18 @@ function Age($birthDate)
     return $age;
 }
 
+
+function LetterCorrection($input_string)
+{
+    $input_string = str_replace("Ã¤","ä",$input_string);
+    $input_string = str_replace("Ã„","Ä",$input_string);
+    $input_string = str_replace("Ã¶","ö",$input_string);
+    $input_string = str_replace("Ã–","Ö",$input_string);
+    $input_string = str_replace("Ã¼","ü",$input_string);
+    $input_string = str_replace("Ãœ","Ü",$input_string);
+    $input_string = str_replace("ÃŸ","ß",$input_string);
+
+    return $input_string;
+}
+
 ?>
