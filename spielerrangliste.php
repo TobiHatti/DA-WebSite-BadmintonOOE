@@ -4,9 +4,9 @@
     $year = $_GET['year'];
     $club = $_GET['club'];
 
-    $accentColor1 = '#FFB152';
-    $accentColor2 = '#9E0000';
-    $highlightColor = '#FFFF00';
+    $accentColor1 = '#'.Fetch("ranglisten_settings","value","setting","Y".$year."ColorA");
+    $accentColor2 = '#'.Fetch("ranglisten_settings","value","setting","Y".$year."ColorB");
+    $highlightColor = '#'.Fetch("ranglisten_settings","value","setting","HighlightColor");
 
     $lastChange = '26.10.2018';
 
@@ -48,11 +48,17 @@
 
                         echo '
 
-                        <input type="" id="customList"/>
+                        <input type="hidden" id="customList"/>
                         <button type="button" onclick="RedirectCustomClubList(\'/spielerrangliste/'.$year.'/\')">Anzeigen</button>
                         </td>
                     </tr>
                 </table>
+
+                <a target="_blank" href="/spielerrangliste/'.$_GET['year'].'/'.$_GET['club'].'/pdf"><button type="button"><i class="fa fa-file-pdf-o"></i> Exportieren als PDF</button></a>
+                <a target="_blank" href="/spielerrangliste/'.$_GET['year'].'/'.$_GET['club'].'/xls"><button type="button"><i class="fa fa-file-excel-o"></i> Exportieren als XLS</button></a>
+                <a target="_blank" href="/spielerrangliste/'.$_GET['year'].'/'.$_GET['club'].'/csv"><button type="button"><i class="fa fa-file-excel-o"></i> Exportieren als CSV</button></a>
+
+
             </center>
         <hr>
     ';
