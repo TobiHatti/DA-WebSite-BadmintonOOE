@@ -1,9 +1,6 @@
 <?php
-session_start();
-    require('../data/functions.php');
-    require('../data/mysql.lib.php');
-    require('../data/string.lib.php');
-    require('../data/mysql_connect.php');
+
+    require("../downloading.php");
     require('../data/fpdf/main_functions.php');
     require('../data/phpspreadsheet/vendor/autoload.php');
 
@@ -18,6 +15,8 @@ session_start();
 
     $year = $_GET['year'];
     $club = $_GET['club'];
+    $originalClub = $club;
+
 
     $color1 = Fetch("ranglisten_settings","value","setting","Y".$year."ColorA");
     $color2 = Fetch("ranglisten_settings","value","setting","Y".$year."ColorB");
@@ -291,7 +290,7 @@ session_start();
         $startRow = $pageCounter;
         $pageCounter+=2;
 
-        $cellCluster = ['ATV Andorf',NULL,NULL,NULL,NULL,'301',"Änderungen/\nMannschaftsf.",'Handy-Nr.','E-Mail'];
+        $cellCluster = [$clubVals['verein'].' '.$clubVals['ort'],NULL,NULL,NULL,NULL,$club,"Änderungen/\nMannschaftsf.",'Handy-Nr.','E-Mail'];
         $spreadsheet->getActiveSheet()->fromArray($cellCluster,NULL,'A'.$startRow);
         $spreadsheet->getActiveSheet()->getStyle('G'.$startRow)->getAlignment()->setWrapText(true);
         $spreadsheet->getActiveSheet()->mergeCells('A'.$startRow.':E'.$startRow);
@@ -410,9 +409,12 @@ session_start();
     }
 
 
+    $filename = 'Spielerrangliste-'.$year.'-'.$originalClub.'.xlsx';
+    $path = "../files/spielerranglisten/$filename";
+    $pathDL = "files/spielerranglisten/$filename";
 
     $writer = new Xlsx($spreadsheet);
-    $writer->save('Spielerrangliste-'.$_GET['year'].'-'.$_GET['club'].'.xlsx');
+    $writer->save($path);
 
-
+    Redirect("/forceDownload?file=".urlencode($pathDL));
 ?>
