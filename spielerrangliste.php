@@ -55,9 +55,8 @@
                 </table>
 
                 <a target="_blank" href="/spielerrangliste/'.$_GET['year'].'/'.$_GET['club'].'/pdf"><button type="button"><i class="fa fa-file-pdf-o"></i> Exportieren als PDF</button></a>
-                <a target="_blank" href="/spielerrangliste/'.$_GET['year'].'/'.$_GET['club'].'/xls"><button type="button"><i class="fa fa-file-excel-o"></i> Exportieren als XLS</button></a>
-                <a target="_blank" href="/spielerrangliste/'.$_GET['year'].'/'.$_GET['club'].'/csv"><button type="button"><i class="fa fa-file-excel-o"></i> Exportieren als CSV</button></a>
-
+                <a href="/spielerrangliste/'.$_GET['year'].'/'.$_GET['club'].'/xls"><button type="button"><i class="fa fa-file-excel-o"></i> Exportieren als XLS</button></a>
+                <a href="/spielerrangliste/'.$_GET['year'].'/'.$_GET['club'].'/csv"><button type="button"><i class="fa fa-file-excel-o"></i> Exportieren als CSV</button></a>
 
             </center>
         <hr>
