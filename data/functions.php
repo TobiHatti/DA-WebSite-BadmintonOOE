@@ -752,7 +752,7 @@ function ExportCSVAgenda($db,$id="",$multiple="")
     // $multiple    export an entire month/year (format = 2018-02 / 2018)
 
     $inhalt = "Subject;Start Date;Start Time;End Date;End Time;All Day Event;Description;Location;Private\r\n";
-    $path = "files/kalendar/";
+    $path = "files/kalender/";
 
     require("mysql_connect.php");
 
@@ -774,7 +774,7 @@ function ExportCSVAgenda($db,$id="",$multiple="")
             }
         }
 
-        $handle = fopen ($path.$filename, 'w');
+        $handle = fopen($path.$filename, 'w');
     }
     else
     {

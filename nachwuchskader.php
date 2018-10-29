@@ -150,7 +150,7 @@
                             </tr>
 
                             <tr>
-                                <td colspan=2 class="ta_c"><br><button type="submit" name="add_nwk">&Auml;nderungen Speichern</button></td>
+                                <td colspan=2 class="ta_c"><br><button type="submit" name="edit_nwk" value="'.$pdat['id'].'">&Auml;nderungen Speichern</button></td>
                             </tr>
                         </table>
                     </center>
@@ -165,8 +165,8 @@
         echo '
         <h3 style="color: blue">Burschen U19 ('.(date("Y") - 18).' - '.(date("Y") - 15).')</h3>
         ';
-        $minYear = date("Y-m-d") - 18;
-        $maxYear = date("Y-m-d") - 15;
+        $minYear = date("Y-m-d",strtotime(date("Y-m-d").' -18 year'));
+        $maxYear = date("Y-m-d",strtotime(date("Y-m-d").' -15 year'));
         $strSQL = "SELECT * FROM nachwuchskader WHERE gender = 'M' AND birthdate >= '$minYear' AND birthdate <= '$maxYear'";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
@@ -219,8 +219,8 @@
         <br><br>
         <h3 style="color: blue">Burschen U15 ('.(date("Y") - 14).' - '.(date("Y") - 13).')</h3>
         ';
-        $minYear = date("Y-m-d") - 14;
-        $maxYear = date("Y-m-d") - 13;
+        $minYear = date("Y-m-d",strtotime(date("Y-m-d").' -14 year'));
+        $maxYear = date("Y-m-d",strtotime(date("Y-m-d").' -13 year'));
         $strSQL = "SELECT * FROM nachwuchskader WHERE gender = 'M' AND birthdate >= '$minYear' AND birthdate <= '$maxYear'";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
@@ -273,8 +273,8 @@
         <br><br>
         <h3 style="color: blue">Burschen U13 ('.(date("Y") - 12).' - '.(date("Y") - 11).')</h3>
         ';
-        $minYear = date("Y-m-d") - 12;
-        $maxYear = date("Y-m-d") - 11;
+        $minYear = date("Y-m-d",strtotime(date("Y-m-d").' -12 year'));
+        $maxYear = date("Y-m-d",strtotime(date("Y-m-d").' -11 year'));
         $strSQL = "SELECT * FROM nachwuchskader WHERE gender = 'M' AND birthdate >= '$minYear'";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
