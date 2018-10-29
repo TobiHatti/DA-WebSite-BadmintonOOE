@@ -56,10 +56,38 @@
         ';
     }
 
+    if(CheckPermission("ChangeContent")) echo '<table><tr><td>Rundruf-Nachricht anzeigen:</td><td>'.Checkbox("toggleBroadcast", "toggleBroadcast",GetProperty("ShowBroadcast")=="true","window.location.replace('index?toggleBroadcast')").'</td></tr></table>';
+
+    if(GetProperty("ShowBroadcast")=="true")
+    {
+        echo '
+            <h2>Rundruf</h2>
+            <hr>
+            <div>
+            '.PageContent("5",CheckPermission("ChangeContent"),"index",true).'
+            </div>
+        ';
+    }
+
     echo '
             <div class="doublecol">
                 <article>
-                    <h2>News</h2>
+                    <div style="position: relative">
+                        <h2>News</h2>
+                        ';
+
+                        if(CheckPermission("AddNews"))
+                        {
+                            echo '
+                                <div style="position: absolute; top: 0px; left: 70px;">
+                                    '.AddButton("/news/neu",false,false,"News-Artikel hinzuf&uuml;gen").'<br>
+                                    '.AddButton("/spieler-des-monats/neu",false,false,"\"Spieler des Monats\" hinzuf&uuml;gen").'
+                                </div>
+                            ';
+                        }
+
+                        echo '
+                        </div>
                     <hr>
 
                     <center>
@@ -70,21 +98,37 @@
                                     //RefreshSliderContent();
                                     // 3 SQL-Queries are required for the slider to work in the best way.
                                     // Bundeling some queries can slow the slider down and skip slides
+                                    if(MySQLCount("SELECT * FROM news WHERE tags = 'Spieler-des-Monats'")>0)
+                                    {
+                                        $sdm = MySQLGetRow("SELECT * FROM news WHERE tags = 'Spieler-des-Monats' ORDER BY id DESC LIMIT 0,1");
+                                        $showSDM = GetProperty("ShowSpielerDesMonats");
+                                    }
+                                    else $showSDM = false;
+
+
+                                    $sdmPosition = 2;
                                     $i=1;
                                     $refreshID = uniqid();
-                                    $strSQL = "SELECT * FROM news WHERE thumbnail NOT LIKE '' ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
+                                    $strSQL = "SELECT * FROM news WHERE thumbnail NOT LIKE '' AND tags NOT LIKE 'Spieler-des-Monats' ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
                                     $rs=mysqli_query($link,$strSQL);
                                     while($row=mysqli_fetch_assoc($rs))
                                     {
-                                        echo '
-                                        <li>
-                                            <img src="/content/news/_slideshow/slide_'.$i.'.jpg?'.$refreshID.'" title="'.$row['title'].'" id="wows1_'.($i-1).'"/>
-                                        </li>
-                                        ';
+                                        if($showSDM=='true' AND $sdmPosition==$i)
+                                        {
+                                            echo '
+                                                <li>
+                                                    <img src="/content/news/_slideshow/slide_sdm.jpg?'.$refreshID.'" title="'.$sdm['title'].'" id="wows1_99"/>
+                                                </li>
+                                            ';
+                                        }
 
+                                        echo '
+                                            <li>
+                                                <img src="/content/news/_slideshow/slide_'.$i.'.jpg?'.$refreshID.'" title="'.$row['title'].'" id="wows1_'.($i-1).'"/>
+                                            </li>
+                                        ';
                                         $i++;
                                     }
-
                                     echo '
                                 </ul>
                             </div>
@@ -93,10 +137,15 @@
                                     ';
 
                                     $i=1;
-                                    $strSQL = "SELECT * FROM news WHERE thumbnail NOT LIKE '' ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
+                                    $strSQL = "SELECT * FROM news WHERE thumbnail NOT LIKE '' AND tags NOT LIKE 'Spieler-des-Monats' ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
                                     $rs=mysqli_query($link,$strSQL);
                                     while($row=mysqli_fetch_assoc($rs))
                                     {
+                                        if($showSDM=='true' AND $sdmPosition==$i)
+                                        {
+                                            echo '<a href="#" title="'.$sdm['title'].'"><span><img src="/content/news/_slideshow/slide_sdm.jpg?'.$refreshID.'" alt="'.$sdm['title'].'" height="48px"/>99</span></a>';
+                                        }
+
                                         echo '<a href="#" title="'.$row['title'].'"><span><img src="/content/news/_slideshow/slide_'.$i.'.jpg?'.$refreshID.'" alt="'.$row['title'].'" height="48px"/>'.$i++.'</span></a>';
                                     }
 
@@ -112,10 +161,19 @@
                     ';
 
                     $i=1;
-                    $strSQL = "SELECT * FROM news WHERE thumbnail NOT LIKE '' ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
+                    $strSQL = "SELECT * FROM news WHERE thumbnail NOT LIKE '' AND tags NOT LIKE 'Spieler-des-Monats' ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
                     $rs=mysqli_query($link,$strSQL);
                     while($row=mysqli_fetch_assoc($rs))
                     {
+                        if($showSDM=='true' AND $sdmPosition==$i)
+                        {
+                            echo '
+                                <input type="hidden" id="slideTitle99" value="'.$sdm['title'].'">
+                                <input type="hidden" id="slideDate99" value="'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($sdm['release_date']))).'">
+                                <input type="hidden" id="slideLink99" value="'.$sdm['article_url'].'">
+                            ';
+                        }
+
                         echo '
                             <input type="hidden" id="slideTitle'.$i.'" value="'.$row['title'].'">
                             <input type="hidden" id="slideDate'.$i.'" value="'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['release_date']))).'">
@@ -127,7 +185,7 @@
 
                     <script>
                         window.setInterval(function(){
-                            CopySliderTitle('.$sliderLimit.');
+                            CopySliderTitle('.$sliderLimit.','.$showSDM.');
                         }, 500);
                     </script>
 
@@ -176,96 +234,61 @@
 
                 <div class="tripple_container">
                     <div>
-                        <h3>Meisterschaft [WIP]</h3>
+                        <h3>Meisterschaft</h3>
                         <hr>
-                        <center>
-                            <br>
-                            <select name="" id="Meisterschaft" onchange="RedirectListLink(\'Meisterschaft\');">
-                                <option value="" selected disabled>&#9135;&#9135; Tabelle Ausw&auml;hlen &#9135;&#9135;</option>
-                                <option value="http://obv.tournamentsoftware.com/sport/draw.aspx?id=D99AEEED-819E-4D1D-9648-4FE568AB2777&draw=1">1. Bundesliga</option>
-                                <option value="http://obv.tournamentsoftware.com/sport/draw.aspx?id=D99AEEED-819E-4D1D-9648-4FE568AB2777&draw=2">2. Bundesliga</option>
-                                <option value="http://obv.tournamentsoftware.com/sport/draw.aspx?id=7E6C0314-C641-4A5D-93D8-52C3E0EE981D&draw=3">1. Landesliga</option>
-                                <option value="http://obv.tournamentsoftware.com/sport/draw.aspx?id=7E6C0314-C641-4A5D-93D8-52C3E0EE981D&draw=5">2. Landesliga Nord</option>
-                                <option value="http://obv.tournamentsoftware.com/sport/draw.aspx?id=7E6C0314-C641-4A5D-93D8-52C3E0EE981D&draw=6">2. Landesliga S&uuml;d</option>
-                                <option value="http://obv.tournamentsoftware.com/sport/draw.aspx?id=7E6C0314-C641-4A5D-93D8-52C3E0EE981D&draw=7">Bezirksliga Nord</option>
-                                <option value="http://obv.tournamentsoftware.com/sport/draw.aspx?id=7E6C0314-C641-4A5D-93D8-52C3E0EE981D&draw=8">Bezirksliga S&uuml;d</option>
-                                <option value="http://obv.tournamentsoftware.com/sport/draw.aspx?id=7E6C0314-C641-4A5D-93D8-52C3E0EE981D&draw=1">1. Klasse Nord</option>
-                                <option value="http://obv.tournamentsoftware.com/sport/draw.aspx?id=7E6C0314-C641-4A5D-93D8-52C3E0EE981D&draw=2">1. Klasse S&uuml;d</option>
-                                <option value="http://obv.tournamentsoftware.com/sport/draw.aspx?id=7E6C0314-C641-4A5D-93D8-52C3E0EE981D&draw=4">2. Klasse</option>
-                                <option value="http://obv.tournamentsoftware.com/sport/events.aspx?id=C5983872-69F8-4E1B-A463-CB1DB1323A39&tlt=1">SCH-JGD-O&Ouml;MM</option>
-                            </select>
-                            <br>
-                            <table>
-                                <tr>
-                                    <td><b>Pl</b></td>
-                                    <td><b>Mannschaft</b></td>
-                                    <td><b>Sp</b></td>
-                                    <td><b>Pkt</b></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align:right;">1</td>
-                                    <td>BSC 70 Linz 2</td>
-                                    <td style="text-align:center;">10</td>
-                                    <td style="text-align:center;">28</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align:right;">2</td>
-                                    <td>Union Oaschdorf</td>
-                                    <td style="text-align:center;">10</td>
-                                    <td style="text-align:center;">25</td>
+                        ';
+                        if(CheckPermission("ChangeContent")) echo EditButton("/home/Meisterschaft/bearbeiten");
 
-                                </tr>
-                                <tr>
-                                    <td style="text-align:right;">3</td>
-                                    <td>U. W-garsten 1</td>
-                                    <td style="text-align:center;">10</td>
-                                    <td style="text-align:center;">21</td>
+                        echo '
+                            <center>
+                                <select onchange="RedirectListLink(this);">
+                                    <option value="" selected disabled>&#9135;&#9135; Tabelle Ausw&auml;hlen &#9135;&#9135;</option>
+                                    ';
 
-                                </tr>
-                                 <tr>
-                                    <td style="text-align:right;">4</td>
-                                    <td>ASK&Ouml; Traun 2</td>
-                                    <td style="text-align:center;">10</td>
-                                    <td style="text-align:center;">20</td>
-                                </tr>
-                                 <tr>
-                                    <td style="text-align:right;">5</td>
-                                    <td>UBC Vorchdorf 2</td>
-                                    <td style="text-align:center;">10</td>
-                                    <td style="text-align:center;">14</td>
-                                </tr>
-                                 <tr>
-                                    <td style="text-align:right;">6</td>
-                                    <td>UBC Neuhofen 1</td>
-                                    <td style="text-align:center;">10</td>
-                                    <td style="text-align:center;">12</td>
-                                </tr>
-                            </table>
-                        </center>
+                                    $strSQL = "SELECT * FROM home_tiles WHERE tile = 'Meisterschaft' ORDER BY id ASC";
+                                    $rs=mysqli_query($link,$strSQL);
+                                    while($row=mysqli_fetch_assoc($rs)) echo '<option value="'.$row['value'].'">'.$row['text'].'</option>';
+
+                                    echo '
+                                </select>
+                            </center>
+                        ';
+
+                        echo MySQLSkalar("SELECT text AS x FROM page_content WHERE page = 'index' AND paragraph_index = '1'");
+
+                        echo '
                     </div>
                     <div>
-                        <h3>Ranglisten [WIP]</h3>
+                        <h3>Ranglisten</h3>
                         <hr>
+                        ';
+                        if(CheckPermission("ChangeContent")) echo EditButton("/home/Ranglisten/bearbeiten");
+
+                        echo '
                         <br>
                         <center>
-                            <select name="" id="">
+                            <select onchange="RedirectListLink(this);">
                                 <option value="" selected disabled>&#9135;&#9135; Rangliste Ausw&auml;hlen &#9135;&#9135;</option>
-                                <option value="">O&Ouml;BV DD Allg. Klasse</option>
-                                <option value="">O&Ouml;BV HD Allg. Klasse</option>
-                                <option value="">O&Ouml;BV Mixed Allg. Klasse</option>
-                                <option value="">&Ouml;BV DE Allg. Klasse</option>
-                                <option value="">&Ouml;BV HE Allg. Klasse</option>
-                                <option value="">&Ouml;BV DD Allg. Klasse</option>
-                                <option value="">&Ouml;BV HD Allg. Klasse</option>
-                                <option value="">&Ouml;BV Mixed Allg. Klasse</option>
+                                ';
+
+                                $strSQL = "SELECT * FROM home_tiles WHERE tile = 'Ranglisten' ORDER BY id ASC";
+                                $rs=mysqli_query($link,$strSQL);
+                                while($row=mysqli_fetch_assoc($rs)) echo '<option value="'.$row['value'].'">'.$row['text'].'</option>';
+
+                                echo '
                             </select>
                             <br><br>
                             <img src="/content/ooebv.png" alt="" width="100px;"/>
                         </center>
                     </div>
                     <div>
-                        <h3>Links [WIP]</h3>
+                        <h3>Links</h3>
                         <hr>
+                        ';
+                        if(CheckPermission("ChangeContent")) echo EditButton("/home/Links/bearbeiten").'<br>';
+                        echo MySQLSkalar("SELECT text AS x FROM page_content WHERE page = 'index' AND paragraph_index = '3'");
+
+                        echo '
                     </div>
                 </div>
                 <br><br><br>
@@ -310,14 +333,25 @@
                     </div>
                 </div>
                 <br><br><br>
-                <div>
-                        <h3>Veranstaltungen</h3>
-                        <hr>
-                        <center>
-                            <iframe width="420px" height="240" src="https://www.youtube.com/embed/_FpDVKgfTHs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </center>
-                    </div>
+                ';
 
+                if(CheckPermission("ChangeContent")) echo '<table><tr><td>Veranstaltungen-Feld anzeigen:</td><td>'.Checkbox("toggleEvents", "toggleEvents",GetProperty("ShowHomeEvents")=="true","window.location.replace('index?toggleEvents')").'</td></tr></table>';
+
+                if(GetProperty("ShowHomeEvents")=="true")
+                {
+                    echo '
+                        <div>
+                            <h3>Veranstaltungen</h3>
+                            <hr>
+                            '.PageContent("6",CheckPermission("ChangeContent"),"index",true).'
+                        </div>
+                    ';
+                }
+
+                echo '
+
+                
+                <br><br><br><br><br><br>
                 <hr>
                 <hr>
                 <hr>

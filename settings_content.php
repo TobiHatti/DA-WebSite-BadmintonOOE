@@ -326,6 +326,10 @@
                         <td><b>ChangeContent</b></td>
                         <td>Seiteninhalte verwalten/&auml;ndern</td>
                     </tr>
+                    <tr>
+                        <td><b>DeleteCC</b></td>
+                        <td>Seiteninhalte l&ouml;schen (Standart bei ChangeContent dabei, ben&ouml;tigt f&uuml;r z.B. editTiles)</td>
+                    </tr>
                     <tr><td colspan="2"><hr></td></tr>
                     <tr>
                         <td><b>ManageSettings</b></td>
@@ -409,6 +413,32 @@
                     <tr>
                         <td><b>DeleteDate</b></td>
                         <td>Termin l&ouml;schen</td>
+                    </tr>
+                    <tr><td colspan="2"><hr></td></tr>
+                    <tr>
+                        <td><b>AddClub</b></td>
+                        <td>Verein hinzuf&uuml;gen</td>
+                    </tr>
+                    <tr>
+                        <td><b>EditClub</b></td>
+                        <td>Verein bearbeiten</td>
+                    </tr>
+                    <tr>
+                        <td><b>DeleteClub</b></td>
+                        <td>Verein l&ouml;schen</td>
+                    </tr>
+                    <tr><td colspan="2"><hr></td></tr>
+                    <tr>
+                        <td><b>AddNWK</b></td>
+                        <td>Nachwuchskader hinzuf&uuml;gen</td>
+                    </tr>
+                    <tr>
+                        <td><b>EditNWK</b></td>
+                        <td>Nachwuchskader bearbeiten</td>
+                    </tr>
+                    <tr>
+                        <td><b>DeleteNWK</b></td>
+                        <td>Nachwuchskader l&ouml;schen</td>
                     </tr>
                     <tr><td colspan="2"><hr></td></tr>
                 </table>

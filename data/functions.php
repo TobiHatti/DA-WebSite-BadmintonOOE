@@ -175,7 +175,7 @@ function FroalaContent($content)
     return '<div class="fr-view fr-element">'.$content.'</div>';
 }
 
-function PageContent($paragraph_index,$allowEdit=false)
+function PageContent($paragraph_index,$allowEdit=false,$reactToCustomPage="",$isIndex = false)
 {
     // DESCRIPTION:
     // Gets the text/description for the current page
@@ -184,6 +184,9 @@ function PageContent($paragraph_index,$allowEdit=false)
     // !editContent for PageContent()-function
     // !editSC for Special Containers
     $page = ThisPage("!editSC","!editContent");
+
+    if($reactToCustomPage!="") $page = $reactToCustomPage;
+
     $content = nl2br(MySQLSkalar("SELECT text AS x FROM page_content WHERE page = '$page' AND paragraph_index = '$paragraph_index'"));
 
     if(!$allowEdit)
@@ -192,7 +195,8 @@ function PageContent($paragraph_index,$allowEdit=false)
     }
     else if(($allowEdit AND !isset($_GET['editContent'])) OR ($allowEdit AND isset($_GET['editContent']) AND $_GET['editContent']!=$paragraph_index))
     {
-        $retval = FroalaContent($content).EditButton(ThisPage("!editSC","editContent",'+editContent='.$paragraph_index));
+        if($isIndex) $retval = FroalaContent($content).EditButton('index'.str_replace('index','',ThisPage("!editSC","editContent",'+editContent='.$paragraph_index)));
+        else $retval = FroalaContent($content).EditButton(ThisPage("!editSC","editContent",'+editContent='.$paragraph_index));
     }
     else if($allowEdit AND isset($_GET['editContent']) AND $_GET['editContent']==$paragraph_index)
     {
@@ -701,7 +705,9 @@ function RefreshSliderContent()
     $sliderImages = '';
     $sliderLimit = GetProperty("SliderImageCount");
     $today = date("Y-m-d");
-    $strSQL = "SELECT * FROM news WHERE release_date <= '$today' AND thumbnail NOT LIKE '' ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
+
+    // Default news-images
+    $strSQL = "SELECT * FROM news WHERE release_date <= '$today' AND thumbnail NOT LIKE '' AND tags NOT LIKE 'Spieler-des-Monats' ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
     $rs=mysqli_query($link,$strSQL);
     while($row=mysqli_fetch_assoc($rs))
     {
@@ -717,6 +723,24 @@ function RefreshSliderContent()
 
         $i++;
     }
+
+
+    // Player of the month
+    $strSQL = "SELECT * FROM news WHERE tags = 'Spieler-des-Monats' ORDER BY id DESC LIMIT 0,1";
+    $rs=mysqli_query($link,$strSQL);
+    while($row=mysqli_fetch_assoc($rs))
+    {
+        $uniqID = uniqid();
+        $articleUrl = $row['article_url'];
+        $thumbnail = $row['thumbnail'];
+
+        $secureSize = 10;
+        $qualityMultiplier = 2;
+
+        ResizeImage($thumbnail,"content/news/_slideshow/slide_temp_sdm.jpg",(480 + $secureSize) * $qualityMultiplier , (273 + $secureSize) * $qualityMultiplier);
+        CropImage("content/news/_slideshow/slide_temp_sdm.jpg", "content/news/_slideshow/slide_sdm.jpg", (480) * $qualityMultiplier , (273) * $qualityMultiplier);
+    }
+
 }
 
 function ExportCSVAgenda($db,$id="",$multiple="")

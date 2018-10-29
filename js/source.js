@@ -499,7 +499,7 @@ function UpdateArchiveFrame()
 
 
 
-function CopySliderTitle(maxSlides)
+function CopySliderTitle(maxSlides,sdmActive)
 {
     var list = document.getElementsByClassName("ws-title")[0];
     document.getElementById("slider_news_title").value = list.getElementsByTagName("SPAN")[0].innerHTML;
@@ -511,6 +511,15 @@ function CopySliderTitle(maxSlides)
         {
             document.getElementById("sliderDate").value = document.getElementById("slideDate" + i).value;
             document.getElementById("sliderLink").href = "/news/artikel/" + document.getElementById("slideLink" + i).value;
+        }
+    }
+
+    if(sdmActive)
+    {
+        if(document.getElementById("slideTitle99").value == currentTitle)
+        {
+            document.getElementById("sliderDate").value = document.getElementById("slideDate99").value;
+            document.getElementById("sliderLink").href = "/spieler-des-monats/" + document.getElementById("slideLink99").value;
         }
     }
 }
@@ -764,12 +773,11 @@ function SetSearchSettings()
     window.location.replace("/suche/" + subject + "/" + search + "/" + limit);
 }
 
-function RedirectListLink(id)
+function RedirectListLink(e)
 {
-    var listpre = document.getElementById(id);
-    var link = listpre.options[listpre.selectedIndex].value;
+    var link = e.options[e.selectedIndex].value;
 
-    document.getElementById(id).selectedIndex = "0";
+    e.selectedIndex = "0";
 
     window.open(link,'_blank');
 }
