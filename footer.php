@@ -34,6 +34,21 @@
                             echo '
                         ];
 
+                        var sponsors_link = [
+                            ';
+
+                            $i=0;
+                            $strSQL = "SELECT * FROM sponsors";
+                            $rs=mysqli_query($link,$strSQL);
+                            while($row=mysqli_fetch_assoc($rs))
+                            {
+                                if($i++ == 0) echo '"'.$row['link'].'"';
+                                else echo ',"'.$row['link'].'"';
+                            }
+
+                            echo '
+                        ];
+
                         var imgId1, imgId2, imgId3;
 
                         imgId1 = Math.floor(Math.random()*sponsors_img.length);
@@ -47,6 +62,10 @@
                         document.getElementById("sponsorImg1").src="/content/sponsors/" + sponsors_img[imgId1];
                         document.getElementById("sponsorImg2").src="/content/sponsors/" + sponsors_img[imgId2];
                         document.getElementById("sponsorImg3").src="/content/sponsors/" + sponsors_img[imgId3];
+
+                        document.getElementById("sponsorLink1").href = sponsors_link[imgId1];
+                        document.getElementById("sponsorLink2").href = sponsors_link[imgId2];
+                        document.getElementById("sponsorLink3").href = sponsors_link[imgId3];
                     }
 
 
@@ -56,10 +75,17 @@
 
                 <div id="sponsorSlide" class="footer_sponsor_container ease50">
 
-                    <img id="sponsorImg1" class="footer_sponsors ease1s" src="/content/sponsors/sporthilfe.png" alt="" />
-                    <img id="sponsorImg2" class="footer_sponsors ease1s" src="/content/sponsors/sportooe.png" alt="" />
-                    <img id="sponsorImg3" class="footer_sponsors ease1s" src="/content/sponsors/raiffeisen.png" alt="" />
+                    ';
 
+                    $i=1;
+                    $strSQL = "SELECT * FROM sponsors ORDER BY RAND() LIMIT 0,3";
+                    $rs=mysqli_query($link,$strSQL);
+                    while($row=mysqli_fetch_assoc($rs))
+                    {
+                        echo '<a href="'.$row['link'].'" taget="_blank" id="sponsorLink'.$i.'"><img id="sponsorImg'.$i++.'" class="footer_sponsors ease1s" src="/content/sponsors/'.$row['image'].'" alt="" /></a>';
+                    }
+
+                    echo '
                 </div>
                 <br>
 

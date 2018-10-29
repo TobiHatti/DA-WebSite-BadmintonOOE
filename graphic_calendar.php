@@ -140,16 +140,18 @@
                 ';
             }
 
-
-            $strSQL = "SELECT * FROM zentralausschreibungen WHERE date_begin = '$curDate'";
-            $rs=mysqli_query($link,$strSQL);
-            while($row=mysqli_fetch_assoc($rs))
+            if(GetProperty("ShowZAinAG")=='true')
             {
-                echo '
-                    <a href="#calenderInfoZA'.$row['id'].'" onclick="SelectGalleryImage('.$i.');" style="text-decoration:none;">
-                        <div style="color: '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '#000000').';">&#9679; '.$row['title_line1'].'</div>
-                    </a>
-                ';
+                $strSQL = "SELECT * FROM zentralausschreibungen WHERE date_begin = '$curDate'";
+                $rs=mysqli_query($link,$strSQL);
+                while($row=mysqli_fetch_assoc($rs))
+                {
+                    echo '
+                        <a href="#calenderInfoZA'.$row['id'].'" onclick="SelectGalleryImage('.$i.');" style="text-decoration:none;">
+                            <div style="color: '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '#000000').';">&#9679; '.$row['title_line1'].'</div>
+                        </a>
+                    ';
+                }
             }
 
             echo'
@@ -283,73 +285,76 @@
         ';
     }
 
-    $strSQL = "SELECT * FROM zentralausschreibungen WHERE date_begin LIKE '$datePart%'";
-    $rs=mysqli_query($link,$strSQL);
-    while($row=mysqli_fetch_assoc($rs))
+    if(GetProperty("ShowZAinAG")=='true')
     {
+        $strSQL = "SELECT * FROM zentralausschreibungen WHERE date_begin LIKE '$datePart%'";
+        $rs=mysqli_query($link,$strSQL);
+        while($row=mysqli_fetch_assoc($rs))
+        {
 
-        echo '
-            <div class="modal_wrapper" id="calenderInfoZA'.$row['id'].'">
-                <a href="#c">
-                    <div class="modal_bg"></div>
-                </a>
-                <div class="modal_container" style="width: 50%; height: 60%;">
-                    <a href="#c"><img src="/content/cross2.png" alt="" class="close_cross"/></a>
-                    <div style="border-left: 3px solid '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '').'; padding-left: 5px;">
-                        <a href="#exportZA'.$row['id'].'"><button style="float: right; margin-right: 30px;"><i class="fas fa-file-export"></i> Exportieren</button></a>
-                        <span style="color: #696969"><i>Zentralausschreibung</i></span>
-                        <h2><u>'.$row['title_line1'].'<br>'.$row['title_line2'].'</u></h2>
-                        <h4>'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['date_begin']))).'</h4>
-                        <h4>'.$row['uhrzeit'].'</h4>
-                        <p>
-                        ';
-
-                        if($row['size']=='full')
-                        {
-                            echo '<div class="za_data">';
-                            echo ShowZATable($row['id']);
-                            echo '</div>';
-                        }
-                        else
-                        {
-                            echo '
-                                <div class="za_data">
-                                    <table>
-                                        <tr>
-                                            <td>Ort:</td>
-                                            <td>'.$row['location'].'</td>
-                                        </tr>
-                                    </table>
-                                </div>
+            echo '
+                <div class="modal_wrapper" id="calenderInfoZA'.$row['id'].'">
+                    <a href="#c">
+                        <div class="modal_bg"></div>
+                    </a>
+                    <div class="modal_container" style="width: 50%; height: 60%;">
+                        <a href="#c"><img src="/content/cross2.png" alt="" class="close_cross"/></a>
+                        <div style="border-left: 3px solid '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '').'; padding-left: 5px;">
+                            <a href="#exportZA'.$row['id'].'"><button style="float: right; margin-right: 30px;"><i class="fas fa-file-export"></i> Exportieren</button></a>
+                            <span style="color: #696969"><i>Zentralausschreibung</i></span>
+                            <h2><u>'.$row['title_line1'].'<br>'.$row['title_line2'].'</u></h2>
+                            <h4>'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['date_begin']))).'</h4>
+                            <h4>'.$row['uhrzeit'].'</h4>
+                            <p>
                             ';
-                        }
 
-                        echo '
-                        </p>
+                            if($row['size']=='full')
+                            {
+                                echo '<div class="za_data">';
+                                echo ShowZATable($row['id']);
+                                echo '</div>';
+                            }
+                            else
+                            {
+                                echo '
+                                    <div class="za_data">
+                                        <table>
+                                            <tr>
+                                                <td>Ort:</td>
+                                                <td>'.$row['location'].'</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                ';
+                            }
+
+                            echo '
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        ';
+            ';
 
 
-        echo '
-            <div class="modal_wrapper" id="exportZA'.$row['id'].'">
-                <a href="#c">
-                    <div class="modal_bg"></div>
-                </a>
-                <div class="modal_container" style="width: 200px; height: 100px;">
-                    <h3>Exportieren</h3>
-                    <center>
-                        <form action="/kalender" method="post" accept-charset="utf-8" enctype="multipart/form-data" target="_top">
-                            <button type="submit" class="cel_m" name="export_csv" value="ZA'.$row['id'].'"><i class="fa fa-file-excel-o" style="float: left;"></i> Als .csv Exportieren</button>
-                            <br>
-                            <button type="submit" class="cel_m" name="export_ics" value="ZA'.$row['id'].'"><i class="fas fa-file" style="float: left;"></i>Als .ics Exportieren</button>
-                        </form>
-                    </center>
+            echo '
+                <div class="modal_wrapper" id="exportZA'.$row['id'].'">
+                    <a href="#c">
+                        <div class="modal_bg"></div>
+                    </a>
+                    <div class="modal_container" style="width: 200px; height: 100px;">
+                        <h3>Exportieren</h3>
+                        <center>
+                            <form action="/kalender" method="post" accept-charset="utf-8" enctype="multipart/form-data" target="_top">
+                                <button type="submit" class="cel_m" name="export_csv" value="ZA'.$row['id'].'"><i class="fa fa-file-excel-o" style="float: left;"></i> Als .csv Exportieren</button>
+                                <br>
+                                <button type="submit" class="cel_m" name="export_ics" value="ZA'.$row['id'].'"><i class="fas fa-file" style="float: left;"></i>Als .ics Exportieren</button>
+                            </form>
+                        </center>
+                    </div>
                 </div>
-            </div>
 
-        ';
+            ';
+        }
     }
 
     echo '
