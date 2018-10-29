@@ -60,7 +60,7 @@ function RadioButton($title, $name, $checked = 0,$value="")
     ';
 }
 
-function FileButton($name, $id, $multiple=false, $onchange="", $onclick="")
+function FileButton($name, $id, $multiple=false, $onchange="", $onclick="",$style="")
 {
     // DESCRIPTION:
     // Returns a File-Upload Form-Element
@@ -70,7 +70,7 @@ function FileButton($name, $id, $multiple=false, $onchange="", $onclick="")
 
     return  '
         <input type="file" name="'.$name.'[]" id="'.$id.'" class="inputfile" data-multiple-caption="{count} Dateien" '.(($multiple) ? 'multiple' : '').' '.(($onchange!="") ? ('onchange="'.$onchange.'"') : '').' hidden/>
-        <label for="'.$id.'" '.(($onclick!="") ? ('onclick="'.$onclick.'"') : '').'><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span style="color:#FEFEFE;">Datei ausw&auml;hlen</span></label>
+        <label for="'.$id.'" '.(($onclick!="") ? ('onclick="'.$onclick.'"') : '').' style="'.$style.'"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span style="color:#FEFEFE;">Datei ausw&auml;hlen</span></label>
         <script src="/js/filebutton.js"></script>
     ';
 }
@@ -175,7 +175,7 @@ function FroalaContent($content)
     return '<div class="fr-view fr-element">'.$content.'</div>';
 }
 
-function PageContent($paragraph_index,$allowEdit=false)
+function PageContent($paragraph_index,$allowEdit=false,$reactToCustomPage="",$isIndex = false)
 {
     // DESCRIPTION:
     // Gets the text/description for the current page
@@ -184,6 +184,9 @@ function PageContent($paragraph_index,$allowEdit=false)
     // !editContent for PageContent()-function
     // !editSC for Special Containers
     $page = ThisPage("!editSC","!editContent");
+
+    if($reactToCustomPage!="") $page = $reactToCustomPage;
+
     $content = nl2br(MySQLSkalar("SELECT text AS x FROM page_content WHERE page = '$page' AND paragraph_index = '$paragraph_index'"));
 
     if(!$allowEdit)
@@ -192,7 +195,8 @@ function PageContent($paragraph_index,$allowEdit=false)
     }
     else if(($allowEdit AND !isset($_GET['editContent'])) OR ($allowEdit AND isset($_GET['editContent']) AND $_GET['editContent']!=$paragraph_index))
     {
-        $retval = FroalaContent($content).EditButton(ThisPage("!editSC","editContent",'+editContent='.$paragraph_index));
+        if($isIndex) $retval = FroalaContent($content).EditButton('index'.str_replace('index','',ThisPage("!editSC","editContent",'+editContent='.$paragraph_index)));
+        else $retval = FroalaContent($content).EditButton(ThisPage("!editSC","editContent",'+editContent='.$paragraph_index));
     }
     else if($allowEdit AND isset($_GET['editContent']) AND $_GET['editContent']==$paragraph_index)
     {
@@ -701,7 +705,9 @@ function RefreshSliderContent()
     $sliderImages = '';
     $sliderLimit = GetProperty("SliderImageCount");
     $today = date("Y-m-d");
-    $strSQL = "SELECT * FROM news WHERE release_date <= '$today' AND thumbnail NOT LIKE '' ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
+
+    // Default news-images
+    $strSQL = "SELECT * FROM news WHERE release_date <= '$today' AND thumbnail NOT LIKE '' AND tags NOT LIKE 'Spieler-des-Monats' ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
     $rs=mysqli_query($link,$strSQL);
     while($row=mysqli_fetch_assoc($rs))
     {
@@ -717,6 +723,24 @@ function RefreshSliderContent()
 
         $i++;
     }
+
+
+    // Player of the month
+    $strSQL = "SELECT * FROM news WHERE tags = 'Spieler-des-Monats' ORDER BY id DESC LIMIT 0,1";
+    $rs=mysqli_query($link,$strSQL);
+    while($row=mysqli_fetch_assoc($rs))
+    {
+        $uniqID = uniqid();
+        $articleUrl = $row['article_url'];
+        $thumbnail = $row['thumbnail'];
+
+        $secureSize = 10;
+        $qualityMultiplier = 2;
+
+        ResizeImage($thumbnail,"content/news/_slideshow/slide_temp_sdm.jpg",(480 + $secureSize) * $qualityMultiplier , (273 + $secureSize) * $qualityMultiplier);
+        CropImage("content/news/_slideshow/slide_temp_sdm.jpg", "content/news/_slideshow/slide_sdm.jpg", (480) * $qualityMultiplier , (273) * $qualityMultiplier);
+    }
+
 }
 
 function ExportCSVAgenda($db,$id="",$multiple="")
@@ -728,7 +752,7 @@ function ExportCSVAgenda($db,$id="",$multiple="")
     // $multiple    export an entire month/year (format = 2018-02 / 2018)
 
     $inhalt = "Subject;Start Date;Start Time;End Date;End Time;All Day Event;Description;Location;Private\r\n";
-    $path = "files/kalendar/";
+    $path = "files/kalender/";
 
     require("mysql_connect.php");
 
@@ -750,7 +774,7 @@ function ExportCSVAgenda($db,$id="",$multiple="")
             }
         }
 
-        $handle = fopen ($path.$filename, 'w');
+        $handle = fopen($path.$filename, 'w');
     }
     else
     {
@@ -1047,6 +1071,20 @@ function Age($birthDate)
     $age = date_diff(date_create($birthDate), date_create('now'))->y;
 
     return $age;
+}
+
+
+function LetterCorrection($input_string)
+{
+    $input_string = str_replace("Ã¤","ä",$input_string);
+    $input_string = str_replace("Ã„","Ä",$input_string);
+    $input_string = str_replace("Ã¶","ö",$input_string);
+    $input_string = str_replace("Ã–","Ö",$input_string);
+    $input_string = str_replace("Ã¼","ü",$input_string);
+    $input_string = str_replace("Ãœ","Ü",$input_string);
+    $input_string = str_replace("ÃŸ","ß",$input_string);
+
+    return $input_string;
 }
 
 ?>

@@ -1,6 +1,6 @@
 <?php
     require("header.php");
-    PageTitle("Schiedsrichter");
+    PageTitle("Spielregeln");
 
     echo '<h1 class="stagfade1">Spielregeln</h1>';
 

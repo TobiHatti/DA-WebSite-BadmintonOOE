@@ -4,9 +4,9 @@
     $year = $_GET['year'];
     $club = $_GET['club'];
 
-    $accentColor1 = '#00FF7F';
-    $accentColor2 = '#6A5ACD';
-    $highlightColor = '#FFFF00';
+    $accentColor1 = '#'.Fetch("ranglisten_settings","value","setting","Y".$year."ColorA");
+    $accentColor2 = '#'.Fetch("ranglisten_settings","value","setting","Y".$year."ColorB");
+    $highlightColor = '#'.Fetch("ranglisten_settings","value","setting","HighlightColor");
 
     $lastChange = '26.10.2018';
 
@@ -19,10 +19,10 @@
                     <tr>
                         <td class="ta_r">Anzeigen:</td>
                         <td class="ta_l">
-                            <select name="" id="" class="cel_l">
+                            <select name="" id="clubList" class="cel_l" onchange="RedirectSelectBoxSpielerrangliste(this,\'/spielerrangliste/'.$year.'/\')">
                                 <optgroup label="Mehrfachauswahl">
                                     <option '.(($_GET['club']=='alle') ? 'selected' : '').' value="alle">Alle anzeigen</option>
-                                    <option '.((StartsWith($_GET['club'],'M')) ? 'selected' : '').'>Ausw&auml;hlen...</option>
+                                    <option '.((StartsWith($_GET['club'],'M')) ? 'selected' : '').' value="multi">Ausw&auml;hlen...</option>
                                 </optgroup>
                                 <optgroup label="Einzelauswahl">
                                 ';
@@ -34,7 +34,7 @@
                             </select>
                         </td>
                     </tr>
-                    <tr>
+                    <tr id="clubToggleList" style="display: none">
                         <td colspan=2>
                         ';
 
@@ -43,13 +43,21 @@
                         while($row=mysqli_fetch_assoc($rs))
                         {
                             $clubVals = FetchArray("vereine","kennzahl",$row['club']);
-                            echo '<div style="display: inline-block">'.Tickbox("",$row['club'],$clubVals['verein'].' '.$clubVals['ort'],false,$onchange="").'</div>';
+                            echo '<div>'.Tickbox("",$row['club'],$clubVals['verein'].' '.$clubVals['ort'],false, 'UpdateClubList(this, \''.$row['club'].'\');').'</div>';
                         }
 
                         echo '
+
+                        <input type="hidden" id="customList"/>
+                        <button type="button" onclick="RedirectCustomClubList(\'/spielerrangliste/'.$year.'/\')">Anzeigen</button>
                         </td>
                     </tr>
                 </table>
+
+                <a target="_blank" href="/spielerrangliste/'.$_GET['year'].'/'.$_GET['club'].'/pdf"><button type="button"><i class="fa fa-file-pdf-o"></i> Exportieren als PDF</button></a>
+                <a href="/spielerrangliste/'.$_GET['year'].'/'.$_GET['club'].'/xls"><button type="button"><i class="fa fa-file-excel-o"></i> Exportieren als XLS</button></a>
+                <a href="/spielerrangliste/'.$_GET['year'].'/'.$_GET['club'].'/csv"><button type="button"><i class="fa fa-file-excel-o"></i> Exportieren als CSV</button></a>
+
             </center>
         <hr>
     ';
@@ -75,7 +83,27 @@
     ';
 
 
-    $strSQLc = "SELECT DISTINCT club FROM reihung WHERE year = '$year'";
+    if($club == "alle") $strSQLc = "SELECT DISTINCT club FROM reihung WHERE year = '$year'";
+    else if(StartsWith($club,"M"))
+    {
+        $selectedClubs = str_replace('M','',$club);
+        $clubArray = explode('-',$selectedClubs);
+
+        $first = true;
+        foreach($clubArray AS $club)
+        {
+            if($first) $sqlClubExtension = "club = '$club'";
+            else $sqlClubExtension .= " OR club = '$club'";
+
+            $first = false;
+        }
+
+        $strSQLc = "SELECT DISTINCT club FROM reihung WHERE year = '$year' AND ($sqlClubExtension)";
+    }
+    else $strSQLc = "SELECT DISTINCT club FROM reihung WHERE year = '$year' AND club = '$club'";
+
+
+
     $rsc=mysqli_query($link,$strSQLc);
     while($rowc=mysqli_fetch_assoc($rsc))
     {

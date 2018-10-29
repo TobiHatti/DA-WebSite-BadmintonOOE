@@ -171,11 +171,11 @@
     {
 
         echo '
-            <div class="calender_info_wrapper" id="calenderInfoAG'.$row['id'].'">
+            <div class="modal_wrapper" id="calenderInfoAG'.$row['id'].'">
                 <a href="#c">
-                    <div class="calender_info_bg"></div>
+                    <div class="modal_bg"></div>
                 </a>
-                <div class="info_container">
+                <div class="modal_container" style="width: 50%; height: 60%;">
                     <a href="#c"><img src="/content/cross2.png" alt="" class="close_cross"/></a>
                     <div style="border-left: 3px solid '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '').'; padding-left: 5px;">
                         ';
@@ -264,11 +264,11 @@
         ';
 
         echo '
-            <div class="calender_export_wrapper" id="exportAG'.$row['id'].'">
+            <div class="modal_wrapper" id="exportAG'.$row['id'].'">
                 <a href="#c">
-                    <div class="calender_info_bg"></div>
+                    <div class="modal_bg"></div>
                 </a>
-                <div class="info_container">
+                <div class="modal_container" style="width: 200px; height: 100px;">
                     <h3>Exportieren</h3>
                     <center>
                         <form action="/kalender" method="post" accept-charset="utf-8" enctype="multipart/form-data" target="_top">

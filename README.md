@@ -2,4 +2,4 @@
 New Website for "Badminton-Verband OÖ"
 
 
-- PHP-Version: 5.6
+- PHP-Version: 7.2.11

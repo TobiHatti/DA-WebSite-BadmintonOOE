@@ -1195,6 +1195,11 @@ input[type="week"]:focus {
   line-height: 10px;
   padding: 0; }
 
+.cel_h18 {
+  height: 18px;
+  line-height: 18px;
+  padding: 0; }
+
 .cel_h20 {
   height: 20px;
   line-height: 20px;
@@ -1621,8 +1626,9 @@ table.centered_content td {
 /*===================================================================================*/
 .nwkaderCard {
   display: inline-flex;
-  width: 220px;
-  height: 80px;
+  position: relative;
+  width: 250px;
+  height: 95px;
   padding: 0px 0px;
   border: 1px solid #3B9EBF;
   border-radius: 0 25% 0 25%;
@@ -1630,11 +1636,11 @@ table.centered_content td {
   margin: 5px;
   background: linear-gradient(to left, #C4E3ED 10%, #FFFFFF 70%); }
   .nwkaderCard img {
-    height: 80px;
+    height: 95px;
     margin: 0;
     margin-right: 3px; }
   .nwkaderCard div {
-    height: 80px;
+    height: 95px;
     padding-right: 5px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -2933,6 +2939,7 @@ table.centered_content td {
 /* (V01)   VInfo > MemberInfo                                                        */
 /*===================================================================================*/
 .member_info {
+  position: relative;
   display: inline-flex;
   width: 300px;
   height: 90px;

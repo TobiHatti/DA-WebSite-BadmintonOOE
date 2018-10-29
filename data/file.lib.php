@@ -35,7 +35,7 @@ function FileUpload($path,$formId,$formats="",$limit="",$sql="",$customName="")
     $count=0;
     if(isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST")
     {
-        foreach ($_FILES[$formId]['name'] as $f => $name)
+        foreach (SReplace($_FILES[$formId]['name']) as $f => $name)
         {
             if ($_FILES[$formId]['error'][$f] == 4) continue;
             if ($_FILES[$formId]['error'][$f] == 0)
@@ -54,6 +54,7 @@ function FileUpload($path,$formId,$formats="",$limit="",$sql="",$customName="")
                 {
                     if(move_uploaded_file($_FILES[$formId]["tmp_name"][$f], $path.$name))
                     {
+
                         if($customName!="")
                         {
                             $extension = pathinfo($path.$name, PATHINFO_EXTENSION);
@@ -163,6 +164,53 @@ function CropImage($path, $output, $width, $height)
         imagedestroy($im2);
     }
     imagedestroy($im);
+}
+
+function DirectoryListing($path)
+{
+    $retval='';
+    foreach (glob($path.'*.*') as $filename)
+    {
+
+        $file_short = str_replace($path,'',$filename);
+
+        if(XSubStringFind($file_short,'.rar','.zip','.gz','.7z')) $retval.= '<i class="fa fa-file-archive-o"></i>';
+        else if(XSubStringFind($file_short,'.wav','.mp3','.aif','.m4r','.m4a','.mid')) $retval.= '<i class="fa fa-file-audio-o"></i>';
+        else if(XSubStringFind($file_short,'.c','.cpp','.cs','.js','.php','.html','.css','.htm','.exe','.app','.bat','.cmd','.jar','.asp','.accdb','.db','.dbf','.mdb','.pdb','.sql','.apk','.cgi','.com','.gadget','.wsf','.aspx','.cer','.cfm','.csr','.jsp','.rss','.xhtml'.'.crx'.'.plugin')) echo '<i class="fa fa-file-code-o"></i>';
+        else if(XSubStringFind($file_short,'.xls','.xlsx','.xlsm','.xlr')) $retval.= '<i class="fa fa-file-excel-o"></i>';
+        else if(XSubStringFind($file_short,'.png','.jpg','.jpeg','.gif','.tiff','.bmp','.svg','.tif','.ico')) $retval.= '<i class="fa fa-file-image-o"></i>';
+        else if(XSubStringFind($file_short,'.mpg','.mp4','.mov','.wmv','.avi','.rm','.3gp','.aaf')) $retval.= '<i class="fa fa-file-movie-o"></i>';
+        else if(XSubStringFind($file_short,'.pdf','.pct','.indd')) $retval.= '<i class="fa fa-file-pdf-o"></i>';
+        else if(XSubStringFind($file_short,'.ppt','.pptx','.pptm')) $retval.= '<i class="fa fa-file-powerpoint-o"></i>';
+        else if(XSubStringFind($file_short,'.txt','.rtf','.log')) $retval.= '<i class="fa fa-file-text-o"></i>';
+        else if(XSubStringFind($file_short,'.doc','.docx','.docm')) $retval.= '<i class="fa fa-file-word-o"></i>';
+        else $retval.= '<i class="fa fa-file-o"></i> ';
+
+        $retval.= ' <a href="'.$filename.'" download>'.$file_short.'</a><br>';
+    }
+
+    return $retval;
+}
+
+function FileList($path2file, $displayname)
+{
+    $retval='';
+
+    if(XSubStringFind($path2file,'.rar','.zip','.gz','.7z')) $retval.= '<i class="fa fa-file-archive-o"></i>';
+    else if(XSubStringFind($path2file,'.wav','.mp3','.aif','.m4r','.m4a','.mid')) $retval.= '<i class="fa fa-file-audio-o"></i>';
+    else if(XSubStringFind($path2file,'.c','.cpp','.cs','.js','.php','.html','.css','.htm','.exe','.app','.bat','.cmd','.jar','.asp','.accdb','.db','.dbf','.mdb','.pdb','.sql','.apk','.cgi','.com','.gadget','.wsf','.aspx','.cer','.cfm','.csr','.jsp','.rss','.xhtml'.'.crx'.'.plugin')) echo '<i class="fa fa-file-code-o"></i>';
+    else if(XSubStringFind($path2file,'.xls','.xlsx','.xlsm','.xlr','.csv')) $retval.= '<i class="fa fa-file-excel-o"></i>';
+    else if(XSubStringFind($path2file,'.png','.jpg','.jpeg','.gif','.tiff','.bmp','.svg','.tif','.ico')) $retval.= '<i class="fa fa-file-image-o"></i>';
+    else if(XSubStringFind($path2file,'.mpg','.mp4','.mov','.wmv','.avi','.rm','.3gp','.aaf')) $retval.= '<i class="fa fa-file-movie-o"></i>';
+    else if(XSubStringFind($path2file,'.pdf','.pct','.indd')) $retval.= '<i class="fa fa-file-pdf-o"></i>';
+    else if(XSubStringFind($path2file,'.ppt','.pptx','.pptm')) $retval.= '<i class="fa fa-file-powerpoint-o"></i>';
+    else if(XSubStringFind($path2file,'.txt','.rtf','.log')) $retval.= '<i class="fa fa-file-text-o"></i>';
+    else if(XSubStringFind($path2file,'.doc','.docx','.docm')) $retval.= '<i class="fa fa-file-word-o"></i>';
+    else $retval.= '<i class="fa fa-file-o"></i> ';
+
+    $retval.= '<a href="'.$path2file.'" download>&nbsp;&nbsp;'.$displayname.'</a>';
+
+    return $retval;
 }
 
 ?>

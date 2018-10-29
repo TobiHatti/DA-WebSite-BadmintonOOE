@@ -42,27 +42,36 @@ function MySQLSkalar($strSQL)
     return $retval;
 }
 
-function MySQLRow($table, $strSQL)
+function MySQLGetRow($strSQLBase)
 {
+    // DESCRIPTION:
+    // Returns the row of a table as an array
+    // behaves like a standart SQL-SELECT-Query
+    // Use with the same keys as in the database:
+    // e.g: $values['id']
+
+
     require("mysql_connect.php");
-    $fields = '';
 
+    $fields=array();
+    $vals=array();
 
+    $posOfFrom = strpos($strSQLBase,'FROM ') + strlen('FROM ');
+    $posOfWhere = strpos($strSQLBase,' WHERE');
+    $db = substr($strSQLBase,$posOfFrom,$posOfWhere-$posOfFrom);
 
-    $strSQLC = "SHOW COLUMNS FROM $table";
-    $rsC=mysqli_query($link,$strSQLC);
-    while($rowC=mysqli_fetch_assoc($rsC))
-    {
-        $fields.=$row['Field'];
-    }
+    $strSQL = "SHOW COLUMNS FROM $db";
+    $rs=mysqli_query($link,$strSQL);
+    while($row=mysqli_fetch_assoc($rs)) array_push($fields,$row['Field']);
 
-    $retval = array();
-
+    $strSQL = $strSQLBase;
     $rs=mysqli_query($link,$strSQL);
     while($row=mysqli_fetch_assoc($rs))
     {
-     array_push($retval,$row[$row['Field']]);
+        foreach($fields as $field)  array_push($vals,$row[$field]);
     }
+
+    return array_combine($fields,$vals);
 }
 
 function MySQLCount($strSQL)

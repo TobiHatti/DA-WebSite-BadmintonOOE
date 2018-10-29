@@ -43,6 +43,9 @@
         $Nennschluss = $_POST['nennschluss'];
         $Zusatzangaben = $_POST['zusatzangaben'];
 
+        if($kategorie=='Training') $size='';
+        else $size='full';
+
         $Location = $_POST['location'];
 
         if($_POST['postType']=="new")
@@ -54,6 +57,7 @@
 
         $updateSQL = "
             UPDATE zentralausschreibungen SET
+            size = '$size',
             kategorie = '$kategorie',
             title_line1 = '$title1',
             title_line2 = '$title2',
