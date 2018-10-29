@@ -499,7 +499,7 @@ function UpdateArchiveFrame()
 
 
 
-function CopySliderTitle(maxSlides)
+function CopySliderTitle(maxSlides,sdmActive)
 {
     var list = document.getElementsByClassName("ws-title")[0];
     document.getElementById("slider_news_title").value = list.getElementsByTagName("SPAN")[0].innerHTML;
@@ -511,6 +511,15 @@ function CopySliderTitle(maxSlides)
         {
             document.getElementById("sliderDate").value = document.getElementById("slideDate" + i).value;
             document.getElementById("sliderLink").href = "/news/artikel/" + document.getElementById("slideLink" + i).value;
+        }
+    }
+
+    if(sdmActive)
+    {
+        if(document.getElementById("slideTitle99").value == currentTitle)
+        {
+            document.getElementById("sliderDate").value = document.getElementById("slideDate99").value;
+            document.getElementById("sliderLink").href = "/spieler-des-monats/" + document.getElementById("slideLink99").value;
         }
     }
 }
@@ -764,12 +773,11 @@ function SetSearchSettings()
     window.location.replace("/suche/" + subject + "/" + search + "/" + limit);
 }
 
-function RedirectListLink(id)
+function RedirectListLink(e)
 {
-    var listpre = document.getElementById(id);
-    var link = listpre.options[listpre.selectedIndex].value;
+    var link = e.options[e.selectedIndex].value;
 
-    document.getElementById(id).selectedIndex = "0";
+    e.selectedIndex = "0";
 
     window.open(link,'_blank');
 }
@@ -1054,4 +1062,40 @@ function RedirectSelectBox(e,linkBase)
     var selectedOption = e.options[e.selectedIndex].value;
 
     window.location.replace(linkBase + selectedOption);
+}
+
+function RedirectSelectBoxSpielerrangliste(e,linkBase)
+{
+    var selectedOption = e.options[e.selectedIndex].value;
+
+    if(selectedOption == "multi") document.getElementById("clubToggleList").style.display = "table-row";
+    else
+    {
+        document.getElementById("clubToggleList").style.display = "none";
+        window.location.replace(linkBase + selectedOption);
+    }
+}
+
+
+function UpdateClubList(e,club)
+{
+    var list = document.getElementById("customList");
+
+    if(e.checked)
+    {
+
+        list.value = list.value + club + "-";
+    }
+    else
+    {
+        list.value = list.value.replace(club + '-','')
+    }
+}
+
+function RedirectCustomClubList(linkBase)
+{
+    var selectedClubs = document.getElementById("customList").value;
+    selectedClubs = selectedClubs.substring(0, selectedClubs.length - 1);
+
+    window.location.replace(linkBase + "M" + selectedClubs);
 }

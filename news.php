@@ -135,7 +135,7 @@
             echo '
                 <div class="doublecol_singletile">
                     <article>
-                        <span style="color: #A9A9A9">'.date_format(date_create(Fetch("news","release_date","article_url",$_GET['artikel'])),"d. F Y").' |</span>
+                        <span style="color: #A9A9A9">'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime(Fetch("news","release_date","article_url",$_GET['artikel'])))).' |</span>
                         '.ShowTags(Fetch("news","tags","article_url",$_GET['artikel'])).'
                         <div class="fr-view fr-element">'.Fetch("news","article","article_url",$_GET['artikel']).'</div>
                         <span>'.Fetch("news","views","article_url",$_GET['artikel']).' Aufrufe</span><br><br>

@@ -88,8 +88,8 @@ function SReplace($string)
     $sstr = str_replace('Ã¼','ue',$sstr);
     $sstr = str_replace('ÃŸ','ss',$sstr);
 
-    // Remove everything but Alphanumeric letters and numbers and "-"
-    $sstr = preg_replace('/[^0-9A-Za-z-\|]/', '', $sstr);
+    // Remove everything but Alphanumeric letters and numbers and "-", "."
+    $sstr = preg_replace('/[^0-9A-Za-z-.\|]/', '', $sstr);
 
     return $sstr;
 }

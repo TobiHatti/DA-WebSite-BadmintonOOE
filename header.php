@@ -69,10 +69,9 @@
                         if(CheckPermission("AddGallery")) echo '<a href="/fotogalerie/neu">Galerie hinzuf&uuml;gen</a> | ';
                         if(CheckPermission("AddDate")) echo '<a href="/kalender/neu">Termin hinzuf&uuml;gen</a> | ';
 
-                        echo '<span style="float:right">Angemeldet als '.$_SESSION['firstname'].' '.$_SESSION['lastname'].' - <a href="/logout"><u>Abmelden</u></a></span></div>';
+                        echo '<span style="float:right">Angemeldet als '.$_SESSION['firstname'].' '.$_SESSION['lastname'].' - <a href="/logout"><i class="fas fa-door-open"></i> Abmelden</a></span></div>';
                     }
-
-                    if(isset($_SESSION['userID']) AND CheckRank() == "clubmanager")
+                    else if(isset($_SESSION['userID']) AND CheckRank() == "clubmanager")
                     {
                         echo '<div class="quickNav">Vereinsverwaltung<img src="/content/favicon.png" alt="" style="margin-bottom: -3px; margin-right: 8px; margin-left: 8px;"/>';
 
@@ -84,10 +83,16 @@
                         $headerClubID = Fetch("users","club","id",$_SESSION['userID']);
                         $headerClubData = FetchArray("vereine","kennzahl",$headerClubID);
 
-                        echo '<span style="float:right">'.$headerClubData['verein'].' '.$headerClubData['ort'].' - <a href="/logout"><u>Abmelden</u></a></span></div>';
+                        echo '<span style="float:right">'.$headerClubData['verein'].' '.$headerClubData['ort'].' - <a href="/logout"><i class="fas fa-door-open"></i> Abmelden</a></span></div>';
                     }
-
-
+                    else
+                    {
+                        echo '
+                            <div class="login_bar">
+                                <a href="/login"> <i class="fas fa-door-open"></i> Anmelden</a>
+                            </div>
+                        ';
+                    }
                     echo '
                 </header>
 

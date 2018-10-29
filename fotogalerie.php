@@ -190,7 +190,14 @@
 
        $allowDownload = Fetch("fotogalerie","allowDownload","album_url",$_GET['album']);
 
-       if($allowDownload) echo '<button type="submit" name="download_zip" value="'.$_GET['album'].'" style="float: right;"><i class="fa fa-download"></i> Album Herunterladen</button><br><br><br>';
+       if($allowDownload)
+       {
+            echo '
+                <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                    <button type="submit" name="download_zip" value="'.$_GET['album'].'" style="float: right;"><i class="fa fa-download"></i> Album Herunterladen</button><br><br><br>
+                </form>
+            ';
+       }
 
        echo '
 

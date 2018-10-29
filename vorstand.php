@@ -2,6 +2,21 @@
     require("header.php");
     PageTitle("Vorstand");
 
+    if(isset($_POST['add_vorstand_member']))
+    {
+        $name = $_POST['name'];
+        $fields = $_POST['fields'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+
+        MySQLNonQuery("INSERT INTO vorstand (id,darstellung,name,bereich,email,telefon) VALUES ('','box','$name','$fields','$email','$phone')");
+
+        FileUpload("content/vorstand/","image","","","UPDATE vorstand SET foto = 'FNAME' WHERE name = '$name'");
+
+        Redirect("/vorstand");
+        die();
+    }
+
     if(isset($_POST['updateVorstand']))
     {
         $id = $_POST['updateVorstand'];
@@ -32,12 +47,54 @@
         die();
     }
 
-    echo '
-        <h1 class="stagfade1">Vorstand</h1>
+    if(isset($_GET['neu']))
+    {
+        echo '<h2 class="stagfade1">Vorstandsmitglied hinzuf&uuml;gen</h2>';
 
-        <p>'.PageContent('1',CheckPermission("ChangeContent")).'</p>
-        <br>
-        <center>
+        echo '
+            <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                <table>
+                    <tr>
+                        <td class="ta_r">Name: </td>
+                        <td><input type="text" name="name" placeholder="Vor- & Nachname"/></td>
+                    </tr>
+                    <tr>
+                        <td class="ta_r">Bereiche: </td>
+                        <td><textarea name="fields" placeholder="Bereiche..."></textarea></td>
+                    </tr>
+                    <tr>
+                        <td class="ta_r">E-Mail: </td>
+                        <td><input type="email" name="email" placeholder="E-Mail..."/></td>
+                    </tr>
+                    <tr>
+                        <td class="ta_r">Telefon: </td>
+                        <td><input type="tel" name="phone" placeholder="Telefon..."/></td>
+                    </tr>
+                    <tr>
+                        <td class="ta_r">Foto: </td>
+                        <td>'.FileButton('image','image').'</td>
+                    </tr>
+                    <tr>
+                        <td colspan=2><button type="submit" name="add_vorstand_member">Hinzuf&uuml;gen</button></td>
+                    </tr>
+                </table>
+            </form>
+        ';
+    }
+    else
+    {
+
+        echo '
+            <h1 class="stagfade1">Vorstand</h1>
+        ';
+
+        if(CheckPermission("AddVorstand")) echo AddButton("/vorstand/neu");
+
+        echo '
+
+            <p>'.PageContent('1',CheckPermission("ChangeContent")).'</p>
+            <br>
+            <center>
         ';
 
         $strSQL = "SELECT * FROM vorstand WHERE darstellung = 'box'";
@@ -154,7 +211,7 @@
         }
 
         echo '</center>';
-
+    }
 
 
     include("footer.php");

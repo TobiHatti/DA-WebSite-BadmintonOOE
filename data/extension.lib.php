@@ -117,4 +117,13 @@ function ThisPage()
     return  $thisPage;
 }
 
+function Back($steps = 1)
+{
+    echo '
+        <script>
+            window.history.back('.$steps.');
+        </script>
+    ';
+}
+
 ?>
