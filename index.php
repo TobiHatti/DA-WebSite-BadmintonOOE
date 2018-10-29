@@ -156,8 +156,12 @@
                         </div>
                         <script type="text/javascript" src="/js/wowslider.js"></script>
                         <script type="text/javascript" src="/js/slides/'.GetProperty("SliderAnimation").'"></script>
-                    </center>
+                        ';
 
+                        if(CheckPermission("ChangeContent")) echo '<a href="index'.str_replace('index','',ThisPage("+regenerateSlider")).'">&#9874; Slider Aktualisieren (Fehlerbehebung etc.)</a>';
+
+                        echo '
+                    </center>
                     ';
 
                     $i=1;

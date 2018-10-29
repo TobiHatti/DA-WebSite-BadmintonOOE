@@ -549,10 +549,10 @@
 
     .mobile_searchtrigger_container .searchbar_trigger{
         border:none;
-        background: #507CA5;
+        background: $modern-dark;
         padding: 3px 1px 1px 1px;
         width: 35px;
-        box-shadow: inset 0 0 2px 1px #375572;
+        box-shadow: inset 0 0 2px 1px $modern-dark;
     }
 
     .mobile_searchbar_container{
@@ -563,7 +563,7 @@
 
     .mobile_searchbar_container:target{
         display: inline-block;
-        background: #416586;
+        background: $modern-dark;
         width: 100%;
         height: 38px;
         z-index: 300000;
@@ -578,8 +578,8 @@
         font-size:14pt;
         padding: 0px;
         border:none;
-        box-shadow: inset 0 0 2px 1px #375572;
-        background: #507CA5;
+        box-shadow: inset 0 0 2px 1px $modern-dark;
+        background: $modern-dark;
         color: #FFFFFF;
         padding-left: 5px;
         @include box-sizing(border-box);
@@ -595,7 +595,7 @@
     .searchbar_container{
         position: absolute;
         right: -250px;
-        top: 5px;
+        top: 2px;
     }
 
     .searchbar_container .searchbar{
@@ -604,7 +604,7 @@
         background: $modern-dark;
         color: #FFFFFF;
         padding-left: 5px;
-        box-shadow: inset 0 0 2px 1px #666666;
+        box-shadow: inset 0 0 2px 1px #1F1F1F;
     }
 
     .searchbar_container .searchbar:focus{

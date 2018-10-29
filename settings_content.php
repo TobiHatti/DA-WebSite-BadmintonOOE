@@ -43,7 +43,36 @@
 
     if(isset($_POST['addUserAdministrative']))
     {
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $gedner = $_POST['gender'];
+        $email = $_POST['email'];
+        $password = hash('sha256',hash('sha256',$_POST['password']."salt")."pepper");
 
+        MySQLNonQuery("INSERT INTO users (id,rank,firstname,lastname,sex,email,password) VALUES ('','administrative','$firstname','$lastname','$gedner','$email','$password')");
+
+        $first = true;
+        $uid = MySQLSkalar("SELECT id AS x FROM users WHERE email = '$email' AND password = '$password'");
+        $SQLIn = "INSERT INTO permissions (id,user_id,permission,allowed) VALUES ";
+        $strSQL = "SELECT * FROM permission_list";
+        $rs=mysqli_query($link,$strSQL);
+        while($row=mysqli_fetch_assoc($rs))
+        {
+            $permission = $row['permission'];
+            $allowed = isset($_POST[$permission]) ? 1 : 0;
+
+            // Special Case for ChangeContent
+            if($permission == 'DeleteCC' AND isset($_POST['ChangeContent'])) $allowed = 1;
+
+            if($first) $SQLIn .= "('','$uid','$permission','$allowed') ";
+            else $SQLIn .= ",('','$uid','$permission','$allowed') ";
+            $first = false;
+        }
+
+        MySQLNonQuery($SQLIn);
+
+        Redirect(ThisPage("+newUserAdded"));
+        die();
     }
 
 
@@ -56,7 +85,7 @@
 
     echo '
             </head>
-            <body>
+            <body style="font-size:10pt;">
                 <div class="iframe_content stagfade1">
                 <h2 class="stagfade2">'.((isset($_GET['topic'])) ? $_GET['topic'] : '').'</h2>
     ';
@@ -113,7 +142,10 @@
             }
             else if(isset($_GET['administrative']))
             {
+                if(isset($_GET['newUserAdded'])) echo '<center><span style="color: #32CD32">Nutzer wurde hinzugef&uuml;gt!</span></center>';
+
                 echo '
+                <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                     <h2>Nutzer eintragen</h2>
                     <br>
 
@@ -123,28 +155,34 @@
                         <table>
                             <tr>
                                 <td class="ta_r">Anrede:</td>
-                                <td>'.RadioButton("Herr","sex",1).'</td>
-                                <td>'.RadioButton("Frau","sex").'</td>
+                                <td>'.RadioButton("Herr","gender",1,"M").'</td>
+                                <td>'.RadioButton("Frau","gender",0,"W").'</td>
                             </tr>
                             <tr>
                                 <td class="ta_r">Vorname: </td>
-                                <td colspan=2><input type="text" placeholder="Vorname"/></td>
+                                <td colspan=2><input type="text" placeholder="Vorname" name="firstname"/></td>
                             </tr>
                             <tr>
                                 <td class="ta_r">Nachname: </td>
-                                <td colspan=2><input type="text" placeholder="Nachname"/></td>
+                                <td colspan=2><input type="text" placeholder="Nachname" name="lastname"/></td>
                             </tr>
                             <tr>
                                 <td class="ta_r">E-Mail: </td>
-                                <td colspan=2><input type="text" placeholder="E-Mail"/></td>
+                                <td colspan=2>
+                                    <input type="email" placeholder="E-Mail" name="email" oninput="EMailCheck(this,\'outMailMessage\',\'submitButton\');" required/><br>
+                                    <span style="color: red"><output id="outMailMessage"></output></span>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="ta_r">Passwort: </td>
-                                <td colspan=2><input type="text" placeholder="Passwort"/></td>
+                                <td colspan=2>
+                                    <input type="password" placeholder="Passwort" name="password" id="pswd1" oninput="CheckPasswordPair(this,\'pswd2\',\'outPswdMessage\',\'submitButton\')" required/><br>
+                                    <span style="color: red"><output id="outPswdMessage"></output></span>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="ta_r">(Wiederholen) Passwort: </td>
-                                <td colspan=2><input type="text" placeholder="Passwort"/></td>
+                                <td colspan=2><input type="password" placeholder="Passwort" id="pswd2" oninput="CheckPasswordPair(this,\'pswd1\',\'outPswdMessage\',\'submitButton\')" required/></td>
                             </tr>
                         </table>
                     </center>
@@ -153,85 +191,175 @@
 
                     <center>
 
-                        <table style="width: 60%;">
-                            <tr><td colspan=6><h4>Generelles</h4></td></tr>
+                        <table style="width:90%;">
                             <tr>
-                                <td style="width: 50px;">'.Checkbox("1","1e").'</td>
-                                <td>Inhalte &auml;ndern</td>
-                                <td style="width: 50px;">'.Checkbox("2","2e").'</td>
-                                <td>Einstellungen &auml;ndern</td>
-                                <td style="width: 50px;">'.Checkbox("3","3e").'</td>
-                                <td>Sponsoren &auml;ndern</td>
+                                <td style="width: 50%">
+                                    <h5>Verwaltung <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Inhalten auf der Seite"></i></h5>
+                                    <table>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("ChangeContent","ChangeContent",true).'</td>
+                                            <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Seiteninhalte verwalten / &auml;ndern</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("ManageSettings","ManageSettings",true).'</td>
+                                            <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Seiteneinstellungen ver&auml;ndern</td>
+                                        </tr>
+                                    </table>
+                                </td>
+
+                                <td style="width: 50%">
+                                    <h5>Nutzer <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Nutzern und deren Rechten"></i></h5>
+                                    <table>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("ManageUsers","ManageUsers",true).'</td>
+                                            <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Nutzer hinzuf&uuml;gen (registrieren) / entfernen</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("ManagePermissions","ManagePermissions",true).'</td>
+                                            <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Nutzerrechte verwalten</td>
+                                        </tr>
+                                    </table>
+                                </td>
                             </tr>
+                        </table>
+                        <br>
+                        <table style="width:90%;">
                             <tr>
-                                <td style="width: 50px;">'.Checkbox("1","1f").'</td>
-                                <td>Nutzer verwalten</td>
-                                <td style="width: 50px;">'.Checkbox("2","2f").'</td>
-                                <td>Rechte verwalten</td>
+                                <td style="width: 25%">
+                                    <h5>News <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von News-Artikeln"></i></h5>
+                                    <table>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("AddNews","AddNews",true).'</td>
+                                            <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("EditNews","EditNews",true).'</td>
+                                            <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("DeleteNews","DeleteNews",true).'</td>
+                                            <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
+                                        </tr>
+                                    </table>
+                                </td>
+
+                                <td style="width: 25%">
+                                    <h5>Termine <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Terminen im Kalender"></i></h5>
+                                    <table>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("AddDate","AddDate",true).'</td>
+                                            <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("EditDate","EditDate",true).'</td>
+                                            <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("DeleteDate","DeleteDate",true).'</td>
+                                            <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
+                                        </tr>
+                                    </table>
+                                </td>
+
+                                <td style="width: 25%">
+                                    <h5>Vereine <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Vereinen"></i></h5>
+                                    <table>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("AddClub","AddClub",true).'</td>
+                                            <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("EditClub","EditClub",true).'</td>
+                                            <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("DeleteClub","DeleteClub",true).'</td>
+                                            <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
+                                        </tr>
+                                    </table>
+                                </td>
+
+                                <td style="width: 25%">
+                                    <h5>Galerie <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Fotogalerien"></i></h5>
+                                    <table>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("AddGallery","AddGallery",true).'</td>
+                                            <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("EditGallery","EditGallery",true).'</td>
+                                            <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("DeleteGallery","DeleteGallery",true).'</td>
+                                            <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <br>
+                        <table>
+                            <tr>
+                                <td style="width: 33%">
+                                    <h5>Nachwuchskader <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Spielern im Nachwuchskader"></i></h5>
+                                    <table>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("AddNWK","AddNWK",true).'</td>
+                                            <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("EditNWK","EditNWK",true).'</td>
+                                            <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("DeleteNWK","DeleteNWK",true).'</td>
+                                            <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
+                                        </tr>
+                                    </table>
+                                </td>
+
+                                <td style="width: 33%">
+                                    <h5>Vorstand <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Mitgliedern im Vorstand"></i></h5>
+                                    <table>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("AddVorstand","AddVorstand",true).'</td>
+                                            <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("EditVorstand","EditVorstand",true).'</td>
+                                            <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("DeleteVorstand","DeleteVorstand",true).'</td>
+                                            <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
+                                        </tr>
+                                    </table>
+                                </td>
+
+                                <td style="width: 33%">
+                                    <h5>Zentralausschreibungen <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Spielern im Nachwuchskader"></i></h5>
+                                    <table>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("AddZA","AddZA",true).'</td>
+                                            <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("EditZA","EditZA",true).'</td>
+                                            <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("DeleteZA","DeleteZA",true).'</td>
+                                            <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
+                                        </tr>
+                                    </table>
+                                </td>
                             </tr>
                         </table>
                         <br><br>
-                        <table style="width: 50%;">
-                            <tr><td colspan=6><h4>News</h4></td></tr>
-                            <tr>
-                                <td style="width: 50px;">'.Checkbox("1","1").'</td>
-                                <td>Erstellen</td>
-                                <td style="width: 50px;">'.Checkbox("2","2").'</td>
-                                <td>Bearbeiten</td>
-                                <td style="width: 50px;">'.Checkbox("3","3").'</td>
-                                <td>L&ouml;schen</td>
-                            </tr>
-                        </table>
-                        <br>
-                        <table style="width: 50%;">
-                            <tr><td colspan=6><h4>Zentralausschreibungen</h4></td></tr>
-                            <tr>
-                                <td style="width: 50px;">'.Checkbox("1","1a").'</td>
-                                <td>Erstellen</td>
-                                <td style="width: 50px;">'.Checkbox("2","2a").'</td>
-                                <td>Bearbeiten</td>
-                                <td style="width: 50px;">'.Checkbox("3","3a").'</td>
-                                <td>L&ouml;schen</td>
-                            </tr>
-                        </table>
-                        <br>
-                        <table style="width: 50%;">
-                            <tr><td colspan=6><h4>Termine</h4></td></tr>
-                            <tr>
-                                <td style="width: 50px;">'.Checkbox("1","1b").'</td>
-                                <td>Erstellen</td>
-                                <td style="width: 50px;">'.Checkbox("2","2b").'</td>
-                                <td>Bearbeiten</td>
-                                <td style="width: 50px;">'.Checkbox("3","3b").'</td>
-                                <td>L&ouml;schen</td>
-                            </tr>
-                        </table>
-                        <br>
-                        <table style="width: 50%;">
-                            <tr><td colspan=6><h4>Fotogalerie</h4></td></tr>
-                            <tr>
-                                <td style="width: 50px;">'.Checkbox("1","1c").'</td>
-                                <td>Erstellen</td>
-                                <td style="width: 50px;">'.Checkbox("2","2c").'</td>
-                                <td>Bearbeiten</td>
-                                <td style="width: 50px;">'.Checkbox("3","3c").'</td>
-                                <td>L&ouml;schen</td>
-                            </tr>
-                        </table>
-                        <br>
-                        <table style="width: 50%;">
-                            <tr><td colspan=6><h4>Vorstand</h4></td></tr>
-                            <tr>
-                                <td style="width: 50px;">'.Checkbox("1","1d").'</td>
-                                <td>Erstellen</td>
-                                <td style="width: 50px;">'.Checkbox("2","2d").'</td>
-                                <td>Bearbeiten</td>
-                                <td style="width: 50px;">'.Checkbox("3","3d").'</td>
-                                <td>L&ouml;schen</td>
-                            </tr>
-                        </table>
-                        <br>
+                        <button type="submit" name="addUserAdministrative" id="submitButton">Nutzer Registrieren</button>
                     </center>
+                </form>
                 ';
             }
             else if(isset($_GET['clubmanager']))
@@ -274,7 +402,7 @@
 
                                         echo '
                                     </select><br>
-                                    Verein nicht gefunden? <a href="/vereine/neu">Hier neuen Verein anlegen</a>
+                                    Verein nicht gefunden? <a href="/vereine/neu" target="_top">Hier neuen Verein anlegen</a>
                                     </td>
                                 </tr>
                             </table>
@@ -300,15 +428,29 @@
                     <br><br>
                     <h3>Aktuelle Nutzer</h3>
                     <hr>
+                    <h5>Verwaltung:</h5>
                     <ul>
                 ';
 
-                $strSQL = "SELECT * FROM users";
+                $strSQL = "SELECT * FROM users WHERE rank = 'administrative'";
                 $rs=mysqli_query($link,$strSQL);
                 while($row=mysqli_fetch_assoc($rs))
                 {
                     echo '<a href="/settings_content?topic=Nutzer&user='.$row['id'].'"><li>'.$row['firstname'].' '.$row['lastname'].' <span style="color: #696969">['.$row['email'].']</span></li></a>';
                 }
+                echo '
+                    </ul>
+                    <h5>Vereine:</h5>
+                    <ul>
+                ';
+
+                $strSQL = "SELECT * FROM users INNER JOIN vereine ON users.club = vereine.kennzahl WHERE users.rank = 'clubmanager'";
+                $rs=mysqli_query($link,$strSQL);
+                while($row=mysqli_fetch_assoc($rs))
+                {
+                    echo '<li>'.$row['verein'].' '.$row['ort'].' <span style="color: #696969">['.$row['email'].']</span></li>';
+                }
+
                 echo '</ul>';
             }
         }
@@ -334,11 +476,6 @@
                     <tr>
                         <td><b>ManageSettings</b></td>
                         <td>Seiteneinstellungen verwalten/&auml;ndern</td>
-                    </tr>
-                    <tr><td colspan="2"><hr></td></tr>
-                    <tr>
-                        <td><b>ManageSponsors</b></td>
-                        <td>Sponsorenlisten verwalten/&auml;ndern</td>
                     </tr>
                     <tr><td colspan="2"><hr></td></tr>
                     <tr>

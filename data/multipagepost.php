@@ -39,4 +39,12 @@
         Redirect(ThisPage("-toggleEvents"));
         die();
     }
+
+    if(isset($_GET['regenerateSlider']))
+    {
+        RefreshSliderContent();
+        Redirect(ThisPage('-regenerateSlider'));
+        die();
+    }
+
 ?>

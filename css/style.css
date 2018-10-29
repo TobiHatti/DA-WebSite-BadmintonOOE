@@ -1195,6 +1195,11 @@ input[type="week"]:focus {
   line-height: 10px;
   padding: 0; }
 
+.cel_h18 {
+  height: 18px;
+  line-height: 18px;
+  padding: 0; }
+
 .cel_h20 {
   height: 20px;
   line-height: 20px;
@@ -2934,6 +2939,7 @@ table.centered_content td {
 /* (V01)   VInfo > MemberInfo                                                        */
 /*===================================================================================*/
 .member_info {
+  position: relative;
   display: inline-flex;
   width: 300px;
   height: 90px;

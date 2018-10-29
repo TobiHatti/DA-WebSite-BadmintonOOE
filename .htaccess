@@ -45,6 +45,9 @@ RewriteRule ^zentralausschreibung/neu zentralausschreibung.php?neu [NC,QSA,L]
 # Rewrite Rules for vereine.php
 RewriteRule ^vereine/neu vereine.php?neu [NC,QSA,L]
 
+# Rewrite Rules for vorstand.php
+RewriteRule ^vorstand/neu vorstand.php?neu [NC,QSA,L]
+
 # Rewrite Rules for nachwuchskader.php
 RewriteRule ^nachwuchskader/neu nachwuchskader.php?neu [NC,QSA,L]
 
