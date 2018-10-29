@@ -234,9 +234,8 @@ function CheckPermission($permission)
     {
         $uid = $_SESSION['userID'];
 
-        // Check Permission-Database and get the propper value
-        // NOT FINALISED
-        return true;
+        if(MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = '$permission' AND user_id = '$uid'")==1) return true;
+        else return false;
     }
 }
 
@@ -592,11 +591,11 @@ function ArticleImgFilter($article,$path)
     return $article;
 }
 
-function SettingOption($type ,$title, $description, $property, $id, $selectArray='')
+function SettingOption($type, $description, $property, $selectArray='')
 {
+    $id = uniqid();
     $retval = '
         <tr>
-            <td>'.$title.'</td>
             <td>
     ';
 

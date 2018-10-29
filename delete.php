@@ -1,7 +1,7 @@
 <?php
     require("header.php");
 
-    if(CheckPermission("Delete".$_GET['s']) OR $_GET['s'] == 'ClubManager')
+    if(CheckPermission("Delete".$_GET['s']) OR $_GET['s'] == 'ClubManager' OR $_GET['s']== 'ManageUsers')
     {
         if(isset($_POST['delete']))
         {

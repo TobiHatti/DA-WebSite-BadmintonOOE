@@ -136,28 +136,28 @@
   body {
     display: grid;
     margin: 0;
-    margin-bottom: 20px; }
+    margin-bottom: 150px; }
 
   @media only screen and (max-width: 600px) {
     body {
       margin: 0px;
       grid-template-columns: 1fr;
-      grid-template-rows: 30px 120px auto 150px;
+      grid-template-rows: 30px 120px auto 0px;
       grid-template-areas: "nav" "header" "main" "."; } }
   @media only screen and (min-width: 600px) {
     body {
       grid-template-columns: 1fr;
-      grid-template-rows: 80px 38px auto 150px;
+      grid-template-rows: 80px 38px auto 0px;
       grid-template-areas: "header" "nav" "main" "."; } }
   @media only screen and (min-width: 768px) {
     body {
       grid-template-columns: 1fr;
-      grid-template-rows: 100px 38px auto 150px;
+      grid-template-rows: 100px 38px auto 0px;
       grid-template-areas: "header" "nav" "main" "."; } }
   @media only screen and (min-width: 992px) {
     body {
       grid-template-columns: 1fr;
-      grid-template-rows: 150px 38px auto 150px;
+      grid-template-rows: 150px 38px auto 0px;
       grid-template-areas: "header" "nav" "main" "."; } } }
 /*===================================================================================*/
 /* (A01) HTML > header                                                               */

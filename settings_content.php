@@ -1,5 +1,6 @@
 <?php
     setlocale (LC_ALL, 'de_DE.UTF-8', 'de_DE@euro', 'de_DE', 'de', 'ge', 'de_DE.ISO_8859-1', 'German_Germany');
+    session_start();
     require("data/mysql_connect.php");
 
     require("data/extension.lib.php");
@@ -41,6 +42,18 @@
         die();
     }
 
+    if(isset($_POST['updateUserClubManager']))
+    {
+        $id = $_POST['updateUserClubManager'];
+        $email = $_POST['email'];
+        $club = $_POST['club'];
+
+        MySQLNonQuery("UPDATE users SET club = '$club', email = '$email' WHERE id = '$id'");
+
+        Redirect(ThisPage());
+        die();
+    }
+
     if(isset($_POST['addUserAdministrative']))
     {
         $firstname = $_POST['firstname'];
@@ -75,6 +88,59 @@
         die();
     }
 
+    if(isset($_POST['updateUserAdministrative']))
+    {
+        $id = $_POST['updateUserAdministrative'];
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $gedner = $_POST['gender'];
+        $email = $_POST['email'];
+
+        MySQLNonQuery("UPDATE users SET firstname = '$firstname', lastname = '$lastname', sex = '$gedner', email = '$email' WHERE id = '$id'");
+
+        $strSQL = "SELECT * FROM permission_list";
+        $rs=mysqli_query($link,$strSQL);
+        while($row=mysqli_fetch_assoc($rs))
+        {
+            $permission = $row['permission'];
+            $allowed = isset($_POST[$permission]) ? 1 : 0;
+
+            // Special Case for ChangeContent
+            if($permission == 'DeleteCC' AND isset($_POST['ChangeContent'])) $allowed = 1;
+
+            MySQLNonQuery("UPDATE permissions SET allowed = '$allowed' WHERE user_id = '$id' AND permission = '$permission'");
+        }
+
+        Redirect(ThisPage());
+        die();
+    }
+
+    if(isset($_POST['addSponsor']))
+    {
+        $id = uniqid();
+        $name = $_POST['name'];
+        $website = $_POST['website'];
+
+        MySQLNonQuery("INSERT INTO sponsors (id,name,link) VALUES ('$id','$name','$website')");
+        FileUpload("content/sponsors/","sponsorLogo","","","UPDATE sponsors SET image = 'FNAME' WHERE id = '$id'",uniqid());
+
+        Redirect(ThisPage());
+        die();
+    }
+
+    if(isset($_POST['updateSponsor']))
+    {
+        $id = $_POST['updateSponsor'];
+        $name = $_POST['name'];
+        $website = $_POST['website'];
+
+        MySQLNonQuery("UPDATE sponsors SET name = '$name', link = '$website' WHERE id = '$id'");
+
+        FileUpload("content/sponsors/","sponsorLogo","","","UPDATE sponsors SET image = 'FNAME' WHERE id = '$id'",uniqid());
+
+        Redirect(ThisPage());
+        die();
+    }
 
     echo '
         <!DOCTYPE html>
@@ -85,9 +151,9 @@
 
     echo '
             </head>
-            <body style="font-size:10pt;">
+            <body style="font-size:10pt; padding-left: 5px;">
                 <div class="iframe_content stagfade1">
-                <h2 class="stagfade2">'.((isset($_GET['topic'])) ? $_GET['topic'] : '').'</h2>
+                <h2 class="stagfade2">'.((isset($_GET['topic'])) ? str_replace('ss','&szlig;',$_GET['topic']) : '').'</h2>
     ';
 
     $i=0;
@@ -95,7 +161,34 @@
 
     if(isset($_GET['topic']))
     {
-        if($_GET['topic'] == 'Unsorted')
+        if($_GET['topic'] == 'Allgemein')
+        {
+            echo '
+                <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                    <br><h4>Preloader</h4>
+                    <table class="settingTable">
+                        '.SettingOption("C","Preloader Aktivieren (Vorlader)", "EnablePreloader").'
+                        '.SettingOption("C","Preloader Aktivieren im News-Archiv", "EnablePreloaderArchive").'
+                    </table>
+
+                    <br><h4>Listen-Gr&ouml;&szlig;en</h4>
+                    <table class="settingTable">
+                        '.SettingOption("N","Listen-Gr&ouml;&szlig;e bei News-Listen", "PagerSizeNews").'
+                        '.SettingOption("N","Listen-Gr&ouml;&szlig;e bei Fotogalerie-Alben", "PagerSizeGalleryAlbum").'
+                        '.SettingOption("N","Listen-Gr&ouml;&szlig;e bei Fotogalerie-Fotos", "PagerSizeGalleryImage").'
+                        '.SettingOption("N","Listen-Gr&ouml;&szlig;e bei Kalender (Liste)", "PagerSizeCalendar").'
+                        '.SettingOption("N","Listen-Gr&ouml;&szlig;e bei Suchen", "PagerSizeSearch").'
+                        '.SettingOption("N","Menge an Artikeln die in der Seitenleiste unter \"Neueste Beitr&auml;ge\" angezeigt werden", "NewsAmountTile").'
+                    </table>
+
+                    <br><h4>Kalender</h4>
+                    <table class="settingTable">
+                        '.SettingOption("C","Zentralausschreibungen in Terminplaner anzeigen", "ShowZAinAG").'
+                    </table>
+                </form>
+            ';
+        }
+        else if($_GET['topic'] == 'Startseite')
         {
             $sliderAnimations = array();
             $strSQL = "SELECT * FROM slides ORDER BY name ASC";
@@ -103,42 +196,421 @@
             while($row=mysqli_fetch_assoc($rs)) array_push($sliderAnimations, $row['filename']);
 
             echo '
-                <b>Entwicklernotiz: Kategorien noch richtig einordnen!</b>
-                <br><br>
-
                 <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+
+                    <br><h4>Felder</h4>
                     <table class="settingTable">
-                        '.SettingOption("N","SliderImageCount", "Anzahl an Bildern die bei Slider auf Startseite angezeigt werden", "SliderImageCount", "sopt".$i++).'
-                        '.SettingOption("C","EnablePreloader", "Preloader Aktivieren", "EnablePreloader", "sopt".$i++).'
-                        '.SettingOption("C","EnablePreloaderArchive", "Preloader Aktivieren im News-Archiv", "EnablePreloaderArchive", "sopt".$i++).'
-                        '.SettingOption("N","PagerSizeNews", "Pager-Gr&ouml;&szlig;e bei News-Listen", "PagerSizeNews", "sopt".$i++).'
-                        '.SettingOption("N","PagerSizeGalleryAlbum", "Pager-Gr&ouml;&szlig;e bei Fotogalerie-Alben", "PagerSizeGalleryAlbum", "sopt".$i++).'
-                        '.SettingOption("N","PagerSizeGalleryImage", "Pager-Gr&ouml;&szlig;e bei Fotogalerie-Fotos", "PagerSizeGalleryImage", "sopt".$i++).'
-                        '.SettingOption("N","PagerSizeCalendar", "Pager-Gr&ouml;&szlig;e bei Kalender (Liste)", "PagerSizeCalendar", "sopt".$i++).'
-                        '.SettingOption("N","NewsAmountStartpageTN", "Menge an Artikeln die auf der Startseite unter \"Neuigkeiten\" angezeigt werden", "NewsAmountStartpageTN", "sopt".$i++).'
-                        '.SettingOption("N","NewsAmountStartpageNW", "Menge an Artikeln die auf der Startseite unter \"Nachwuchs\" angezeigt werden", "NewsAmountStartpageNW", "sopt".$i++).'
-                        '.SettingOption("N","NewsAmountTile", "Menge an Artikeln die in der Seitenleiste unter \"Neueste Beitr&auml;ge\" angezeigt werden", "NewsAmountTile", "sopt".$i++).'
-                        '.SettingOption("S","SliderAnimation", "Slider-Animation auf Startseite", "SliderAnimation", "sopt".$i++,$sliderAnimations).'
-                        '.SettingOption("C","ShowZAinAG", "Zentralausschreibungen in Terminplaner anzeigen", "ShowZAinAG", "sopt".$i++).'
+                        '.SettingOption("C","Rundruf-Feld auf Startseite anzeigen", "ShowBroadcast").'
+                        '.SettingOption("C","Heutige Termine als Rundruf auf Startseite anzeigen", "ShowTodaysEvents").'
+                        '.SettingOption("C","Veranstaltungs-Feld auf Startseite anzeigen", "ShowHomeEvents").'
+                    </table>
+
+                    <br><h4>Spieler des Monats</h4>
+                    <table class="settingTable">
+                        '.SettingOption("C","\"Spieler des Monats\" auf Startseite anzeigen", "ShowSpielerDesMonats").'
+                    </table>
+
+                    <br><h4>News</h4>
+                    <table class="settingTable">
+                        '.SettingOption("N","Menge an Artikeln die auf der Startseite unter \"Neuigkeiten\" angezeigt werden", "NewsAmountStartpageTN").'
+                        '.SettingOption("N","Menge an Artikeln die auf der Startseite unter \"Nachwuchs\" angezeigt werden", "NewsAmountStartpageNW").'
+                    </table>
+
+                    <br><h4>Slider</h4>
+                    <table class="settingTable">
+                        '.SettingOption("N","Anzahl an Bildern die bei Slider auf Startseite angezeigt werden", "SliderImageCount").'
+                        '.SettingOption("S","Slider-Animation auf Startseite", "SliderAnimation", $sliderAnimations).'
                     </table>
                 </form>
             ';
         }
-
-        if($_GET['topic'] == 'Allgemein')
+        else if($_GET['topic']=="Fusszeile")
         {
-            echo '
+            echo '<h3>Sponsoren</h3>';
 
-            ';
+            if(isset($_GET['neu']))
+            {
+                echo '
+                    <form action="'.ThisPage("-neu").'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                        <center>
+                            <h4>Neuen Sponsoren eintragen</h4>
+                            <table>
+                                <tr>
+                                    <td class="ta_r">Name: </td>
+                                    <td><input type="text" name="name" placeholder="Name..." required/></td>
+                                </tr>
+                                <tr>
+                                    <td class="ta_r">Website: </td>
+                                    <td><input type="text" name="website" placeholder="http://..."/></td>
+                                </tr>
+                                <tr>
+                                    <td class="ta_r">Logo: </td>
+                                    <td>'.FileButton("sponsorLogo","sponsorLogo").'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan=2 class="ta_c">
+                                        <br><button type="submit" name="addSponsor">Sponsor hinzuf&uuml;gen</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </center>
+                    </form>
+                ';
+            }
+
+            echo '<ul>';
+            $strSQL = "SELECT * FROM sponsors";
+            $rs=mysqli_query($link,$strSQL);
+            while($row=mysqli_fetch_assoc($rs))
+            {
+                if(isset($_GET['edit']) AND $_GET['edit']==$row['id'])
+                {
+                    echo '
+                        <form action="'.ThisPage("!edit").'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                            <table>
+                                <tr>
+                                    <td rowspan=2><li></li></td>
+                                    <td><input type="text" name="name" value="'.$row['name'].'" placeholder="Name..."/></td>
+                                    <td><input type="text" name="website" value="'.$row['link'].'" placeholder="http://..."/></td>
+                                    <td>'.FileButton("sponsorLogo","sponsorLogo").'</td>
+                                </tr>
+                                <tr>
+                                    <td><button type="submit" name="updateSponsor" value="'.$row['id'].'">Aktualisieren</button></td>
+                                </tr>
+                            </table>
+                        </form>
+                    ';
+                }
+                else
+                {
+                    echo '<li><a href="'.$row['link'].'">'.$row['name'].'</a>';
+                    if(CheckPermission("ChangeContent")) echo EditButton(ThisPage("+edit=".$row['id']),true);
+                    if(CheckPermission("ChangeContent")) echo DeleteButton("CC","sponsors",$row['id'],true,true);
+                    echo '</li>';
+                }
+
+            }
+            echo '</ul><br>';
+
+            if(CheckPermission("ChangeContent")) echo AddButton(ThisPage("+neu"));
         }
+//========================================================================================
+//========================================================================================
+//  NUTZER
+//========================================================================================
+//========================================================================================
         else if($_GET['topic'] == 'Nutzer')
         {
-            if(isset($_GET['user']))
+            if(isset($_GET['cuser']))
             {
+                $uid = $_GET['cuser'];
+                $uDat = FetchArray("users","id",$_GET['cuser']);
+
+                echo '<br><h3>Vereins-Account Bearbeiten</h3>';
+
+                echo '
+                    <form action="'.ThisPage("!cuser").'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                        <center>
+                            <table>
+                                <tr>
+                                    <td class="ta_r">E-Mail: </td>
+                                    <td colspan=2>
+                                        <input type="email" placeholder="E-Mail" name="email" oninput="EMailCheck(this,\'outMailMessage\',\'submitButton\');" value="'.$uDat['email'].'" required/><br>
+                                        <span style="color: red"><output id="outMailMessage"></output></span>
+                                    </td>
+                                </tr>
+                                <tr><td colspan=2><br></td></tr>
+                                <tr>
+                                    <td class="ta_r">Verein:<br>&nbsp;</td>
+                                    <td colspan=2>
+                                    <select name="club" class="cel_m" required>
+                                        <option value="" selected disabled>--- Verein Ausw&auml;hlen ---</option>
+                                        ';
+
+                                        $strSQL = "SELECT verein, ort, kennzahl FROM vereine ORDER BY kennzahl ASC";
+                                        $rs=mysqli_query($link,$strSQL);
+                                        while($row=mysqli_fetch_assoc($rs)) echo '<option value="'.$row['kennzahl'].'" '.($row['kennzahl']==$uDat['club'] ? 'selected' : '').'>'.$row['kennzahl'].' - '.$row['verein'].' '.$row['ort'].'</option>';
+
+                                        echo '
+                                    </select><br>
+                                    Verein nicht gefunden? <a href="/vereine/neu" target="_top">Hier neuen Verein anlegen</a>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+
+                            Der Nutzer kann nach der ersten Anmeldung das Passwort &auml;ndern
+
+                            <br><br>
+
+                            <button type="submit" name="updateUserClubManager" value="'.$uDat['id'].'" id="submitButton">Aktualisieren</button>
+                        </center>
+                    </form>
+                ';
+            }
+            else if(isset($_GET['user']))
+            {
+                $uid = $_GET['user'];
                 $uDat = FetchArray("users","id",$_GET['user']);
                 echo '<br><h3>Nutzerdaten von <i>'.$uDat['firstname'].' '.$uDat['lastname'].'</i></h3>';
 
-                echo '<i>List Permissions here</i>';
+
+
+                if(isset($_GET['edit']))
+                {
+                    echo '
+                        <form action="'.ThisPage("-edit").'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                            <center>
+                                <table>
+                                    <tr>
+                                        <td class="ta_r">Anrede:</td>
+                                        <td>'.RadioButton("Herr","gender",$uDat['sex']=='M',"M").'</td>
+                                        <td>'.RadioButton("Frau","gender",$uDat['sex']=='W',"W").'</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ta_r">Vorname: </td>
+                                        <td colspan=2><input type="text" placeholder="Vorname" name="firstname" value="'.$uDat['firstname'].'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ta_r">Nachname: </td>
+                                        <td colspan=2><input type="text" placeholder="Nachname" name="lastname" value="'.$uDat['lastname'].'"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ta_r">E-Mail: </td>
+                                        <td colspan=2>
+                                            <input type="email" placeholder="E-Mail" name="email" oninput="EMailCheck(this,\'outMailMessage\',\'submitButton\');" value="'.$uDat['email'].'" required/><br>
+                                            <span style="color: red"><output id="outMailMessage"></output></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </center>
+                            <h3>Rechte</h3>
+                            <hr>
+
+                            <center>
+
+                                <table style="width:90%;">
+                                    <tr>
+                                        <td style="width: 50%">
+                                            <h5>Verwaltung <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Inhalten auf der Seite"></i></h5>
+                                            <table>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("ChangeContent","ChangeContent",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'ChangeContent' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Seiteninhalte verwalten / &auml;ndern</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("ManageSettings","ManageSettings",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'ManageSettings' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Seiteneinstellungen ver&auml;ndern</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+
+                                        <td style="width: 50%">
+                                            <h5>Nutzer <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Nutzern und deren Rechten"></i></h5>
+                                            <table>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("ManageUsers","ManageUsers",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'ManageUsers' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Nutzer hinzuf&uuml;gen (registrieren) / entfernen</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("ManagePermissions","ManagePermissions",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'ManagePermissions' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Nutzerrechte verwalten</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br>
+                                <table style="width:90%;">
+                                    <tr>
+                                        <td style="width: 25%">
+                                            <h5>News <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von News-Artikeln"></i></h5>
+                                            <table>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("AddNews","AddNews",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'AddNews' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("EditNews","EditNews",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'EditNews' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("DeleteNews","DeleteNews",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'DeleteNews' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+
+                                        <td style="width: 25%">
+                                            <h5>Termine <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Terminen im Kalender"></i></h5>
+                                            <table>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("AddDate","AddDate",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'AddDate' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("EditDate","EditDate",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'EditDate' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("DeleteDate","DeleteDate",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'DeleteDate' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+
+                                        <td style="width: 25%">
+                                            <h5>Vereine <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Vereinen"></i></h5>
+                                            <table>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("AddClub","AddClub",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'AddClub' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("EditClub","EditClub",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'EditClub' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("DeleteClub","DeleteClub",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'DeleteClub' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+
+                                        <td style="width: 25%">
+                                            <h5>Galerie <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Fotogalerien"></i></h5>
+                                            <table>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("AddGallery","AddGallery",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'AddGallery' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("EditGallery","EditGallery",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'EditGallery' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("DeleteGallery","DeleteGallery",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'DeleteGallery' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br>
+                                <table>
+                                    <tr>
+                                        <td style="width: 33%">
+                                            <h5>Nachwuchskader <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Spielern im Nachwuchskader"></i></h5>
+                                            <table>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("AddNWK","AddNWK",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'AddNWK' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("EditNWK","EditNWK",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'EditNWK' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("DeleteNWK","DeleteNWK",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'DeleteNWK' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+
+                                        <td style="width: 33%">
+                                            <h5>Vorstand <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Mitgliedern im Vorstand"></i></h5>
+                                            <table>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("AddVorstand","AddVorstand",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'AddVorstand' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("EditVorstand","EditVorstand",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'EditVorstand' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("DeleteVorstand","DeleteVorstand",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'DeleteVorstand' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+
+                                        <td style="width: 33%">
+                                            <h5>Zentralausschreibungen <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Spielern im Nachwuchskader"></i></h5>
+                                            <table>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("AddZA","AddZA",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'AddZA' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("EditZA","EditZA",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'EditZA' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("DeleteZA","DeleteZA",MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'DeleteZA' AND user_id = '$uid'")).'</td>
+                                                    <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br><br>
+                                <button type="submit" name="updateUserAdministrative" id="submitButton" value="'.$uDat['id'].'">Nutzer aktualisieren</button>
+                            </center>
+                        </form>
+                    ';
+                }
+                else
+                {
+                    if(CheckPermission("ManageUsers") OR $_SESSION['userID'] == $uDat['id']) echo EditButton(ThisPage("+edit"));
+                    if(CheckPermission("ManageUsers")) echo DeleteButton("ManageUsers","users",$uDat['id'],false,true);
+
+                    $dotGreen = '<i class="fas fa-circle" style="color: #32CD32"></i>';
+                    $dotRed = '<i class="fas fa-circle" style="color: #FF0000"></i>';
+
+                    echo '<br><br><h4>Verwaltung</h4>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'ChangeContent' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Seiteninhalte verwalten / &auml;ndern<br>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'ManageSettings' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Seiteneinstellungen ver&auml;ndern<br>';
+
+                    echo '<br><h4>Nutzer</h4>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'ManageUsers' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Nutzer hinzuf&uuml;gen (registrieren) / entfernen<br>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'ManagePermissions' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Nutzerrechte verwalten<br>';
+
+                    echo '<br><h4>News</h4>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'AddNews' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' News-Artikel erstellen<br>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'EditNews' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' News-Artikel bearbeiten<br>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'DeleteNews' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' News-Artikel l&ouml;schen<br>';
+
+                    echo '<br><h4>Termine</h4>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'AddDate' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Termine erstellen<br>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'EditDate' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Termine bearbeiten<br>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'DeleteDate' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Termine l&ouml;schen<br>';
+
+                    echo '<br><h4>Vereine</h4>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'AddClub' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Vereine hinzuf&uuml;gen<br>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'EditClub' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Vereine bearbeiten<br>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'DeleteClub' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Vereine l&ouml;schen<br>';
+
+                    echo '<br><h4>Galerie</h4>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'AddGallery' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Fotogalerie erstellen<br>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'EditGallery' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Fotogalerie bearbeiten<br>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'DeleteGallery' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Fotogalerie l&ouml;schen<br>';
+
+                    echo '<br><h4>Nachwuchskader</h4>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'AddNWK' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Nachwuchskader-Mitglied hinzuf&uuml;gen<br>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'EditNWK' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Nachwuchskader-Mitglied bearbeiten<br>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'DeleteNWK' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Nachwuchskader-Mitglied l&ouml;schen<br>';
+
+                    echo '<br><h4>Vorstand</h4>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'AddVorstand' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Vorstand-Mitglied hinzuf&uuml;gen<br>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'EditVorstand' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Vorstand-Mitglied bearbeiten<br>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'DeleteVorstand' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Vorstand-Mitglied l&ouml;schen<br>';
+
+                    echo '<br><h4>Zentralausschreibungen</h4>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'AddZA' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Zentralausschreibung erstellen<br>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'EditZA' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Zentralausschreibung bearbeiten<br>';
+                    echo ((MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = 'DeleteZA' AND user_id = '$uid'")) ? $dotGreen : $dotRed).' Zentralausschreibung l&ouml;schen<br>';
+                }
             }
             else if(isset($_GET['administrative']))
             {
@@ -444,143 +916,22 @@
                     <ul>
                 ';
 
-                $strSQL = "SELECT * FROM users INNER JOIN vereine ON users.club = vereine.kennzahl WHERE users.rank = 'clubmanager'";
+                $strSQL = "SELECT *, users.id AS uid FROM users INNER JOIN vereine ON users.club = vereine.kennzahl WHERE users.rank = 'clubmanager'";
                 $rs=mysqli_query($link,$strSQL);
                 while($row=mysqli_fetch_assoc($rs))
                 {
-                    echo '<li>'.$row['verein'].' '.$row['ort'].' <span style="color: #696969">['.$row['email'].']</span></li>';
+                    echo '<li>'.$row['verein'].' '.$row['ort'].' <span style="color: #696969">['.$row['email'].']</span>';
+
+                    if(CheckPermission("ManageUsers")) echo EditButton(ThisPage("+cuser=".$row['uid']),true);
+                    if(CheckPermission("ManageUsers")) echo DeleteButton("ManageUsers","users",$row['uid'],true,true);
+
+                    echo '</li>';
                 }
 
                 echo '</ul>';
             }
         }
-        else if($_GET['topic'] == 'Startseite')
-        {
-            echo '
 
-            ';
-        }
-        else if($_GET['topic'] == 'Rechte')
-        {
-            echo '
-                <table>
-                    <tr>
-                        <td><b>ChangeContent</b></td>
-                        <td>Seiteninhalte verwalten/&auml;ndern</td>
-                    </tr>
-                    <tr>
-                        <td><b>DeleteCC</b></td>
-                        <td>Seiteninhalte l&ouml;schen (Standart bei ChangeContent dabei, ben&ouml;tigt f&uuml;r z.B. editTiles)</td>
-                    </tr>
-                    <tr><td colspan="2"><hr></td></tr>
-                    <tr>
-                        <td><b>ManageSettings</b></td>
-                        <td>Seiteneinstellungen verwalten/&auml;ndern</td>
-                    </tr>
-                    <tr><td colspan="2"><hr></td></tr>
-                    <tr>
-                        <td><b>ManageUsers</b></td>
-                        <td>Nutzer hinzuf&uuml;gen/entfernen</td>
-                    </tr>
-                    <tr>
-                        <td><b>ManagePermissions</b></td>
-                        <td>Nutzer-Rechte verwalten</td>
-                    </tr>
-                    <tr><td colspan="2"><hr></td></tr>
-                    <tr>
-                        <td><b>AddGallery</b></td>
-                        <td>Neue Galerie erstellen/Fotos hochladen</td>
-                    </tr>
-                    <tr>
-                        <td><b>EditGallery</b></td>
-                        <td>Galerie bearbeiten</td>
-                    </tr>
-                    <tr>
-                        <td><b>DeleteGallery</b></td>
-                        <td>Album/Fotos l&ouml;schen</td>
-                    </tr>
-                    <tr><td colspan="2"><hr></td></tr>
-                    <tr>
-                        <td><b>AddNews</b></td>
-                        <td>Artikel hinzuf&uuml;gen</td>
-                    </tr>
-                    <tr>
-                        <td><b>EditNews</b></td>
-                        <td>Artikel bearbeiten</td>
-                    </tr>
-                    <tr>
-                        <td><b>DeleteNews</b></td>
-                        <td>Artikel l&ouml;schen</td>
-                    </tr>
-                    <tr><td colspan="2"><hr></td></tr>
-                    <tr>
-                        <td><b>AddZA</b></td>
-                        <td>Zentralausschreibung hinzuf&uuml;gen</td>
-                    </tr>
-                    <tr>
-                        <td><b>EditZA</b></td>
-                        <td>Zentralausschreibung bearbeiten</td>
-                    </tr>
-                    <tr>
-                        <td><b>DeleteZA</b></td>
-                        <td>Zentralausschreibung l&ouml;schen</td>
-                    </tr>
-                    <tr><td colspan="2"><hr></td></tr>
-                    <tr>
-                        <td><b>AddVorstand</b></td>
-                        <td>Vorstand-Mitglied hinzuf&uuml;gen</td>
-                    </tr>
-                    <tr>
-                        <td><b>EditVorstand</b></td>
-                        <td>Vorstand-Mitglied bearbeiten</td>
-                    </tr>
-                    <tr>
-                        <td><b>DeleteVorstand</b></td>
-                        <td>Vorstand-Mitglied l&ouml;schen</td>
-                    </tr>
-                    <tr><td colspan="2"><hr></td></tr>
-                    <tr>
-                        <td><b>AddDate</b></td>
-                        <td>Termin hinzuf&uuml;gen</td>
-                    </tr>
-                    <tr>
-                        <td><b>EditDate</b></td>
-                        <td>Termin bearbeiten</td>
-                    </tr>
-                    <tr>
-                        <td><b>DeleteDate</b></td>
-                        <td>Termin l&ouml;schen</td>
-                    </tr>
-                    <tr><td colspan="2"><hr></td></tr>
-                    <tr>
-                        <td><b>AddClub</b></td>
-                        <td>Verein hinzuf&uuml;gen</td>
-                    </tr>
-                    <tr>
-                        <td><b>EditClub</b></td>
-                        <td>Verein bearbeiten</td>
-                    </tr>
-                    <tr>
-                        <td><b>DeleteClub</b></td>
-                        <td>Verein l&ouml;schen</td>
-                    </tr>
-                    <tr><td colspan="2"><hr></td></tr>
-                    <tr>
-                        <td><b>AddNWK</b></td>
-                        <td>Nachwuchskader hinzuf&uuml;gen</td>
-                    </tr>
-                    <tr>
-                        <td><b>EditNWK</b></td>
-                        <td>Nachwuchskader bearbeiten</td>
-                    </tr>
-                    <tr>
-                        <td><b>DeleteNWK</b></td>
-                        <td>Nachwuchskader l&ouml;schen</td>
-                    </tr>
-                    <tr><td colspan="2"><hr></td></tr>
-                </table>
-            ';
-        }
     }
 
     echo '
