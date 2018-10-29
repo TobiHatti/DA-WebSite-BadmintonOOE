@@ -63,11 +63,22 @@
         die();
     }
 
-    if(isset($_POST['editUpdate']))
+    if(isset($_POST['editUpdateMeisterschaft']))
     {
         $text = $_POST['editText'];
         $value = $_POST['editValue'];
-        $id = $_POST['editUpdate'];
+        $id = $_POST['editUpdateMeisterschaft'];
+
+        MySQLNonQuery("UPDATE home_tiles SET text = '$text', value = '$value' WHERE id = '$id'");
+        Redirect("/home/Meisterschaft/bearbeiten");
+        die();
+    }
+
+    if(isset($_POST['editUpdateRanglisten']))
+    {
+        $text = $_POST['editText'];
+        $value = $_POST['editValue'];
+        $id = $_POST['editUpdateRanglisten'];
 
         MySQLNonQuery("UPDATE home_tiles SET text = '$text', value = '$value' WHERE id = '$id'");
         Redirect("/home/Ranglisten/bearbeiten");
@@ -94,13 +105,13 @@
                         <li>
                             <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                                 <input type="text" name="editText" value="'.$row['text'].'" placeholder="Anzeigename..."/>
-                                <input type="url"  name="editValue" value="'.$row['value'].'" placeholder="http://..."/>
-                                <button type="submit" name="editUpdate" value="'.$row['id'].'">Aktualisieren</button>
+                                <input type="text"  name="editValue" value="'.$row['value'].'" placeholder="http://..."/>
+                                <button type="submit" name="editUpdateMeisterschaft" value="'.$row['id'].'">Aktualisieren</button>
                             </form>
                         </li>
                     ';
                 }
-                else echo '<li><a href="'.$row['value'].'" target="_blank">'.$row['text'].'</a>&nbsp;&nbsp;'.EditButton("/home/Ranglisten/bearbeiten?editLine=".$row['id'],true).'  '.DeleteButton("CC","home_tiles",$row['id'],true).'</li>';
+                else echo '<li><a href="'.$row['value'].'" target="_blank">'.$row['text'].'</a>&nbsp;&nbsp;'.EditButton("/home/Meisterschaft/bearbeiten?editLine=".$row['id'],true).'  '.DeleteButton("CC","home_tiles",$row['id'],true).'</li>';
             }
             echo '</ul><br><br>';
 
@@ -154,8 +165,8 @@
                         <li>
                             <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                                 <input type="text" name="editText" value="'.$row['text'].'" placeholder="Anzeigename..."/>
-                                <input type="url"  name="editValue" value="'.$row['value'].'" placeholder="http://..."/>
-                                <button type="submit" name="editUpdate" value="'.$row['id'].'">Aktualisieren</button>
+                                <input type="text"  name="editValue" value="'.$row['value'].'" placeholder="http://..."/>
+                                <button type="submit" name="editUpdateRanglisten" value="'.$row['id'].'">Aktualisieren</button>
                             </form>
                         </li>
                     ';
