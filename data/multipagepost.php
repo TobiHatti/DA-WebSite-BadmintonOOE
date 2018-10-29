@@ -17,4 +17,26 @@
         Redirect(ThisPage("!editContent"));
         die();
     }
+
+    if(isset($_GET['toggleBroadcast']))
+    {
+        $current = GetProperty("ShowBroadcast");
+
+        if($current == 'true') SetProperty("ShowBroadcast","false");
+        else SetProperty("ShowBroadcast","true");
+
+        Redirect(ThisPage("-toggleBroadcast"));
+        die();
+    }
+
+    if(isset($_GET['toggleEvents']))
+    {
+        $current = GetProperty("ShowHomeEvents");
+
+        if($current == 'true') SetProperty("ShowHomeEvents","false");
+        else SetProperty("ShowHomeEvents","true");
+
+        Redirect(ThisPage("-toggleEvents"));
+        die();
+    }
 ?>

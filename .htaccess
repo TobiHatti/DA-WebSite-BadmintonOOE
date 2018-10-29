@@ -12,14 +12,20 @@ RewriteCond %{REQUEST_FILENAME} !-f
 #         URL Rewrites        #
 ###############################
 
+# Rewrite Rules for edit-home-tiles.php
+RewriteRule ^home/Meisterschaft/bearbeiten edit-home-tiles.php?tile=Meisterschaft [NC,QSA,L]
+RewriteRule ^home/Ranglisten/bearbeiten edit-home-tiles.php?tile=Ranglisten [NC,QSA,L]
+RewriteRule ^home/Links/bearbeiten edit-home-tiles.php?tile=Links [NC,QSA,L]
+
 # Rewrite Rules for news.php
 RewriteRule ^news/neu news.php?neu [NC,QSA,L]
 RewriteRule ^news/artikel/([a-zA-Z0-9-]+)/?$ news.php?artikel=$1 [NC,QSA,L]
 RewriteRule ^news/suche news.php?suche [NC,QSA,L]
 RewriteRule ^news/kategorie/([a-zA-Z0-9-]+)/?$ news.php?kategorie=$1 [NC,QSA,L]
 
-# Rewrite Rules for gamerofmonth.php
-RewriteRule ^gamerofmonth/neu gamerofmonth.php?neu [NC,QSA,L]
+# Rewrite Rules for spieler-des-monats.php
+RewriteRule ^spieler-des-monats/neu spieler-des-monats.php?neu [NC,QSA,L]
+RewriteRule ^spieler-des-monats/([a-zA-Z0-9-]+)/?$ spieler-des-monats.php?article=$1 [NC,QSA,L]
 
 # Rewrite Rules for ooem-archiv.php
 RewriteRule ^ooemm-archiv/jahr/([a-zA-Z0-9-]+)/?$ ooemm-archiv.php?jahr=$1 [NC,QSA,L]
@@ -35,6 +41,12 @@ RewriteRule ^kalender/datum/([a-zA-Z0-9-]+)/?$ kalender.php?datum=$1 [NC,QSA,L]
 
 # Rewrite Rules for zentralausschreibungen.php
 RewriteRule ^zentralausschreibung/neu zentralausschreibung.php?neu [NC,QSA,L]
+
+# Rewrite Rules for vereine.php
+RewriteRule ^vereine/neu vereine.php?neu [NC,QSA,L]
+
+# Rewrite Rules for nachwuchskader.php
+RewriteRule ^nachwuchskader/neu nachwuchskader.php?neu [NC,QSA,L]
 
 # Rewrite Rules for zentralausschreibungen.php
 RewriteRule ^schiedsrichter/seite/([a-zA-Z0-9-]+)/?$ schiedsrichter.php?seite=$1 [NC,QSA,L]
