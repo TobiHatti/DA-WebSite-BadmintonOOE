@@ -28,9 +28,9 @@
         {
             echo FileList('/files/downloads/'.$row['file'], $row['name']);
 
-            if(CheckPermission("DeteleDownloads"))
+            if(CheckPermission("ChangeContent"))
             {
-                echo DeleteButton("Downloads","downloads",$row['id']);
+                echo DeleteButton("CC","downloads",$row['id']);
             }
 
             echo '<br><br>';
@@ -41,7 +41,7 @@
     ';
 
 
-    if(CheckPermission("AddDownloads"))
+    if(CheckPermission("ChangeContent"))
     {
         echo '
             <a href="#addfile"><button type="button">Datei hinzuf&uuml;gen</button></a>

@@ -294,6 +294,38 @@
 
             if(CheckPermission("ChangeContent")) echo AddButton(ThisPage("+neu"));
         }
+        else if($_GET['topic'] == 'Dateien')
+        {
+            echo '<h3>Hochgeladene Dateien:</h3>';
+
+            echo '<ul>';
+            $strSQL = "SELECT * FROM uploads ORDER BY displayname ASC";
+            $rs=mysqli_query($link,$strSQL);
+            while($row=mysqli_fetch_assoc($rs))
+            {
+                echo '
+                    <table style="margin-bottom: 5px;" class="hoverFocus">
+                        <tr>
+                            <td rowspan=2>
+                                <li></li>
+                            </td>
+                            <td>
+                                <span style="font-size: 12pt;">'.$row['displayname'].'</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span style="color: #696969; font-size: 10pt;">['.$row['filename'].']</span>
+                            </td>
+                            <td>
+                                '.DeleteButton("CC","uploads",$row['id'],false,true).'
+                            </td>
+                        </tr>
+                    </table>
+                ';
+            }
+            echo '</ul>';
+        }
 //========================================================================================
 //========================================================================================
 //  NUTZER

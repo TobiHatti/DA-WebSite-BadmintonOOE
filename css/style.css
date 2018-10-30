@@ -389,6 +389,16 @@ h5 {
 .ta_c {
   text-align: center; }
 
+.hoverFocus {
+  -webkit-transition: background 0.3s ease-in-out;
+  -moz-transition: background 0.3s ease-in-out;
+  -ms-transition: background 0.3s ease-in-out;
+  -o-transition: background 0.3s ease-in-out;
+  transition: background 0.3s ease-in-out; }
+
+.hoverFocus:hover {
+  background: #D1EEF5; }
+
 /*===================================================================================*/
 /* (Z06) Pager                                                                       */
 /*===================================================================================*/
