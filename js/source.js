@@ -810,6 +810,14 @@ function ConvertDiv2Base64Froala(divID)
     });
 }
 
+function AddStringToFroala(string)
+{
+    var froalaContent = window.parent.document.getElementsByClassName("fr-element")[0].innerHTML;
+
+    window.parent.document.getElementsByClassName("fr-element fr-view")[0].innerHTML = froalaContent + string;
+
+}
+
 function ChangeNewsImageCreatorLink()
 {
     var listpre = document.getElementById("themeSelector");

@@ -338,6 +338,14 @@ h5{
     text-align: center;
 }
 
+.hoverFocus{
+    @include custom-ease(background,0.3s);
+}
+
+.hoverFocus:hover{
+    background: $theme-vibrant-bright-l;
+}
+
 /*===================================================================================*/
 /* (Z06) Pager                                                                       */
 /*===================================================================================*/

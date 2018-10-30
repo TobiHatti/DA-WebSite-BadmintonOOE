@@ -12,6 +12,7 @@
                 <a onclick="ChangeFrameLink(\'settings_content?topic=Startseite\');"><li>Startseite</li></a>
                 <a onclick="ChangeFrameLink(\'settings_content?topic=Nutzer\');"><li>Nutzer</li></a>
                 <a onclick="ChangeFrameLink(\'settings_content?topic=Fusszeile\');"><li>Fu&szlig;zeile</li></a>
+                <a onclick="ChangeFrameLink(\'settings_content?topic=Dateien\');"><li>Dateien</li></a>
             </div>
             <iframe id="chframe" name="settingsContent" src="/settings_content?topic=Allgemein" frameborder="0"></iframe>
         </div>

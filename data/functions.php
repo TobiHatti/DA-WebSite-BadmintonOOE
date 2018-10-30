@@ -200,7 +200,26 @@ function PageContent($paragraph_index,$allowEdit=false,$reactToCustomPage="",$is
     }
     else if($allowEdit AND isset($_GET['editContent']) AND $_GET['editContent']==$paragraph_index)
     {
-        $retval = '<form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">'.TextareaPlus("contentEdit","contentEdit",$content).'<br><button type="submit" name="changeContent" value="'.$page.'||'.$paragraph_index.'">&Auml;ndern</button type="button"><a href="'.ThisPage("!editContent").'"><button type="button">Abbrechen</button></a><form>';
+        $uniqID = uniqid();
+        $retval = '
+            <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                '.TextareaPlus("contentEdit","contentEdit",$content).'
+                <br>
+                <button type="submit" name="changeContent" value="'.$page.'||'.$paragraph_index.'">&Auml;ndern</button>
+                <a href="'.ThisPage("!editContent").'"><button type="button">Abbrechen</button></a>
+
+                <a href="#editFileUpload'.$uniqID.'"><button type="button" style="float: right;"><i class="fas fa-upload"></i> Datei hochladen</button></a>
+
+                <div class="modal_wrapper" id="editFileUpload'.$uniqID.'">
+                    <a href="#c">
+                        <div class="modal_bg"></div>
+                    </a>
+                    <div class="modal_container" style="width: 300px; height: 280px">
+                        <iframe src="/froalapl-upload-file?parent='.urlencode(ThisPage()).'" frameborder="0" style="width: 100%; height: 100%;">
+                    </div>
+                </div>
+
+            <form>';
     }
 
 
