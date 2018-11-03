@@ -1,4 +1,6 @@
 <?php
+    require("data/mysql_connect.php");
+
      echo '
             </main>
             <footer>
@@ -78,7 +80,7 @@
                     ';
 
                     $i=1;
-                    $strSQL = "SELECT * FROM sponsors ORDER BY RAND() LIMIT 0,3";
+                    $strSQL = "SELECT * FROM sponsors ORDER BY RAND() LIMIT 3";
                     $rs=mysqli_query($link,$strSQL);
                     while($row=mysqli_fetch_assoc($rs))
                     {
