@@ -2,7 +2,7 @@
     include("header.php");
 
 
-    echo phpversion();
+    echo ''.ColorPicker("","picker1","Farbe w&auml;hlen", "#FFD700") .'';
 
 
 
