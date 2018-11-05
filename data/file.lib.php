@@ -35,7 +35,7 @@ function FileUpload($path,$formId,$formats="",$limit="",$sql="",$customName="")
     $count=0;
     if(isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST")
     {
-        foreach (SReplace($_FILES[$formId]['name']) as $f => $name)
+        foreach (SReplace($_FILES[$formId]['name'],'.') as $f => $name)
         {
             if ($_FILES[$formId]['error'][$f] == 4) continue;
             if ($_FILES[$formId]['error'][$f] == 0)

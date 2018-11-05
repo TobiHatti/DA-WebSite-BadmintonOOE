@@ -63,7 +63,7 @@ function EndsWith($haystack, $needle)
     return $length === 0 || (substr($haystack, -$length) === $needle);
 }
 
-function SReplace($string)
+function SReplace($string,$specialCharacters='')
 {
     // DESCRIPTION:
     // Formats a given string so it is save for URL-names etc.
@@ -88,8 +88,8 @@ function SReplace($string)
     $sstr = str_replace('Ã¼','ue',$sstr);
     $sstr = str_replace('ÃŸ','ss',$sstr);
 
-    // Remove everything but Alphanumeric letters and numbers and "-", "."
-    $sstr = preg_replace('/[^0-9A-Za-z-.\|]/', '', $sstr);
+    // Remove everything but Alphanumeric letters and numbers and "-"
+    $sstr = preg_replace('/[^0-9A-Za-z-'.$specialCharacters.'\|]/', '', $sstr);
 
     return $sstr;
 }
