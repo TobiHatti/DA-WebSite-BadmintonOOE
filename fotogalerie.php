@@ -89,7 +89,7 @@
     }
 
 
-    if(CheckPermission("AddGallery") AND isset($_GET['neu']))
+    if(isset($_GET['neu']) AND CheckPermission("AddGallery"))
     {
         echo '
             <h2 class="stagfade1">Neue Fotogalerie erstellen</h1>

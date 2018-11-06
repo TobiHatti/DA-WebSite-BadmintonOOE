@@ -106,7 +106,7 @@
                                     else $showSDM = false;
 
 
-                                    $sdmPosition = 2;
+                                    $sdmPosition = GetProperty("SDMSliderPosition");
                                     $i=1;
                                     $refreshID = uniqid();
                                     $strSQL = "SELECT * FROM news WHERE thumbnail NOT LIKE '' AND tags NOT LIKE 'Spieler-des-Monats' ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
