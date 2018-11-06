@@ -31,7 +31,11 @@ function GetProperty($key)
     // If property does not exist, an empty string ("") is returned
     // $key     Keyword of the property (e.g. keyword="site_name" returns "My Cool Website")
 
-    return MySQLSkalar("SELECT value AS x FROM settings WHERE setting = '$key'");
+    $property = MySQLSkalar("SELECT value AS x FROM settings WHERE setting = '$key'");
+
+    if(strtolower($property) == "true") return true;
+    else if(strtolower($property) == "false") return false;
+    else return $property;
 }
 
 function IncProperty($key,$resetLimit = "none")

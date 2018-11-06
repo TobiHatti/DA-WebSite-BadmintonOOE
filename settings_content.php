@@ -220,6 +220,7 @@
                     <table class="settingTable">
                         '.SettingOption("N","Anzahl an Bildern die bei Slider auf Startseite angezeigt werden", "SliderImageCount").'
                         '.SettingOption("S","Slider-Animation auf Startseite", "SliderAnimation", $sliderAnimations).'
+                        '.SettingOption("N","Position des \"Spieler des Monats\"-Beitrags im Slider", "SDMSliderPosition").'
                     </table>
                 </form>
             ';
