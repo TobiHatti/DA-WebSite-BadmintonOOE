@@ -94,7 +94,8 @@
         echo '
             <h2 class="stagfade1">Neue Fotogalerie erstellen</h1>
             <hr>
-            <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data" onkeypress="return event.keyCode != 13;">
+            <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data"
+            onkeypress="return event.keyCode != 13;">
                 <div class="stagfade2">
                     <p>Vergeben Sie einen Namen und bei wunsch auch eine Beschreibung an das Album:</p>
                     <input type="text" placeholder="Titel" name="album_name" class="cel_100" reqiured/>
