@@ -2,12 +2,7 @@
     include("header.php");
 
 
-    MySQLNonQuery("INSERT INTO test (id,value) VALUES ('','Hi')");
-
-    $value = "Ho";
-    $value2 = "He";
-
-    //MySQLNonQuery("INSERT INTO test (id,value,value2) VALUES ('',?,?)","@s",$value,$value2);
+    ExceptionNotification("Es ist ".date("H:m:s"),"information","warning");
 
 
 
