@@ -6,18 +6,28 @@
         $email=$_POST['email'];
         $pswd = hash('sha256',hash('sha256',$_POST['password']."salt")."pepper");
 
-        if(MySQLExists("SELECT * FROM users WHERE email = '$email' AND password = '$pswd'"))
-        {
-            $userData = FetchArray("users","email",$email);
 
-            $_SESSION['userID'] = $userData['id'];
-            $_SESSION['firstname'] = $userData['firstname'];
-            $_SESSION['lastname'] = $userData['lastname'];
-            $_SESSION['rank'] = $userData['rank'];
+        $stmt = $link->prepare('SELECT * FROM users WHERE email = ? AND password = ?');
+        $stmt->bind_param('ss', $email, $pswd); // 's' specifies the variable type => 'string'
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        $executed = false;
+
+        while ($row = $result->fetch_assoc())
+        {
+            $executed = true;
+
+            $_SESSION['userID'] = $row['id'];
+            $_SESSION['firstname'] = $row['firstname'];
+            $_SESSION['lastname'] = $row['lastname'];
+            $_SESSION['rank'] = $row['rank'];     
             Redirect("/");
         }
-        else Redirect(str_replace('?err','',ThisPage()).'?err');
 
+        if(!$executed) Redirect(str_replace('?err','',ThisPage()).'?err');
     }
 
     echo '
