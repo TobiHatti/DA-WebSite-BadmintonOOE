@@ -15,16 +15,58 @@
 //      •MySQLPDSave    (return: int)                                               *
 //***********************************************************************************
 
-function MySQLNonQuery($strSQL)
+function MySQLNonQuery($strSQL,$dataTypes="", &...$mySQLParamValues)
 {
     // DESCRIPTION:
     // Executes a standard SQL-Query such as UPDATE,DELETE,INSERT, etc.
     // Can be used in combination with "or die("error_msg");"
 
+    // FOR PARAMETERIZED VERSION:
+    // $dataTypes   Set datatype of the value ([i]int, [s]string, [f]float)
+    //              Example:    "ssiiis"
+    //              OR:         "@s" to set every parameter to "s"
+    // Example-Usage:
+    // MySQLNonQuery("INSERT INTO test (id,value,value2) VALUES ('',?,?)","@s",$value,$value2);
+
+
     require("mysql_connect.php");
-    $rs = mysqli_query($link,$strSQL);
-    mysqli_close($link);
-    return $rs;
+
+    if($dataTypes == "")
+    {
+        // Old version without parameterized queries
+        // Kept for compatibility
+
+        $rs = mysqli_query($link,$strSQL);
+        mysqli_close($link);
+        return $rs;
+    }
+    else
+    {
+        // New version with parameterized queries
+        $paramAmt = func_num_args() - 2;
+
+        if(StartsWith($dataTypes,"@"))
+        {
+            $broadCastType = str_replace("@","",$dataTypes);
+            $mySQLParamTypes = '';
+
+            for($i=0;$i<$paramAmt;$i++) $mySQLParamTypes .= $broadCastType;
+        }
+        else
+        {
+            if($paramAmt == strlen($dataTypes)) $mySQLParamTypes = $dataTypes;
+            else die("<b>Nicht gen&uuml;gend Typ-Parameter &uuml;bergeben!</b> <br> <b>&Uuml;bergeben:</b> ".strlen($dataTypes)." <br><b>Ben&ouml;tigt:</b> $paramAmt");
+        }
+
+        $stmt = $link->prepare($strSQL);
+
+        call_user_func_array(array($stmt, "bind_param"), array_merge(array($mySQLParamTypes), $mySQLParamValues));
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result;
+    }
 }
 
 function MySQLSkalar($strSQL)
