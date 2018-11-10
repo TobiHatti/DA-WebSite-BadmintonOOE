@@ -9,6 +9,7 @@
     require("data/mysql.lib.php");
     require("data/property.lib.php");
     require("data/string.lib.php");
+    require("data/notification.lib.php");
 
     require("data/functions.php");
     require("data/editfunctions.php");
@@ -59,6 +60,8 @@
                     <div class="header_logo"></div>
                     <!-- <div class="header_sponsor"></div> -->
                     ';
+
+                    echo CatchNotification();
 
                     if(isset($_SESSION['userID']) AND CheckRank() == "administrative")
                     {

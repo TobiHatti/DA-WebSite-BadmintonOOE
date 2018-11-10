@@ -28,6 +28,7 @@
     (Z05)   Formating Classes
     (Z06)   Pager
     (Z06)   Modal
+    (Z07)   Notifications
     ====== Y - Form-Elements ===============
     (Y01)   Buttons
     (Y02)   Textboxes
@@ -444,7 +445,7 @@ h5{
 }
 
 /*===================================================================================*/
-/* (Z08) Grab Items                                                                       */
+/* (Z08) Grab Items                                                                  */
 /*===================================================================================*/
 
 .dragItem{
@@ -473,6 +474,104 @@ h5{
     border-left: 1px solid $theme-medium;
     border-bottom: 1px solid $theme-medium;
     @include ease(0.0s);
+}
+
+/*===================================================================================*/
+/* (Z09) Notifications                                                               */
+/*===================================================================================*/
+
+@keyframes notification_banner_fade{
+    0%{
+        opacity:0;
+    }
+    5%{
+        opacity:1;
+    }
+    95%{
+        opacity:1;
+    }
+    100%{
+        opacity:0;
+    }
+}
+
+@keyframes notification_icon_slidein{
+    0%{
+        margin-left: -80px;
+    }
+
+    100%{
+        margin-left: -40px;
+    }
+
+}
+
+@keyframes notification_icon_blur{
+    0%{
+        width:35px;
+        height:35px;
+        opacity:1;
+    }
+
+    100%{
+        margin-left: -50px;
+        margin-top: -10px;
+        width:55px;
+        height:55px;
+        opacity:0;
+    }
+
+}
+
+.notigication_banner{
+    position:fixed;
+    top:20px;
+    right:15%;
+    left: 15%;
+    height:50px;
+    border: 1px solid #1E90FF;
+    box-shadow: 0 0 15px 0 #000000;
+    border-radius: 5px;
+    opacity:0;
+    padding: 5px;
+    padding-left:50px;
+    font-size: 22pt;
+    overflow: hidden;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    animation-name: notification_banner_fade;
+    animation-delay: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-duration: 5s;
+}
+
+.notification_icon{
+    position:absolute;
+    height:35px;
+    width:35px;
+    margin-left:-40px;
+
+    animation-name: notification_icon_slidein;
+    animation-delay: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.5s;
+}
+
+.notification_icon_blur{
+    position:absolute;
+    height:35px;
+    width:35px;
+    margin-left:-40px;
+    opacity:0;
+
+    animation-name: notification_icon_blur;
+    animation-iteration-count:2;
+    animation-delay: 1s;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.3s;
 }
 
 /*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+*/
@@ -3097,3 +3196,20 @@ $listItemHeight: 25px;
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
