@@ -23,7 +23,7 @@
         $author = (isset($_SESSION['userID'])) ? $_SESSION['userID'] : 0 ;
 
         // In case the ID already exists, cycle
-        if(MySQLExists("SELECT article_url FROM news WHERE article_url = '$article_url'"))
+        if(SQL::Exist("SELECT article_url FROM news WHERE article_url = ?",'@s',$article_url))
         {
             $i=2;
             do
@@ -31,12 +31,12 @@
                 $newID = $article_url.'-'.$i;
                 $i++;
             }
-            while(MySQLExists("SELECT article_url FROM news WHERE article_url = '$newID'"));
+            while(SQL::Exist("SELECT article_url FROM news WHERE article_url = ?",'@s',$newID));
 
             $article_url = $newID;
         }
 
-        MySQLNonQuery("INSERT INTO news (id,article_url,title, author,tags,article,release_date,thumbnail) VALUES ('','$article_url','$title','$author','$tags','$article','$release','$thumb')") or die("<h1>Ein fehler ist aufgetreten</h1>");
+        SQL::NonQuery("INSERT INTO news (id,article_url,title, author,tags,article,release_date,thumbnail) VALUES ('',?,?,?,?,?,?,?)",'@s',$article_url,$title,$author,$tags,$article,$release,$thumb);
 
         // Changing the News-Slider in Index
         RefreshSliderContent();
@@ -54,8 +54,7 @@
 
         list($article,$nameid,$thumb,$title) = ArticlePreProcessRoutine($article);
 
-        $strSQL = "UPDATE news SET title = '$title',article_url = '$nameid' , tags = '$tags', article = '$article', release_date = '$release', thumbnail = '$thumb' WHERE id = '$id'";
-        MySQLNonQuery($strSQL);
+        SQL::NonQuery("UPDATE news SET title = ?,article_url = ?, tags = ?, article = ?, release_date = ?, thumbnail = ? WHERE id = ?",'@s',$title,$nameid,$tags,$article,$release,$thumb,$id);
 
         Redirect("/news/artikel/".$nameid);
         die();
@@ -129,16 +128,17 @@
         }
         else
         {
-            MySQLNonQuery("UPDATE news SET views = views + 1 WHERE article_url = '".$_GET['artikel']."'");
-            $id = Fetch("news","id","article_url",$_GET['artikel']);
+            SQL::NonQuery("UPDATE news SET views = views + 1 WHERE article_url = ?",'@s',$_GET['artikel']);
+
+            $id = SQL::Fetch("news","id","article_url",$_GET['artikel']);
 
             echo '
                 <div class="doublecol_singletile">
                     <article>
-                        <span style="color: #A9A9A9">'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime(Fetch("news","release_date","article_url",$_GET['artikel'])))).' |</span>
-                        '.ShowTags(Fetch("news","tags","article_url",$_GET['artikel'])).'
-                        <div class="fr-view fr-element">'.Fetch("news","article","article_url",$_GET['artikel']).'</div>
-                        <span>'.Fetch("news","views","article_url",$_GET['artikel']).' Aufrufe</span><br><br>
+                        <span style="color: #A9A9A9">'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime(SQL::Fetch("news","release_date","article_url",$_GET['artikel'])))).' |</span>
+                        '.ShowTags(SQL::Fetch("news","tags","article_url",$_GET['artikel'])).'
+                        <div class="fr-view fr-element">'.SQL::Fetch("news","article","article_url",$_GET['artikel']).'</div>
+                        <span>'.SQL::Fetch("news","views","article_url",$_GET['artikel']).' Aufrufe</span><br><br>
                         ';
 
                         if(CheckPermission("EditNews"))
@@ -165,7 +165,7 @@
         echo '
             <div class="doublecol_singletile">
                 <article>
-                    <h2 class="stagfade1">'.Fetch("news_tags","name","id",$_GET['kategorie']).'</h2>
+                    <h2 class="stagfade1">'.SQL::Fetch("news_tags","name","id",$_GET['kategorie']).'</h2>
                     <h5 class="stagfade2">Seite '.((isset($_GET['page'])) ? $_GET['page'] : 1 ).'</h5>
                     <br>
         ';

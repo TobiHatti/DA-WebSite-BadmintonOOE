@@ -12,7 +12,7 @@
         $termin_time=$_POST['time'];
         $termin_kategorie=$_POST['kategorie'];
 
-        MySQLNonQuery("INSERT INTO agenda (id, titel, description, date, place, time,kategorie) VALUES ('','$terminName','$description','$termin_date','$termin_place','$termin_time','$termin_kategorie')");
+        SQL::NonQuery("INSERT INTO agenda (id, titel, description, date, place, time,kategorie) VALUES ('',?,?,?,?,?,?)",'@s',$terminName,$description,$termin_date,$termin_place,$termin_time,$termin_kategorie);
 
         Redirect("/kalender");
         die();
@@ -30,16 +30,16 @@
         $termin_kategorie=$_POST['kategorie'];
 
         $strSQL = "UPDATE agenda SET
-        titel = '$terminName',
-        description = '$description',
-        date = '$termin_date',
-        place = '$termin_place',
-        time = '$termin_time',
-        kategorie = '$termin_kategorie'
-        WHERE id = '$id'
+        titel = ?,
+        description = ?,
+        date = ?,
+        place = ?,
+        time = ?,
+        kategorie = ?
+        WHERE id = ?
         ";
 
-        MySQLNonQuery($strSQL);
+        SQL::NonQuery($strSQL,'@s',$terminName,$description,$termin_date,$termin_place,$termin_time,$termin_kategorie,$id);
 
         Redirect("/kalender");
         die();

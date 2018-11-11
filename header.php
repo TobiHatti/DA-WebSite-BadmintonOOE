@@ -7,6 +7,7 @@
     require("data/extension.lib.php");
     require("data/file.lib.php");
     require("data/mysql.lib.php");
+    require("data/mysql.lib.new.php");
     require("data/property.lib.php");
     require("data/string.lib.php");
     require("data/notification.lib.php");
@@ -15,7 +16,7 @@
     require("data/editfunctions.php");
     require("data/multipagepost.php");
 
-    //MySQLPDSave("d");
+    SQL::PeriodicSave('d');
 
 
     echo '<!DOCTYPE html>
@@ -83,8 +84,8 @@
                         if(CheckPermission("AddGallery")) echo '<a href="/fotogalerie/neu">Galerie hinzuf&uuml;gen</a> | ';
                         if(CheckPermission("AddDate")) echo '<a href="/kalender/neu">Termin hinzuf&uuml;gen</a> | ';
 
-                        $headerClubID = Fetch("users","club","id",$_SESSION['userID']);
-                        $headerClubData = FetchArray("vereine","kennzahl",$headerClubID);
+                        $headerClubID = SQL::Scalar("SELECT club FROM users WHERE id = ?",'s',$_SESSION['userID']);
+                        $headerClubData = SQL::Row("SELECT * FROM vereine WHERE kennzahl = ?",'i',$headerClubID);
 
                         echo '<span style="float:right">'.$headerClubData['verein'].' '.$headerClubData['ort'].' - <a href="/logout"><i class="fas fa-door-open"></i> Abmelden</a></span></div>';
                     }

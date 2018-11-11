@@ -9,7 +9,7 @@
         $email = $_POST['email'];
         $phone = $_POST['phone'];
 
-        MySQLNonQuery("INSERT INTO vorstand (id,darstellung,name,bereich,email,telefon) VALUES ('','box','$name','$fields','$email','$phone')");
+        SQL::NonQuery("INSERT INTO vorstand (id,darstellung,name,bereich,email,telefon) VALUES ('','box',?,?,?,?)",'@s',$name,$fields,$email,$phone);
 
         FileUpload("content/vorstand/","image","","","UPDATE vorstand SET foto = 'FNAME' WHERE name = '$name'");
 
@@ -25,7 +25,7 @@
         $email = $_POST['email'];
         $telefon = $_POST['telefon'];
 
-        MySQLNonQuery("UPDATE vorstand SET name = '$name', bereich = '$bereich', email = '$email', telefon = '$telefon' WHERE id = '$id'");
+        SQL::NonQuery("UPDATE vorstand SET name = ?, bereich = ?, email = ?, telefon = ? WHERE id = ?",'@s',$name,$bereich,$email,$telefon,$id);
 
         Redirect(ThisPage());
         die();
@@ -38,10 +38,10 @@
         $b3_LA = $_POST['box3'];
         $b4_SG = $_POST['box4'];
 
-        MySQLNonQuery("UPDATE vorstand SET list_content = '$b1_NW' WHERE bereich = 'Nachwuchsarbeitskreis' AND darstellung = 'list'");
-        MySQLNonQuery("UPDATE vorstand SET list_content = '$b2_LG' WHERE bereich = 'Ligagremium' AND darstellung = 'list'");
-        MySQLNonQuery("UPDATE vorstand SET list_content = '$b3_LA' WHERE bereich = 'Ligaausschuss' AND darstellung = 'list'");
-        MySQLNonQuery("UPDATE vorstand SET list_content = '$b4_SG' WHERE bereich = 'Schiedsgericht' AND darstellung = 'list'");
+        SQL::NonQuery("UPDATE vorstand SET list_content = ? WHERE bereich = 'Nachwuchsarbeitskreis' AND darstellung = 'list'",'@s',$b1_NW);
+        SQL::NonQuery("UPDATE vorstand SET list_content = ? WHERE bereich = 'Ligagremium' AND darstellung = 'list'",'@s',$b2_LG);
+        SQL::NonQuery("UPDATE vorstand SET list_content = ? WHERE bereich = 'Ligaausschuss' AND darstellung = 'list'",'@s',$b3_LA);
+        SQL::NonQuery("UPDATE vorstand SET list_content = ? WHERE bereich = 'Schiedsgericht' AND darstellung = 'list'",'@s',$b4_SG);
 
         Redirect(ThisPage());
         die();

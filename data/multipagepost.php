@@ -7,12 +7,12 @@
 
         $content = $_POST['contentEdit'];
 
-        if(!MySQLExists("SELECT id FROM page_content WHERE page = '$page' AND paragraph_index = '$pidx'"))
+        if(!SQL::Exist("SELECT id FROM page_content WHERE page = ? AND paragraph_index = ?",'@s',$page,$pidx))
         {
-            MySQLNonQuery("INSERT INTO page_content (id, page, paragraph_index) VALUES ('','$page','$pidx')");
+            SQL::NonQuery("INSERT INTO page_content (id, page, paragraph_index) VALUES ('',?,?)",'@s',$page,$pidx);
         }
 
-        MySQLNonQuery("UPDATE page_content SET text = '$content' WHERE page = '$page' AND paragraph_index = '$pidx'");
+        SQL::NonQuery("UPDATE page_content SET text = ? WHERE page = ? AND paragraph_index = ?",'@s',$content,$page,$pidx);
 
         Redirect(ThisPage("!editContent"));
         die();

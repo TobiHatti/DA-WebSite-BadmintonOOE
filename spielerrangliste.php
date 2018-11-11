@@ -4,9 +4,9 @@
     $year = $_GET['year'];
     $club = $_GET['club'];
 
-    $accentColor1 = '#'.Fetch("ranglisten_settings","value","setting","Y".$year."ColorA");
-    $accentColor2 = '#'.Fetch("ranglisten_settings","value","setting","Y".$year."ColorB");
-    $highlightColor = '#'.Fetch("ranglisten_settings","value","setting","HighlightColor");
+    $accentColor1 = '#'.SQL::Fetch("ranglisten_settings","value","setting","Y".$year."ColorA");
+    $accentColor2 = '#'.SQL::Fetch("ranglisten_settings","value","setting","Y".$year."ColorB");
+    $highlightColor = '#'.SQL::Fetch("ranglisten_settings","value","setting","HighlightColor");
 
     $lastChange = '26.10.2018';
 
@@ -28,7 +28,7 @@
                                 ';
                                     $strSQL = "SELECT DISTINCT club FROM reihung WHERE year = '$year'";
                                     $rs=mysqli_query($link,$strSQL);
-                                    while($row=mysqli_fetch_assoc($rs)) echo '<option '.(($_GET['club']==$row['club']) ? 'selected' : '').' value="'.$row['club'].'">'.Fetch("vereine","verein","kennzahl",$row['club']).' '.Fetch("vereine","ort","kennzahl",$row['club']).'</option>';
+                                    while($row=mysqli_fetch_assoc($rs)) echo '<option '.(($_GET['club']==$row['club']) ? 'selected' : '').' value="'.$row['club'].'">'.SQL::Fetch("vereine","verein","kennzahl",$row['club']).' '.SQL::Fetch("vereine","ort","kennzahl",$row['club']).'</option>';
                                 echo '
                                 </optgroup>
                             </select>
@@ -42,7 +42,7 @@
                         $rs=mysqli_query($link,$strSQL);
                         while($row=mysqli_fetch_assoc($rs))
                         {
-                            $clubVals = FetchArray("vereine","kennzahl",$row['club']);
+                            $clubVals = SQL::FetchArray("vereine","kennzahl",$row['club']);
                             echo '<div>'.Tickbox("",$row['club'],$clubVals['verein'].' '.$clubVals['ort'],false, 'UpdateClubList(this, \''.$row['club'].'\');').'</div>';
                         }
 
@@ -108,7 +108,7 @@
     while($rowc=mysqli_fetch_assoc($rsc))
     {
         $club = $rowc['club'];
-        $clubVals = FetchArray("vereine","kennzahl",$club);
+        $clubVals = SQL::FetchArray("vereine","kennzahl",$club);
 
 
         echo '

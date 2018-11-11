@@ -187,7 +187,7 @@ function PageContent($paragraph_index,$allowEdit=false,$reactToCustomPage="",$is
 
     if($reactToCustomPage!="") $page = $reactToCustomPage;
 
-    $content = nl2br(MySQLSkalar("SELECT text AS x FROM page_content WHERE page = '$page' AND paragraph_index = '$paragraph_index'"));
+    $content = nl2br(SQL::Scalar("SELECT text AS x FROM page_content WHERE page = ? AND paragraph_index = ?",'@s',$page,$paragraph_index));
 
     if(!$allowEdit)
     {
@@ -253,7 +253,7 @@ function CheckPermission($permission)
     {
         $uid = $_SESSION['userID'];
 
-        if(MySQLSkalar("SELECT allowed AS x FROM permissions WHERE permission = '$permission' AND user_id = '$uid'")==1) return true;
+        if(SQL::Scalar("SELECT allowed AS x FROM permissions WHERE permission = ? AND user_id = ?",'@s',$permission,$uid)==1) return true;
         else return false;
     }
 }

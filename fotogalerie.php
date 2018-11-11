@@ -16,10 +16,9 @@
         $showDateLoc = (isset($_POST['showDateLoc'])) ? 1 : 0 ;
         $user = $_SESSION['userID'];
 
+        SQL::NonQuery("INSERT INTO fotogalerie (id, album_url, album_name, album_description, event_location, event_date, allowDownload, creation_date, tags, author,show_dateloc) VALUES ('',?,?,?,?,?,?,?,?,?,?)",'@s',$albumUrl,$albumName,$album_description,$album_ort,$album_date,$download,$today,$tags,$user,$showDateLoc);
 
-        MySQLNonQuery("INSERT INTO fotogalerie (id, album_url, album_name, album_description, event_location, event_date, allowDownload, creation_date, tags, author,show_dateloc) VALUES ('','$albumUrl','$albumName','$album_description','$album_ort','$album_date','$download','$today','$tags','$user','$showDateLoc')");
-
-        $albID = Fetch("fotogalerie","id","album_name",$albumName);
+        $albID = SQL::Fetch("fotogalerie","id","album_name",$albumName);
         FileUpload("content/gallery/".$albumUrl."/", "images" ,"","","INSERT INTO gallery_images (id,album_id,image) VALUES ('','$albID','FNAME')");
 
         Redirect("/fotogalerie");
@@ -38,17 +37,18 @@
         $showDateLoc = (isset($_POST['showDateLoc'])) ? 1 : 0 ;
 
         $strSQL = "UPDATE fotogalerie SET
-        album_name = '$albumName',
-        album_description = '$album_description',
-        event_date = '$album_date',
-        event_location = '$album_ort',
-        allowDownload = '$download',
-        show_dateloc = '$showDateLoc',
-        tags = '$tags'
-        WHERE id = '$id';
+        album_name = ?,
+        album_description = ?,
+        event_date = ?,
+        event_location = ?,
+        allowDownload = ?,
+        show_dateloc = ?,
+        tags = ?
+        WHERE id = ?;
         ";
 
-        MySQLNonQuery($strSQL);
+        SQL::NonQuery($strSQL,'@s',$albumName,$album_description,$album_date,$album_ort,$download,$showDateLoc,$tags,$id);
+
         Redirect("/fotogalerie");
         die();
     }
@@ -158,7 +158,7 @@
     else if(isset($_GET['album']))
     {
        echo '
-       <h1 class="stagfade1">'.Fetch("fotogalerie","album_name","album_url",$_GET['album']).'</h1>
+       <h1 class="stagfade1">'.SQL::Fetch("fotogalerie","album_name","album_url",$_GET['album']).'</h1>
        <form action="'.ThisPage("!#").'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
        <br>
        ';
@@ -181,7 +181,7 @@
                                 '.FileButton("addImages","addImg", true).'
                                 <br>
                                 <input type="hidden" value="'.$_GET['album'].'" name="album_url"/>
-                                <button type="submit" name="addMoreImg" value="'.Fetch("fotogalerie","id","album_url",$_GET['album']).'">Fotos hinzuf&uuml;gen</button>
+                                <button type="submit" name="addMoreImg" value="'.SQL::Fetch("fotogalerie","id","album_url",$_GET['album']).'">Fotos hinzuf&uuml;gen</button>
                             </form>
                         </center>
                     </div>
@@ -189,7 +189,7 @@
             ';
        }
 
-       $allowDownload = Fetch("fotogalerie","allowDownload","album_url",$_GET['album']);
+       $allowDownload = SQL::Fetch("fotogalerie","allowDownload","album_url",$_GET['album']);
 
        if($allowDownload)
        {
@@ -206,8 +206,8 @@
        ';
 
         $album_path = $_GET['album'];
-        $album_name = Fetch("fotogalerie","album_name","album_url",$_GET['album']);
-        $album_id = Fetch("fotogalerie","id","album_url",$_GET['album']);
+        $album_name = SQL::Fetch("fotogalerie","album_name","album_url",$_GET['album']);
+        $album_id = SQL::Fetch("fotogalerie","id","album_url",$_GET['album']);
 
 
         $entriesPerPage = GetProperty("PagerSizeGalleryImage");
@@ -367,21 +367,21 @@
 
                 $albumId = $row['id'];
 
-                if(MySQLCount("SELECT id FROM gallery_images WHERE album_id = '$albumId'")>=9)
+                if(SQL::Count("SELECT id FROM gallery_images WHERE album_id = ?",'@s',$albumId)>=9)
                 {
                     $i=1;
                     $strSQLI = "SELECT * FROM gallery_images INNER JOIN fotogalerie ON gallery_images.album_id = fotogalerie.ID WHERE fotogalerie.ID = '$albumId' LIMIT 0,9";
                     $rsI=mysqli_query($link,$strSQLI);
                     while($rowI=mysqli_fetch_assoc($rsI)) { echo '<img src="/content/gallery/'.$row['album_url'].'/'.$rowI['image'].'" id="img'.$i++.'">'; }
                 }
-                else if(MySQLCount("SELECT id FROM gallery_images WHERE album_id = '$albumId'")>=4)
+                else if(SQL::Count("SELECT id FROM gallery_images WHERE album_id = ?",'@s',$albumId)>=4)
                 {
                     $i=1;
                     $strSQLI = "SELECT * FROM gallery_images INNER JOIN fotogalerie ON gallery_images.album_id = fotogalerie.ID WHERE fotogalerie.ID = '$albumId' LIMIT 0,4";
                     $rsI=mysqli_query($link,$strSQLI);
                     while($rowI=mysqli_fetch_assoc($rsI)) { echo '<img src="/content/gallery/'.$row['album_url'].'/'.$rowI['image'].'" id="img'.$i++.'">'; }
                 }
-                else if(MySQLCount("SELECT id FROM gallery_images WHERE album_id = '$albumId'") < 4)
+                else if(SQL::Count("SELECT id FROM gallery_images WHERE album_id = ?",'@s',$albumId) < 4)
                 {
                     $strSQLI = "SELECT * FROM gallery_images INNER JOIN fotogalerie ON gallery_images.album_id = fotogalerie.ID WHERE fotogalerie.ID = '$albumId' LIMIT 0,1";
                     $rsI=mysqli_query($link,$strSQLI);

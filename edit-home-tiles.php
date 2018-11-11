@@ -7,12 +7,12 @@
         $page = 'index';
         $pidx = 3;
 
-        if(!MySQLExists("SELECT id FROM page_content WHERE page = '$page' AND paragraph_index = '$pidx'"))
+        if(!SQL::Exist("SELECT id FROM page_content WHERE page = ? AND paragraph_index = ?",'@s',$page,$pidx))
         {
-            MySQLNonQuery("INSERT INTO page_content (id, page, paragraph_index) VALUES ('','$page','$pidx')");
+            SQL::NonQuery("INSERT INTO page_content (id, page, paragraph_index) VALUES ('',?,?)",'@s',$page,$pidx);
         }
 
-        MySQLNonQuery("UPDATE page_content SET text = '$pageContent' WHERE page = '$page' AND paragraph_index = '$pidx'");
+        SQL::NonQuery("UPDATE page_content SET text = ? WHERE page = ? AND paragraph_index = ?",'@s',$pageContent,$page,$pidx);
 
         Redirect("/");
         die();
@@ -24,12 +24,12 @@
         $page = 'index';
         $pidx = 1;
 
-        if(!MySQLExists("SELECT id FROM page_content WHERE page = '$page' AND paragraph_index = '$pidx'"))
+        if(!SQL::Exist("SELECT id FROM page_content WHERE page = ? AND paragraph_index = ?",'@s',$page,$pidx))
         {
-            MySQLNonQuery("INSERT INTO page_content (id, page, paragraph_index) VALUES ('','$page','$pidx')");
+            SQL::NonQuery("INSERT INTO page_content (id, page, paragraph_index) VALUES ('',?,?)",'@s',$page,$pidx);
         }
 
-        MySQLNonQuery("UPDATE page_content SET text = '$pageContent' WHERE page = '$page' AND paragraph_index = '$pidx'");
+        SQL::NonQuery("UPDATE page_content SET text = ? WHERE page = ? AND paragraph_index = ?",'@s',$pageContent,$page,$pidx);
 
         Redirect("/");
         die();
@@ -41,7 +41,7 @@
         $text = $_POST['text'];
         $value = $_POST['value'];
 
-        MySQLNonQuery("INSERT INTO home_tiles (id,tile,text,value) VALUES ('$id','Meisterschaft','$text','$value')");
+        SQL::NonQuery("INSERT INTO home_tiles (id,tile,text,value) VALUES (?,'Meisterschaft',?,?)",'@s',$id,$text,$value);
 
         if($value=="")FileUpload("/files/ranglisten/","uploadFile","","","UPDATE home_tiles SET value = '/files/ranglisten/FNAME' WHERE id = '$id'");
 
@@ -55,7 +55,7 @@
         $text = $_POST['text'];
         $value = $_POST['value'];
 
-        MySQLNonQuery("INSERT INTO home_tiles (id,tile,text,value) VALUES ('$id','Ranglisten','$text','$value')");
+        SQL::NonQuery("INSERT INTO home_tiles (id,tile,text,value) VALUES (?,'Ranglisten',?,?)",'@s',$id,$text,$value);
 
         if($value=="")FileUpload("/files/ranglisten/","uploadFile","","","UPDATE home_tiles SET value = '/files/ranglisten/FNAME' WHERE id = '$id'");
 
@@ -69,7 +69,7 @@
         $value = $_POST['editValue'];
         $id = $_POST['editUpdateMeisterschaft'];
 
-        MySQLNonQuery("UPDATE home_tiles SET text = '$text', value = '$value' WHERE id = '$id'");
+        SQL::NonQuery("UPDATE home_tiles SET text = ?, value = ? WHERE id = ?",'@s',$text,$value,$id);
         Redirect("/home/Meisterschaft/bearbeiten");
         die();
     }
@@ -80,7 +80,7 @@
         $value = $_POST['editValue'];
         $id = $_POST['editUpdateRanglisten'];
 
-        MySQLNonQuery("UPDATE home_tiles SET text = '$text', value = '$value' WHERE id = '$id'");
+        SQL::NonQuery("UPDATE home_tiles SET text = ?, value = ? WHERE id = ?",'@s',$text,$value,$id);
         Redirect("/home/Ranglisten/bearbeiten");
         die();
     }
@@ -146,7 +146,7 @@
                 <br><br>
             ';
             echo '<form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">';
-            echo TextareaPlus("contentLinks","contentLinks",MySQLSkalar("SELECT text AS x FROM page_content WHERE page = 'index' AND paragraph_index = '1'"));
+            echo TextareaPlus("contentLinks","contentLinks",SQL::Scalar("SELECT text FROM page_content WHERE page = 'index' AND paragraph_index = '1'"));
             echo '<br><button type="submit" name="editMeisterschaft">&Auml;nderungen speichern</button> <button type="button" onclick="window.history.back();">&Auml;nderungen verwerfen</button></form>';
         }
 
@@ -211,7 +211,7 @@
 
             echo '<form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">';
 
-            echo TextareaPlus("contentLinks","contentLinks",MySQLSkalar("SELECT text AS x FROM page_content WHERE page = 'index' AND paragraph_index = '3'"));
+            echo TextareaPlus("contentLinks","contentLinks",SQL::Scalar("SELECT text FROM page_content WHERE page = 'index' AND paragraph_index = '3'"));
 
             echo '<br><button type="submit" name="editLinks">&Auml;nderungen speichern</button> <button type="button" onclick="window.history.back();">&Auml;nderungen verwerfen</button></form>';
         }
