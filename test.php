@@ -1,13 +1,11 @@
 <?php
     include("data/mysql.lib.new.php");
 
-    $id=1;
+    $lastname = 'Hattinger';
 
-    while($row = SQL::Query("SELECT * FROM users WHERE id NOT LIKE ?",'s',$id)->fetch_assoc())
-    {
+    $val = SQL::Row("SELECT * FROM users WHERE lastname = ?",'s',$lastname);
 
-    }
-
+    echo $val['firstname'];
 
 ?>
 
