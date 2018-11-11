@@ -119,7 +119,7 @@
             ';
 
 
-            if(MySQLCount($strSQL)==0)
+            if(SQL::Count($strSQL)==0)
             {
                 echo '<br><br><i>Keine Ergebnisse gefunden.</i>';
             }

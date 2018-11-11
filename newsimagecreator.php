@@ -26,7 +26,7 @@
     }
     else
     {
-        $val = FetchArray("news_templates","id",$_GET['template']);
+        $val = SQL::FetchArray("news_templates","id",$_GET['template']);
 
         if($val['bgIsImage']) $backgroundStyle = "background-size: cover; background-image: url('content/newstemplates/".$val['bgPath']."')";
         else

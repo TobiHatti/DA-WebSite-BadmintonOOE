@@ -50,52 +50,56 @@
 
         if($_POST['postType']=="new")
         {
-            MySQLNonQuery("INSERT INTO zentralausschreibungen (id,kategorie) VALUES ('','newfield')");
-            $zaID = Fetch("zentralausschreibungen","id","kategorie","newfield");
+            SQL::NonQuery("INSERT INTO zentralausschreibungen (id,kategorie) VALUES ('','newfield')");
+            $zaID = SQL::Scalar("SELECT id FROM zentralausschreibungen WHERE kategorie = newfield");
         }
         else $zaID = $_POST['updateZA'];
 
         $updateSQL = "
             UPDATE zentralausschreibungen SET
-            size = '$size',
-            kategorie = '$kategorie',
-            title_line1 = '$title1',
-            title_line2 = '$title2',
-            date_begin = '$date1',
-            date_end = '$date2',
-            act_timespan = '$chTimespan',
-            act_verein = '$chVerein',
-            verein = '$Verein',
-            act_uhrzeit = '$chUhrzeit',
-            uhrzeit = '$Uhrzeit',
-            act_auslosung = '$chAuslosung',
-            auslosung = '$Auslosung',
-            act_hallenname = '$chHallenname',
-            hallenname = '$Hallenname',
-            act_anschrift_halle = '$chAnschriftHalle',
-            anschrift_halle = '$AnschriftHalle',
-            act_anzahl_felder = '$chAnzahlFelder',
-            anzahl_felder = '$AnzahlFelder',
-            act_turnierverantwortlicher = '$chTurnierverantwortlicher',
-            turnierverantwortlicher = '$Turnierverantwortlicher',
-            act_oberschiedsrichter = '$chOberschiedsrichter',
-            oberschiedsrichter = '$Oberschiedsrichter',
-            act_telefon = '$chTelefon',
-            telefon = '$Telefon',
-            act_anmeldung_online = '$chAnmeldungOnline',
-            anmeldung_online = '$AnmeldungOnline',
-            act_anmeldung_email = '$chAnmeldungEmail',
-            anmeldung_email = '$AnmeldungEmail',
-            act_nennungen_email = '$chNennungenEmail',
-            nennungen_email = '$NennungenEmail',
-            act_nennschluss = '$chNennschluss',
-            nennschluss = '$Nennschluss',
-            act_zusatzangaben = '$chZusatzangaben',
-            zusatzangaben = '$Zusatzangaben',
-            location = '$Location'
-            WHERE id = '$zaID';
+            size = ?,
+            kategorie = ?,
+            title_line1 = ?,
+            title_line2 = ?,
+            date_begin = ?,
+            date_end = ?,
+            act_timespan = ?,
+            act_verein = ?,
+            verein = ?,
+            act_uhrzeit = ?,
+            uhrzeit = ?,
+            act_auslosung = ?,
+            auslosung = ?,
+            act_hallenname = ?,
+            hallenname = ?,
+            act_anschrift_halle = ?,
+            anschrift_halle = ?,
+            act_anzahl_felder = ?,
+            anzahl_felder = ?,
+            act_turnierverantwortlicher = ?,
+            turnierverantwortlicher = ?,
+            act_oberschiedsrichter = ?,
+            oberschiedsrichter = ?,
+            act_telefon = ?,
+            telefon = ?,
+            act_anmeldung_online = ?,
+            anmeldung_online = ?,
+            act_anmeldung_email = ?,
+            anmeldung_email = ?,
+            act_nennungen_email = ?,
+            nennungen_email = ?,
+            act_nennschluss = ?,
+            nennschluss = ?,
+            act_zusatzangaben = ?,
+            zusatzangaben = ?,
+            location = ?
+            WHERE id = ?;
         ";
-        MySQLNonQuery($updateSQL);
+
+        SQL::NonQuery($updateSQL,'@s',$size,$kategorie,$title1,$title2,$date1,$date2,$chTimespan,$chVerein,$Verein,$chUhrzeit,$Uhrzeit,$chAuslosung,$Auslosung,$chHallenname,
+        $Hallenname,$chAnschriftHalle,$AnschriftHalle, $chAnzahlFelder,$AnzahlFelder,$chTurnierverantwortlicher,$Turnierverantwortlicher,$chOberschiedsrichter,$Oberschiedsrichter,
+        $chTelefon,$Telefon,$chAnmeldungOnline,$AnmeldungOnline,$chAnmeldungEmail,$AnmeldungEmail,$chNennungenEmail,$NennungenEmail,$chNennschluss,$Nennschluss,$chZusatzangaben,
+        $Zusatzangaben,$Location,$zaID);
 
         Redirect(ThisPage());
         die();

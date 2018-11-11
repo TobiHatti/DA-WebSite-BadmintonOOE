@@ -19,9 +19,9 @@
     ';
 
 
-    if(GetProperty("ShowTodaysEvents") AND MySQLExists("SELECT id FROM zentralausschreibungen WHERE date_begin = '$today'"))
+    if(GetProperty("ShowTodaysEvents") AND SQL::Exist("SELECT id FROM zentralausschreibungen WHERE date_begin = ?",'@s',$today))
     {
-        $zaVal = FetchArray("zentralausschreibungen","date_begin",$today);
+        $zaVal = SQL::FetchArray("zentralausschreibungen","date_begin",$today);
 
         echo '
             <h2>Heute, am '.str_replace('ä','&auml;',strftime("%A den %d. %B %Y",strtotime($today))).':</h2>
@@ -98,9 +98,9 @@
                                     //RefreshSliderContent();
                                     // 3 SQL-Queries are required for the slider to work in the best way.
                                     // Bundeling some queries can slow the slider down and skip slides
-                                    if(MySQLCount("SELECT * FROM news WHERE tags = 'Spieler-des-Monats'")>0)
+                                    if(SQL::Count("SELECT * FROM news WHERE tags = 'Spieler-des-Monats'")>0)
                                     {
-                                        $sdm = MySQLGetRow("SELECT * FROM news WHERE tags = 'Spieler-des-Monats' ORDER BY id DESC LIMIT 0,1");
+                                        $sdm = SQL::Row("SELECT * FROM news WHERE tags = 'Spieler-des-Monats' ORDER BY id DESC LIMIT 0,1");
                                         $showSDM = GetProperty("ShowSpielerDesMonats");
                                     }
                                     else $showSDM = false;
@@ -258,7 +258,7 @@
                             </center>
                         ';
 
-                        echo MySQLSkalar("SELECT text AS x FROM page_content WHERE page = 'index' AND paragraph_index = '1'");
+                        echo SQL::Scalar("SELECT text FROM page_content WHERE page = 'index' AND paragraph_index = '1'");
 
                         echo '
                     </div>
@@ -290,7 +290,8 @@
                         <hr>
                         ';
                         if(CheckPermission("ChangeContent")) echo EditButton("/home/Links/bearbeiten").'<br>';
-                        echo MySQLSkalar("SELECT text AS x FROM page_content WHERE page = 'index' AND paragraph_index = '3'");
+
+                        echo SQL::Scalar("SELECT text FROM page_content WHERE page = 'index' AND paragraph_index = '3'");
 
                         echo '
                     </div>

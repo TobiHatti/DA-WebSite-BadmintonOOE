@@ -11,20 +11,20 @@
         $birthdate = $_POST['birthdate'];
         $club = $_POST['club'];
 
-        if(isset($_POST['add_nwk'])) MySQLNonQuery("INSERT INTO nachwuchskader (id,firstname,lastname,gender,club,birthdate) VALUES ('$id','$fn','$ln','$gender','$club','$birthdate')");
+        if(isset($_POST['add_nwk']))SQL::NonQuery("INSERT INTO nachwuchskader (id,firstname,lastname,gender,club,birthdate) VALUES (?,?,?,?,?,?)",'@s',$id,$fn,$ln,$gender,$club,$birthdate);
         else
         {
             $id = $_POST["edit_nwk"];
 
             $strSQL = "UPDATE nachwuchskader SET
-            gender = '$gender',
-            firstname = '$fn',
-            lastname = '$ln',
-            birthdate = '$birthdate',
-            club = '$club'
-            WHERE id = '$id'";
+            gender = ?,
+            firstname = ?,
+            lastname = ?,
+            birthdate = ?,
+            club = ?
+            WHERE id = ?";
 
-            MySQLNonQuery($strSQL);
+            SQL::NonQuery($strSQL,'@s',$gender,$fn,$ln,$birthdate,$club,$id);
         }
 
         FileUpload("/content/nachwuchskader/","playerImg","","","UPDATE nachwuchskader SET image = 'FNAME' WHERE id = '$id'",uniqid());
@@ -100,7 +100,7 @@
 
         if(isset($_GET['edit']) AND CheckPermission("EditNWK"))
         {
-            $pdat = FetchArray("nachwuchskader","id",$_GET['edit']);
+            $pdat = SQL::FetchArray("nachwuchskader","id",$_GET['edit']);
 
             echo '
                 <h2 class="stagfade2">Spieler bearbeiten</h2>
@@ -177,7 +177,7 @@
                     <div>
                         <b>'.$row['lastname'].'</b> '.$row['firstname'].'<br>
                         Geb.: '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['birthdate']))).'<br>
-                        <span style="color: #696969">'.Fetch("vereine","verein","kennzahl",$row['club']).' '.Fetch("vereine","ort","kennzahl",$row['club']).'</span>
+                        <span style="color: #696969">'.SQL::Fetch("vereine","verein","kennzahl",$row['club']).' '.SQL::Fetch("vereine","ort","kennzahl",$row['club']).'</span>
                     </div>
                     <div style="position: absolute; bottom: 0px; right: 0px; height: 20px;">
                     ';
@@ -203,7 +203,7 @@
                     <div>
                         <b>'.$row['lastname'].'</b> '.$row['firstname'].'<br>
                         Geb.: '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['birthdate']))).'<br>
-                        <span style="color: #696969">'.Fetch("vereine","verein","kennzahl",$row['club']).' '.Fetch("vereine","ort","kennzahl",$row['club']).'</span>
+                        <span style="color: #696969">'.SQL::Fetch("vereine","verein","kennzahl",$row['club']).' '.SQL::Fetch("vereine","ort","kennzahl",$row['club']).'</span>
                     </div>
                     <div style="position: absolute; bottom: 0px; right: 0px; height: 20px;">
                     ';
@@ -231,7 +231,7 @@
                     <div>
                         <b>'.$row['lastname'].'</b> '.$row['firstname'].'<br>
                         Geb.: '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['birthdate']))).'<br>
-                        <span style="color: #696969">'.Fetch("vereine","verein","kennzahl",$row['club']).' '.Fetch("vereine","ort","kennzahl",$row['club']).'</span>
+                        <span style="color: #696969">'.SQL::Fetch("vereine","verein","kennzahl",$row['club']).' '.SQL::Fetch("vereine","ort","kennzahl",$row['club']).'</span>
                     </div>
                     <div style="position: absolute; bottom: 0px; right: 0px; height: 20px;">
                     ';
@@ -257,7 +257,7 @@
                     <div>
                         <b>'.$row['lastname'].'</b> '.$row['firstname'].'<br>
                         Geb.: '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['birthdate']))).'<br>
-                        <span style="color: #696969">'.Fetch("vereine","verein","kennzahl",$row['club']).' '.Fetch("vereine","ort","kennzahl",$row['club']).'</span>
+                        <span style="color: #696969">'.SQL::Fetch("vereine","verein","kennzahl",$row['club']).' '.SQL::Fetch("vereine","ort","kennzahl",$row['club']).'</span>
                     </div>
                     <div style="position: absolute; bottom: 0px; right: 0px; height: 20px;">
                     ';
@@ -285,7 +285,7 @@
                     <div>
                         <b>'.$row['lastname'].'</b> '.$row['firstname'].'<br>
                         Geb.: '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['birthdate']))).'<br>
-                        <span style="color: #696969">'.Fetch("vereine","verein","kennzahl",$row['club']).' '.Fetch("vereine","ort","kennzahl",$row['club']).'</span>
+                        <span style="color: #696969">'.SQL::Fetch("vereine","verein","kennzahl",$row['club']).' '.SQL::Fetch("vereine","ort","kennzahl",$row['club']).'</span>
                     </div>
                     <div style="position: absolute; bottom: 0px; right: 0px; height: 20px;">
                     ';
@@ -311,7 +311,7 @@
                     <div>
                         <b>'.$row['lastname'].'</b> '.$row['firstname'].'<br>
                         Geb.: '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['birthdate']))).'<br>
-                        <span style="color: #696969">'.Fetch("vereine","verein","kennzahl",$row['club']).' '.Fetch("vereine","ort","kennzahl",$row['club']).'</span>
+                        <span style="color: #696969">'.SQL::Fetch("vereine","verein","kennzahl",$row['club']).' '.SQL::Fetch("vereine","ort","kennzahl",$row['club']).'</span>
                     </div>
                     <div style="position: absolute; bottom: 0px; right: 0px; height: 20px;">
                     ';

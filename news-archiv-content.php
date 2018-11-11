@@ -5,6 +5,7 @@
     require("data/extension.lib.php");
     require("data/file.lib.php");
     require("data/mysql.lib.php");
+    require("data/mysql.lib.new.php"); 
     require("data/property.lib.php");
     require("data/string.lib.php");
 
@@ -47,7 +48,7 @@
         echo '</ul>';
     }
 
-    if(MySQLCount("SELECT * FROM news WHERE release_date LIKE '$dateStr%'")==0)
+    if(SQL::Count("SELECT * FROM news WHERE release_date LIKE '$dateStr%'")==0)
     {
         echo '<h4>Keine ergebnisse</h4>';
     }
