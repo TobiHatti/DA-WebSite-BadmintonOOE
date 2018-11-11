@@ -174,7 +174,7 @@
 
         $today = date("Y-m-d");
 
-        $entriesPerPage = GetProperty("PagerSizeNews");
+        $entriesPerPage = Setting::Get("PagerSizeNews");
 
         $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
 
@@ -314,7 +314,7 @@
 
         $today = date("Y-m-d");
 
-        $entriesPerPage = GetProperty("PagerSizeNews");
+        $entriesPerPage = Setting::Get("PagerSizeNews");
 
         $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
 

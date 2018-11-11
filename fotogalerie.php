@@ -210,7 +210,7 @@
         $album_id = SQL::Fetch("fotogalerie","id","album_url",$_GET['album']);
 
 
-        $entriesPerPage = GetProperty("PagerSizeGalleryImage");
+        $entriesPerPage = Setting::Get("PagerSizeGalleryImage");
         $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
 
         $i= 1 + ((isset($_GET['page'])) ? $_GET['page']-1 : 0 )*$entriesPerPage;
@@ -278,7 +278,7 @@
             echo AddButton(ThisPage("!editSC","!#edit","+neu"));
         }
 
-        $entriesPerPage = GetProperty("PagerSizeGalleryAlbum");
+        $entriesPerPage = Setting::Get("PagerSizeGalleryAlbum");
         $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
 
         $strSQL = "SELECT * FROM fotogalerie LIMIT $offset,$entriesPerPage";

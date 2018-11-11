@@ -13,7 +13,7 @@
 
                         ';
 
-                        $first_article = explode('-',SQL::Scalar("SELECT release_date FROM news ORDER BY release_date DESC"));
+                        $first_article = explode('-',SQL::Scalar("SELECT release_date FROM news ORDER BY release_date ASC"));
                         for($y = date("Y"); $y >= $first_article[0];$y--)
                         {
                             echo '<a onclick="ArchiveSelectYear('.$y.');" id="year'.$y.'">'.$y.'</a>';
@@ -107,7 +107,7 @@
 
             ';
 
-            if(GetProperty("EnablePreloaderArchive"))
+            if(Setting::Get("EnablePreloaderArchive"))
             {
                 echo '<img src="/content/loadersprite.gif" alt="" style="height: 80px; opacity: 0;" id="loaderSprite" class="ease50"/>';
             }

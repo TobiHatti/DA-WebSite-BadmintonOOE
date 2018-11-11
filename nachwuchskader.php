@@ -100,7 +100,7 @@
 
         if(isset($_GET['edit']) AND CheckPermission("EditNWK"))
         {
-            $pdat = SQL::FetchArray("nachwuchskader","id",$_GET['edit']);
+            $pdat = SQL::FetchRow("nachwuchskader","id",$_GET['edit']);
 
             echo '
                 <h2 class="stagfade2">Spieler bearbeiten</h2>

@@ -42,7 +42,7 @@
                         $rs=mysqli_query($link,$strSQL);
                         while($row=mysqli_fetch_assoc($rs))
                         {
-                            $clubVals = SQL::FetchArray("vereine","kennzahl",$row['club']);
+                            $clubVals = SQL::FetchRow("vereine","kennzahl",$row['club']);
                             echo '<div>'.Tickbox("",$row['club'],$clubVals['verein'].' '.$clubVals['ort'],false, 'UpdateClubList(this, \''.$row['club'].'\');').'</div>';
                         }
 
@@ -108,7 +108,7 @@
     while($rowc=mysqli_fetch_assoc($rsc))
     {
         $club = $rowc['club'];
-        $clubVals = SQL::FetchArray("vereine","kennzahl",$club);
+        $clubVals = SQL::FetchRow("vereine","kennzahl",$club);
 
 
         echo '

@@ -52,7 +52,7 @@
 
     if(isset($_GET['uploadComplete']))
     {
-        $uploadData = SQL::FetchArray("uploads","id",$_GET['uploadComplete']);
+        $uploadData = SQL::FetchRow("uploads","id",$_GET['uploadComplete']);
         echo '
             <h4>Datei wurde hochgeladen!</h4>
             <center>
@@ -104,7 +104,7 @@
     }
     else if(isset($_GET['uploadSelection']))
     {
-        $uploadData = SQL::FetchArray("uploads","id",$_GET['uploadSelection']);
+        $uploadData = SQL::FetchRow("uploads","id",$_GET['uploadSelection']);
         echo '
             <h4>Datei wurde ausgew&auml;hlt!</h4>
             <center>

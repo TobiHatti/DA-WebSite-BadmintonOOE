@@ -2,6 +2,7 @@
     session_start();
     require('../data/functions.php');
     require('../data/mysql.lib.php');
+    require('../data/mysql.lib.new.php');
     require('../data/string.lib.php');
     require('../data/mysql_connect.php');
     require('../data/fpdf/main_functions.php');
@@ -13,10 +14,10 @@
     $showBorders = false;
 
     // Colors
-    list($color1R, $color1G, $color1B) = sscanf('#'.Fetch("ranglisten_settings","value","setting","Y".$year."ColorA"), "#%02x%02x%02x");
-    list($color2R, $color2G, $color2B) = sscanf('#'.Fetch("ranglisten_settings","value","setting","Y".$year."ColorB"), "#%02x%02x%02x");
+    list($color1R, $color1G, $color1B) = sscanf('#'.SQL::Fetch("ranglisten_settings","value","setting","Y".$year."ColorA"), "#%02x%02x%02x");
+    list($color2R, $color2G, $color2B) = sscanf('#'.SQL::Fetch("ranglisten_settings","value","setting","Y".$year."ColorB"), "#%02x%02x%02x");
 
-    list($colorMarkR, $colorMarkG, $colorMarkB) = sscanf('#'.Fetch("ranglisten_settings","value","setting","HighlightColor"), "#%02x%02x%02x");
+    list($colorMarkR, $colorMarkG, $colorMarkB) = sscanf('#'.SQL::Fetch("ranglisten_settings","value","setting","HighlightColor"), "#%02x%02x%02x");
 
     // Initialisation
     $pdf = new PDF();
@@ -79,7 +80,7 @@
     while($rowc=mysqli_fetch_assoc($rsc))
     {
         $club = $rowc['club'];
-        $clubVals = FetchArray("vereine","kennzahl",$club);
+        $clubVals = SQL::FetchRow("vereine","kennzahl",$club);
 
 
         if(!$first) $pdf->AddPage();

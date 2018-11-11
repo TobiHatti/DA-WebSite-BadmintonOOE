@@ -6,9 +6,12 @@
 
     require("data/extension.lib.php");
     require("data/file.lib.php");
-    require("data/mysql.lib.php");
-    require("data/property.lib.php");
+    //require("data/mysql.lib.php");
+    require("data/mysql.lib.new.php");
+    //require("data/property.lib.php");
+    require("data/setting.lib.php");
     require("data/string.lib.php");
+    require("data/notification.lib.php");
 
     require("data/functions.php");
 
@@ -117,12 +120,12 @@
             {
                 echo '
                     <a target="_parent" style="text-decoration:none;" href="/kalender/event/AG'.$row['id'].'/'.$row['date'].'">
-                        <span style="cursor: help;color: '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '#000000').';" title="'.$row['titel'].'">&#9679;</span>
+                        <span style="cursor: help;color: '.(($row['kategorie']!="") ? Setting::Get("Color".$row['kategorie']) : '#000000').';" title="'.$row['titel'].'">&#9679;</span>
                     </a>
                 ';
             }
             
-            if(GetProperty("ShowZAinAG")=='true')
+            if(Setting::Get("ShowZAinAG"))
             {
                 $strSQL = "SELECT * FROM zentralausschreibungen WHERE date_begin = '$curDate' LIMIT 0,1";
                 $rs=mysqli_query($link,$strSQL);
@@ -130,7 +133,7 @@
                 {
                     echo '
                         <a target="_parent" style="text-decoration:none;" href="/kalender/event/ZA'.$row['id'].'/'.$row['date_begin'].'">
-                            <span style="cursor: help;color: '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '#000000').';" title="'.$row['title_line1'].'">&#9679;</span>
+                            <span style="cursor: help;color: '.(($row['kategorie']!="") ? Setting::Get("Color".$row['kategorie']) : '#000000').';" title="'.$row['title_line1'].'">&#9679;</span>
                         </a>
                     ';
                 }

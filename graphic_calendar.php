@@ -135,12 +135,12 @@
             {
                 echo '
                     <a href="#calenderInfoAG'.$row['id'].'" onclick="SelectGalleryImage('.$i.');" style="text-decoration:none;">
-                        <div style="color: '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '#000000').';">&#9679; '.$row['titel'].'</div>
+                        <div style="color: '.(($row['kategorie']!="") ? Setting::Get("Color".$row['kategorie']) : '#000000').';">&#9679; '.$row['titel'].'</div>
                     </a>
                 ';
             }
 
-            if(GetProperty("ShowZAinAG")=='true')
+            if(Setting::Get("ShowZAinAG"))
             {
                 $strSQL = "SELECT * FROM zentralausschreibungen WHERE date_begin = '$curDate'";
                 $rs=mysqli_query($link,$strSQL);
@@ -148,7 +148,7 @@
                 {
                     echo '
                         <a href="#calenderInfoZA'.$row['id'].'" onclick="SelectGalleryImage('.$i.');" style="text-decoration:none;">
-                            <div style="color: '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '#000000').';">&#9679; '.$row['title_line1'].'</div>
+                            <div style="color: '.(($row['kategorie']!="") ? Setting::Get("Color".$row['kategorie']) : '#000000').';">&#9679; '.$row['title_line1'].'</div>
                         </a>
                     ';
                 }
@@ -179,7 +179,7 @@
                 </a>
                 <div class="modal_container" style="width: 50%; height: 60%;">
                     <a href="#c"><img src="/content/cross2.png" alt="" class="close_cross"/></a>
-                    <div style="border-left: 3px solid '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '').'; padding-left: 5px;">
+                    <div style="border-left: 3px solid '.(($row['kategorie']!="") ? Setting::Get("Color".$row['kategorie']) : '').'; padding-left: 5px;">
                         ';
 
                         if(isset($_GET['edit']) AND $_GET['edit']==$row['id'] AND CheckPermission("EditDate"))
@@ -216,12 +216,12 @@
                                             <td>
                                             <select class="cel_l" name="kategorie" id="classKat">
                                                 <option '.(($row['kategorie']=="Anderes") ? 'selected' : '').' value="">Anderes</option>
-                                                <option '.(($row['kategorie']=="Landesmeisterschaft") ? 'selected' : '').' value="Landesmeisterschaft" style="color: '.GetProperty("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
-                                                <option '.(($row['kategorie']=="Doppelturnier") ? 'selected' : '').' value="Doppelturnier" style="color: '.GetProperty("ColorDoppelturnier").'">Doppelturnier</option>
-                                                <option '.(($row['kategorie']=="Nachwuchs") ? 'selected' : '').' value="Nachwuchs" style="color: '.GetProperty("ColorNachwuchs").'">Nachwuchs</option>
-                                                <option '.(($row['kategorie']=="SchuelerJugend") ? 'selected' : '').' value="SchuelerJugend" style="color: '.GetProperty("ColorSchuelerJugend").'">Sch&uuml;ler/Jugend</option>
-                                                <option '.(($row['kategorie']=="Senioren") ? 'selected' : '').' value="Senioren" style="color: '.GetProperty("ColorSenioren").'">Senioren</option>
-                                                <option '.(($row['kategorie']=="Training") ? 'selected' : '').' value="Training" style="color: '.GetProperty("ColorTraining").'">Training</option>
+                                                <option '.(($row['kategorie']=="Landesmeisterschaft") ? 'selected' : '').' value="Landesmeisterschaft" style="color: '.Setting::Get("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
+                                                <option '.(($row['kategorie']=="Doppelturnier") ? 'selected' : '').' value="Doppelturnier" style="color: '.Setting::Get("ColorDoppelturnier").'">Doppelturnier</option>
+                                                <option '.(($row['kategorie']=="Nachwuchs") ? 'selected' : '').' value="Nachwuchs" style="color: '.Setting::Get("ColorNachwuchs").'">Nachwuchs</option>
+                                                <option '.(($row['kategorie']=="SchuelerJugend") ? 'selected' : '').' value="SchuelerJugend" style="color: '.Setting::Get("ColorSchuelerJugend").'">Sch&uuml;ler/Jugend</option>
+                                                <option '.(($row['kategorie']=="Senioren") ? 'selected' : '').' value="Senioren" style="color: '.Setting::Get("ColorSenioren").'">Senioren</option>
+                                                <option '.(($row['kategorie']=="Training") ? 'selected' : '').' value="Training" style="color: '.Setting::Get("ColorTraining").'">Training</option>
                                             </select>
                                             </td>
                                         </tr>
@@ -285,7 +285,7 @@
         ';
     }
 
-    if(GetProperty("ShowZAinAG")=='true')
+    if(Setting::Get("ShowZAinAG"))
     {
         $strSQL = "SELECT * FROM zentralausschreibungen WHERE date_begin LIKE '$datePart%'";
         $rs=mysqli_query($link,$strSQL);
@@ -299,7 +299,7 @@
                     </a>
                     <div class="modal_container" style="width: 50%; height: 60%;">
                         <a href="#c"><img src="/content/cross2.png" alt="" class="close_cross"/></a>
-                        <div style="border-left: 3px solid '.(($row['kategorie']!="") ? GetProperty("Color".$row['kategorie']) : '').'; padding-left: 5px;">
+                        <div style="border-left: 3px solid '.(($row['kategorie']!="") ? Setting::Get("Color".$row['kategorie']) : '').'; padding-left: 5px;">
                             <a href="#exportZA'.$row['id'].'"><button style="float: right; margin-right: 30px;"><i class="fas fa-file-export"></i> Exportieren</button></a>
                             <span style="color: #696969"><i>Zentralausschreibung</i></span>
                             <h2><u>'.$row['title_line1'].'<br>'.$row['title_line2'].'</u></h2>
