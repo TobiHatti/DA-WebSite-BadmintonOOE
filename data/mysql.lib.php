@@ -45,7 +45,7 @@ function MySQLNonQuery($strSQL,$dataTypes="", &...$mySQLParamValues)
         // New version with parameterized queries
         $paramAmt = func_num_args() - 2;
 
-        if(StartsWith($dataTypes,"@"))
+        if(substr($dataTypes,0,1) == "@")
         {
             $broadCastType = str_replace("@","",$dataTypes);
             $mySQLParamTypes = '';
@@ -64,7 +64,7 @@ function MySQLNonQuery($strSQL,$dataTypes="", &...$mySQLParamValues)
 
         $stmt->execute();
         $result = $stmt->get_result();
-
+        $stmt->close();
         return $result;
     }
 }
