@@ -5,6 +5,12 @@ class SQL
 ##########################################################################################
 
     private static $sqlConnectionLink;
+    private static $mysqli;
+
+    private static $databaseHost;
+    private static $databaseUser;
+    private static $databasePass;
+    private static $databaseName;
 
 ##########################################################################################
 
@@ -12,6 +18,13 @@ class SQL
     {
         require("_mysqlConDat.php");
         self::$sqlConnectionLink = mysqli_connect(getenv("MYSQLDB_SERVER"),getenv("MYSQLDB_USERNAME"),getenv("MYSQLDB_PASSWORD"),getenv("MYSQLDB_DBNAME")) or die("MySQL Error");
+
+        self::$mysqli = new mysqli(getenv("MYSQLDB_SERVER"),getenv("MYSQLDB_USERNAME"),getenv("MYSQLDB_PASSWORD"),getenv("MYSQLDB_DBNAME")) or die("MySQL Error");
+
+        self::$databaseHost = getenv("MYSQLDB_SERVER");
+        self::$databaseUser = getenv("MYSQLDB_USERNAME");
+        self::$databasePass = getenv("MYSQLDB_PASSWORD");
+        self::$databaseName = getenv("MYSQLDB_DBNAME");
     }
 
 ##########################################################################################
@@ -27,7 +40,7 @@ class SQL
         }
         else
         {
-            if($paramAmt == strlen($paramTypeList)) $mySQLParamTypes = $paramTypeList;
+            if($paramAmt == strlen($paramTypeList) OR ($paramTypeList == "" AND $paramAmt == -1)) $mySQLParamTypes = $paramTypeList;
             else die("<b>Nicht gen&uuml;gend Typ-Parameter &uuml;bergeben!</b> <br> <b>&Uuml;bergeben:</b> ".strlen($paramTypeList)." <br><b>Ben&ouml;tigt:</b> $paramAmt");
         }
 
@@ -35,11 +48,6 @@ class SQL
     }
 
 ##########################################################################################
-
-    public static function Query($sqlStatement,$parameterTypes="", &...$sqlParameters)
-    {
-
-    }
 
     public static function NonQuery($sqlStatement,$parameterTypes="", &...$sqlParameters)
     {
@@ -53,7 +61,7 @@ class SQL
         $stmt = self::$sqlConnectionLink->prepare($sqlStatement);
 
         // Bind Parameters to Query
-        call_user_func_array(array($stmt, "bind_param"), array_merge(array($parameterTypeList), $sqlParameters));
+        if($parameterTypes != "") call_user_func_array(array($stmt, "bind_param"), array_merge(array($parameterTypeList), $sqlParameters));
 
         $stmt->execute();
         $stmt->close();
@@ -71,7 +79,7 @@ class SQL
         $stmt = self::$sqlConnectionLink->prepare($sqlStatement);
 
         // Bind Parameters to Query
-        call_user_func_array(array($stmt, "bind_param"), array_merge(array($parameterTypeList), $sqlParameters));
+        if($parameterTypes != "") call_user_func_array(array($stmt, "bind_param"), array_merge(array($parameterTypeList), $sqlParameters));
 
         $stmt->execute();
         $result = $stmt->get_result();
@@ -93,7 +101,7 @@ class SQL
         $stmt = self::$sqlConnectionLink->prepare($sqlStatement);
 
         // Bind Parameters to Query
-        call_user_func_array(array($stmt, "bind_param"), array_merge(array($parameterTypeList), $sqlParameters));
+        if($parameterTypes != "") call_user_func_array(array($stmt, "bind_param"), array_merge(array($parameterTypeList), $sqlParameters));
 
         $stmt->execute();
         $stmt->store_result();
@@ -115,7 +123,7 @@ class SQL
         $stmt = self::$sqlConnectionLink->prepare($sqlStatement);
 
         // Bind Parameters to Query
-        call_user_func_array(array($stmt, "bind_param"), array_merge(array($parameterTypeList), $sqlParameters));
+        if($parameterTypes != "") call_user_func_array(array($stmt, "bind_param"), array_merge(array($parameterTypeList), $sqlParameters));
 
         $stmt->execute();
         $result = $stmt->get_result();
@@ -137,7 +145,7 @@ class SQL
         $stmt = self::$sqlConnectionLink->prepare($sqlStatement);
 
         // Bind Parameters to Query
-        call_user_func_array(array($stmt, "bind_param"), array_merge(array($parameterTypeList), $sqlParameters));
+        if($parameterTypes != "") call_user_func_array(array($stmt, "bind_param"), array_merge(array($parameterTypeList), $sqlParameters));
 
         $stmt->execute();
         $stmt->store_result();
@@ -151,29 +159,127 @@ class SQL
 
     public static function Fetch($table,$getColumn,$whereColumn,$whereColumnValue)
     {
+        $sqlStatement = "SELECT $getColumn FROM $table WHERE $whereColumn LIKE '$whereColumnValue'";
 
+        $result = self::$mysqli->query($sqlStatement);
+        $row = $result->fetch_assoc();
+        self::$mysqli->close();
+
+        return $row[$getColumn];
     }
 
     public static function FetchCount($table,$whereColumn,$whereColumnValue)
     {
+        $sqlStatement = "SELECT * FROM $table WHERE $whereColumn LIKE '$whereColumnValue'";
 
+        $result = self::$mysqli->query($sqlStatement);
+        $count = $result->num_rows;
+        self::$mysqli->close();
+
+        return $count;
     }
 
-    public static function FetchArray($table,$whereColumn,$whereColumnValue)
+    public static function FetchRow($table,$whereColumn,$whereColumnValue)
     {
+        $sqlStatement = "SELECT * FROM $table WHERE $whereColumn LIKE '$whereColumnValue'";
 
+        $result = self::$mysqli->query($sqlStatement);
+        $row = $result->fetch_assoc();
+        self::$mysqli->close();
+
+        return $row;
     }
 
 ##########################################################################################
 
     public static function Save($backUpName)
     {
+        $host = self::$databaseHost;
+        $user = self::$databaseUser;
+        $pass = self::$databasePass;
+        $name = self::$databaseName;
 
+        $path = "backup/";
+
+        $return = '';
+
+        $tables = '*';
+
+        //$link = mysql_connect($host,$user,$pass);
+        //mysql_select_db($name,$link);
+
+        self::$mysqli->select_db($name);
+
+        //get all of the tables
+        if($tables == '*')
+        {
+            $tables = array();
+            $result = self::$mysqli->query('SHOW TABLES');
+            while($row = $result->fetch_row())
+            {
+                $tables[] = $row[0];
+            }
+        }
+        else
+        {
+            $tables = is_array($tables) ? $tables : explode(',',$tables);
+        }
+
+        //cycle through
+        foreach($tables as $table)
+        {
+            //$result = mysql_query('SELECT * FROM '.$table);
+            $result = self::$mysqli->query('SELECT * FROM '.$table);
+            //$num_fields = mysql_num_fields($result);
+            $num_fields = $result->field_count;
+
+            $return.= 'DROP TABLE '.$table.';';
+
+            $rs2 = self::$mysqli->query('SHOW CREATE TABLE '.$table);
+            $row2 = $rs2->fetch_row();
+
+            //$row2 = mysql_fetch_row(mysql_query('SHOW CREATE TABLE '.$table));
+            $return.= "\n\n".$row2[1].";\n\n";
+
+            for ($i = 0; $i < $num_fields; $i++)
+            {
+                while($row = $result->fetch_row())
+                {
+                    $return.= 'INSERT INTO '.$table.' VALUES(';
+                    for($j=0; $j < $num_fields; $j++)
+                    {
+                        $row[$j] = addslashes($row[$j]);
+                        $row[$j] = preg_replace("/\n/","/\\n/",$row[$j]);
+                        if (isset($row[$j])) { $return.= '"'.$row[$j].'"' ; } else { $return.= '""'; }
+                        if ($j < ($num_fields-1)) { $return.= ','; }
+                    }
+                    $return.= ");\n";
+                }
+            }
+            $return.="\n\n\n";
+        }
+
+        //save file
+        $handle = fopen($path.$backUpName.'.sql','w+');
+        fwrite($handle,$return);
+        fclose($handle);
     }
 
-    public static function PeriodicSave($interval)
-    {
 
+    public static function PeriodicSave($period = "d")
+    {
+        switch($period)
+        {
+            case 'w': $filename = 'dbbu_'.date("\DY-\WW"); break;
+            case 'd': $filename = 'dbbu_'.date("\DY-m-d"); break;
+            case 'h': $filename = 'dbbu_'.date("\DY-m-d-\HH"); break;
+            default : $filename = 'dbbu_'.date("\DY-m-d"); break;
+        }
+
+        if(!file_exists('backup/'.$filename.'.sql'))
+        {
+            self::Save($filename);
+        }
     }
 
 ##########################################################################################
