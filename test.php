@@ -1,29 +1,12 @@
 <?php
-    include("header.php");
+    include("data/mysql.lib.new.php");
 
+    $id=1;
 
-    ExceptionNotification("Es ist ".date("H:m:s"),"information","warning");
+    while($row = SQL::Query("SELECT * FROM users WHERE id NOT LIKE ?",'s',$id)->fetch_assoc())
+    {
 
-
-
-    include("footer.php");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 
 ?>
