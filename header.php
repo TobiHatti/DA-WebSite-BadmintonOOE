@@ -6,9 +6,10 @@
 
     require("data/extension.lib.php");
     require("data/file.lib.php");
-    require("data/mysql.lib.php");
+    //require("data/mysql.lib.php");
     require("data/mysql.lib.new.php");
-    require("data/property.lib.php");
+    //require("data/property.lib.php");
+    require("data/setting.lib.php");
     require("data/string.lib.php");
     require("data/notification.lib.php");
 
@@ -16,7 +17,7 @@
     require("data/editfunctions.php");
     require("data/multipagepost.php");
 
-    SQL::PeriodicSave('d');
+    if(ThisPage()=="") SQL::PeriodicSave('d');
 
 
     echo '<!DOCTYPE html>
@@ -35,7 +36,7 @@
 
                 ';
 
-                if(GetProperty("EnablePreloader"))
+                if(Setting::Get("EnablePreloader"))
                 {
                     echo '
                         <script>

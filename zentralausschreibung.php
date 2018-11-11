@@ -206,7 +206,7 @@
                         echo '
                             <div class="za_box">
                                 <div class="za_title">
-                                    <h1 style="color: '.GetProperty("Color".$row['kategorie']).'">'.$row['title_line1'].'<br>'.$row['title_line2'].'</h1>
+                                    <h1 style="color: '.Setting::Get("Color".$row['kategorie']).'">'.$row['title_line1'].'<br>'.$row['title_line2'].'</h1>
                                     <h2><span style="color: #000000">'.$dateStr.'</span></h2>
                                 </div>
                                 <div class="za_data">
@@ -235,7 +235,7 @@
                         echo '
                             <div class="za_box">
                                 <div class="za_title">
-                                    <h3 style="color: '.GetProperty("Color".$row['kategorie']).'">'.$row['title_line1'].'</h3>
+                                    <h3 style="color: '.Setting::Get("Color".$row['kategorie']).'">'.$row['title_line1'].'</h3>
 
                                 </div>
                                 <div class="za_data">

@@ -10,18 +10,18 @@
 
     $today = date("Y-m-d");
 
-    $sliderLimit = GetProperty("SliderImageCount");
-    $nachwuchsLimit = GetProperty("NewsAmountStartpageNW");
-    $newsLimit = GetProperty("NewsAmountStartpageTN");
+    $sliderLimit = Setting::Get("SliderImageCount");
+    $nachwuchsLimit = Setting::Get("NewsAmountStartpageNW");
+    $newsLimit = Setting::Get("NewsAmountStartpageTN");
 
     echo '
         <div class="indexContentModern">
     ';
 
 
-    if(GetProperty("ShowTodaysEvents") AND SQL::Exist("SELECT id FROM zentralausschreibungen WHERE date_begin = ?",'@s',$today))
+    if(Setting::Get("ShowTodaysEvents") AND SQL::Exist("SELECT id FROM zentralausschreibungen WHERE date_begin = ?",'@s',$today))
     {
-        $zaVal = SQL::FetchArray("zentralausschreibungen","date_begin",$today);
+        $zaVal = SQL::FetchRow("zentralausschreibungen","date_begin",$today);
 
         echo '
             <h2>Heute, am '.str_replace('ä','&auml;',strftime("%A den %d. %B %Y",strtotime($today))).':</h2>
@@ -31,8 +31,8 @@
                     <span>Zentralausschreibung:</span>
                 </div>
                 <div>
-                    <h4 style="color: '.GetProperty("Color".$zaVal['kategorie']).'">'.$zaVal['title_line1'].'</h4>
-                    <h4 style="color: '.GetProperty("Color".$zaVal['kategorie']).'">'.$zaVal['title_line2'].'</h4>
+                    <h4 style="color: '.Setting::Get("Color".$zaVal['kategorie']).'">'.$zaVal['title_line1'].'</h4>
+                    <h4 style="color: '.Setting::Get("Color".$zaVal['kategorie']).'">'.$zaVal['title_line2'].'</h4>
                 </div>
                 <div>
                     <center>
@@ -56,9 +56,9 @@
         ';
     }
 
-    if(CheckPermission("ChangeContent")) echo '<table><tr><td>Rundruf-Nachricht anzeigen:</td><td>'.Checkbox("toggleBroadcast", "toggleBroadcast",GetProperty("ShowBroadcast")=="true","window.location.replace('index?toggleBroadcast')").'</td></tr></table>';
+    if(CheckPermission("ChangeContent")) echo '<table><tr><td>Rundruf-Nachricht anzeigen:</td><td>'.Checkbox("toggleBroadcast", "toggleBroadcast",Setting::Get("ShowBroadcast"),"window.location.replace('index?toggleBroadcast')").'</td></tr></table>';
 
-    if(GetProperty("ShowBroadcast")=="true")
+    if(Setting::Get("ShowBroadcast"))
     {
         echo '
             <h2>Rundruf</h2>
@@ -101,16 +101,19 @@
                                     if(SQL::Count("SELECT * FROM news WHERE tags = 'Spieler-des-Monats'")>0)
                                     {
                                         $sdm = SQL::Row("SELECT * FROM news WHERE tags = 'Spieler-des-Monats' ORDER BY id DESC LIMIT 0,1");
-                                        $showSDM = GetProperty("ShowSpielerDesMonats");
+                                        $showSDM = Setting::Get("ShowSpielerDesMonats");
                                     }
                                     else $showSDM = false;
 
 
-                                    $sdmPosition = GetProperty("SDMSliderPosition");
+
+                                    $sdmPosition = Setting::Get("SDMSliderPosition");
                                     $i=1;
                                     $refreshID = uniqid();
                                     $strSQL = "SELECT * FROM news WHERE thumbnail NOT LIKE '' AND tags NOT LIKE 'Spieler-des-Monats' ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
                                     $rs=mysqli_query($link,$strSQL);
+
+
                                     while($row=mysqli_fetch_assoc($rs))
                                     {
                                         if($showSDM=='true' AND $sdmPosition==$i)
@@ -155,7 +158,7 @@
                             <div class="ws_shadow"></div>
                         </div>
                         <script type="text/javascript" src="/js/wowslider.js"></script>
-                        <script type="text/javascript" src="/js/slides/'.GetProperty("SliderAnimation").'"></script>
+                        <script type="text/javascript" src="/js/slides/'.Setting::Get("SliderAnimation").'"></script>
                         ';
 
                         if(CheckPermission("ChangeContent")) echo '<a href="index'.str_replace('index','',ThisPage("+regenerateSlider")).'">&#9874; Slider Aktualisieren (Fehlerbehebung etc.)</a>';
@@ -340,9 +343,9 @@
                 <br><br><br>
                 ';
 
-                if(CheckPermission("ChangeContent")) echo '<table><tr><td>Veranstaltungen-Feld anzeigen:</td><td>'.Checkbox("toggleEvents", "toggleEvents",GetProperty("ShowHomeEvents")=="true","window.location.replace('index?toggleEvents')").'</td></tr></table>';
+                if(CheckPermission("ChangeContent")) echo '<table><tr><td>Veranstaltungen-Feld anzeigen:</td><td>'.Checkbox("toggleEvents", "toggleEvents",Setting::Get("ShowHomeEvents"),"window.location.replace('index?toggleEvents')").'</td></tr></table>';
 
-                if(GetProperty("ShowHomeEvents")=="true")
+                if(Setting::Get("ShowHomeEvents"))
                 {
                     echo '
                         <div>

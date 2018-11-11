@@ -219,7 +219,7 @@
         {
 
 
-            $cdata = SQL::FetchArray("vereine","kennzahl",SQL::Fetch("users","club","id",$_SESSION['userID']));
+            $cdata = SQL::FetchRow("vereine","kennzahl",SQL::Fetch("users","club","id",$_SESSION['userID']));
 
             echo '
                 <h2 class="stagfade1">'.$cdata['verein'].' '.$cdata['ort'].'</h2>

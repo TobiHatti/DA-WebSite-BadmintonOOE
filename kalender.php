@@ -110,12 +110,12 @@
                         <select class="cel_l" name="kategorie" id="classKat">
                             <option value="" disabled selected>--- Kategorie ausw&auml;hlen ---</option>
                             <option value="">Anderes</option>
-                            <option value="Landesmeisterschaft" style="color: '.GetProperty("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
-                            <option value="Doppelturnier" style="color: '.GetProperty("ColorDoppelturnier").'">Doppelturnier</option>
-                            <option value="Nachwuchs" style="color: '.GetProperty("ColorNachwuchs").'">Nachwuchs</option>
-                            <option value="SchuelerJugend" style="color: '.GetProperty("ColorSchuelerJugend").'">Sch&uuml;ler/Jugend</option>
-                            <option value="Senioren" style="color: '.GetProperty("ColorSenioren").'">Senioren</option>
-                            <option value="Training" style="color: '.GetProperty("ColorTraining").'">Training</option>
+                            <option value="Landesmeisterschaft" style="color: '.Setting::Get("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
+                            <option value="Doppelturnier" style="color: '.Setting::Get("ColorDoppelturnier").'">Doppelturnier</option>
+                            <option value="Nachwuchs" style="color: '.Setting::Get("ColorNachwuchs").'">Nachwuchs</option>
+                            <option value="SchuelerJugend" style="color: '.Setting::Get("ColorSchuelerJugend").'">Sch&uuml;ler/Jugend</option>
+                            <option value="Senioren" style="color: '.Setting::Get("ColorSenioren").'">Senioren</option>
+                            <option value="Training" style="color: '.Setting::Get("ColorTraining").'">Training</option>
                         </select>
                         </td>
                     </tr>
@@ -151,7 +151,7 @@
             echo '
             <hr>
         ';
-            $entriesPerPage = GetProperty("PagerSizeCalendar");
+            $entriesPerPage = Setting::Get("PagerSizeCalendar");
             $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
 
             $strSQL = "SELECT id,date,titel,description,kategorie FROM agenda UNION ALL SELECT id,date_begin AS date,CONCAT_WS(' ', title_line1, title_line2) AS titel, NULL AS description,kategorie FROM zentralausschreibungen ORDER BY date ASC LIMIT $offset,$entriesPerPage";
@@ -161,7 +161,7 @@
                 $isZA = ($row['description']==NULL) ? true : false;
 
                 echo'
-                    <div class="calendar_list" style="border-left-color: '.GetProperty("Color".$row['kategorie']).'">
+                    <div class="calendar_list" style="border-left-color: '.Setting::Get("Color".$row['kategorie']).'">
                         '.($isZA ? '<span style="color: #696969"><i>Zentralausschreibung</i></span>' : '').'
                         <a onclick="window.sessionStorage.setItem(\'toggleCalendar\',1);" href="/kalender/event/'.($isZA ? 'ZA' : 'AG').$row['id'].'/'.$row['date'].'"><h4 style="margin:0">'.$row['titel'].'</h4></a>
                         <a onclick="window.sessionStorage.setItem(\'toggleCalendar\',1);" href="/kalender/datum/'.$row['date'].'">'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['date']))).'</span></a>

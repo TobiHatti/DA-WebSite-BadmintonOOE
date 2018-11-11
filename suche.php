@@ -126,7 +126,7 @@
             else
             {
                 $today = date("Y-m-d");
-                $entriesPerPage = isset($_GET['limit']) ? $_GET['limit'] : GetProperty("PagerSizeSearch");
+                $entriesPerPage = isset($_GET['limit']) ? $_GET['limit'] : Setting::Get("PagerSizeSearch");
                 $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
 
                 $rs=mysqli_query($link,$strSQL." LIMIT $offset,$entriesPerPage");

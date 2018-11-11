@@ -5,9 +5,12 @@
 
     require("data/extension.lib.php");
     require("data/file.lib.php");
-    require("data/mysql.lib.php");
-    require("data/property.lib.php");
+    //require("data/mysql.lib.php");
+    require("data/mysql.lib.new.php");
+    //require("data/property.lib.php");
+    require("data/setting.lib.php");
     require("data/string.lib.php");
+    require("data/notification.lib.php");
 
     require("data/functions.php");
 
@@ -26,7 +29,7 @@
     }
     else
     {
-        $val = SQL::FetchArray("news_templates","id",$_GET['template']);
+        $val = SQL::FetchRow("news_templates","id",$_GET['template']);
 
         if($val['bgIsImage']) $backgroundStyle = "background-size: cover; background-image: url('content/newstemplates/".$val['bgPath']."')";
         else

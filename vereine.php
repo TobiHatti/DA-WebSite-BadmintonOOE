@@ -63,7 +63,7 @@
 
         echo '<h2 class="stagfade1">'.($edit ? 'Verein Bearbeiten' : 'Neuer Verein').'</h2>';
 
-        if($edit) $cdat = SQL::FetchArray("vereine","id",$_GET['edit']);
+        if($edit) $cdat = SQL::FetchRow("vereine","id",$_GET['edit']);
 
         echo '
             <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">

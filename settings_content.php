@@ -5,10 +5,12 @@
 
     require("data/extension.lib.php");
     require("data/file.lib.php");
-    require("data/mysql.lib.php");
+    //require("data/mysql.lib.php");
     require("data/mysql.lib.new.php");
-    require("data/property.lib.php");
+    //require("data/property.lib.php");
+    require("data/setting.lib.php");
     require("data/string.lib.php");
+    require("data/notification.lib.php");
 
     require("data/functions.php");
 
@@ -19,9 +21,9 @@
         if($_POST[$_POST['updateSetting'].'_inputType'] == "C")
         {
             $checked = (isset($_POST[$_POST['updateSetting'].'_val'])) ? 1 : 0;
-            SetProperty($_POST['updateSetting'],  $checked);
+            Setting::Set($_POST['updateSetting'],  $checked);
         }
-        else SetProperty($_POST['updateSetting'],  $_POST[$_POST['updateSetting'].'_val']);
+        else Setting::Set($_POST['updateSetting'],  $_POST[$_POST['updateSetting'].'_val']);
 
 
         // Additional operation (special Cases)
@@ -339,7 +341,7 @@
             if(isset($_GET['cuser']))
             {
                 $uid = $_GET['cuser'];
-                $uDat = SQL::FetchArray("users","id",$_GET['cuser']);
+                $uDat = SQL::FetchRow("users","id",$_GET['cuser']);
 
                 echo '<br><h3>Vereins-Account Bearbeiten</h3>';
 
@@ -386,7 +388,7 @@
             else if(isset($_GET['user']))
             {
                 $uid = $_GET['user'];
-                $uDat = SQL::FetchArray("users","id",$_GET['user']);
+                $uDat = SQL::FetchRow("users","id",$_GET['user']);
                 echo '<br><h3>Nutzerdaten von <i>'.$uDat['firstname'].' '.$uDat['lastname'].'</i></h3>';
 
 

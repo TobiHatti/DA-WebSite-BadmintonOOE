@@ -27,6 +27,11 @@ class SQL
         self::$databaseName = getenv("MYSQLDB_DBNAME");
     }
 
+    public static function Close()
+    {
+        self::$mysqli->close();
+    }
+
 ##########################################################################################
 
     private static function GetParamTypeList($paramTypeList,$paramAmt)
@@ -163,7 +168,8 @@ class SQL
 
         $result = self::$mysqli->query($sqlStatement);
         $row = $result->fetch_assoc();
-        self::$mysqli->close();
+
+
 
         return $row[$getColumn];
     }
@@ -174,7 +180,6 @@ class SQL
 
         $result = self::$mysqli->query($sqlStatement);
         $count = $result->num_rows;
-        self::$mysqli->close();
 
         return $count;
     }
@@ -185,7 +190,6 @@ class SQL
 
         $result = self::$mysqli->query($sqlStatement);
         $row = $result->fetch_assoc();
-        self::$mysqli->close();
 
         return $row;
     }

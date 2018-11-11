@@ -1,7 +1,6 @@
 <?php
 
     require("../downloading.php");
-    require('../data/fpdf/main_functions.php');
     require('../data/phpspreadsheet/vendor/autoload.php');
 
     use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -18,9 +17,9 @@
     $originalClub = $club;
 
 
-    $color1 = Fetch("ranglisten_settings","value","setting","Y".$year."ColorA");
-    $color2 = Fetch("ranglisten_settings","value","setting","Y".$year."ColorB");
-    $colorHilight = Fetch("ranglisten_settings","value","setting","HighlightColor");
+    $color1 = SQL::Fetch("ranglisten_settings","value","setting","Y".$year."ColorA");
+    $color2 = SQL::Fetch("ranglisten_settings","value","setting","Y".$year."ColorB");
+    $colorHilight = SQL::Fetch("ranglisten_settings","value","setting","HighlightColor");
 
 
 
@@ -281,7 +280,7 @@
     while($rowc=mysqli_fetch_assoc($rsc))
     {
         $club = $rowc['club'];
-        $clubVals = FetchArray("vereine","kennzahl",$club);
+        $clubVals = SQL::FetchRow("vereine","kennzahl",$club);
 
 
         //========================================================================================

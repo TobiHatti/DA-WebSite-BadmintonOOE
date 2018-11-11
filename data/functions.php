@@ -260,7 +260,7 @@ function CheckPermission($permission)
 
 function CheckRank()
 {
-    if(isset($_SESSION['rank']) AND $_SESSION['rank'] == Fetch("users","rank","id",$_SESSION['userID']))
+    if(isset($_SESSION['rank']) AND $_SESSION['rank'] == SQL::Fetch("users","rank","id",$_SESSION['userID']))
     {
         return $_SESSION['rank'];
     }
@@ -293,8 +293,8 @@ function ShowTags($tagstr,$disableLinks = false, $targetTop = false)
 
     foreach($tags = explode('||',$tagstr) as $tag)
     {
-        if($tag != "" AND $tag != $tags[0]) $retval .= ',&nbsp;&nbsp;<a '.(($targetTop) ? 'target="_top"' : '').' href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.((Fetch("news_tags","name","id",$tag)!="") ? Fetch("news_tags","name","id",$tag) : $tag).'</a>';
-        if($tag == $tags[0]) $retval .= '<a '.(($targetTop) ? 'target="_top"' : '').' href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.((Fetch("news_tags","name","id",$tag)!="") ? Fetch("news_tags","name","id",$tag) : $tag).'</a>';
+        if($tag != "" AND $tag != $tags[0]) $retval .= ',&nbsp;&nbsp;<a '.(($targetTop) ? 'target="_top"' : '').' href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.((SQL::Fetch("news_tags","name","id",$tag)!="") ? SQL::Fetch("news_tags","name","id",$tag) : $tag).'</a>';
+        if($tag == $tags[0]) $retval .= '<a '.(($targetTop) ? 'target="_top"' : '').' href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.((SQL::Fetch("news_tags","name","id",$tag)!="") ? SQL::Fetch("news_tags","name","id",$tag) : $tag).'</a>';
     }
 
    return $retval;
@@ -364,7 +364,7 @@ function Pager($sqlQuery,$entriesPerPage = 10,$customURL="")
     $thisPage = ($customURL == "") ? ThisPage() : $customURL;
 
     $currentPage = (isset($_GET['page']) ? $_GET['page'] : 1 );
-    $entryCounts = MySQLCount($sqlQuery);
+    $entryCounts = SQL::Count($sqlQuery);
 
     $pages = 0;
 
