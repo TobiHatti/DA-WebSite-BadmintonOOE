@@ -138,6 +138,32 @@ class SQL
         return $row;
     }
 
+    public static function Cluster($sqlStatement,$parameterTypes="", &...$sqlParameters)
+    {
+        $rowArray = array();
+
+        // Parameter-Count
+        $parameterAmount = func_num_args() - 2;
+
+        // Get Parameter-Type list
+        $parameterTypeList = self::GetParamTypeList($parameterTypes,$parameterAmount);
+
+        // Prepare SQL-Query
+        $stmt = self::$sqlConnectionLink->prepare($sqlStatement);
+
+        // Bind Parameters to Query
+        if($parameterTypes != "") call_user_func_array(array($stmt, "bind_param"), array_merge(array($parameterTypeList), $sqlParameters));
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        while($row = $result->fetch_assoc()) array_push($rowArray,$row);
+
+        $stmt->close();
+
+        return $rowArray;
+    }
+
     public static function Exist($sqlStatement,$parameterTypes="", &...$sqlParameters)
     {
         // Parameter-Count

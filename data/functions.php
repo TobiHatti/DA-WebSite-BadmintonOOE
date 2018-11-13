@@ -509,7 +509,7 @@ function NewsSidebar()
 {
     require("mysql_connect.php");
 
-    $sidebarLimit = GetProperty("NewsAmountTile");
+    $sidebarLimit = Setting::Get("NewsAmountTile");
 
     $retval ='
         <div class="home_tile_container_l stagfade1">
@@ -620,8 +620,8 @@ function SettingOption($type, $description, $property, $selectArray='')
 
     if($type=="C")
     {
-        $retval .= Checkbox($property.'_val',$id,GetProperty($property),'CheckChange'.$id.'();').'
-            <input type="checkbox" id="changeCheck'.$id.'" '.((GetProperty($property)) ? 'checked' : '').' hidden/>
+        $retval .= Checkbox($property.'_val',$id,Setting::Get($property),'CheckChange'.$id.'();').'
+            <input type="checkbox" id="changeCheck'.$id.'" '.((Setting::Get($property)) ? 'checked' : '').' hidden/>
             <script>
                 function CheckChange'.$id.'()
                 {
@@ -637,8 +637,8 @@ function SettingOption($type, $description, $property, $selectArray='')
     if($type=="T")
     {
         $retval .= '
-            <input type="text"   id="'.$id.'" name="'.$property.'_val" value="'.GetProperty($property).'" oninput="CheckChange'.$id.'();">
-            <input type="hidden" id="changeCheck'.$id.'" value="'.GetProperty($property).'"/>
+            <input type="text"   id="'.$id.'" name="'.$property.'_val" value="'.Setting::Get($property).'" oninput="CheckChange'.$id.'();">
+            <input type="hidden" id="changeCheck'.$id.'" value="'.Setting::Get($property).'"/>
             <script>
                 function CheckChange'.$id.'()
                 {
@@ -654,8 +654,8 @@ function SettingOption($type, $description, $property, $selectArray='')
     if($type=="N")
     {
         $retval .= '
-            <input type="number" id="'.$id.'" name="'.$property.'_val" class="cel_xs" value="'.GetProperty($property).'" oninput="CheckChange'.$id.'();">
-            <input type="hidden" id="changeCheck'.$id.'" value="'.GetProperty($property).'"/>
+            <input type="number" id="'.$id.'" name="'.$property.'_val" class="cel_xs" value="'.Setting::Get($property).'" oninput="CheckChange'.$id.'();">
+            <input type="hidden" id="changeCheck'.$id.'" value="'.Setting::Get($property).'"/>
             <script>
                 function CheckChange'.$id.'()
                 {
@@ -674,12 +674,12 @@ function SettingOption($type, $description, $property, $selectArray='')
 
         foreach($selectArray as $opt)
         {
-            $retval.= '<option value="'.$opt.'" '.((GetProperty($property) == $opt) ? 'selected' : '').'>'.Fetch("slides","name","filename",$opt).'</option>';
+            $retval.= '<option value="'.$opt.'" '.((Setting::Get($property) == $opt) ? 'selected' : '').'>'.Fetch("slides","name","filename",$opt).'</option>';
         }
 
         $retval .= '
             </select>
-            <input type="hidden" id="changeCheck'.$id.'" value="'.GetProperty($property).'"/>
+            <input type="hidden" id="changeCheck'.$id.'" value="'.Setting::Get($property).'"/>
             <script>
                 function CheckChange'.$id.'()
                 {
@@ -721,7 +721,7 @@ function RefreshSliderContent()
     
     $i=1;
     $sliderImages = '';
-    $sliderLimit = GetProperty("SliderImageCount");
+    $sliderLimit = Setting::Get("SliderImageCount");
     $today = date("Y-m-d");
 
     // Default news-images
@@ -851,8 +851,8 @@ function SeachTile($kategory, $id)
                         <div class="double_container">
                             <div>
                                 <i>Zentralausschreibungen</i><br>
-                                <h2 style="color: '.GetProperty("Color".$val['kategorie']).'">'.$val['title_line1'].'</h2>
-                                <h2 style="color: '.GetProperty("Color".$val['kategorie']).'">'.$val['title_line2'].'</h2>
+                                <h2 style="color: '.Setting::Get("Color".$val['kategorie']).'">'.$val['title_line1'].'</h2>
+                                <h2 style="color: '.Setting::Get("Color".$val['kategorie']).'">'.$val['title_line2'].'</h2>
                                 <h3 style="color: #000000">'.str_replace('ä','&auml;',strftime("%A, %d. %B %Y",strtotime($val['date_begin']))).'</h3>
                             </div>
                             <div>
@@ -899,7 +899,7 @@ function SeachTile($kategory, $id)
                         <div class="double_container">
                             <div>
                                 <i>Kalender</i><br>
-                                <h2 style="color: '.GetProperty("Color".$val['kategorie']).'">'.$val['titel'].'</h2>
+                                <h2 style="color: '.Setting::Get("Color".$val['kategorie']).'">'.$val['titel'].'</h2>
                                 <h3 style="color: #000000">'.str_replace('ä','&auml;',strftime("%A, %d. %B %Y",strtotime($val['date']))).'</h3>
                                 <h3 style="color: #000000">'.date_format(date_create($val['time']), "H:i").' Uhr</h3>
                             </div>
