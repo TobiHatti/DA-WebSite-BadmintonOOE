@@ -105,16 +105,16 @@
                                     }
                                     else $showSDM = false;
 
+                                    $strSQL = "SELECT * FROM news WHERE thumbnail NOT LIKE '' AND tags NOT LIKE 'Spieler-des-Monats' ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
+                                    $sliderImageDataArray = SQL::Cluster($strSQL);
 
 
                                     $sdmPosition = Setting::Get("SDMSliderPosition");
                                     $i=1;
                                     $refreshID = uniqid();
-                                    $strSQL = "SELECT * FROM news WHERE thumbnail NOT LIKE '' AND tags NOT LIKE 'Spieler-des-Monats' ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
-                                    $rs=mysqli_query($link,$strSQL);
 
 
-                                    while($row=mysqli_fetch_assoc($rs))
+                                    foreach($sliderImageDataArray as $row)
                                     {
                                         if($showSDM=='true' AND $sdmPosition==$i)
                                         {
@@ -132,6 +132,7 @@
                                         ';
                                         $i++;
                                     }
+
                                     echo '
                                 </ul>
                             </div>
@@ -140,9 +141,7 @@
                                     ';
 
                                     $i=1;
-                                    $strSQL = "SELECT * FROM news WHERE thumbnail NOT LIKE '' AND tags NOT LIKE 'Spieler-des-Monats' ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
-                                    $rs=mysqli_query($link,$strSQL);
-                                    while($row=mysqli_fetch_assoc($rs))
+                                    foreach($sliderImageDataArray as $row)
                                     {
                                         if($showSDM=='true' AND $sdmPosition==$i)
                                         {
@@ -168,9 +167,7 @@
                     ';
 
                     $i=1;
-                    $strSQL = "SELECT * FROM news WHERE thumbnail NOT LIKE '' AND tags NOT LIKE 'Spieler-des-Monats' ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
-                    $rs=mysqli_query($link,$strSQL);
-                    while($row=mysqli_fetch_assoc($rs))
+                    foreach($sliderImageDataArray as $row)
                     {
                         if($showSDM=='true' AND $sdmPosition==$i)
                         {

@@ -1,7 +1,12 @@
 <?php
-    include("data/setting.lib.php");
+    include("data/mysql.lib.new.php");
 
+    $rows = SQL::Cluster("SELECT * FROM settings LIMIT 0,3");
 
+    foreach($rows as $row)
+    {
+        echo $row['setting'].' : '.$row['value'].'<br>';
+    }
 ?>
 
 
