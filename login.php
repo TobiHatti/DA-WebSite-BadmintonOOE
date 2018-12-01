@@ -4,9 +4,26 @@
     if(isset($_POST['login']))
     {
         $email=$_POST['email'];
-        $pswd = hash('sha256',hash('sha256',$_POST['password']."salt")."pepper");
 
+        $passwordHash = SQL::Scalar("SELECT password FROM users WHERE email = ?",'s',$email);
+        $executed = false;
 
+        if(password_verify($_POST['password'],$passwordHash))
+        {
+            $userDataArray = SQL::Row("SELECT * FROM users WHERE email = ?",'s',$email);
+
+            $executed = true;
+
+            $_SESSION['userID'] = $userDataArray['id'];
+            $_SESSION['firstname'] = $userDataArray['firstname'];
+            $_SESSION['lastname'] = $userDataArray['lastname'];
+            $_SESSION['rank'] = $userDataArray['rank'];
+            Redirect("/");
+        }
+
+        if(!$executed) Redirect(str_replace('?err','',ThisPage()).'?err');
+
+        /*
         $stmt = $link->prepare('SELECT * FROM users WHERE email = ? AND password = ?');
         $stmt->bind_param('ss', $email, $pswd); // 's' specifies the variable type => 'string'
 
@@ -23,11 +40,12 @@
             $_SESSION['userID'] = $row['id'];
             $_SESSION['firstname'] = $row['firstname'];
             $_SESSION['lastname'] = $row['lastname'];
-            $_SESSION['rank'] = $row['rank'];     
+            $_SESSION['rank'] = $row['rank'];
             Redirect("/");
         }
 
         if(!$executed) Redirect(str_replace('?err','',ThisPage()).'?err');
+        */
     }
 
     echo '

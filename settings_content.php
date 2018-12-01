@@ -36,7 +36,8 @@
     if(isset($_POST['addUserClubManager']))
     {
         $email = $_POST['email'];
-        $password = hash('sha256',hash('sha256',$_POST['password']."salt")."pepper");
+        //$password = hash('sha256',hash('sha256',$_POST['password']."salt")."pepper");
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $club = $_POST['club'];
 
         SQL::NonQuery("INSERT INTO users (id,rank,club,email,password) VALUES ('','clubmanager',?,?,?)",'@s',$club,$email,$password);
@@ -63,7 +64,8 @@
         $lastname = $_POST['lastname'];
         $gedner = $_POST['gender'];
         $email = $_POST['email'];
-        $password = hash('sha256',hash('sha256',$_POST['password']."salt")."pepper");
+        //$password = hash('sha256',hash('sha256',$_POST['password']."salt")."pepper");
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         SQL::NonQuery("INSERT INTO users (id,rank,firstname,lastname,sex,email,password) VALUES ('','administrative',?,?,?,?,?)",'@s',$firstname,$lastname,$gedner,$email,$password);
 
