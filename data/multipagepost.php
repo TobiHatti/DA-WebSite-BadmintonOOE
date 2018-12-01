@@ -20,10 +20,10 @@
 
     if(isset($_GET['toggleBroadcast']))
     {
-        $current = GetProperty("ShowBroadcast");
+        $current = Setting::Get("ShowBroadcast");
 
-        if($current == 'true') SetProperty("ShowBroadcast","false");
-        else SetProperty("ShowBroadcast","true");
+        if($current == 'true') Setting::Set("ShowBroadcast","false");
+        else Setting::Set("ShowBroadcast","true");
 
         Redirect(ThisPage("-toggleBroadcast"));
         die();
@@ -31,10 +31,10 @@
 
     if(isset($_GET['toggleEvents']))
     {
-        $current = GetProperty("ShowHomeEvents");
+        $current = Setting::Get("ShowHomeEvents");
 
-        if($current == 'true') SetProperty("ShowHomeEvents","false");
-        else SetProperty("ShowHomeEvents","true");
+        if($current == 'true') Setting::Set("ShowHomeEvents","false");
+        else Setting::Set("ShowHomeEvents","true");
 
         Redirect(ThisPage("-toggleEvents"));
         die();
