@@ -1,0 +1,19 @@
+***Jeder soll sich auskennen***
+***Jeder soll 3-5min reden***
+***Pro Person max 3 Folien***
+***Auf den Folien soll nicht zu viel draufstehen***
+
+Titelfolie:
+Titel, Betreuer, Teilnehmer OK
+
+Folie 1:
+Aufgabenstellung OK
+
+2++:
+Umsetzung und Ergebnisse (Screenshots) OK
+Was ist bereits geschehen OK
+INERESSANTE SACHEN!!!!
+Überblickskizzen
+Server, Client, Aufrufe,..
+Was ist noch offen
+Wieviele Stunden wurden daran gearbeitet (nicht Prozent, wirklich stunden hinschreiben)
