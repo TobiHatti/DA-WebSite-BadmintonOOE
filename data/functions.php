@@ -820,7 +820,7 @@ function SeachTile($kategory, $id)
 {
     if($kategory=="News")
     {
-        $val = FetchArray("news","id",$id);
+        $val = SQL::Row("SELECT * FROM news WHERE id = ?",'s',$id);
 
         echo '
             <a href="/news/artikel/'.$val['article_url'].'" style="text-decoration: none;">
@@ -842,7 +842,7 @@ function SeachTile($kategory, $id)
     }
     else if($kategory=="Zentralausschreibungen")
     {
-        $val = FetchArray("zentralausschreibungen","id",$id);
+        $val = SQL::Row("SELECT * FROM zentralausschreibungen WHERE id = ?",'s',$id);
 
         echo '
             <a href="/zentralausschreibung#'.SReplace($val['title_line1'].' '.$val['title_line2']).'" style="text-decoration: none;">
@@ -868,7 +868,7 @@ function SeachTile($kategory, $id)
     }
     else if($kategory=="Fotogalerie")
     {
-        $val = FetchArray("fotogalerie","id",$id);
+        $val = SQL::Row("SELECT * FROM fotogalerie WHERE id = ?",'s',$id);
 
         echo '
             <a href="/fotogalerie/album/'.$val['album_url'].'" style="text-decoration: none;">
@@ -890,7 +890,7 @@ function SeachTile($kategory, $id)
     }
     else if($kategory=="Kalender")
     {
-        $val = FetchArray("agenda","id",$id);
+        $val = SQL::Row("SELECT * FROM agenda WHERE id = ?",'s',$id);
 
         echo '
             <a href="/kalender/event/AG'.$id.'/'.$val['date'].'" style="text-decoration: none;">
@@ -918,7 +918,7 @@ function SeachTile($kategory, $id)
 
 function ShowZATable($id)
 {
-    $row = FetchArray("zentralausschreibungen","id",$id);
+    $row = SQL::Row("SELECT * FROM zentralausschreibungen WHERE id = ?",'s',$id);
 
     $retval = '<table>';
 

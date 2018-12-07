@@ -15,6 +15,11 @@
         {
             echo '<h2 class="stagfade1">Suchergebnisse f&uuml;r <i>"'.$searchValue.'"</i></h2>';
 
+            $searchValuePrep = '%'.$searchValue.'%';
+
+            $today = date("Y-m-d");
+            $entriesPerPage = isset($_GET['limit']) ? $_GET['limit'] : Setting::Get("PagerSizeSearch");
+            $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
 
             if($_GET['kategorie'] AND $_GET['kategorie'] == 'Alle')
             {
@@ -23,27 +28,30 @@
                     id AS isNews, NULL AS isZA, NULL AS isFotogalerie, NULL AS isAgenda,
                     release_date AS date
                     FROM news
-                    WHERE title LIKE '%$searchValue%'
+                    WHERE title LIKE ?
                     UNION ALL
                     SELECT
                     NULL AS isNews, id AS isZA, NULL AS isFotogalerie, NULL AS isAgenda,
                     date_begin AS date
                     FROM zentralausschreibungen
-                    WHERE CONCAT_WS(' ', title_line1, title_line2) LIKE '%$searchValue%'
+                    WHERE CONCAT_WS(' ', title_line1, title_line2) LIKE ?
                     UNION ALL
                     SELECT
                     NULL AS isNews, NULL AS isZA, id AS isFotogalerie, NULL AS isAgenda,
                     event_date AS date
                     FROM fotogalerie
-                    WHERE album_name LIKE '%$searchValue%'
+                    WHERE album_name LIKE ?
                     UNION ALL
                     SELECT
                     NULL AS isNews, NULL AS isZA, NULL AS isFotogalerie, id AS isAgenda,
                     date AS date
                     FROM agenda
-                    WHERE CONCAT_WS(' ', titel, description) LIKE '%$searchValue%'
+                    WHERE CONCAT_WS(' ', titel, description) LIKE ?
                     ORDER BY date DESC
                 ";
+
+                $resultCount = SQL::Count($strSQL,'@s',$searchValuePrep,$searchValuePrep,$searchValuePrep,$searchValuePrep);
+                $resultArray = SQL::Cluster($strSQL." LIMIT $offset,$entriesPerPage",'@s',$searchValuePrep,$searchValuePrep,$searchValuePrep,$searchValuePrep);
             }
             else if($_GET['kategorie'] AND $_GET['kategorie'] == 'News')
             {
@@ -52,9 +60,12 @@
                     id AS isNews, NULL AS isZA, NULL AS isFotogalerie, NULL AS isAgenda,
                     release_date AS date
                     FROM news
-                    WHERE title LIKE '%$searchValue%'
+                    WHERE title LIKE ?
                     ORDER BY date DESC
                 ";
+
+                $resultCount = SQL::Count($strSQL,'@s',$searchValuePrep);
+                $resultArray = SQL::Cluster($strSQL." LIMIT $offset,$entriesPerPage",'@s',$searchValuePrep);
             }
             else if($_GET['kategorie'] AND $_GET['kategorie'] == 'Zentralausschreibungen')
             {
@@ -63,9 +74,12 @@
                     NULL AS isNews, id AS isZA, NULL AS isFotogalerie, NULL AS isAgenda,
                     date_begin AS date
                     FROM zentralausschreibungen
-                    WHERE CONCAT_WS(' ', title_line1, title_line2) LIKE '%$searchValue%'
+                    WHERE CONCAT_WS(' ', title_line1, title_line2) LIKE ?
                     ORDER BY date DESC
                 ";
+
+                $resultCount = SQL::Count($strSQL,'@s',$searchValuePrep);
+                $resultArray = SQL::Cluster($strSQL." LIMIT $offset,$entriesPerPage",'@s',$searchValuePrep);
             }
             else if($_GET['kategorie'] AND $_GET['kategorie'] == 'Fotogalerie')
             {
@@ -74,9 +88,12 @@
                     NULL AS isNews, NULL AS isZA, id AS isFotogalerie, NULL AS isAgenda,
                     event_date AS date
                     FROM fotogalerie
-                    WHERE album_name LIKE '%$searchValue%'
+                    WHERE album_name LIKE ?
                     ORDER BY date DESC
                 ";
+
+                $resultCount = SQL::Count($strSQL,'@s',$searchValuePrep);
+                $resultArray = SQL::Cluster($strSQL." LIMIT $offset,$entriesPerPage",'@s',$searchValuePrep);
             }
             else if($_GET['kategorie'] AND $_GET['kategorie'] == 'Kalender')
             {
@@ -85,9 +102,12 @@
                     NULL AS isNews, NULL AS isZA, NULL AS isFotogalerie, id AS isAgenda,
                     date AS date
                     FROM agenda
-                    WHERE CONCAT_WS(' ', titel, description) LIKE '%$searchValue%'
+                    WHERE CONCAT_WS(' ', titel, description) LIKE ?
                     ORDER BY date DESC
                 ";
+
+                $resultCount = SQL::Count($strSQL,'@s',$searchValuePrep);
+                $resultArray = SQL::Cluster($strSQL." LIMIT $offset,$entriesPerPage",'@s',$searchValuePrep);
             }
             else Redirect("/suche/Alle/".$_GET['suche']);
 
@@ -119,18 +139,14 @@
             ';
 
 
-            if(SQL::Count($strSQL)==0)
+            if($resultCount==0)
             {
                 echo '<br><br><i>Keine Ergebnisse gefunden.</i>';
             }
             else
             {
-                $today = date("Y-m-d");
-                $entriesPerPage = isset($_GET['limit']) ? $_GET['limit'] : Setting::Get("PagerSizeSearch");
-                $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
 
-                $rs=mysqli_query($link,$strSQL." LIMIT $offset,$entriesPerPage");
-                while($row=mysqli_fetch_assoc($rs))
+                foreach($resultArray AS $row)
                 {
                     if($row['isNews'] != NULL)
                     {
