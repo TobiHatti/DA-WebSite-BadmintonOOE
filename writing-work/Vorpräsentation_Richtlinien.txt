@@ -14,6 +14,6 @@ Umsetzung und Ergebnisse (Screenshots) OK
 Was ist bereits geschehen OK
 INERESSANTE SACHEN!!!!
 Überblickskizzen
-Server, Client, Aufrufe,..
+Server, Client, Aufrufe,.. 
 Was ist noch offen
 Wieviele Stunden wurden daran gearbeitet (nicht Prozent, wirklich stunden hinschreiben)
