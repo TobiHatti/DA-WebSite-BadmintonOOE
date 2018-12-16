@@ -7,7 +7,7 @@
 
     require("data/extension.lib.php");
     require("data/file.lib.php");
-    require("data/mysql.new.lib.php");
+    require("data/mysql.lib.new.php");
     require("data/setting.lib.php");
     require("data/string.lib.php");
 
