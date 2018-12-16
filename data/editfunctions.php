@@ -34,14 +34,14 @@ function EditZA($id='')
                                 <td colspan=2>
                                     <select name="kategorie" id="zaKategory" onchange="SelectZAKategory();" class="cel_m" tabindex="1">
                                         <optgroup label="Gro&szlig;e Felder">
-                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Landesmeisterschaft") ? 'selected' : '').' value="Landesmeisterschaft" style="color: '.GetProperty("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
-                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Doppelturnier") ? 'selected' : '').' value="Doppelturnier" style="color: '.GetProperty("ColorDoppelturnier").'">Doppelturnier</option>
-                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Nachwuchs") ? 'selected' : '').' value="Nachwuchs" style="color: '.GetProperty("ColorNachwuchs").'">Nachwuchs</option>
-                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "SchuelerJugend") ? 'selected' : '').' value="SchuelerJugend" style="color: '.GetProperty("ColorSchuelerJugend").'">Sch&uuml;ler/Jugend</option>
-                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Senioren") ? 'selected' : '').' value="Senioren" style="color: '.GetProperty("ColorSenioren").'">Senioren</option>
+                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Landesmeisterschaft") ? 'selected' : '').' value="Landesmeisterschaft" style="color: '.Setting::Get("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
+                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Doppelturnier") ? 'selected' : '').' value="Doppelturnier" style="color: '.Setting::Get("ColorDoppelturnier").'">Doppelturnier</option>
+                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Nachwuchs") ? 'selected' : '').' value="Nachwuchs" style="color: '.Setting::Get("ColorNachwuchs").'">Nachwuchs</option>
+                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "SchuelerJugend") ? 'selected' : '').' value="SchuelerJugend" style="color: '.Setting::Get("ColorSchuelerJugend").'">Sch&uuml;ler/Jugend</option>
+                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Senioren") ? 'selected' : '').' value="Senioren" style="color: '.Setting::Get("ColorSenioren").'">Senioren</option>
                                         </optgroup>
                                         <optgroup label="Kleine Felder">
-                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Training") ? 'selected' : '').' value="Training" style="color: '.GetProperty("ColorTraining").'">Training</option>
+                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Training") ? 'selected' : '').' value="Training" style="color: '.Setting::Get("ColorTraining").'">Training</option>
                                         </optgroup>
                                     </select>
                                 </td>
@@ -257,7 +257,7 @@ function EditZA($id='')
                         <div class="za_box" id="zaFieldS" style="display:none;">
                             <div class="za_title">
                                 <h3>
-                                    <output style="color: '.GetProperty("ColorTraining").'" class="cel_l cef_nobg cef_brdb" id="zaTitleLineOutS">Titel/Beschreibung</output>
+                                    <output style="color: '.Setting::Get("ColorTraining").'" class="cel_l cef_nobg cef_brdb" id="zaTitleLineOutS">Titel/Beschreibung</output>
                                 </h3>
 
                             </div>
@@ -302,14 +302,14 @@ function EditZA($id='')
                         <td colspan=2>
                             <select name="kategorie" id="zaKategory" onchange="SelectZAKategory();" class="cel_m" tabindex="1">
                                 <optgroup label="Gro&szlig;e Felder">
-                                    <option value="Landesmeisterschaft" style="color: '.GetProperty("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
-                                    <option value="Doppelturnier" style="color: '.GetProperty("ColorDoppelturnier").'">Doppelturnier</option>
-                                    <option value="Nachwuchs" style="color: '.GetProperty("ColorNachwuchs").'">Nachwuchs</option>
-                                    <option value="SchuelerJugend" style="color: '.GetProperty("ColorSchuelerJugend").'">Sch&uuml;ler/Jugend</option>
-                                    <option value="Senioren" style="color: '.GetProperty("ColorSenioren").'">Senioren</option>
+                                    <option value="Landesmeisterschaft" style="color: '.Setting::Get("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
+                                    <option value="Doppelturnier" style="color: '.Setting::Get("ColorDoppelturnier").'">Doppelturnier</option>
+                                    <option value="Nachwuchs" style="color: '.Setting::Get("ColorNachwuchs").'">Nachwuchs</option>
+                                    <option value="SchuelerJugend" style="color: '.Setting::Get("ColorSchuelerJugend").'">Sch&uuml;ler/Jugend</option>
+                                    <option value="Senioren" style="color: '.Setting::Get("ColorSenioren").'">Senioren</option>
                                 </optgroup>
                                 <optgroup label="Kleine Felder">
-                                    <option value="Training" style="color: '.GetProperty("ColorTraining").'">Training</option>
+                                    <option value="Training" style="color: '.Setting::Get("ColorTraining").'">Training</option>
                                 </optgroup>
                             </select>
                         </td>
@@ -527,7 +527,7 @@ function EditZA($id='')
                 <div class="za_box" id="zaFieldS" style="display:none;">
                     <div class="za_title">
                         <h3>
-                            <output style="color: '.GetProperty("ColorTraining").'" class="cel_l cef_nobg cef_brdb" id="zaTitleLineOutS">Titel/Beschreibung</output>
+                            <output style="color: '.Setting::Get("ColorTraining").'" class="cel_l cef_nobg cef_brdb" id="zaTitleLineOutS">Titel/Beschreibung</output>
                         </h3>
 
                     </div>
