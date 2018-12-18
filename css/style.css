@@ -3189,4 +3189,7 @@ table.centered_content td {
   padding-left: 5px;
   padding-right: 10px; }
 
+div.fr-wrapper div a {
+  display: none; }
+
 /*# sourceMappingURL=style.css.map */

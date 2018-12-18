@@ -59,6 +59,7 @@
 
                 echo '
                 <header id="htmlheader">
+                    
                     <div class="header_logo"></div>
                     <!-- <div class="header_sponsor"></div> -->
                     ';
