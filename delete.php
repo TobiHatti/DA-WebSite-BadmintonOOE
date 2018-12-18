@@ -7,13 +7,14 @@
         {
             $table = $_GET['t'];
             $id = $_GET['i'];
-            SQL::NonQuery("DELETE FROM $table WHERE id = ?",'@s',$id);
+            MySQL::NonQuery("DELETE FROM $table WHERE id = ?",'@s',$id);
             echo '
                 <script>
                     window.history.back();
                     window.history.back();
                 </script>
             ';
+            die();
         }
 
         if(isset($_POST['abort']))

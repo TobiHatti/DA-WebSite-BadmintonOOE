@@ -63,7 +63,7 @@ function FileUpload($path,$formId,$formats="",$limit="",$sql="",$customName="")
                         }
                         $count++;
                     }
-                    if($sql != "") SQL::NonQuery(str_replace('FNAME',$name,$sql));
+                    if($sql != "") MySQL::NonQuery(str_replace('FNAME',$name,$sql));
                 }
             }
         }

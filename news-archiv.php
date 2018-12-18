@@ -6,14 +6,14 @@
 
     echo '
         <center>
-            <div class="archive_year_selection">
+            <div class="archive_year_selection" style="width:800px;">
                 <a onclick="ListMoveRight();"><img src="/content/left.png" alt=""/></a>
                 <div class="year_container">
                     <div class="year_slider" id="YearSlider">
 
                         ';
 
-                        $first_article = explode('-',SQL::Scalar("SELECT release_date FROM news ORDER BY release_date ASC"));
+                        $first_article = explode('-',MySQL::Scalar("SELECT release_date FROM news ORDER BY release_date ASC"));
                         for($y = date("Y"); $y >= $first_article[0];$y--)
                         {
                             echo '<a onclick="ArchiveSelectYear('.$y.');" id="year'.$y.'">'.$y.'</a>';

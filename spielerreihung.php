@@ -7,7 +7,7 @@
 
         $year = $_POST['year'];
 
-        $club = SQL::Fetch("users","club","id",$_SESSION['userID']);
+        $club = MySQL::Scalar("SELECT club FROM users WHERE id = ?",'i',$_SESSION['userID']);
         if(isset($_POST['updateListM'])) $type='M';
         if(isset($_POST['updateListW'])) $type='W';
         $strSQL = "SELECT * FROM members WHERE club = '$club' AND gender = '$type'";
@@ -21,14 +21,14 @@
         }
 
         // Remove existing values from Database
-        SQL::NonQuery("DELETE FROM reihung WHERE type = ? AND club = ? AND year = ?",'@s',$type,$club,$year);
+        MySQL::NonQuery("DELETE FROM reihung WHERE type = ? AND club = ? AND year = ?",'@s',$type,$club,$year);
 
 
         $i=1;
         foreach($selectedMembers as $member)
         {
             $uid = uniqid();
-            SQL::NonQuery("INSERT INTO reihung (id,type,member,club,position,year,team) VALUES (?,?,?,?,'".$i++."',?,'1')",'@s',$uid,$type,$member,$club,$year);
+            MySQL::NonQuery("INSERT INTO reihung (id,type,member,club,position,year,team) VALUES (?,?,?,?,'".$i++."',?,'1')",'@s',$uid,$type,$member,$club,$year);
         }
 
         Redirect(ThisPage());
@@ -37,7 +37,7 @@
 
     if(isset($_POST['updateReihung']))
     {
-        $club = SQL::Fetch("users","club","id",$_SESSION['userID']);
+        $club = MySQL::Scalar("SELECT club FROM users WHERE id = ?",'i',$_SESSION['userID']);
         $reihungComboM = $_POST['reihungM'];
         $reihungComboW = $_POST['reihungW'];
 
@@ -55,7 +55,7 @@
             $mobile = $_POST['mobile_'.$rp[1]];
             $email = $_POST['email_'.$rp[1]];
 
-            SQL::NonQuery("UPDATE reihung SET position = '".$rp[0]."', team = ?, mf = ?, mobile_nr = ?, email = ? WHERE member = '".$rp[1]."' AND club = ? AND year = ?",'@s',$team,$mf,$mobile,$email,$club,$year);
+            MySQL::NonQuery("UPDATE reihung SET position = '".$rp[0]."', team = ?, mf = ?, mobile_nr = ?, email = ? WHERE member = '".$rp[1]."' AND club = ? AND year = ?",'@s',$team,$mf,$mobile,$email,$club,$year);
         }
 
         foreach(explode('||',$reihungComboW) as $rp)
@@ -68,7 +68,7 @@
             $mobile = $_POST['mobile_'.$rp[1]];
             $email = $_POST['email_'.$rp[1]];
 
-            SQL::NonQuery("UPDATE reihung SET position = '".$rp[0]."', team = ?, mf = ?, mobile_nr = ?, email = ? WHERE member = '".$rp[1]."' AND club = ? AND year = ?",'@s',$team,$mf,$mobile,$email,$club,$year);
+            MySQL::NonQuery("UPDATE reihung SET position = '".$rp[0]."', team = ?, mf = ?, mobile_nr = ?, email = ? WHERE member = '".$rp[1]."' AND club = ? AND year = ?",'@s',$team,$mf,$mobile,$email,$club,$year);
         }
 
         Redirect("/spielerreihung");
@@ -92,7 +92,7 @@
 
         if(isset($_GET['bearbeiten']))
         {
-            $club = SQL::Fetch("users","club","id",$_SESSION['userID']);
+            $club = MySQL::Scalar("SELECT club FROM users WHERE id = ?",'i',$_SESSION['userID']);
             $year = $_GET['jahr'];
 
             echo '
@@ -142,7 +142,7 @@
 
                                 <ul class="dragSortList_posNumbers">
                                 ';
-                                    $listedMembersAmt = SQL::Scalar("SELECT position FROM reihung WHERE type = 'M' AND club = ? AND year = ? ORDER BY position DESC LIMIT 0,1",'@s',$club,$year);
+                                    $listedMembersAmt = MySQL::Scalar("SELECT position FROM reihung WHERE type = 'M' AND club = ? AND year = ? ORDER BY position DESC LIMIT 0,1",'@s',$club,$year);
                                     for($i=1;$i<$listedMembersAmt+1; $i++) echo '<li>'.$i.'</li>';
                                 echo '
                                 </ul>
@@ -198,7 +198,7 @@
                                 <br>
                                 <ul class="dragSortList_posNumbers">
                                 ';
-                                    $listedMembersAmt = SQL::Scalar("SELECT position FROM reihung WHERE type = 'W' AND club = ? AND year = ? ORDER BY position DESC LIMIT 0,1",'@s',$club,$year);
+                                    $listedMembersAmt = MySQL::Scalar("SELECT position FROM reihung WHERE type = 'W' AND club = ? AND year = ? ORDER BY position DESC LIMIT 0,1",'@s',$club,$year);
                                     for($i=1;$i<$listedMembersAmt+1; $i++) echo '<li>'.$i.'</li>';
                                 echo '
                                 </ul>
@@ -305,7 +305,7 @@
         }
         else
         {
-            $club = SQL::Fetch("users","club","id",$_SESSION['userID']);
+            $club = MySQL::Scalar("SELECT club FROM users WHERE id = ?",'i',$_SESSION['userID']);  
             $year = $_GET['jahr'];
 
             echo '
@@ -332,7 +332,7 @@
                             <br>
                             <ul class="dragSortList_posNumbers">
                             ';
-                                $listedMembersAmt = intval(SQL::Scalar("SELECT position FROM reihung WHERE type = 'M' AND club = ? AND year = ? ORDER BY position DESC LIMIT 0,1",'@s',$club,$year));
+                                $listedMembersAmt = intval(MySQL::Scalar("SELECT position FROM reihung WHERE type = 'M' AND club = ? AND year = ? ORDER BY position DESC LIMIT 0,1",'@s',$club,$year));
                                 for($i=1;$i<$listedMembersAmt+1; $i++) echo '<li>'.$i.'</li>';
                             echo '
                             </ul>
@@ -382,7 +382,7 @@
                             <br>
                             <ul class="dragSortList_posNumbers">
                             ';
-                                $listedMembersAmt = intval(SQL::Scalar("SELECT position FROM reihung WHERE type = 'W' AND club = ? AND year = ? ORDER BY position DESC LIMIT 0,1",'@s',$club,$year));
+                                $listedMembersAmt = intval(MySQL::Scalar("SELECT position FROM reihung WHERE type = 'W' AND club = ? AND year = ? ORDER BY position DESC LIMIT 0,1",'@s',$club,$year));
                                 for($i=1;$i<$listedMembersAmt+1; $i++) echo '<li>'.$i.'</li>';
                             echo '
                             </ul>

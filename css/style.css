@@ -439,6 +439,7 @@ h5 {
     transition: all 0.2s ease-in-out; }
   .modal_wrapper .modal_container {
     position: absolute;
+    overflow-y: scroll;
     background: #FFFFFF;
     left: 50%;
     transform: translateX(-50%);
@@ -451,7 +452,10 @@ h5 {
     -moz-transition: all 0.5s ease-in-out;
     -ms-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out; }
+    transition: all 0.5s ease-in-out;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
   .modal_wrapper .close_cross {
     position: absolute;
     top: 10px;
@@ -1818,12 +1822,12 @@ table.centered_content td {
       margin-left: 20px;
       font-size: 13pt;
       color: #000000; }
-    .gallery_album .album_description .dateloc {
-      position: absolute;
-      bottom: 0px;
-      margin-left: 20px;
-      color: #696969;
-      font-style: italic; }
+  .gallery_album .dateloc {
+    position: absolute;
+    bottom: 0px;
+    margin-left: 20px;
+    color: #696969;
+    font-style: italic; }
 
 .gallery_album:hover {
   box-shadow: 0 10px 10px -3px #000000; }
@@ -2408,7 +2412,8 @@ table.centered_content td {
 /* (U01)   Kalender > iFrame                                                         */
 /*===================================================================================*/
 .calender_iframe {
-  width: 100%; }
+  width: 100%;
+  min-height: 600px; }
 
 /*===================================================================================*/
 /* (U03)   Kalender > Graphic Calendar                                               */
@@ -2445,30 +2450,104 @@ table.centered_content td {
     background: #B9DDE9; }
   .calendar_table tr:nth-child(4) td {
     border: 1px solid #C4E3ED;
+    padding: 0;
     height: 100px;
     vertical-align: top;
-    text-align: left; }
-    .calendar_table tr:nth-child(4) td span {
-      text-align: left;
-      margin: 3px;
-      width: 100%; }
-    .calendar_table tr:nth-child(4) td div {
-      border: 1px outset #63B4CF;
-      border-radius: 5px;
-      margin: 3px;
-      background: linear-gradient(to bottom, #DDDDDD 33%, #E8E8E8 66%, #DDDDDD 100%);
-      padding-left: 3px;
+    text-align: left;
+                /*
+                span{
+                    text-align: left;
+                    margin: 3px;
+                    width: 100%;
+                }
+
+                div{
+                    border: 1px outset $theme-bright;
+                    border-radius: 10px;
+                    margin: 3px;
+                    background:linear-gradient(to bottom, #DDDDDD 33%,#E8E8E8 66%,#DDDDDD 100%);
+                    padding-left: 3px;
+
+                    @include box-sizing(border-box);
+                    @include ease(0.2s);
+                }
+
+                div#timespanStart{
+                    border-radius: 10px 0 0 10px;
+                    border-right: none;
+                    margin-right: 0;
+                }
+
+                div#timespanMiddle{
+                    border-radius: 0;
+                    border-left: none;
+                    border-right: none;
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+
+                div#timespanEnd{
+                    border-radius: 0 10px 10px 0;
+                    border-left: none;
+                    margin-left: 0;
+                }
+
+                div:hover{
+                    border-color: $theme-medium;
+                    box-shadow: 0 3px 4px 0 #000000;
+                }
+                */ }
+    .calendar_table tr:nth-child(4) td .cellContentData {
+      background: none;
+      border-spacing: 0;
+      border-collapse: collapse;
+      width: 100%;
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      -webkit-transition: all 0.2s ease-in-out;
-      -moz-transition: all 0.2s ease-in-out;
-      -ms-transition: all 0.2s ease-in-out;
-      -o-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out; }
-    .calendar_table tr:nth-child(4) td div:hover {
-      border-color: #3B9EBF;
-      box-shadow: 0 3px 4px 0 #000000; }
+      box-sizing: border-box; }
+      .calendar_table tr:nth-child(4) td .cellContentData tr {
+        background: none; }
+        .calendar_table tr:nth-child(4) td .cellContentData tr td {
+          border: none;
+          padding: 0;
+          height: 24px;
+          vertical-align: top;
+          text-align: left;
+          background: none;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden; }
+          .calendar_table tr:nth-child(4) td .cellContentData tr td div {
+            height: 22px;
+            border: 1px outset #63B4CF;
+            border-radius: 10px;
+            width: 100%;
+            background: linear-gradient(to bottom, #DDDDDD 33%, #E8E8E8 66%, #DDDDDD 100%);
+            padding-left: 3px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-transition: all 0.2s ease-in-out;
+            -moz-transition: all 0.2s ease-in-out;
+            -ms-transition: all 0.2s ease-in-out;
+            -o-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out; }
+          .calendar_table tr:nth-child(4) td .cellContentData tr td div#timespanStart {
+            border-radius: 10px 0 0 10px;
+            border-right: none;
+            margin-left: 5px; }
+          .calendar_table tr:nth-child(4) td .cellContentData tr td div#timespanMiddle {
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            margin-left: 0;
+            margin-right: 0; }
+          .calendar_table tr:nth-child(4) td .cellContentData tr td div#timespanEnd {
+            border-radius: 0 10px 10px 0;
+            border-left: none;
+            margin-right: 10px; }
+          .calendar_table tr:nth-child(4) td .cellContentData tr td div:hover {
+            border-color: #3B9EBF; }
   .calendar_table tr:nth-child(4) .blank {
     background: #E8E8E8; }
   .calendar_table tr:nth-child(4) .accent1 {
@@ -2489,30 +2568,104 @@ table.centered_content td {
     animation-delay: 0s; }
   .calendar_table tr:nth-child(5) td {
     border: 1px solid #C4E3ED;
+    padding: 0;
     height: 100px;
     vertical-align: top;
-    text-align: left; }
-    .calendar_table tr:nth-child(5) td span {
-      text-align: left;
-      margin: 3px;
-      width: 100%; }
-    .calendar_table tr:nth-child(5) td div {
-      border: 1px outset #63B4CF;
-      border-radius: 5px;
-      margin: 3px;
-      background: linear-gradient(to bottom, #DDDDDD 33%, #E8E8E8 66%, #DDDDDD 100%);
-      padding-left: 3px;
+    text-align: left;
+                /*
+                span{
+                    text-align: left;
+                    margin: 3px;
+                    width: 100%;
+                }
+
+                div{
+                    border: 1px outset $theme-bright;
+                    border-radius: 10px;
+                    margin: 3px;
+                    background:linear-gradient(to bottom, #DDDDDD 33%,#E8E8E8 66%,#DDDDDD 100%);
+                    padding-left: 3px;
+
+                    @include box-sizing(border-box);
+                    @include ease(0.2s);
+                }
+
+                div#timespanStart{
+                    border-radius: 10px 0 0 10px;
+                    border-right: none;
+                    margin-right: 0;
+                }
+
+                div#timespanMiddle{
+                    border-radius: 0;
+                    border-left: none;
+                    border-right: none;
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+
+                div#timespanEnd{
+                    border-radius: 0 10px 10px 0;
+                    border-left: none;
+                    margin-left: 0;
+                }
+
+                div:hover{
+                    border-color: $theme-medium;
+                    box-shadow: 0 3px 4px 0 #000000;
+                }
+                */ }
+    .calendar_table tr:nth-child(5) td .cellContentData {
+      background: none;
+      border-spacing: 0;
+      border-collapse: collapse;
+      width: 100%;
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      -webkit-transition: all 0.2s ease-in-out;
-      -moz-transition: all 0.2s ease-in-out;
-      -ms-transition: all 0.2s ease-in-out;
-      -o-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out; }
-    .calendar_table tr:nth-child(5) td div:hover {
-      border-color: #3B9EBF;
-      box-shadow: 0 3px 4px 0 #000000; }
+      box-sizing: border-box; }
+      .calendar_table tr:nth-child(5) td .cellContentData tr {
+        background: none; }
+        .calendar_table tr:nth-child(5) td .cellContentData tr td {
+          border: none;
+          padding: 0;
+          height: 24px;
+          vertical-align: top;
+          text-align: left;
+          background: none;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden; }
+          .calendar_table tr:nth-child(5) td .cellContentData tr td div {
+            height: 22px;
+            border: 1px outset #63B4CF;
+            border-radius: 10px;
+            width: 100%;
+            background: linear-gradient(to bottom, #DDDDDD 33%, #E8E8E8 66%, #DDDDDD 100%);
+            padding-left: 3px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-transition: all 0.2s ease-in-out;
+            -moz-transition: all 0.2s ease-in-out;
+            -ms-transition: all 0.2s ease-in-out;
+            -o-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out; }
+          .calendar_table tr:nth-child(5) td .cellContentData tr td div#timespanStart {
+            border-radius: 10px 0 0 10px;
+            border-right: none;
+            margin-left: 5px; }
+          .calendar_table tr:nth-child(5) td .cellContentData tr td div#timespanMiddle {
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            margin-left: 0;
+            margin-right: 0; }
+          .calendar_table tr:nth-child(5) td .cellContentData tr td div#timespanEnd {
+            border-radius: 0 10px 10px 0;
+            border-left: none;
+            margin-right: 10px; }
+          .calendar_table tr:nth-child(5) td .cellContentData tr td div:hover {
+            border-color: #3B9EBF; }
   .calendar_table tr:nth-child(5) .blank {
     background: #E8E8E8; }
   .calendar_table tr:nth-child(5) .accent1 {
@@ -2533,30 +2686,104 @@ table.centered_content td {
     animation-delay: 0s; }
   .calendar_table tr:nth-child(6) td {
     border: 1px solid #C4E3ED;
+    padding: 0;
     height: 100px;
     vertical-align: top;
-    text-align: left; }
-    .calendar_table tr:nth-child(6) td span {
-      text-align: left;
-      margin: 3px;
-      width: 100%; }
-    .calendar_table tr:nth-child(6) td div {
-      border: 1px outset #63B4CF;
-      border-radius: 5px;
-      margin: 3px;
-      background: linear-gradient(to bottom, #DDDDDD 33%, #E8E8E8 66%, #DDDDDD 100%);
-      padding-left: 3px;
+    text-align: left;
+                /*
+                span{
+                    text-align: left;
+                    margin: 3px;
+                    width: 100%;
+                }
+
+                div{
+                    border: 1px outset $theme-bright;
+                    border-radius: 10px;
+                    margin: 3px;
+                    background:linear-gradient(to bottom, #DDDDDD 33%,#E8E8E8 66%,#DDDDDD 100%);
+                    padding-left: 3px;
+
+                    @include box-sizing(border-box);
+                    @include ease(0.2s);
+                }
+
+                div#timespanStart{
+                    border-radius: 10px 0 0 10px;
+                    border-right: none;
+                    margin-right: 0;
+                }
+
+                div#timespanMiddle{
+                    border-radius: 0;
+                    border-left: none;
+                    border-right: none;
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+
+                div#timespanEnd{
+                    border-radius: 0 10px 10px 0;
+                    border-left: none;
+                    margin-left: 0;
+                }
+
+                div:hover{
+                    border-color: $theme-medium;
+                    box-shadow: 0 3px 4px 0 #000000;
+                }
+                */ }
+    .calendar_table tr:nth-child(6) td .cellContentData {
+      background: none;
+      border-spacing: 0;
+      border-collapse: collapse;
+      width: 100%;
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      -webkit-transition: all 0.2s ease-in-out;
-      -moz-transition: all 0.2s ease-in-out;
-      -ms-transition: all 0.2s ease-in-out;
-      -o-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out; }
-    .calendar_table tr:nth-child(6) td div:hover {
-      border-color: #3B9EBF;
-      box-shadow: 0 3px 4px 0 #000000; }
+      box-sizing: border-box; }
+      .calendar_table tr:nth-child(6) td .cellContentData tr {
+        background: none; }
+        .calendar_table tr:nth-child(6) td .cellContentData tr td {
+          border: none;
+          padding: 0;
+          height: 24px;
+          vertical-align: top;
+          text-align: left;
+          background: none;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden; }
+          .calendar_table tr:nth-child(6) td .cellContentData tr td div {
+            height: 22px;
+            border: 1px outset #63B4CF;
+            border-radius: 10px;
+            width: 100%;
+            background: linear-gradient(to bottom, #DDDDDD 33%, #E8E8E8 66%, #DDDDDD 100%);
+            padding-left: 3px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-transition: all 0.2s ease-in-out;
+            -moz-transition: all 0.2s ease-in-out;
+            -ms-transition: all 0.2s ease-in-out;
+            -o-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out; }
+          .calendar_table tr:nth-child(6) td .cellContentData tr td div#timespanStart {
+            border-radius: 10px 0 0 10px;
+            border-right: none;
+            margin-left: 5px; }
+          .calendar_table tr:nth-child(6) td .cellContentData tr td div#timespanMiddle {
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            margin-left: 0;
+            margin-right: 0; }
+          .calendar_table tr:nth-child(6) td .cellContentData tr td div#timespanEnd {
+            border-radius: 0 10px 10px 0;
+            border-left: none;
+            margin-right: 10px; }
+          .calendar_table tr:nth-child(6) td .cellContentData tr td div:hover {
+            border-color: #3B9EBF; }
   .calendar_table tr:nth-child(6) .blank {
     background: #E8E8E8; }
   .calendar_table tr:nth-child(6) .accent1 {
@@ -2577,30 +2804,104 @@ table.centered_content td {
     animation-delay: 0s; }
   .calendar_table tr:nth-child(7) td {
     border: 1px solid #C4E3ED;
+    padding: 0;
     height: 100px;
     vertical-align: top;
-    text-align: left; }
-    .calendar_table tr:nth-child(7) td span {
-      text-align: left;
-      margin: 3px;
-      width: 100%; }
-    .calendar_table tr:nth-child(7) td div {
-      border: 1px outset #63B4CF;
-      border-radius: 5px;
-      margin: 3px;
-      background: linear-gradient(to bottom, #DDDDDD 33%, #E8E8E8 66%, #DDDDDD 100%);
-      padding-left: 3px;
+    text-align: left;
+                /*
+                span{
+                    text-align: left;
+                    margin: 3px;
+                    width: 100%;
+                }
+
+                div{
+                    border: 1px outset $theme-bright;
+                    border-radius: 10px;
+                    margin: 3px;
+                    background:linear-gradient(to bottom, #DDDDDD 33%,#E8E8E8 66%,#DDDDDD 100%);
+                    padding-left: 3px;
+
+                    @include box-sizing(border-box);
+                    @include ease(0.2s);
+                }
+
+                div#timespanStart{
+                    border-radius: 10px 0 0 10px;
+                    border-right: none;
+                    margin-right: 0;
+                }
+
+                div#timespanMiddle{
+                    border-radius: 0;
+                    border-left: none;
+                    border-right: none;
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+
+                div#timespanEnd{
+                    border-radius: 0 10px 10px 0;
+                    border-left: none;
+                    margin-left: 0;
+                }
+
+                div:hover{
+                    border-color: $theme-medium;
+                    box-shadow: 0 3px 4px 0 #000000;
+                }
+                */ }
+    .calendar_table tr:nth-child(7) td .cellContentData {
+      background: none;
+      border-spacing: 0;
+      border-collapse: collapse;
+      width: 100%;
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      -webkit-transition: all 0.2s ease-in-out;
-      -moz-transition: all 0.2s ease-in-out;
-      -ms-transition: all 0.2s ease-in-out;
-      -o-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out; }
-    .calendar_table tr:nth-child(7) td div:hover {
-      border-color: #3B9EBF;
-      box-shadow: 0 3px 4px 0 #000000; }
+      box-sizing: border-box; }
+      .calendar_table tr:nth-child(7) td .cellContentData tr {
+        background: none; }
+        .calendar_table tr:nth-child(7) td .cellContentData tr td {
+          border: none;
+          padding: 0;
+          height: 24px;
+          vertical-align: top;
+          text-align: left;
+          background: none;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden; }
+          .calendar_table tr:nth-child(7) td .cellContentData tr td div {
+            height: 22px;
+            border: 1px outset #63B4CF;
+            border-radius: 10px;
+            width: 100%;
+            background: linear-gradient(to bottom, #DDDDDD 33%, #E8E8E8 66%, #DDDDDD 100%);
+            padding-left: 3px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-transition: all 0.2s ease-in-out;
+            -moz-transition: all 0.2s ease-in-out;
+            -ms-transition: all 0.2s ease-in-out;
+            -o-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out; }
+          .calendar_table tr:nth-child(7) td .cellContentData tr td div#timespanStart {
+            border-radius: 10px 0 0 10px;
+            border-right: none;
+            margin-left: 5px; }
+          .calendar_table tr:nth-child(7) td .cellContentData tr td div#timespanMiddle {
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            margin-left: 0;
+            margin-right: 0; }
+          .calendar_table tr:nth-child(7) td .cellContentData tr td div#timespanEnd {
+            border-radius: 0 10px 10px 0;
+            border-left: none;
+            margin-right: 10px; }
+          .calendar_table tr:nth-child(7) td .cellContentData tr td div:hover {
+            border-color: #3B9EBF; }
   .calendar_table tr:nth-child(7) .blank {
     background: #E8E8E8; }
   .calendar_table tr:nth-child(7) .accent1 {
@@ -2621,30 +2922,104 @@ table.centered_content td {
     animation-delay: 0s; }
   .calendar_table tr:nth-child(8) td {
     border: 1px solid #C4E3ED;
+    padding: 0;
     height: 100px;
     vertical-align: top;
-    text-align: left; }
-    .calendar_table tr:nth-child(8) td span {
-      text-align: left;
-      margin: 3px;
-      width: 100%; }
-    .calendar_table tr:nth-child(8) td div {
-      border: 1px outset #63B4CF;
-      border-radius: 5px;
-      margin: 3px;
-      background: linear-gradient(to bottom, #DDDDDD 33%, #E8E8E8 66%, #DDDDDD 100%);
-      padding-left: 3px;
+    text-align: left;
+                /*
+                span{
+                    text-align: left;
+                    margin: 3px;
+                    width: 100%;
+                }
+
+                div{
+                    border: 1px outset $theme-bright;
+                    border-radius: 10px;
+                    margin: 3px;
+                    background:linear-gradient(to bottom, #DDDDDD 33%,#E8E8E8 66%,#DDDDDD 100%);
+                    padding-left: 3px;
+
+                    @include box-sizing(border-box);
+                    @include ease(0.2s);
+                }
+
+                div#timespanStart{
+                    border-radius: 10px 0 0 10px;
+                    border-right: none;
+                    margin-right: 0;
+                }
+
+                div#timespanMiddle{
+                    border-radius: 0;
+                    border-left: none;
+                    border-right: none;
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+
+                div#timespanEnd{
+                    border-radius: 0 10px 10px 0;
+                    border-left: none;
+                    margin-left: 0;
+                }
+
+                div:hover{
+                    border-color: $theme-medium;
+                    box-shadow: 0 3px 4px 0 #000000;
+                }
+                */ }
+    .calendar_table tr:nth-child(8) td .cellContentData {
+      background: none;
+      border-spacing: 0;
+      border-collapse: collapse;
+      width: 100%;
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      -webkit-transition: all 0.2s ease-in-out;
-      -moz-transition: all 0.2s ease-in-out;
-      -ms-transition: all 0.2s ease-in-out;
-      -o-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out; }
-    .calendar_table tr:nth-child(8) td div:hover {
-      border-color: #3B9EBF;
-      box-shadow: 0 3px 4px 0 #000000; }
+      box-sizing: border-box; }
+      .calendar_table tr:nth-child(8) td .cellContentData tr {
+        background: none; }
+        .calendar_table tr:nth-child(8) td .cellContentData tr td {
+          border: none;
+          padding: 0;
+          height: 24px;
+          vertical-align: top;
+          text-align: left;
+          background: none;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden; }
+          .calendar_table tr:nth-child(8) td .cellContentData tr td div {
+            height: 22px;
+            border: 1px outset #63B4CF;
+            border-radius: 10px;
+            width: 100%;
+            background: linear-gradient(to bottom, #DDDDDD 33%, #E8E8E8 66%, #DDDDDD 100%);
+            padding-left: 3px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-transition: all 0.2s ease-in-out;
+            -moz-transition: all 0.2s ease-in-out;
+            -ms-transition: all 0.2s ease-in-out;
+            -o-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out; }
+          .calendar_table tr:nth-child(8) td .cellContentData tr td div#timespanStart {
+            border-radius: 10px 0 0 10px;
+            border-right: none;
+            margin-left: 5px; }
+          .calendar_table tr:nth-child(8) td .cellContentData tr td div#timespanMiddle {
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            margin-left: 0;
+            margin-right: 0; }
+          .calendar_table tr:nth-child(8) td .cellContentData tr td div#timespanEnd {
+            border-radius: 0 10px 10px 0;
+            border-left: none;
+            margin-right: 10px; }
+          .calendar_table tr:nth-child(8) td .cellContentData tr td div:hover {
+            border-color: #3B9EBF; }
   .calendar_table tr:nth-child(8) .blank {
     background: #E8E8E8; }
   .calendar_table tr:nth-child(8) .accent1 {
@@ -2665,30 +3040,104 @@ table.centered_content td {
     animation-delay: 0s; }
   .calendar_table tr:nth-child(9) td {
     border: 1px solid #C4E3ED;
+    padding: 0;
     height: 100px;
     vertical-align: top;
-    text-align: left; }
-    .calendar_table tr:nth-child(9) td span {
-      text-align: left;
-      margin: 3px;
-      width: 100%; }
-    .calendar_table tr:nth-child(9) td div {
-      border: 1px outset #63B4CF;
-      border-radius: 5px;
-      margin: 3px;
-      background: linear-gradient(to bottom, #DDDDDD 33%, #E8E8E8 66%, #DDDDDD 100%);
-      padding-left: 3px;
+    text-align: left;
+                /*
+                span{
+                    text-align: left;
+                    margin: 3px;
+                    width: 100%;
+                }
+
+                div{
+                    border: 1px outset $theme-bright;
+                    border-radius: 10px;
+                    margin: 3px;
+                    background:linear-gradient(to bottom, #DDDDDD 33%,#E8E8E8 66%,#DDDDDD 100%);
+                    padding-left: 3px;
+
+                    @include box-sizing(border-box);
+                    @include ease(0.2s);
+                }
+
+                div#timespanStart{
+                    border-radius: 10px 0 0 10px;
+                    border-right: none;
+                    margin-right: 0;
+                }
+
+                div#timespanMiddle{
+                    border-radius: 0;
+                    border-left: none;
+                    border-right: none;
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+
+                div#timespanEnd{
+                    border-radius: 0 10px 10px 0;
+                    border-left: none;
+                    margin-left: 0;
+                }
+
+                div:hover{
+                    border-color: $theme-medium;
+                    box-shadow: 0 3px 4px 0 #000000;
+                }
+                */ }
+    .calendar_table tr:nth-child(9) td .cellContentData {
+      background: none;
+      border-spacing: 0;
+      border-collapse: collapse;
+      width: 100%;
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      -webkit-transition: all 0.2s ease-in-out;
-      -moz-transition: all 0.2s ease-in-out;
-      -ms-transition: all 0.2s ease-in-out;
-      -o-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out; }
-    .calendar_table tr:nth-child(9) td div:hover {
-      border-color: #3B9EBF;
-      box-shadow: 0 3px 4px 0 #000000; }
+      box-sizing: border-box; }
+      .calendar_table tr:nth-child(9) td .cellContentData tr {
+        background: none; }
+        .calendar_table tr:nth-child(9) td .cellContentData tr td {
+          border: none;
+          padding: 0;
+          height: 24px;
+          vertical-align: top;
+          text-align: left;
+          background: none;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden; }
+          .calendar_table tr:nth-child(9) td .cellContentData tr td div {
+            height: 22px;
+            border: 1px outset #63B4CF;
+            border-radius: 10px;
+            width: 100%;
+            background: linear-gradient(to bottom, #DDDDDD 33%, #E8E8E8 66%, #DDDDDD 100%);
+            padding-left: 3px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-transition: all 0.2s ease-in-out;
+            -moz-transition: all 0.2s ease-in-out;
+            -ms-transition: all 0.2s ease-in-out;
+            -o-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out; }
+          .calendar_table tr:nth-child(9) td .cellContentData tr td div#timespanStart {
+            border-radius: 10px 0 0 10px;
+            border-right: none;
+            margin-left: 5px; }
+          .calendar_table tr:nth-child(9) td .cellContentData tr td div#timespanMiddle {
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            margin-left: 0;
+            margin-right: 0; }
+          .calendar_table tr:nth-child(9) td .cellContentData tr td div#timespanEnd {
+            border-radius: 0 10px 10px 0;
+            border-left: none;
+            margin-right: 10px; }
+          .calendar_table tr:nth-child(9) td .cellContentData tr td div:hover {
+            border-color: #3B9EBF; }
   .calendar_table tr:nth-child(9) .blank {
     background: #E8E8E8; }
   .calendar_table tr:nth-child(9) .accent1 {

@@ -1,290 +1,274 @@
 <?php
-//***********************************************************************************
-//                           PHP - MySQL-Functions Library                          *
-//                          Copyright 2018 Tobias Hattinger                         *
-//***********************************************************************************
-//                                      Contains:                                   *
-// MySQL-Functions                                                                  *
-//      •MySQLNonQuery  (return: bool)                                              *
-//      •MySQLSkalar    (return: string)                                            *
-//      •MySQLCount     (return: int)                                               *
-//      •MySQLExists    (return: bool)                                              *
-//      •Fetch          (return: string)                                            *
-//      •FetchCount     (return: int)                                               *
-//      •MySQLSave      (return: int)                                               *
-//      •MySQLPDSave    (return: int)                                               *
-//***********************************************************************************
 
-function MySQLNonQuery($strSQL,$dataTypes="", &...$mySQLParamValues)
+class MySQL
 {
-    // DESCRIPTION:
-    // Executes a standard SQL-Query such as UPDATE,DELETE,INSERT, etc.
-    // Can be used in combination with "or die("error_msg");"
+##########################################################################################
 
-    // FOR PARAMETERIZED VERSION:
-    // $dataTypes   Set datatype of the value ([i]int, [s]string, [f]float)
-    //              Example:    "ssiiis"
-    //              OR:         "@s" to set every parameter to "s"
-    // Example-Usage:
-    // MySQLNonQuery("INSERT INTO test (id,value,value2) VALUES ('',?,?)","@s",$value,$value2);
+    private static $sqlConnectionLink;
 
+    private static $databaseHost;
+    private static $databaseUser;
+    private static $databasePass;
+    private static $databaseName;
 
-    require("mysql_connect.php");
+    private static $databaseBackupPath;
 
-    if($dataTypes == "")
+##########################################################################################
+
+    public static function init()
     {
-        // Old version without parameterized queries
-        // Kept for compatibility
+        require("mysql.lib.config.php");
 
-        $rs = mysqli_query($link,$strSQL);
-        mysqli_close($link);
-        return $rs;
+        self::$databaseHost = $sqlConfigDatabaseHost;
+        self::$databaseUser = $sqlConfigDatabaseUser;
+        self::$databasePass = $sqlConfigDatabasePass;
+        self::$databaseName = $sqlConfigDatabaseName;
+
+        self::$databaseBackupPath = $sqlConfigBackupPath;
+
+        self::$sqlConnectionLink = mysqli_connect($sqlConfigDatabaseHost,$sqlConfigDatabaseUser,$sqlConfigDatabasePass,$sqlConfigDatabaseName) OR die("<br><br><b>Error in mysql.lib.php :</b> Could not connect to Database (Code 1)<br><br>");
     }
-    else
-    {
-        // New version with parameterized queries
-        $paramAmt = func_num_args() - 2;
 
-        if(substr($dataTypes,0,1) == "@")
+##########################################################################################
+
+    private static function GetParamTypeList($paramTypeList,$paramAmt)
+    {
+        if(substr($paramTypeList,0,1) == "@")
         {
-            $broadCastType = str_replace("@","",$dataTypes);
+            $broadcastType = str_replace("@","",$paramTypeList);
             $mySQLParamTypes = '';
 
-            for($i=0;$i<$paramAmt;$i++) $mySQLParamTypes .= $broadCastType;
+            for($i=0;$i<$paramAmt;$i++) $mySQLParamTypes .= $broadcastType;
         }
         else
         {
-            if($paramAmt == strlen($dataTypes)) $mySQLParamTypes = $dataTypes;
-            else die("<b>Nicht gen&uuml;gend Typ-Parameter &uuml;bergeben!</b> <br> <b>&Uuml;bergeben:</b> ".strlen($dataTypes)." <br><b>Ben&ouml;tigt:</b> $paramAmt");
+            if($paramAmt == strlen($paramTypeList) OR ($paramTypeList == "" AND $paramAmt == -1)) $mySQLParamTypes = $paramTypeList;
+            else die("<b>Not enought parameters provided!</b> <br> <b>Provided: </b> ".strlen($paramTypeList)." <br><b>Required:</b> $paramAmt");
         }
 
-        $stmt = $link->prepare($strSQL);
+        return $mySQLParamTypes;
+    }
 
-        call_user_func_array(array($stmt, "bind_param"), array_merge(array($mySQLParamTypes), $mySQLParamValues));
+##########################################################################################
+
+    public static function NonQuery($sqlStatement,$parameterTypes="", &...$sqlParameters)
+    {
+        // Parameter-Count
+        $parameterAmount = func_num_args() - 2;
+
+        // Get Parameter-Type list
+        $parameterTypeList = self::GetParamTypeList($parameterTypes,$parameterAmount);
+
+        // Prepare SQL-Query
+        $stmt = self::$sqlConnectionLink->prepare($sqlStatement);
+
+        // Bind Parameters to Query
+        if($parameterTypes != "") call_user_func_array(array($stmt, "bind_param"), array_merge(array($parameterTypeList), $sqlParameters));
+
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    public static function Scalar($sqlStatement,$parameterTypes="", &...$sqlParameters)
+    {
+        // Parameter-Count
+        $parameterAmount = func_num_args() - 2;
+
+        // Get Parameter-Type list
+        $parameterTypeList = self::GetParamTypeList($parameterTypes,$parameterAmount);
+
+        // Prepare SQL-Query
+        $stmt = self::$sqlConnectionLink->prepare($sqlStatement);
+
+        // Bind Parameters to Query
+        if($parameterTypes != "") call_user_func_array(array($stmt, "bind_param"), array_merge(array($parameterTypeList), $sqlParameters));
 
         $stmt->execute();
         $result = $stmt->get_result();
+        $value = $result->fetch_array();
         $stmt->close();
-        return $result;
-    }
-}
 
-function MySQLSkalar($strSQL)
-{
-    // DESCRIPTION:
-    // Returns a single value from a Table.
-    // Syntax: MySQLSkalar("SELECT name AS x FROM users....");
-    // Use "rowname AS x" to get the wanted value
-
-    require("mysql_connect.php");
-    $retval = '';
-    $rs=mysqli_query($link,$strSQL);
-    while($row=mysqli_fetch_assoc($rs)) $retval = $row['x'];
-    mysqli_close($link);
-    return $retval;
-}
-
-function MySQLGetRow($strSQLBase)
-{
-    // DESCRIPTION:
-    // Returns the row of a table as an array
-    // behaves like a standart SQL-SELECT-Query
-    // Use with the same keys as in the database:
-    // e.g: $values['id']
-
-
-    require("mysql_connect.php");
-
-    $fields=array();
-    $vals=array();
-
-    $posOfFrom = strpos($strSQLBase,'FROM ') + strlen('FROM ');
-    $posOfWhere = strpos($strSQLBase,' WHERE');
-    $db = substr($strSQLBase,$posOfFrom,$posOfWhere-$posOfFrom);
-
-    $strSQL = "SHOW COLUMNS FROM $db";
-    $rs=mysqli_query($link,$strSQL);
-    while($row=mysqli_fetch_assoc($rs)) array_push($fields,$row['Field']);
-
-    $strSQL = $strSQLBase;
-    $rs=mysqli_query($link,$strSQL);
-    while($row=mysqli_fetch_assoc($rs))
-    {
-        foreach($fields as $field)  array_push($vals,$row[$field]);
+        return $value[0];
     }
 
-    return array_combine($fields,$vals);
-}
-
-function MySQLCount($strSQL)
-{
-    // DESCRIPTION:
-    // Returns the number of rows that fit a specific SQL-Query.
-    // Syntax: MySQLCount("SELECT * FROM users WHERE ...");
-    // Usualy used for normal counting
-
-    require("mysql_connect.php");
-    $rs=mysqli_query($link,$strSQL);
-    $retval = mysqli_num_rows($rs);
-    mysqli_close($link);
-    return $retval;
-}
-
-function MySQLExists($strSQL)
-{
-    // DESCRIPTION:
-    // Checks if a specific value or value-combination exists in a table
-    // Syntax: MySQLExists("SELECT * FROM users WHERE ...");
-    // If at least one result is found, this function returns true, else
-    // it returns false
-    // Should be used inside an if-Statements, NOT with "or die("error_msg");"
-
-    require("mysql_connect.php");
-    $rs=mysqli_query($link,$strSQL);
-    $retval = (mysqli_num_rows($rs)!=0) ? true : false ;
-    mysqli_close($link);
-    return $retval;
-}
-
-function Fetch($db,$get,$col,$like)
-{
-    // DESCRIPTION:
-    // Returns a single value from a table
-    // Similar to MySQLSkalar(), but here only 1 "WHERE"-Argument is possible
-    // $db      Name of the table
-    // $get     The column you want to get the value from
-    // $col     For "WHERE"-Argument: =Where this column...
-    // $like    ...is this value
-
-    require("mysql_connect.php");
-
-    $retval = '';
-    $strSQL = "SELECT $get FROM $db WHERE $col LIKE '$like'";
-    $rs=mysqli_query($link,$strSQL);
-    while($row=mysqli_fetch_assoc($rs)) $retval = $row[$get];
-    mysqli_close($link);
-    return $retval;
-}
-
-function FetchCount($db,$col,$like)
-{
-    // DESCRIPTION:
-    // Returns the number of rows that fit one condition
-    // Similar to MySQLCount(), but here only 1 "WHERE"-Argument is possible
-    // $db      Name of the table
-    // $col     For "WHERE"-Argument: =Where this column...
-    // $like    ...is this value
-
-    require("mysql_connect.php");
-
-    $strSQL = "SELECT $col FROM $db WHERE $col LIKE '$like'";
-    $rs=mysqli_query($link,$strSQL);
-    $retval = mysqli_num_rows($rs);
-    mysqli_close($link);
-    return $retval;
-}
-
-function FetchArray($db,$col,$like)
-{
-    // DESCRIPTION:
-    // Returns the row of a table as an array
-    // behaves like a standart SQL-SELECT-Query
-    // Use with the same keys as in the database:
-    // e.g: $values['id']
-    // $db      Name of the table
-    // $col     For "WHERE"-Argument: =Where this column...
-    // $like    ...is this value
-
-    require("mysql_connect.php");
-
-    $fields=array();
-    $vals=array();
-
-    $strSQL = "SHOW COLUMNS FROM $db";
-    $rs=mysqli_query($link,$strSQL);
-    while($row=mysqli_fetch_assoc($rs)) array_push($fields,$row['Field']);
-
-    $strSQL = "SELECT * FROM $db WHERE $col LIKE '$like'";
-    $rs=mysqli_query($link,$strSQL);
-    while($row=mysqli_fetch_assoc($rs))
+    public static function Count($sqlStatement,$parameterTypes="", &...$sqlParameters)
     {
-        foreach($fields as $field)  array_push($vals,$row[$field]);
+        // Parameter-Count
+        $parameterAmount = func_num_args() - 2;
+
+        // Get Parameter-Type list
+        $parameterTypeList = self::GetParamTypeList($parameterTypes,$parameterAmount);
+
+        // Prepare SQL-Query
+        $stmt = self::$sqlConnectionLink->prepare($sqlStatement);
+
+        // Bind Parameters to Query
+        if($parameterTypes != "") call_user_func_array(array($stmt, "bind_param"), array_merge(array($parameterTypeList), $sqlParameters));
+
+        $stmt->execute();
+        $stmt->store_result();
+        $count = $stmt->num_rows;
+        $stmt->close();
+
+        return $count;
     }
 
-    return array_combine($fields,$vals);
-}
-
-function MySQLSave($buname)
-{
-    // DESCRIPTION:
-    // Creates a Database Backup
-    // $buname: The name of the backup
-
-    require("mysql_connect.php");
-
-    $dbhost     = $servername;
-    $dbuser     = $username;
-    $dbpwd      = $password;
-    $dbname     = $database;
-    $dbbackup   = 'backup/'.$buname.'.sql';
-
-    error_reporting(0);
-    set_time_limit(0);
-
-    // ab hier nichts mehr ändern     
-    $conn = mysql_connect($dbhost, $dbuser, $dbpwd) or die(mysql_error());
-    mysql_select_db($dbname);
-    $f = fopen($dbbackup, "w");
-
-    $tables = mysql_list_tables($dbname);
-    while ($cells = mysql_fetch_array($tables))
+    public static function Row($sqlStatement,$parameterTypes="", &...$sqlParameters)
     {
-        $table = $cells[0];
-        $res = mysql_query("SHOW CREATE TABLE `".$table."`");
-        if ($res)
+        // Parameter-Count
+        $parameterAmount = func_num_args() - 2;
+
+        // Get Parameter-Type list
+        $parameterTypeList = self::GetParamTypeList($parameterTypes,$parameterAmount);
+
+        // Prepare SQL-Query
+        $stmt = self::$sqlConnectionLink->prepare($sqlStatement);
+
+        // Bind Parameters to Query
+        if($parameterTypes != "") call_user_func_array(array($stmt, "bind_param"), array_merge(array($parameterTypeList), $sqlParameters));
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_array();
+        $stmt->close();
+
+        return $row;
+    }
+
+    public static function Cluster($sqlStatement,$parameterTypes="", &...$sqlParameters)
+    {
+        $rowArray = array();
+
+        // Parameter-Count
+        $parameterAmount = func_num_args() - 2;
+
+        // Get Parameter-Type list
+        $parameterTypeList = self::GetParamTypeList($parameterTypes,$parameterAmount);
+
+        // Prepare SQL-Query
+        $stmt = self::$sqlConnectionLink->prepare($sqlStatement);
+
+        // Bind Parameters to Query
+        if($parameterTypes != "") call_user_func_array(array($stmt, "bind_param"), array_merge(array($parameterTypeList), $sqlParameters));
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        while($row = $result->fetch_assoc()) array_push($rowArray,$row);
+
+        $stmt->close();
+
+        return $rowArray;
+    }
+
+    public static function Exist($sqlStatement,$parameterTypes="", &...$sqlParameters)
+    {
+        // Parameter-Count
+        $parameterAmount = func_num_args() - 2;
+
+        // Get Parameter-Type list
+        $parameterTypeList = self::GetParamTypeList($parameterTypes,$parameterAmount);
+
+        // Prepare SQL-Query
+        $stmt = self::$sqlConnectionLink->prepare($sqlStatement);
+
+        // Bind Parameters to Query
+        if($parameterTypes != "") call_user_func_array(array($stmt, "bind_param"), array_merge(array($parameterTypeList), $sqlParameters));
+
+        $stmt->execute();
+        $stmt->store_result();
+        $count = $stmt->num_rows;
+        $stmt->close();
+
+        return $count!=0;
+    }
+
+##########################################################################################
+
+    public static function Save($backUpName)
+    {
+        $host = self::$databaseHost;
+        $user = self::$databaseUser;
+        $pass = self::$databasePass;
+        $name = self::$databaseName;
+
+        $return = '';
+
+        $tables = '*';
+
+        self::$mysqli->select_db($name);
+
+        //get all of the tables
+        if($tables == '*')
         {
-            $create = mysql_fetch_array($res);
-            $create[1] .= ";";
-            $line = str_replace("\n", "", $create[1]);
-            fwrite($f, $line."\n");
-            $data = mysql_query("SELECT * FROM `".$table."`");
-            $num = mysql_num_fields($data);
-            while ($row = mysql_fetch_array($data))
+            $tables = array();
+            $result = self::$mysqli->query('SHOW TABLES');
+            while($row = $result->fetch_row())
             {
-                $line = "INSERT INTO `".$table."` VALUES(";
-                for ($i=1;$i<=$num;$i++)
-                {
-                    $line .= "'".mysql_real_escape_string($row[$i-1])."', ";
-                }
-                $line = substr($line,0,-2);
-                fwrite($f, $line.");\n");
+                $tables[] = $row[0];
             }
         }
+        else
+        {
+            $tables = is_array($tables) ? $tables : explode(',',$tables);
+        }
+
+        //cycle through
+        foreach($tables as $table)
+        {
+            $result = self::$mysqli->query('SELECT * FROM '.$table);
+            $num_fields = $result->field_count;
+
+            $return.= 'DROP TABLE '.$table.';';
+
+            $rs2 = self::$mysqli->query('SHOW CREATE TABLE '.$table);
+            $row2 = $rs2->fetch_row();
+
+            $return.= "\n\n".$row2[1].";\n\n";
+
+            for ($i = 0; $i < $num_fields; $i++)
+            {
+                while($row = $result->fetch_row())
+                {
+                    $return.= 'INSERT INTO '.$table.' VALUES(';
+                    for($j=0; $j < $num_fields; $j++)
+                    {
+                        $row[$j] = addslashes($row[$j]);
+                        $row[$j] = preg_replace("/\n/","/\\n/",$row[$j]);
+                        if (isset($row[$j])) { $return.= '"'.$row[$j].'"' ; } else { $return.= '""'; }
+                        if ($j < ($num_fields-1)) { $return.= ','; }
+                    }
+                    $return.= ");\n";
+                }
+            }
+            $return.="\n\n\n";
+        }
+
+        //save file
+        $handle = fopen(self::$databaseBackupPath.$backUpName.'.sql','w+');
+        fwrite($handle,$return);
+        fclose($handle);
     }
-    fclose($f);
-}
 
-function MySQLPDSave($period = "d")
-{
-    // DESCRIPTION:
-    // Used for frequent Database Backups
-    // $period: Default: "d". the period in which backups are created
-    //          d...Daily
-    //          w...Weekly
-    //          h...Hourly
 
-    switch($period)
+    public static function PeriodicSave($period = "d")
     {
-        case 'w': $filename = 'dbbu_'.date("\DY-\WW"); break;
-        case 'd': $filename = 'dbbu_'.date("\DY-m-d"); break;
-        case 'h': $filename = 'dbbu_'.date("\DY-m-d-\HH"); break;
-        default : $filename = 'dbbu_'.date("\DY-m-d"); break;
+        switch($period)
+        {
+            case 'w': $filename = 'dbbu_'.date("\DY-\WW"); break;
+            case 'd': $filename = 'dbbu_'.date("\DY-m-d"); break;
+            case 'h': $filename = 'dbbu_'.date("\DY-m-d-\HH"); break;
+            default : $filename = 'dbbu_'.date("\DY-m-d"); break;
+        }
+
+        if(!file_exists(self::$databaseBackupPath.$filename.'.sql'))
+        {
+            self::Save($filename);
+        }
     }
 
-    if(!file_exists('backup/'.$filename.'.sql'))
-    {
-        MySQLSave($filename);
-    }
+##########################################################################################
 }
+MySQL::init();
 
 ?>

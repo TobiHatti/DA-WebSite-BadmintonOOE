@@ -44,7 +44,7 @@
         (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
         ";
 
-        SQL::NonQuery($strSQL,'@s',$id,$name,$actT1,$sizeT1,$colorT1,$xT1,$yT1,$actT2,$sizeT2,$colorT2,$xT2,$yT2,$actT3,$sizeT3,$colorT3,$xT3,$yT3,$actImg,$sizeImg,$xImg,$yImg,$bgIsImage,$bgIsGradient,$bgColor1,$bgColor2,$bgDirection);
+        MySQL::NonQuery($strSQL,'@s',$id,$name,$actT1,$sizeT1,$colorT1,$xT1,$yT1,$actT2,$sizeT2,$colorT2,$xT2,$yT2,$actT3,$sizeT3,$colorT3,$xT3,$yT3,$actImg,$sizeImg,$xImg,$yImg,$bgIsImage,$bgIsGradient,$bgColor1,$bgColor2,$bgDirection);
 
         FileUpload("content/newstemplates/img/","templateLogo","","","UPDATE news_templates SET pathImg = 'FNAME' WHERE id = '$id'",uniqid());
         FileUpload("content/newstemplates/","templateBackground","","","UPDATE news_templates SET bgPath = 'FNAME' WHERE id = '$id'",uniqid());

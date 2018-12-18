@@ -21,7 +21,7 @@
         $phone2 = $_POST['phone2'];
         $phone3 = $_POST['phone3'];
 
-        if(isset($_POST['add_verein'])) SQL::NonQuery("INSERT INTO vereine (id, verein, ort, kennzahl, dachverband, website, contact_name, contact_street, contact_city, contact_email, contact_phoneLabel1, contact_phone1, contact_phoneLabel2, contact_phone2, contact_phoneLabel3, contact_phone3) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",'@s',$verein,$ort,$kennzahl,$dachverband,$website,$name,$street,$city,$email,$label1,$phone1,$label2,$phone2,$label3,$phone3);
+        if(isset($_POST['add_verein'])) MySQL::NonQuery("INSERT INTO vereine (id, verein, ort, kennzahl, dachverband, website, contact_name, contact_street, contact_city, contact_email, contact_phoneLabel1, contact_phone1, contact_phoneLabel2, contact_phone2, contact_phoneLabel3, contact_phone3) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",'@s',$verein,$ort,$kennzahl,$dachverband,$website,$name,$street,$city,$email,$label1,$phone1,$label2,$phone2,$label3,$phone3);
         else
         {
             $id = $_POST['edit_verein'];
@@ -44,7 +44,7 @@
             contact_phone3 = ?
             WHERE vereine.id = ?;";
 
-            SQL::NonQuery($strSQL,'@s',$verein,$ort,$kennzahl,$dachverband,$website,$name,$street,$city,$email,$label1,$phone1,$label2,$phone2,$label3,$phone3,$id);
+            MySQL::NonQuery($strSQL,'@s',$verein,$ort,$kennzahl,$dachverband,$website,$name,$street,$city,$email,$label1,$phone1,$label2,$phone2,$label3,$phone3,$id);
         }
 
 
@@ -63,7 +63,7 @@
 
         echo '<h2 class="stagfade1">'.($edit ? 'Verein Bearbeiten' : 'Neuer Verein').'</h2>';
 
-        if($edit) $cdat = SQL::FetchRow("vereine","id",$_GET['edit']);
+        if($edit) $cdat = MySQL::Row("SELECT * FROM vereine WHERE id = ?",'s',$_GET['edit']);
 
         echo '
             <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">

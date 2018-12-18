@@ -3,15 +3,7 @@
     setlocale (LC_ALL, 'de_DE.UTF-8', 'de_DE@euro', 'de_DE', 'de', 'ge', 'de_DE.ISO_8859-1', 'German_Germany');
     error_reporting(E_ALL ^ E_NOTICE);
 
-    require("data/mysql_connect.php");
-
-    require("data/extension.lib.php");
-    require("data/file.lib.php");
-    require("data/mysql.lib.new.php");
-    require("data/setting.lib.php");
-    require("data/string.lib.php");
-
-    require("data/functions.php");
+    require("headerincludes.php");
 
     echo '
         <!DOCTYPE html>
@@ -109,11 +101,163 @@
 
 
     $cntr = 1; // day printing counter
+
+    $showZAinAG = Setting::Get("ShowZAinAG");
+
+    $thisMontAndYear = "2018-12-%";
+
+    $zaTSMonthCluster = MySQL::Cluster("SELECT * FROM zentralausschreibungen WHERE act_timespan = '1' AND (date_begin LIKE ? OR date_end LIKE ?)",'ss',$thisMontAndYear,$thisMontAndYear);
+    $zaSiMonthCluster = MySQL::Cluster("SELECT * FROM zentralausschreibungen WHERE act_timespan = '0' AND date_begin LIKE ?",'s',$thisMontAndYear);
+
+    $agTSMonthCluster = MySQL::Cluster("SELECT * FROM agenda WHERE isTimespan = '1' AND (date_begin LIKE ? OR date_end LIKE ?)",'ss',$thisMontAndYear,$thisMontAndYear);
+    $agSiMonthCluster = MySQL::Cluster("SELECT * FROM agenda WHERE isTimespan = '0' AND date_begin LIKE ?",'s',$thisMontAndYear);
+
+
+//========================================================================================
+// Preparing Layout-Array
+//========================================================================================
+
+
+    $designDataGrid = array_fill(0,31,array(NULL,NULL,NULL,NULL,NULL,NULL));
+
+    for($ddg = 0 ; $ddg < 31 ; $ddg++)
+    {
+//========================================================================================
+
+        // Set Positions for Multi-Day ZA's
+        foreach($zaTSMonthCluster AS $dateData)
+        {
+            // Get date-parts
+            $datePartsBegin = explode('-',$dateData['date_begin']);
+            $datePartsEnd = explode('-',$dateData['date_end']);
+
+            // Check if date maches day-slot
+            if($datePartsBegin[2] == $ddg + 1)
+            {
+                //calculate timespan
+                $timespan =  $datePartsEnd[2] - $datePartsBegin[2] + 1;
+
+                // Check avaiable layers from bottom up
+                for($lctr = 5 ; $lctr >= 0 ; $lctr--)
+                {
+                    $layerValid = true;
+
+                    for($ldctr = 0 ; $ldctr < $timespan ; $ldctr++) if($designDataGrid[$ddg + $ldctr][$lctr] != NULL) $layerValid = false;
+                    if($layerValid) $layer = $lctr;
+                }
+
+                // Fill designdatagrid with identifiers
+                for($dctr = 0 ; $dctr < $timespan ; $dctr++) $designDataGrid[$ddg + $dctr][$layer] = 'ZA-'.$dateData['id'];
+            }
+        }
+
+//========================================================================================
+
+        // Set Positions for Multi-Day AG's
+        foreach($agTSMonthCluster AS $dateData)
+        {
+            // Get date-parts
+            $datePartsBegin = explode('-',$dateData['date_begin']);
+            $datePartsEnd = explode('-',$dateData['date_end']);
+
+            // Check if date maches day-slot
+            if($datePartsBegin[2] == $ddg + 1)
+            {
+                //calculate timespan
+                $timespan =  $datePartsEnd[2] - $datePartsBegin[2] + 1;
+
+                // Check avaiable layers from bottom up
+                for($lctr = 5 ; $lctr >= 0 ; $lctr--)
+                {
+                    $layerValid = true;
+
+                    for($ldctr = 0 ; $ldctr < $timespan ; $ldctr++) if($designDataGrid[$ddg + $ldctr][$lctr] != NULL) $layerValid = false;
+                    if($layerValid) $layer = $lctr;
+
+                }
+
+
+                // Fill designdatagrid with identifiers
+                for($dctr = 0 ; $dctr < $timespan ; $dctr++) $designDataGrid[$ddg + $dctr][$layer] = 'AG-'.$dateData['id'];
+            }
+        }
+
+//========================================================================================
+
+        // Set Positions for Single-Day ZA's
+        foreach($zaSiMonthCluster AS $dateData)
+        {
+            // Get date-parts
+            $datePartsBegin = explode('-',$dateData['date_begin']);
+
+            // Check if date maches day-slot
+            if($datePartsBegin[2] == $ddg + 1)
+            {
+
+                // Check avaiable layers from bottom up
+                for($lctr = 5 ; $lctr >= 0 ; $lctr--)
+                {
+                    $layerValid = true;
+                    if($designDataGrid[$ddg][$lctr] != NULL) $layerValid = false;
+
+                    if($layerValid) $layer = $lctr;
+                }
+
+                // Fill designdatagrid with identifiers
+                $designDataGrid[$ddg][$layer] = 'ZA-'.$dateData['id'];
+            }
+        }
+
+//========================================================================================
+
+        // Set Positions for Single-Day AG's
+        foreach($agSiMonthCluster AS $dateData)
+        {
+            // Get date-parts
+            $datePartsBegin = explode('-',$dateData['date_begin']);
+
+            // Check if date maches day-slot
+            if($datePartsBegin[2] == $ddg + 1)
+            {
+
+                // Check avaiable layers from bottom up
+                for($lctr = 5 ; $lctr >= 0 ; $lctr--)
+                {
+                    $layerValid = true;
+                    if($designDataGrid[$ddg][$lctr] != NULL) $layerValid = false;
+
+                    if($layerValid) $layer = $lctr;
+                }
+
+                // Fill designdatagrid with identifiers
+                $designDataGrid[$ddg][$layer] = 'AG-'.$dateData['id'];
+            }
+        }
+
+//========================================================================================
+    }
+
+//  Determine the amount of needed Layers to save space
+    for($lctr = 0 ; $lctr < 5 ; $lctr++)
+    {
+        for($ddg = 0 ; $ddg < 31 ; $ddg++) if($designDataGrid[$ddg][$lctr] != NULL) $lastLayer =  $lctr;
+    }
+
+
     for ($i=1;$i<=6;$i++)
     {
+//========================================================================================
+// START OF ROW
+//========================================================================================
+
+        $listSlotManager = array(0);
+
         echo '<tr>';
         for ($j=1;$j<=7;$j++)
         {
+//========================================================================================
+// START OF CELL (GENERAL)
+//========================================================================================
             $curr = $cntr++;
 
             $accent = ($days[$curr]['dat'] == "") ? 'blank' : (($curr % 2 == 0) ? 'accent1' : 'accent2');
@@ -129,6 +273,131 @@
             ';
 
             $curDate = $days[$curr]['dat'];
+
+//========================================================================================
+// START OF CELL (DATA)
+//========================================================================================
+
+
+
+            $dayNow = intval(str_replace('.','',$days[$curr]['out']));
+
+            echo '<table class="cellContentData">';
+            for($dctr = 0 ; $dctr <= $lastLayer ; $dctr++)
+            {
+                $dataParts = explode("-",$designDataGrid[$dayNow - 1][$dctr]);
+
+                if($dataParts[0] == "ZA" OR $dataParts[0] == "AG")
+                {
+                    if($dataParts[0] == "ZA")
+                    {
+                        $calData = MySQL::Row("SELECT *,CONCAT_WS(' ',title_line1,title_line2) AS displayTitle FROM zentralausschreibungen WHERE id = ?",'i',$dataParts[1]);
+                        $displayTitle = '';
+
+                        if($calData['act_timespan'])
+                        {
+                            if($curDate == $calData['date_begin'])
+                            {
+                                $cellStyle = "timespanStart";
+                                $displayTitle = $calData['displayTitle'];
+                            }
+                            else if($curDate == $calData['date_end']) $cellStyle = "timespanEnd";
+                            else $cellStyle = "timespanMiddle";
+                        }
+                        else
+                        {
+                            $cellStyle = "timespanSingle";
+                            $displayTitle = $calData['displayTitle'];
+                        }
+
+
+
+
+
+
+
+
+                    }
+                    if($dataParts[0] == "AG")
+                    {
+                        $calData = MySQL::Row("SELECT *,titel AS displayTitle FROM agenda WHERE id = ?",'i',$dataParts[1]);
+                        $displayTitle = '';
+
+                        if($calData['isTimespan'])
+                        {
+                            if($curDate == $calData['date_begin'])
+                            {
+                                $cellStyle = "timespanStart";
+                                $displayTitle = $calData['displayTitle'];
+                            }
+                            else if($curDate == $calData['date_end']) $cellStyle = "timespanEnd";
+                            else $cellStyle = "timespanMiddle";
+                        }
+                        else
+                        {
+                            $cellStyle = "timespanSingle";
+                            $displayTitle = $calData['displayTitle'];
+                        }
+
+
+
+                    }
+
+                    echo '
+                        <tr>
+                            <td>
+                                <a href="#calenderInfo'.$designDataGrid[$dayNow - 1][$dctr].'" style="text-decoration:none;">
+                                    <div id="'.$cellStyle.'" style="color: '.(($calData['kategorie']!="") ? Setting::Get("Color".$calData['kategorie']) : '#000000').';">'.$displayTitle.'</div>
+                                </a>
+                            </td>
+                        </tr>
+                    ';
+                }
+                else echo '<tr><td></td></tr>';
+
+
+
+
+
+            }
+            echo '</table>';
+
+
+
+            //for($s = 0 ; $s < count($listSlotManager) ; $s++) if($listSlotManager[$s] == 0) $injectionLine = $i;
+
+
+            /*
+            if($showZAinAG)
+            {
+                $strSQL = "SELECT * FROM zentralausschreibungen WHERE act_timespan = '0' AND date_begin = '$curDate'";
+                $rs=mysqli_query($link,$strSQL);
+                while($row=mysqli_fetch_assoc($rs))
+                {
+                    echo '
+                        <a href="#calenderInfoZA'.$row['id'].'" onclick="SelectGalleryImage('.$i.');" style="text-decoration:none;">
+                            <div style="color: '.(($row['kategorie']!="") ? Setting::Get("Color".$row['kategorie']) : '#000000').';">&#9670; '.$row['title_line1'].'</div>
+                        </a>
+                    ';
+                }
+
+                $strSQL = "SELECT * FROM zentralausschreibungen WHERE act_timespan = '1' AND date_begin <= '$curDate' AND date_end >= '$curDate'";
+                $rs=mysqli_query($link,$strSQL);
+                while($row=mysqli_fetch_assoc($rs))
+                {
+                    if($curDate == $row['date_begin']) $cellStyle = "timespanStart";
+                    else if($curDate == $row['date_end']) $cellStyle = "timespanEnd";
+                    else $cellStyle = "timespanMiddle";
+
+                    echo '
+                        <a href="#calenderInfoZA'.$row['id'].'" onclick="SelectGalleryImage('.$i.');" style="text-decoration:none;">
+                            <div id="'.$cellStyle.'" style="color: '.(($row['kategorie']!="") ? Setting::Get("Color".$row['kategorie']) : '#000000').';">&#9670; '.$row['title_line1'].'</div>
+                        </a>
+                    ';
+                }
+            }
+
+
             $strSQL = "SELECT * FROM agenda WHERE date = '$curDate'";
             $rs=mysqli_query($link,$strSQL);
             while($row=mysqli_fetch_assoc($rs))
@@ -140,20 +409,19 @@
                 ';
             }
 
-            if(Setting::Get("ShowZAinAG"))
-            {
-                $strSQL = "SELECT * FROM zentralausschreibungen WHERE date_begin = '$curDate'";
-                $rs=mysqli_query($link,$strSQL);
-                while($row=mysqli_fetch_assoc($rs))
-                {
-                    echo '
-                        <a href="#calenderInfoZA'.$row['id'].'" onclick="SelectGalleryImage('.$i.');" style="text-decoration:none;">
-                            <div style="color: '.(($row['kategorie']!="") ? Setting::Get("Color".$row['kategorie']) : '#000000').';">&#9679; '.$row['title_line1'].'</div>
-                        </a>
-                    ';
-                }
-            }
 
+            */
+
+
+
+
+
+
+
+
+//========================================================================================
+// END OF CELL
+//========================================================================================
             echo'
                 </td>
             ';
@@ -165,9 +433,10 @@
         </table>
     ';
 
+    /*
     $datePart = $yr.'-'.str_pad($mo,2,0,STR_PAD_LEFT).'-';
 
-    $strSQL = "SELECT * FROM agenda WHERE date LIKE '$datePart%'";
+    $strSQL = "SELECT * FROM agenda WHERE date_begin LIKE '$datePart%'";
     $rs=mysqli_query($link,$strSQL);
     while($row=mysqli_fetch_assoc($rs))
     {
@@ -356,6 +625,8 @@
             ';
         }
     }
+
+    */
 
     echo '
                 </div>

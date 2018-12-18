@@ -14,10 +14,14 @@
     $showBorders = false;
 
     // Colors
-    list($color1R, $color1G, $color1B) = sscanf('#'.SQL::Fetch("ranglisten_settings","value","setting","Y".$year."ColorA"), "#%02x%02x%02x");
-    list($color2R, $color2G, $color2B) = sscanf('#'.SQL::Fetch("ranglisten_settings","value","setting","Y".$year."ColorB"), "#%02x%02x%02x");
+    $accentColor1Sett = "Y".$year."ColorA";
+    $accentColor2Sett = "Y".$year."ColorB";
+    $highlightColorSett = "HighlightColor";
 
-    list($colorMarkR, $colorMarkG, $colorMarkB) = sscanf('#'.SQL::Fetch("ranglisten_settings","value","setting","HighlightColor"), "#%02x%02x%02x");
+    list($color1R, $color1G, $color1B) = sscanf('#'.MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$accentColor1Sett), "#%02x%02x%02x");
+    list($color2R, $color2G, $color2B) = sscanf('#'.MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$accentColor2Sett), "#%02x%02x%02x");
+
+    list($colorMarkR, $colorMarkG, $colorMarkB) = sscanf('#'.MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$highlightColorSett), "#%02x%02x%02x");
 
     // Initialisation
     $pdf = new PDF();
@@ -80,7 +84,7 @@
     while($rowc=mysqli_fetch_assoc($rsc))
     {
         $club = $rowc['club'];
-        $clubVals = SQL::FetchRow("vereine","kennzahl",$club);
+        $clubVals = MySQL::Row("SELECT * FROM vereine WHERE kennzahl = ?",'s',$club);
 
 
         if(!$first) $pdf->AddPage();

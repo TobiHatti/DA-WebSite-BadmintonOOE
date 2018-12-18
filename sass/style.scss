@@ -397,6 +397,7 @@ h5{
         // Define Width in inline-css inside the HTML-file
         //width: 50%;
         //height: 60%;
+        overflow-y: scroll;
         background: #FFFFFF;
         left: 50%;
         transform: translateX(-50%);
@@ -405,7 +406,9 @@ h5{
         z-index: 100001;
         opacity: 0;
         padding: 20px;
+
         @include ease(0.5s);
+        @include box-sizing(border-box);
     }
 
 
@@ -1953,15 +1956,14 @@ table.centered_content td{
             font-size: 13pt;
             color: #000000;
         }
+    }
 
-        .dateloc{
-            position: absolute;
-            bottom: 0px;
-            margin-left: 20px;
-            color: #696969;
-            font-style: italic;
-        }
-
+    .dateloc{
+        position: absolute;
+        bottom: 0px;
+        margin-left: 20px;
+        color: #696969;
+        font-style: italic;
     }
 
 }
@@ -2672,6 +2674,7 @@ table.centered_content td{
 
 .calender_iframe{
     width: 100%;
+    min-height: 600px;
 }
 
 /*===================================================================================*/
@@ -2736,10 +2739,76 @@ table.centered_content td{
         tr:nth-child(#{$i}){
             td{
                 border: 1px solid $theme-bright-l;
+                padding: 0;
                 height: 100px;
                 vertical-align: top;
                 text-align: left;
 
+
+                .cellContentData{
+                    background: none;
+                    border-spacing: 0;
+                    border-collapse: collapse;
+                    width:100%;
+                    @include box-sizing(border-box); 
+
+                    tr{
+                        background: none;
+
+                        td{
+                            border: none;
+                            padding: 0;
+                            height: 24px;
+                            vertical-align: top;
+                            text-align: left;
+                            background: none;
+                            //border-bottom: 1px solid black;
+                            white-space: nowrap;
+                            text-overflow:ellipsis;
+                            overflow: hidden;
+
+                            div{
+                                height: 22px;
+                                border: 1px outset $theme-bright;
+                                border-radius: 10px;
+                                width: 100%;
+                                background:linear-gradient(to bottom, #DDDDDD 33%,#E8E8E8 66%,#DDDDDD 100%);
+                                padding-left: 3px;
+                                @include box-sizing(border-box);
+                                @include ease(0.2s);
+                            }
+
+                            div#timespanStart{
+                                border-radius: 10px 0 0 10px;
+                                border-right: none;
+                                margin-left: 5px;
+                            }
+
+                            div#timespanMiddle{
+                                border-radius: 0;
+                                border-left: none;
+                                border-right: none;
+                                margin-left: 0;
+                                margin-right: 0;
+                            }
+
+                            div#timespanEnd{
+                                border-radius: 0 10px 10px 0;
+                                border-left: none;
+                                margin-right: 10px;
+                            }
+
+                            div:hover{
+                                border-color: $theme-medium;
+                            }
+
+                        }
+
+                    }
+
+                }
+
+                /*
                 span{
                     text-align: left;
                     margin: 3px;
@@ -2748,7 +2817,7 @@ table.centered_content td{
 
                 div{
                     border: 1px outset $theme-bright;
-                    border-radius: 5px;
+                    border-radius: 10px;
                     margin: 3px;
                     background:linear-gradient(to bottom, #DDDDDD 33%,#E8E8E8 66%,#DDDDDD 100%);
                     padding-left: 3px;
@@ -2757,10 +2826,31 @@ table.centered_content td{
                     @include ease(0.2s);
                 }
 
+                div#timespanStart{
+                    border-radius: 10px 0 0 10px;
+                    border-right: none;
+                    margin-right: 0;
+                }
+
+                div#timespanMiddle{
+                    border-radius: 0;
+                    border-left: none;
+                    border-right: none;
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+
+                div#timespanEnd{
+                    border-radius: 0 10px 10px 0;
+                    border-left: none;
+                    margin-left: 0;
+                }
+
                 div:hover{
                     border-color: $theme-medium;
                     box-shadow: 0 3px 4px 0 #000000;
                 }
+                */
 
             }
 
@@ -2797,6 +2887,8 @@ table.centered_content td{
         }
     }
 }
+
+
 
 /*===================================================================================*/
 /* (U04)   Kalender > Graphic Calendar (Small)                                       */

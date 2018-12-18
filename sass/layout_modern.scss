@@ -97,7 +97,7 @@
 
 @supports (grid-area: auto){
 
-    body{
+    body#mainPage{
         display: grid;
         margin: 0;
         //margin-bottom: 20px;
@@ -105,7 +105,7 @@
     }
 
     @media only screen and (max-width: $media-smalllargephone){
-            body{
+            body#mainPage{
             margin:0px;
             grid-template-columns: 1fr;
             grid-template-rows: 30px 120px auto 0px;
@@ -118,7 +118,7 @@
     }
 
     @media only screen and (min-width: $media-smalllargephone){
-        body{
+        body#mainPage{
             grid-template-columns: 1fr;
             grid-template-rows: 80px 38px auto 0px;
             grid-template-areas:
@@ -130,7 +130,7 @@
     }
 
     @media only screen and (min-width: $media-tablet){
-        body{
+        body#mainPage{
             grid-template-columns: 1fr;
             grid-template-rows: 100px 38px auto 0px;
             grid-template-areas:
@@ -142,7 +142,7 @@
     }
 
     @media only screen and (min-width: $media-desktop){
-        body{
+        body#mainPage{
             grid-template-columns: 1fr;
             grid-template-rows: 150px 38px auto 0px;
             grid-template-areas:

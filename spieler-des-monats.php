@@ -14,7 +14,7 @@
         $author = (isset($_SESSION['userID'])) ? $_SESSION['userID'] : 0 ;
 
         // In case the ID already exists, cycle
-        if(SQL::Exist("SELECT article_url FROM news WHERE article_url = ?",'@s',$article_url))
+        if(MySQL::Exist("SELECT article_url FROM news WHERE article_url = ?",'@s',$article_url))
         {
             $i=2;
             do
@@ -22,12 +22,12 @@
                 $newID = $article_url.'-'.$i;
                 $i++;
             }
-            while(SQL::Exist("SELECT article_url FROM news WHERE article_url = ?",'@s',$newID));
+            while(MySQL::Exist("SELECT article_url FROM news WHERE article_url = ?",'@s',$newID));
 
             $article_url = $newID;
         }
 
-        SQL::NonQuery("INSERT INTO news (id,article_url,title, author,tags,article,release_date,thumbnail) VALUES ('',?,?,?,?,?,?,?)",'@s',$article_url,$title,$author,$tags,$article,$release,$thumb);
+        MySQL::NonQuery("INSERT INTO news (id,article_url,title, author,tags,article,release_date,thumbnail) VALUES ('',?,?,?,?,?,?,?)",'@s',$article_url,$title,$author,$tags,$article,$release,$thumb);
 
         //Changing the News-Slider in Index
         RefreshSliderContent();
@@ -83,29 +83,29 @@
     else
     {
         if(!isset($_GET['article'])) $article = $_GET['article'];
-        else $article = SQL::Scalar("SELECT article_url FROM news WHERE tags = 'Spieler-des-Monats' ORDER BY id DESC LIMIT 0,1");
+        else $article = MySQL::Scalar("SELECT article_url FROM news WHERE tags = 'Spieler-des-Monats' ORDER BY id DESC LIMIT 0,1");
 
-        SQL::NonQuery("UPDATE news SET views = views + 1 WHERE article_url = ?",'@s',$article);
+        MySQL::NonQuery("UPDATE news SET views = views + 1 WHERE article_url = ?",'@s',$article);
 
-        $id = SQL::Fetch("news","id","article_url",$article);
+        $newsData = MySQL::Row("SELECT * FROM news WHERE article_url = ?",'s',$article);
 
         echo '
             <div class="doublecol_singletile">
                 <article>
-                    <span style="color: #A9A9A9">'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime(SQL::Fetch("news","release_date","article_url",$article)))).' |</span>
-                    '.ShowTags(SQL::Fetch("news","tags","article_url",$article)).'
-                    <div class="fr-view fr-element">'.SQL::Fetch("news","article","article_url",$article).'</div>
-                    <span>'.SQL::Fetch("news","views","article_url",$article).' Aufrufe</span><br><br>
+                    <span style="color: #A9A9A9">'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($newsData['release_date']))).' |</span>
+                    '.ShowTags($newsData['tags']).'
+                    <div class="fr-view fr-element">'.$newsData['article'].'</div>
+                    <span>'.$newsData['views'].' Aufrufe</span><br><br>
                     ';
 
                     if(CheckPermission("EditNews"))
                     {
-                        echo '<span style="float: left;"> '.EditButton(ThisPage("!editContent","!editSC","+editSC=$id")).' </span>';
+                        echo '<span style="float: left;"> '.EditButton(ThisPage("!editContent","!editSC","+editSC=".$newsData['id'])).' </span>';
                     }
 
                     if(CheckPermission("DeleteNews"))
                     {
-                        echo '<span style="float: left;"> '.DeleteButton("News","news",$id).' </span>';
+                        echo '<span style="float: left;"> '.DeleteButton("News","news",$newsData['id']).' </span>';
                     }
 
                     echo '
@@ -115,12 +115,6 @@
                 </aside>
             </div>
         ';
-
-
-
-
-
-
     }
 
 

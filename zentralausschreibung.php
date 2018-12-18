@@ -50,8 +50,8 @@
 
         if($_POST['postType']=="new")
         {
-            SQL::NonQuery("INSERT INTO zentralausschreibungen (id,kategorie) VALUES ('','newfield')");
-            $zaID = SQL::Scalar("SELECT id FROM zentralausschreibungen WHERE kategorie = newfield");
+            MySQL::NonQuery("INSERT INTO zentralausschreibungen (id,kategorie) VALUES ('','newfield')");
+            $zaID = MySQL::Scalar("SELECT id FROM zentralausschreibungen WHERE kategorie = 'newfield'");
         }
         else $zaID = $_POST['updateZA'];
 
@@ -96,7 +96,7 @@
             WHERE id = ?;
         ";
 
-        SQL::NonQuery($updateSQL,'@s',$size,$kategorie,$title1,$title2,$date1,$date2,$chTimespan,$chVerein,$Verein,$chUhrzeit,$Uhrzeit,$chAuslosung,$Auslosung,$chHallenname,
+        MySQL::NonQuery($updateSQL,'@s',$size,$kategorie,$title1,$title2,$date1,$date2,$chTimespan,$chVerein,$Verein,$chUhrzeit,$Uhrzeit,$chAuslosung,$Auslosung,$chHallenname,
         $Hallenname,$chAnschriftHalle,$AnschriftHalle, $chAnzahlFelder,$AnzahlFelder,$chTurnierverantwortlicher,$Turnierverantwortlicher,$chOberschiedsrichter,$Oberschiedsrichter,
         $chTelefon,$Telefon,$chAnmeldungOnline,$AnmeldungOnline,$chAnmeldungEmail,$AnmeldungEmail,$chNennungenEmail,$NennungenEmail,$chNennschluss,$Nennschluss,$chZusatzangaben,
         $Zusatzangaben,$Location,$zaID);
@@ -148,7 +148,8 @@
 
         echo '<br><center>';
         $first = true;
-        $strSQL = "SELECT DISTINCT SUBSTRING(date_begin, 1, 7) AS date FROM zentralausschreibungen ORDER BY date_begin ASC";
+        $today=date("Y-m-d");  
+        $strSQL = "SELECT DISTINCT SUBSTRING(date_begin, 1, 7) AS date FROM zentralausschreibungen WHERE date_begin > '$today' ORDER BY date_begin ASC";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
         {
@@ -162,14 +163,15 @@
         echo PageContent("1",CheckPermission("ChangeContent"));
 
 
-        $strSQLt = "SELECT DISTINCT SUBSTRING(date_begin, 1, 7) AS date FROM zentralausschreibungen ORDER BY date_begin ASC";
+
+        $strSQLt = "SELECT DISTINCT SUBSTRING(date_begin, 1, 7) AS date FROM zentralausschreibungen WHERE date_begin > '$today' ORDER BY date_begin ASC";
         $rst=mysqli_query($link,$strSQLt);
         while($rowt=mysqli_fetch_assoc($rst))
         {
             $date = $rowt['date'];
             echo '<a name="'.$date.'">&nbsp;</a>';
 
-            $strSQL = "SELECT * FROM zentralausschreibungen WHERE date_begin LIKE '$date%' ORDER BY date_begin ASC";
+            $strSQL = "SELECT * FROM zentralausschreibungen WHERE date_begin LIKE '$date%' AND date_begin > '$today' ORDER BY date_begin ASC";
             $rs=mysqli_query($link,$strSQL);
             while($row=mysqli_fetch_assoc($rs))
             {

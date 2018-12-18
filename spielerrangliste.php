@@ -4,9 +4,13 @@
     $year = $_GET['year'];
     $club = $_GET['club'];
 
-    $accentColor1 = '#'.SQL::Fetch("ranglisten_settings","value","setting","Y".$year."ColorA");
-    $accentColor2 = '#'.SQL::Fetch("ranglisten_settings","value","setting","Y".$year."ColorB");
-    $highlightColor = '#'.SQL::Fetch("ranglisten_settings","value","setting","HighlightColor");
+    $accentColor1Sett = "Y".$year."ColorA";
+    $accentColor2Sett = "Y".$year."ColorB";
+    $highlightColorSett = "HighlightColor";
+
+    $accentColor1 = '#'.MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$accentColor1Sett);
+    $accentColor2 = '#'.MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$accentColor2Sett);
+    $highlightColor = '#'.MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$highlightColorSett);
 
     $lastChange = '26.10.2018';
 
@@ -28,7 +32,7 @@
                                 ';
                                     $strSQL = "SELECT DISTINCT club FROM reihung WHERE year = '$year'";
                                     $rs=mysqli_query($link,$strSQL);
-                                    while($row=mysqli_fetch_assoc($rs)) echo '<option '.(($_GET['club']==$row['club']) ? 'selected' : '').' value="'.$row['club'].'">'.SQL::Fetch("vereine","verein","kennzahl",$row['club']).' '.SQL::Fetch("vereine","ort","kennzahl",$row['club']).'</option>';
+                                    while($row=mysqli_fetch_assoc($rs)) echo '<option '.(($_GET['club']==$row['club']) ? 'selected' : '').' value="'.$row['club'].'">'.MySQL::Scalar("SELECT CONCAT_WS(' ',verein,ort) FROM vereine WHERE kennzahl = ?",'s',$row['club']).'</option>';
                                 echo '
                                 </optgroup>
                             </select>
@@ -42,7 +46,8 @@
                         $rs=mysqli_query($link,$strSQL);
                         while($row=mysqli_fetch_assoc($rs))
                         {
-                            $clubVals = SQL::FetchRow("vereine","kennzahl",$row['club']);
+                            $clubVals = MySQL::Row("SELECT * FROM vereine WHERE kennzahl = ?",'s',$row['club']);
+
                             echo '<div>'.Tickbox("",$row['club'],$clubVals['verein'].' '.$clubVals['ort'],false, 'UpdateClubList(this, \''.$row['club'].'\');').'</div>';
                         }
 
@@ -108,7 +113,7 @@
     while($rowc=mysqli_fetch_assoc($rsc))
     {
         $club = $rowc['club'];
-        $clubVals = SQL::FetchRow("vereine","kennzahl",$club);
+        $clubVals = MySQL::Row("SELECT * FROM vereine WHERE kennzahl = ?",'s',$club);
 
 
         echo '

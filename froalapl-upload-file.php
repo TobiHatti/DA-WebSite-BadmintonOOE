@@ -26,7 +26,7 @@
         $filename = $filenameNoExtension.'.'.$extension;
 
         // In case the ID already exists, cycle
-        if(SQL::Exist("SELECT filename FROM uploads WHERE filename = ?",'@s',$filename))
+        if(MySQL::Exist("SELECT filename FROM uploads WHERE filename = ?",'@s',$filename))
         {
             $i=2;
             do
@@ -35,7 +35,7 @@
                 $newFilenamePlusExtension = $newFilename.'.'.$extension;
                 $i++;
             }
-            while(SQL::Exist("SELECT filename FROM uploads WHERE filename = ?",'@s',$newFilenamePlusExtension));
+            while(MySQL::Exist("SELECT filename FROM uploads WHERE filename = ?",'@s',$newFilenamePlusExtension));
 
             $filename = $newFilename.'.'.$extension;
             $filenameNoExtension = $newFilename;
@@ -52,7 +52,7 @@
 
     if(isset($_GET['uploadComplete']))
     {
-        $uploadData = SQL::FetchRow("uploads","id",$_GET['uploadComplete']);
+        $uploadData = MySQL::Row("SELECT * FROM uploads WHERE id = ?",'s',$_GET['uploadComplete']);
         echo '
             <h4>Datei wurde hochgeladen!</h4>
             <center>
@@ -104,7 +104,7 @@
     }
     else if(isset($_GET['uploadSelection']))
     {
-        $uploadData = SQL::FetchRow("uploads","id",$_GET['uploadSelection']);
+        $uploadData = MySQL::Row("SELECT * FROM uploads WHERE id = ?",'s',$_GET['uploadSelection']);
         echo '
             <h4>Datei wurde ausgew&auml;hlt!</h4>
             <center>

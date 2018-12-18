@@ -1,18 +1,8 @@
 <?php
     setlocale (LC_ALL, 'de_DE.UTF-8', 'de_DE@euro', 'de_DE', 'de', 'ge', 'de_DE.ISO_8859-1', 'German_Germany');
     session_start();
-    require("data/mysql_connect.php");
 
-    require("data/extension.lib.php");
-    require("data/file.lib.php");
-    //require("data/mysql.lib.php");
-    require("data/mysql.lib.new.php");
-    //require("data/property.lib.php");
-    require("data/setting.lib.php");
-    require("data/string.lib.php");
-    require("data/notification.lib.php");
-
-    require("data/functions.php");
+    require("headerincludes.php");
 
 
     if(isset($_POST['updateSetting']))
@@ -40,7 +30,7 @@
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $club = $_POST['club'];
 
-        SQL::NonQuery("INSERT INTO users (id,rank,club,email,password) VALUES ('','clubmanager',?,?,?)",'@s',$club,$email,$password);
+        MySQL::NonQuery("INSERT INTO users (id,rank,club,email,password) VALUES ('','clubmanager',?,?,?)",'@s',$club,$email,$password);
 
         Redirect(ThisPage("+newUserAdded"));
         die();
@@ -52,7 +42,7 @@
         $email = $_POST['email'];
         $club = $_POST['club'];
 
-        SQL::NonQuery("UPDATE users SET club = ?, email = ? WHERE id = ?",'@s',$club,$email,$id);
+        MySQL::NonQuery("UPDATE users SET club = ?, email = ? WHERE id = ?",'@s',$club,$email,$id);
 
         Redirect(ThisPage());
         die();
@@ -67,10 +57,10 @@
         //$password = hash('sha256',hash('sha256',$_POST['password']."salt")."pepper");
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-        SQL::NonQuery("INSERT INTO users (id,rank,firstname,lastname,sex,email,password) VALUES ('','administrative',?,?,?,?,?)",'@s',$firstname,$lastname,$gedner,$email,$password);
+        MySQL::NonQuery("INSERT INTO users (id,rank,firstname,lastname,sex,email,password) VALUES ('','administrative',?,?,?,?,?)",'@s',$firstname,$lastname,$gedner,$email,$password);
 
         $first = true;
-        $uid = SQL::Scalar("SELECT id FROM users WHERE email = ? AND password = ?",'@s',$email,$password);
+        $uid = MySQL::Scalar("SELECT id FROM users WHERE email = ? AND password = ?",'@s',$email,$password);
         $SQLIn = "INSERT INTO permissions (id,user_id,permission,allowed) VALUES ";
         $strSQL = "SELECT * FROM permission_list";
         $rs=mysqli_query($link,$strSQL);
@@ -87,7 +77,7 @@
             $first = false;
         }
 
-        SQL::NonQuery($SQLIn);
+        MySQL::NonQuery($SQLIn);
 
         Redirect(ThisPage("+newUserAdded"));
         die();
@@ -101,7 +91,7 @@
         $gedner = $_POST['gender'];
         $email = $_POST['email'];
 
-        SQL::NonQuery("UPDATE users SET firstname = ?, lastname = ?, sex = ?, email = ? WHERE id = ?",'@s',$firstname,$lastname,$gedner,$email,$id);
+        MySQL::NonQuery("UPDATE users SET firstname = ?, lastname = ?, sex = ?, email = ? WHERE id = ?",'@s',$firstname,$lastname,$gedner,$email,$id);
 
         $strSQL = "SELECT * FROM permission_list";
         $rs=mysqli_query($link,$strSQL);
@@ -113,7 +103,7 @@
             // Special Case for ChangeContent
             if($permission == 'DeleteCC' AND isset($_POST['ChangeContent'])) $allowed = 1;
 
-            SQL::NonQuery("UPDATE permissions SET allowed = ? WHERE user_id = ? AND permission = ?",'@s',$allowed,$id,$permission);
+            MySQL::NonQuery("UPDATE permissions SET allowed = ? WHERE user_id = ? AND permission = ?",'@s',$allowed,$id,$permission);
         }
 
         Redirect(ThisPage());
@@ -126,7 +116,7 @@
         $name = $_POST['name'];
         $website = $_POST['website'];
 
-        SQL::NonQuery("INSERT INTO sponsors (id,name,link) VALUES (?,?,?)",'@s',$id,$name,$website);
+        MySQL::NonQuery("INSERT INTO sponsors (id,name,link) VALUES (?,?,?)",'@s',$id,$name,$website);
 
         FileUpload("content/sponsors/","sponsorLogo","","","UPDATE sponsors SET image = 'FNAME' WHERE id = '$id'",uniqid());
 
@@ -140,7 +130,7 @@
         $name = $_POST['name'];
         $website = $_POST['website'];
 
-        SQL::NonQuery("UPDATE sponsors SET name = ?, link = ? WHERE id = ?",'@s',$name,$website,$id);
+        MySQL::NonQuery("UPDATE sponsors SET name = ?, link = ? WHERE id = ?",'@s',$name,$website,$id);
 
         FileUpload("content/sponsors/","sponsorLogo","","","UPDATE sponsors SET image = 'FNAME' WHERE id = '$id'",uniqid());
 
@@ -343,7 +333,7 @@
             if(isset($_GET['cuser']))
             {
                 $uid = $_GET['cuser'];
-                $uDat = SQL::FetchRow("users","id",$_GET['cuser']);
+                $uDat = MySQL::Row("SELECT * FROM users WHERE id = ?",'s',$_GET['cuser']);
 
                 echo '<br><h3>Vereins-Account Bearbeiten</h3>';
 
@@ -390,7 +380,8 @@
             else if(isset($_GET['user']))
             {
                 $uid = $_GET['user'];
-                $uDat = SQL::FetchRow("users","id",$_GET['user']);
+                $uDat = MySQL::Row("SELECT * FROM users WHERE id = ?",'s',$_GET['user']);
+
                 echo '<br><h3>Nutzerdaten von <i>'.$uDat['firstname'].' '.$uDat['lastname'].'</i></h3>';
 
 
@@ -434,11 +425,11 @@
                                             <h5>Verwaltung <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Inhalten auf der Seite"></i></h5>
                                             <table>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("ChangeContent","ChangeContent",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'ChangeContent' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("ChangeContent","ChangeContent",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'ChangeContent' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Seiteninhalte verwalten / &auml;ndern</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("ManageSettings","ManageSettings",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'ManageSettings' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("ManageSettings","ManageSettings",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'ManageSettings' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Seiteneinstellungen ver&auml;ndern</td>
                                                 </tr>
                                             </table>
@@ -448,11 +439,11 @@
                                             <h5>Nutzer <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Nutzern und deren Rechten"></i></h5>
                                             <table>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("ManageUsers","ManageUsers",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'ManageUsers' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("ManageUsers","ManageUsers",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'ManageUsers' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Nutzer hinzuf&uuml;gen (registrieren) / entfernen</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("ManagePermissions","ManagePermissions",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'ManagePermissions' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("ManagePermissions","ManagePermissions",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'ManagePermissions' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Nutzerrechte verwalten</td>
                                                 </tr>
                                             </table>
@@ -466,15 +457,15 @@
                                             <h5>News <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von News-Artikeln"></i></h5>
                                             <table>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("AddNews","AddNews",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddNews' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("AddNews","AddNews",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddNews' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("EditNews","EditNews",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditNews' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("EditNews","EditNews",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditNews' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("DeleteNews","DeleteNews",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteNews' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("DeleteNews","DeleteNews",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteNews' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
                                                 </tr>
                                             </table>
@@ -484,15 +475,15 @@
                                             <h5>Termine <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Terminen im Kalender"></i></h5>
                                             <table>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("AddDate","AddDate",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddDate' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("AddDate","AddDate",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddDate' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("EditDate","EditDate",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditDate' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("EditDate","EditDate",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditDate' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("DeleteDate","DeleteDate",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteDate' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("DeleteDate","DeleteDate",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteDate' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
                                                 </tr>
                                             </table>
@@ -502,15 +493,15 @@
                                             <h5>Vereine <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Vereinen"></i></h5>
                                             <table>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("AddClub","AddClub",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddClub' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("AddClub","AddClub",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddClub' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("EditClub","EditClub",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditClub' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("EditClub","EditClub",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditClub' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("DeleteClub","DeleteClub",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteClub' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("DeleteClub","DeleteClub",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteClub' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
                                                 </tr>
                                             </table>
@@ -520,15 +511,15 @@
                                             <h5>Galerie <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Fotogalerien"></i></h5>
                                             <table>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("AddGallery","AddGallery",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddGallery' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("AddGallery","AddGallery",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddGallery' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("EditGallery","EditGallery",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditGallery' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("EditGallery","EditGallery",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditGallery' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("DeleteGallery","DeleteGallery",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteGallery' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("DeleteGallery","DeleteGallery",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteGallery' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
                                                 </tr>
                                             </table>
@@ -542,15 +533,15 @@
                                             <h5>Nachwuchskader <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Spielern im Nachwuchskader"></i></h5>
                                             <table>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("AddNWK","AddNWK",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddNWK' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("AddNWK","AddNWK",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddNWK' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("EditNWK","EditNWK",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditNWK' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("EditNWK","EditNWK",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditNWK' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("DeleteNWK","DeleteNWK",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteNWK' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("DeleteNWK","DeleteNWK",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteNWK' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
                                                 </tr>
                                             </table>
@@ -560,15 +551,15 @@
                                             <h5>Vorstand <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Mitgliedern im Vorstand"></i></h5>
                                             <table>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("AddVorstand","AddVorstand",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddVorstand' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("AddVorstand","AddVorstand",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddVorstand' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("EditVorstand","EditVorstand",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditVorstand' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("EditVorstand","EditVorstand",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditVorstand' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("DeleteVorstand","DeleteVorstand",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteVorstand' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("DeleteVorstand","DeleteVorstand",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteVorstand' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
                                                 </tr>
                                             </table>
@@ -578,15 +569,15 @@
                                             <h5>Zentralausschreibungen <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Spielern im Nachwuchskader"></i></h5>
                                             <table>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("AddZA","AddZA",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddZA' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("AddZA","AddZA",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddZA' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("EditZA","EditZA",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditZA' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("EditZA","EditZA",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditZA' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("DeleteZA","DeleteZA",SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteZA' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("DeleteZA","DeleteZA",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteZA' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
                                                 </tr>
                                             </table>
@@ -608,47 +599,47 @@
                     $dotRed = '<i class="fas fa-circle" style="color: #FF0000"></i>';
 
                     echo '<br><br><h4>Verwaltung</h4>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'ChangeContent' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Seiteninhalte verwalten / &auml;ndern<br>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'ManageSettings' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Seiteneinstellungen ver&auml;ndern<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'ChangeContent' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Seiteninhalte verwalten / &auml;ndern<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'ManageSettings' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Seiteneinstellungen ver&auml;ndern<br>';
 
                     echo '<br><h4>Nutzer</h4>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'ManageUsers' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Nutzer hinzuf&uuml;gen (registrieren) / entfernen<br>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'ManagePermissions' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Nutzerrechte verwalten<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'ManageUsers' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Nutzer hinzuf&uuml;gen (registrieren) / entfernen<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'ManagePermissions' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Nutzerrechte verwalten<br>';
 
                     echo '<br><h4>News</h4>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddNews' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' News-Artikel erstellen<br>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditNews' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' News-Artikel bearbeiten<br>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteNews' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' News-Artikel l&ouml;schen<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddNews' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' News-Artikel erstellen<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditNews' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' News-Artikel bearbeiten<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteNews' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' News-Artikel l&ouml;schen<br>';
 
                     echo '<br><h4>Termine</h4>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddDate' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Termine erstellen<br>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditDate' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Termine bearbeiten<br>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteDate' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Termine l&ouml;schen<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddDate' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Termine erstellen<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditDate' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Termine bearbeiten<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteDate' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Termine l&ouml;schen<br>';
 
                     echo '<br><h4>Vereine</h4>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddClub' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Vereine hinzuf&uuml;gen<br>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditClub' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Vereine bearbeiten<br>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteClub' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Vereine l&ouml;schen<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddClub' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Vereine hinzuf&uuml;gen<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditClub' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Vereine bearbeiten<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteClub' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Vereine l&ouml;schen<br>';
 
                     echo '<br><h4>Galerie</h4>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddGallery' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Fotogalerie erstellen<br>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditGallery' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Fotogalerie bearbeiten<br>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteGallery' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Fotogalerie l&ouml;schen<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddGallery' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Fotogalerie erstellen<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditGallery' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Fotogalerie bearbeiten<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteGallery' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Fotogalerie l&ouml;schen<br>';
 
                     echo '<br><h4>Nachwuchskader</h4>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddNWK' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Nachwuchskader-Mitglied hinzuf&uuml;gen<br>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditNWK' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Nachwuchskader-Mitglied bearbeiten<br>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteNWK' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Nachwuchskader-Mitglied l&ouml;schen<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddNWK' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Nachwuchskader-Mitglied hinzuf&uuml;gen<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditNWK' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Nachwuchskader-Mitglied bearbeiten<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteNWK' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Nachwuchskader-Mitglied l&ouml;schen<br>';
 
                     echo '<br><h4>Vorstand</h4>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddVorstand' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Vorstand-Mitglied hinzuf&uuml;gen<br>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditVorstand' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Vorstand-Mitglied bearbeiten<br>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteVorstand' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Vorstand-Mitglied l&ouml;schen<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddVorstand' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Vorstand-Mitglied hinzuf&uuml;gen<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditVorstand' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Vorstand-Mitglied bearbeiten<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteVorstand' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Vorstand-Mitglied l&ouml;schen<br>';
 
                     echo '<br><h4>Zentralausschreibungen</h4>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddZA' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Zentralausschreibung erstellen<br>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditZA' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Zentralausschreibung bearbeiten<br>';
-                    echo ((SQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteZA' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Zentralausschreibung l&ouml;schen<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddZA' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Zentralausschreibung erstellen<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditZA' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Zentralausschreibung bearbeiten<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteZA' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Zentralausschreibung l&ouml;schen<br>';
                 }
             }
             else if(isset($_GET['administrative']))
