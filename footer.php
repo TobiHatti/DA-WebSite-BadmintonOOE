@@ -95,12 +95,23 @@
                 <br>
                 <span style="color: #696969">&copy; Copyright 2018 Tobias Hattinger & Paul Luger</span> | <a href="impressum">Impressum</a>
             </footer>
+
+            <script>
+                $( document ).ready(function() {
+                    var doc = document.getElementsByClassName("fr-wrapper");
+                    var nodes = doc[0].childNodes;
+                    var nodeNodes = nodes[0].childNodes;
+                    if(nodeNodes[0].tagName == "A") nodeNodes[0].style.display = "none";
+                });
+            </script>
+
         </body>
     ';
 
     SQL::Close();
 
 ?>
+
 
 <!--
 

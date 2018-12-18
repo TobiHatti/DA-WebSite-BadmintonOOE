@@ -21,7 +21,7 @@
 
     if(Setting::Get("ShowTodaysEvents") AND SQL::Exist("SELECT id FROM zentralausschreibungen WHERE date_begin = ?",'@s',$today))
     {
-        $zaVal = SQL::FetchRow("zentralausschreibungen","date_begin",$today);
+        $zaVal = SQL::Row("SELECT * FROM zentralausschreibungen WHERE date_begin = ?",'s',$today);
 
         echo '
             <h2>Heute, am '.str_replace('ä','&auml;',strftime("%A den %d. %B %Y",strtotime($today))).':</h2>
@@ -328,7 +328,7 @@
                         </ul>
                     </div>
                     <div>
-                        <h3><img src="/content/rss.png" alt="" style="width:20px; height: 20px; margin-bottom:-2px; margin-right: 5px;"/>&Ouml;BV News</h3>
+                        <h3><!--<img src="/content/rss.png" alt="" style="width:20px; height: 20px; margin-bottom:-2px; margin-right: 5px;"/>-->&Ouml;BV News</h3>
                         <hr>
                         <center>
                             <div style="max-width: 500px; min-width: 300px;">
@@ -355,7 +355,7 @@
 
                 echo '
 
-
+                <!--
                 <br><br><br><br><br><br>
                 <hr>
                 <hr>
@@ -372,7 +372,7 @@
                     <li><u><b>Demos/Training</b></u></li>
                     <li><a href="__formoverview">PHP-Forms Overview</a></li>
                 </ul>
-
+                -->
             </div>
         </div>
     ';
