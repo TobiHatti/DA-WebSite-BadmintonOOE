@@ -12,7 +12,7 @@
         $termin_time=$_POST['time'];
         $termin_kategorie=$_POST['kategorie'];
 
-        SQL::NonQuery("INSERT INTO agenda (id, titel, description, date, place, time,kategorie) VALUES ('',?,?,?,?,?,?)",'@s',$terminName,$description,$termin_date,$termin_place,$termin_time,$termin_kategorie);
+        MySQL::NonQuery("INSERT INTO agenda (id, titel, description, date, place, time,kategorie) VALUES ('',?,?,?,?,?,?)",'@s',$terminName,$description,$termin_date,$termin_place,$termin_time,$termin_kategorie);
 
         Redirect("/kalender");
         die();
@@ -39,7 +39,7 @@
         WHERE id = ?
         ";
 
-        SQL::NonQuery($strSQL,'@s',$terminName,$description,$termin_date,$termin_place,$termin_time,$termin_kategorie,$id);
+        MySQL::NonQuery($strSQL,'@s',$terminName,$description,$termin_date,$termin_place,$termin_time,$termin_kategorie,$id);
 
         Redirect("/kalender");
         die();
@@ -154,7 +154,7 @@
             $entriesPerPage = Setting::Get("PagerSizeCalendar");
             $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
 
-            $strSQL = "SELECT id,date,titel,description,kategorie FROM agenda UNION ALL SELECT id,date_begin AS date,CONCAT_WS(' ', title_line1, title_line2) AS titel, NULL AS description,kategorie FROM zentralausschreibungen ORDER BY date ASC LIMIT $offset,$entriesPerPage";
+            $strSQL = "SELECT id,date_begin,titel,description,kategorie FROM agenda UNION ALL SELECT id,date_begin AS date,CONCAT_WS(' ', title_line1, title_line2) AS titel, NULL AS description,kategorie FROM zentralausschreibungen ORDER BY date_begin ASC LIMIT $offset,$entriesPerPage";
             $rs=mysqli_query($link,$strSQL);
             while($row=mysqli_fetch_assoc($rs))
             {
@@ -163,8 +163,8 @@
                 echo'
                     <div class="calendar_list" style="border-left-color: '.Setting::Get("Color".$row['kategorie']).'">
                         '.($isZA ? '<span style="color: #696969"><i>Zentralausschreibung</i></span>' : '').'
-                        <a onclick="window.sessionStorage.setItem(\'toggleCalendar\',1);" href="/kalender/event/'.($isZA ? 'ZA' : 'AG').$row['id'].'/'.$row['date'].'"><h4 style="margin:0">'.$row['titel'].'</h4></a>
-                        <a onclick="window.sessionStorage.setItem(\'toggleCalendar\',1);" href="/kalender/datum/'.$row['date'].'">'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['date']))).'</span></a>
+                        <a onclick="window.sessionStorage.setItem(\'toggleCalendar\',1);" href="/kalender/event/'.($isZA ? 'ZA' : 'AG').$row['id'].'/'.$row['date_begin'].'"><h4 style="margin:0">'.$row['titel'].'</h4></a>
+                        <a onclick="window.sessionStorage.setItem(\'toggleCalendar\',1);" href="/kalender/datum/'.$row['date_begin'].'">'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['date_begin']))).'</span></a>
                         '.($isZA ? '' : ('<p>'.$row['description'].'</p>')).'
                     </div>
                 ';

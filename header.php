@@ -2,22 +2,12 @@
     session_start();
     setlocale (LC_ALL, 'de_DE.UTF-8', 'de_DE@euro', 'de_DE', 'de', 'ge', 'de_DE.ISO_8859-1', 'German_Germany');
 
-    require("data/mysql_connect.php");
+    require("headerincludes.php");
 
-    require("data/extension.lib.php");
-    require("data/file.lib.php");
-    //require("data/mysql.lib.php");
-    require("data/mysql.lib.new.php");
-    //require("data/property.lib.php");
-    require("data/setting.lib.php");
-    require("data/string.lib.php");
-    require("data/notification.lib.php");
-
-    require("data/functions.php");
     require("data/editfunctions.php");
     require("data/multipagepost.php");
 
-    if(ThisPage()=="") SQL::PeriodicSave('d');
+    if(ThisPage()=="") MySQL::PeriodicSave('d');
 
 
     echo '<!DOCTYPE html>
@@ -32,7 +22,7 @@
                 echo '
             </head>
 
-            <body>
+            <body id="mainPage">
 
                 ';
 
@@ -64,8 +54,6 @@
                     <!-- <div class="header_sponsor"></div> -->
                     ';
 
-                    echo CatchNotification();
-
                     if(isset($_SESSION['userID']) AND CheckRank() == "administrative")
                     {
                         echo '<div class="quickNav">Seitenverwaltung<img src="/content/favicon.png" alt="" style="margin-bottom: -3px; margin-right: 8px; margin-left: 8px;"/>';
@@ -86,8 +74,8 @@
                         if(CheckPermission("AddGallery")) echo '<a href="/fotogalerie/neu">Galerie hinzuf&uuml;gen</a> | ';
                         if(CheckPermission("AddDate")) echo '<a href="/kalender/neu">Termin hinzuf&uuml;gen</a> | ';
 
-                        $headerClubID = SQL::Scalar("SELECT club FROM users WHERE id = ?",'s',$_SESSION['userID']);
-                        $headerClubData = SQL::Row("SELECT * FROM vereine WHERE kennzahl = ?",'i',$headerClubID);
+                        $headerClubID = MySQL::Scalar("SELECT club FROM users WHERE id = ?",'s',$_SESSION['userID']);
+                        $headerClubData = MySQL::Row("SELECT * FROM vereine WHERE kennzahl = ?",'i',$headerClubID);
 
                         echo '<span style="float:right">'.$headerClubData['verein'].' '.$headerClubData['ort'].' - <a href="/logout"><i class="fas fa-door-open"></i> Abmelden</a></span></div>';
                     }

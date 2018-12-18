@@ -19,9 +19,9 @@
     ';
 
 
-    if(Setting::Get("ShowTodaysEvents") AND SQL::Exist("SELECT id FROM zentralausschreibungen WHERE date_begin = ?",'@s',$today))
+    if(Setting::Get("ShowTodaysEvents") AND MySQL::Exist("SELECT id FROM zentralausschreibungen WHERE date_begin = ?",'@s',$today))
     {
-        $zaVal = SQL::Row("SELECT * FROM zentralausschreibungen WHERE date_begin = ?",'s',$today);
+        $zaVal = MySQL::Row("SELECT * FROM zentralausschreibungen WHERE date_begin = ?",'s',$today);
 
         echo '
             <h2>Heute, am '.str_replace('ä','&auml;',strftime("%A den %d. %B %Y",strtotime($today))).':</h2>
@@ -98,15 +98,15 @@
                                     //RefreshSliderContent();
                                     // 3 SQL-Queries are required for the slider to work in the best way.
                                     // Bundeling some queries can slow the slider down and skip slides
-                                    if(SQL::Count("SELECT * FROM news WHERE tags = 'Spieler-des-Monats'")>0)
+                                    if(MySQL::Count("SELECT * FROM news WHERE tags = 'Spieler-des-Monats'")>0)
                                     {
-                                        $sdm = SQL::Row("SELECT * FROM news WHERE tags = 'Spieler-des-Monats' ORDER BY id DESC LIMIT 0,1");
+                                        $sdm = MySQL::Row("SELECT * FROM news WHERE tags = 'Spieler-des-Monats' ORDER BY id DESC LIMIT 0,1");
                                         $showSDM = Setting::Get("ShowSpielerDesMonats");
                                     }
                                     else $showSDM = false;
 
                                     $strSQL = "SELECT * FROM news WHERE thumbnail NOT LIKE '' AND tags NOT LIKE 'Spieler-des-Monats' ORDER BY release_date DESC, id DESC LIMIT 0,$sliderLimit";
-                                    $sliderImageDataArray = SQL::Cluster($strSQL);
+                                    $sliderImageDataArray = MySQL::Cluster($strSQL);
 
 
                                     $sdmPosition = Setting::Get("SDMSliderPosition");
@@ -258,7 +258,7 @@
                             </center>
                         ';
 
-                        echo SQL::Scalar("SELECT text FROM page_content WHERE page = 'index' AND paragraph_index = '1'");
+                        echo MySQL::Scalar("SELECT text FROM page_content WHERE page = 'index' AND paragraph_index = '1'");
 
                         echo '
                     </div>
@@ -291,7 +291,7 @@
                         ';
                         if(CheckPermission("ChangeContent")) echo EditButton("/home/Links/bearbeiten").'<br>';
 
-                        echo SQL::Scalar("SELECT text FROM page_content WHERE page = 'index' AND paragraph_index = '3'");
+                        echo MySQL::Scalar("SELECT text FROM page_content WHERE page = 'index' AND paragraph_index = '3'");
 
                         echo '
                     </div>

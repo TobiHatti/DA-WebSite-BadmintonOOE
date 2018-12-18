@@ -2,18 +2,7 @@
     setlocale (LC_ALL, 'de_DE.UTF-8', 'de_DE@euro', 'de_DE', 'de', 'ge', 'de_DE.ISO_8859-1', 'German_Germany');
     error_reporting(E_ALL ^ E_NOTICE);
 
-    require("data/mysql_connect.php");
-
-    require("data/extension.lib.php");
-    require("data/file.lib.php");
-    //require("data/mysql.lib.php");
-    require("data/mysql.lib.new.php");
-    //require("data/property.lib.php");
-    require("data/setting.lib.php");
-    require("data/string.lib.php");
-    require("data/notification.lib.php");
-
-    require("data/functions.php");
+    require("headerincludes.php");
 
     echo '
         <!DOCTYPE html>
@@ -21,6 +10,7 @@
             <head>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
                 <link rel="stylesheet" type="text/css" href="/css/style.css">
+                <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
                 <meta charset="utf-8">
             </head>
             <body>
@@ -152,6 +142,7 @@
 
     echo '
                 </div>
+
             </body>
         </html>
     ';

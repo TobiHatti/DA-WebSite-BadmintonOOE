@@ -1,18 +1,8 @@
 <?php
 
     setlocale (LC_ALL, 'de_DE.UTF-8', 'de_DE@euro', 'de_DE', 'de', 'ge', 'de_DE.ISO_8859-1', 'German_Germany');
-    require("data/mysql_connect.php");
 
-    require("data/extension.lib.php");
-    require("data/file.lib.php");
-    //require("data/mysql.lib.php");
-    require("data/mysql.lib.new.php");
-    //require("data/property.lib.php");
-    require("data/setting.lib.php");
-    require("data/string.lib.php");
-    require("data/notification.lib.php");
-
-    require("data/functions.php");
+    require("headerincludes.php");
 
 
     echo '<head>';
@@ -29,7 +19,7 @@
     }
     else
     {
-        $val = SQL::FetchRow("news_templates","id",$_GET['template']);
+        $val = MySQL::Row("SELECT * FROM news_templates WHERE id = ?",'s',$_GET['template']);
 
         if($val['bgIsImage']) $backgroundStyle = "background-size: cover; background-image: url('content/newstemplates/".$val['bgPath']."')";
         else

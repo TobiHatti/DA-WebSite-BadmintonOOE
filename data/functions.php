@@ -187,7 +187,7 @@ function PageContent($paragraph_index,$allowEdit=false,$reactToCustomPage="",$is
 
     if($reactToCustomPage!="") $page = $reactToCustomPage;
 
-    $content = nl2br(SQL::Scalar("SELECT text AS x FROM page_content WHERE page = ? AND paragraph_index = ?",'@s',$page,$paragraph_index));
+    $content = nl2br(MySQL::Scalar("SELECT text AS x FROM page_content WHERE page = ? AND paragraph_index = ?",'@s',$page,$paragraph_index));
 
     if(!$allowEdit)
     {
@@ -253,14 +253,14 @@ function CheckPermission($permission)
     {
         $uid = $_SESSION['userID'];
 
-        if(SQL::Scalar("SELECT allowed AS x FROM permissions WHERE permission = ? AND user_id = ?",'@s',$permission,$uid)==1) return true;
+        if(MySQL::Scalar("SELECT allowed AS x FROM permissions WHERE permission = ? AND user_id = ?",'@s',$permission,$uid)==1) return true;
         else return false;
     }
 }
 
 function CheckRank()
 {
-    if(isset($_SESSION['rank']) AND $_SESSION['rank'] == SQL::Fetch("users","rank","id",$_SESSION['userID']))
+    if(isset($_SESSION['rank']) AND $_SESSION['rank'] == MySQL::Scalar("SELECT rank FROM users WHERE id = ?",'s',$_SESSION['userID']))
     {
         return $_SESSION['rank'];
     }
@@ -293,8 +293,10 @@ function ShowTags($tagstr,$disableLinks = false, $targetTop = false)
 
     foreach($tags = explode('||',$tagstr) as $tag)
     {
-        if($tag != "" AND $tag != $tags[0]) $retval .= ',&nbsp;&nbsp;<a '.(($targetTop) ? 'target="_top"' : '').' href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.((SQL::Fetch("news_tags","name","id",$tag)!="") ? SQL::Fetch("news_tags","name","id",$tag) : $tag).'</a>';
-        if($tag == $tags[0]) $retval .= '<a '.(($targetTop) ? 'target="_top"' : '').' href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.((SQL::Fetch("news_tags","name","id",$tag)!="") ? SQL::Fetch("news_tags","name","id",$tag) : $tag).'</a>';
+        $ntname = MySQL::Scalar("SELECT name FROM news_tags WHERE id = ?",'s',$tag);
+
+        if($tag != "" AND $tag != $tags[0]) $retval .= ',&nbsp;&nbsp;<a '.(($targetTop) ? 'target="_top"' : '').' href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.(($ntname!="") ? $ntname : $tag).'</a>';
+        if($tag == $tags[0]) $retval .= '<a '.(($targetTop) ? 'target="_top"' : '').' href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.(($ntname!="") ? $ntname : $tag).'</a>';
     }
 
    return $retval;
@@ -364,7 +366,7 @@ function Pager($sqlQuery,$entriesPerPage = 10,$customURL="")
     $thisPage = ($customURL == "") ? ThisPage() : $customURL;
 
     $currentPage = (isset($_GET['page']) ? $_GET['page'] : 1 );
-    $entryCounts = SQL::Count($sqlQuery);
+    $entryCounts = MySQL::Count($sqlQuery);
 
     $pages = 0;
 
@@ -674,7 +676,7 @@ function SettingOption($type, $description, $property, $selectArray='')
 
         foreach($selectArray as $opt)
         {
-            $retval.= '<option value="'.$opt.'" '.((Setting::Get($property) == $opt) ? 'selected' : '').'>'.Fetch("slides","name","filename",$opt).'</option>';
+            $retval.= '<option value="'.$opt.'" '.((Setting::Get($property) == $opt) ? 'selected' : '').'>'.MySQL::Scalar("SELECT name FROM slides WHERE filename = ?",'s',$opt).'</option>';
         }
 
         $retval .= '
@@ -820,7 +822,7 @@ function SeachTile($kategory, $id)
 {
     if($kategory=="News")
     {
-        $val = SQL::Row("SELECT * FROM news WHERE id = ?",'s',$id);
+        $val = MySQL::Row("SELECT * FROM news WHERE id = ?",'s',$id);
 
         echo '
             <a href="/news/artikel/'.$val['article_url'].'" style="text-decoration: none;">
@@ -842,7 +844,7 @@ function SeachTile($kategory, $id)
     }
     else if($kategory=="Zentralausschreibungen")
     {
-        $val = SQL::Row("SELECT * FROM zentralausschreibungen WHERE id = ?",'s',$id);
+        $val = MySQL::Row("SELECT * FROM zentralausschreibungen WHERE id = ?",'s',$id);
 
         echo '
             <a href="/zentralausschreibung#'.SReplace($val['title_line1'].' '.$val['title_line2']).'" style="text-decoration: none;">
@@ -868,13 +870,13 @@ function SeachTile($kategory, $id)
     }
     else if($kategory=="Fotogalerie")
     {
-        $val = SQL::Row("SELECT * FROM fotogalerie WHERE id = ?",'s',$id);
+        $val = MySQL::Row("SELECT * FROM fotogalerie WHERE id = ?",'s',$id);
 
         echo '
             <a href="/fotogalerie/album/'.$val['album_url'].'" style="text-decoration: none;">
                 <div class="search_tile">
                     <div class="prevImg">
-                        <img src="/content/gallery/'.$val['album_url'].'/'.Fetch("gallery_images","image","album_id",$id).'" alt="" />
+                        <img src="/content/gallery/'.$val['album_url'].'/'.MySQL::Scalar("SELECT image FROM gallery_images WHERE album_id = ?",'s',$id).'" alt="" />
                     </div>
                     <div class="content_s">
                         <i>Fotogalerie</i><br>
@@ -890,7 +892,7 @@ function SeachTile($kategory, $id)
     }
     else if($kategory=="Kalender")
     {
-        $val = SQL::Row("SELECT * FROM agenda WHERE id = ?",'s',$id);
+        $val = MySQL::Row("SELECT * FROM agenda WHERE id = ?",'s',$id);
 
         echo '
             <a href="/kalender/event/AG'.$id.'/'.$val['date'].'" style="text-decoration: none;">
@@ -918,7 +920,7 @@ function SeachTile($kategory, $id)
 
 function ShowZATable($id)
 {
-    $row = SQL::Row("SELECT * FROM zentralausschreibungen WHERE id = ?",'s',$id);
+    $row = MySQL::Row("SELECT * FROM zentralausschreibungen WHERE id = ?",'s',$id);
 
     $retval = '<table>';
 

@@ -11,7 +11,7 @@
         $birthdate = $_POST['birthdate'];
         $club = $_POST['club'];
 
-        if(isset($_POST['add_nwk']))SQL::NonQuery("INSERT INTO nachwuchskader (id,firstname,lastname,gender,club,birthdate) VALUES (?,?,?,?,?,?)",'@s',$id,$fn,$ln,$gender,$club,$birthdate);
+        if(isset($_POST['add_nwk']))MySQL::NonQuery("INSERT INTO nachwuchskader (id,firstname,lastname,gender,club,birthdate) VALUES (?,?,?,?,?,?)",'@s',$id,$fn,$ln,$gender,$club,$birthdate);
         else
         {
             $id = $_POST["edit_nwk"];
@@ -24,7 +24,7 @@
             club = ?
             WHERE id = ?";
 
-            SQL::NonQuery($strSQL,'@s',$gender,$fn,$ln,$birthdate,$club,$id);
+            MySQL::NonQuery($strSQL,'@s',$gender,$fn,$ln,$birthdate,$club,$id);
         }
 
         FileUpload("/content/nachwuchskader/","playerImg","","","UPDATE nachwuchskader SET image = 'FNAME' WHERE id = '$id'",uniqid());
@@ -100,7 +100,7 @@
 
         if(isset($_GET['edit']) AND CheckPermission("EditNWK"))
         {
-            $pdat = SQL::FetchRow("nachwuchskader","id",$_GET['edit']);
+            $pdat = MySQL::Row("SELECT * FROM nachwuchskader WHERE id = ?",'s',$_GET['edit']);
 
             echo '
                 <h2 class="stagfade2">Spieler bearbeiten</h2>
@@ -177,7 +177,7 @@
                     <div>
                         <b>'.$row['lastname'].'</b> '.$row['firstname'].'<br>
                         Geb.: '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['birthdate']))).'<br>
-                        <span style="color: #696969">'.SQL::Fetch("vereine","verein","kennzahl",$row['club']).' '.SQL::Fetch("vereine","ort","kennzahl",$row['club']).'</span>
+                        <span style="color: #696969">'.MySQL::Scalar("SELECT CONCAT_WS(' ',verein,ort) FROM vereine WHERE kennzahl = ?",'s',$row['club']).'</span>
                     </div>
                     <div style="position: absolute; bottom: 0px; right: 0px; height: 20px;">
                     ';
@@ -203,7 +203,7 @@
                     <div>
                         <b>'.$row['lastname'].'</b> '.$row['firstname'].'<br>
                         Geb.: '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['birthdate']))).'<br>
-                        <span style="color: #696969">'.SQL::Fetch("vereine","verein","kennzahl",$row['club']).' '.SQL::Fetch("vereine","ort","kennzahl",$row['club']).'</span>
+                        <span style="color: #696969">'.MySQL::Scalar("SELECT CONCAT_WS(' ',verein,ort) FROM vereine WHERE kennzahl = ?",'s',$row['club']).'</span>
                     </div>
                     <div style="position: absolute; bottom: 0px; right: 0px; height: 20px;">
                     ';
@@ -231,7 +231,7 @@
                     <div>
                         <b>'.$row['lastname'].'</b> '.$row['firstname'].'<br>
                         Geb.: '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['birthdate']))).'<br>
-                        <span style="color: #696969">'.SQL::Fetch("vereine","verein","kennzahl",$row['club']).' '.SQL::Fetch("vereine","ort","kennzahl",$row['club']).'</span>
+                        <span style="color: #696969">'.MySQL::Scalar("SELECT CONCAT_WS(' ',verein,ort) FROM vereine WHERE kennzahl = ?",'s',$row['club']).'</span>
                     </div>
                     <div style="position: absolute; bottom: 0px; right: 0px; height: 20px;">
                     ';
@@ -257,7 +257,7 @@
                     <div>
                         <b>'.$row['lastname'].'</b> '.$row['firstname'].'<br>
                         Geb.: '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['birthdate']))).'<br>
-                        <span style="color: #696969">'.SQL::Fetch("vereine","verein","kennzahl",$row['club']).' '.SQL::Fetch("vereine","ort","kennzahl",$row['club']).'</span>
+                        <span style="color: #696969">'.MySQL::Scalar("SELECT CONCAT_WS(' ',verein,ort) FROM vereine WHERE kennzahl = ?",'s',$row['club']).'</span>
                     </div>
                     <div style="position: absolute; bottom: 0px; right: 0px; height: 20px;">
                     ';
@@ -285,7 +285,7 @@
                     <div>
                         <b>'.$row['lastname'].'</b> '.$row['firstname'].'<br>
                         Geb.: '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['birthdate']))).'<br>
-                        <span style="color: #696969">'.SQL::Fetch("vereine","verein","kennzahl",$row['club']).' '.SQL::Fetch("vereine","ort","kennzahl",$row['club']).'</span>
+                        <span style="color: #696969">'.MySQL::Scalar("SELECT CONCAT_WS(' ',verein,ort) FROM vereine WHERE kennzahl = ?",'s',$row['club']).'</span>
                     </div>
                     <div style="position: absolute; bottom: 0px; right: 0px; height: 20px;">
                     ';
@@ -311,7 +311,7 @@
                     <div>
                         <b>'.$row['lastname'].'</b> '.$row['firstname'].'<br>
                         Geb.: '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['birthdate']))).'<br>
-                        <span style="color: #696969">'.SQL::Fetch("vereine","verein","kennzahl",$row['club']).' '.SQL::Fetch("vereine","ort","kennzahl",$row['club']).'</span>
+                        <span style="color: #696969">'.MySQL::Scalar("SELECT CONCAT_WS(' ',verein,ort) FROM vereine WHERE kennzahl = ?",'s',$row['club']).'</span>
                     </div>
                     <div style="position: absolute; bottom: 0px; right: 0px; height: 20px;">
                     ';

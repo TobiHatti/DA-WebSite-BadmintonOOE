@@ -23,7 +23,7 @@
         $author = (isset($_SESSION['userID'])) ? $_SESSION['userID'] : 0 ;
 
         // In case the ID already exists, cycle
-        if(SQL::Exist("SELECT article_url FROM news WHERE article_url = ?",'@s',$article_url))
+        if(MySQL::Exist("SELECT article_url FROM news WHERE article_url = ?",'@s',$article_url))
         {
             $i=2;
             do
@@ -31,12 +31,12 @@
                 $newID = $article_url.'-'.$i;
                 $i++;
             }
-            while(SQL::Exist("SELECT article_url FROM news WHERE article_url = ?",'@s',$newID));
+            while(MySQL::Exist("SELECT article_url FROM news WHERE article_url = ?",'@s',$newID));
 
             $article_url = $newID;
         }
 
-        SQL::NonQuery("INSERT INTO news (id,article_url,title, author,tags,article,release_date,thumbnail) VALUES ('',?,?,?,?,?,?,?)",'@s',$article_url,$title,$author,$tags,$article,$release,$thumb);
+        MySQL::NonQuery("INSERT INTO news (id,article_url,title, author,tags,article,release_date,thumbnail) VALUES ('',?,?,?,?,?,?,?)",'@s',$article_url,$title,$author,$tags,$article,$release,$thumb);
 
         // Changing the News-Slider in Index
         RefreshSliderContent();
@@ -54,7 +54,7 @@
 
         list($article,$nameid,$thumb,$title) = ArticlePreProcessRoutine($article);
 
-        SQL::NonQuery("UPDATE news SET title = ?,article_url = ?, tags = ?, article = ?, release_date = ?, thumbnail = ? WHERE id = ?",'@s',$title,$nameid,$tags,$article,$release,$thumb,$id);
+        MySQL::NonQuery("UPDATE news SET title = ?,article_url = ?, tags = ?, article = ?, release_date = ?, thumbnail = ? WHERE id = ?",'@s',$title,$nameid,$tags,$article,$release,$thumb,$id);
 
         Redirect("/news/artikel/".$nameid);
         die();
@@ -128,27 +128,27 @@
         }
         else
         {
-            SQL::NonQuery("UPDATE news SET views = views + 1 WHERE article_url = ?",'@s',$_GET['artikel']);
+            MySQL::NonQuery("UPDATE news SET views = views + 1 WHERE article_url = ?",'@s',$_GET['artikel']);
 
-            $id = SQL::Fetch("news","id","article_url",$_GET['artikel']);
+            $articleData = MySQL::Row("SELECT * FROM news WHERE article_url = ?",'s',$_GET['artikel']);
 
             echo '
                 <div class="doublecol_singletile">
                     <article>
-                        <span style="color: #A9A9A9">'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime(SQL::Fetch("news","release_date","article_url",$_GET['artikel'])))).' |</span>
-                        '.ShowTags(SQL::Fetch("news","tags","article_url",$_GET['artikel'])).'
-                        <div class="fr-view fr-element">'.SQL::Fetch("news","article","article_url",$_GET['artikel']).'</div>
-                        <span>'.SQL::Fetch("news","views","article_url",$_GET['artikel']).' Aufrufe</span><br><br>
+                        <span style="color: #A9A9A9">'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($articleData['release_date']))).' |</span>
+                        '.ShowTags($articleData['tags']).'
+                        <div class="fr-view fr-element">'.$articleData['article'].'</div>
+                        <span>'.$articleData['views'].' Aufrufe</span><br><br>
                         ';
 
                         if(CheckPermission("EditNews"))
                         {
-                            echo '<span style="float: left;"> '.EditButton(ThisPage("!editContent","!editSC","+editSC=$id")).' </span>';
+                            echo '<span style="float: left;"> '.EditButton(ThisPage("!editContent","!editSC","+editSC=".$articleData['id'])).' </span>';
                         }
 
                         if(CheckPermission("DeleteNews"))
                         {
-                            echo '<span style="float: left;"> '.DeleteButton("News","news",$id).' </span>';
+                            echo '<span style="float: left;"> '.DeleteButton("News","news",$articleData['id']).' </span>';
                         }
 
                         echo '
@@ -165,7 +165,7 @@
         echo '
             <div class="doublecol_singletile">
                 <article>
-                    <h2 class="stagfade1">'.SQL::Fetch("news_tags","name","id",$_GET['kategorie']).'</h2>
+                    <h2 class="stagfade1">'.MySQL::Scalar("SELECT name FROM news_tags WHERE id = ?",'s',$_GET['kategorie']).'</h2>
                     <h5 class="stagfade2">Seite '.((isset($_GET['page'])) ? $_GET['page'] : 1 ).'</h5>
                     <br>
         ';

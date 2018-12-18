@@ -17,11 +17,14 @@
     $originalClub = $club;
 
 
-    $color1 = SQL::Fetch("ranglisten_settings","value","setting","Y".$year."ColorA");
-    $color2 = SQL::Fetch("ranglisten_settings","value","setting","Y".$year."ColorB");
-    $colorHilight = SQL::Fetch("ranglisten_settings","value","setting","HighlightColor");
+    $accentColor1Sett = "Y".$year."ColorA";
+    $accentColor2Sett = "Y".$year."ColorB";
+    $highlightColorSett = "HighlightColor";
 
-
+    $color1 = MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$accentColor1Sett);
+    $color2 = MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$accentColor2Sett);
+    $colorHilight = MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$highlightColorSett);
+    
 
     $spreadsheet = new Spreadsheet();
     $spreadsheet->setActiveSheetIndex(0);
@@ -280,7 +283,7 @@
     while($rowc=mysqli_fetch_assoc($rsc))
     {
         $club = $rowc['club'];
-        $clubVals = SQL::FetchRow("vereine","kennzahl",$club);
+        $clubVals = MySQL::Row("SELECT * FROM vereine WHERE kennzahl = ?",'s',$club);
 
 
         //========================================================================================

@@ -9,9 +9,9 @@
         $lastname=$_POST['lastname'];
         $birthdate=$_POST['birthdate'];
         $number=$_POST['number'];
-        $club = SQL::Fetch("users","club","id",$_SESSION['userID']);
+        $club = MySQL::Scalar("SELECT club FROM users WHERE id = ?",'i',$_SESSION['userID']);
 
-        SQL::NonQuery("INSERT INTO members (id,club,number,gender,firstname,lastname,birthdate) VALUES (?,?,?,?,?,?,?)",'@s',$uid,$club,$number,$gender,$firstname,$lastname,$birthdate);
+        MySQL::NonQuery("INSERT INTO members (id,club,number,gender,firstname,lastname,birthdate) VALUES (?,?,?,?,?,?,?)",'@s',$uid,$club,$number,$gender,$firstname,$lastname,$birthdate);
 
         FileUpload("content/members/","image","","","UPDATE members SET img = 'FNAME' WHERE id = '$uid'",uniqid());
 
@@ -27,7 +27,7 @@
         $birthdate=$_POST['birthdate'];
         $number=$_POST['number'];
 
-        SQL::NonQuery("UPDATE members SET firstname = ?, lastname = ?, birthdate = ?, number = ? WHERE id = ?",'@s',$firstname,$lastname,$birthdate,$number,$id);
+        MySQL::NonQuery("UPDATE members SET firstname = ?, lastname = ?, birthdate = ?, number = ? WHERE id = ?",'@s',$firstname,$lastname,$birthdate,$number,$id);
 
         FileUpload("content/members/","image","","","UPDATE members SET img = 'FNAME' WHERE id = '$id'",uniqid());
 
@@ -73,7 +73,7 @@
         contact_phone3 = ?
         WHERE vereine.id = ?;";
 
-        SQL::NonQuery($strSQL,'@s',$verein,$ort,$kennzahl,$dachverband,$website,$name,$street,$city,$email,$label1,$phone1,$label2,$phone2,$label3,$phone3,$id);
+        MySQL::NonQuery($strSQL,'@s',$verein,$ort,$kennzahl,$dachverband,$website,$name,$street,$city,$email,$label1,$phone1,$label2,$phone2,$label3,$phone3,$id);
 
         Redirect("/verein-info");
         die();
@@ -81,7 +81,7 @@
 
     if(CheckRank() == "clubmanager")
     {
-        $club = SQL::Fetch("users","club","id",$_SESSION['userID']);
+        $club = MySQL::Scalar("SELECT club FROM users WHERE id = ?",'i',$_SESSION['userID']);
         if(isset($_GET['mitglieder']))
         {
             if(isset($_GET['neu']))
@@ -217,9 +217,8 @@
         }
         else
         {
-
-
-            $cdata = SQL::FetchRow("vereine","kennzahl",SQL::Fetch("users","club","id",$_SESSION['userID']));
+            $kennzahl = MySQL::Scalar("SELECT club FROM users WHERE id = ",'i',$_SESSION['userID']);
+            $cdata = MySQL::Row("SELECT * FROM vereine WHERE kennzahl = ?",'s',$kennzahl);
 
             echo '
                 <h2 class="stagfade1">'.$cdata['verein'].' '.$cdata['ort'].'</h2>

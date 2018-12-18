@@ -1,21 +1,11 @@
 <?php
     setlocale (LC_ALL, 'de_DE.UTF-8', 'de_DE@euro', 'de_DE', 'de', 'ge', 'de_DE.ISO_8859-1', 'German_Germany');
-    require("data/mysql_connect.php");
 
-    require("data/extension.lib.php");
-    require("data/file.lib.php");
-    //require("data/mysql.lib.php");
-    require("data/mysql.lib.new.php");
-    //require("data/property.lib.php");
-    require("data/setting.lib.php");
-    require("data/string.lib.php");
-    require("data/notification.lib.php");
-
-    require("data/functions.php");
+    require("headerincludes.php");
 
     echo '<head>';
     require("headerlinks.php");
-    echo '</head>';
+    echo '</head><body>';
 
 
 
@@ -25,7 +15,10 @@
 
     $dateStr = $y.'-'.str_pad($m, 2, "0", STR_PAD_LEFT).'-';
 
-    echo '<h1 class="stagfade1">'.str_replace('ä','&auml;',strftime("%B %Y",strtotime($y.'-'.($m+1).'-0'))).'</h1>';
+    $monthDisplay = ($m == 12) ? 1 : ($m+1);
+    $yearDisplay = ($m == 12) ? ($y + 1) : $y;
+
+    echo '<h1 class="stagfade1">'.str_replace('ä','&auml;',strftime("%B %Y",strtotime($yearDisplay.'-'.$monthDisplay.'-0'))).'</h1>';
 
 
     echo '<div class="iframe_content stagfade2">';
@@ -50,12 +43,12 @@
         echo '</ul>';
     }
 
-    if(SQL::Count("SELECT * FROM news WHERE release_date LIKE '$dateStr%'")==0)
+    if(MySQL::Count("SELECT * FROM news WHERE release_date LIKE '$dateStr%'")==0)
     {
-        echo '<h4>Keine ergebnisse</h4>';
+        echo '<h4>Keine Ergebnisse</h4>';
     }
 
-    echo '</div>';
+    echo '</div></body>';
 
 
 ?>

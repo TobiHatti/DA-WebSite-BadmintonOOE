@@ -1,7 +1,7 @@
 <?php
     include("data/mysql.lib.new.php");
 
-    $rows = SQL::Cluster("SELECT * FROM settings LIMIT 0,3");
+    $rows = MySQL::Cluster("SELECT * FROM settings LIMIT 0,3");
 
     foreach($rows as $row)
     {

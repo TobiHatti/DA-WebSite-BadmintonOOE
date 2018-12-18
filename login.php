@@ -5,12 +5,12 @@
     {
         $email=$_POST['email'];
 
-        $passwordHash = SQL::Scalar("SELECT password FROM users WHERE email = ?",'s',$email);
+        $passwordHash = MySQL::Scalar("SELECT password FROM users WHERE email = ?",'s',$email);
         $executed = false;
 
         if(password_verify($_POST['password'],$passwordHash))
         {
-            $userDataArray = SQL::Row("SELECT * FROM users WHERE email = ?",'s',$email);
+            $userDataArray = MySQL::Row("SELECT * FROM users WHERE email = ?",'s',$email);
 
             $executed = true;
 

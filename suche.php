@@ -50,8 +50,8 @@
                     ORDER BY date DESC
                 ";
 
-                $resultCount = SQL::Count($strSQL,'@s',$searchValuePrep,$searchValuePrep,$searchValuePrep,$searchValuePrep);
-                $resultArray = SQL::Cluster($strSQL." LIMIT $offset,$entriesPerPage",'@s',$searchValuePrep,$searchValuePrep,$searchValuePrep,$searchValuePrep);
+                $resultCount = MySQL::Count($strSQL,'@s',$searchValuePrep,$searchValuePrep,$searchValuePrep,$searchValuePrep);
+                $resultArray = MySQL::Cluster($strSQL." LIMIT $offset,$entriesPerPage",'@s',$searchValuePrep,$searchValuePrep,$searchValuePrep,$searchValuePrep);
             }
             else if($_GET['kategorie'] AND $_GET['kategorie'] == 'News')
             {
@@ -64,8 +64,8 @@
                     ORDER BY date DESC
                 ";
 
-                $resultCount = SQL::Count($strSQL,'@s',$searchValuePrep);
-                $resultArray = SQL::Cluster($strSQL." LIMIT $offset,$entriesPerPage",'@s',$searchValuePrep);
+                $resultCount = MySQL::Count($strSQL,'@s',$searchValuePrep);
+                $resultArray = MySQL::Cluster($strSQL." LIMIT $offset,$entriesPerPage",'@s',$searchValuePrep);
             }
             else if($_GET['kategorie'] AND $_GET['kategorie'] == 'Zentralausschreibungen')
             {
@@ -78,8 +78,8 @@
                     ORDER BY date DESC
                 ";
 
-                $resultCount = SQL::Count($strSQL,'@s',$searchValuePrep);
-                $resultArray = SQL::Cluster($strSQL." LIMIT $offset,$entriesPerPage",'@s',$searchValuePrep);
+                $resultCount = MySQL::Count($strSQL,'@s',$searchValuePrep);
+                $resultArray = MySQL::Cluster($strSQL." LIMIT $offset,$entriesPerPage",'@s',$searchValuePrep);
             }
             else if($_GET['kategorie'] AND $_GET['kategorie'] == 'Fotogalerie')
             {
@@ -92,8 +92,8 @@
                     ORDER BY date DESC
                 ";
 
-                $resultCount = SQL::Count($strSQL,'@s',$searchValuePrep);
-                $resultArray = SQL::Cluster($strSQL." LIMIT $offset,$entriesPerPage",'@s',$searchValuePrep);
+                $resultCount = MySQL::Count($strSQL,'@s',$searchValuePrep);
+                $resultArray = MySQL::Cluster($strSQL." LIMIT $offset,$entriesPerPage",'@s',$searchValuePrep);
             }
             else if($_GET['kategorie'] AND $_GET['kategorie'] == 'Kalender')
             {
@@ -106,8 +106,8 @@
                     ORDER BY date DESC
                 ";
 
-                $resultCount = SQL::Count($strSQL,'@s',$searchValuePrep);
-                $resultArray = SQL::Cluster($strSQL." LIMIT $offset,$entriesPerPage",'@s',$searchValuePrep);
+                $resultCount = MySQL::Count($strSQL,'@s',$searchValuePrep);
+                $resultArray = MySQL::Cluster($strSQL." LIMIT $offset,$entriesPerPage",'@s',$searchValuePrep);
             }
             else Redirect("/suche/Alle/".$_GET['suche']);
 
