@@ -332,6 +332,8 @@
                             }
                             else if($curDate == $calData['date_end']) $cellStyle = "timespanEnd";
                             else $cellStyle = "timespanMiddle";
+
+                            if($j == 1) $displayTitle = $calData['displayTitle'];  
                         }
                         else
                         {

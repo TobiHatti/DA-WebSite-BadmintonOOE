@@ -13,6 +13,8 @@ class MySQL
 
     private static $databaseBackupPath;
 
+    private static $mysqli;
+
 ##########################################################################################
 
     public static function init()
@@ -27,6 +29,7 @@ class MySQL
         self::$databaseBackupPath = $sqlConfigBackupPath;
 
         self::$sqlConnectionLink = mysqli_connect($sqlConfigDatabaseHost,$sqlConfigDatabaseUser,$sqlConfigDatabasePass,$sqlConfigDatabaseName) OR die("<br><br><b>Error in mysql.lib.php :</b> Could not connect to Database (Code 1)<br><br>");
+
     }
 
 ##########################################################################################
@@ -196,13 +199,13 @@ class MySQL
 
         $tables = '*';
 
-        self::$mysqli->select_db($name);
+        self::$sqlConnectionLink->select_db($name);
 
         //get all of the tables
         if($tables == '*')
         {
             $tables = array();
-            $result = self::$mysqli->query('SHOW TABLES');
+            $result = self::$sqlConnectionLink->query('SHOW TABLES');
             while($row = $result->fetch_row())
             {
                 $tables[] = $row[0];
@@ -216,12 +219,12 @@ class MySQL
         //cycle through
         foreach($tables as $table)
         {
-            $result = self::$mysqli->query('SELECT * FROM '.$table);
+            $result = self::$sqlConnectionLink->query('SELECT * FROM '.$table);
             $num_fields = $result->field_count;
 
             $return.= 'DROP TABLE '.$table.';';
 
-            $rs2 = self::$mysqli->query('SHOW CREATE TABLE '.$table);
+            $rs2 = self::$sqlConnectionLink->query('SHOW CREATE TABLE '.$table);
             $row2 = $rs2->fetch_row();
 
             $return.= "\n\n".$row2[1].";\n\n";

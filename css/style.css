@@ -2422,7 +2422,7 @@ table.centered_content td {
   position: absolute;
   text-align: center;
   border-collapse: collapse;
-  width: 90%;
+  width: 100%;
   left: 5%; }
   .calendar_table td {
     width: 14.25%; }
@@ -2453,50 +2453,7 @@ table.centered_content td {
     padding: 0;
     height: 100px;
     vertical-align: top;
-    text-align: left;
-                /*
-                span{
-                    text-align: left;
-                    margin: 3px;
-                    width: 100%;
-                }
-
-                div{
-                    border: 1px outset $theme-bright;
-                    border-radius: 10px;
-                    margin: 3px;
-                    background:linear-gradient(to bottom, #DDDDDD 33%,#E8E8E8 66%,#DDDDDD 100%);
-                    padding-left: 3px;
-
-                    @include box-sizing(border-box);
-                    @include ease(0.2s);
-                }
-
-                div#timespanStart{
-                    border-radius: 10px 0 0 10px;
-                    border-right: none;
-                    margin-right: 0;
-                }
-
-                div#timespanMiddle{
-                    border-radius: 0;
-                    border-left: none;
-                    border-right: none;
-                    margin-left: 0;
-                    margin-right: 0;
-                }
-
-                div#timespanEnd{
-                    border-radius: 0 10px 10px 0;
-                    border-left: none;
-                    margin-left: 0;
-                }
-
-                div:hover{
-                    border-color: $theme-medium;
-                    box-shadow: 0 3px 4px 0 #000000;
-                }
-                */ }
+    text-align: left; }
     .calendar_table tr:nth-child(4) td .cellContentData {
       background: none;
       border-spacing: 0;
@@ -2508,6 +2465,7 @@ table.centered_content td {
       .calendar_table tr:nth-child(4) td .cellContentData tr {
         background: none; }
         .calendar_table tr:nth-child(4) td .cellContentData tr td {
+          width: 200px;
           border: none;
           padding: 0;
           height: 24px;
@@ -2571,50 +2529,7 @@ table.centered_content td {
     padding: 0;
     height: 100px;
     vertical-align: top;
-    text-align: left;
-                /*
-                span{
-                    text-align: left;
-                    margin: 3px;
-                    width: 100%;
-                }
-
-                div{
-                    border: 1px outset $theme-bright;
-                    border-radius: 10px;
-                    margin: 3px;
-                    background:linear-gradient(to bottom, #DDDDDD 33%,#E8E8E8 66%,#DDDDDD 100%);
-                    padding-left: 3px;
-
-                    @include box-sizing(border-box);
-                    @include ease(0.2s);
-                }
-
-                div#timespanStart{
-                    border-radius: 10px 0 0 10px;
-                    border-right: none;
-                    margin-right: 0;
-                }
-
-                div#timespanMiddle{
-                    border-radius: 0;
-                    border-left: none;
-                    border-right: none;
-                    margin-left: 0;
-                    margin-right: 0;
-                }
-
-                div#timespanEnd{
-                    border-radius: 0 10px 10px 0;
-                    border-left: none;
-                    margin-left: 0;
-                }
-
-                div:hover{
-                    border-color: $theme-medium;
-                    box-shadow: 0 3px 4px 0 #000000;
-                }
-                */ }
+    text-align: left; }
     .calendar_table tr:nth-child(5) td .cellContentData {
       background: none;
       border-spacing: 0;
@@ -2626,6 +2541,7 @@ table.centered_content td {
       .calendar_table tr:nth-child(5) td .cellContentData tr {
         background: none; }
         .calendar_table tr:nth-child(5) td .cellContentData tr td {
+          width: 200px;
           border: none;
           padding: 0;
           height: 24px;
@@ -2689,50 +2605,7 @@ table.centered_content td {
     padding: 0;
     height: 100px;
     vertical-align: top;
-    text-align: left;
-                /*
-                span{
-                    text-align: left;
-                    margin: 3px;
-                    width: 100%;
-                }
-
-                div{
-                    border: 1px outset $theme-bright;
-                    border-radius: 10px;
-                    margin: 3px;
-                    background:linear-gradient(to bottom, #DDDDDD 33%,#E8E8E8 66%,#DDDDDD 100%);
-                    padding-left: 3px;
-
-                    @include box-sizing(border-box);
-                    @include ease(0.2s);
-                }
-
-                div#timespanStart{
-                    border-radius: 10px 0 0 10px;
-                    border-right: none;
-                    margin-right: 0;
-                }
-
-                div#timespanMiddle{
-                    border-radius: 0;
-                    border-left: none;
-                    border-right: none;
-                    margin-left: 0;
-                    margin-right: 0;
-                }
-
-                div#timespanEnd{
-                    border-radius: 0 10px 10px 0;
-                    border-left: none;
-                    margin-left: 0;
-                }
-
-                div:hover{
-                    border-color: $theme-medium;
-                    box-shadow: 0 3px 4px 0 #000000;
-                }
-                */ }
+    text-align: left; }
     .calendar_table tr:nth-child(6) td .cellContentData {
       background: none;
       border-spacing: 0;
@@ -2744,6 +2617,7 @@ table.centered_content td {
       .calendar_table tr:nth-child(6) td .cellContentData tr {
         background: none; }
         .calendar_table tr:nth-child(6) td .cellContentData tr td {
+          width: 200px;
           border: none;
           padding: 0;
           height: 24px;
@@ -2807,50 +2681,7 @@ table.centered_content td {
     padding: 0;
     height: 100px;
     vertical-align: top;
-    text-align: left;
-                /*
-                span{
-                    text-align: left;
-                    margin: 3px;
-                    width: 100%;
-                }
-
-                div{
-                    border: 1px outset $theme-bright;
-                    border-radius: 10px;
-                    margin: 3px;
-                    background:linear-gradient(to bottom, #DDDDDD 33%,#E8E8E8 66%,#DDDDDD 100%);
-                    padding-left: 3px;
-
-                    @include box-sizing(border-box);
-                    @include ease(0.2s);
-                }
-
-                div#timespanStart{
-                    border-radius: 10px 0 0 10px;
-                    border-right: none;
-                    margin-right: 0;
-                }
-
-                div#timespanMiddle{
-                    border-radius: 0;
-                    border-left: none;
-                    border-right: none;
-                    margin-left: 0;
-                    margin-right: 0;
-                }
-
-                div#timespanEnd{
-                    border-radius: 0 10px 10px 0;
-                    border-left: none;
-                    margin-left: 0;
-                }
-
-                div:hover{
-                    border-color: $theme-medium;
-                    box-shadow: 0 3px 4px 0 #000000;
-                }
-                */ }
+    text-align: left; }
     .calendar_table tr:nth-child(7) td .cellContentData {
       background: none;
       border-spacing: 0;
@@ -2862,6 +2693,7 @@ table.centered_content td {
       .calendar_table tr:nth-child(7) td .cellContentData tr {
         background: none; }
         .calendar_table tr:nth-child(7) td .cellContentData tr td {
+          width: 200px;
           border: none;
           padding: 0;
           height: 24px;
@@ -2925,50 +2757,7 @@ table.centered_content td {
     padding: 0;
     height: 100px;
     vertical-align: top;
-    text-align: left;
-                /*
-                span{
-                    text-align: left;
-                    margin: 3px;
-                    width: 100%;
-                }
-
-                div{
-                    border: 1px outset $theme-bright;
-                    border-radius: 10px;
-                    margin: 3px;
-                    background:linear-gradient(to bottom, #DDDDDD 33%,#E8E8E8 66%,#DDDDDD 100%);
-                    padding-left: 3px;
-
-                    @include box-sizing(border-box);
-                    @include ease(0.2s);
-                }
-
-                div#timespanStart{
-                    border-radius: 10px 0 0 10px;
-                    border-right: none;
-                    margin-right: 0;
-                }
-
-                div#timespanMiddle{
-                    border-radius: 0;
-                    border-left: none;
-                    border-right: none;
-                    margin-left: 0;
-                    margin-right: 0;
-                }
-
-                div#timespanEnd{
-                    border-radius: 0 10px 10px 0;
-                    border-left: none;
-                    margin-left: 0;
-                }
-
-                div:hover{
-                    border-color: $theme-medium;
-                    box-shadow: 0 3px 4px 0 #000000;
-                }
-                */ }
+    text-align: left; }
     .calendar_table tr:nth-child(8) td .cellContentData {
       background: none;
       border-spacing: 0;
@@ -2980,6 +2769,7 @@ table.centered_content td {
       .calendar_table tr:nth-child(8) td .cellContentData tr {
         background: none; }
         .calendar_table tr:nth-child(8) td .cellContentData tr td {
+          width: 200px;
           border: none;
           padding: 0;
           height: 24px;
@@ -3043,50 +2833,7 @@ table.centered_content td {
     padding: 0;
     height: 100px;
     vertical-align: top;
-    text-align: left;
-                /*
-                span{
-                    text-align: left;
-                    margin: 3px;
-                    width: 100%;
-                }
-
-                div{
-                    border: 1px outset $theme-bright;
-                    border-radius: 10px;
-                    margin: 3px;
-                    background:linear-gradient(to bottom, #DDDDDD 33%,#E8E8E8 66%,#DDDDDD 100%);
-                    padding-left: 3px;
-
-                    @include box-sizing(border-box);
-                    @include ease(0.2s);
-                }
-
-                div#timespanStart{
-                    border-radius: 10px 0 0 10px;
-                    border-right: none;
-                    margin-right: 0;
-                }
-
-                div#timespanMiddle{
-                    border-radius: 0;
-                    border-left: none;
-                    border-right: none;
-                    margin-left: 0;
-                    margin-right: 0;
-                }
-
-                div#timespanEnd{
-                    border-radius: 0 10px 10px 0;
-                    border-left: none;
-                    margin-left: 0;
-                }
-
-                div:hover{
-                    border-color: $theme-medium;
-                    box-shadow: 0 3px 4px 0 #000000;
-                }
-                */ }
+    text-align: left; }
     .calendar_table tr:nth-child(9) td .cellContentData {
       background: none;
       border-spacing: 0;
@@ -3098,6 +2845,7 @@ table.centered_content td {
       .calendar_table tr:nth-child(9) td .cellContentData tr {
         background: none; }
         .calendar_table tr:nth-child(9) td .cellContentData tr td {
+          width: 200px;
           border: none;
           padding: 0;
           height: 24px;
