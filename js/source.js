@@ -878,6 +878,12 @@ function ShowHideElement(e,elementId)
     else document.getElementById(elementId).style.display = "none";
 }
 
+function ShowHideTableRow(e,elementId)
+{
+    if(e.checked) document.getElementById(elementId).style.display = "table-row";
+    else document.getElementById(elementId).style.display = "none";
+}
+
 function ShowHideBGImage(e,divID)
 {
     var saveImg = document.getElementById("saveOutput").value;

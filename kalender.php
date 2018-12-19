@@ -7,12 +7,14 @@
     {
         $terminName = $_POST['termin_titel'];
         $description = $_POST['description_date'];
-        $termin_date=$_POST['date_termin'];
+        $termin_date_start=$_POST['date_termin_start'];
+        $termin_date_end=(isset($_POST['toggleMultiday']) ? $_POST['date_termin_end'] : '0000-00-00');
+        $isTimespan = (isset($_POST['toggleMultiday']) ? 1 : 0);
         $termin_place=$_POST['place'];
         $termin_time=$_POST['time'];
         $termin_kategorie=$_POST['kategorie'];
 
-        MySQL::NonQuery("INSERT INTO agenda (id, titel, description, date, place, time,kategorie) VALUES ('',?,?,?,?,?,?)",'@s',$terminName,$description,$termin_date,$termin_place,$termin_time,$termin_kategorie);
+        MySQL::NonQuery("INSERT INTO agenda (id, titel, description, date_begin, date_end, isTimespan, place, time,kategorie) VALUES ('',?,?,?,?,?,?,?,?)",'@s',$terminName,$description,$termin_date_start,$termin_date_end,$isTimespan,$termin_place,$termin_time,$termin_kategorie);
 
         Redirect("/kalender");
         die();
@@ -93,8 +95,14 @@
                         <td><textarea class="cel_l" name="description_date" placeholder="Beschreibung" style="resize: vertical;" require></textarea></td>
                     </tr>
                     <tr>
-                        <td class="ta_r">Datum</td>
-                        <td><input type="date" class="cel_l" name="date_termin" required/></td>
+                        <td class="ta_r">Datum <output id="outBeginText" style="display:none;">Start</output></td>
+                        <td><input type="date" class="cel_l" name="date_termin_start" required/></td>
+                        <td>'.Checkbox("toggleMultiday", "toggleMultiday", false,"ShowHideTableRow(this,'rowEndDate'); ShowHideElement(this,'outBeginText')").'</td>
+                        <td>Mehrt&auml;gig</td>
+                    </tr>
+                    <tr id="rowEndDate" style="display:none;">
+                        <td class="ta_r">Datum<br>Ende</td>
+                        <td><input type="date" class="cel_l" name="date_termin_end"/></td>
                     </tr>
                     <tr>
                         <td class="ta_r">Ort</td>
@@ -102,7 +110,7 @@
                     </tr>
                     <tr>
                         <td class="ta_r">Uhrzeit</td>
-                        <td><input type="time" class="cel_l" name="time" required/></td>
+                        <td><input type="time" class="cel_l" name="time"/></td>
                     </tr>
                     <tr>
                         <td class="ta_r">Kategorie</td>
@@ -153,8 +161,8 @@
         ';
             $entriesPerPage = Setting::Get("PagerSizeCalendar");
             $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
-
-            $strSQL = "SELECT id,date_begin,titel,description,kategorie FROM agenda UNION ALL SELECT id,date_begin AS date,CONCAT_WS(' ', title_line1, title_line2) AS titel, NULL AS description,kategorie FROM zentralausschreibungen ORDER BY date_begin ASC LIMIT $offset,$entriesPerPage";
+            $today = date("Y-m-d");
+            $strSQL = "SELECT id,date_begin,titel,description,kategorie FROM agenda WHERE date_begin >= '$today' UNION ALL SELECT id,date_begin,CONCAT_WS(' ', title_line1, title_line2) AS titel, NULL AS description,kategorie FROM zentralausschreibungen WHERE date_begin >= '$today' ORDER BY date_begin ASC LIMIT $offset,$entriesPerPage";
             $rs=mysqli_query($link,$strSQL);
             while($row=mysqli_fetch_assoc($rs))
             {
