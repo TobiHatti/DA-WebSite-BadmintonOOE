@@ -2682,16 +2682,32 @@ table.centered_content td{
 /*===================================================================================*/
 
 .calendar_table{
-    position: absolute;
     text-align: center;
     border-collapse: collapse;
-    width: 100%;
-    left: 5%;
 
 
+    @media only screen and (max-width: $media-smalllargephone){
+        td{
+            width: 70px;
+        }
+    }
 
-    td{
-        width: 14.25%;
+    @media only screen and (min-width: $media-smalllargephone){
+        td{
+            width: 75px;
+        }
+    }
+
+    @media only screen and (min-width: $media-tablet){
+        td{
+            width: 100px;
+        }
+    }
+
+    @media only screen and (min-width: $media-desktop){
+        td{
+            width: 130px;
+        }
     }
 
     tr:nth-child(1){
@@ -2756,14 +2772,13 @@ table.centered_content td{
                         background: none;
 
                         td{
-                            width: 200px;
                             border: none;
                             padding: 0;
                             height: 24px;
                             vertical-align: top;
                             text-align: left;
                             background: none;
-                            //border-bottom: 1px solid black;
+                            @include box-sizing(border-box);
                             white-space: nowrap;
                             text-overflow:ellipsis;
                             overflow: hidden;
@@ -2772,17 +2787,45 @@ table.centered_content td{
                                 height: 22px;
                                 border: 1px outset $theme-bright;
                                 border-radius: 10px;
-                                width: 100%;
+                                width: 100px;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                overflow: hidden;
                                 background:linear-gradient(to bottom, #DDDDDD 33%,#E8E8E8 66%,#DDDDDD 100%);
                                 padding-left: 3px;
+                                margin-left: 0;
+                                margin-right: 0;
                                 @include box-sizing(border-box);
                                 @include ease(0.2s);
+                            }
+
+                            @media only screen and (max-width: $media-smalllargephone){
+                                div{
+                                    width: 70px;
+                                }
+                            }
+
+                            @media only screen and (min-width: $media-smalllargephone){
+                                div{
+                                    width: 75px;
+                                }
+                            }
+
+                            @media only screen and (min-width: $media-tablet){
+                                div{
+                                    width: 100px;
+                                }
+                            }
+
+                            @media only screen and (min-width: $media-desktop){
+                                div{
+                                    width: 130px;
+                                }
                             }
 
                             div#timespanStart{
                                 border-radius: 10px 0 0 10px;
                                 border-right: none;
-                                margin-left: 5px;
                             }
 
                             div#timespanMiddle{
@@ -2796,11 +2839,11 @@ table.centered_content td{
                             div#timespanEnd{
                                 border-radius: 0 10px 10px 0;
                                 border-left: none;
-                                margin-right: 10px;
                             }
 
                             div:hover{
-                                border-color: $theme-medium;
+                                color: $theme-vibrant-medium !important;
+                                text-decoration: underline;
                             }
                         }
                     }
@@ -3246,13 +3289,10 @@ $listItemHeight: 25px;
 
 div.fr-wrapper{
     div{
-      
         a{
             display: none;
         }
-
     }
-
 }
 
 

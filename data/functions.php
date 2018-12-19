@@ -784,8 +784,8 @@ function ExportCSVAgenda($db,$id="",$multiple="")
         {
             if($db == 'agenda')
             {
-                $inhalt .= $row['titel'].';'.$row['date'].';'.$row['time'].';;;FALSE;'.$row['description'].';'.$row['place'].';FALSE'."\r\n";
-                $filename = "Termin-".$row['date'].".csv";
+                $inhalt .= $row['titel'].';'.$row['date_begin'].';'.$row['time'].';;;FALSE;'.$row['description'].';'.$row['place'].';FALSE'."\r\n";
+                $filename = "Termin-".$row['date_begin'].".csv";
             }
             else
             {

@@ -146,6 +146,8 @@
 
         echo '<div style="float:right;"><table><tr><td>Liste / Kalender</td><td>'.Togglebox("","changeListStyle",1,"ChangeCalenderStyle();","toggleCalendar").'</td></tr></table></div><br>';
 
+
+
         echo'
             <div id="CalenderList" style="display:none;">
             <h2>Liste der Termine</h2>
@@ -153,7 +155,7 @@
 
             if(CheckPermission("AddDate"))
             {
-                echo AddButton(ThisPage("+neu")).'<br><br>';
+                echo AddButton(ThisPage("+neu")).' oder <a href="/kalender-import">Termine Importieren</a><br><br>';
             }
 
             echo '
@@ -190,7 +192,7 @@
 
             if(CheckPermission("AddDate"))
             {
-                echo AddButton(ThisPage("+neu")).'<br><br>';
+                echo AddButton(ThisPage("+neu")).' oder <a href="/kalender-import">Termine Importieren</a><br><br>';
             }
 
             echo '
