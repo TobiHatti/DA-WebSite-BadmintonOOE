@@ -307,21 +307,22 @@
                         <ul>
                         ';
 
+                        $todayAgenda = date("Y-m-").'1';
 
-                        $strSQL = "SELECT id AS isAgenda, NULL AS isZA, titel AS title, date FROM agenda
-                        WHERE date >= '$today'
+                        $strSQL = "SELECT id AS isAgenda, NULL AS isZA, titel AS title, date_begin FROM agenda
+                        WHERE date_begin >= '$todayAgenda'
                         UNION ALL
-                        SELECT NULL AS isAgenda, id AS isZA, CONCAT_WS(' ', title_line1, title_line2) AS title, date_begin AS date FROM zentralausschreibungen
-                        WHERE date_begin >= '$today'
-                        ORDER BY date ASC
+                        SELECT NULL AS isAgenda, id AS isZA, CONCAT_WS(' ', title_line1, title_line2) AS title, date_begin FROM zentralausschreibungen
+                        WHERE date_begin >= '$todayAgenda'
+                        ORDER BY date_begin ASC
                         LIMIT 0,3";
                         $rs=mysqli_query($link,$strSQL);
                         while($row=mysqli_fetch_assoc($rs))
                         {
-                            if($row['isZA']!=NULL) $link = '/kalender/event/ZA'.$row['isZA'].'/'.$row['date'];
-                            else $link = '/kalender/event/AG'.$row['isAgenda'].'/'.$row['date'];
+                            if($row['isZA']!=NULL) $link = '/kalender/event/ZA'.$row['isZA'].'/'.$row['date_begin'];
+                            else $link = '/kalender/event/AG'.$row['isAgenda'].'/'.$row['date_begin'];
 
-                            echo '<a href="'.$link.'"><li style="text-align: left;"><b>'.(($row['date']==$today) ? 'Heute: ' : (str_replace('ä','&auml;',strftime("%d. %b",strtotime($row['date']))).': ')).'</b> '.$row['title'].'</li></a>';
+                            echo '<a href="'.$link.'"><li style="text-align: left;"><b>'.(($row['date_begin']==$today) ? 'Heute: ' : (str_replace('ä','&auml;',strftime("%d. %b",strtotime($row['date_begin']))).': ')).'</b> '.$row['title'].'</li></a>';
                         }
 
                         echo '

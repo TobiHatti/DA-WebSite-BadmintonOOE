@@ -76,6 +76,7 @@
 
     // output table
     echo '
+        <center>
             <table class="calendar_table">
             <tr>
                 <td colspan="1"><a href="?day='.date('Y-m-d', mktime(0,0,0,$mo,$da,$yr-1)).'">&laquo;</a></td>
@@ -102,9 +103,10 @@
 
     $cntr = 1; // day printing counter
 
+// FETCHING DATA FROM DB TO IMPROVE RUNTIME
     $showZAinAG = Setting::Get("ShowZAinAG");
 
-    $thisMontAndYear = "2018-12-%";
+    $thisMontAndYear = $yr.'-'.str_pad($mo,2,0,STR_PAD_LEFT).'-%';
 
     $zaTSMonthCluster = MySQL::Cluster("SELECT * FROM zentralausschreibungen WHERE act_timespan = '1' AND (date_begin LIKE ? OR date_end LIKE ?)",'ss',$thisMontAndYear,$thisMontAndYear);
     $zaSiMonthCluster = MySQL::Cluster("SELECT * FROM zentralausschreibungen WHERE act_timespan = '0' AND date_begin LIKE ?",'s',$thisMontAndYear);
@@ -112,6 +114,18 @@
     $agTSMonthCluster = MySQL::Cluster("SELECT * FROM agenda WHERE isTimespan = '1' AND (date_begin LIKE ? OR date_end LIKE ?)",'ss',$thisMontAndYear,$thisMontAndYear);
     $agSiMonthCluster = MySQL::Cluster("SELECT * FROM agenda WHERE isTimespan = '0' AND date_begin LIKE ?",'s',$thisMontAndYear);
 
+    $categoryColor = array(
+    "Landesmeisterschaft" => Setting::Get("ColorLandesmeisterschaft"),
+    "Doppelturnier" => Setting::Get("ColorDoppelturnier"),
+    "Nachwuchs" => Setting::Get("ColorNachwuchs"),
+    "SchuelerJugend" => Setting::Get("ColorSchuelerJugend"),
+    "Senioren" => Setting::Get("ColorSenioren"),
+    "Training" => Setting::Get("ColorTraining"));
+
+    $permissionEditDate = CheckPermission("EditDate");
+    $permissionDeleteDate = CheckPermission("DeleteDate");
+
+    $dateModalInfos = '';
 
 //========================================================================================
 // Preparing Layout-Array
@@ -278,148 +292,268 @@
 // START OF CELL (DATA)
 //========================================================================================
 
-
-
             $dayNow = intval(str_replace('.','',$days[$curr]['out']));
 
             echo '<table class="cellContentData">';
+            // Run through all necessary layers
             for($dctr = 0 ; $dctr <= $lastLayer ; $dctr++)
             {
                 $dataParts = explode("-",$designDataGrid[$dayNow - 1][$dctr]);
+                $dateModalInfo = '';
 
+                // Check if entry exists for layer
                 if($dataParts[0] == "ZA" OR $dataParts[0] == "AG")
                 {
+//========================================================================================
+                    // DATA & MODAL FOR ZA ===============================================
+//========================================================================================
                     if($dataParts[0] == "ZA")
                     {
                         $calData = MySQL::Row("SELECT *,CONCAT_WS(' ',title_line1,title_line2) AS displayTitle FROM zentralausschreibungen WHERE id = ?",'i',$dataParts[1]);
                         $displayTitle = '';
 
+                        // MODAL =========================================================
+                        $dateModalInfo = '
+                            <div class="modal_wrapper" id="calenderInfo'.$designDataGrid[$dayNow - 1][$dctr].'">
+                                <a href="#c"><div class="modal_bg"></div></a>
+                                <div class="modal_container" style="width: 50%; height: 60%;">
+                                    <a href="#c"><img src="/content/cross2.png" alt="" class="close_cross"/></a>
+
+
+                                     <div style="border-left: 3px solid '.(($calData['kategorie']!="") ? $categoryColor[$calData['kategorie']] : '000000').'; padding-left: 5px;">
+                                        <a href="#exportZA'.$calData['id'].'"><button style="float: right; margin-right: 30px;"><i class="fas fa-file-export"></i> Exportieren</button></a>
+                                        <span style="color: #696969"><i>Zentralausschreibung</i></span>
+                                        <h2><u>'.$calData['title_line1'].'<br>'.$calData['title_line2'].'</u></h2>
+                                        <h4>'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($calData['date_begin']))).'</h4>
+                                        <h4>'.$calData['uhrzeit'].'</h4>
+                                        <p>
+                                        ';
+
+                                        if($calData['size']=='full')  $dateModalInfo .= '<div class="za_data">'.ShowZATable($calData['id']).'</div>';
+                                        else
+                                        {
+                                            $dateModalInfo .= '
+                                                <div class="za_data">
+                                                    <table>
+                                                        <tr>
+                                                            <td>Ort:</td>
+                                                            <td>'.$calData['location'].'</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            ';
+                                        }
+
+                                        $dateModalInfo .= '
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="modal_wrapper" id="exportZA'.$calData['id'].'">
+                                <a href="#c">
+                                    <div class="modal_bg"></div>
+                                </a>
+                                <div class="modal_container" style="width: 400px; height: 200px;">
+                                    <h3>Exportieren</h3>
+                                    <center>
+                                        <form action="/kalender" method="post" accept-charset="utf-8" enctype="multipart/form-data" target="_top">
+                                            <button type="submit" class="cel_m" name="export_csv" value="ZA'.$calData['id'].'"><i class="fa fa-file-excel-o" style="float: left;"></i> Als .csv Exportieren</button>
+                                            <br>
+                                            <button type="submit" class="cel_m" name="export_ics" value="ZA'.$calData['id'].'"><i class="fas fa-file" style="float: left;"></i>Als .ics Exportieren</button>
+                                        </form>
+                                    </center>
+                                </div>
+                            </div>
+                        ';
+
+                        // Determine Cell-Style and Text =================================
                         if($calData['act_timespan'])
                         {
                             if($curDate == $calData['date_begin'])
                             {
                                 $cellStyle = "timespanStart";
                                 $displayTitle = $calData['displayTitle'];
+
                             }
-                            else if($curDate == $calData['date_end']) $cellStyle = "timespanEnd";
-                            else $cellStyle = "timespanMiddle";
+                            else if($curDate == $calData['date_end'])
+                            {
+                                $cellStyle = "timespanEnd";
+                                $dateModalInfo = '';
+                            }
+                            else
+                            {
+                                $cellStyle = "timespanMiddle";
+                                $dateModalInfo = '';
+                            }
+
+                            if($j == 1) $displayTitle = $calData['displayTitle'];
                         }
                         else
                         {
                             $cellStyle = "timespanSingle";
                             $displayTitle = $calData['displayTitle'];
                         }
-
-
-
-
-
-
-
-
                     }
+
+//========================================================================================
+                    // DATA & MODAL FOR AG ===============================================
+//========================================================================================
+
                     if($dataParts[0] == "AG")
                     {
                         $calData = MySQL::Row("SELECT *,titel AS displayTitle FROM agenda WHERE id = ?",'i',$dataParts[1]);
                         $displayTitle = '';
 
+                        // MODAL =========================================================
+                        $dateModalInfo = '
+                            <div class="modal_wrapper" id="calenderInfo'.$designDataGrid[$dayNow - 1][$dctr].'">
+                                <a href="#c"><div class="modal_bg"></div></a>
+                                <div class="modal_container" style="width: 50%; height: 60%;">
+                                    <a href="#c"><img src="/content/cross2.png" alt="" class="close_cross"/></a>
+
+
+                                    ';
+
+
+                                        if(isset($_GET['edit']) AND $_GET['edit']==$calData['id'] AND $permissionEditDate)
+                                        {
+                                            $dateModalInfo .= '
+                                                <h2>Termin bearbeiten</h2>
+                                                <hr>
+                                                <form action="/kalender" method="post" accept-charset="utf-8" enctype="multipart/form-data" target="_top" class="stagfade2">
+                                                    <table>
+                                                        <tr>
+                                                            <td class="ta_r">Titel</td>
+                                                            <td><input value="'.$calData['titel'].'" type="text" class="cel_l" placeholder="Titel" name="termin_titel" required/></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="ta_r">Beschreibung</td>
+                                                            <td><textarea class="cel_l" name="description_date" placeholder="Beschreibung" style="resize: vertical;">'.$calData['description'].'</textarea></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="ta_r">Datum</td>
+                                                            <td><input value="'.$calData['date_begin'].'" type="date" class="cel_l" name="date_termin" required/></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="ta_r">Ort</td>
+                                                            <td><input value="'.$calData['place'].'" type="text" class="cel_l" placeholder="Ort" name="place"/></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="ta_r">Uhrzeit</td>
+                                                            <td><input value="'.$calData['time'].'" type="time" class="cel_l" name="time" required/></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="ta_r">Kategorie</td>
+                                                            <td>
+                                                            <select class="cel_l" name="kategorie" id="classKat">
+                                                                <option '.(($calData['kategorie']=="Anderes") ? 'selected' : '').' value="">Anderes</option>
+                                                                <option '.(($calData['kategorie']=="Landesmeisterschaft") ? 'selected' : '').' value="Landesmeisterschaft" style="color: '.$categoryColor["Landesmeisterschaft"].'">Landesmeisterschaft</option>
+                                                                <option '.(($calData['kategorie']=="Doppelturnier") ? 'selected' : '').' value="Doppelturnier" style="color: '.$categoryColor["Doppelturnier"].'">Doppelturnier</option>
+                                                                <option '.(($calData['kategorie']=="Nachwuchs") ? 'selected' : '').' value="Nachwuchs" style="color: '.$categoryColor["Nachwuchs"].'">Nachwuchs</option>
+                                                                <option '.(($calData['kategorie']=="SchuelerJugend") ? 'selected' : '').' value="SchuelerJugend" style="color: '.$categoryColor["SchuelerJugend"].'">Sch&uuml;ler/Jugend</option>
+                                                                <option '.(($calData['kategorie']=="Senioren") ? 'selected' : '').' value="Senioren" style="color: '.$categoryColor["Senioren"].'">Senioren</option>
+                                                                <option '.(($calData['kategorie']=="Training") ? 'selected' : '').' value="Training" style="color: '.$categoryColor["Training"].'">Training</option>
+                                                            </select>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+
+                                                    <br>
+                                                    <br>
+                                                    <button type="submit" name="update_termin" value="'.$calData['id'].'" class="stagfade3">Termin aktualisieren</button>
+
+                                                </form>
+                                            ';
+                                        }
+                                        else
+                                        {
+                                            $dateModalInfo .= '
+                                            <a href="#exportAG'.$calData['id'].'"><button style="float: right; margin-right: 30px;"><i class="fas fa-file-export"></i> Exportieren</button></a>
+                                            <h2><u>'.$calData['titel'].'</u></h2>
+                                            <h4>'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($calData['date_begin']))).'</h4>
+                                            <h4>'.date_format(date_create($calData['time']),"H:i").' Uhr</h4>
+                                            <p>
+                                                '.$calData['description'].'
+                                            </p>
+
+                                            ';
+
+                                            if($permissionEditDate) $dateModalInfo .= '<span> '.EditButton("/kalender/event/AG".$calData['id']."/".$calData['date_begin']."?editSC=".$calData['id'],false,true).' </span>';
+                                            if($permissionDeleteDate)  $dateModalInfo .= '<span> '.DeleteButton("Date","agenda",$calData['id'],false,true).' </span>';
+                                        }
+
+
+                                    $dateModalInfo .= '
+                                </div>
+                            </div>
+
+                            <div class="modal_wrapper" id="exportAG'.$calData['id'].'">
+                                <a href="#c">
+                                    <div class="modal_bg"></div>
+                                </a>
+                                <div class="modal_container" style="width: 400px; height: 200px;">
+                                    <h3>Exportieren</h3>
+                                    <center>
+                                        <form action="/kalender" method="post" accept-charset="utf-8" enctype="multipart/form-data" target="_top">
+                                            <button type="submit" class="cel_m" name="export_csv" value="AG'.$calData['id'].'"><i class="fa fa-file-excel-o" style="float: left;"></i> Als .csv Exportieren</button>
+                                            <br>
+                                            <button type="submit" class="cel_m" name="export_ics" value="AG'.$calData['id'].'"><i class="fas fa-file" style="float: left;"></i>Als .ics Exportieren</button>
+                                        </form>
+                                    </center>
+                                </div>
+                            </div>
+                        ';
+
+                        // Determine Cell-Style and Text =================================
                         if($calData['isTimespan'])
                         {
                             if($curDate == $calData['date_begin'])
                             {
                                 $cellStyle = "timespanStart";
                                 $displayTitle = $calData['displayTitle'];
-                            }
-                            else if($curDate == $calData['date_end']) $cellStyle = "timespanEnd";
-                            else $cellStyle = "timespanMiddle";
 
-                            if($j == 1) $displayTitle = $calData['displayTitle'];  
+                            }
+                            else if($curDate == $calData['date_end'])
+                            {
+                                $cellStyle = "timespanEnd";
+                                $dateModalInfo = '';
+                            }
+                            else
+                            {
+                                $cellStyle = "timespanMiddle";
+                                $dateModalInfo = '';
+                            }
+
+                            if($j == 1) $displayTitle = $calData['displayTitle'];
                         }
                         else
                         {
                             $cellStyle = "timespanSingle";
                             $displayTitle = $calData['displayTitle'];
                         }
-
-
-
                     }
 
+                    // OUTPUT TO PAGE ====================================================
                     echo '
                         <tr>
                             <td>
                                 <a href="#calenderInfo'.$designDataGrid[$dayNow - 1][$dctr].'" style="text-decoration:none;">
-                                    <div id="'.$cellStyle.'" style="color: '.(($calData['kategorie']!="") ? Setting::Get("Color".$calData['kategorie']) : '#000000').';">'.$displayTitle.'</div>
+                                    <div id="'.$cellStyle.'" style="color: '.(($calData['kategorie']!="") ? $categoryColor[$calData['kategorie']] : '#000000').';">'.$displayTitle.'</div>
                                 </a>
                             </td>
                         </tr>
                     ';
+
+                    // Add Modal to other Modals
+                    $dateModalInfos .= $dateModalInfo;
+
                 }
                 else echo '<tr><td></td></tr>';
-
-
-
-
-
             }
             echo '</table>';
-
-
-
-            //for($s = 0 ; $s < count($listSlotManager) ; $s++) if($listSlotManager[$s] == 0) $injectionLine = $i;
-
-
-            /*
-            if($showZAinAG)
-            {
-                $strSQL = "SELECT * FROM zentralausschreibungen WHERE act_timespan = '0' AND date_begin = '$curDate'";
-                $rs=mysqli_query($link,$strSQL);
-                while($row=mysqli_fetch_assoc($rs))
-                {
-                    echo '
-                        <a href="#calenderInfoZA'.$row['id'].'" onclick="SelectGalleryImage('.$i.');" style="text-decoration:none;">
-                            <div style="color: '.(($row['kategorie']!="") ? Setting::Get("Color".$row['kategorie']) : '#000000').';">&#9670; '.$row['title_line1'].'</div>
-                        </a>
-                    ';
-                }
-
-                $strSQL = "SELECT * FROM zentralausschreibungen WHERE act_timespan = '1' AND date_begin <= '$curDate' AND date_end >= '$curDate'";
-                $rs=mysqli_query($link,$strSQL);
-                while($row=mysqli_fetch_assoc($rs))
-                {
-                    if($curDate == $row['date_begin']) $cellStyle = "timespanStart";
-                    else if($curDate == $row['date_end']) $cellStyle = "timespanEnd";
-                    else $cellStyle = "timespanMiddle";
-
-                    echo '
-                        <a href="#calenderInfoZA'.$row['id'].'" onclick="SelectGalleryImage('.$i.');" style="text-decoration:none;">
-                            <div id="'.$cellStyle.'" style="color: '.(($row['kategorie']!="") ? Setting::Get("Color".$row['kategorie']) : '#000000').';">&#9670; '.$row['title_line1'].'</div>
-                        </a>
-                    ';
-                }
-            }
-
-
-            $strSQL = "SELECT * FROM agenda WHERE date = '$curDate'";
-            $rs=mysqli_query($link,$strSQL);
-            while($row=mysqli_fetch_assoc($rs))
-            {
-                echo '
-                    <a href="#calenderInfoAG'.$row['id'].'" onclick="SelectGalleryImage('.$i.');" style="text-decoration:none;">
-                        <div style="color: '.(($row['kategorie']!="") ? Setting::Get("Color".$row['kategorie']) : '#000000').';">&#9679; '.$row['titel'].'</div>
-                    </a>
-                ';
-            }
-
-
-            */
-
-
-
-
-
-
-
 
 //========================================================================================
 // END OF CELL
@@ -432,8 +566,25 @@
     }
 
     echo '
-        </table>
+            </table>
+        </center>
     ';
+
+    // Output Modals
+    echo $dateModalInfos;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /*
     $datePart = $yr.'-'.str_pad($mo,2,0,STR_PAD_LEFT).'-';
