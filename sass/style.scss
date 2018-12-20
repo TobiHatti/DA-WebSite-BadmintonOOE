@@ -3300,6 +3300,31 @@ div.fr-wrapper{
 
 
 
+.agendaImportTable{
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    tr:nth-child(odd)
+    {
+        background: $theme-bright-l;
+    }
+
+    tr:nth-child(even)
+    {
+        background: $theme-medium-l;
+    }
+
+    tr:nth-child(1){
+        background: $theme-medium;
+    }
+
+    tr:nth-child(2){
+        background: $theme-bright;
+        border-bottom: 2px solid #FFFFFF;
+        color: #FFFFFF;
+    }
+
+}
 
 
 

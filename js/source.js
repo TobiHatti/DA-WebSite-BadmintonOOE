@@ -1113,3 +1113,52 @@ function RedirectCustomClubList(linkBase)
 
     window.location.replace(linkBase + "M" + selectedClubs);
 }
+
+function CheckColumnDuplicatesCSVImport()
+{
+    var colCounter = document.getElementById("colCounter").value;
+
+    var listpre;
+    var selection;
+    var duplicateFound = false;
+    var selArray = [];
+
+    for(var i = 0; i < colCounter; i++) selArray.push("BlankSlot" + i);
+
+    for(var i = 0; i < colCounter; i++)
+    {
+        listpre = document.getElementById("colAssign" + i);
+        selection = listpre.options[listpre.selectedIndex].value;
+
+        if(selection != "") selArray[i] = selection;
+        else  duplicateFound = true;
+    }
+
+
+    var counts = [];
+    for(var i = 0; i <= selArray.length; i++)
+    {
+        if(counts[selArray[i]] === undefined)
+        {
+            counts[selArray[i]] = 1;
+        }
+        else
+        {
+            duplicateFound = true;
+        }
+    }
+
+
+   if(duplicateFound) document.getElementById("checkAndContinueBtn").disabled = true;
+   else document.getElementById("checkAndContinueBtn").disabled = false;
+}
+
+
+
+
+
+
+
+
+
+

@@ -20,29 +20,14 @@
         function Footer()
         {
             // Position from bottom
-            $this->SetY(-20);
-
-            /*
-            $this->SetFont('Arial','U',9);
-            $this->Cell(20,6,"Bankverbindung:",0,1,'L');
-            $this->SetFont('Arial','',9);
-            $this->Cell(33,4,"Empfänger:",0,0,'L');
-            $this->Cell(50,4,"?????",0,1,'L');
-            $this->Cell(33,4,"Verwendungszweck:",0,0,'L');
-            $this->Cell(80,4,"?????",0,1,'L');
-            $this->Cell(33,4,"IBAN:",0,0,'L');
-            $this->Cell(50,4,"?????",0,1,'L');
-            $this->Cell(33,4,"BIC:",0,0,'L');
-            $this->Cell(50,4,"?????",0,1,'L');
-            */
-
+            $this->SetY(-10);
 
             // Arial italic 8
             $this->SetFont('Arial','I',8);
             // Page number
             $this->Cell(0,5,'Seite '.$this->PageNo().'/{nb}',0,1,'C');
             //$this->Cell(0,5,'Seite 1/1',0,1,'C');
-            $this->Cell(0,5,'Footer Text',0,1,'C');
+            //$this->Cell(0,5,'Footer Text',0,1,'C');
         }
 
         function WriteHTML($html)

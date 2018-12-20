@@ -14,7 +14,7 @@
         $termin_time=$_POST['time'];
         $termin_kategorie=$_POST['kategorie'];
 
-        MySQL::NonQuery("INSERT INTO agenda (id, titel, description, date_begin, date_end, isTimespan, place, time,kategorie) VALUES ('',?,?,?,?,?,?,?,?)",'@s',$terminName,$description,$termin_date_start,$termin_date_end,$isTimespan,$termin_place,$termin_time,$termin_kategorie);
+        MySQL::NonQuery("INSERT INTO agenda (id, title, description, date_begin, date_end, isTimespan, location, time_start,category) VALUES ('',?,?,?,?,?,?,?,?)",'@s',$terminName,$description,$termin_date_start,$termin_date_end,$isTimespan,$termin_place,$termin_time,$termin_kategorie);
 
         Redirect("/kalender");
         die();
@@ -32,12 +32,12 @@
         $termin_kategorie=$_POST['kategorie'];
 
         $strSQL = "UPDATE agenda SET
-        titel = ?,
+        title = ?,
         description = ?,
-        date = ?,
-        place = ?,
-        time = ?,
-        kategorie = ?
+        date_begin = ?,
+        location = ?,
+        time_start = ?,
+        category = ?
         WHERE id = ?
         ";
 
@@ -164,16 +164,16 @@
             $entriesPerPage = Setting::Get("PagerSizeCalendar");
             $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
             $today = date("Y-m-d");
-            $strSQL = "SELECT id,date_begin,titel,description,kategorie FROM agenda WHERE date_begin >= '$today' UNION ALL SELECT id,date_begin,CONCAT_WS(' ', title_line1, title_line2) AS titel, NULL AS description,kategorie FROM zentralausschreibungen WHERE date_begin >= '$today' ORDER BY date_begin ASC LIMIT $offset,$entriesPerPage";
+            $strSQL = "SELECT id,date_begin,title,description,category FROM agenda WHERE date_begin >= '$today' UNION ALL SELECT id,date_begin,CONCAT_WS(' ', title_line1, title_line2) AS title, NULL AS description,category FROM zentralausschreibungen WHERE date_begin >= '$today' ORDER BY date_begin ASC LIMIT $offset,$entriesPerPage";
             $rs=mysqli_query($link,$strSQL);
             while($row=mysqli_fetch_assoc($rs))
             {
                 $isZA = ($row['description']==NULL) ? true : false;
 
                 echo'
-                    <div class="calendar_list" style="border-left-color: '.Setting::Get("Color".$row['kategorie']).'">
+                    <div class="calendar_list" style="border-left-color: '.Setting::Get("Color".$row['category']).'">
                         '.($isZA ? '<span style="color: #696969"><i>Zentralausschreibung</i></span>' : '').'
-                        <a onclick="window.sessionStorage.setItem(\'toggleCalendar\',1);" href="/kalender/event/'.($isZA ? 'ZA' : 'AG').$row['id'].'/'.$row['date_begin'].'"><h4 style="margin:0">'.$row['titel'].'</h4></a>
+                        <a onclick="window.sessionStorage.setItem(\'toggleCalendar\',1);" href="/kalender/event/'.($isZA ? 'ZA' : 'AG').$row['id'].'/'.$row['date_begin'].'"><h4 style="margin:0">'.$row['title'].'</h4></a>
                         <a onclick="window.sessionStorage.setItem(\'toggleCalendar\',1);" href="/kalender/datum/'.$row['date_begin'].'">'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['date_begin']))).'</span></a>
                         '.($isZA ? '' : ('<p>'.$row['description'].'</p>')).'
                     </div>

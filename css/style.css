@@ -3504,4 +3504,18 @@ table.centered_content td {
 div.fr-wrapper div a {
   display: none; }
 
+.agendaImportTable {
+  border-collapse: collapse;
+  border-spacing: 0; }
+  .agendaImportTable tr:nth-child(odd) {
+    background: #C4E3ED; }
+  .agendaImportTable tr:nth-child(even) {
+    background: #B9DDE9; }
+  .agendaImportTable tr:nth-child(1) {
+    background: #3B9EBF; }
+  .agendaImportTable tr:nth-child(2) {
+    background: #63B4CF;
+    border-bottom: 2px solid #FFFFFF;
+    color: #FFFFFF; }
+
 /*# sourceMappingURL=style.css.map */
