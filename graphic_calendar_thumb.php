@@ -276,13 +276,13 @@
 
                     if($dataParts[0] == "AG")
                     {
-                        $calData = MySQL::Row("SELECT *,titel AS displayTitle FROM agenda WHERE id = ?",'i',$dataParts[1]);
+                        $calData = MySQL::Row("SELECT *,title AS displayTitle FROM agenda WHERE id = ?",'i',$dataParts[1]);
                         $displayTitle = $calData['displayTitle'];
                     }
 
                     echo '
                         <a target="_parent" style="text-decoration:none;" href="/kalender/event/'.$dataParts[0].'-'.$calData['id'].'/'.$calData['date_begin'].'">
-                            <span style="cursor: help;color: '.(($calData['kategorie']!="") ? $categoryColor[$calData['kategorie']] : '#000000').';" title="'.$calData['displayTitle'].'">&#9679;</span>
+                            <span style="cursor: help;color: '.(($calData['category']!="") ? $categoryColor[$calData['category']] : '#000000').';" title="'.$calData['displayTitle'].'">&#9679;</span>
                         </a>
                     ';
                 }

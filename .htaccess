@@ -64,6 +64,10 @@ RewriteRule ^verein-info/mitglieder verein-info.php?mitglieder [NC,QSA,L]
 # Rewrite Rules for spielerreihung.php
 RewriteRule ^spielerreihung/bearbeiten spielerreihung.php?bearbeiten [NC,QSA,L]
 
+# Rewrite Rules for spielerranglistenSettings.php
+RewriteRule ^spielerrangliste/einstellungen/([a-zA-Z0-9-_]+)/?$ spielerranglistenSettings.php?season=$1 [NC,QSA,L]
+RewriteRule ^spielerrangliste/einstellungen spielerranglistenSettings.php [NC,QSA,L]
+
 # Rewrite Rules for spielerrangliste.php
 RewriteRule ^spielerrangliste/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/?$/?$ spielerrangliste.php?year=$1&club=$2 [NC,QSA,L]
 
@@ -74,6 +78,7 @@ RewriteRule ^delete/(.*)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-]+)/?$/?$/?$ delete.php?t=
 RewriteRule ^spielerrangliste/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/pdf/?$/?$ filecreators/pdf-spielerrangliste.php?year=$1&club=$2 [NC,QSA,L]
 RewriteRule ^spielerrangliste/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/xls/?$/?$ filecreators/xls-spielerrangliste.php?year=$1&club=$2 [NC,QSA,L]
 RewriteRule ^spielerrangliste/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/csv/?$/?$ filecreators/csv-spielerrangliste.php?year=$1&club=$2 [NC,QSA,L]
+
 
 
 #Ignore .php-Extension

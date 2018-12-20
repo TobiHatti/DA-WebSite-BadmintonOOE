@@ -7,6 +7,7 @@
     $accentColor1Sett = "Y".$year."ColorA";
     $accentColor2Sett = "Y".$year."ColorB";
     $highlightColorSett = "HighlightColor";
+    $headerSubtitleSett = "Y".$year."HeaderSubtitle";
 
     $accentColor1 = '#'.MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$accentColor1Sett);
     $accentColor2 = '#'.MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$accentColor2Sett);
@@ -15,6 +16,8 @@
     $lastChange = '26.10.2018';
 
     echo '<h1 class="stagfade1">Spielerrangliste '.$_GET['year'].'</h1>';
+
+    if(CheckPermission("EditSpielerrangliste")) echo '<a href="/spielerrangliste/einstellungen/'.$_GET['year'].'">&#x270E; Spielerranglisten-Einstellungen</a>';
 
     echo '
         <hr>
@@ -77,7 +80,7 @@
                     <td colspan=1 class="ta_r" style="background: '.$accentColor1.'; font-size: 14pt;"><b>'.$year.'</b></td>
                 </tr>
                 <tr>
-                    <td colspan=8 style="background: '.$accentColor1.'; font-size: 12pt;"><b>6. - 10. Meisterschaftsrunde - R&uuml;ckrunde</b></td>
+                    <td colspan=8 style="background: '.$accentColor1.'; font-size: 12pt;"><b>'.MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$headerSubtitleSett).'</b></td>
                     <td colspan=1 class="ta_r" rowspan=3 style="background: '.$accentColor1.'; border-bottom: 6px solid '.$accentColor2.'"><img src="/content/ooebv.png" alt="" style="height:100px"/></td>
                 </tr>
                 <tr>

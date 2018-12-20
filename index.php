@@ -309,7 +309,7 @@
 
                         $todayAgenda = date("Y-m-").'1';
 
-                        $strSQL = "SELECT id AS isAgenda, NULL AS isZA, titel AS title, date_begin FROM agenda
+                        $strSQL = "SELECT id AS isAgenda, NULL AS isZA, title, date_begin FROM agenda
                         WHERE date_begin >= '$todayAgenda'
                         UNION ALL
                         SELECT NULL AS isAgenda, id AS isZA, CONCAT_WS(' ', title_line1, title_line2) AS title, date_begin FROM zentralausschreibungen

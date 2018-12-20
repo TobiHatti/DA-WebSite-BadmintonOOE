@@ -320,7 +320,7 @@
                                     <a href="#c"><img src="/content/cross2.png" alt="" class="close_cross"/></a>
 
 
-                                     <div style="border-left: 3px solid '.(($calData['kategorie']!="") ? $categoryColor[$calData['kategorie']] : '000000').'; padding-left: 5px;">
+                                     <div style="border-left: 3px solid '.(($calData['category']!="") ? $categoryColor[$calData['category']] : '000000').'; padding-left: 5px;">
                                         <a href="#exportZA'.$calData['id'].'"><button style="float: right; margin-right: 30px;"><i class="fas fa-file-export"></i> Exportieren</button></a>
                                         <span style="color: #696969"><i>Zentralausschreibung</i></span>
                                         <h2><u>'.$calData['title_line1'].'<br>'.$calData['title_line2'].'</u></h2>
@@ -404,7 +404,7 @@
 
                     if($dataParts[0] == "AG")
                     {
-                        $calData = MySQL::Row("SELECT *,titel AS displayTitle FROM agenda WHERE id = ?",'i',$dataParts[1]);
+                        $calData = MySQL::Row("SELECT *,title AS displayTitle FROM agenda WHERE id = ?",'i',$dataParts[1]);
                         $displayTitle = '';
 
                         // MODAL =========================================================
@@ -427,7 +427,7 @@
                                                     <table>
                                                         <tr>
                                                             <td class="ta_r">Titel</td>
-                                                            <td><input value="'.$calData['titel'].'" type="text" class="cel_l" placeholder="Titel" name="termin_titel" required/></td>
+                                                            <td><input value="'.$calData['title'].'" type="text" class="cel_l" placeholder="Titel" name="termin_titel" required/></td>
                                                         </tr>
                                                         <tr>
                                                             <td class="ta_r">Beschreibung</td>
@@ -439,23 +439,23 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="ta_r">Ort</td>
-                                                            <td><input value="'.$calData['place'].'" type="text" class="cel_l" placeholder="Ort" name="place"/></td>
+                                                            <td><input value="'.$calData['location'].'" type="text" class="cel_l" placeholder="Ort" name="place"/></td>
                                                         </tr>
                                                         <tr>
                                                             <td class="ta_r">Uhrzeit</td>
-                                                            <td><input value="'.$calData['time'].'" type="time" class="cel_l" name="time" required/></td>
+                                                            <td><input value="'.$calData['time_start'].'" type="time" class="cel_l" name="time" required/></td>
                                                         </tr>
                                                         <tr>
                                                             <td class="ta_r">Kategorie</td>
                                                             <td>
                                                             <select class="cel_l" name="kategorie" id="classKat">
-                                                                <option '.(($calData['kategorie']=="Anderes") ? 'selected' : '').' value="">Anderes</option>
-                                                                <option '.(($calData['kategorie']=="Landesmeisterschaft") ? 'selected' : '').' value="Landesmeisterschaft" style="color: '.$categoryColor["Landesmeisterschaft"].'">Landesmeisterschaft</option>
-                                                                <option '.(($calData['kategorie']=="Doppelturnier") ? 'selected' : '').' value="Doppelturnier" style="color: '.$categoryColor["Doppelturnier"].'">Doppelturnier</option>
-                                                                <option '.(($calData['kategorie']=="Nachwuchs") ? 'selected' : '').' value="Nachwuchs" style="color: '.$categoryColor["Nachwuchs"].'">Nachwuchs</option>
-                                                                <option '.(($calData['kategorie']=="SchuelerJugend") ? 'selected' : '').' value="SchuelerJugend" style="color: '.$categoryColor["SchuelerJugend"].'">Sch&uuml;ler/Jugend</option>
-                                                                <option '.(($calData['kategorie']=="Senioren") ? 'selected' : '').' value="Senioren" style="color: '.$categoryColor["Senioren"].'">Senioren</option>
-                                                                <option '.(($calData['kategorie']=="Training") ? 'selected' : '').' value="Training" style="color: '.$categoryColor["Training"].'">Training</option>
+                                                                <option '.(($calData['category']=="Anderes") ? 'selected' : '').' value="">Anderes</option>
+                                                                <option '.(($calData['category']=="Landesmeisterschaft") ? 'selected' : '').' value="Landesmeisterschaft" style="color: '.$categoryColor["Landesmeisterschaft"].'">Landesmeisterschaft</option>
+                                                                <option '.(($calData['category']=="Doppelturnier") ? 'selected' : '').' value="Doppelturnier" style="color: '.$categoryColor["Doppelturnier"].'">Doppelturnier</option>
+                                                                <option '.(($calData['category']=="Nachwuchs") ? 'selected' : '').' value="Nachwuchs" style="color: '.$categoryColor["Nachwuchs"].'">Nachwuchs</option>
+                                                                <option '.(($calData['category']=="SchuelerJugend") ? 'selected' : '').' value="SchuelerJugend" style="color: '.$categoryColor["SchuelerJugend"].'">Sch&uuml;ler/Jugend</option>
+                                                                <option '.(($calData['category']=="Senioren") ? 'selected' : '').' value="Senioren" style="color: '.$categoryColor["Senioren"].'">Senioren</option>
+                                                                <option '.(($calData['category']=="Training") ? 'selected' : '').' value="Training" style="color: '.$categoryColor["Training"].'">Training</option>
                                                             </select>
                                                             </td>
                                                         </tr>
@@ -541,7 +541,7 @@
                         <tr>
                             <td>
                                 <a href="#calenderInfo'.$designDataGrid[$dayNow - 1][$dctr].'" style="text-decoration:none;">
-                                    <div id="'.$cellStyle.'" style="color: '.(($calData['kategorie']!="") ? $categoryColor[$calData['kategorie']] : '#000000').';">'.$displayTitle.'</div>
+                                    <div id="'.$cellStyle.'" style="color: '.(($calData['category']!="") ? $categoryColor[$calData['category']] : '#000000').';">'.$displayTitle.'</div>
                                 </a>
                             </td>
                         </tr>
@@ -573,213 +573,6 @@
     // Output Modals
     echo $dateModalInfos;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*
-    $datePart = $yr.'-'.str_pad($mo,2,0,STR_PAD_LEFT).'-';
-
-    $strSQL = "SELECT * FROM agenda WHERE date_begin LIKE '$datePart%'";
-    $rs=mysqli_query($link,$strSQL);
-    while($row=mysqli_fetch_assoc($rs))
-    {
-
-        echo '
-            <div class="modal_wrapper" id="calenderInfoAG'.$row['id'].'">
-                <a href="#c">
-                    <div class="modal_bg"></div>
-                </a>
-                <div class="modal_container" style="width: 50%; height: 60%;">
-                    <a href="#c"><img src="/content/cross2.png" alt="" class="close_cross"/></a>
-                    <div style="border-left: 3px solid '.(($row['kategorie']!="") ? Setting::Get("Color".$row['kategorie']) : '').'; padding-left: 5px;">
-                        ';
-
-                        if(isset($_GET['edit']) AND $_GET['edit']==$row['id'] AND CheckPermission("EditDate"))
-                        {
-                            echo '
-                                <h2>Termin bearbeiten</h2>
-                                <hr>
-
-
-                                <form action="/kalender" method="post" accept-charset="utf-8" enctype="multipart/form-data" target="_top" class="stagfade2">
-                                    <table>
-                                        <tr>
-                                            <td class="ta_r">Titel</td>
-                                            <td><input value="'.$row['titel'].'" type="text" class="cel_l" placeholder="Titel" name="termin_titel" required/></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="ta_r">Beschreibung</td>
-                                            <td><textarea class="cel_l" name="description_date" placeholder="Beschreibung" style="resize: vertical;">'.$row['description'].'</textarea></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="ta_r">Datum</td>
-                                            <td><input value="'.$row['date'].'" type="date" class="cel_l" name="date_termin" required/></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="ta_r">Ort</td>
-                                            <td><input value="'.$row['place'].'" type="text" class="cel_l" placeholder="Ort" name="place"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="ta_r">Uhrzeit</td>
-                                            <td><input value="'.$row['time'].'" type="time" class="cel_l" name="time" required/></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="ta_r">Kategorie</td>
-                                            <td>
-                                            <select class="cel_l" name="kategorie" id="classKat">
-                                                <option '.(($row['kategorie']=="Anderes") ? 'selected' : '').' value="">Anderes</option>
-                                                <option '.(($row['kategorie']=="Landesmeisterschaft") ? 'selected' : '').' value="Landesmeisterschaft" style="color: '.Setting::Get("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
-                                                <option '.(($row['kategorie']=="Doppelturnier") ? 'selected' : '').' value="Doppelturnier" style="color: '.Setting::Get("ColorDoppelturnier").'">Doppelturnier</option>
-                                                <option '.(($row['kategorie']=="Nachwuchs") ? 'selected' : '').' value="Nachwuchs" style="color: '.Setting::Get("ColorNachwuchs").'">Nachwuchs</option>
-                                                <option '.(($row['kategorie']=="SchuelerJugend") ? 'selected' : '').' value="SchuelerJugend" style="color: '.Setting::Get("ColorSchuelerJugend").'">Sch&uuml;ler/Jugend</option>
-                                                <option '.(($row['kategorie']=="Senioren") ? 'selected' : '').' value="Senioren" style="color: '.Setting::Get("ColorSenioren").'">Senioren</option>
-                                                <option '.(($row['kategorie']=="Training") ? 'selected' : '').' value="Training" style="color: '.Setting::Get("ColorTraining").'">Training</option>
-                                            </select>
-                                            </td>
-                                        </tr>
-                                    </table>
-
-                                    <br>
-                                    <br>
-                                    <button type="submit" name="update_termin" value="'.$row['id'].'" class="stagfade3">Termin aktualisieren</button>
-
-                                </form>
-                            ';
-                        }
-                        else
-                        {
-                            echo '
-                            <a href="#exportAG'.$row['id'].'"><button style="float: right; margin-right: 30px;"><i class="fas fa-file-export"></i> Exportieren</button></a>
-                            <h2><u>'.$row['titel'].'</u></h2>
-                            <h4>'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['date']))).'</h4>
-                            <h4>'.date_format(date_create($row['time']),"H:i").' Uhr</h4>
-                            <p>
-                                '.$row['description'].'
-                            </p>
-
-                            ';
-
-                            if(CheckPermission("EditDate"))
-                            {
-                                echo '<span> '.EditButton("/kalender/event/AG".$row['id']."/".$row['date']."?editSC=".$row['id'],false,true).' </span>';
-                            }
-
-                            if(CheckPermission("DeleteDate"))
-                            {
-                                echo '<span> '.DeleteButton("Date","agenda",$row['id'],false,true).' </span>';
-                            }
-                        }
-
-                        echo '
-
-                    </div>
-                </div>
-            </div>
-        ';
-
-        echo '
-            <div class="modal_wrapper" id="exportAG'.$row['id'].'">
-                <a href="#c">
-                    <div class="modal_bg"></div>
-                </a>
-                <div class="modal_container" style="width: 200px; height: 100px;">
-                    <h3>Exportieren</h3>
-                    <center>
-                        <form action="/kalender" method="post" accept-charset="utf-8" enctype="multipart/form-data" target="_top">
-                            <button type="submit" class="cel_m" name="export_csv" value="AG'.$row['id'].'"><i class="fa fa-file-excel-o" style="float: left;"></i> Als .csv Exportieren</button>
-                            <br>
-                            <button type="submit" class="cel_m" name="export_ics" value="AG'.$row['id'].'"><i class="fas fa-file" style="float: left;"></i>Als .ics Exportieren</button>
-                        </form>
-                    </center>
-                </div>
-            </div>
-
-        ';
-    }
-
-    if(Setting::Get("ShowZAinAG"))
-    {
-        $strSQL = "SELECT * FROM zentralausschreibungen WHERE date_begin LIKE '$datePart%'";
-        $rs=mysqli_query($link,$strSQL);
-        while($row=mysqli_fetch_assoc($rs))
-        {
-
-            echo '
-                <div class="modal_wrapper" id="calenderInfoZA'.$row['id'].'">
-                    <a href="#c">
-                        <div class="modal_bg"></div>
-                    </a>
-                    <div class="modal_container" style="width: 50%; height: 60%;">
-                        <a href="#c"><img src="/content/cross2.png" alt="" class="close_cross"/></a>
-                        <div style="border-left: 3px solid '.(($row['kategorie']!="") ? Setting::Get("Color".$row['kategorie']) : '').'; padding-left: 5px;">
-                            <a href="#exportZA'.$row['id'].'"><button style="float: right; margin-right: 30px;"><i class="fas fa-file-export"></i> Exportieren</button></a>
-                            <span style="color: #696969"><i>Zentralausschreibung</i></span>
-                            <h2><u>'.$row['title_line1'].'<br>'.$row['title_line2'].'</u></h2>
-                            <h4>'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['date_begin']))).'</h4>
-                            <h4>'.$row['uhrzeit'].'</h4>
-                            <p>
-                            ';
-
-                            if($row['size']=='full')
-                            {
-                                echo '<div class="za_data">';
-                                echo ShowZATable($row['id']);
-                                echo '</div>';
-                            }
-                            else
-                            {
-                                echo '
-                                    <div class="za_data">
-                                        <table>
-                                            <tr>
-                                                <td>Ort:</td>
-                                                <td>'.$row['location'].'</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                ';
-                            }
-
-                            echo '
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            ';
-
-
-            echo '
-                <div class="modal_wrapper" id="exportZA'.$row['id'].'">
-                    <a href="#c">
-                        <div class="modal_bg"></div>
-                    </a>
-                    <div class="modal_container" style="width: 200px; height: 100px;">
-                        <h3>Exportieren</h3>
-                        <center>
-                            <form action="/kalender" method="post" accept-charset="utf-8" enctype="multipart/form-data" target="_top">
-                                <button type="submit" class="cel_m" name="export_csv" value="ZA'.$row['id'].'"><i class="fa fa-file-excel-o" style="float: left;"></i> Als .csv Exportieren</button>
-                                <br>
-                                <button type="submit" class="cel_m" name="export_ics" value="ZA'.$row['id'].'"><i class="fas fa-file" style="float: left;"></i>Als .ics Exportieren</button>
-                            </form>
-                        </center>
-                    </div>
-                </div>
-
-            ';
-        }
-    }
-
-    */
 
     echo '
                 </div>

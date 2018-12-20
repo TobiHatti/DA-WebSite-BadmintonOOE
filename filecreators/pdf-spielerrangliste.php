@@ -1,10 +1,6 @@
 <?php
     session_start();
-    require('../data/functions.php');
-    require('../data/mysql.lib.php');
-    require('../data/mysql.lib.new.php');
-    require('../data/string.lib.php');
-    require('../data/mysql_connect.php');
+    require("../headerincludes.php");
     require('../data/fpdf/main_functions.php');
 
     $year = $_GET['year'];
@@ -17,6 +13,7 @@
     $accentColor1Sett = "Y".$year."ColorA";
     $accentColor2Sett = "Y".$year."ColorB";
     $highlightColorSett = "HighlightColor";
+    $headerSubtitleSett = "Y".$year."HeaderSubtitle";  
 
     list($color1R, $color1G, $color1B) = sscanf('#'.MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$accentColor1Sett), "#%02x%02x%02x");
     list($color2R, $color2G, $color2B) = sscanf('#'.MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$accentColor2Sett), "#%02x%02x%02x");
@@ -39,7 +36,7 @@
     $pdf->Cell(65,15,"$year",$showBorders,1,'L',true);
 
     $pdf->SetFont('Arial','B',12);
-    $pdf->Cell(190,8,LetterCorrection("6. - 10. Meisterschaftsrunde - Rückrunde"),$showBorders,1,'L',true);
+    $pdf->Cell(190,8,LetterCorrection(MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$headerSubtitleSett)),$showBorders,1,'L',true);
 
     $pdf->SetFont('Arial','B',14);
     $pdf->Cell(105,15,"S P I E L E R R A N G L I S T E",$showBorders,0,'L',true);

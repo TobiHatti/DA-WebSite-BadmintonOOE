@@ -20,6 +20,7 @@
     $accentColor1Sett = "Y".$year."ColorA";
     $accentColor2Sett = "Y".$year."ColorB";
     $highlightColorSett = "HighlightColor";
+    $headerSubtitleSett = "Y".$year."HeaderSubtitle";
 
     $color1 = MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$accentColor1Sett);
     $color2 = MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$accentColor2Sett);
@@ -56,7 +57,7 @@
     // FILLING CELLS (Array-Method)
     $cellCluster = [
         ['OÖBV - Mannschaftsmeisterschaft', NULL, NULL, NULL, NULL, NULL, NULL, NULL, $_GET['year']],
-        ['6. - 10. Meisterschaftsrunde - Rückrunde'],
+        [MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$headerSubtitleSett)],
         ['S P I E L E R R A N G L I S T E', NULL, NULL, NULL, 'Stand per 09.02.2018'],
     ];
     $spreadsheet->getActiveSheet()->fromArray($cellCluster,NULL,'A1');

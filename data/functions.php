@@ -784,7 +784,7 @@ function ExportCSVAgenda($db,$id="",$multiple="")
         {
             if($db == 'agenda')
             {
-                $inhalt .= $row['titel'].';'.$row['date_begin'].';'.$row['time'].';;;FALSE;'.$row['description'].';'.$row['place'].';FALSE'."\r\n";
+                $inhalt .= $row['title'].';'.$row['date_begin'].';'.$row['time_start'].';;;FALSE;'.$row['description'].';'.$row['location'].';FALSE'."\r\n";
                 $filename = "Termin-".$row['date_begin'].".csv";
             }
             else
@@ -798,13 +798,13 @@ function ExportCSVAgenda($db,$id="",$multiple="")
     }
     else
     {
-        if($db == 'agenda') $strSQL = "SELECT * FROM $db WHERE date LIKE '$multiple%'";
+        if($db == 'agenda') $strSQL = "SELECT * FROM $db WHERE date_begin LIKE '$multiple%'";
         else $strSQL = "SELECT * FROM $db WHERE date_begin LIKE '$multiple%'";
 
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
         {
-            if($db == 'agenda') $inhalt .= $row['titel'].';'.$row['date'].';'.$row['time'].';;;FALSE;'.$row['description'].';'.$row['place'].';FALSE'."\r\n";
+            if($db == 'agenda') $inhalt .= $row['title'].';'.$row['date_begin'].';'.$row['time_start'].';;;FALSE;'.$row['description'].';'.$row['location'].';FALSE'."\r\n";
             else $inhalt .= $row['title_line1'].$row['title_line2'].';'.$row['date_begin'].';;;;FALSE;;'.$row['hallenname'].' - '.$row['anschrift_halle'].';FALSE'."\r\n";
         }
 
