@@ -139,13 +139,33 @@
     }
     else
     {
-        $frameExtension = (isset($_GET['event'])) ? ('?datum='.$_GET['datum'].'#calenderInfo'.$_GET['event']) : ((isset($_GET['datum'])) ? ('?datum='.$_GET['datum']) : '');
+        //$frameExtension = (isset($_GET['event'])) ? ('?datum='.$_GET['datum'].'#calenderInfo'.$_GET['event']) : ((isset($_GET['datum'])) ? ('?datum='.$_GET['datum']) : '');
+
+        $frameExtension = '';
+
+        if(isset($_GET['category'])) $frameExtension = "?category=".$_GET['category'];
+
+        if(isset($_GET['event']))
+        {
+            $frameExtension = '?datum='.$_GET['datum'].'#calenderInfo'.$_GET['event'];
+
+            if(isset($_GET['category'])) $frameExtension .= "&category=".$_GET['category'];
+        }
+        else if(isset($_GET['datum']))
+        {
+            $frameExtension = '?datum='.$_GET['datum'];
+
+            if(isset($_GET['category'])) $frameExtension .= "&category=".$_GET['category'];
+        }
+
+
+
         if(isset($_GET['editSC']))  $frameExtension = '?datum='.$_GET['datum'].'&edit='.$_GET['editSC'].'#calenderInfo'.$_GET['event'];
 
 
 
-        echo '<div style="float:right;"><table><tr><td>Liste / Kalender</td><td>'.Togglebox("","changeListStyle",1,"ChangeCalenderStyle();","toggleCalendar").'</td></tr></table></div><br>';
 
+        echo '<div style="float:right;"><table><tr><td>Liste / Kalender</td><td>'.Togglebox("","changeListStyle",1,"ChangeCalenderStyle();","toggleCalendar").'</td></tr></table></div><br>';
 
 
         echo'
@@ -157,6 +177,20 @@
             {
                 echo AddButton(ThisPage("+neu")).' oder <a href="/kalender-import">Termine Importieren</a><br><br>';
             }
+
+            echo '
+                <div style="float: right;">
+                    <select onchange="RedirectSelectBox(this,\'/kalender/\');">
+                        <option value="" disabled selected>--- Kategorie ausw&auml;hlen ---</option>
+                        <option '.((isset($_GET['category']) AND $_GET['category'] == 'Landesmeisterschaft') ? 'selected' : '').' value="Landesmeisterschaft" style="color: '.Setting::Get("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
+                        <option '.((isset($_GET['category']) AND $_GET['category'] == 'Doppelturnier') ? 'selected' : '').' value="Doppelturnier" style="color: '.Setting::Get("ColorDoppelturnier").'">Doppelturnier</option>
+                        <option '.((isset($_GET['category']) AND $_GET['category'] == 'Nachwuchs') ? 'selected' : '').' value="Nachwuchs" style="color: '.Setting::Get("ColorNachwuchs").'">Nachwuchs</option>
+                        <option '.((isset($_GET['category']) AND $_GET['category'] == 'SchuelerJugend') ? 'selected' : '').' value="SchuelerJugend" style="color: '.Setting::Get("ColorSchuelerJugend").'">Sch&uuml;ler/Jugend</option>
+                        <option '.((isset($_GET['category']) AND $_GET['category'] == 'Senioren') ? 'selected' : '').' value="Senioren" style="color: '.Setting::Get("ColorSenioren").'">Senioren</option>
+                        <option '.((isset($_GET['category']) AND $_GET['category'] == 'Training') ? 'selected' : '').' value="Training" style="color: '.Setting::Get("ColorTraining").'">Training</option>
+                    </select>
+                </div>
+            ';
 
             echo '
             <hr>
@@ -194,6 +228,20 @@
             {
                 echo AddButton(ThisPage("+neu")).' oder <a href="/kalender-import">Termine Importieren</a><br><br>';
             }
+
+            echo '
+                <div style="float: right;">
+                    <select onchange="RedirectSelectBox(this,\'/kalender/\');">
+                        <option value="" disabled selected>--- Kategorie ausw&auml;hlen ---</option>
+                        <option '.((isset($_GET['category']) AND $_GET['category'] == 'Landesmeisterschaft') ? 'selected' : '').' value="Landesmeisterschaft" style="color: '.Setting::Get("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
+                        <option '.((isset($_GET['category']) AND $_GET['category'] == 'Doppelturnier') ? 'selected' : '').' value="Doppelturnier" style="color: '.Setting::Get("ColorDoppelturnier").'">Doppelturnier</option>
+                        <option '.((isset($_GET['category']) AND $_GET['category'] == 'Nachwuchs') ? 'selected' : '').' value="Nachwuchs" style="color: '.Setting::Get("ColorNachwuchs").'">Nachwuchs</option>
+                        <option '.((isset($_GET['category']) AND $_GET['category'] == 'SchuelerJugend') ? 'selected' : '').' value="SchuelerJugend" style="color: '.Setting::Get("ColorSchuelerJugend").'">Sch&uuml;ler/Jugend</option>
+                        <option '.((isset($_GET['category']) AND $_GET['category'] == 'Senioren') ? 'selected' : '').' value="Senioren" style="color: '.Setting::Get("ColorSenioren").'">Senioren</option>
+                        <option '.((isset($_GET['category']) AND $_GET['category'] == 'Training') ? 'selected' : '').' value="Training" style="color: '.Setting::Get("ColorTraining").'">Training</option>
+                    </select>
+                </div>
+            ';
 
             echo '
             <iframe src="/graphic_calendar'.$frameExtension.'" frameborder="0" onload="ResizeIframe(this);" class="calender_iframe"></iframe>
