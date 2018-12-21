@@ -74,19 +74,22 @@
 
     $calcDate = $yr.'-'.str_pad($mo,2,0,STR_PAD_LEFT).'-'.str_pad($da,2,0,STR_PAD_LEFT);
 
+    $redirEx = '';
+    if(isset($_GET['category'])) $redirEx = "&category=".$_GET['category'];
+
     // output table
     echo '
         <center>
             <table class="calendar_table">
             <tr>
-                <td colspan="1"><a href="?day='.date('Y-m-d', mktime(0,0,0,$mo,$da,$yr-1)).'">&laquo;</a></td>
+                <td colspan="1"><a href="?day='.date('Y-m-d', mktime(0,0,0,$mo,$da,$yr-1)).$redirEx.'">&laquo;</a></td>
                 <td colspan="5"><b>'.$yr.'</b></td>
-                <td colspan="1"><a href="?day='.date('Y-m-d', mktime(0,0,0,$mo,$da,$yr+1)).'">&raquo;</a></td>
+                <td colspan="1"><a href="?day='.date('Y-m-d', mktime(0,0,0,$mo,$da,$yr+1)).$redirEx.'">&raquo;</a></td>
             </tr>
             <tr>
-                <td colspan="1"><a href="?day='.date('Y-m-d', mktime(0,0,0,$mo,0,$yr)).'">&laquo;</a></td>
+                <td colspan="1"><a href="?day='.date('Y-m-d', mktime(0,0,0,$mo,0,$yr)).$redirEx.'">&laquo;</a></td>
                 <td colspan="5"><b>'.str_replace('Mrz','M&auml;rz',SReplace(strftime("%B",strtotime($yr.'-'.$mo.'-'.$da)))).'</b></td>
-                <td colspan="1"><a href="?day='.date('Y-m-d', mktime(0,0,0,$mo+1,1,$yr)).'">&raquo;</a></td>
+                <td colspan="1"><a href="?day='.date('Y-m-d', mktime(0,0,0,$mo+1,1,$yr)).$redirEx.'">&raquo;</a></td>
             </tr>
 
             <tr>
@@ -106,13 +109,16 @@
 // FETCHING DATA FROM DB TO IMPROVE RUNTIME
     $showZAinAG = Setting::Get("ShowZAinAG");
 
+    $sqlExtension = '';
+    if(isset($_GET['category'])) $sqlExtension = " AND category = '".$_GET['category']."'";
+
     $thisMontAndYear = $yr.'-'.str_pad($mo,2,0,STR_PAD_LEFT).'-%';
 
-    $zaTSMonthCluster = MySQL::Cluster("SELECT * FROM zentralausschreibungen WHERE act_timespan = '1' AND (date_begin LIKE ? OR date_end LIKE ?)",'ss',$thisMontAndYear,$thisMontAndYear);
-    $zaSiMonthCluster = MySQL::Cluster("SELECT * FROM zentralausschreibungen WHERE act_timespan = '0' AND date_begin LIKE ?",'s',$thisMontAndYear);
+    $zaTSMonthCluster = MySQL::Cluster("SELECT * FROM zentralausschreibungen WHERE act_timespan = '1' $sqlExtension AND (date_begin LIKE ? OR date_end LIKE ?)",'ss',$thisMontAndYear,$thisMontAndYear);
+    $zaSiMonthCluster = MySQL::Cluster("SELECT * FROM zentralausschreibungen WHERE act_timespan = '0' $sqlExtension AND date_begin LIKE ?",'s',$thisMontAndYear);
 
-    $agTSMonthCluster = MySQL::Cluster("SELECT * FROM agenda WHERE isTimespan = '1' AND (date_begin LIKE ? OR date_end LIKE ?)",'ss',$thisMontAndYear,$thisMontAndYear);
-    $agSiMonthCluster = MySQL::Cluster("SELECT * FROM agenda WHERE isTimespan = '0' AND date_begin LIKE ?",'s',$thisMontAndYear);
+    $agTSMonthCluster = MySQL::Cluster("SELECT * FROM agenda WHERE isTimespan = '1' $sqlExtension AND (date_begin LIKE ? OR date_end LIKE ?) ",'ss',$thisMontAndYear,$thisMontAndYear);
+    $agSiMonthCluster = MySQL::Cluster("SELECT * FROM agenda WHERE isTimespan = '0' $sqlExtension AND date_begin LIKE ?",'s',$thisMontAndYear);
 
     $categoryColor = array(
     "Landesmeisterschaft" => Setting::Get("ColorLandesmeisterschaft"),
