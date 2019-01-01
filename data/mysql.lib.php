@@ -21,18 +21,23 @@ class MySQL
     {
         require("mysql.lib.config.php");
 
-        self::$databaseHost = $sqlConfigDatabaseHost;
-        self::$databaseUser = $sqlConfigDatabaseUser;
-        self::$databasePass = $sqlConfigDatabasePass;
-        self::$databaseName = $sqlConfigDatabaseName;
-
         self::$databaseBackupPath = $sqlConfigBackupPath;
-
-        self::$sqlConnectionLink = mysqli_connect($sqlConfigDatabaseHost,$sqlConfigDatabaseUser,$sqlConfigDatabasePass,$sqlConfigDatabaseName) OR die("<br><br><b>Error in mysql.lib.php :</b> Could not connect to Database (Code 1)<br><br>");
-
     }
 
 ##########################################################################################
+
+    public static function SetSQLLink($link)
+    {
+        self::$sqlConnectionLink = $link;
+    }
+
+    public static function SetSQLConData($host,$user,$pass,$name)
+    {
+        self::$databaseHost = $host;
+        self::$databaseUser = $user;
+        self::$databasePass = $pass;
+        self::$databaseName = $name;
+    }
 
     private static function GetParamTypeList($paramTypeList,$paramAmt)
     {
