@@ -20,12 +20,21 @@
             MySQL::NonQuery("INSERT INTO members (id, clubID, playerID, gender, firstname, lastname, birthdate) VALUES (?,?,?,?,?,?,?)",'@s',$id,$clubID,$playerID,$gender,$firstname,$lastname,$birthdate);
             FileUpload("content/members/","playerImg","","","UPDATE members SET image = 'FNAME' WHERE id = '$id'",uniqid());
         }
+        else
+        {
+            $id = MySQL::Scalar("SELECT id FROM members WHERE playerID = ?",'s',$playerID);
+        }
 
 
         if($_GET['assignUser'] == 'tg')
         {
             $trainingsgruppenID = $_POST['trainingsgruppenID'];
-            MySQL::NonQuery("INSERT INTO members_trainingsgruppen (id,tgID,playerID) VALUES ('',?,?)",'ss',$trainingsgruppenID,$playerID);
+            MySQL::NonQuery("INSERT INTO members_trainingsgruppen (id,tgID,memberID) VALUES ('',?,?)",'ss',$trainingsgruppenID,$id);
+        }
+
+        if($_GET['assignUser'] == 'nwk')
+        {
+            MySQL::NonQuery("INSERT INTO members_nachwuchskader (id,memberID) VALUES ('',?)",'s',$id);
         }
 
         Redirect(ThisPage());
@@ -136,8 +145,8 @@
                                 <td colspan=2><input type="text" name="lastname" placeholder="Nachname..." id="inputLastName"/></td>
                             </tr>
                             <tr>
-                                <td class="ta_r">Geburtsjahr: </td>
-                                <td colspan=2><input type="date" name="birthdate" placeholder="Geburtsjahr..." id="inputBirthyear"/></td>
+                                <td class="ta_r">Geburtsdatum: </td>
+                                <td colspan=2><input type="date" name="birthdate" placeholder="Geburtsdatum..." id="inputBirthyear"/></td>
                             </tr>
                             <tr>
                                 <td class="ta_r">Verein: </td>

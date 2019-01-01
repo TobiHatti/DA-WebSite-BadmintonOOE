@@ -9,10 +9,7 @@
 
         $tgID = MySQL::Scalar("SELECT id FROM trainingsgruppen WHERE tgURL = ?",'s',$_GET['eintragen']);
 
-        echo '
-            <iframe src="/memberAddFrame?assignUser=tg&tgID='.$tgID.'" frameborder="0" style="width: 100%; height: 400px;"></iframe>
-        ';
-
+        echo ' <iframe src="/memberAddFrame?assignUser=tg&tgID='.$tgID.'" frameborder="0" style="width: 100%; height: 400px;"></iframe>';
     }
     else
     {
@@ -20,9 +17,9 @@
         foreach($trainingsgruppen as $tg)
         {
             echo '<h3><sub>Gruppe</sub>&nbsp;&nbsp;&nbsp;'.$tg['trainingsgruppe'].'</h3><hr>';
-            echo '<a href="/trainingsgruppen/'.$tg['tgURL'].'/eintragen">Spieler hinzuf&uuml;gen</a><br>';
+            if(CheckPermission("AddNWTG")) echo '<a href="/trainingsgruppen/'.$tg['tgURL'].'/eintragen">Spieler hinzuf&uuml;gen</a><br>';
 
-            $tgData = MySQL::Cluster("SELECT * FROM members_trainingsgruppen INNER JOIN members ON members_trainingsgruppen.playerID = members.playerID WHERE members_trainingsgruppen.tgID = ?",'i',$tg['id']);
+            $tgData = MySQL::Cluster("SELECT *,members_trainingsgruppen.id AS mbID FROM members_trainingsgruppen INNER JOIN members ON members_trainingsgruppen.memberID = members.id WHERE members_trainingsgruppen.tgID = ?",'i',$tg['id']);
             foreach($tgData as $memberData)
             {
                 if($memberData['gender']=='M') $styleBorder = "border-left: 5px groove blue;";
@@ -38,8 +35,8 @@
                         </div>
                         <div style="position: absolute; bottom: 0px; right: 0px; height: 20px;">
                         ';
-                        //if(CheckPermission("EditNWK")) echo EditButton("/nachwuchskader?edit=".$memberData['id'],true);
-                        //if(CheckPermission("DeleteNWK")) echo DeleteButton("NWK","nachwuchskader",$memberData['id'],true);
+                        if(CheckPermission("EditNWTG")) echo EditButton("/mitglieder/bearbeiten/NWTG/".$memberData['playerID'],true);
+                        if(CheckPermission("DeleteNWTG")) echo DeleteButton("NWTG","members_trainingsgruppen",$memberData['mbID'],true);
                         echo '
                         </div>
                     </div>
