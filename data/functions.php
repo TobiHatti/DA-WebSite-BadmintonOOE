@@ -44,7 +44,7 @@ function Togglebox($name, $id, $checked = 0,$onchange="",$sessionName="")
     ';
 }
 
-function RadioButton($title, $name, $checked = 0,$value="")
+function RadioButton($title, $name, $checked = 0,$value="",$id="")
 {
     // DESCRIPTION:
     // Returns a Radio-Button Form-Element
@@ -54,7 +54,7 @@ function RadioButton($title, $name, $checked = 0,$value="")
 
     return '
         <label class="radiolabel">'.$title.'
-            <input type="radio" value="'.$value.'" name="'.$name.'" '.(($checked) ? 'checked' : '').'>
+            <input type="radio" id="'.$id.'" value="'.$value.'" name="'.$name.'" '.(($checked) ? 'checked' : '').'>
             <span class="radiocheckmark"></span>
         </label>
     ';
@@ -215,11 +215,11 @@ function PageContent($paragraph_index,$allowEdit=false,$reactToCustomPage="",$is
                         <div class="modal_bg"></div>
                     </a>
                     <div class="modal_container" style="width: 300px; height: 280px">
-                        <iframe src="/froalapl-upload-file?parent='.urlencode(ThisPage()).'" frameborder="0" style="width: 100%; height: 100%;">
+                        <iframe src="/froalapl-upload-file?parent='.urlencode(ThisPage()).'" frameborder="0" style="width: 100%; height: 100%;"></iframe>
                     </div>
                 </div>
 
-            <form>';
+            </form>';
     }
 
 

@@ -47,12 +47,15 @@ class FileUploader
 
     public static function init()
     {
-        require("upload.lib.config.php");
 
-        self::$sqlConnectionLink = mysqli_connect($uploadConfigDatabaseHost,$uploadConfigDatabaseUser,$uploadConfigDatabasePass,$uploadConfigDatabaseName) OR die("<br><br><b>Error in upload.lib.php :</b> Could not connect to Database (Code 1)<br><br>");
     }
 
 ##########################################################################################
+
+    public static function SetSQLLink($link)
+    {
+        self::$sqlConnectionLink = $link;
+    }
 
     private function SaveReplace($string)
     {

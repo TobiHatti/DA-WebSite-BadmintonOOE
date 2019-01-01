@@ -80,6 +80,8 @@ RewriteRule ^spielerrangliste/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/pdf/?$/?$ filecr
 RewriteRule ^spielerrangliste/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/xls/?$/?$ filecreators/xls-spielerrangliste.php?year=$1&club=$2 [NC,QSA,L]
 RewriteRule ^spielerrangliste/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/csv/?$/?$ filecreators/csv-spielerrangliste.php?year=$1&club=$2 [NC,QSA,L]
 
+# Rewrite Rules for trainingsgruppen
+RewriteRule ^trainingsgruppen/([a-zA-Z0-9-_]+)/eintragen/?$ trainingsgruppen.php?eintragen=$1 [NC,QSA,L]
 
 
 #Ignore .php-Extension
@@ -90,7 +92,6 @@ RewriteRule ^([^\.]+)$ $1.php [NC,L]
 ###############################
 RewriteRule (^|/)backup(/|$) - [F]
 RewriteRule (^|/)sass(/|$) - [F]
-RewriteRule (^|/)data(/|$) - [F]
 
 ###############################
 #       Error Ducuments       #

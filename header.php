@@ -19,6 +19,8 @@
 
                 require("headerlinks.php");
 
+                echo Dynload::Link();     
+
                 echo '
             </head>
 
@@ -133,7 +135,7 @@
                                         <li><a href="/trainingszeiten">Trainingszeiten BNLZ-Nord</a></li>
                                         <li><a href="/fotogalerie">Fotogalerie</a></li>
                                         <li><a href="/trainingsgruppen">Trainingsgruppen</a></li>
-                                        <li><a href="/kalender/nachwuchs">Terminkalender</a></li>
+                                        <li><a href="/kalender/Nachwuchs">Terminkalender</a></li>
                                     </ul>
                                 </li>
 

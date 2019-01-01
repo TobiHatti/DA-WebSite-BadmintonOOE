@@ -8,6 +8,9 @@
     require("data/setting.lib.php");
     require("data/string.lib.php");
     require("data/upload.lib.php");
+    require("data/dynload.lib.php");
+
+    require("data/sqlConnect.php");
     //require("data/notification.lib.php");
 
     require("data/functions.php");
