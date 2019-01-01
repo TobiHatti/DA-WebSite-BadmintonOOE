@@ -83,6 +83,8 @@ RewriteRule ^spielerrangliste/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/csv/?$/?$ filecr
 # Rewrite Rules for trainingsgruppen
 RewriteRule ^trainingsgruppen/([a-zA-Z0-9-_]+)/eintragen/?$ trainingsgruppen.php?eintragen=$1 [NC,QSA,L]
 
+# Rewrite Rules for member-edit
+RewriteRule ^mitglieder/bearbeiten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$/?$ editMembers.php?permissionSuffix=$1&memberID=$2 [NC,QSA,L]
 
 #Ignore .php-Extension
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
