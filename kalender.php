@@ -9,12 +9,18 @@
         $description = $_POST['description_date'];
         $termin_date_start=$_POST['date_termin_start'];
         $termin_date_end=(isset($_POST['toggleMultiday']) ? $_POST['date_termin_end'] : '0000-00-00');
-        $isTimespan = (isset($_POST['toggleMultiday']) ? 1 : 0);
-        $termin_place=$_POST['place'];
-        $termin_time=$_POST['time'];
+        $isTimespanDate = (isset($_POST['toggleMultiday']) ? 1 : 0);
+        $isTimespanTime = (isset($_POST['toggleMultiday']) ? 1 : 0);
+        $termin_location=$_POST['location'];
+        $termin_time_start=$_POST['time_start'];
+        $termin_time_end=$_POST['time_end'];
         $termin_kategorie=$_POST['kategorie'];
+        $termin_responsible=$_POST['responsible'];
+        $termin_participant=$_POST['participant'];
+        $termin_additionalInfo=$_POST['additionalInfo'];
 
-        MySQL::NonQuery("INSERT INTO agenda (id, title, description, date_begin, date_end, isTimespan, location, time_start,category) VALUES ('',?,?,?,?,?,?,?,?)",'@s',$terminName,$description,$termin_date_start,$termin_date_end,$isTimespan,$termin_place,$termin_time,$termin_kategorie);
+
+        MySQL::NonQuery("INSERT INTO agenda (id, title, description, date_begin, date_end, isTimespan, location, time_start, time_end,category, participant, responsible, additional_info) VALUES ('',?,?,?,?,?,?,?,?,?,?,?,?)",'@s',$terminName,$description,$termin_date_start,$termin_date_end,$isTimespanDate,$termin_location,$termin_time_start,$termin_time_end,$termin_kategorie,$termin_participant,$termin_responsible,$termin_additionalInfo);
 
         Redirect("/kalender");
         die();
@@ -23,6 +29,7 @@
 
     if(isset($_POST['update_termin']))
     {
+        // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         $id = $_POST['update_termin'];
         $terminName = $_POST['termin_titel'];
         $description = $_POST['description_date'];
@@ -88,11 +95,11 @@
                 <table>
                     <tr>
                         <td class="ta_r">Titel</td>
-                        <td><input type="text" class="cel_l" placeholder="Titel" name="termin_titel" required/></td>
+                        <td><input type="text" class="cel_l" placeholder="Titel..." name="termin_titel" required/></td>
                     </tr>
                     <tr>
                         <td class="ta_r">Beschreibung</td>
-                        <td><textarea class="cel_l" name="description_date" placeholder="Beschreibung" style="resize: vertical;" require></textarea></td>
+                        <td><textarea class="cel_l" name="description_date" placeholder="Beschreibung..." style="resize: vertical;"></textarea></td>
                     </tr>
                     <tr>
                         <td class="ta_r">Datum <output id="outBeginText" style="display:none;">Start</output></td>
@@ -106,12 +113,20 @@
                     </tr>
                     <tr>
                         <td class="ta_r">Ort</td>
-                        <td><input type="text" class="cel_l" placeholder="Ort" name="place"/></td>
+                        <td><input type="text" class="cel_l" placeholder="Ort..." name="location"/></td>
                     </tr>
+
                     <tr>
-                        <td class="ta_r">Uhrzeit</td>
-                        <td><input type="time" class="cel_l" name="time"/></td>
+                        <td class="ta_r">Uhrzeit <output id="outBeginTimeText" style="display:none;">Start</output></td>
+                        <td><input type="time" class="cel_l" name="time_start" required/></td>
+                        <td>'.Checkbox("toggleMultiTimespan", "toggleMultiTimespan", false,"ShowHideTableRow(this,'rowEndTime'); ShowHideElement(this,'outBeginTimeText')").'</td>
+                        <td>Zeitspanne</td>
                     </tr>
+                    <tr id="rowEndTime" style="display:none;">
+                        <td class="ta_r">Uhrzeit<br>Ende</td>
+                        <td><input type="time" class="cel_l" name="time_end"/></td>
+                    </tr>
+
                     <tr>
                         <td class="ta_r">Kategorie</td>
                         <td>
@@ -126,6 +141,18 @@
                             <option value="Training" style="color: '.Setting::Get("ColorTraining").'">Training</option>
                         </select>
                         </td>
+                    </tr>
+                    <tr>
+                        <td class="ta_r">Verantwortlicher</td>
+                        <td><input type="text" class="cel_l" placeholder="Verantwortliche Person..." name="responsible" required/></td>
+                    </tr>
+                    <tr>
+                        <td class="ta_r">Teilnehmer</td>
+                        <td><input type="text" class="cel_l" placeholder="Teilnehmer..." name="participant" required/></td>
+                    </tr>
+                    <tr>
+                        <td class="ta_r">Zusatzinformationen</td>
+                        <td><textarea class="cel_l" name="additionalInfo" placeholder="Zusatzinformationen..." style="resize: vertical;"></textarea></td>
                     </tr>
                 </table>
 
