@@ -118,7 +118,7 @@
 
                     <tr>
                         <td class="ta_r">Uhrzeit <output id="outBeginTimeText" style="display:none;">Start</output></td>
-                        <td><input type="time" class="cel_l" name="time_start" required/></td>
+                        <td><input type="time" class="cel_l" name="time_start"/></td>
                         <td>'.Checkbox("toggleMultiTimespan", "toggleMultiTimespan", false,"ShowHideTableRow(this,'rowEndTime'); ShowHideElement(this,'outBeginTimeText')").'</td>
                         <td>Zeitspanne</td>
                     </tr>
@@ -130,9 +130,12 @@
                     <tr>
                         <td class="ta_r">Kategorie</td>
                         <td>
-                        <select class="cel_l" name="kategorie" id="classKat">
+                        <select class="cel_l" name="kategorie" id="classKat" required>
                             <option value="" disabled selected>--- Kategorie ausw&auml;hlen ---</option>
                             <option value="">Anderes</option>
+                            <option value="OEBV-International" style="color: #2E8B57">&Ouml;BV / International</option>
+                            <option value="OEBV" style="color: #9932CC">&Ouml;BV</option>
+                            <option value="LV" style="color: #1E90FF">LV</option>
                             <option value="Landesmeisterschaft" style="color: '.Setting::Get("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
                             <option value="Doppelturnier" style="color: '.Setting::Get("ColorDoppelturnier").'">Doppelturnier</option>
                             <option value="Nachwuchs" style="color: '.Setting::Get("ColorNachwuchs").'">Nachwuchs</option>
@@ -144,11 +147,11 @@
                     </tr>
                     <tr>
                         <td class="ta_r">Verantwortlicher</td>
-                        <td><input type="text" class="cel_l" placeholder="Verantwortliche Person..." name="responsible" required/></td>
+                        <td><input type="text" class="cel_l" placeholder="Verantwortliche Person..." name="responsible"/></td>
                     </tr>
                     <tr>
                         <td class="ta_r">Teilnehmer</td>
-                        <td><input type="text" class="cel_l" placeholder="Teilnehmer..." name="participant" required/></td>
+                        <td><input type="text" class="cel_l" placeholder="Teilnehmer..." name="participant"/></td>
                     </tr>
                     <tr>
                         <td class="ta_r">Zusatzinformationen</td>
