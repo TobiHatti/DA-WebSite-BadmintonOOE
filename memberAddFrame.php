@@ -16,8 +16,10 @@
             $firstname = $_POST['firstname'];
             $lastname = $_POST['lastname'];
             $birthdate = $_POST['birthdate'];
+            $email = $_POST['email'];
+            $phoneNumber = $_POST['phoneNr'];
 
-            MySQL::NonQuery("INSERT INTO members (id, clubID, playerID, gender, firstname, lastname, birthdate) VALUES (?,?,?,?,?,?,?)",'@s',$id,$clubID,$playerID,$gender,$firstname,$lastname,$birthdate);
+            MySQL::NonQuery("INSERT INTO members (id, clubID, playerID, gender, firstname, lastname, birthdate, email, mobileNr) VALUES (?,?,?,?,?,?,?,?,?)",'@s',$id,$clubID,$playerID,$gender,$firstname,$lastname,$birthdate,$email,$phoneNumber);
             FileUpload("content/members/","playerImg","","","UPDATE members SET image = 'FNAME' WHERE id = '$id'",uniqid());
         }
         else
@@ -35,6 +37,11 @@
         if($_GET['assignUser'] == 'nwk')
         {
             MySQL::NonQuery("INSERT INTO members_nachwuchskader (id,memberID) VALUES ('',?)",'s',$id);
+        }
+
+        if($_GET['assignUser'] == 'club')
+        {
+            // No actions needed -> special actions in reihung!
         }
 
         Redirect(ThisPage());
@@ -76,7 +83,9 @@
                                         document.getElementById("inputFirstName").disabled = true;
                                         document.getElementById("inputLastName").disabled = true;
                                         document.getElementById("inputBirthyear").disabled = true;
-                                        document.getElementById("inputClub").disabled = true;
+                                        document.getElementById("inputEmail").disabled = true;
+                                        document.getElementById("inputPhone").disabled = true;
+                                        '.((isset($_GET['assignUser']) AND $_GET['assignUser'] != "club") ? 'document.getElementById("inputClub").disabled = true;' : '').'
 
                                         document.getElementById("checkMemberNotificationExists").style.display = "table-row";
                                         document.getElementById("checkMemberNotificationExistsNot").style.display = "none";
@@ -88,7 +97,9 @@
                                         document.getElementById("inputFirstName").disabled = false;
                                         document.getElementById("inputLastName").disabled = false;
                                         document.getElementById("inputBirthyear").disabled = false;
-                                        document.getElementById("inputClub").disabled = false;
+                                        document.getElementById("inputEmail").disabled = false;
+                                        document.getElementById("inputPhone").disabled = false;
+                                        '.((isset($_GET['assignUser']) AND $_GET['assignUser'] != "club") ? 'document.getElementById("inputClub").disabled = false;' : '').'
 
                                         document.getElementById("checkMemberNotificationExistsNot").style.display = "table-row";
                                         document.getElementById("checkMemberNotificationExists").style.display = "none";
@@ -101,7 +112,9 @@
                                     document.getElementById("inputFirstName").disabled = true;
                                     document.getElementById("inputLastName").disabled = true;
                                     document.getElementById("inputBirthyear").disabled = true;
-                                    document.getElementById("inputClub").disabled = true;
+                                    document.getElementById("inputEmail").disabled = true;
+                                    document.getElementById("inputPhone").disabled = true;
+                                    '.((isset($_GET['assignUser']) AND $_GET['assignUser'] != "club") ? 'document.getElementById("inputClub").disabled = true;' : '').'
                                 }
 
 
@@ -134,7 +147,7 @@
                             <tr>
                                 <td class="ta_r">Geschlecht: </td>
                                 <td>'.RadioButton("M&auml;nnlich", "gender",true,"M","inputGenderM").'</td>
-                                <td>'.RadioButton("Weiblich", "gender",false,"W","inputGenderF").'</td>
+                                <td>'.RadioButton("Weiblich", "gender",false,"F","inputGenderF").'</td>
                             </tr>
                             <tr>
                                 <td class="ta_r">Vorname: </td>
@@ -149,23 +162,41 @@
                                 <td colspan=2><input type="date" name="birthdate" placeholder="Geburtsdatum..." id="inputBirthyear"/></td>
                             </tr>
                             <tr>
-                                <td class="ta_r">Verein: </td>
-                                <td colspan=2>
-                                    <select name="club" class="cel_m" id="inputClub">
-                                        <option selected disabled>--- Verein Ausw&auml;hlen ---</option>
-                                    ';
-
-                                        $strSQL = "SELECT * FROM vereine ORDER BY ort ASC";
-                                        $rs=mysqli_query($link,$strSQL);
-                                        while($row=mysqli_fetch_assoc($rs))
-                                        {
-                                            echo '<option value="'.$row['kennzahl'].'">'.$row['verein'].' '.$row['ort'].'</option>';
-                                        }
-
-                                    echo '
-                                    </select>
-                                </td>
+                                <td class="ta_r">E-Mail: </td>
+                                <td colspan=2><input type="email" name="email" placeholder="E-Mail..." id="inputEmail"/></td>
                             </tr>
+                            <tr>
+                                <td class="ta_r">Telefon-Nummer: </td>
+                                <td colspan=2><input type="text" name="phoneNr" placeholder="Telefon-Nummer..." id="inputPhone"/></td>
+                            </tr>
+                            ';
+
+                            if(isset($_GET['assignUser']) AND $_GET['assignUser'] != 'club')
+                            {
+                                echo '
+                                    <tr>
+                                        <td class="ta_r">Verein: </td>
+                                        <td colspan=2>
+                                            <select name="club" class="cel_m" id="inputClub">
+                                                <option selected disabled>--- Verein Ausw&auml;hlen ---</option>
+                                            ';
+
+                                                $strSQL = "SELECT * FROM vereine ORDER BY ort ASC";
+                                                $rs=mysqli_query($link,$strSQL);
+                                                while($row=mysqli_fetch_assoc($rs))
+                                                {
+                                                    echo '<option value="'.$row['kennzahl'].'">'.$row['verein'].' '.$row['ort'].'</option>';
+                                                }
+
+                                            echo '
+                                            </select>
+                                        </td>
+                                    </tr>
+                                ';
+                            }
+                            else echo '<input type="hidden" name="club" value="'.$_GET['club'].'"/>';
+
+                            echo '
                             <tr>
                                 <td class="ta_r">Bild ausw&auml;hlen: </td>
                                 <td colspan=2>'.FileButton("playerImg", "playerImg").'</td>

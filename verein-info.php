@@ -86,48 +86,9 @@
         {
             if(isset($_GET['neu']))
             {
-                echo '
-                    <h2 class="stagfade1">Neuen Spieler eintragen</h2>
-                    <hr>
+                echo '<h2 class="stagfade1">Neuen Spieler eintragen</h2>';
 
-                    <br>
-                    <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-                        <center>
-                            <table>
-                                <tr>
-                                    <td class="ta_r">Geschlecht:</td>
-                                    <td>'.RadioButton("M&auml;nnlich","gender",1,"M").'</td>
-                                    <td>'.RadioButton("Weiblich","gender",0,"W").'</td>
-                                </tr>
-                                <tr>
-                                    <td class="ta_r">Vorname:</td>
-                                    <td colspan=2><input type="text" name="firstname" class="cel_l" placeholder="Vorname..." required/></td>
-                                </tr>
-                                <tr>
-                                    <td class="ta_r">Nachname:</td>
-                                    <td colspan=2><input type="text" name="lastname" class="cel_l" placeholder="Nachname..." required/></td>
-                                </tr>
-                                <tr>
-                                    <td class="ta_r">Geburtsdatum:</td>
-                                    <td colspan=2><input type="date" name="birthdate" class="cel_l" required/></td>
-                                </tr>
-                                <tr>
-                                    <td class="ta_r">Mitgliedsnummer:</td>
-                                    <td colspan=2><input type="number" name="number" class="cel_l" placeholder="Mitgl. Nr." required/></td>
-                                </tr>
-                                <tr>
-                                    <td class="ta_r"><br>Foto:</td>
-                                    <td colspan=2><br>'.FileButton("image", "image")  .'</td>
-                                </tr>
-                                <tr><td colspan=3><hr></td></tr>
-                                <tr>
-                                    <td colspan=3 style="text-align:center"><br><button type="submit" name="addMember">Spieler eintragen</button></td>
-                                </tr>
-                            </table>
-                        </center>
-                    </form>
-
-                ';
+                echo ' <iframe src="/memberAddFrame?assignUser=club&club='.$club.'" frameborder="0" style="width: 100%; height: 450px;"></iframe>';
             }
             else
             {
@@ -136,7 +97,7 @@
 
                 ';
 
-                $strSQL = "SELECT * FROM members WHERE club = '$club' ORDER BY birthdate DESC";
+                $strSQL = "SELECT * FROM members WHERE clubID = '$club' ORDER BY birthdate DESC";
                 $rs=mysqli_query($link,$strSQL);
                 while($row=mysqli_fetch_assoc($rs))
                 {
@@ -178,7 +139,7 @@
                         echo '
                             <div class="member_info" style="border-left: 5px groove '.(($row['gender']=='M') ? 'blue' : 'red').';">
                                 <div class="member_image">
-                                    <img src="'.(($row['img'] != "") ? ('/content/members/'.$row['img']) : '/content/user.png' ).'" alt="" />
+                                    <img src="'.(($row['image'] != "") ? ('/content/members/'.$row['image']) : '/content/user.png' ).'" alt="" />
                                 </div>
                                 <table>
                                     <tr>
@@ -195,7 +156,7 @@
                                     </tr>
                                     <tr>
                                         <td>Mitgl. Nr.: </td>
-                                        <td>'.$row['number'].'</td>
+                                        <td>'.$row['playerID'].'</td>
                                     </tr>
                                 </table>
 
@@ -217,7 +178,7 @@
         }
         else
         {
-            $kennzahl = MySQL::Scalar("SELECT club FROM users WHERE id = ",'i',$_SESSION['userID']);
+            $kennzahl = MySQL::Scalar("SELECT club FROM users WHERE id = ?",'i',$_SESSION['userID']);
             $cdata = MySQL::Row("SELECT * FROM vereine WHERE kennzahl = ?",'s',$kennzahl);
 
             echo '
@@ -352,14 +313,14 @@
                 <hr>
             ';
 
-            $strSQL = "SELECT * FROM members WHERE club = '$club' ORDER BY birthdate DESC";
+            $strSQL = "SELECT * FROM members WHERE clubID = '$club' ORDER BY birthdate DESC";
                 $rs=mysqli_query($link,$strSQL);
                 while($row=mysqli_fetch_assoc($rs))
                 {
                     echo '
                         <div class="member_info" style="border-left: 5px groove '.(($row['gender']=='M') ? 'blue' : 'red').';">
                             <div class="member_image">
-                                <img src="'.(($row['img'] != "") ? ('/content/members/'.$row['img']) : '/content/user.png' ).'" alt="" />
+                                <img src="'.(($row['image'] != "") ? ('/content/members/'.$row['image']) : '/content/user.png' ).'" alt="" />
                             </div>
                             <table>
                                 <tr>
@@ -376,7 +337,7 @@
                                 </tr>
                                 <tr>
                                     <td>Mitgl. Nr.: </td>
-                                    <td>'.$row['number'].'</td>
+                                    <td>'.$row['playerID'].'</td>
                                 </tr>
                             </table>
                         </div>

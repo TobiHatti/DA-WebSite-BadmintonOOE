@@ -33,9 +33,9 @@
                                 </optgroup>
                                 <optgroup label="Einzelauswahl">
                                 ';
-                                    $strSQL = "SELECT DISTINCT club FROM reihung WHERE year = '$year'";
-                                    $rs=mysqli_query($link,$strSQL);
-                                    while($row=mysqli_fetch_assoc($rs)) echo '<option '.(($_GET['club']==$row['club']) ? 'selected' : '').' value="'.$row['club'].'">'.MySQL::Scalar("SELECT CONCAT_WS(' ',verein,ort) FROM vereine WHERE kennzahl = ?",'s',$row['club']).'</option>';
+                                    $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' GROUP BY members.clubID";
+                                    $reihungClubList = MySQL::Cluster($strSQL);
+                                    foreach($reihungClubList as $clubData)  echo '<option '.(($_GET['club']==$clubData['clubID']) ? 'selected' : '').' value="'.$clubData['clubID'].'">'.$clubData['verein'].' '.$clubData['ort'].'</option>';
                                 echo '
                                 </optgroup>
                             </select>
@@ -45,17 +45,9 @@
                         <td colspan=2>
                         ';
 
-                        $strSQL = "SELECT DISTINCT club FROM reihung WHERE year = '$year'";
-                        $rs=mysqli_query($link,$strSQL);
-                        while($row=mysqli_fetch_assoc($rs))
-                        {
-                            $clubVals = MySQL::Row("SELECT * FROM vereine WHERE kennzahl = ?",'s',$row['club']);
-
-                            echo '<div>'.Tickbox("",$row['club'],$clubVals['verein'].' '.$clubVals['ort'],false, 'UpdateClubList(this, \''.$row['club'].'\');').'</div>';
-                        }
+                        foreach($reihungClubList as $clubData) echo '<div>'.Tickbox("",$clubData['clubID'],$clubData['verein'].' '.$clubData['ort'],false, 'UpdateClubList(this, \''.$clubData['clubID'].'\');').'</div>';
 
                         echo '
-
                         <input type="hidden" id="customList"/>
                         <button type="button" onclick="RedirectCustomClubList(\'/spielerrangliste/'.$year.'/\')">Anzeigen</button>
                         </td>
@@ -91,39 +83,36 @@
     ';
 
 
-    if($club == "alle") $strSQLc = "SELECT DISTINCT club FROM reihung WHERE year = '$year'";
+    if($club == "alle") $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' GROUP BY members.clubID";
     else if(StartsWith($club,"M"))
     {
         $selectedClubs = str_replace('M','',$club);
         $clubArray = explode('-',$selectedClubs);
 
         $first = true;
-        foreach($clubArray AS $club)
+        foreach($clubArray AS $sClub)
         {
-            if($first) $sqlClubExtension = "club = '$club'";
-            else $sqlClubExtension .= " OR club = '$club'";
+            if($first) $sqlClubExtension = "members.clubID = '$sClub'";
+            else $sqlClubExtension .= " OR members.clubID = '$sClub'";
 
             $first = false;
         }
 
-        $strSQLc = "SELECT DISTINCT club FROM reihung WHERE year = '$year' AND ($sqlClubExtension)";
+        $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' AND ($sqlClubExtension) GROUP BY members.clubID";
     }
-    else $strSQLc = "SELECT DISTINCT club FROM reihung WHERE year = '$year' AND club = '$club'";
+    else $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' AND members.clubID = '$club' GROUP BY members.clubID";
 
 
 
     $rsc=mysqli_query($link,$strSQLc);
     while($rowc=mysqli_fetch_assoc($rsc))
     {
-        $club = $rowc['club'];
-        $clubVals = MySQL::Row("SELECT * FROM vereine WHERE kennzahl = ?",'s',$club);
-
-
+        $club = $rowc['clubID'];
         echo '
             <tr><td>&nbsp;</td></tr>
             <tr>
-                <th class="ta_l" colspan=5 style="background: '.$accentColor1.'; font-size: 14pt; border-bottom: 6px solid '.$accentColor2.'">'.$clubVals['verein'].' '.$clubVals['ort'].'</th>
-                <th style="background: '.$accentColor1.'; font-size: 14pt; border-bottom: 6px solid '.$accentColor2.'">'.$club.'</th>
+                <th class="ta_l" colspan=5 style="background: '.$accentColor1.'; font-size: 14pt; border-bottom: 6px solid '.$accentColor2.'">'.$rowc['verein'].' '.$rowc['ort'].'</th>
+                <th style="background: '.$accentColor1.'; font-size: 14pt; border-bottom: 6px solid '.$accentColor2.'">'.$rowc['clubID'].'</th>
                 <th style="background: '.$accentColor1.'; font-size: 10pt; width: 90px; border-bottom: 6px solid '.$accentColor2.'">&Auml;nderungen/<br>Mannschaftsf.</th>
                 <th style="background: '.$accentColor1.'; font-size: 14pt; width: 130px; border-bottom: 6px solid '.$accentColor2.'">Handy-Nr.</th>
                 <th style="background: '.$accentColor1.'; font-size: 14pt; width: 200px; border-bottom: 6px solid '.$accentColor2.'">E-Mail</th>
@@ -143,7 +132,7 @@
 
         $i=1;
         echo '<tr><td colspan=9><b>Herren:</b></td></tr>';
-        $strSQL = "SELECT * FROM reihung INNER JOIN members ON reihung.member = members.number WHERE reihung.type='M' AND reihung.club = '$club' AND reihung.year = '$year' ORDER BY reihung.position ASC";
+        $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'M' AND members.clubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
         {
@@ -155,11 +144,11 @@
                     <td class="ta_r">'.$i++.'.</td>
                     <td>'.$row['lastname'].'</td>
                     <td>'.$row['firstname'].'</td>
-                    <td class="ta_c">'.$row['number'].'</td>
+                    <td class="ta_c">'.$row['playerID'].'</td>
                     <td class="ta_c">'.$row['team'].'</td>
-                    <td class="ta_c">'.$row['club'].'</td>
+                    <td class="ta_c">'.$row['clubID'].'</td>
                     <td class="ta_c" '.($highlight ? ('style="background: '.$highlightColor.';"') : '').'><b>'.$row['mf'].'</b></td>
-                    <td class="ta_c">'.$row['mobile_nr'].'</td>
+                    <td class="ta_c">'.$row['mobileNr'].'</td>
                     <td class="ta_c">'.$row['email'].'</td>
                 </tr>
             ';
@@ -167,7 +156,7 @@
 
         $i=1;
         echo '<tr><td colspan=9><b><br>Damen:</b></td></tr>';
-        $strSQL = "SELECT * FROM reihung INNER JOIN members ON reihung.member = members.number WHERE reihung.type='W' AND reihung.club = '$club' AND reihung.year = '$year' ORDER BY reihung.position ASC";
+        $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'F' AND members.clubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
         {
@@ -179,11 +168,11 @@
                     <td class="ta_r">'.$i++.'.</td>
                     <td>'.$row['lastname'].'</td>
                     <td>'.$row['firstname'].'</td>
-                    <td class="ta_c">'.$row['number'].'</td>
+                    <td class="ta_c">'.$row['playerID'].'</td>
                     <td class="ta_c">'.$row['team'].'</td>
-                    <td class="ta_c">'.$row['club'].'</td>
+                    <td class="ta_c">'.$row['clubID'].'</td>
                     <td class="ta_c" '.($highlight ? ('style="background: '.$highlightColor.';"') : '').'><b>'.$row['mf'].'</b></td>
-                    <td class="ta_c">'.$row['mobile_nr'].'</td>
+                    <td class="ta_c">'.$row['mobileNr'].'</td>
                     <td class="ta_c">'.$row['email'].'</td>
                 </tr>
             ';
