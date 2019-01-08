@@ -9,26 +9,27 @@
 
         $club = MySQL::Scalar("SELECT club FROM users WHERE id = ?",'i',$_SESSION['userID']);
         if(isset($_POST['updateListM'])) $type='M';
-        if(isset($_POST['updateListW'])) $type='W';
-        $strSQL = "SELECT * FROM members WHERE club = '$club' AND gender = '$type'";
+        if(isset($_POST['updateListW'])) $type='F';
+        $strSQL = "SELECT * FROM members WHERE clubID = '$club' AND gender = '$type'";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
         {
-            if(isset($_POST["member".$row['number']]))
+            if(isset($_POST["member".$row['playerID']]))
             {
-                array_push($selectedMembers,$row['number']);
+                array_push($selectedMembers,$row['id']);
             }
         }
 
         // Remove existing values from Database
-        MySQL::NonQuery("DELETE FROM reihung WHERE type = ? AND club = ? AND year = ?",'@s',$type,$club,$year);
+        //MySQL::NonQuery("DELETE FROM reihung WHERE type = ? AND club = ? AND year = ?",'@s',$type,$club,$year);
+        MySQL::NonQuery("DELETE members_spielerranglisten FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = ? AND members.clubID = ? AND members_spielerranglisten.year = ?",'@s',$type,$club,$year);
 
 
         $i=1;
         foreach($selectedMembers as $member)
         {
             $uid = uniqid();
-            MySQL::NonQuery("INSERT INTO reihung (id,type,member,club,position,year,team) VALUES (?,?,?,?,'".$i++."',?,'1')",'@s',$uid,$type,$member,$club,$year);
+            MySQL::NonQuery("INSERT INTO members_spielerranglisten (id,memberID,position,year,team) VALUES (NULL,?,'".$i++."',?,'1')",'@s',$member,$year);
         }
 
         Redirect(ThisPage());
@@ -55,7 +56,8 @@
             $mobile = $_POST['mobile_'.$rp[1]];
             $email = $_POST['email_'.$rp[1]];
 
-            MySQL::NonQuery("UPDATE reihung SET position = '".$rp[0]."', team = ?, mf = ?, mobile_nr = ?, email = ? WHERE member = '".$rp[1]."' AND club = ? AND year = ?",'@s',$team,$mf,$mobile,$email,$club,$year);
+            // ToDo!!!
+            MySQL::NonQuery("UPDATE reihung SET position = '".$rp[0]."', team = ?, mf = ?, mobileNr = ?, email = ? WHERE member = '".$rp[1]."' AND club = ? AND year = ?",'@s',$team,$mf,$mobile,$email,$club,$year);
         }
 
         foreach(explode('||',$reihungComboW) as $rp)
@@ -149,32 +151,32 @@
                                 <ul class="dragSortList_values" id="sortListM">
                                 ';
                                     $currentSelectedMembersM = array();
-                                    $strSQL = "SELECT * FROM reihung INNER JOIN members ON reihung.member = members.number WHERE reihung.type='M' AND reihung.club = '$club' AND reihung.year = '$year' ORDER BY reihung.position ASC";
+                                    $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender='M' AND members.clubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
                                     $rs=mysqli_query($link,$strSQL);
                                     while($row=mysqli_fetch_assoc($rs))
                                     {
                                         echo '
-                                        <li value="'.$row['number'].'">
-                                            '.$row['number'].' - '.$row['firstname'].' '.$row['lastname'].'
+                                        <li value="'.$row['playerID'].'">
+                                            '.$row['playerID'].' - '.$row['firstname'].' '.$row['lastname'].'
                                             <span style="float: right; font-size: 8pt; padding-right: 4px;" class="reihungFold">
                                             Mehr &raquo;
                                             <div class="infoContainer">
                                                 <table>
                                                     <tr>
                                                         <td class="ta_r">Team: </td>
-                                                        <td><input name="team_'.$row['number'].'" type="number" class="cel_s sampleField" value="'.$row['team'].'" min="1" max="10"/></td>
+                                                        <td><input name="team_'.$row['playerID'].'" type="number" class="cel_s sampleField" value="'.$row['team'].'" min="1" max="10"/></td>
                                                     </tr>
                                                     <tr>
                                                         <td class="ta_r">&Auml;nderungen/<br>Manschaftsf.:</td>
-                                                        <td><input name="mf_'.$row['number'].'" type="text" class="cel_s sampleField"  value="'.$row['mf'].'"/></td>
+                                                        <td><input name="mf_'.$row['playerID'].'" type="text" class="cel_s sampleField"  value="'.$row['mf'].'"/></td>
                                                     </tr>
                                                     <tr>
                                                         <td class="ta_r">Handy-Nr.:</td>
-                                                        <td><input name="mobile_'.$row['number'].'" type="text" class="cel_s sampleField" value="'.$row['mobile_nr'].'"/></td>
+                                                        <td><input name="mobile_'.$row['playerID'].'" type="text" class="cel_s sampleField" value="'.$row['mobileNr'].'"/></td>
                                                     </tr>
                                                     <tr>
                                                         <td class="ta_r">E-Mail:</td>
-                                                        <td><input name="email_'.$row['number'].'" type="text" class="cel_s sampleField" value="'.$row['email'].'"/></td>
+                                                        <td><input name="email_'.$row['playerID'].'" type="text" class="cel_s sampleField" value="'.$row['email'].'"/></td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -182,7 +184,7 @@
                                         </li>';
 
                                         // Needed later for test if user is already in list or not
-                                        array_push($currentSelectedMembersM,$row['number']);
+                                        array_push($currentSelectedMembersM,$row['playerID']);
                                     }
                                 echo '
                                 </ul>
@@ -205,32 +207,32 @@
                                 <ul class="dragSortList_values" id="sortListW">
                                 ';
                                     $currentSelectedMembersW = array();
-                                    $strSQL = "SELECT * FROM reihung INNER JOIN members ON reihung.member = members.number WHERE reihung.type='W' AND reihung.club = '$club' AND reihung.year = '$year' ORDER BY reihung.position ASC";
+                                    $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender='F' AND members.clubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
                                     $rs=mysqli_query($link,$strSQL);
                                     while($row=mysqli_fetch_assoc($rs))
                                     {
                                         echo '
-                                        <li value="'.$row['number'].'">
-                                            '.$row['number'].' - '.$row['firstname'].' '.$row['lastname'].'
+                                        <li value="'.$row['playerID'].'">
+                                            '.$row['playerID'].' - '.$row['firstname'].' '.$row['lastname'].'
                                             <span style="float: right; font-size: 8pt; padding-right: 4px;" class="reihungFold">
                                             Mehr &raquo;
                                             <div class="infoContainer">
                                                 <table>
                                                     <tr>
                                                         <td class="ta_r">Team: </td>
-                                                        <td><input name="team_'.$row['number'].'" type="number" class="cel_s sampleField" value="'.$row['team'].'" min="1" max="10"/></td>
+                                                        <td><input name="team_'.$row['playerID'].'" type="number" class="cel_s sampleField" value="'.$row['team'].'" min="1" max="10"/></td>
                                                     </tr>
                                                     <tr>
                                                         <td class="ta_r">&Auml;nderungen/<br>Manschaftsf.:</td>
-                                                        <td><input name="mf_'.$row['number'].'" type="text" class="cel_s sampleField"  value="'.$row['mf'].'"/></td>
+                                                        <td><input name="mf_'.$row['playerID'].'" type="text" class="cel_s sampleField"  value="'.$row['mf'].'"/></td>
                                                     </tr>
                                                     <tr>
                                                         <td class="ta_r">Handy-Nr.:</td>
-                                                        <td><input name="mobile_'.$row['number'].'" type="text" class="cel_s sampleField" value="'.$row['mobile_nr'].'"/></td>
+                                                        <td><input name="mobile_'.$row['playerID'].'" type="text" class="cel_s sampleField" value="'.$row['mobileNr'].'"/></td>
                                                     </tr>
                                                     <tr>
                                                         <td class="ta_r">E-Mail:</td>
-                                                        <td><input name="email_'.$row['number'].'" type="text" class="cel_s sampleField" value="'.$row['email'].'"/></td>
+                                                        <td><input name="email_'.$row['playerID'].'" type="text" class="cel_s sampleField" value="'.$row['email'].'"/></td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -238,7 +240,7 @@
                                         </li>';
 
                                         // Needed later for test if user is already in list or not
-                                        array_push($currentSelectedMembersW,$row['number']);
+                                        array_push($currentSelectedMembersW,$row['playerID']);
                                     }
                                 echo '
                                 </ul>
@@ -260,12 +262,12 @@
                             <h3>Spieler ausw&auml;hlen (Herren)</h3>
                             ';
 
-                            $strSQL = "SELECT * FROM members WHERE club = '$club' AND gender = 'M'";
+                            $strSQL = "SELECT * FROM members WHERE clubID = '$club' AND gender = 'M'";
                             $rs=mysqli_query($link,$strSQL);
                             while($row=mysqli_fetch_assoc($rs))
                             {
-                                $checked = in_array($row['number'],$currentSelectedMembersM) ? true : false;
-                                echo Tickbox("member".$row['number'],"member".$row['number'],$row['number'].' - '.$row['firstname'].' '.$row['lastname'],$checked);
+                                $checked = in_array($row['playerID'],$currentSelectedMembersM) ? true : false;
+                                echo Tickbox("member".$row['playerID'],"member".$row['playerID'],$row['playerID'].' - '.$row['firstname'].' '.$row['lastname'],$checked);
                             }
 
                             echo '
@@ -283,12 +285,12 @@
                             <h3>Spieler ausw&auml;hlen (Damen)</h3>
                             ';
 
-                            $strSQL = "SELECT * FROM members WHERE club = '$club' AND gender = 'W'";
+                            $strSQL = "SELECT * FROM members WHERE clubID = '$club' AND gender = 'F'";
                             $rs=mysqli_query($link,$strSQL);
                             while($row=mysqli_fetch_assoc($rs))
                             {
-                                $checked = in_array($row['number'],$currentSelectedMembersW) ? true : false;
-                                echo Tickbox("member".$row['number'],"member".$row['number'],$row['number'].' - '.$row['firstname'].' '.$row['lastname'],$checked);
+                                $checked = in_array($row['playerID'],$currentSelectedMembersW) ? true : false;
+                                echo Tickbox("member".$row['playerID'],"member".$row['playerID'],$row['playerID'].' - '.$row['firstname'].' '.$row['lastname'],$checked);
                             }
 
                             echo '
@@ -338,13 +340,13 @@
                             </ul>
                             <ul class="dragSortListStatic_values" id="sortListW">
                             ';
-                                $strSQL = "SELECT * FROM reihung INNER JOIN members ON reihung.member = members.number WHERE reihung.type='M' AND reihung.club = '$club' AND reihung.year = '$year' ORDER BY reihung.position ASC";
+                                $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'F' AND members.clubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
                                 $rs=mysqli_query($link,$strSQL);
                                 while($row=mysqli_fetch_assoc($rs))
                                 {
                                     echo '
                                     <li>
-                                        '.$row['number'].' - '.$row['firstname'].' '.$row['lastname'].'
+                                        '.$row['playerID'].' - '.$row['firstname'].' '.$row['lastname'].'
                                         <span style="float: right; font-size: 8pt; padding-right: 4px;" class="reihungFold">
                                             Mehr &raquo;
                                             <div class="infoContainerSmall">
@@ -359,7 +361,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="ta_r">Handy-Nr.:</td>
-                                                        <td>'.$row['mobile_nr'].'</td>
+                                                        <td>'.$row['mobileNr'].'</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="ta_r">E-Mail:</td>
@@ -388,13 +390,13 @@
                             </ul>
                             <ul class="dragSortListStatic_values" id="sortListW">
                             ';
-                                $strSQL = "SELECT * FROM reihung INNER JOIN members ON reihung.member = members.number WHERE reihung.type='W' AND reihung.club = '$club' AND reihung.year = '$year' ORDER BY reihung.position ASC";
+                                $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'F' AND members.clubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
                                 $rs=mysqli_query($link,$strSQL);
                                 while($row=mysqli_fetch_assoc($rs))
                                 {
                                     echo '
                                     <li>
-                                        '.$row['number'].' - '.$row['firstname'].' '.$row['lastname'].'
+                                        '.$row['playerID'].' - '.$row['firstname'].' '.$row['lastname'].'
                                         <span style="float: right; font-size: 8pt; padding-right: 4px;" class="reihungFold">
                                             Mehr &raquo;
                                             <div class="infoContainerSmall">
@@ -409,7 +411,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="ta_r">Handy-Nr.:</td>
-                                                        <td>'.$row['mobile_nr'].'</td>
+                                                        <td>'.$row['mobileNr'].'</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="ta_r">E-Mail:</td>
