@@ -3521,7 +3521,6 @@ table.centered_content td {
   width: 100%; }
   .ooebvRanglistenTable tr:nth-child(1),
   .ooebvRanglistenTable tr:nth-child(2) {
-    background: red;
     font-weight: bold;
     color: #FFFFFF;
     text-align: center; }

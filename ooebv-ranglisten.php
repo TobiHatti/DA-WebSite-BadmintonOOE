@@ -30,6 +30,21 @@
         die();
     }
 
+    if(isset($_POST['createNewSection']))
+    {
+        $sectionName = $_POST['name'];
+        $sectionInfoLeft = $_POST['infoLeft'];
+        $sectionInfoRight = $_POST['infoRight'];
+
+        $listID = MySQL::Scalar("SELECT id FROM ooebvrl_lists WHERE listFilename = ?",'s',$_GET['list']);
+        $tableID = MySQL::Scalar("SELECT id FROM ooebvrl_tables WHERE tableFilename = ?",'s',$_GET['table']);
+
+        MySQL::NonQuery("INSERT INTO ooebvrl_sections (id, listID, tableID, sectionName, sectionInfoLeft, sectionInfoRight) VALUES ('',?,?,?,?,?)",'sssss',$listID,$tableID,$sectionName,$sectionInfoLeft,$sectionInfoRight);
+
+        Redirect('/ooebv-ranglisten/'.$_GET['list'].'/'.$_GET['table']);
+        die();
+    }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 //  /\  POST        MAIN-PAGE \/
@@ -112,11 +127,11 @@
                         </tr>
                         <tr>
                             <td>Sektions-Info<br>Links:</td>
-                            <td><textarea name="name" placeholder="Sektions-Info..."></textarea></td>
+                            <td><textarea name="infoLeft" placeholder="Sektions-Info..."></textarea></td>
                         </tr>
                         <tr>
                             <td>Sektions-Info<br>Rechts:</td>
-                            <td><textarea name="name" placeholder="Sektions-Info..."></textarea></td>
+                            <td><textarea name="infoRight" placeholder="Sektions-Info..."></textarea></td>
                         </tr>
                         <tr>
                             <td colspan=2>
@@ -157,6 +172,67 @@
     else if(isset($_GET['show']))
     {
         if(CheckPermission("addOOEBVRLJgnd")) echo AddButton("/ooebv-ranglisten/".$_GET['list']."/".$_GET['table']."/neue-sektion",false,false,"Sektion hinzuf&uuml;gen");
+
+        $listID = MySQL::Scalar("SELECT id FROM ooebvrl_lists WHERE listFilename = ?",'s',$_GET['list']);
+        $tableID = MySQL::Scalar("SELECT id FROM ooebvrl_tables WHERE tableFilename = ?",'s',$_GET['table']);
+
+        $sections = MySQL::Cluster("SELECT * FROM ooebvrl_sections INNER JOIN ooebvrl_tables ON ooebvrl_sections.tableID = ooebvrl_tables.id WHERE ooebvrl_sections.listID = ? AND ooebvrl_sections.tableID = ?",'ss',$listID,$tableID);
+
+        echo '
+            <br><br>
+                <a href="#export"><button type="button">Exportieren</button></a>
+                <center>
+        ';
+
+        foreach($sections AS $section)
+        {
+            echo '
+                <table class="ooebvRanglistenTable">
+                    <tr style="background: #'.$section['headerColor'].'">
+                        <td colspan=2>'.nl2br($section['sectionInfoLeft']).'</td>
+                        <td colspan=4 style="font-size: 16pt; font-weight: normal">'.nl2br($section['sectionName']).'</td>
+                        <td colspan=4>'.nl2br($section['sectionInfoRight']).'</td>
+                    </tr>
+                    <tr style="background: #'.$section['headerColor'].'">
+                        <td>Rang</td>
+                        <td>MgNr.</td>
+                        <td>Name</td>
+                        <td>Verein</td>
+                        <td>Jg.</td>
+                        <td>1. Rd</td>
+                        <td>2. Rd</td>
+                        <td>3. Rd</td>
+                        <td>Str.</td>
+                        <td>Ges.</td>
+                    </tr>
+                </table>
+
+                <br><br>
+            ';
+
+
+        }
+
+        echo '</center>';
+
+
+        echo '
+
+            <div class="modal_wrapper" id="export">
+                <a href="#c"><div class="modal_bg"></div></a>
+                <div class="modal_container" style="width: 370px; height: 160px; overflow-y: hidden">
+                    <center>
+                    <button type="button"><span style="font-size: 60pt; color: #FFFFFF;"><i class="fas fa-file-pdf"></i></span><br>PDF</button>
+                    <button type="button"><span style="font-size: 60pt; color: #FFFFFF;"><i class="fas fa-file-excel"></i></span><br>Excel</button>
+                    <button type="button"><span style="font-size: 60pt; color: #FFFFFF;"><i class="fas fa-file-csv"></i></span><br>CSV</button>
+                    </center>
+
+                </div>
+            </div>
+
+        ';
+
+
     }
     else
     {
