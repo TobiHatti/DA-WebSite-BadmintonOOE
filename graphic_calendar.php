@@ -422,7 +422,7 @@
                                 <a href="#c"><div class="modal_bg"></div></a>
                                 <div class="modal_container" style="width: 50%; height: 60%;">
                                     <a href="#c"><img src="/content/cross2.png" alt="" class="close_cross"/></a>
-
+                                    <div style="border-left: 3px solid '.(($calData['category']!="") ? $categoryColor[$calData['category']] : '000000').'; padding-left: 5px;">
 
                                     ';
 
@@ -499,7 +499,15 @@
                                                 else $dateModalInfo .= '<h4>'.date_format(date_create($calData['time_start']),"H:i").' Uhr</h4>';
                                             }
 
-                                            $dateModalInfo .= $calData['category'];
+                                            echo '<i>';
+                                            switch($calData['category'])
+                                            {
+                                                case 'OEBVInternational': $dateModalInfo .= '&Ouml;BV-International'; break;
+                                                case 'OEBV': $dateModalInfo .= '&Ouml;BV'; break;
+                                                case 'SchuelerJugend': $dateModalInfo .= 'Sch&uuml;ler/Jugend'; break;
+                                                default: $dateModalInfo .= $calData['category']; break;
+                                            }
+                                            echo '</i>';
 
                                             $dateModalInfo .= '
                                             <p>
@@ -513,6 +521,7 @@
 
 
                                     $dateModalInfo .= '
+                                    </div>
                                 </div>
                             </div>
 

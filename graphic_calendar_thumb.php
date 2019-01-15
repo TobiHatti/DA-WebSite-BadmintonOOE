@@ -291,15 +291,15 @@
 
             if($entryCounter != 0)
             {
-                if($entryCounter==1) echo '<span style="color: '.$circleColor.'">&#10122;</span>';
-                if($entryCounter==2) echo '<span style="color: '.$circleColor.'">&#10123;</span>';
-                if($entryCounter==3) echo '<span style="color: '.$circleColor.'">&#10124;</span>';
-                if($entryCounter==4) echo '<span style="color: '.$circleColor.'">&#10125;</span>';
-                if($entryCounter==5) echo '<span style="color: '.$circleColor.'">&#10126;</span>';
-                if($entryCounter==6) echo '<span style="color: '.$circleColor.'">&#10127;</span>';
-                if($entryCounter==7) echo '<span style="color: '.$circleColor.'">&#10128;</span>';
-                if($entryCounter==8) echo '<span style="color: '.$circleColor.'">&#10129;</span>';
-                if($entryCounter==9) echo '<span style="color: '.$circleColor.'">&#10130;</span>';
+                if($entryCounter==1) echo '<span style="color: '.$circleColor.'; font-weight: lighter;">&#10122;</span>';
+                if($entryCounter==2) echo '<span style="color: '.$circleColor.'; font-weight: lighter;">&#10123;</span>';
+                if($entryCounter==3) echo '<span style="color: '.$circleColor.'; font-weight: lighter;">&#10124;</span>';
+                if($entryCounter==4) echo '<span style="color: '.$circleColor.'; font-weight: lighter;">&#10125;</span>';
+                if($entryCounter==5) echo '<span style="color: '.$circleColor.'; font-weight: lighter;">&#10126;</span>';
+                if($entryCounter==6) echo '<span style="color: '.$circleColor.'; font-weight: lighter;">&#10127;</span>';
+                if($entryCounter==7) echo '<span style="color: '.$circleColor.'; font-weight: lighter;">&#10128;</span>';
+                if($entryCounter==8) echo '<span style="color: '.$circleColor.'; font-weight: lighter;">&#10129;</span>';
+                if($entryCounter==9) echo '<span style="color: '.$circleColor.'; font-weight: lighter;">&#10130;</span>';
             }
 
 

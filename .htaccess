@@ -86,11 +86,19 @@ RewriteRule ^trainingsgruppen/([a-zA-Z0-9-_]+)/eintragen/?$ trainingsgruppen.php
 # Rewrite Rules for member-edit
 RewriteRule ^mitglieder/bearbeiten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$/?$ editMembers.php?permissionSuffix=$1&memberID=$2 [NC,QSA,L]
 
-# Rewrite Rules for member-edit
-RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/?$ ooebv-ranglisten.php?section=$1 [NC,QSA,L]
-RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$/?$ ooebv-ranglisten.php?section=$1&$2 [NC,QSA,L]
+# Rewrite Rules for ooebv-ranglisten
+RewriteRule ^ooebv-ranglisten/neue-liste ooebv-ranglisten.php?new&newList [NC,QSA,L]
+RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/neue-tabelle/?$ ooebv-ranglisten.php?new&newTable&list=$1 [NC,QSA,L]
+RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/neue-sektion/?$/?$ ooebv-ranglisten.php?new&newSection&list=$1&table=$2 [NC,QSA,L]
+RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/spieler-hinzufuegen/?$/?$/?$ ooebv-ranglisten.php?new&newTable&list=$1&table=$2&section=$3 [NC,QSA,L]
 
-#Ignore .php-Extension
+RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/bearbeiten/?$ ooebv-ranglisten.php?edit&editList&list=$1 [NC,QSA,L]
+RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/bearbeiten/?$/?$ ooebv-ranglisten.php?edit&editTable&list=$1&table=$2 [NC,QSA,L]
+RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/spieler-bearbeiten/?$/?$ ooebv-ranglisten.php?new&newTable&list=$1&table=$2 [NC,QSA,L]
+
+RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$/?$ ooebv-ranglisten.php?list=$1&table=$2&show [NC,QSA,L]
+
+# Ignore .php-Extension
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
 
 ###############################
@@ -100,7 +108,7 @@ RewriteRule (^|/)backup(/|$) - [F]
 RewriteRule (^|/)sass(/|$) - [F]
 
 ###############################
-#       Error Ducuments       #
+#       Error Documents       #
 ###############################
 # ERROR 400: Bad Request
 ErrorDocument 400 /400.php

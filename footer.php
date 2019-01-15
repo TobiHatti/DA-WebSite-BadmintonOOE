@@ -93,7 +93,7 @@
 
 
                 <br>
-                <span style="color: #696969">&copy; Copyright 2018-2019 Tobias Hattinger & Paul Luger</span> | <a href="/impressum">Impressum</a> | <a href="https://endix.at/development/badminton-ooe">Fehler melden</a>
+                <span style="color: #696969">&copy; Copyright 2018-2019 Tobias Hattinger & Paul Luger</span> | <a href="/impressum">Impressum</a> | <a href="https://development.endix.at/support/bug-reports/badminton-ooe/new">Fehler melden</a>
             </footer>
 
             <script>
