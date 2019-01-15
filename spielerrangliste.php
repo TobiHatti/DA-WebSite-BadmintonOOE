@@ -23,6 +23,19 @@
 
     echo '
         <hr>
+            <a href="#export"><button type="button" style="float: right;"><i class="fas fa-save"></i> Datei Speichern...</button></a>
+
+            <div class="modal_wrapper" id="export">
+            <a href="#c"><div class="modal_bg"></div></a>
+                <div class="modal_container" style="width: 370px; height: 160px; overflow-y: hidden">
+                    <center>
+                        <a target="_blank" href="/spielerrangliste/'.$_GET['year'].'/'.$_GET['club'].'/pdf"><button type="button"><span style="font-size: 60pt; color: #FFFFFF;"><i class="fas fa-file-pdf"></i></span><br>PDF</button></a>
+                        <a href="/spielerrangliste/'.$_GET['year'].'/'.$_GET['club'].'/xls"><button type="button"><span style="font-size: 60pt; color: #FFFFFF;"><i class="fas fa-file-excel"></i></span><br>Excel</button></a>
+                        <a href="/spielerrangliste/'.$_GET['year'].'/'.$_GET['club'].'/csv"><button type="button"><span style="font-size: 60pt; color: #FFFFFF;"><i class="fas fa-file-csv"></i></span><br>CSV</button></a>
+                    </center>
+                </div>
+            </div>
+
             <center>
                 <table style="width: 400px">
                     <tr>
@@ -56,9 +69,6 @@
                     </tr>
                 </table>
 
-                <a target="_blank" href="/spielerrangliste/'.$_GET['year'].'/'.$_GET['club'].'/pdf"><button type="button"><i class="fa fa-file-pdf-o"></i> Exportieren als PDF</button></a>
-                <a href="/spielerrangliste/'.$_GET['year'].'/'.$_GET['club'].'/xls"><button type="button"><i class="fa fa-file-excel-o"></i> Exportieren als XLS</button></a>
-                <a href="/spielerrangliste/'.$_GET['year'].'/'.$_GET['club'].'/csv"><button type="button"><i class="fa fa-file-excel-o"></i> Exportieren als CSV</button></a>
 
             </center>
         <hr>
