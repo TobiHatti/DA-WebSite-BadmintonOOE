@@ -133,9 +133,9 @@
                         <select class="cel_l" name="kategorie" id="classKat" required>
                             <option value="" disabled selected>--- Kategorie ausw&auml;hlen ---</option>
                             <option value="">Anderes</option>
-                            <option value="OEBV-International" style="color: #2E8B57">&Ouml;BV / International</option>
-                            <option value="OEBV" style="color: #9932CC">&Ouml;BV</option>
-                            <option value="LV" style="color: #1E90FF">LV</option>
+                            <option value="OEBVInternational" style="color: '.Setting::Get("ColorOEBVInternational").'">&Ouml;BV / International</option>
+                            <option value="OEBV" style="color: '.Setting::Get("ColorOEBV").'">&Ouml;BV</option>
+                            <option value="LV" style="color: '.Setting::Get("ColorLV").'">LV</option>
                             <option value="Landesmeisterschaft" style="color: '.Setting::Get("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
                             <option value="Doppelturnier" style="color: '.Setting::Get("ColorDoppelturnier").'">Doppelturnier</option>
                             <option value="Nachwuchs" style="color: '.Setting::Get("ColorNachwuchs").'">Nachwuchs</option>
@@ -212,6 +212,9 @@
                 <div style="float: right;">
                     <select onchange="RedirectSelectBox(this,\'/kalender/\');">
                         <option value="" disabled selected>--- Kategorie ausw&auml;hlen ---</option>
+                        <option '.((isset($_GET['category']) AND $_GET['category'] == 'OEBVInternational') ? 'selected' : '').' value="OEBVInternational" style="color: '.Setting::Get("ColorOEBVInternational").'">&Ouml;BV-International</option>
+                        <option '.((isset($_GET['category']) AND $_GET['category'] == 'OEBV') ? 'selected' : '').' value="OEBV" style="color: '.Setting::Get("ColorOEBV").'">&Ouml;BV</option>
+                        <option '.((isset($_GET['category']) AND $_GET['category'] == 'LV') ? 'selected' : '').' value="LV" style="color: '.Setting::Get("ColorLV").'">LV</option>
                         <option '.((isset($_GET['category']) AND $_GET['category'] == 'Landesmeisterschaft') ? 'selected' : '').' value="Landesmeisterschaft" style="color: '.Setting::Get("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
                         <option '.((isset($_GET['category']) AND $_GET['category'] == 'Doppelturnier') ? 'selected' : '').' value="Doppelturnier" style="color: '.Setting::Get("ColorDoppelturnier").'">Doppelturnier</option>
                         <option '.((isset($_GET['category']) AND $_GET['category'] == 'Nachwuchs') ? 'selected' : '').' value="Nachwuchs" style="color: '.Setting::Get("ColorNachwuchs").'">Nachwuchs</option>
@@ -263,6 +266,9 @@
                 <div style="float: right;">
                     <select onchange="RedirectSelectBox(this,\'/kalender/\');">
                         <option value="" disabled selected>--- Kategorie ausw&auml;hlen ---</option>
+                        <option '.((isset($_GET['category']) AND $_GET['category'] == 'OEBVInternational') ? 'selected' : '').' value="OEBVInternational" style="color: '.Setting::Get("ColorOEBVInternational").'">&Ouml;BV-International</option>
+                        <option '.((isset($_GET['category']) AND $_GET['category'] == 'OEBV') ? 'selected' : '').' value="OEBV" style="color: '.Setting::Get("ColorOEBV").'">&Ouml;BV</option>
+                        <option '.((isset($_GET['category']) AND $_GET['category'] == 'LV') ? 'selected' : '').' value="LV" style="color: '.Setting::Get("ColorLV").'">LV</option>
                         <option '.((isset($_GET['category']) AND $_GET['category'] == 'Landesmeisterschaft') ? 'selected' : '').' value="Landesmeisterschaft" style="color: '.Setting::Get("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
                         <option '.((isset($_GET['category']) AND $_GET['category'] == 'Doppelturnier') ? 'selected' : '').' value="Doppelturnier" style="color: '.Setting::Get("ColorDoppelturnier").'">Doppelturnier</option>
                         <option '.((isset($_GET['category']) AND $_GET['category'] == 'Nachwuchs') ? 'selected' : '').' value="Nachwuchs" style="color: '.Setting::Get("ColorNachwuchs").'">Nachwuchs</option>

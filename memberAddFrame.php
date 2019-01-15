@@ -6,7 +6,10 @@
 
     if(isset($_POST['addMember']))
     {
-        $playerID = $_POST['playerID'];
+
+
+        if(!isset($_POST['playerID'])) $playerID = $_POST['playerIDTMP'];
+        else $playerID = $_POST['playerID'];
 
         if(!MySQL::Exist("SELECT id FROM members WHERE playerID = ?",'s',$playerID))
         {
@@ -65,6 +68,8 @@
 
     echo DynLoad::Start(1);
 
+    $tempPlayerID = 'TMP'.uniqid();
+
     echo '
                     <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                         <center>
@@ -74,8 +79,28 @@
                         <script type="text/javascript">
                             setInterval(function() {
 
-                                if(document.getElementById("inputPlayerID").value != "")
+                                if(document.getElementById("noPlayerID").checked)
                                 {
+                                    document.getElementById("inputGenderM").disabled = false;
+                                    document.getElementById("inputGenderF").disabled = false;
+                                    document.getElementById("inputFirstName").disabled = false;
+                                    document.getElementById("inputLastName").disabled = false;
+                                    document.getElementById("inputBirthyear").disabled = false;
+                                    document.getElementById("inputEmail").disabled = false;
+                                    document.getElementById("inputPhone").disabled = false;
+                                    '.((isset($_GET['assignUser']) AND $_GET['assignUser'] != "club") ? 'document.getElementById("inputClub").disabled = false;' : '').'
+                                    document.getElementById("inputPlayerID").disabled = true;
+
+                                    document.getElementById("inputPlayerID").value = "'.$tempPlayerID.'";
+
+                                    document.getElementById("checkMemberNotificationExists").style.display = "none";
+                                    document.getElementById("checkMemberNotificationExistsNot").style.display = "none";
+                                }
+                                else if(document.getElementById("inputPlayerID").value != "")
+                                {
+                                    if(document.getElementById("inputPlayerID").value.startsWith("TMP")) document.getElementById("inputPlayerID").value = "";
+                                    document.getElementById("inputPlayerID").disabled = false;
+
                                     if(document.getElementById("outPlayerIDCheck").value == "1")
                                     {
                                         document.getElementById("inputGenderM").disabled = true;
@@ -107,6 +132,9 @@
                                 }
                                 else
                                 {
+                                    if(document.getElementById("inputPlayerID").value.startsWith("TMP")) document.getElementById("inputPlayerID").value = "";
+                                    document.getElementById("inputPlayerID").disabled = false;
+
                                     document.getElementById("inputGenderM").disabled = true;
                                     document.getElementById("inputGenderF").disabled = true;
                                     document.getElementById("inputFirstName").disabled = true;
@@ -122,14 +150,16 @@
                             }, 200);
                         </script>
 
+                        <input type="hidden" value="'.$tempPlayerID.'" name="playerIDTMP"/>
 
                         <table>
                             <tr>
                                 <td class="ta_r">Spielernummer: </td>
-                                <td colspan=2><input type="number" name="playerID" placeholder="Spielernummer..." id="inputPlayerID"
+                                <td colspan=2><input type="text" name="playerID" placeholder="Spielernummer..." id="inputPlayerID"
                                 onchange="
                                 DynLoadExist(1,this,\'outPlayerIDCheck\',\'SELECT * FROM members WHERE playerID = ??\');
                                 "/></td>
+                                <td>'.Tickbox("noPlayerID","noPlayerID","Spieler ohne Mitgliedsnr.").'</td>
                             </tr>
                             <tr style="display: none" id="checkMemberNotificationExists">
                                 <td colspan=3>

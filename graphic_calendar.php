@@ -126,7 +126,10 @@
     "Nachwuchs" => Setting::Get("ColorNachwuchs"),
     "SchuelerJugend" => Setting::Get("ColorSchuelerJugend"),
     "Senioren" => Setting::Get("ColorSenioren"),
-    "Training" => Setting::Get("ColorTraining"));
+    "Training" => Setting::Get("ColorTraining"),
+    "OEBVInternational" => Setting::Get("ColorOEBVInternational"),
+    "OEBV" => Setting::Get("ColorOEBV"),
+    "LV" => Setting::Get("ColorLV"));
 
     $permissionEditDate = CheckPermission("EditDate");
     $permissionDeleteDate = CheckPermission("DeleteDate");
@@ -419,7 +422,7 @@
                                 <a href="#c"><div class="modal_bg"></div></a>
                                 <div class="modal_container" style="width: 50%; height: 60%;">
                                     <a href="#c"><img src="/content/cross2.png" alt="" class="close_cross"/></a>
-
+                                    <div style="border-left: 3px solid '.(($calData['category']!="") ? $categoryColor[$calData['category']] : '000000').'; padding-left: 5px;">
 
                                     ';
 
@@ -455,7 +458,12 @@
                                                             <td class="ta_r">Kategorie</td>
                                                             <td>
                                                             <select class="cel_l" name="kategorie" id="classKat">
+                                                                <option value="">Anderes</option>
+
                                                                 <option '.(($calData['category']=="Anderes") ? 'selected' : '').' value="">Anderes</option>
+                                                                <option '.(($calData['category']=="OEBVInternational") ? 'selected' : '').' value="OEBVInternational" style="color: '.$categoryColor["OEBVInternational"].'">&Ouml;BV-International</option>
+                                                                <option '.(($calData['category']=="OEBV") ? 'selected' : '').' value="OEBV" style="color: '.$categoryColor["OEBV"].'">&Ouml;BV</option>
+                                                                <option '.(($calData['category']=="LV") ? 'selected' : '').' value="LV" style="color: '.$categoryColor["LV"].'">LV</option>
                                                                 <option '.(($calData['category']=="Landesmeisterschaft") ? 'selected' : '').' value="Landesmeisterschaft" style="color: '.$categoryColor["Landesmeisterschaft"].'">Landesmeisterschaft</option>
                                                                 <option '.(($calData['category']=="Doppelturnier") ? 'selected' : '').' value="Doppelturnier" style="color: '.$categoryColor["Doppelturnier"].'">Doppelturnier</option>
                                                                 <option '.(($calData['category']=="Nachwuchs") ? 'selected' : '').' value="Nachwuchs" style="color: '.$categoryColor["Nachwuchs"].'">Nachwuchs</option>
@@ -478,13 +486,33 @@
                                         {
                                             $dateModalInfo .= '
                                             <a href="#exportAG'.$calData['id'].'"><button style="float: right; margin-right: 30px;"><i class="fas fa-file-export"></i> Exportieren</button></a>
-                                            <h2><u>'.$calData['titel'].'</u></h2>
-                                            <h4>'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($calData['date_begin']))).'</h4>
-                                            <h4>'.date_format(date_create($calData['time']),"H:i").' Uhr</h4>
+                                            <h2><u>'.$calData['title'].'</u></h2>
+                                            ';
+
+                                            if($calData['isTimespan'])$dateModalInfo .= '<h4>'.str_replace('ä','&auml;',strftime("%d. %B",strtotime($calData['date_begin']))).' bis '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($calData['date_end']))).'</h4>';
+                                            else $dateModalInfo .= '<h4>'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($calData['date_begin']))).'</h4>';
+
+
+                                            if($calData['time_start'] != "00:00:00")
+                                            {
+                                                if($calData['time_end'] != "00:00:00") $dateModalInfo .= '<h4>'.date_format(date_create($calData['time_start']),"H:i").' - '.date_format(date_create($calData['time_end']),"H:i").' Uhr</h4>';
+                                                else $dateModalInfo .= '<h4>'.date_format(date_create($calData['time_start']),"H:i").' Uhr</h4>';
+                                            }
+
+                                            echo '<i>';
+                                            switch($calData['category'])
+                                            {
+                                                case 'OEBVInternational': $dateModalInfo .= '&Ouml;BV-International'; break;
+                                                case 'OEBV': $dateModalInfo .= '&Ouml;BV'; break;
+                                                case 'SchuelerJugend': $dateModalInfo .= 'Sch&uuml;ler/Jugend'; break;
+                                                default: $dateModalInfo .= $calData['category']; break;
+                                            }
+                                            echo '</i>';
+
+                                            $dateModalInfo .= '
                                             <p>
                                                 '.$calData['description'].'
                                             </p>
-
                                             ';
 
                                             if($permissionEditDate) $dateModalInfo .= '<span> '.EditButton("/kalender/event/AG".$calData['id']."/".$calData['date_begin']."?editSC=".$calData['id'],false,true).' </span>';
@@ -493,6 +521,7 @@
 
 
                                     $dateModalInfo .= '
+                                    </div>
                                 </div>
                             </div>
 

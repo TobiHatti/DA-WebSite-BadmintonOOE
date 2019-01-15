@@ -3205,7 +3205,7 @@ $listItemHeight: 25px;
         left: 50px;
         top: -45px;
         display: none;
-        width: 230px;
+        width: 280px;
         height: 150px;
         background: #FFFFFF;
         box-shadow: 0 0 15px 2px #303030;
@@ -3286,20 +3286,6 @@ $listItemHeight: 25px;
 }
 
 
-
-div.fr-wrapper{
-    div{
-        a{
-            display: none;
-        }
-    }
-}
-
-
-
-
-
-
 .agendaImportTable{
     border-collapse: collapse;
     border-spacing: 0;
@@ -3323,10 +3309,91 @@ div.fr-wrapper{
         border-bottom: 2px solid #FFFFFF;
         color: #FFFFFF;
     }
+}
+
+.ooebvRanglistenTable{
+
+    border-spacing: 0px;
+    border-collapse: collapse;
+    width: 100%;
+
+    tr{
+
+    }
+
+    tr:nth-child(1),
+    tr:nth-child(2){
+        background: red;
+        font-weight: bold;
+        color: #FFFFFF;
+        text-align: center;
+    }
 
 }
 
+.rlSortContainer{
+    min-width: 920px;
 
+    .rlSortableListCount{
+        display: inline-block;
+        vertical-align: top;
+        padding: 0;
+        width: 40px;
+
+        li{
+            width: 25px;
+            height: 40px;
+            line-height: 40px;
+            text-align: right;
+            padding-right: 5px;
+            list-style: none;
+            background: linear-gradient(to left top, $theme-vibrant-bright-l, #FFFFFF);
+            border: 1px solid $theme-vibrant-medium;
+            border-radius: 10px 0 0 0;
+        }
+    }
+
+    .rlSortableListData{
+        display: inline-block;
+        padding: 0;
+
+        li{
+            table{
+                tr{
+                    td{
+                        padding: 0;
+                        input{
+                            margin: 0;
+                        }
+                    }
+
+                    td:first-child{
+                        padding-right: 8px;
+                    }
+
+                }
+            }
+
+            cursor: grab;
+            height: 40px;
+            line-height: 40px;
+            text-align: left;
+            padding-left: 5px;
+            list-style: none;
+            background: linear-gradient(to right, $theme-vibrant-bright-l, #FFFFFF);
+            border: 1px solid $theme-vibrant-medium;
+            border-radius: 0 8px 8px 0;
+
+            @include custom-ease(box-shadow, 0.15s);
+        }
+
+        li:active{
+            cursor: grabbing;
+            box-shadow: 0 0 20px 0px #000000;
+            vertical-align: top;
+        }
+    }
+}
 
 
 

@@ -400,8 +400,13 @@ CREATE TABLE `members_spielerranglisten` (
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO members_spielerranglisten VALUES("5","5c34766056e18","2018-2019","1","1","");
+<<<<<<< HEAD
+INSERT INTO members_spielerranglisten VALUES("8","5c3474bad8559","2018-2019","3","1","Halo");
+INSERT INTO members_spielerranglisten VALUES("9","5c35b05b104ea","2018-2019","2","1","MF");
+=======
 INSERT INTO members_spielerranglisten VALUES("8","5c3474bad8559","2018-2019","3","1","");
 INSERT INTO members_spielerranglisten VALUES("9","5c35b05b104ea","2018-2019","2","1","");
+>>>>>>> 305c0576535a6a47e095a79b7a26be92aac99fce
 INSERT INTO members_spielerranglisten VALUES("10","5c35b083a6c65","2018-2019","1","1","");
 
 
@@ -2169,6 +2174,10 @@ INSERT INTO ranglisten_settings VALUES("Y2017-2018HeaderSubtitle","6. - 10. Meis
 INSERT INTO ranglisten_settings VALUES("Y2018-2019ColorA","D5592F");
 INSERT INTO ranglisten_settings VALUES("Y2018-2019ColorB","00ACB6");
 INSERT INTO ranglisten_settings VALUES("Y2018-2019HeaderSubtitle","1. - 5. Meisterschaftsrunde - Hinrunde");
+<<<<<<< HEAD
+INSERT INTO ranglisten_settings VALUES("Y2018-2019LastUpdate","2019-01-09");
+=======
+>>>>>>> 305c0576535a6a47e095a79b7a26be92aac99fce
 
 
 

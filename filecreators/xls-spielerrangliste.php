@@ -21,11 +21,14 @@
     $accentColor2Sett = "Y".$year."ColorB";
     $highlightColorSett = "HighlightColor";
     $headerSubtitleSett = "Y".$year."HeaderSubtitle";
+    $lastUpdateSett = "Y".$year."LastUpdate";   
 
     $color1 = MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$accentColor1Sett);
     $color2 = MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$accentColor2Sett);
     $colorHilight = MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$highlightColorSett);
-    
+
+    $lastChangeDate = MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$lastUpdateSett);
+    $lastChange = str_replace('ä','&auml;',strftime("%d.%m.%Y",strtotime($lastChangeDate)));
 
     $spreadsheet = new Spreadsheet();
     $spreadsheet->setActiveSheetIndex(0);
@@ -58,7 +61,7 @@
     $cellCluster = [
         ['OÖBV - Mannschaftsmeisterschaft', NULL, NULL, NULL, NULL, NULL, NULL, NULL, $_GET['year']],
         [MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$headerSubtitleSett)],
-        ['S P I E L E R R A N G L I S T E', NULL, NULL, NULL, 'Stand per 09.02.2018'],
+        ['S P I E L E R R A N G L I S T E', NULL, NULL, NULL, 'Stand per '.$lastChange],
     ];
     $spreadsheet->getActiveSheet()->fromArray($cellCluster,NULL,'A1');
 
@@ -343,7 +346,7 @@
             $startRow = $pageCounter;
             $pageCounter+=1;
 
-            $cellCluster = [NULL,$row['lastname'],$row['firstname'],$row['playerID'],$row['team'],$row['clubID'],$row['mf'],$row['mobileNr'],$row['email']];
+            $cellCluster = [NULL,$row['lastname'],$row['firstname'],$row['playerID'],$row['team'],$row['clubID'],$row['mf'],($row['mf']!="" ? $row['mobileNr'] : ''),($row['mf']!="" ? $row['email'] : '')];
             $spreadsheet->getActiveSheet()->fromArray($cellCluster,NULL,'A'.$startRow);
             $spreadsheet->getActiveSheet()->setCellValueExplicit('A'.$startRow,$i++.".",\PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
             $spreadsheet->getActiveSheet()->getStyle('D'.$startRow.':F'.$startRow)->getAlignment()->setHorizontal('center');
@@ -385,7 +388,7 @@
             $startRow = $pageCounter;
             $pageCounter+=1;
 
-            $cellCluster = [NULL,$row['lastname'],$row['firstname'],$row['playerID'],$row['team'],$row['clubID'],$row['mf'],$row['mobileNr'],$row['email']];
+            $cellCluster = [NULL,$row['lastname'],$row['firstname'],$row['playerID'],$row['team'],$row['clubID'],$row['mf'],($row['mf']!="" ? $row['mobileNr'] : ''),($row['mf']!="" ? $row['email'] : '')];
             $spreadsheet->getActiveSheet()->fromArray($cellCluster,NULL,'A'.$startRow);
             $spreadsheet->getActiveSheet()->setCellValueExplicit('A'.$startRow,$i++.".",\PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
             $spreadsheet->getActiveSheet()->getStyle('D'.$startRow.':F'.$startRow)->getAlignment()->setHorizontal('center');
