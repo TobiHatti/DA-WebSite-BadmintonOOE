@@ -8,12 +8,14 @@
     $accentColor2Sett = "Y".$year."ColorB";
     $highlightColorSett = "HighlightColor";
     $headerSubtitleSett = "Y".$year."HeaderSubtitle";
+    $lastUpdateSett = "Y".$year."LastUpdate";
 
     $accentColor1 = '#'.MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$accentColor1Sett);
     $accentColor2 = '#'.MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$accentColor2Sett);
     $highlightColor = '#'.MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$highlightColorSett);
 
-    $lastChange = '26.10.2018';
+    $lastChangeDate = MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$lastUpdateSett);
+    $lastChange = str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($lastChangeDate)));
 
     echo '<h1 class="stagfade1">Spielerrangliste '.$_GET['year'].'</h1>';
 
@@ -148,8 +150,8 @@
                     <td class="ta_c">'.$row['team'].'</td>
                     <td class="ta_c">'.$row['clubID'].'</td>
                     <td class="ta_c" '.($highlight ? ('style="background: '.$highlightColor.';"') : '').'><b>'.$row['mf'].'</b></td>
-                    <td class="ta_c">'.$row['mobileNr'].'</td>
-                    <td class="ta_c">'.$row['email'].'</td>
+                    <td class="ta_c">'.($row['mf']!="" ? $row['mobileNr'] : '').'</td>
+                    <td class="ta_c">'.($row['mf']!="" ? $row['email'] : '').'</td>
                 </tr>
             ';
         }
@@ -172,8 +174,8 @@
                     <td class="ta_c">'.$row['team'].'</td>
                     <td class="ta_c">'.$row['clubID'].'</td>
                     <td class="ta_c" '.($highlight ? ('style="background: '.$highlightColor.';"') : '').'><b>'.$row['mf'].'</b></td>
-                    <td class="ta_c">'.$row['mobileNr'].'</td>
-                    <td class="ta_c">'.$row['email'].'</td>
+                    <td class="ta_c">'.($row['mf']!="" ? $row['mobileNr'] : '').'</td>
+                    <td class="ta_c">'.($row['mf']!="" ? $row['email'] : '').'</td>
                 </tr>
             ';
         }

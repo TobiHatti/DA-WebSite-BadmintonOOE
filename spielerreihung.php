@@ -21,9 +21,7 @@
         }
 
         // Remove existing values from Database
-        //MySQL::NonQuery("DELETE FROM reihung WHERE type = ? AND club = ? AND year = ?",'@s',$type,$club,$year);
         MySQL::NonQuery("DELETE members_spielerranglisten FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = ? AND members.clubID = ? AND members_spielerranglisten.year = ?",'@s',$type,$club,$year);
-
 
         $i=1;
         foreach($selectedMembers as $member)
@@ -31,6 +29,15 @@
             $uid = uniqid();
             MySQL::NonQuery("INSERT INTO members_spielerranglisten (id,memberID,position,year,team) VALUES (NULL,?,'".$i++."',?,'1')",'@s',$member,$year);
         }
+
+        // Update last edit-Date
+        $paramLatestUpdate = 'Y'.$year.'LastUpdate';
+        $latestDate = date("Y-m-d");
+        if(!MySQL::Exist("SELECT * FROM ranglisten_settings WHERE setting = ?",'s',$paramLatestUpdate))
+        {
+            MySQL::NonQuery("INSERT INTO ranglisten_settings (setting,value) VALUES (?,'')",'s',$paramLatestUpdate);
+        }
+        MySQL::NonQuery("UPDATE ranglisten_settings SET value = ? WHERE setting = ?",'ss',$latestDate,$paramLatestUpdate);
 
         Redirect(ThisPage());
         die();
@@ -56,8 +63,11 @@
             $mobile = $_POST['mobile_'.$rp[1]];
             $email = $_POST['email_'.$rp[1]];
 
+            $memberID = MySQL::Scalar("SELECT id FROM members WHERE playerID = ?",'s',$rp[1]);
+
             // ToDo!!!
-            MySQL::NonQuery("UPDATE reihung SET position = '".$rp[0]."', team = ?, mf = ?, mobileNr = ?, email = ? WHERE member = '".$rp[1]."' AND club = ? AND year = ?",'@s',$team,$mf,$mobile,$email,$club,$year);
+            MySQL::NonQuery("UPDATE members_spielerranglisten SET team = ?, mf = ?, year = ?, position = ? WHERE memberID = ?",'@s',$team,$mf,$year,$rp[0],$memberID);
+            MySQL::NonQuery("UPDATE members SET email = ?, mobileNr = ? WHERE id = ?",'@s',$email,$mobile,$memberID);
         }
 
         foreach(explode('||',$reihungComboW) as $rp)
@@ -72,6 +82,15 @@
 
             MySQL::NonQuery("UPDATE reihung SET position = '".$rp[0]."', team = ?, mf = ?, mobile_nr = ?, email = ? WHERE member = '".$rp[1]."' AND club = ? AND year = ?",'@s',$team,$mf,$mobile,$email,$club,$year);
         }
+
+        // Update last edit-Date
+        $paramLatestUpdate = 'Y'.$year.'LastUpdate';
+        $latestDate = date("Y-m-d");
+        if(!MySQL::Exist("SELECT * FROM ranglisten_settings WHERE setting = ?",'s',$paramLatestUpdate))
+        {
+            MySQL::NonQuery("INSERT INTO ranglisten_settings (setting,value) VALUES (?,'')",'s',$paramLatestUpdate);
+        }
+        MySQL::NonQuery("UPDATE ranglisten_settings SET value = ? WHERE setting = ?",'ss',$latestDate,$paramLatestUpdate);
 
         Redirect("/spielerreihung");
         die();
@@ -133,7 +152,7 @@
 
                 </script>
 
-                <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data" novalidate >
                     <div class="double_container">
                         <div style="overflow: visible;">
                             <center>
@@ -144,7 +163,7 @@
 
                                 <ul class="dragSortList_posNumbers">
                                 ';
-                                    $listedMembersAmt = MySQL::Scalar("SELECT position FROM reihung WHERE type = 'M' AND club = ? AND year = ? ORDER BY position DESC LIMIT 0,1",'@s',$club,$year);
+                                    $listedMembersAmt = MySQL::Scalar("SELECT position FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'M' AND members.clubID = ? AND members_spielerranglisten.year = ? ORDER BY members_spielerranglisten.position DESC LIMIT 0,1",'@s',$club,$year);
                                     for($i=1;$i<$listedMembersAmt+1; $i++) echo '<li>'.$i.'</li>';
                                 echo '
                                 </ul>
@@ -200,7 +219,7 @@
                                 <br>
                                 <ul class="dragSortList_posNumbers">
                                 ';
-                                    $listedMembersAmt = MySQL::Scalar("SELECT position FROM reihung WHERE type = 'W' AND club = ? AND year = ? ORDER BY position DESC LIMIT 0,1",'@s',$club,$year);
+                                    $listedMembersAmt = MySQL::Scalar("SELECT position FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'F' AND members.clubID = ? AND members_spielerranglisten.year = ? ORDER BY members_spielerranglisten.position DESC LIMIT 0,1",'@s',$club,$year);
                                     for($i=1;$i<$listedMembersAmt+1; $i++) echo '<li>'.$i.'</li>';
                                 echo '
                                 </ul>
@@ -334,13 +353,13 @@
                             <br>
                             <ul class="dragSortList_posNumbers">
                             ';
-                                $listedMembersAmt = intval(MySQL::Scalar("SELECT position FROM reihung WHERE type = 'M' AND club = ? AND year = ? ORDER BY position DESC LIMIT 0,1",'@s',$club,$year));
+                                $listedMembersAmt = MySQL::Scalar("SELECT position FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'M' AND members.clubID = ? AND members_spielerranglisten.year = ? ORDER BY members_spielerranglisten.position DESC LIMIT 0,1",'@s',$club,$year);
                                 for($i=1;$i<$listedMembersAmt+1; $i++) echo '<li>'.$i.'</li>';
                             echo '
                             </ul>
                             <ul class="dragSortListStatic_values" id="sortListW">
                             ';
-                                $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'F' AND members.clubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
+                                $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'M' AND members.clubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
                                 $rs=mysqli_query($link,$strSQL);
                                 while($row=mysqli_fetch_assoc($rs))
                                 {
@@ -384,7 +403,7 @@
                             <br>
                             <ul class="dragSortList_posNumbers">
                             ';
-                                $listedMembersAmt = intval(MySQL::Scalar("SELECT position FROM reihung WHERE type = 'W' AND club = ? AND year = ? ORDER BY position DESC LIMIT 0,1",'@s',$club,$year));
+                                $listedMembersAmt = MySQL::Scalar("SELECT position FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'F' AND members.clubID = ? AND members_spielerranglisten.year = ? ORDER BY members_spielerranglisten.position DESC LIMIT 0,1",'@s',$club,$year);
                                 for($i=1;$i<$listedMembersAmt+1; $i++) echo '<li>'.$i.'</li>';
                             echo '
                             </ul>

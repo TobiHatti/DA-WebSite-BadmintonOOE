@@ -100,7 +100,10 @@
     "Nachwuchs" => Setting::Get("ColorNachwuchs"),
     "SchuelerJugend" => Setting::Get("ColorSchuelerJugend"),
     "Senioren" => Setting::Get("ColorSenioren"),
-    "Training" => Setting::Get("ColorTraining"));
+    "Training" => Setting::Get("ColorTraining"),
+    "OEBVInternational" => Setting::Get("ColorOEBVInternational"),
+    "OEBV" => Setting::Get("ColorOEBV"),
+    "LV" => Setting::Get("ColorLV"));
 
 //========================================================================================
 // Preparing Layout-Array
@@ -257,12 +260,57 @@
             $dayParts = explode('-',$days[$curr]['dat']);
             $day = intval($dayParts[2]);
 
-            // Run through all necessary layers
+            // Count Entries
+            $entryCounter = 0;
+            $circleColor = '';
             for($dctr = 0 ; $dctr <  6 ; $dctr++)
             {
                 $dataParts = explode("-",$designDataGrid[$day - 1][$dctr]);
+                // Check if entry exists for layer
+                if($dataParts[0] == "ZA" OR $dataParts[0] == "AG")
+                {
+                    if($circleColor == '' AND $dataParts[0] == "ZA")
+                    {
+                        $calData = MySQL::Row("SELECT *,CONCAT_WS(' ',title_line1,title_line2) AS displayTitle FROM zentralausschreibungen WHERE id = ?",'i',$dataParts[1]);
+                        $displayTitle = $calData['displayTitle'];
+                        $circleColor = (($calData['category']!="") ? $categoryColor[$calData['category']] : '#000000');
+                    }
+
+                    if($circleColor == '' AND $dataParts[0] == "AG")
+                    {
+                        $calData = MySQL::Row("SELECT *,title AS displayTitle FROM agenda WHERE id = ?",'i',$dataParts[1]);
+                        $displayTitle = $calData['displayTitle'];
+                        $circleColor = (($calData['category']!="") ? $categoryColor[$calData['category']] : '#000000');
+                    }
+
+                    $entryCounter++;
+                }
+            }
 
 
+
+            if($entryCounter != 0)
+            {
+                if($entryCounter==1) echo '<span style="color: '.$circleColor.'">&#10122;</span>';
+                if($entryCounter==2) echo '<span style="color: '.$circleColor.'">&#10123;</span>';
+                if($entryCounter==3) echo '<span style="color: '.$circleColor.'">&#10124;</span>';
+                if($entryCounter==4) echo '<span style="color: '.$circleColor.'">&#10125;</span>';
+                if($entryCounter==5) echo '<span style="color: '.$circleColor.'">&#10126;</span>';
+                if($entryCounter==6) echo '<span style="color: '.$circleColor.'">&#10127;</span>';
+                if($entryCounter==7) echo '<span style="color: '.$circleColor.'">&#10128;</span>';
+                if($entryCounter==8) echo '<span style="color: '.$circleColor.'">&#10129;</span>';
+                if($entryCounter==9) echo '<span style="color: '.$circleColor.'">&#10130;</span>';
+            }
+
+
+
+
+
+            // Run through all necessary layers
+            /*
+            for($dctr = 0 ; $dctr <  6 ; $dctr++)
+            {
+                $dataParts = explode("-",$designDataGrid[$day - 1][$dctr]);
 
                 // Check if entry exists for layer
                 if($dataParts[0] == "ZA" OR $dataParts[0] == "AG")
@@ -282,11 +330,12 @@
 
                     echo '
                         <a target="_parent" style="text-decoration:none;" href="/kalender/event/'.$dataParts[0].'-'.$calData['id'].'/'.$calData['date_begin'].'">
-                            <span style="cursor: help;color: '.(($calData['category']!="") ? $categoryColor[$calData['category']] : '#000000').';" title="'.$calData['displayTitle'].'">&#9679;</span>
+                            <span style="cursor: help; color: '.(($calData['category']!="") ? $categoryColor[$calData['category']] : '#000000').';" title="'.$calData['displayTitle'].'">&#9679;</span>
                         </a>
                     ';
                 }
             }
+            */
 
 //========================================================================================
 // END OF CELL

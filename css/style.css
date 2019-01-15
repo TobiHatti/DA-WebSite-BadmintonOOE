@@ -3442,7 +3442,7 @@ table.centered_content td {
     left: 50px;
     top: -45px;
     display: none;
-    width: 230px;
+    width: 280px;
     height: 150px;
     background: #FFFFFF;
     box-shadow: 0 0 15px 2px #303030;
@@ -3501,9 +3501,6 @@ table.centered_content td {
   padding-left: 5px;
   padding-right: 10px; }
 
-div.fr-wrapper div a {
-  display: none; }
-
 .agendaImportTable {
   border-collapse: collapse;
   border-spacing: 0; }
@@ -3517,5 +3514,16 @@ div.fr-wrapper div a {
     background: #63B4CF;
     border-bottom: 2px solid #FFFFFF;
     color: #FFFFFF; }
+
+.ooebvRanglistenTable {
+  border-spacing: 0px;
+  border-collapse: collapse;
+  width: 100%; }
+  .ooebvRanglistenTable tr:nth-child(1),
+  .ooebvRanglistenTable tr:nth-child(2) {
+    background: red;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center; }
 
 /*# sourceMappingURL=style.css.map */

@@ -3205,7 +3205,7 @@ $listItemHeight: 25px;
         left: 50px;
         top: -45px;
         display: none;
-        width: 230px;
+        width: 280px;
         height: 150px;
         background: #FFFFFF;
         box-shadow: 0 0 15px 2px #303030;
@@ -3286,20 +3286,6 @@ $listItemHeight: 25px;
 }
 
 
-
-div.fr-wrapper{
-    div{
-        a{
-            display: none;
-        }
-    }
-}
-
-
-
-
-
-
 .agendaImportTable{
     border-collapse: collapse;
     border-spacing: 0;
@@ -3322,6 +3308,25 @@ div.fr-wrapper{
         background: $theme-bright;
         border-bottom: 2px solid #FFFFFF;
         color: #FFFFFF;
+    }
+}
+
+.ooebvRanglistenTable{
+
+    border-spacing: 0px;
+    border-collapse: collapse;
+    width: 100%;
+
+    tr{
+
+    }
+
+    tr:nth-child(1),
+    tr:nth-child(2){
+        background: red;
+        font-weight: bold;
+        color: #FFFFFF;
+        text-align: center;
     }
 
 }

@@ -1067,6 +1067,7 @@ function CheckSortableListState(ulListID,outputID)
 
     for (i = 0; i < myListItems.length; ++i) {
         // Execute Event for every list-element
+
         output.value = output.value + (i+1) + "##" + myListItems[i].value + "||";
     }
 }
