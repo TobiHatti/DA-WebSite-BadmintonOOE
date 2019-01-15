@@ -1067,6 +1067,7 @@ function CheckSortableListState(ulListID,outputID)
 
     for (i = 0; i < myListItems.length; ++i) {
         // Execute Event for every list-element
+
         output.value = output.value + (i+1) + "##" + myListItems[i].value + "||";
     }
 }
@@ -1155,6 +1156,20 @@ function CheckColumnDuplicatesCSVImport()
 
 
 
+function CopyDisplayToElement(e,outputID)
+{
+    document.getElementById(outputID).value = e.options[e.selectedIndex].innerHTML;
+}
+
+function CopyValueToElement(e,outputID)
+{
+    document.getElementById(outputID).value = e.options[e.selectedIndex].value;
+}
+
+function ResetDropdown(e)
+{
+    e.selectedIndex = "0";  
+}
 
 
 

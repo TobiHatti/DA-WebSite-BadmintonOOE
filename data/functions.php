@@ -853,8 +853,8 @@ function SeachTile($kategory, $id)
                         <div class="double_container">
                             <div>
                                 <i>Zentralausschreibungen</i><br>
-                                <h2 style="color: '.Setting::Get("Color".$val['kategorie']).'">'.$val['title_line1'].'</h2>
-                                <h2 style="color: '.Setting::Get("Color".$val['kategorie']).'">'.$val['title_line2'].'</h2>
+                                <h2 style="color: '.Setting::Get("Color".$val['category']).'">'.$val['title_line1'].'</h2>
+                                <h2 style="color: '.Setting::Get("Color".$val['category']).'">'.$val['title_line2'].'</h2>
                                 <h3 style="color: #000000">'.str_replace('ä','&auml;',strftime("%A, %d. %B %Y",strtotime($val['date_begin']))).'</h3>
                             </div>
                             <div>
@@ -895,15 +895,15 @@ function SeachTile($kategory, $id)
         $val = MySQL::Row("SELECT * FROM agenda WHERE id = ?",'s',$id);
 
         echo '
-            <a href="/kalender/event/AG'.$id.'/'.$val['date'].'" style="text-decoration: none;">
+            <a href="/kalender/event/AG'.$id.'/'.$val['date_begin'].'" style="text-decoration: none;">
                 <div class="search_tile">
                     <div class="content_l">
                         <div class="double_container">
                             <div>
                                 <i>Kalender</i><br>
-                                <h2 style="color: '.Setting::Get("Color".$val['kategorie']).'">'.$val['titel'].'</h2>
-                                <h3 style="color: #000000">'.str_replace('ä','&auml;',strftime("%A, %d. %B %Y",strtotime($val['date']))).'</h3>
-                                <h3 style="color: #000000">'.date_format(date_create($val['time']), "H:i").' Uhr</h3>
+                                <h2 style="color: '.Setting::Get("Color".$val['category']).'">'.$val['title'].'</h2>
+                                <h3 style="color: #000000">'.str_replace('ä','&auml;',strftime("%A, %d. %B %Y",strtotime($val['date_begin']))).'</h3>
+                                <h3 style="color: #000000">'.date_format(date_create($val['time_start']), "H:i").' Uhr</h3>
                             </div>
                             <div>
                                 <p>

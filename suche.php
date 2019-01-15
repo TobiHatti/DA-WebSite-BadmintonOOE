@@ -44,9 +44,9 @@
                     UNION ALL
                     SELECT
                     NULL AS isNews, NULL AS isZA, NULL AS isFotogalerie, id AS isAgenda,
-                    date AS date
+                    date_begin AS date
                     FROM agenda
-                    WHERE CONCAT_WS(' ', titel, description) LIKE ?
+                    WHERE CONCAT_WS(' ', title, description) LIKE ?
                     ORDER BY date DESC
                 ";
 
@@ -100,9 +100,9 @@
                 $strSQL = "
                     SELECT
                     NULL AS isNews, NULL AS isZA, NULL AS isFotogalerie, id AS isAgenda,
-                    date AS date
+                    date_begin AS date
                     FROM agenda
-                    WHERE CONCAT_WS(' ', titel, description) LIKE ?
+                    WHERE CONCAT_WS(' ', title, description) LIKE ?
                     ORDER BY date DESC
                 ";
 

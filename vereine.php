@@ -21,7 +21,11 @@
         $phone2 = $_POST['phone2'];
         $phone3 = $_POST['phone3'];
 
-        if(isset($_POST['add_verein'])) MySQL::NonQuery("INSERT INTO vereine (id, verein, ort, kennzahl, dachverband, website, contact_name, contact_street, contact_city, contact_email, contact_phoneLabel1, contact_phone1, contact_phoneLabel2, contact_phone2, contact_phoneLabel3, contact_phone3) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",'@s',$verein,$ort,$kennzahl,$dachverband,$website,$name,$street,$city,$email,$label1,$phone1,$label2,$phone2,$label3,$phone3);
+        if(isset($_POST['add_verein']))
+        {
+            MySQL::NonQuery("INSERT INTO vereine (id, verein, ort, kennzahl, dachverband, website, contact_name, contact_street, contact_city, contact_email, contact_phoneLabel1, contact_phone1, contact_phoneLabel2, contact_phone2, contact_phoneLabel3, contact_phone3) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",'@s',$verein,$ort,$kennzahl,$dachverband,$website,$name,$street,$city,$email,$label1,$phone1,$label2,$phone2,$label3,$phone3);
+            FileUpload("content/clubs/","clubImg","","","UPDATE vereine SET clubImage = 'FNAME' WHERE kennzahl = '$kennzahl'",uniqid());
+        }
         else
         {
             $id = $_POST['edit_verein'];
@@ -45,7 +49,10 @@
             WHERE vereine.id = ?;";
 
             MySQL::NonQuery($strSQL,'@s',$verein,$ort,$kennzahl,$dachverband,$website,$name,$street,$city,$email,$label1,$phone1,$label2,$phone2,$label3,$phone3,$id);
+            FileUpload("content/clubs/","clubImg","","","UPDATE vereine SET clubImage = 'FNAME' WHERE id = '$id'",uniqid());
         }
+
+
 
 
         Redirect("/vereine");
@@ -140,6 +147,10 @@
                         <td><input type="text" name="phone3" placeholder="Telefonnummer..." value="'.($edit ? $cdat['contact_phone3'] : '').'"/></td>
                     </tr>
                     <tr>
+                        <td class="ta_r">Vereins-Logo:</td>
+                        <td class="ta_r">'.FileButton("clubImg", "clubImg").'</td>
+                    </tr>
+                    <tr>
                         <td colspan=2 class="ta_c"><button type="submit"  '.($edit ? ('value="'.$cdat['id'].'" name="edit_verein"') : 'name="add_verein"').'>'.($edit ? '&Auml;nderungen speichern' : 'Hinzuf&uuml;gen').'</button></td>
                     </tr>
                 </table>
@@ -171,34 +182,40 @@
             while($rowo=mysqli_fetch_assoc($rso))
             {
                 echo '
-                    <div>
-                        <h4 style="margin: 4px;">
-                        <a href="#alkhoven" name="alkhoven">'.$rowo['verein'].' '.$rowo['ort'].'</a>
-                        </h4>
-                        Kennzahl: '.$rowo['kennzahl'].'
-                        <br>
-                        Dachverband: '.$rowo['dachverband'].'
-                        <br>
-                        <br>
-                        <b>'.$rowo['contact_name'].'</b>
-                        <br>
-                        '.$rowo['contact_street'].'
-                        <br>
-                        '.$rowo['contact_city'].'
-                        <br>
-                        '.(($rowo['website']!="") ? ('Website: <a href="'.$rowo['website'].'" target="_blank">'.str_replace('http://','',str_replace('https://','',$rowo['website'])).'</a><br>') : '').'
-                        E-mail: <a href="mailto:'.$rowo['contact_email'].'">'.$rowo['contact_email'].'</a>
-                        <br>
-                        '.(($rowo['contact_phone1']!='') ? ($rowo['contact_phoneLabel1'].' '.$rowo['contact_phone1'].'<br>') : '' ).'
-                        '.(($rowo['contact_phone2']!='') ? ($rowo['contact_phoneLabel2'].' '.$rowo['contact_phone2'].'<br>') : '' ).'
-                        '.(($rowo['contact_phone3']!='') ? ($rowo['contact_phoneLabel3'].' '.$rowo['contact_phone3'].'<br>') : '' ).'
-                        ';
+                    <div class="double_container">
+                        <div>
+                            <h4 style="margin: 4px;">
+                            <a href="#alkhoven" name="alkhoven">'.$rowo['verein'].' '.$rowo['ort'].'</a>
+                            </h4>
+                            Kennzahl: '.$rowo['kennzahl'].'
+                            <br>
+                            Dachverband: '.$rowo['dachverband'].'
+                            <br>
+                            <br>
+                            <b>'.$rowo['contact_name'].'</b>
+                            <br>
+                            '.$rowo['contact_street'].'
+                            <br>
+                            '.$rowo['contact_city'].'
+                            <br>
+                            '.(($rowo['website']!="") ? ('Website: <a href="'.$rowo['website'].'" target="_blank">'.str_replace('http://','',str_replace('https://','',$rowo['website'])).'</a><br>') : '').'
+                            E-mail: <a href="mailto:'.$rowo['contact_email'].'">'.$rowo['contact_email'].'</a>
+                            <br>
+                            '.(($rowo['contact_phone1']!='') ? ($rowo['contact_phoneLabel1'].' '.$rowo['contact_phone1'].'<br>') : '' ).'
+                            '.(($rowo['contact_phone2']!='') ? ($rowo['contact_phoneLabel2'].' '.$rowo['contact_phone2'].'<br>') : '' ).'
+                            '.(($rowo['contact_phone3']!='') ? ($rowo['contact_phoneLabel3'].' '.$rowo['contact_phone3'].'<br>') : '' ).'
+                            ';
 
-                        if(CheckPermission("EditClub")) echo EditButton("/vereine?edit=".$rowo['id']);
-                        if(CheckPermission("DeleteClub")) echo DeleteButton("Club","vereine",$rowo['id']);
+                            if(CheckPermission("EditClub")) echo EditButton("/vereine?edit=".$rowo['id']);
+                            if(CheckPermission("DeleteClub")) echo DeleteButton("Club","vereine",$rowo['id']);
 
-                        echo '
+                            echo '
+                        </div>
+                        <div>
+                            <img src="/content/clubs/'.$rowo['clubImage'].'" alt="" style="max-width: 200px; max-height: 150px;"/>   
+                        </div>
                     </div>
+
                     <br><br>
                 ';
             }
