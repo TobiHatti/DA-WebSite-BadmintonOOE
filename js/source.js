@@ -1156,6 +1156,20 @@ function CheckColumnDuplicatesCSVImport()
 
 
 
+function CopyDisplayToElement(e,outputID)
+{
+    document.getElementById(outputID).value = e.options[e.selectedIndex].innerHTML;
+}
+
+function CopyValueToElement(e,outputID)
+{
+    document.getElementById(outputID).value = e.options[e.selectedIndex].value;
+}
+
+function ResetDropdown(e)
+{
+    e.selectedIndex = "0";  
+}
 
 
 
