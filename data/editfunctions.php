@@ -34,6 +34,9 @@ function EditZA($id='')
                                 <td colspan=2>
                                     <select name="kategorie" id="zaKategory" onchange="SelectZAKategory();" class="cel_m" tabindex="1">
                                         <optgroup label="Gro&szlig;e Felder">
+                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "OEBVInternational") ? 'selected' : '').' value="OEBVInternational" style="color: '.Setting::Get("ColorOEBVInternational").'">&Ouml;BV-International</option>
+                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "OEBV") ? 'selected' : '').' value="OEBV" style="color: '.Setting::Get("ColorOEBV").'">&Ouml;BV</option>
+                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "LV") ? 'selected' : '').' value="LV" style="color: '.Setting::Get("ColorLV").'">LV</option>
                                             <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Landesmeisterschaft") ? 'selected' : '').' value="Landesmeisterschaft" style="color: '.Setting::Get("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
                                             <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Doppelturnier") ? 'selected' : '').' value="Doppelturnier" style="color: '.Setting::Get("ColorDoppelturnier").'">Doppelturnier</option>
                                             <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Nachwuchs") ? 'selected' : '').' value="Nachwuchs" style="color: '.Setting::Get("ColorNachwuchs").'">Nachwuchs</option>
@@ -302,7 +305,10 @@ function EditZA($id='')
                         <td colspan=2>
                             <select name="kategorie" id="zaKategory" onchange="SelectZAKategory();" class="cel_m" tabindex="1">
                                 <optgroup label="Gro&szlig;e Felder">
-                                    <option value="Landesmeisterschaft" style="color: '.Setting::Get("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
+                                    <option value="OEBVInternational" style="color: '.Setting::Get("ColorOEBVInternational").'">&Ouml;BV / International</option>
+                                    <option value="OEBV" style="color: '.Setting::Get("ColorOEBV").'">&Ouml;BV</option>
+                                    <option value="LV" style="color: '.Setting::Get("ColorLV").'">LV</option>
+                                    <option value="Landesmeisterschaft" style="color: '.Setting::Get("ColorLandesmeisterschaft").'" selected>Landesmeisterschaft</option>
                                     <option value="Doppelturnier" style="color: '.Setting::Get("ColorDoppelturnier").'">Doppelturnier</option>
                                     <option value="Nachwuchs" style="color: '.Setting::Get("ColorNachwuchs").'">Nachwuchs</option>
                                     <option value="SchuelerJugend" style="color: '.Setting::Get("ColorSchuelerJugend").'">Sch&uuml;ler/Jugend</option>
