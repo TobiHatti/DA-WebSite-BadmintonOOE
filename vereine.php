@@ -212,7 +212,7 @@
                             echo '
                         </div>
                         <div>
-                            <img src="/content/clubs/'.$rowo['clubImage'].'" alt="" style="max-width: 200px; max-height: 150px;"/>   
+                            '.($rowo['clubImage']!="" ? ('<img src="/content/clubs/'.$rowo['clubImage'].'" alt="" style="max-width: 200px; max-height: 150px;"/>') : '').
                         </div>
                     </div>
 
