@@ -18,13 +18,14 @@
     {
         $tableName = $_POST['name'];
         $headerColor = $_POST['headerColor'];
+        $roundCount = $_POST['roundCount'];
         $tableFilename = SReplace($tableName);
         $showLastEdit = (isset($_POST['showLastEdit']) ? 1 : 0);
         $lastEdit = date("Y-m-d");
 
         $listID = MySQL::Scalar("SELECT id FROM ooebvrl_lists WHERE listFilename = ?",'s',$_GET['list']);
 
-        MySQL::NonQuery("INSERT INTO ooebvrl_tables (id, listID, tableName, tableFilename, headerColor, showLastEdit, lastEdit) VALUES ('',?,?,?,?,?,?)",'ssssss',$listID,$tableName,$tableFilename,$headerColor,$showLastEdit,$lastEdit);
+        MySQL::NonQuery("INSERT INTO ooebvrl_tables (id, listID, tableName, tableFilename, headerColor, showLastEdit, lastEdit, roundCount) VALUES ('',?,?,?,?,?,?,?)",'sssssss',$listID,$tableName,$tableFilename,$headerColor,$showLastEdit,$lastEdit,$roundCount);
 
         Redirect("/ooebv-ranglisten");
         die();
@@ -46,11 +47,15 @@
         die();
     }
 
-    if(isset($_POST['addPlayers']))
+    if(isset($_POST['updatePlayerList']))
     {
         $sectionID = MySQL::Scalar("SELECT id FROM ooebvrl_sections WHERE sectionFilename = ?",'s',$_GET['section']);
-        $rankList = $_POST['rankList'];
 
+        // Remove all existing entries from table
+        MySQL::NonQuery("DELETE FROM members_ooebvrl WHERE sectionID = ?",'s',$sectionID);
+
+        $rankArray = array();
+        $rankList = $_POST['rankList'];
         $rankParts = explode('||',$rankList);
 
         $i = 1;
@@ -64,7 +69,13 @@
             $str = $_POST['str'.$i];
             $ges = $_POST['ges'.$i];
 
-            $rank = explode('##',$rankParts[$i-1])[1];
+            // Determine Rank
+            foreach($rankParts AS $rankSegment)
+            {
+                $rankP = explode('##',$rankSegment);
+                if(!isset($rankP[1])) continue;
+                if($i == $rankP[1]) $rank = $rankP[0];
+            }
 
             // Check if member exists. If not create new member in Members Table.
             // If no Player-ID is given, create a new member with a Temp-ID
@@ -72,12 +83,16 @@
             {
                 $memberID = MySQL::Scalar("SELECT id FROM members WHERE playerID = ?",'s',$playerID);
             }
+            else if(isset($_POST['tempPlayerID'.$i]) AND $_POST['tempPlayerID'.$i]=="" AND MySQL::Exist("SELECT * FROM members WHERE playerID = ?",'s',$_POST['tempPlayerID'.$i]))
+            {
+                $memberID = MySQL::Scalar("SELECT id FROM members WHERE playerID = ?",'s',$_POST['tempPlayerID'.$i]);
+            }
             else
             {
                 $memberID = uniqid();
                 $nameParts = explode(' ',$name);
-                $lastname = $nameParts[count($nameParts)-1];
-                $firstname = str_replace($lastname,'',$name);
+                $lastname = rtrim(ltrim($nameParts[count($nameParts)-1],' '),' ');
+                $firstname = rtrim(ltrim(str_replace($lastname,'',$name),' '),' ');
                 $birthdate = "20".str_pad($jg, 2, "0", STR_PAD_LEFT)."-01-01";
 
                 if($playerID == "") $playerID = "TMP".uniqid();
@@ -148,7 +163,11 @@
                     <table>
                         <tr>
                             <td>Tabellen-Name:</td>
-                            <td><input type="text" placeholder="Tabellen-Name..." name="name"/></td>
+                            <td><input class="cel_100" type="text" placeholder="Tabellen-Name..." name="name"/></td>
+                        </tr>
+                        <tr>
+                            <td>Rundenanzahl:</td>
+                            <td><input class="cel_100" type="number" min="1" max="9" placeholder="Rundenanzahl..." name="roundCount"/></td>
                         </tr>
                         <tr>
                             <td>Kopfzeilen-<br>farbe:</td>
@@ -253,12 +272,13 @@
                     </form>
                 ';
             }
-            else
-            {
-                $playerCount = $_POST['amountPlayers'];
-                $clubList = MySQL::Cluster("SELECT * FROM vereine ORDER BY ort,verein ASC");
+        }
+        else if(CheckPermission("AddOOEBVRLJgnd")) echo AddButton('/ooebv-ranglisten/'.$_GET['list'].'/'.$_GET['table'].'/'.$_GET['section'].'/spieler/hinzufuegen',false,false,"Spieler hinzuf&uuml;gen");
 
-                echo '
+
+        echo '
+            <center>
+                <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                     <script>
                         $( function() {
                             $( "#sortList" ).sortable();
@@ -269,127 +289,111 @@
                             CheckSortableListState("sortList","sortListOutput");
                         }, 100);
                     </script>
-                ';
-
-
-                echo '
-                    <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-                        <center>
-                        <textarea hidden name="rankList" id="sortListOutput" cols="30" rows="10"></textarea>
-                            <div class="rlSortContainer">
-                                <ul class="rlSortableListCount">
-                ';
-                for($i = 1; $i <= $playerCount; $i++) echo '<li><div>'.$i.'</div></li>';
-                echo '
-                    </ul>
-                    <ul class="rlSortableListData" id="sortList">
-                ';
-                for($i = 1; $i <= $playerCount; $i++)
-                {
-                    echo '
-                    <li value="'.$i.'">
-                        <table>
-                            <tr>
-                                <td><i class="fas fa-grip-horizontal"></i></td>
-                                <td><input class="cel_s" type="number" placeholder="MgNr." name="playerID'.$i.'"/></td>
-                                <td><input class="" type="text" placeholder="Name" name="name'.$i.'"/></td>
-                                <td>
-                                    <input type="hidden" name="clubID'.$i.'" id="outClubID'.$i.'"/>
-                                    <input class="cel_m" type="text" placeholder="Verein" id="outClub'.$i.'"/>
-                                    <select class="cel_xs" onchange="CopyValueToElement(this,\'outClubID'.$i.'\'); CopyDisplayToElement(this,\'outClub'.$i.'\'); ResetDropdown(this)">
-                                        <option value="" selected disabled>&#9660;</option>
-                                        ';
-                                        foreach($clubList as $club) echo '<option value="'.$club['kennzahl'].'">'.$club['verein'].' '.$club['ort'].'</option>';
-                                        echo '
-                                    </select>
-                                </td>
-                                <td><input class="cel_xs" type="number" placeholder="Jg." min="0" max="99" name="jg'.$i.'"/></td>
-                                <td><input class="cel_xs" type="number" placeholder="1.Rd." name="1rd'.$i.'"/></td>
-                                <td><input class="cel_xs" type="number" placeholder="2.Rd." name="2rd'.$i.'"/></td>
-                                <td><input class="cel_xs" type="number" placeholder="3.Rd." name="3rd'.$i.'"/></td>
-                                <td><input class="cel_xs" type="number" placeholder="Str." name="str'.$i.'"/></td>
-                                <td><input class="cel_xs" type="number" placeholder="Ges." name="ges'.$i.'"/></td>
-                            </tr>
-                        </table>
-                        </li>
-                    ';
-                }
-                echo '
-                                </ul>
-                            </div>
-                            <button type="submit" name="addPlayers">Spieler hinzuf&uuml;gen</button>
-                        </center>
-                    </form>
-                ';
-            }
-        }
-        else if(CheckPermission("addOOEBVRLJgnd")) echo AddButton('/ooebv-ranglisten/'.$_GET['list'].'/'.$_GET['table'].'/'.$_GET['section'].'/spieler/hinzufuegen',false,false,"Spieler hinzuf&uuml;gen");
-
-
-        echo '
-            <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-                <script>
-                    $( function() {
-                        $( "#sortList" ).sortable();
-                        $( "#sortList" ).disableSelection();
-                    } );
-
-                    window.setInterval(function(){
-                        CheckSortableListState("sortList","sortListOutput");
-                    }, 100);
-                </script>
+                    <textarea style="display: none" name="rankList" id="sortListOutput"></textarea>
         ';
 
+        $clubList = MySQL::Cluster("SELECT * FROM vereine ORDER BY ort,verein ASC");
 
-        $players = MySQL::Cluster("SELECT * FROM members_ooebvrl INNER JOIN ooebvrl_sections ON members_ooebvrl.sectionID = ooebvrl_sections.id INNER JOIN ooebvrl_tables ON ooebvrl_sections.tableID = ooebvrl_tables.id INNER JOIN ooebvrl_lists ON ooebvrl_tables.listID = ooebvrl_lists.id WHERE sectionFilename = ? AND tableFilename = ? AND listFilename = ? ORDER BY members_ooebvrl.rank ASC",'sss',$_GET['section'],$_GET['table'],$_GET['list']);
+        $playerAddCount = 0;
+        if(isset($_POST['amountPlayers'])) $playerAddCount = $_POST['amountPlayers'];
+
+
+        $players = MySQL::Cluster("SELECT *, members_ooebvrl.id AS entryID FROM members_ooebvrl INNER JOIN members ON members_ooebvrl.memberID = members.id INNER JOIN ooebvrl_sections ON members_ooebvrl.sectionID = ooebvrl_sections.id INNER JOIN ooebvrl_tables ON ooebvrl_sections.tableID = ooebvrl_tables.id INNER JOIN ooebvrl_lists ON ooebvrl_tables.listID = ooebvrl_lists.id INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE sectionFilename = ? AND tableFilename = ? AND listFilename = ? ORDER BY members_ooebvrl.rank ASC",'sss',$_GET['section'],$_GET['table'],$_GET['list']);
         $i=1;
         echo '
             <div class="rlSortContainer">
                 <ul class="rlSortableListCount">
         ';
 
-        for($i = 1; $i <= count($players); $i++) echo '<li><div>'.$i.'</div></li>';
+        for($i = 1; $i <= count($players) + $playerAddCount; $i++) echo '<li><div>'.$i.'</div></li>';
         echo '
             </ul>
             <ul class="rlSortableListData" id="sortList">
         ';
 
+        $roundCount = MySQL::Scalar("SELECT roundCount FROM ooebvrl_tables INNER JOIN ooebvrl_lists ON ooebvrl_lists.id = ooebvrl_tables.listID WHERE ooebvrl_tables.tableFilename = ? AND ooebvrl_lists.listFilename = ?",'ss',$_GET['table'],$_GET['list']);
+
+        $p = 1;
         foreach($players AS $player)
         {
             echo '
-            <li>
+            <li value="'.$p.'">
                 <table>
                     <tr>
                         <td><i class="fas fa-grip-horizontal"></i></td>
-                        <td><input class="cel_s" type="number" placeholder="MgNr." name="playerID'.$i.'"/></td>
-                        <td><input class="" type="text" placeholder="Name" name="name'.$i.'"/></td>
                         <td>
-                            <input type="hidden" name="clubID" id="outClubID'.$i.'"/>
-                            <input class="cel_m" type="text" placeholder="Verein" id="outClub'.$i.'"/>
-                            <select class="cel_xs" onchange="CopyValueToElement(this,\'outClubID'.$i.'\'); CopyDisplayToElement(this,\'outClub'.$i.'\'); ResetDropdown(this)">
+                            <input class="cel_s" type="number" placeholder="MgNr." name="playerID'.$p.'" value="'.((!StartsWith($player['playerID'],'TMP')) ? $player['playerID'] : '').'"/>
+                            <input type="hidden" name="tempPlayerID'.$p.'" value="'.((StartsWith($player['playerID'],'TMP')) ? $player['playerID'] : '').'"/>
+                        </td>
+                        <td><input class="" type="text" placeholder="Name" name="name'.$p.'" value="'.$player['firstname'].' '.$player['lastname'].'"/></td>
+                        <td>
+                            <input type="hidden" name="clubID'.$p.'" id="outClubID'.$p.'" value="'.$player['clubID'].'"/>
+                            <input class="cel_m" type="text" placeholder="Verein" id="outClub'.$p.'" value="'.$player['verein'].' '.$player['ort'].'"/>
+                            <select class="cel_xs" onchange="CopyValueToElement(this,\'outClubID'.$p.'\'); CopyDisplayToElement(this,\'outClub'.$p.'\'); ResetDropdown(this)">
                                 <option value="" selected disabled>&#9660;</option>
                                 ';
                                 foreach($clubList as $club) echo '<option value="'.$club['kennzahl'].'">'.$club['verein'].' '.$club['ort'].'</option>';
                                 echo '
                             </select>
                         </td>
-                        <td><input class="cel_xs" type="number" placeholder="Jg." name="jg'.$i.'"/></td>
-                        <td><input class="cel_xs" type="number" placeholder="1.Rd." name="1rd'.$i.'"/></td>
-                        <td><input class="cel_xs" type="number" placeholder="2.Rd." name="2rd'.$i.'"/></td>
-                        <td><input class="cel_xs" type="number" placeholder="3.Rd." name="3rd'.$i.'"/></td>
-                        <td><input class="cel_xs" type="number" placeholder="Str." name="str'.$i.'"/></td>
-                        <td><input class="cel_xs" type="number" placeholder="Ges." name="ges'.$i.'"/></td>
+                        <td><input class="cel_xs" type="number" placeholder="Jg." name="jg'.$p.'" value="'.date_format(date_create($player['birthdate']),"y").'"/></td>
+                        ';
+                        for($rc=1;$rc<=$roundCount;$rc++) echo '<td><input class="cel_xs" type="number" placeholder="'.$rc.'.Rd." name="'.$rc.'rd'.$p.'" value="'.$player['round'.$rc].'"/></td>';
+                        echo '
+                        <td><input class="cel_xs" type="number" placeholder="Str." name="str'.$p.'"value="'.$player['str'].'"/></td>
+                        <td><input class="cel_xs" type="number" placeholder="Ges." name="ges'.$p.'"value="'.$player['ges'].'"/></td>
+                        <td>'.(CheckPermission("DeleteOOEBVRLJgnd") ? DeleteButton("OOEBVRLJgnd","members_ooebvrl",$player['entryID'],true) : '').'</td>
                     </tr>
                 </table>
                 </li>
             ';
+
+            $p++;
+        }
+
+        if(isset($_POST['amountPlayers']))
+        {
+            for($i = $p; $i <= count($players) + $playerAddCount; $i++)
+            {
+                echo '
+                <li value="'.$i.'">
+                    <table>
+                        <tr>
+                            <td><i class="fas fa-grip-horizontal"></i></td>
+                            <td>
+                                <input class="cel_s" type="number" placeholder="MgNr." name="playerID'.$i.'"/>
+                                <input class="cel_s" type="hidden" name="isTemp'.$i.'" value="0"/>
+                            </td>
+                            <td><input class="" type="text" placeholder="Name" name="name'.$i.'"/></td>
+                            <td>
+                                <input type="hidden" name="clubID'.$i.'" id="outClubID'.$i.'"/>
+                                <input class="cel_m" type="text" placeholder="Verein" id="outClub'.$i.'"/>
+                                <select class="cel_xs" onchange="CopyValueToElement(this,\'outClubID'.$i.'\'); CopyDisplayToElement(this,\'outClub'.$i.'\'); ResetDropdown(this)">
+                                    <option value="" selected disabled>&#9660;</option>
+                                    ';
+                                    foreach($clubList as $club) echo '<option value="'.$club['kennzahl'].'">'.$club['verein'].' '.$club['ort'].'</option>';
+                                    echo '
+                                </select>
+                            </td>
+                            <td><input class="cel_xs" type="number" placeholder="Jg." name="jg'.$i.'"/></td>
+                            ';
+                            for($rc=1;$rc<=$roundCount;$rc++) echo '<td><input class="cel_xs" type="number" placeholder="'.$rc.'.Rd." name="'.$rc.'rd'.$i.'"/></td>';
+                            echo '
+                            <td><input class="cel_xs" type="number" placeholder="Str." name="str'.$i.'"/></td>
+                            <td><input class="cel_xs" type="number" placeholder="Ges." name="ges'.$i.'"/></td>
+                        </tr>
+                    </table>
+                    </li>
+                ';
+            }
         }
 
         echo '
-                    </ul>
-                </div>
-                <button type="submit">Reihung aktualisieren</button>
-            </form>
+                        </ul>
+                    </div>
+                    <button type="submit" name="updatePlayerList">Reihung aktualisieren</button>
+                </form>
+            </center>
         ';
 
 
@@ -408,15 +412,17 @@
                 <a href="#export"><button type="button">Exportieren</button></a>
         ';
 
+        $roundCount = MySQL::Scalar("SELECT roundCount FROM ooebvrl_tables INNER JOIN ooebvrl_lists ON ooebvrl_lists.id = ooebvrl_tables.listID WHERE ooebvrl_tables.tableFilename = ? AND ooebvrl_lists.listFilename = ?",'ss',$_GET['table'],$_GET['list']);
+
         foreach($sections AS $section)
         {
             echo '
                 <center>
                     <table class="ooebvRanglistenTable">
                         <tr style="background: #'.$section['headerColor'].'">
-                            <td colspan=2>'.nl2br($section['sectionInfoLeft']).'</td>
-                            <td colspan=4 style="font-size: 16pt; font-weight: normal">'.nl2br($section['sectionName']).'</td>
-                            <td colspan=4>'.nl2br($section['sectionInfoRight']).'</td>
+                            <td colspan=3>'.nl2br($section['sectionInfoLeft']).'</td>
+                            <td colspan='.(1 + $roundCount).' style="font-size: 16pt; font-weight: normal">'.nl2br($section['sectionName']).'</td>
+                            <td colspan=3>'.nl2br($section['sectionInfoRight']).'</td>
                         </tr>
                         <tr style="background: #'.$section['headerColor'].'">
                             <td>Rang</td>
@@ -424,9 +430,9 @@
                             <td>Name</td>
                             <td>Verein</td>
                             <td>Jg.</td>
-                            <td>1. Rd</td>
-                            <td>2. Rd</td>
-                            <td>3. Rd</td>
+                            ';
+                            for($rc=1;$rc<=$section['roundCount'];$rc++) echo '<td>'.$rc.'. Rd</td>';
+                            echo '
                             <td>Str.</td>
                             <td>Ges.</td>
                         </tr>
@@ -442,9 +448,9 @@
                         <td>'.$player['firstname'].' '.$player['lastname'].'</td>
                         <td>'.$player['clubID'].'</td>
                         <td>'.date_format(date_create($player['birthdate']),"y").'</td>
-                        <td>'.$player['round1'].'</td>
-                        <td>'.$player['round2'].'</td>
-                        <td>'.$player['round3'].'</td>
+                        ';
+                        for($rc=1;$rc<=$section['roundCount'];$rc++) echo '<td>'.$player['round'.$rc].'</td>';
+                        echo '
                         <td>'.$player['str'].'</td>
                         <td>'.$player['ges'].'</td>
                     </tr>
@@ -499,119 +505,6 @@
         }
     }
 
-
-
-
-
-
-
-
-
-
-        if(isset($_GET['section']) AND $_GET['section']=='U11-U19-Maedchen')
-        {
-            echo '<h3>U11 - U19 M&auml;dchen</h3><br>';
-
-            if(isset($_GET['edit']))
-            {
-                $clubList = MySQL::Cluster("SELECT * FROM vereine ORDER BY ort,verein ASC");
-
-                echo '
-                    <script>
-                        $( function() {
-                            $( "#sortList" ).sortable();
-                            $( "#sortList" ).disableSelection();
-                        } );
-
-                        window.setInterval(function(){
-                            CheckSortableListState("sortListM","outputM");
-                            CheckSortableListState("sortListW","outputW");
-                        }, 100);
-
-
-                    </script>
-                    <center>
-                        <div class="rlSortContainer">
-                            <ul class="rlSortableListCount">
-                ';
-
-                for($i = 1; $i <= 15; $i++) echo '<li><div>'.$i.'</div></li>';
-
-                echo '
-                    </ul>
-                    <ul class="rlSortableListData" id="sortList">
-                ';
-
-                for($i = 1; $i <= 15; $i++)
-                {
-                    echo '
-                    <li>
-                        <table>
-                            <tr>
-                                <td><i class="fas fa-grip-horizontal"></i></td>
-                                <td><input class="cel_s" type="number" placeholder="MgNr." name="playerID'.$i.'"/></td>
-                                <td><input class="" type="text" placeholder="Name" name="name'.$i.'"/></td>
-                                <td>
-                                    <input type="hidden" name="clubID" id="outClubID'.$i.'"/>
-                                    <input class="cel_m" type="text" placeholder="Verein" id="outClub'.$i.'"/>
-                                    <select class="cel_xs" onchange="CopyValueToElement(this,\'outClubID'.$i.'\'); CopyDisplayToElement(this,\'outClub'.$i.'\'); ResetDropdown(this)">
-                                        <option value="" selected disabled>&#9660;</option>
-                                        ';
-                                        foreach($clubList as $club) echo '<option value="'.$club['kennzahl'].'">'.$club['verein'].' '.$club['ort'].'</option>';
-                                        echo '
-                                    </select>
-                                </td>
-                                <td><input class="cel_xs" type="number" placeholder="Jg." name="jg'.$i.'"/></td>
-                                <td><input class="cel_xs" type="number" placeholder="1.Rd." name="1rd'.$i.'"/></td>
-                                <td><input class="cel_xs" type="number" placeholder="2.Rd." name="2rd'.$i.'"/></td>
-                                <td><input class="cel_xs" type="number" placeholder="3.Rd." name="3rd'.$i.'"/></td>
-                                <td><input class="cel_xs" type="number" placeholder="Str." name="str'.$i.'"/></td>
-                                <td><input class="cel_xs" type="number" placeholder="Ges." name="ges'.$i.'"/></td>
-                            </tr>
-                        </table>
-                        </li>
-                    ';
-                }
-
-                echo '
-                            </ul>
-                        </div>
-                        <br>
-                        <button type="submit">Spieler hinzuf&uuml;gen</button>
-                    </center>
-                ';
-
-            }
-            else
-            {
-                 if(CheckPermission("EditOOEBVRLJgnd")) echo EditButton("/ooebv-ranglisten/".$_GET['section']."/edit");
-
-                echo '
-                    <br><br>
-                    <center>
-                        <table class="ooebvRanglistenTable">
-                            <tr>
-                                <td colspan=2>O&Ouml;BV<br>Rangliste 2018</td>
-                                <td colspan=4 style="font-size: 16pt; font-weight: normal">Damen Einzel U11</td>
-                                <td colspan=4>Stand nach 5. Runde<br>22.10.2018</td>
-                            </tr>
-                            <tr>
-                                <td>Rang</td>
-                                <td>MgNr.</td>
-                                <td>Name</td>
-                                <td>Verein</td>
-                                <td>Jg.</td>
-                                <td>1. Rd</td>
-                                <td>2. Rd</td>
-                                <td>3. Rd</td>
-                                <td>Str.</td>
-                                <td>Ges.</td>
-                            </tr>
-                        </table>
-                    </center>
-                ';
-            }
-        }
 
     /*
     echo '
