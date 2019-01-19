@@ -3316,9 +3316,60 @@ $listItemHeight: 25px;
     border-spacing: 0px;
     border-collapse: collapse;
     width: 100%;
+    min-width: 750px;
 
     tr{
+        td{
+            width: 30px;
+            text-align: center;
+        }
 
+        td:nth-child(1){
+            width: 40px;
+            text-align: right;
+
+        }
+
+        td:nth-child(2){
+            width: 60px;
+            text-align: center;
+        }
+
+        td:nth-child(3){
+            width: 150px;
+            max-width: 200px;
+            text-align: left;
+        }
+
+        td:nth-child(4){
+            width: 250px;
+            max-width: 300px;
+            text-align: left;
+        }
+
+        td:nth-child(5){
+            width: 30px;
+            text-align: center;
+        }
+
+        td:nth-last-child(2){
+            width: 30px;
+            text-align: center;
+        }
+
+        td:nth-last-child(1){
+            width: 30px;
+            text-align: center;
+        }
+
+    }
+
+    tr:nth-child(even){
+        background: $theme-bright-l;
+    }
+
+    tr:nth-child(odd){
+        background: #FFFFFF;
     }
 
     tr:nth-child(1),
