@@ -37,7 +37,7 @@
     {
         echo '<h2 class="stagfade1">O&Ouml; Nachwuchskader - Spieler hinzuf&uuml;gen</h2>';
 
-        echo ' <iframe src="/memberAddFrame?assignUser=nwk" frameborder="0" style="width: 100%; height: 480px;"></iframe>';
+        echo '<iframe src="/memberAddFrame?assignUser=nwk" frameborder="0" style="width: 100%; height: 480px;"></iframe>';
     }
     else
     {

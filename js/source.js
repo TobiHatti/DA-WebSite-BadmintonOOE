@@ -1079,6 +1079,13 @@ function RedirectSelectBox(e,linkBase)
     window.location.replace(linkBase + selectedOption);
 }
 
+function RedirectSelectBoxParam(e,linkBase)
+{
+    var selectedOption = e.options[e.selectedIndex].value;
+
+    window.location.replace(linkBase.replace('??',selectedOption));
+}
+
 function RedirectSelectBoxSpielerrangliste(e,linkBase)
 {
     var selectedOption = e.options[e.selectedIndex].value;
@@ -1168,7 +1175,7 @@ function CopyValueToElement(e,outputID)
 
 function ResetDropdown(e)
 {
-    e.selectedIndex = "0";  
+    e.selectedIndex = "0";
 }
 
 

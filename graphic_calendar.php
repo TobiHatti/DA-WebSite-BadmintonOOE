@@ -9,10 +9,15 @@
         <!DOCTYPE html>
         <html>
             <head>
+                ';
+                require("headerlinks.php");
+                echo '
+                <!--
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
                 <link rel="stylesheet" type="text/css" href="/css/style.css">
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
                 <meta charset="utf-8">
+                -->
             </head>
             <body>
                 <div class="iframe_content" style="height: 600px;">
@@ -432,53 +437,78 @@
                                             $dateModalInfo .= '
                                                 <h2>Termin bearbeiten</h2>
                                                 <hr>
-                                                <form action="/kalender" method="post" accept-charset="utf-8" enctype="multipart/form-data" target="_top" class="stagfade2">
+
+                                                <form action="/kalender" method="post" accept-charset="utf-8" enctype="multipart/form-data" class="stagfade2" target="_parent">
                                                     <table>
                                                         <tr>
                                                             <td class="ta_r">Titel</td>
-                                                            <td><input value="'.$calData['title'].'" type="text" class="cel_l" placeholder="Titel" name="termin_titel" required/></td>
+                                                            <td><input type="text" class="cel_l" value="'.$calData['title'].'" placeholder="Titel..." name="termin_titel" required/></td>
                                                         </tr>
                                                         <tr>
                                                             <td class="ta_r">Beschreibung</td>
-                                                            <td><textarea class="cel_l" name="description_date" placeholder="Beschreibung" style="resize: vertical;">'.$calData['description'].'</textarea></td>
+                                                            <td><textarea class="cel_l" value="'.$calData['description'].'" name="description_date" placeholder="Beschreibung..." style="resize: vertical;"></textarea></td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="ta_r">Datum</td>
-                                                            <td><input value="'.$calData['date_begin'].'" type="date" class="cel_l" name="date_termin" required/></td>
+                                                            <td class="ta_r">Datum <output id="outBeginText" style="display:none;">Start</output></td>
+                                                            <td><input type="date" class="cel_l" name="date_termin_start" required  value="'.$calData['date_begin'].'"/></td>
+                                                            <td>'.Checkbox("toggleMultiday", "toggleMultiday",($calData['isTimespan']==1 ? true : false),"ShowHideTableRow(this,'rowEndDate'); ShowHideElement(this,'outBeginText')").'</td>
+                                                            <td>Mehrt&auml;gig</td>
+                                                        </tr>
+                                                        <tr id="rowEndDate"  style="display: '.($calData['isTimespan']==1 ? 'table-row' : 'none').';">
+                                                            <td class="ta_r">Datum<br>Ende</td>
+                                                            <td><input type="date" class="cel_l" name="date_termin_end"  value="'.$calData['date_end'].'"/></td>
                                                         </tr>
                                                         <tr>
                                                             <td class="ta_r">Ort</td>
-                                                            <td><input value="'.$calData['location'].'" type="text" class="cel_l" placeholder="Ort" name="place"/></td>
+                                                            <td><input type="text" class="cel_l" placeholder="Ort..." name="location"  value="'.$calData['location'].'"/></td>
                                                         </tr>
+
                                                         <tr>
-                                                            <td class="ta_r">Uhrzeit</td>
-                                                            <td><input value="'.$calData['time_start'].'" type="time" class="cel_l" name="time" required/></td>
+                                                            <td class="ta_r">Uhrzeit <output id="outBeginTimeText" style="display:none;">Start</output></td>
+                                                            <td><input type="time" class="cel_l" name="time_start"  value="'.$calData['time_start'].'"/></td>
+                                                            <td>'.Checkbox("toggleMultiTimespan", "toggleMultiTimespan", ($calData['time_start']!="00:00:00" ? true : false),"ShowHideTableRow(this,'rowEndTime'); ShowHideElement(this,'outBeginTimeText')").'</td>
+                                                            <td>Zeitspanne</td>
                                                         </tr>
+                                                        <tr id="rowEndTime" style="display: '.($calData['time_start']!="00:00:00" ? 'table-row' : 'none').';">
+                                                            <td class="ta_r">Uhrzeit<br>Ende</td>
+                                                            <td><input type="time" class="cel_l" name="time_end"  value="'.$calData['time_end'].'"/></td>
+                                                        </tr>
+
                                                         <tr>
                                                             <td class="ta_r">Kategorie</td>
                                                             <td>
-                                                            <select class="cel_l" name="kategorie" id="classKat">
-                                                                <option value="">Anderes</option>
-
-                                                                <option '.(($calData['category']=="Anderes") ? 'selected' : '').' value="">Anderes</option>
-                                                                <option '.(($calData['category']=="OEBVInternational") ? 'selected' : '').' value="OEBVInternational" style="color: '.$categoryColor["OEBVInternational"].'">&Ouml;BV-International</option>
-                                                                <option '.(($calData['category']=="OEBV") ? 'selected' : '').' value="OEBV" style="color: '.$categoryColor["OEBV"].'">&Ouml;BV</option>
-                                                                <option '.(($calData['category']=="LV") ? 'selected' : '').' value="LV" style="color: '.$categoryColor["LV"].'">LV</option>
-                                                                <option '.(($calData['category']=="Landesmeisterschaft") ? 'selected' : '').' value="Landesmeisterschaft" style="color: '.$categoryColor["Landesmeisterschaft"].'">Landesmeisterschaft</option>
-                                                                <option '.(($calData['category']=="Doppelturnier") ? 'selected' : '').' value="Doppelturnier" style="color: '.$categoryColor["Doppelturnier"].'">Doppelturnier</option>
-                                                                <option '.(($calData['category']=="Nachwuchs") ? 'selected' : '').' value="Nachwuchs" style="color: '.$categoryColor["Nachwuchs"].'">Nachwuchs</option>
-                                                                <option '.(($calData['category']=="SchuelerJugend") ? 'selected' : '').' value="SchuelerJugend" style="color: '.$categoryColor["SchuelerJugend"].'">Sch&uuml;ler/Jugend</option>
-                                                                <option '.(($calData['category']=="Senioren") ? 'selected' : '').' value="Senioren" style="color: '.$categoryColor["Senioren"].'">Senioren</option>
-                                                                <option '.(($calData['category']=="Training") ? 'selected' : '').' value="Training" style="color: '.$categoryColor["Training"].'">Training</option>
+                                                            <select class="cel_l" name="kategorie" id="classKat" required>
+                                                                <option value="" disabled selected>--- Kategorie ausw&auml;hlen ---</option>
+                                                                <option '.($calData['category'] == '' ? 'selected' : '').' value="">Anderes</option>
+                                                                <option '.($calData['category'] == 'OEBVInternational' ? 'selected' : '').' value="OEBVInternational" style="color: '.Setting::Get("ColorOEBVInternational").'">&Ouml;BV / International</option>
+                                                                <option '.($calData['category'] == 'OEBV' ? 'selected' : '').' value="OEBV" style="color: '.Setting::Get("ColorOEBV").'">&Ouml;BV</option>
+                                                                <option '.($calData['category'] == 'LV' ? 'selected' : '').' value="LV" style="color: '.Setting::Get("ColorLV").'">LV</option>
+                                                                <option '.($calData['category'] == 'Landesmeisterschaft' ? 'selected' : '').' value="Landesmeisterschaft" style="color: '.Setting::Get("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
+                                                                <option '.($calData['category'] == 'Doppelturnier' ? 'selected' : '').' value="Doppelturnier" style="color: '.Setting::Get("ColorDoppelturnier").'">Doppelturnier</option>
+                                                                <option '.($calData['category'] == 'Nachwuchs' ? 'selected' : '').' value="Nachwuchs" style="color: '.Setting::Get("ColorNachwuchs").'">Nachwuchs</option>
+                                                                <option '.($calData['category'] == 'SchuelerJugend' ? 'selected' : '').' value="SchuelerJugend" style="color: '.Setting::Get("ColorSchuelerJugend").'">Sch&uuml;ler/Jugend</option>
+                                                                <option '.($calData['category'] == 'Senioren' ? 'selected' : '').' value="Senioren" style="color: '.Setting::Get("ColorSenioren").'">Senioren</option>
+                                                                <option '.($calData['category'] == 'Training' ? 'selected' : '').' value="Training" style="color: '.Setting::Get("ColorTraining").'">Training</option>
                                                             </select>
                                                             </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="ta_r">Verantwortlicher</td>
+                                                            <td><input type="text" class="cel_l" placeholder="Verantwortliche Person..." name="responsible"  value="'.$calData['responsible'].'"/></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="ta_r">Teilnehmer</td>
+                                                            <td><input type="text" class="cel_l" placeholder="Teilnehmer..." name="participant"  value="'.$calData['participant'].'"/></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="ta_r">Zusatzinformationen</td>
+                                                            <td><textarea class="cel_l" name="additionalInfo" placeholder="Zusatzinformationen..." style="resize: vertical;" value="'.$calData['additional_info'].'"></textarea></td>
                                                         </tr>
                                                     </table>
 
                                                     <br>
                                                     <br>
                                                     <button type="submit" name="update_termin" value="'.$calData['id'].'" class="stagfade3">Termin aktualisieren</button>
-
                                                 </form>
                                             ';
                                         }
