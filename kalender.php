@@ -29,26 +29,38 @@
 
     if(isset($_POST['update_termin']))
     {
-        // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         $id = $_POST['update_termin'];
         $terminName = $_POST['termin_titel'];
         $description = $_POST['description_date'];
-        $termin_date=$_POST['date_termin'];
-        $termin_place=$_POST['place'];
-        $termin_time=$_POST['time'];
+        $termin_date_start=$_POST['date_termin_start'];
+        $termin_date_end=(isset($_POST['toggleMultiday']) ? $_POST['date_termin_end'] : '0000-00-00');
+        $isTimespanDate = (isset($_POST['toggleMultiday']) ? 1 : 0);
+        $isTimespanTime = (isset($_POST['toggleMultiday']) ? 1 : 0);
+        $termin_location=$_POST['location'];
+        $termin_time_start=$_POST['time_start'];
+        $termin_time_end=$_POST['time_end'];
         $termin_kategorie=$_POST['kategorie'];
+        $termin_responsible=$_POST['responsible'];
+        $termin_participant=$_POST['participant'];
+        $termin_additionalInfo=$_POST['additionalInfo'];
 
         $strSQL = "UPDATE agenda SET
         title = ?,
         description = ?,
         date_begin = ?,
+        date_end = ?,
+        isTimespan = ?,
         location = ?,
         time_start = ?,
-        category = ?
+        time_end = ?,
+        category = ?,
+        participant = ?,
+        responsible = ?,
+        additional_info = ?
         WHERE id = ?
         ";
 
-        MySQL::NonQuery($strSQL,'@s',$terminName,$description,$termin_date,$termin_place,$termin_time,$termin_kategorie,$id);
+        MySQL::NonQuery($strSQL,'@s',$terminName,$description,$termin_date_start,$termin_date_end,$isTimespanDate,$termin_location,$termin_time_start,$termin_time_end,$termin_kategorie,$termin_participant,$termin_responsible,$termin_additionalInfo,$id);
 
         Redirect("/kalender");
         die();
@@ -162,7 +174,6 @@
                 <br>
                 <br>
                 <button type="submit" name="add_termin" class="stagfade3">Termin hinzuf&uuml;gen</button>
-
             </form>
         ';
 

@@ -224,7 +224,7 @@
                                     </tr>
                                 ';
                             }
-                            else echo '<input type="hidden" name="club" value="'.$_GET['club'].'"/>';
+                            else if(isset($_GET['assignUser'])) echo '<input type="hidden" name="club" value="'.$_GET['club'].'"/>';
 
                             echo '
                             <tr>
@@ -241,7 +241,7 @@
                             echo '
 
                             <tr>
-                                <td colspan=3 class="ta_c"><br><button type="submit" name="addMember">Spieler eintragen und hinzuf&uuml;gen</button></td>
+                                <td colspan=3 class="ta_c"><br><button type="submit" name="addMember">'.(isset($_GET['assignUser']) ? 'Spieler eintragen und hinzuf&uuml;gen' : 'Spieler eintragen').'</button></td>
                             </tr>
                         </table>
 

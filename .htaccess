@@ -65,6 +65,9 @@ RewriteRule ^verein-info/mitglieder verein-info.php?mitglieder [NC,QSA,L]
 # Rewrite Rules for spielerreihung.php
 RewriteRule ^spielerreihung/bearbeiten spielerreihung.php?bearbeiten [NC,QSA,L]
 
+RewriteRule ^spielerrangliste/reihungen/([a-zA-Z0-9-]+)/bearbeiten/?$ spielerreihung.php?bearbeiten&jahr=$1 [NC,QSA,L]
+RewriteRule ^spielerrangliste/reihungen/([a-zA-Z0-9-]+)/bearbeiten/([a-zA-Z0-9-]+)/?$/?$ spielerreihung.php?bearbeiten&jahr=$1&clubID=$2 [NC,QSA,L]
+
 # Rewrite Rules for spielerranglistenSettings.php
 RewriteRule ^spielerrangliste/einstellungen/([a-zA-Z0-9-_]+)/?$ spielerranglistenSettings.php?season=$1 [NC,QSA,L]
 RewriteRule ^spielerrangliste/einstellungen spielerranglistenSettings.php [NC,QSA,L]
@@ -92,12 +95,16 @@ RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/neue-tabelle/?$ ooebv-ranglisten.
 RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/neue-sektion/?$/?$ ooebv-ranglisten.php?new&newSection&list=$1&table=$2 [NC,QSA,L]
 RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/spieler/?$/?$/?$ ooebv-ranglisten.php?manage&list=$1&table=$2&section=$3 [NC,QSA,L]
 RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/spieler/hinzufuegen/?$/?$/?$ ooebv-ranglisten.php?manage&add&list=$1&table=$2&section=$3 [NC,QSA,L]
+RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/trennlinie/?$/?$/?$/?$ ooebv-ranglisten.php?sepparate&list=$1&table=$2&section=$3&lastRank=$4 [NC,QSA,L]
 
 RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/bearbeiten/?$ ooebv-ranglisten.php?edit&editList&list=$1 [NC,QSA,L]
 RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/bearbeiten/?$/?$ ooebv-ranglisten.php?edit&editTable&list=$1&table=$2 [NC,QSA,L]
+RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/bearbeiten/?$/?$/?$ ooebv-ranglisten.php?edit&editSection&list=$1&table=$2&section=$3 [NC,QSA,L]
 RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/spieler-bearbeiten/?$/?$ ooebv-ranglisten.php?new&newTable&list=$1&table=$2 [NC,QSA,L]
 
 RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$/?$ ooebv-ranglisten.php?list=$1&table=$2&show [NC,QSA,L]
+
+RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/pdf/?$/?$ filecreators/pdf-ooebvrl.php?list=$1&table=$2 [NC,QSA,L]
 
 # Ignore .php-Extension
 RewriteRule ^([^\.]+)$ $1.php [NC,L]

@@ -3519,13 +3519,15 @@ table.centered_content td {
   border-spacing: 0px;
   border-collapse: collapse;
   width: 100%;
-  min-width: 750px; }
+  min-width: 750px;
+  max-width: 1200px; }
   .ooebvRanglistenTable tr td {
     width: 30px;
     text-align: center; }
   .ooebvRanglistenTable tr td:nth-child(1) {
-    width: 40px;
-    text-align: right; }
+    width: 30px;
+    text-align: left;
+    padding-left: 10px; }
   .ooebvRanglistenTable tr td:nth-child(2) {
     width: 60px;
     text-align: center; }
@@ -3564,12 +3566,13 @@ table.centered_content td {
     padding: 0;
     width: 40px; }
     .rlSortContainer .rlSortableListCount li {
-      width: 25px;
+      width: 30px;
       height: 40px;
       line-height: 40px;
       text-align: right;
       padding-right: 5px;
       list-style: none;
+      text-align: center;
       background: linear-gradient(to left top, #D1EEF5, #FFFFFF);
       border: 1px solid #0099C7;
       border-radius: 10px 0 0 0; }

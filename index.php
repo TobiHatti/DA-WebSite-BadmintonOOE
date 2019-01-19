@@ -31,8 +31,8 @@
                     <span>Zentralausschreibung:</span>
                 </div>
                 <div>
-                    <h4 style="color: '.Setting::Get("Color".$zaVal['kategorie']).'">'.$zaVal['title_line1'].'</h4>
-                    <h4 style="color: '.Setting::Get("Color".$zaVal['kategorie']).'">'.$zaVal['title_line2'].'</h4>
+                    <h4 style="color: '.Setting::Get("Color".$zaVal['category']).'">'.$zaVal['title_line1'].'</h4>
+                    <h4 style="color: '.Setting::Get("Color".$zaVal['category']).'">'.$zaVal['title_line2'].'</h4>
                 </div>
                 <div>
                     <center>
