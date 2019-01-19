@@ -92,6 +92,11 @@
 
     if(isset($_POST['updatePlayerList']))
     {
+        // Set last Updates
+        $date = date("Y-m-d");
+        MySQL::NonQuery("UPDATE ooebvrl_tables SET lastEdit = ? WHERE tableFilename = ?",'ss',$date,$_GET['table']);
+
+
         $sectionID = MySQL::Scalar("SELECT id FROM ooebvrl_sections WHERE sectionFilename = ?",'s',$_GET['section']);
 
         // Remove all existing entries from table
@@ -123,37 +128,39 @@
                 $ges = $_POST['ges'.$i];
 
 
-
-                // Check if member exists. If not create new member in Members Table.
-                // If no Player-ID is given, create a new member with a Temp-ID
-                if($playerID != "" AND MySQL::Exist("SELECT * FROM members WHERE playerID = ?",'s',$playerID))
+                if($clubID != "")
                 {
-                    $memberID = MySQL::Scalar("SELECT id FROM members WHERE playerID = ?",'s',$playerID);
-                }
-                else if(isset($_POST['tempPlayerID'.$i]) AND $_POST['tempPlayerID'.$i]=="" AND MySQL::Exist("SELECT * FROM members WHERE playerID = ?",'s',$_POST['tempPlayerID'.$i]))
-                {
-                    $memberID = MySQL::Scalar("SELECT id FROM members WHERE playerID = ?",'s',$_POST['tempPlayerID'.$i]);
-                }
-                else
-                {
-                    $memberID = uniqid();
-                    $nameParts = explode(' ',$name);
-                    $lastname = rtrim(ltrim($nameParts[count($nameParts)-1],' '),' ');
-                    $firstname = rtrim(ltrim(str_replace($lastname,'',$name),' '),' ');
-                    $birthdate = "20".str_pad($jg, 2, "0", STR_PAD_LEFT)."-01-01";
+                    // Check if member exists. If not create new member in Members Table.
+                    // If no Player-ID is given, create a new member with a Temp-ID
+                    if($playerID != "" AND MySQL::Exist("SELECT * FROM members WHERE playerID = ?",'s',$playerID))
+                    {
+                        $memberID = MySQL::Scalar("SELECT id FROM members WHERE playerID = ?",'s',$playerID);
+                    }
+                    else if(isset($_POST['tempPlayerID'.$i]) AND $_POST['tempPlayerID'.$i]=="" AND MySQL::Exist("SELECT * FROM members WHERE playerID = ?",'s',$_POST['tempPlayerID'.$i]))
+                    {
+                        $memberID = MySQL::Scalar("SELECT id FROM members WHERE playerID = ?",'s',$_POST['tempPlayerID'.$i]);
+                    }
+                    else
+                    {
+                        $memberID = uniqid();
+                        $nameParts = explode(' ',$name);
+                        $lastname = rtrim(ltrim($nameParts[count($nameParts)-1],' '),' ');
+                        $firstname = rtrim(ltrim(str_replace($lastname,'',$name),' '),' ');
+                        $birthdate = "20".str_pad($jg, 2, "0", STR_PAD_LEFT)."-01-01";
 
-                    if($playerID == "") $playerID = "TMP".uniqid();
+                        if($playerID == "") $playerID = "TMP".uniqid();
 
-                    MySQL::NonQuery("INSERT INTO members (id,clubID,playerID,firstname, lastname, birthdate) VALUES (?,?,?,?,?,?)",'@s',$memberID,$clubID, $playerID,$firstname,$lastname,$birthdate);
-                }
+                        MySQL::NonQuery("INSERT INTO members (id,clubID,playerID,firstname, lastname, birthdate) VALUES (?,?,?,?,?,?)",'@s',$memberID,$clubID, $playerID,$firstname,$lastname,$birthdate);
+                    }
 
-                MySQL::NonQuery("INSERT INTO members_ooebvrl (id, memberID, sectionID, rank, str, ges) VALUES (?,?,?,?,?,?)",'ssssss',$id,$memberID,$sectionID,$rank,$str,$ges);
+                    MySQL::NonQuery("INSERT INTO members_ooebvrl (id, memberID, sectionID, rank, str, ges) VALUES (?,?,?,?,?,?)",'ssssss',$id,$memberID,$sectionID,$rank,$str,$ges);
 
-                $j = 1;
-                while(isset($_POST[$j.'rd'.$i]))
-                {
-                    MySQL::NonQuery("UPDATE members_ooebvrl SET round".$j." = ? WHERE id = ?",'ss',$_POST[$j.'rd'.$i],$id);
-                    $j++;
+                    $j = 1;
+                    while(isset($_POST[$j.'rd'.$i]))
+                    {
+                        MySQL::NonQuery("UPDATE members_ooebvrl SET round".$j." = ? WHERE id = ?",'ss',$_POST[$j.'rd'.$i],$id);
+                        $j++;
+                    }
                 }
             }
             else

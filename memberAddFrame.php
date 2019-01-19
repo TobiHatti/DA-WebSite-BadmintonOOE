@@ -33,7 +33,10 @@
 
         if($_GET['assignUser'] == 'tg')
         {
+            $date = date("Y-m-d");
             $trainingsgruppenID = $_POST['trainingsgruppenID'];
+
+            MySQL::NonQuery("UPDATE trainingsgruppen SET lastEdit = ? WHERE id = ?",'ss',$date,$trainingsgruppenID);
             MySQL::NonQuery("INSERT INTO members_trainingsgruppen (id,tgID,memberID) VALUES ('',?,?)",'ss',$trainingsgruppenID,$id);
         }
 
