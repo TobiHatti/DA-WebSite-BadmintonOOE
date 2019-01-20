@@ -3449,6 +3449,32 @@ $listItemHeight: 25px;
 }
 
 
+.clubTables{
+    background: linear-gradient(to left, $theme-bright-l, #FCFCFC);
+
+    tr:nth-child(1){
+        td:nth-child(1){
+            word-break: break-word;
+            vertical-align: top;
+
+            a:target{
+                color: red;
+            }
+
+        }
+
+        td:last-child{
+            text-align: center;
+
+            img{
+                max-width: 200px;
+                max-height: 100px;
+            }
+
+        }
+    }
+
+}
 
 
 

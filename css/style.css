@@ -3605,4 +3605,17 @@ table.centered_content td {
       box-shadow: 0 0 20px 0px #000000;
       vertical-align: top; }
 
+.clubTables {
+  background: linear-gradient(to left, #C4E3ED, #FCFCFC); }
+  .clubTables tr:nth-child(1) td:nth-child(1) {
+    word-break: break-word;
+    vertical-align: top; }
+    .clubTables tr:nth-child(1) td:nth-child(1) a:target {
+      color: red; }
+  .clubTables tr:nth-child(1) td:last-child {
+    text-align: center; }
+    .clubTables tr:nth-child(1) td:last-child img {
+      max-width: 200px;
+      max-height: 100px; }
+
 /*# sourceMappingURL=style.css.map */

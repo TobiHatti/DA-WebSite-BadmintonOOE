@@ -1107,4 +1107,86 @@ function LetterCorrection($input_string)
     return $input_string;
 }
 
+function PlayerDisplayClubInfo($row,$editExtension = "")
+{
+    if(isset($_GET['edit']) AND $_GET['edit']==$row['id'].$editExtension)
+    {
+        $retval = '
+            <div class="member_info" style="border-left: 5px groove '.(($row['gender']=='M') ? 'blue' : (($row['gender']=='F') ? 'red' : 'black')).'; height: 150px;">
+                <div class="member_image"></div>
+                <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                    <table>
+                        </tr>
+                            <td>Geschl.: </td>
+                            <td>
+                                <input type="radio" name="gender" value="M" '.($row['gender'] == 'M' ? 'checked' : '').'/> M&auml;nnl.
+                                <input type="radio" name="gender" value="F" '.($row['gender'] == 'F' ? 'checked' : '').'/> Weibl.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 100px;">Vorn.: </td>
+                            <td><input type="text" name="firstname" style="width:160px; margin: 0;" class="cel_h18" value="'.$row['firstname'].'" placeholder="Vorname..."/></td>
+                            <td rowspan=5>
+                            <button type="submit" name="updateMembers" style="padding: 3px;" value="'.$row['id'].'"><i class="fa fa-floppy-o" style="font-size:24px"></i></button></td>
+                        </tr>
+                            <td>Nachn.: </td>
+                            <td><input type="text" name="lastname" style="width:160px; margin: 0;" class="cel_h18" value="'.$row['lastname'].'" placeholder="Nachname..."/></td>
+                        </tr>
+                        <tr>
+                            <td>Geb.: </td>
+                            <td><input type="date" name="birthdate" style="width:160px; margin: 0; font-size: 10pt;" class="cel_h18" value="'.$row['birthdate'].'"/></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 70px;">Mg.Nr.: </td>
+                            <td><input type="text" name="number" style="width:160px; margin: 0;" class="cel_h18" value="'.$row['playerID'].'" placeholder="Mitgl. Nr..."/></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 70px;">Bild: </td>
+                            <td>'.FileButton("image", "image",false,"","","width: 120px;")  .'</td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        ';
+    }
+    else
+    {
+        $retval = '
+            <div class="member_info" style="border-left: 5px groove '.(($row['gender']=='M') ? 'blue' : (($row['gender']=='F') ? 'red' : 'black')).';">
+                <div class="member_image">
+                    <img src="'.(($row['image'] != "") ? ('/content/members/'.$row['image']) : '/content/user.png' ).'" alt="" />
+                </div>
+                <table>
+                    <tr>
+                        <td>Vorname: </td>
+                        <td>'.$row['firstname'].'</td>
+                    </tr>
+                    <tr>
+                        <td>Nachname: </td>
+                        <td>'.$row['lastname'].'</td>
+                    </tr>
+                    <tr>
+                        <td>Geb. Datum: </td>
+                        <td>'.str_replace('ä','&auml;',strftime("%d. %b. %Y",strtotime($row['birthdate']))).' ('.Age($row['birthdate']).')</td>
+                    </tr>
+                    <tr>
+                        <td>Mitgl. Nr.: </td>
+                        <td>'.(StartsWith($row['playerID'],"TMP") ? '<i>-</i>' : $row['playerID']).'</td>
+                    </tr>
+                </table>
+
+                <div style="position: absolute; bottom: 0px; right: 0px;">
+                ';
+                    $retval .= EditButton("/verein-info/mitglieder?edit=".$row['id'].$editExtension,true);
+                    if(StartsWith($row['playerID'],"TMP")) $retval .= '<a href="/verein-info/mitglieder/zusammenfuehren/'.$row['id'].'"><i class="fas fa-compress"></i></a>';
+                    $retval .= DeleteButton("ClubManager","members",$row['id'],true);
+                $retval .= '
+                </div>
+            </div>
+        ';
+    }
+
+    return $retval;
+}
+
 ?>
