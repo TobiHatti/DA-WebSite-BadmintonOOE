@@ -22,30 +22,7 @@
         }
 
         if(!$executed) Redirect(str_replace('?err','',ThisPage()).'?err');
-
-        /*
-        $stmt = $link->prepare('SELECT * FROM users WHERE email = ? AND password = ?');
-        $stmt->bind_param('ss', $email, $pswd); // 's' specifies the variable type => 'string'
-
-        $stmt->execute();
-
-        $result = $stmt->get_result();
-
-        $executed = false;
-
-        while ($row = $result->fetch_assoc())
-        {
-            $executed = true;
-
-            $_SESSION['userID'] = $row['id'];
-            $_SESSION['firstname'] = $row['firstname'];
-            $_SESSION['lastname'] = $row['lastname'];
-            $_SESSION['rank'] = $row['rank'];
-            Redirect("/");
-        }
-
-        if(!$executed) Redirect(str_replace('?err','',ThisPage()).'?err');
-        */
+        die();
     }
 
     echo '

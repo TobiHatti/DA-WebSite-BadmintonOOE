@@ -103,7 +103,11 @@
             // Special Case for ChangeContent
             if($permission == 'DeleteCC' AND isset($_POST['ChangeContent'])) $allowed = 1;
 
-            MySQL::NonQuery("UPDATE permissions SET allowed = ? WHERE user_id = ? AND permission = ?",'@s',$allowed,$id,$permission);
+            if(MySQL::Exist("SELECT * FROM permissions WHERE user_id = ? AND permission = ?",'ss',$id,$permission))
+            {
+                MySQL::NonQuery("UPDATE permissions SET allowed = ? WHERE user_id = ? AND permission = ?",'@s',$allowed,$id,$permission);
+            }
+            else MySQL::NonQuery("INSERT INTO permissions (id,user_id,permission,allowed) VALUES ('',?,?,?)",'sss',$id,$permission,$allowed);
         }
 
         Redirect(ThisPage());
@@ -529,7 +533,25 @@
                                 <br>
                                 <table>
                                     <tr>
-                                        <td style="width: 33%">
+                                        <td style="width: 25%">
+                                            <h5>Trainingsgruppen <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Trainingsgruppen in der Rubrik Nachwuchs"></i></h5>
+                                            <table>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("AddNWTG","AddNWTG",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddNWTG' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("EditNWTG","EditNWTG",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditNWTG' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("DeleteNWK","DeleteNWTG",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteNWTG' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+
+                                        <td style="width: 25%">
                                             <h5>Nachwuchskader <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Spielern im Nachwuchskader"></i></h5>
                                             <table>
                                                 <tr>
@@ -547,7 +569,7 @@
                                             </table>
                                         </td>
 
-                                        <td style="width: 33%">
+                                        <td style="width: 25%">
                                             <h5>Vorstand <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Mitgliedern im Vorstand"></i></h5>
                                             <table>
                                                 <tr>
@@ -565,7 +587,7 @@
                                             </table>
                                         </td>
 
-                                        <td style="width: 33%">
+                                        <td style="width: 25%">
                                             <h5>Zentralausschreibungen <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Spielern im Nachwuchskader"></i></h5>
                                             <table>
                                                 <tr>
@@ -578,6 +600,38 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="width: 50px;">'.Checkbox("DeleteZA","DeleteZA",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteZA' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br>
+                                <table>
+                                    <tr>
+                                        <td style="width: 50%">
+                                            <h5>Spielerranglisten <i class="fas fa-info-circle" title="Rechte f&uuml;r das verwalten von Spielerranglisten in der Rubrik O&Ouml;MM > Allgemein"></i></h5>
+                                            <table>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("EditSpielerrangliste","EditZA",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditZA' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+
+                                        <td style="width: 50%">
+                                            <h5>O&Ouml;BV-Ranglisten <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Ranglisten in der Rubrik Ranglisten > O&Ouml;BV"></i></h5>
+                                            <table>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("AddOOEBVRLJgnd","AddOOEBVRLJgnd",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddZA' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("EditOOEBVRLJgnd","EditOOEBVRLJgnd",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditZA' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">'.Checkbox("DeleteOOEBVRLJgnd","DeleteOOEBVRLJgnd",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteZA' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
                                                 </tr>
                                             </table>
@@ -631,6 +685,11 @@
                     echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditNWK' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Nachwuchskader-Mitglied bearbeiten<br>';
                     echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteNWK' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Nachwuchskader-Mitglied l&ouml;schen<br>';
 
+                    echo '<br><h4>Trainingsgruppen</h4>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddNWTG' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Trainingsgruppen hinzuf&uuml;gen<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditNWTG' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Trainingsgruppen bearbeiten<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteNWTG' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Trainingsgruppen l&ouml;schen<br>';
+
                     echo '<br><h4>Vorstand</h4>';
                     echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddVorstand' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Vorstand-Mitglied hinzuf&uuml;gen<br>';
                     echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditVorstand' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Vorstand-Mitglied bearbeiten<br>';
@@ -640,6 +699,14 @@
                     echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddZA' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Zentralausschreibung erstellen<br>';
                     echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditZA' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Zentralausschreibung bearbeiten<br>';
                     echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteZA' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Zentralausschreibung l&ouml;schen<br>';
+
+                    echo '<br><h4>Spielerranglisten</h4>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditSpielerrangliste' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' Spielerranglisten bearbeiten<br>';
+
+                    echo '<br><h4>O&Ouml;BV-Ranglisten</h4>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddOOEBVRLJgnd' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' O&Ouml;BV-Ranglisten erstellen<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditOOEBVRLJgnd' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' O&Ouml;BV-Ranglisten bearbeiten<br>';
+                    echo ((MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteOOEBVRLJgnd' AND user_id = ?",'@s',$uid)) ? $dotGreen : $dotRed).' O&Ouml;BV-Ranglisten l&ouml;schen<br>';
                 }
             }
             else if(isset($_GET['administrative']))

@@ -101,11 +101,9 @@
             $tgData = MySQL::Cluster("SELECT *,members_trainingsgruppen.id AS mbID FROM members_trainingsgruppen INNER JOIN members ON members_trainingsgruppen.memberID = members.id WHERE members_trainingsgruppen.tgID = ?",'i',$tg['id']);
             foreach($tgData as $memberData)
             {
-                if($memberData['gender']=='M') $styleBorder = "border-left: 5px groove blue;";
-                else $styleBorder = "border-left: 5px groove red;";
 
                 echo '
-                    <div class="nwkaderCard" style="'.$styleBorder.'">
+                    <div class="nwkaderCard" style="border-left: 5px groove '.(($memberData['gender']=='M') ? 'blue' : (($memberData['gender']=='F') ? 'red' : 'black')).'">
                         <img src="'.(($memberData['image']!="") ? ('/content/members/'.$memberData['image']) : '/content/user.png' ).'" alt="" />
                         <div>
                             <b>'.$memberData['lastname'].'</b> '.$memberData['firstname'].'<br>

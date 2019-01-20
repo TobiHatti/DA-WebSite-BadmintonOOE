@@ -7,10 +7,17 @@
         <hr>
     ';
 
-    if(CheckPermission("EditSpielerrangliste"))
-    {
-        echo '<u><a href="/spielerrangliste/einstellungen">&#x270E; Spielerranglisten-Einstellungen</a></u><br><br>';
-    }
+    if(CheckPermission("EditSpielerrangliste")) echo '<u><a href="/spielerrangliste/einstellungen">&#x270E; Spielerranglisten-Einstellungen</a></u><br><br>'; 
+
+    echo '
+        <p>
+        '.PageContent('1',CheckPermission("ChangeContent")).'<br>
+        </p>
+
+    ';
+
+
+
 
     for($i=intval(date("Y"));$i>=2011;$i--)
     {
@@ -22,9 +29,9 @@
         if($i == intval(date("Y")))
         {
             // Saisonwechsel mit 1. September
-            if(intval(date("m"))>= 9) echo '<p><a href="spielerrangliste/'.$i.'-'.($i+1).'/alle">Spielerrangliste '.$i.'-'.($i+1).' (Stand: '.$lastChange.')</a></p> ';
+            if(intval(date("m"))>= 9) echo '<p>'.PageContent($i,CheckPermission("ChangeContent")).'<a href="spielerrangliste/'.$i.'-'.($i+1).'/alle">Spielerrangliste '.$i.'-'.($i+1).' (Stand: '.$lastChange.')</a></p> ';
         }
-        else echo '<p><a href="spielerrangliste/'.$i.'-'.($i+1).'/alle">Spielerrangliste '.$i.'-'.($i+1).' (Stand: '.$lastChange.')</a></p> ';
+        else echo '<p>'.PageContent($i,CheckPermission("ChangeContent")).'<a href="spielerrangliste/'.$i.'-'.($i+1).'/alle">Spielerrangliste '.$i.'-'.($i+1).' (Stand: '.$lastChange.')</a></p> ';
     }
 
     echo '
@@ -34,9 +41,7 @@
 
     <hr>
 
-    <p>
-       '.PageContent('1',CheckPermission("ChangeContent")).'
-    </p>
+
     ';
 
     include("footer.php");

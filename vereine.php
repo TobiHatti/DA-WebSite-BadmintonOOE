@@ -117,9 +117,10 @@
                         <td class="ta_r">
                             <select name="label1">
                                 <option value="">Kontaktart #1</option>
-                                <option '.(($edit AND $cdat['contact_phoneLabel1']=="Mobil") ? 'selected' : ''). 'value="Mobil">Mobil</option>
+                                <option '.(($edit AND $cdat['contact_phoneLabel1']=="Mobil") ? 'selected' : ''). ' value="Mobil">Mobil</option>
                                 <option '.(($edit AND $cdat['contact_phoneLabel1']=="Telefon Privat") ? 'selected' : '').' value="Telefon Privat">Telefon Privat</option>
                                 <option '.(($edit AND $cdat['contact_phoneLabel1']=="Telefon Firma") ? 'selected' : '').' value="Telefon Firma">Telefon Firma</option>
+                                <option '.(($edit AND $cdat['contact_phoneLabel1']=="Fax") ? 'selected' : '').' value="Fax">Fax</option>
                             </select>
                         </td>
                         <td><input type="text" name="phone1" placeholder="Telefonnummer..." value="'.($edit ? $cdat['contact_phone1'] : '').'"/></td>
@@ -131,6 +132,7 @@
                                 <option '.(($edit AND $cdat['contact_phoneLabel2']=="Mobil") ? 'selected' : '').' value="Mobil">Mobil</option>
                                 <option '.(($edit AND $cdat['contact_phoneLabel2']=="Telefon Privat") ? 'selected' : '').' value="Telefon Privat">Telefon Privat</option>
                                 <option '.(($edit AND $cdat['contact_phoneLabel2']=="Telefon Firma") ? 'selected' : '').' value="Telefon Firma">Telefon Firma</option>
+                                <option '.(($edit AND $cdat['contact_phoneLabel2']=="Fax") ? 'selected' : '').' value="Fax">Fax</option>
                             </select>
                         </td>
                         <td><input type="text" name="phone2" placeholder="Telefonnummer..." value="'.($edit ? $cdat['contact_phone2'] : '').'"/></td>
@@ -142,6 +144,7 @@
                                 <option '.(($edit AND $cdat['contact_phoneLabel3']=="Mobil") ? 'selected' : '').' value="Mobil">Mobil</option>
                                 <option '.(($edit AND $cdat['contact_phoneLabel3']=="Telefon Privat") ? 'selected' : '').' value="Telefon Privat">Telefon Privat</option>
                                 <option '.(($edit AND $cdat['contact_phoneLabel3']=="Telefon Firma") ? 'selected' : '').' value="Telefon Firma">Telefon Firma</option>
+                                <option '.(($edit AND $cdat['contact_phoneLabel3']=="Fax") ? 'selected' : '').' value="Fax">Fax</option>
                             </select>
                         </td>
                         <td><input type="text" name="phone3" placeholder="Telefonnummer..." value="'.($edit ? $cdat['contact_phone3'] : '').'"/></td>
@@ -177,48 +180,48 @@
 
             echo '<a name="'.$letter.'"></a>';
 
+            echo '<center>';
             $strSQLo = "SELECT * FROM vereine WHERE ort LIKE '$letter%'";
             $rso=mysqli_query($link,$strSQLo);
             while($rowo=mysqli_fetch_assoc($rso))
             {
                 echo '
-                    <div class="double_container">
-                        <div>
-                            <h4 style="margin: 4px;">
-                            <a href="#alkhoven" name="alkhoven">'.$rowo['verein'].' '.$rowo['ort'].'</a>
-                            </h4>
-                            Kennzahl: '.$rowo['kennzahl'].'
-                            <br>
-                            Dachverband: '.$rowo['dachverband'].'
-                            <br>
-                            <br>
-                            <b>'.$rowo['contact_name'].'</b>
-                            <br>
-                            '.$rowo['contact_street'].'
-                            <br>
-                            '.$rowo['contact_city'].'
-                            <br>
-                            '.(($rowo['website']!="") ? ('Website: <a href="'.$rowo['website'].'" target="_blank">'.str_replace('http://','',str_replace('https://','',$rowo['website'])).'</a><br>') : '').'
-                            E-mail: <a href="mailto:'.$rowo['contact_email'].'">'.$rowo['contact_email'].'</a>
-                            <br>
-                            '.(($rowo['contact_phone1']!='') ? ($rowo['contact_phoneLabel1'].' '.$rowo['contact_phone1'].'<br>') : '' ).'
-                            '.(($rowo['contact_phone2']!='') ? ($rowo['contact_phoneLabel2'].' '.$rowo['contact_phone2'].'<br>') : '' ).'
-                            '.(($rowo['contact_phone3']!='') ? ($rowo['contact_phoneLabel3'].' '.$rowo['contact_phone3'].'<br>') : '' ).'
+                    <table class="clubTables">
+                        <tr>
+                            <td style="width:300px;" rowspan=3><h4 style="margin: 4px;" ><a href="#alkhoven" name="alkhoven" id="'.$letter.'">'.$rowo['verein'].' '.$rowo['ort'].'</a></h4></td>
+                            <td style="width:300px;"><b>'.$rowo['contact_name'].'</b></td>
+                            <td style="width:180px;">'.(($rowo['contact_phone1']!='') ? ($rowo['contact_phoneLabel1'].': '.$rowo['contact_phone1'].'<br>') : '' ).'</td>
+                            <td style="width:300px;" rowspan=5>'.($rowo['clubImage']!="" ? ('<img src="/content/clubs/'.$rowo['clubImage'].'" alt=""/>') : '').'</td>
+                        </tr>
+                        <tr>
+                            <td>'.$rowo['contact_street'].'</td>
+                            <td>'.(($rowo['contact_phone2']!='') ? ($rowo['contact_phoneLabel2'].': '.$rowo['contact_phone2'].'<br>') : '' ).'</td>
+                        </tr>
+                        <tr>
+                            <td>'.$rowo['contact_city'].'</td>
+                            <td>'.(($rowo['contact_phone3']!='') ? ($rowo['contact_phoneLabel3'].': '.$rowo['contact_phone3'].'<br>') : '' ).'</td>
+                        </tr>
+                        <tr>
+                            <td>Kennzahl: '.$rowo['kennzahl'].'</td>
+                            <td>E-mail: <a href="mailto:'.$rowo['contact_email'].'">'.$rowo['contact_email'].'</a></td>
+                        </tr>
+                        <tr>
+                            <td>Dachverband: '.$rowo['dachverband'].'</td>
+                            <td>'.(($rowo['website']!="") ? ('Website: <a href="'.$rowo['website'].'" target="_blank">'.str_replace('http://','',str_replace('https://','',$rowo['website'])).'</a><br>') : '').'</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
                             ';
-
-                            if(CheckPermission("EditClub")) echo EditButton("/vereine?edit=".$rowo['id']);
-                            if(CheckPermission("DeleteClub")) echo DeleteButton("Club","vereine",$rowo['id']);
-
+                                if(CheckPermission("EditClub")) echo EditButton("/vereine?edit=".$rowo['id']);
+                                if(CheckPermission("DeleteClub")) echo DeleteButton("Club","vereine",$rowo['id']);
                             echo '
-                        </div>
-                        <div>
-                            '.($rowo['clubImage']!="" ? ('<img src="/content/clubs/'.$rowo['clubImage'].'" alt="" style="max-width: 200px; max-height: 150px;"/>') : '').
-                        </div>
-                    </div>
-
-                    <br><br>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
                 ';
             }
+            echo '</center>';
         }
     }
 
