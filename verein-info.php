@@ -109,7 +109,7 @@
         die();
     }
 
-    if(CheckRank() == "clubmanager")
+    if(CheckRank() == "clubmanager" OR CheckRank() == "administrative")
     {
         $club = MySQL::Scalar("SELECT club FROM users WHERE id = ?",'i',$_SESSION['userID']);
         if(isset($_GET['mitglieder']))
@@ -154,7 +154,7 @@
                         echo '
                             Tragen Sie so bald wie m&ouml;glich die Mitgliedsnummer dieses Spielers ein, um Doppelte eintr&auml;ge zu vermeiden!<br><br>
                             <b>Info:</b> Sollte bereits ein Spieler mit Mitgliedsnummer passend zu dem Spieler ohne Mitgliedsnummer eingetragen sein,<br>
-                            k&ouml;nnen Sie diesen mit "Zusammenf&uuml;hren" (" <i class="fas fa-compress"></i> ") auf den Spieler mit Mitgliedsnummer übertragen.<br>
+                            k&ouml;nnen Sie diesen mit "Zusammenf&uuml;hren" (" <i class="fas fa-compress"></i> ") auf den Spieler mit Mitgliedsnummer &uuml;bertragen.<br>
                             <span style="color: #BD0000"><b>Das l&ouml;schen des Spielers ohne Mitgliedsnummer soll in diesem Fall vermieden werden!</b></span><br><br>
                         ';
 
@@ -183,6 +183,8 @@
 
             if(!isset($_GET['mergeID']))
             {
+                if($club == "") $club = MySQL::Scalar("SELECT clubID FROM members WHERE id = ?",'s',$_GET['memberID']);
+
                 $player1Data = MySQL::Row("SELECT * FROM members WHERE id = ?",'s',$_GET['memberID']);
                 $playerList = MySQL::Cluster("SELECT * FROM members WHERE clubID = ? AND SUBSTRING(playerID,1,3) != 'TMP'",'s',$club);
 

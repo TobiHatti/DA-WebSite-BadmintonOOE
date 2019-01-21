@@ -160,7 +160,8 @@
                                                 <li><a style="width: 200px;" href="/fotogalerie/neu">Neue Fotogalerie</a></li>
                                                 <li><a style="width: 200px;" href="/zentralausschreibung/neu">Neue Zentralausschreibung</a></li>
                                                 <li><a style="width: 200px;" href="/kalender/neu">Neuen Termin anlegen</a></li>
-                                                <li style="border-top: 2px solid black;"><a style="width: 200px;" href="/mitglieder">Spieler eintragen</a></li>
+                                                <li style="border-top: 2px solid black;"><a style="width: 200px;" href="/mitglieder/neu">Spieler eintragen</a></li>
+                                                <li><a style="width: 200px;" href="/mitglieder/anzeigen">Spieler anzeigen</a></li>
                                                 <li style="border-top: 2px solid black;"><a style="width: 200px;" href="/settings">Seiten-Einstellungen</a></li>
                                             </ul>
                                         </li>

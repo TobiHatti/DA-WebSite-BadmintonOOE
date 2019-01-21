@@ -93,6 +93,8 @@ RewriteRule ^trainingsgruppen/gruppe-bearbeiten/([a-zA-Z0-9-_]+)/?$ trainingsgru
 
 # Rewrite Rules for member-edit
 RewriteRule ^mitglieder/bearbeiten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$/?$ editMembers.php?permissionSuffix=$1&memberID=$2 [NC,QSA,L]
+RewriteRule ^mitglieder/([a-zA-Z0-9-_]+)/?$ mitglieder.php?section=$1 [NC,QSA,L]
+
 
 # Rewrite Rules for ooebv-ranglisten
 RewriteRule ^ooebv-ranglisten/neue-liste ooebv-ranglisten.php?new&newList [NC,QSA,L]
