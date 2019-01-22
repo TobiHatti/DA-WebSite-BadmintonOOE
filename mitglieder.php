@@ -1,6 +1,24 @@
 <?php
     require("header.php");
 
+    if(isset($_POST['updateMembers']))
+    {
+        $id = $_POST['updateMembers'];
+        $firstname=$_POST['firstname'];
+        $lastname=$_POST['lastname'];
+        $birthdate=$_POST['birthdate'];
+        $number=$_POST['number'];
+        $gender = $_POST['gender'];
+
+        MySQL::NonQuery("UPDATE members SET firstname = ?, lastname = ?, birthdate = ?, playerID = ?, gender = ? WHERE id = ?",'@s',$firstname,$lastname,$birthdate,$number,$gender,$id);
+
+        FileUpload("content/members/","image","","","UPDATE members SET img = 'FNAME' WHERE id = '$id'",uniqid());
+
+        Redirect("/mitglieder/anzeigen?verein=".$_GET['verein']);
+        die();
+    }
+
+
     if(CheckRank() == "administrative" AND isset($_GET['section']))
     {
         if($_GET['section'] == 'neu')
@@ -20,7 +38,7 @@
                     <select onchange="RedirectSelectBoxParam(this,\'/mitglieder/anzeigen?verein=??\');">
                         <option value="">--- Verein ausw&auml;hlen ---</option>
                         ';
-                        foreach($clubList AS $clubData) echo '<option value="'.$clubData['kennzahl'].'" '.($_GET['verein'] == $clubData['kennzahl'] ? 'selected' : '').'>'.$clubData['verein'].' '.$clubData['ort'].'</value>';
+                        foreach($clubList AS $clubData) echo '<option value="'.$clubData['kennzahl'].'" '.((isset($_GET['verein']) AND $_GET['verein'] == $clubData['kennzahl']) ? 'selected' : '').'>'.$clubData['kennzahl'].' - '.$clubData['verein'].' '.$clubData['ort'].'</value>';
                         echo '
                     </select>
                 </div>
@@ -33,7 +51,7 @@
 
                 foreach($clubMembers as $member)
                 {
-                    echo PlayerDisplayClubInfo($member);
+                    echo PlayerDisplayClubInfo($member,"",true);
                 }
 
                 $playersNoGender = MySQL::Count("SELECT * FROM members WHERE clubID = ? AND gender = ''",'s',$_GET['verein']);
@@ -55,7 +73,7 @@
                         ';
 
                         $playerData = MySQL::Cluster("SELECT * FROM members WHERE clubID = ? AND SUBSTRING(playerID,1,3) = 'TMP'",'s',$_GET['verein']);
-                        foreach($playerData AS $player) echo PlayerDisplayClubInfo($player,"editNN");
+                        foreach($playerData AS $player) echo PlayerDisplayClubInfo($player,"editNN",true);
 
                         echo '<br><br>';
                     }
@@ -66,7 +84,7 @@
                         echo 'Ohne Angabe des Geschlechts scheint der Spieler u.a. nicht in der Auswahl zur Spielerreihung auf!<br>';
 
                         $playerData = MySQL::Cluster("SELECT * FROM members WHERE clubID = ? AND gender = ''",'s',$_GET['verein']);
-                        foreach($playerData AS $player) echo PlayerDisplayClubInfo($player,"editNG");
+                        foreach($playerData AS $player) echo PlayerDisplayClubInfo($player,"editNG",true);
 
                         echo '<br><br>';
                     }
