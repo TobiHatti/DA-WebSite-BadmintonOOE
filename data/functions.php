@@ -1107,7 +1107,7 @@ function LetterCorrection($input_string)
     return $input_string;
 }
 
-function PlayerDisplayClubInfo($row,$editExtension = "")
+function PlayerDisplayClubInfo($row,$editExtension = "", $adminEdit = false)
 {
     if(isset($_GET['edit']) AND $_GET['edit']==$row['id'].$editExtension)
     {
@@ -1177,7 +1177,10 @@ function PlayerDisplayClubInfo($row,$editExtension = "")
 
                 <div style="position: absolute; bottom: 0px; right: 0px;">
                 ';
-                    $retval .= EditButton("/verein-info/mitglieder?edit=".$row['id'].$editExtension,true);
+                    if($adminEdit) $editLink = "/mitglieder/anzeigen?verein=".$_GET['verein']."&edit=".$row['id'].$editExtension;      
+                    else $editLink = "/verein-info/mitglieder?edit=".$row['id'].$editExtension;
+
+                    $retval .= EditButton($editLink,true);
                     if(StartsWith($row['playerID'],"TMP")) $retval .= '<a href="/verein-info/mitglieder/zusammenfuehren/'.$row['id'].'"><i class="fas fa-compress"></i></a>';
                     $retval .= DeleteButton("ClubManager","members",$row['id'],true);
                 $retval .= '
