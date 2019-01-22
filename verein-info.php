@@ -127,17 +127,6 @@
 
                 ';
 
-                $strSQL = "SELECT * FROM members WHERE clubID = '$club' ORDER BY birthdate DESC";
-                $rs=mysqli_query($link,$strSQL);
-                while($row=mysqli_fetch_assoc($rs))
-                {
-                    echo PlayerDisplayClubInfo($row);
-
-                }
-
-                echo '<br><br><a href="/verein-info/mitglieder?neu">Neuen Spieler hinzufügen</a><br><br>';
-
-
                 // Check for Missing arguments
 
                 $playersNoGender = MySQL::Count("SELECT * FROM members WHERE clubID = ? AND gender = ''",'s',$club);
@@ -172,9 +161,22 @@
                         $playerData = MySQL::Cluster("SELECT * FROM members WHERE clubID = ? AND gender = ''",'s',$club);
                         foreach($playerData AS $player) echo PlayerDisplayClubInfo($player,"editNG");
 
-                        echo '<br><br>';
+                        echo '<br><br><hr>';
                     }
                 }
+
+                $strSQL = "SELECT * FROM members WHERE clubID = '$club' ORDER BY birthdate DESC";
+                $rs=mysqli_query($link,$strSQL);
+                while($row=mysqli_fetch_assoc($rs))
+                {
+                    echo PlayerDisplayClubInfo($row);
+
+                }
+
+                echo '<br><br><a href="/verein-info/mitglieder?neu">Neuen Spieler hinzufügen</a><br><br>';
+
+
+
             }
         }
         else if(isset($_GET['merge']))

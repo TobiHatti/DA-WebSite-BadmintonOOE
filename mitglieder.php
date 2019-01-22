@@ -45,14 +45,9 @@
                 <br><br><br>
             ';
 
-            if(isset($_GET['verein']))
+            if(isset($_GET['verein']) AND $_GET['verein'] != '')
             {
                 $clubMembers = MySQL::Cluster("SELECT * FROM members WHERE clubID = ?",'s',$_GET['verein']);
-
-                foreach($clubMembers as $member)
-                {
-                    echo PlayerDisplayClubInfo($member,"",true);
-                }
 
                 $playersNoGender = MySQL::Count("SELECT * FROM members WHERE clubID = ? AND gender = ''",'s',$_GET['verein']);
                 $playersNoNumber = MySQL::Count("SELECT * FROM members WHERE clubID = ? AND SUBSTRING(playerID,1,3) = 'TMP'",'s',$_GET['verein']);
@@ -86,9 +81,16 @@
                         $playerData = MySQL::Cluster("SELECT * FROM members WHERE clubID = ? AND gender = ''",'s',$_GET['verein']);
                         foreach($playerData AS $player) echo PlayerDisplayClubInfo($player,"editNG",true);
 
-                        echo '<br><br>';
+                        echo '<br><br><hr>';
                     }
                 }
+
+                foreach($clubMembers as $member)
+                {
+                    echo PlayerDisplayClubInfo($member,"",true);
+                }
+
+
 
             }
             else
