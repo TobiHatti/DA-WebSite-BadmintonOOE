@@ -20,7 +20,7 @@
                     <select onchange="RedirectSelectBoxParam(this,\'/mitglieder/anzeigen?verein=??\');">
                         <option value="">--- Verein ausw&auml;hlen ---</option>
                         ';
-                        foreach($clubList AS $clubData) echo '<option value="'.$clubData['kennzahl'].'">'.$clubData['verein'].' '.$clubData['ort'].'</value>';
+                        foreach($clubList AS $clubData) echo '<option value="'.$clubData['kennzahl'].'" '.($_GET['verein'] == $clubData['kennzahl'] ? 'selected' : '').'>'.$clubData['verein'].' '.$clubData['ort'].'</value>';
                         echo '
                     </select>
                 </div>
