@@ -45,7 +45,6 @@
 
     if(isset($_POST['updateReihung']))
     {
-        $club = MySQL::Scalar("SELECT club FROM users WHERE id = ?",'i',$_SESSION['userID']);
         $reihungComboM = $_POST['reihungM'];
         $reihungComboW = $_POST['reihungW'];
 
@@ -65,7 +64,6 @@
 
             $memberID = MySQL::Scalar("SELECT id FROM members WHERE playerID = ?",'s',$rp[1]);
 
-            // ToDo!!!
             MySQL::NonQuery("UPDATE members_spielerranglisten SET team = ?, mf = ?, year = ?, position = ? WHERE memberID = ?",'@s',$team,$mf,$year,$rp[0],$memberID);
             MySQL::NonQuery("UPDATE members SET email = ?, mobileNr = ? WHERE id = ?",'@s',$email,$mobile,$memberID);
         }
@@ -80,7 +78,10 @@
             $mobile = $_POST['mobile_'.$rp[1]];
             $email = $_POST['email_'.$rp[1]];
 
-            MySQL::NonQuery("UPDATE reihung SET position = '".$rp[0]."', team = ?, mf = ?, mobile_nr = ?, email = ? WHERE member = '".$rp[1]."' AND club = ? AND year = ?",'@s',$team,$mf,$mobile,$email,$club,$year);
+            $memberID = MySQL::Scalar("SELECT id FROM members WHERE playerID = ?",'s',$rp[1]);
+
+            MySQL::NonQuery("UPDATE members_spielerranglisten SET team = ?, mf = ?, year = ?, position = ? WHERE memberID = ?",'@s',$team,$mf,$year,$rp[0],$memberID);
+            MySQL::NonQuery("UPDATE members SET email = ?, mobileNr = ? WHERE id = ?",'@s',$email,$mobile,$memberID);
         }
 
         // Update last edit-Date
@@ -347,7 +348,7 @@
                                 <h3>Spieler ausw&auml;hlen (Herren)</h3>
                                 ';
 
-                                $strSQL = "SELECT * FROM members WHERE clubID = '$club' AND gender = 'M'";
+                                $strSQL = "SELECT * FROM members WHERE clubID = '$club' AND gender = 'M' AND SUBSTRING(playerID,1,3) != 'TMP'";
                                 $rs=mysqli_query($link,$strSQL);
                                 while($row=mysqli_fetch_assoc($rs))
                                 {
@@ -370,7 +371,7 @@
                                 <h3>Spieler ausw&auml;hlen (Damen)</h3>
                                 ';
 
-                                $strSQL = "SELECT * FROM members WHERE clubID = '$club' AND gender = 'F'";
+                                $strSQL = "SELECT * FROM members WHERE clubID = '$club' AND gender = 'F' AND SUBSTRING(playerID,1,3) != 'TMP'";
                                 $rs=mysqli_query($link,$strSQL);
                                 while($row=mysqli_fetch_assoc($rs))
                                 {
