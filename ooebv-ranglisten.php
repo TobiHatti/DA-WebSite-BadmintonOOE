@@ -31,14 +31,27 @@
     {
         $tableName = $_POST['name'];
         $headerColor = $_POST['headerColor'];
-        $roundCount = $_POST['roundCount'];
         $tableFilename = SReplace($tableName);
         $showLastEdit = (isset($_POST['showLastEdit']) ? 1 : 0);
         $lastEdit = date("Y-m-d");
+        $showJg = (isset($_POST['showJg']) ? 1 : 0);
+
+        $validRounds = '';
+
+        if(isset($_POST['showRd1'])) $validRounds .= '|1|';
+        if(isset($_POST['showRd2'])) $validRounds .= '|2|';
+        if(isset($_POST['showRd3'])) $validRounds .= '|3|';
+        if(isset($_POST['showRd4'])) $validRounds .= '|4|';
+        if(isset($_POST['showRd5'])) $validRounds .= '|5|';
+        if(isset($_POST['showRd6'])) $validRounds .= '|6|';
+        if(isset($_POST['showRd7'])) $validRounds .= '|7|';
+        if(isset($_POST['showRd8'])) $validRounds .= '|8|';
+        if(isset($_POST['showRd9'])) $validRounds .= '|9|';
+
 
         $listID = MySQL::Scalar("SELECT id FROM ooebvrl_lists WHERE listFilename = ?",'s',$_GET['list']);
 
-        MySQL::NonQuery("INSERT INTO ooebvrl_tables (id, listID, tableName, tableFilename, headerColor, showLastEdit, lastEdit, roundCount) VALUES ('',?,?,?,?,?,?,?)",'sssssss',$listID,$tableName,$tableFilename,$headerColor,$showLastEdit,$lastEdit,$roundCount);
+        MySQL::NonQuery("INSERT INTO ooebvrl_tables (id, listID, tableName, tableFilename, headerColor, showLastEdit, lastEdit, validRounds, showJg) VALUES ('',?,?,?,?,?,?,?,?)",'ssssssss',$listID,$tableName,$tableFilename,$headerColor,$showLastEdit,$lastEdit,$validRounds,$showJg);
 
         Redirect("/ooebv-ranglisten");
         die();
@@ -49,12 +62,25 @@
         $tableID = $_POST['id'];
         $tableName = $_POST['name'];
         $headerColor = $_POST['headerColor'];
-        $roundCount = $_POST['roundCount'];
         $tableFilename = SReplace($tableName);
         $showLastEdit = (isset($_POST['showLastEdit']) ? 1 : 0);
         $lastEdit = date("Y-m-d");
 
-        MySQL::NonQuery("UPDATE ooebvrl_tables SET tableName = ?, tableFilename = ?, headerColor = ?, showLastEdit = ?, lastEdit = ?, roundCount = ? WHERE id = ?",'sssssss',$tableName,$tableFilename,$headerColor,$showLastEdit,$lastEdit,$roundCount,$tableID);
+        $showJg = (isset($_POST['showJg']) ? 1 : 0);
+
+        $validRounds = '';
+
+        if(isset($_POST['showRd1'])) $validRounds .= '|1|';
+        if(isset($_POST['showRd2'])) $validRounds .= '|2|';
+        if(isset($_POST['showRd3'])) $validRounds .= '|3|';
+        if(isset($_POST['showRd4'])) $validRounds .= '|4|';
+        if(isset($_POST['showRd5'])) $validRounds .= '|5|';
+        if(isset($_POST['showRd6'])) $validRounds .= '|6|';
+        if(isset($_POST['showRd7'])) $validRounds .= '|7|';
+        if(isset($_POST['showRd8'])) $validRounds .= '|8|';
+        if(isset($_POST['showRd9'])) $validRounds .= '|9|';
+
+        MySQL::NonQuery("UPDATE ooebvrl_tables SET tableName = ?, tableFilename = ?, headerColor = ?, showLastEdit = ?, lastEdit = ?, validRounds = ?, showJg = ? WHERE id = ?",'ssssssss',$tableName,$tableFilename,$headerColor,$showLastEdit,$lastEdit,$validRounds,$showJg,$tableID);
 
         Redirect("/ooebv-ranglisten");
         die();
@@ -239,8 +265,24 @@
                             <td><input class="cel_100" type="text" placeholder="Tabellen-Name..." name="name"/></td>
                         </tr>
                         <tr>
-                            <td>Rundenanzahl:</td>
-                            <td><input class="cel_100" type="number" min="1" max="9" placeholder="Rundenanzahl..." name="roundCount"/></td>
+                            <td>Runden:</td>
+                            <td>
+                                '.Tickbox("showRd1","showRd1","Runde 1",true).'
+                                '.Tickbox("showRd2","showRd2","Runde 2",true).'
+                                '.Tickbox("showRd3","showRd3","Runde 3",true).'
+                                '.Tickbox("showRd4","showRd4","Runde 4",false).'
+                                '.Tickbox("showRd5","showRd5","Runde 5",false).'
+                                '.Tickbox("showRd6","showRd6","Runde 6",false).'
+                                '.Tickbox("showRd7","showRd7","Runde 7",false).'
+                                '.Tickbox("showRd8","showRd8","Runde 8",false).'
+                                '.Tickbox("showRd9","showRd9","Runde 9",false).'
+                            <td>
+                        </tr>
+                        <tr>
+                            <td>Jahrgang<br>anzeigen:</td>
+                            <td>
+                                '.Tickbox("showJg","showJG","Jahrgang anzeigen",true).'
+                            </td>
                         </tr>
                         <tr>
                             <td>Kopfzeilen-<br>farbe:</td>
@@ -334,6 +376,17 @@
         {
             $tableData = MySQL::Row("SELECT * FROM ooebvrl_tables WHERE tableFilename = ?",'s',$_GET['table']);
 
+            $roundSelected1 = (SubStringFind($tableData['validRounds'],'|1|') ? true : false);
+            $roundSelected2 = (SubStringFind($tableData['validRounds'],'|2|') ? true : false);
+            $roundSelected3 = (SubStringFind($tableData['validRounds'],'|3|') ? true : false);
+            $roundSelected4 = (SubStringFind($tableData['validRounds'],'|4|') ? true : false);
+            $roundSelected5 = (SubStringFind($tableData['validRounds'],'|5|') ? true : false);
+            $roundSelected6 = (SubStringFind($tableData['validRounds'],'|6|') ? true : false);
+            $roundSelected7 = (SubStringFind($tableData['validRounds'],'|7|') ? true : false);
+            $roundSelected8 = (SubStringFind($tableData['validRounds'],'|8|') ? true : false);
+            $roundSelected9 = (SubStringFind($tableData['validRounds'],'|9|') ? true : false);
+
+
             echo '<h2>Tabelle bearbeiten</h2>';
 
             echo '
@@ -345,8 +398,24 @@
                             <td><input class="cel_100" type="text" placeholder="Tabellen-Name..." name="name" value="'.$tableData['tableName'].'"/></td>
                         </tr>
                         <tr>
-                            <td>Rundenanzahl:</td>
-                            <td><input class="cel_100" type="number" min="1" max="9" placeholder="Rundenanzahl..." name="roundCount" value="'.$tableData['roundCount'].'"/></td>
+                            <td>Runden:</td>
+                            <td>
+                                '.Tickbox("showRd1","showRd1","Runde 1",$roundSelected1).'
+                                '.Tickbox("showRd2","showRd2","Runde 2",$roundSelected2).'
+                                '.Tickbox("showRd3","showRd3","Runde 3",$roundSelected3).'
+                                '.Tickbox("showRd4","showRd4","Runde 4",$roundSelected4).'
+                                '.Tickbox("showRd5","showRd5","Runde 5",$roundSelected5).'
+                                '.Tickbox("showRd6","showRd6","Runde 6",$roundSelected6).'
+                                '.Tickbox("showRd7","showRd7","Runde 7",$roundSelected7).'
+                                '.Tickbox("showRd8","showRd8","Runde 8",$roundSelected8).'
+                                '.Tickbox("showRd9","showRd9","Runde 9",$roundSelected9).'
+                            <td>
+                        </tr>
+                        <tr>
+                            <td>Jahrgang<br>anzeigen:</td>
+                            <td>
+                                '.Tickbox("showJg","showJG","Jahrgang anzeigen",($tableData['showJg'] == 1) ? true : false).'
+                            </td>
                         </tr>
                         <tr>
                             <td>Kopfzeilen-<br>farbe:</td>
@@ -354,7 +423,7 @@
                         </tr>
                         <tr>
                             <td>Letzte Bearbeitung<br>anzeigen:</td>
-                            <td><center>'.Tickbox("showLastEdit","showLastEdit","",($tableData['showLastEdit'] == 1) ? true : false).'</center></td>
+                            <td>'.Tickbox("showLastEdit","showLastEdit","Bearbeitungsdatum anzeigen",($tableData['showLastEdit'] == 1) ? true : false).'</td>
                         </tr>
                         <tr>
                             <td colspan=2>
@@ -413,6 +482,8 @@
         $list = $_GET['list'];
         $table = $_GET['table'];
         $section = $_GET['section'];
+
+        $showJg = MySQL::Scalar("SELECT showJg FROM ooebvrl_tables WHERE tableFilename = ?",'s',$_GET['table']);
 
         if(isset($_GET['add']))
         {
@@ -474,7 +545,18 @@
         $playerAddCount = 0;
         if(isset($_POST['amountPlayers'])) $playerAddCount = $_POST['amountPlayers'];
 
-        $roundCount = MySQL::Scalar("SELECT roundCount FROM ooebvrl_tables INNER JOIN ooebvrl_lists ON ooebvrl_lists.id = ooebvrl_tables.listID WHERE ooebvrl_tables.tableFilename = ? AND ooebvrl_lists.listFilename = ?",'ss',$_GET['table'],$_GET['list']);
+        $validRounds = MySQL::Scalar("SELECT validRounds FROM ooebvrl_tables INNER JOIN ooebvrl_lists ON ooebvrl_lists.id = ooebvrl_tables.listID WHERE ooebvrl_tables.tableFilename = ? AND ooebvrl_lists.listFilename = ?",'ss',$_GET['table'],$_GET['list']);
+        $roundCount = 0;
+        if(SubStringFind($validRounds,'|1|')) { $showRound1 = true; $roundCount++; } else $showRound1 = false;
+        if(SubStringFind($validRounds,'|2|')) { $showRound2 = true; $roundCount++; } else $showRound2 = false;
+        if(SubStringFind($validRounds,'|3|')) { $showRound3 = true; $roundCount++; } else $showRound3 = false;
+        if(SubStringFind($validRounds,'|4|')) { $showRound4 = true; $roundCount++; } else $showRound4 = false;
+        if(SubStringFind($validRounds,'|5|')) { $showRound5 = true; $roundCount++; } else $showRound5 = false;
+        if(SubStringFind($validRounds,'|6|')) { $showRound6 = true; $roundCount++; } else $showRound6 = false;
+        if(SubStringFind($validRounds,'|7|')) { $showRound7 = true; $roundCount++; } else $showRound7 = false;
+        if(SubStringFind($validRounds,'|8|')) { $showRound8 = true; $roundCount++; } else $showRound8 = false;
+        if(SubStringFind($validRounds,'|9|')) { $showRound9 = true; $roundCount++; } else $showRound9 = false;
+
         $players = MySQL::Cluster("SELECT *, members_ooebvrl.id AS entryID FROM members_ooebvrl INNER JOIN ooebvrl_sections ON members_ooebvrl.sectionID = ooebvrl_sections.id INNER JOIN ooebvrl_tables ON ooebvrl_sections.tableID = ooebvrl_tables.id INNER JOIN ooebvrl_lists ON ooebvrl_tables.listID = ooebvrl_lists.id WHERE sectionFilename = ? AND tableFilename = ? AND listFilename = ? ORDER BY members_ooebvrl.rank ASC",'sss',$_GET['section'],$_GET['table'],$_GET['list']);
         $i=1;
 
@@ -492,9 +574,21 @@
                                 <td style="width: 171px;">Name</td>
                                 <td style="width: 180px;">Verein</td>
                                 <td style="width: 50px;"></td>
-                                <td style="width: 50px;">Jg.</td>
                                 ';
-                                for($rc=1;$rc<=$roundCount;$rc++) echo '<td style="width: 50px;">'.$rc.'. Rd.</td>';
+
+                                if($showJg) echo '<td style="width: 50px;">Jg.</td>';
+
+
+                                if($showRound1) echo '<td style="width: 50px;">1. Rd.</td>';
+                                if($showRound2) echo '<td style="width: 50px;">2. Rd.</td>';
+                                if($showRound3) echo '<td style="width: 50px;">3. Rd.</td>';
+                                if($showRound4) echo '<td style="width: 50px;">4. Rd.</td>';
+                                if($showRound5) echo '<td style="width: 50px;">5. Rd.</td>';
+                                if($showRound6) echo '<td style="width: 50px;">6. Rd.</td>';
+                                if($showRound7) echo '<td style="width: 50px;">7. Rd.</td>';
+                                if($showRound8) echo '<td style="width: 50px;">8. Rd.</td>';
+                                if($showRound9) echo '<td style="width: 50px;">9. Rd.</td>';
+
                                 echo '
                                 <td style="width: 50px;">Str.</td>
                                 <td style="width: 50px;">Ges.</td>
@@ -547,9 +641,21 @@
                                         echo '
                                     </select>
                                 </td>
-                                <td><input class="cel_xs" type="number" placeholder="Jg." name="jg'.$p.'" value="'.date_format(date_create($clubMemberData['birthdate']),"y").'"/></td>
+
                                 ';
-                                for($rc=1;$rc<=$roundCount;$rc++) echo '<td><input class="cel_xs" type="number" placeholder="'.$rc.'.Rd." name="'.$rc.'rd'.$p.'" value="'.$player['round'.$rc].'"/></td>';
+
+                                if($players['showJg']) echo '<td><input class="cel_xs" type="number" placeholder="Jg." name="jg'.$p.'" value="'.date_format(date_create($clubMemberData['birthdate']),"y").'"/></td>';
+
+                                if($showRound1) echo '<td><input class="cel_xs" type="number" placeholder="1.Rd." name="1rd'.$p.'" value="'.$player['round1'].'"/></td>';
+                                if($showRound2) echo '<td><input class="cel_xs" type="number" placeholder="2.Rd." name="2rd'.$p.'" value="'.$player['round2'].'"/></td>';
+                                if($showRound3) echo '<td><input class="cel_xs" type="number" placeholder="3.Rd." name="3rd'.$p.'" value="'.$player['round3'].'"/></td>';
+                                if($showRound4) echo '<td><input class="cel_xs" type="number" placeholder="4.Rd." name="4rd'.$p.'" value="'.$player['round4'].'"/></td>';
+                                if($showRound5) echo '<td><input class="cel_xs" type="number" placeholder="5.Rd." name="5rd'.$p.'" value="'.$player['round5'].'"/></td>';
+                                if($showRound6) echo '<td><input class="cel_xs" type="number" placeholder="6.Rd." name="6rd'.$p.'" value="'.$player['round6'].'"/></td>';
+                                if($showRound7) echo '<td><input class="cel_xs" type="number" placeholder="7.Rd." name="7rd'.$p.'" value="'.$player['round7'].'"/></td>';
+                                if($showRound8) echo '<td><input class="cel_xs" type="number" placeholder="8.Rd." name="8rd'.$p.'" value="'.$player['round8'].'"/></td>';
+                                if($showRound9) echo '<td><input class="cel_xs" type="number" placeholder="9.Rd." name="9rd'.$p.'" value="'.$player['round9'].'"/></td>';
+
                                 echo '
                                 <td><input class="cel_xs" type="number" placeholder="Str." name="str'.$p.'"value="'.$player['str'].'"/></td>
                                 <td><input class="cel_xs" type="number" placeholder="Ges." name="ges'.$p.'"value="'.$player['ges'].'"/></td>
@@ -580,6 +686,18 @@
 
         if(isset($_POST['amountPlayers']))
         {
+            $validRounds = MySQL::Scalar("SELECT validRounds FROM ooebvrl_tables INNER JOIN ooebvrl_lists ON ooebvrl_lists.id = ooebvrl_tables.listID WHERE ooebvrl_tables.tableFilename = ? AND ooebvrl_lists.listFilename = ?",'ss',$_GET['table'],$_GET['list']);
+            $roundCount = 0;
+            if(SubStringFind($validRounds,'|1|')) { $showRound1 = true; $roundCount++; } else $showRound1 = false;
+            if(SubStringFind($validRounds,'|2|')) { $showRound2 = true; $roundCount++; } else $showRound2 = false;
+            if(SubStringFind($validRounds,'|3|')) { $showRound3 = true; $roundCount++; } else $showRound3 = false;
+            if(SubStringFind($validRounds,'|4|')) { $showRound4 = true; $roundCount++; } else $showRound4 = false;
+            if(SubStringFind($validRounds,'|5|')) { $showRound5 = true; $roundCount++; } else $showRound5 = false;
+            if(SubStringFind($validRounds,'|6|')) { $showRound6 = true; $roundCount++; } else $showRound6 = false;
+            if(SubStringFind($validRounds,'|7|')) { $showRound7 = true; $roundCount++; } else $showRound7 = false;
+            if(SubStringFind($validRounds,'|8|')) { $showRound8 = true; $roundCount++; } else $showRound8 = false;
+            if(SubStringFind($validRounds,'|9|')) { $showRound9 = true; $roundCount++; } else $showRound9 = false;
+
             for($i = $p; $i <= count($players) + $playerAddCount; $i++)
             {
                 echo '
@@ -602,9 +720,20 @@
                                     echo '
                                 </select>
                             </td>
-                            <td><input class="cel_xs" type="number" placeholder="Jg." name="jg'.$i.'"/></td>
                             ';
-                            for($rc=1;$rc<=$roundCount;$rc++) echo '<td><input class="cel_xs" type="number" placeholder="'.$rc.'.Rd." name="'.$rc.'rd'.$i.'"/></td>';
+
+                            if($showJg) echo '<td><input class="cel_xs" type="number" placeholder="Jg." name="jg'.$i.'"/></td>';
+
+                            if($showRound1) echo '<td><input class="cel_xs" type="number" placeholder="1Rd." name="1rd'.$i.'"/></td>';
+                            if($showRound2) echo '<td><input class="cel_xs" type="number" placeholder="2Rd." name="2rd'.$i.'"/></td>';
+                            if($showRound3) echo '<td><input class="cel_xs" type="number" placeholder="3Rd." name="3rd'.$i.'"/></td>';
+                            if($showRound4) echo '<td><input class="cel_xs" type="number" placeholder="4Rd." name="4rd'.$i.'"/></td>';
+                            if($showRound5) echo '<td><input class="cel_xs" type="number" placeholder="5Rd." name="5rd'.$i.'"/></td>';
+                            if($showRound6) echo '<td><input class="cel_xs" type="number" placeholder="6Rd." name="6rd'.$i.'"/></td>';
+                            if($showRound7) echo '<td><input class="cel_xs" type="number" placeholder="7Rd." name="7rd'.$i.'"/></td>';
+                            if($showRound8) echo '<td><input class="cel_xs" type="number" placeholder="8Rd." name="8rd'.$i.'"/></td>';
+                            if($showRound9) echo '<td><input class="cel_xs" type="number" placeholder="9Rd." name="9rd'.$i.'"/></td>';
+
                             echo '
                             <td><input class="cel_xs" type="number" placeholder="Str." name="str'.$i.'"/></td>
                             <td><input class="cel_xs" type="number" placeholder="Ges." name="ges'.$i.'"/></td>
@@ -627,6 +756,18 @@
     }
     else if(isset($_GET['show']))
     {
+        $validRounds = MySQL::Scalar("SELECT validRounds FROM ooebvrl_tables INNER JOIN ooebvrl_lists ON ooebvrl_lists.id = ooebvrl_tables.listID WHERE ooebvrl_tables.tableFilename = ? AND ooebvrl_lists.listFilename = ?",'ss',$_GET['table'],$_GET['list']);
+        $roundCount = 0;
+        if(SubStringFind($validRounds,'|1|')) { $showRound1 = true; $roundCount++; } else $showRound1 = false;
+        if(SubStringFind($validRounds,'|2|')) { $showRound2 = true; $roundCount++; } else $showRound2 = false;
+        if(SubStringFind($validRounds,'|3|')) { $showRound3 = true; $roundCount++; } else $showRound3 = false;
+        if(SubStringFind($validRounds,'|4|')) { $showRound4 = true; $roundCount++; } else $showRound4 = false;
+        if(SubStringFind($validRounds,'|5|')) { $showRound5 = true; $roundCount++; } else $showRound5 = false;
+        if(SubStringFind($validRounds,'|6|')) { $showRound6 = true; $roundCount++; } else $showRound6 = false;
+        if(SubStringFind($validRounds,'|7|')) { $showRound7 = true; $roundCount++; } else $showRound7 = false;
+        if(SubStringFind($validRounds,'|8|')) { $showRound8 = true; $roundCount++; } else $showRound8 = false;
+        if(SubStringFind($validRounds,'|9|')) { $showRound9 = true; $roundCount++; } else $showRound9 = false;
+
         if(CheckPermission("addOOEBVRLJgnd")) echo AddButton("/ooebv-ranglisten/".$_GET['list']."/".$_GET['table']."/neue-sektion",false,false,"Sektion hinzuf&uuml;gen");
 
         $listID = MySQL::Scalar("SELECT id FROM ooebvrl_lists WHERE listFilename = ?",'s',$_GET['list']);
@@ -639,7 +780,6 @@
                 <a href="#export"><button type="button">Exportieren</button></a>
         ';
 
-        $roundCount = MySQL::Scalar("SELECT roundCount FROM ooebvrl_tables INNER JOIN ooebvrl_lists ON ooebvrl_lists.id = ooebvrl_tables.listID WHERE ooebvrl_tables.tableFilename = ? AND ooebvrl_lists.listFilename = ?",'ss',$_GET['table'],$_GET['list']);
 
         foreach($sections AS $section)
         {
@@ -656,9 +796,21 @@
                             <td>MgNr.</td>
                             <td>Name</td>
                             <td>Verein</td>
-                            <td>Jg.</td>
+
                             ';
-                            for($rc=1;$rc<=$section['roundCount'];$rc++) echo '<td>'.$rc.'. Rd</td>';
+
+                            if($section['showJg']) echo '<td>Jg.</td>';
+
+                            if($showRound1) echo '<td>1. Rd</td>';
+                            if($showRound2) echo '<td>2. Rd</td>';
+                            if($showRound3) echo '<td>3. Rd</td>';
+                            if($showRound4) echo '<td>4. Rd</td>';
+                            if($showRound5) echo '<td>5. Rd</td>';
+                            if($showRound6) echo '<td>6. Rd</td>';
+                            if($showRound7) echo '<td>7. Rd</td>';
+                            if($showRound8) echo '<td>8. Rd</td>';
+                            if($showRound9) echo '<td>9. Rd</td>';
+
                             echo '
                             <td>Str.</td>
                             <td>Ges.</td>
@@ -683,9 +835,20 @@
                             <td>'.((!StartsWith($clubMemberData['playerID'],'TMP')) ? $clubMemberData['playerID'] : '').'</td>
                             <td '.((StartsWith($clubMemberData['playerID'],'TMP')) ? 'style="color: #1E90FF; font-weight: bold;"' : '').'>'.$clubMemberData['firstname'].' '.$clubMemberData['lastname'].'</td>
                             <td '.((StartsWith($clubMemberData['playerID'],'TMP')) ? 'style="color: #1E90FF; font-weight: bold;"' : '').'>'.$clubMemberData['verein'].' '.$clubMemberData['ort'].'</td>
-                            <td>'.date_format(date_create($clubMemberData['birthdate']),"y").'</td>
                             ';
-                            for($rc=1;$rc<=$section['roundCount'];$rc++) echo '<td>'.$player['round'.$rc].'</td>';
+
+                            if($section['showJg']) echo '<td>'.date_format(date_create($clubMemberData['birthdate']),"y").'</td>';
+
+                            if($showRound1) echo '<td>'.$player['round1'].'</td>';
+                            if($showRound2) echo '<td>'.$player['round2'].'</td>';
+                            if($showRound3) echo '<td>'.$player['round3'].'</td>';
+                            if($showRound4) echo '<td>'.$player['round4'].'</td>';
+                            if($showRound5) echo '<td>'.$player['round5'].'</td>';
+                            if($showRound6) echo '<td>'.$player['round6'].'</td>';
+                            if($showRound7) echo '<td>'.$player['round7'].'</td>';
+                            if($showRound8) echo '<td>'.$player['round8'].'</td>';
+                            if($showRound9) echo '<td>'.$player['round9'].'</td>';
+
                             echo '
                             <td>'.$player['str'].'</td>
                             <td>'.$player['ges'].'</td>
@@ -698,7 +861,7 @@
                     $showRankNr = false;
                     echo '
                         <tr style="background: #84E184; font-weight: bold; border-top: 2px solid black;">
-                            <td style="text-align: left;" colspan='.(7+$section['roundCount']).'>'.$player['sepText'].'</td>
+                            <td style="text-align: left;" colspan='.(7+$roundCount).'>'.$player['sepText'].'</td>
                         </tr>
                     ';
                 }
@@ -734,6 +897,18 @@
     }
     else
     {
+        $validRounds = MySQL::Scalar("SELECT validRounds FROM ooebvrl_tables INNER JOIN ooebvrl_lists ON ooebvrl_lists.id = ooebvrl_tables.listID WHERE ooebvrl_tables.tableFilename = ? AND ooebvrl_lists.listFilename = ?",'ss',$_GET['table'],$_GET['list']);
+        $roundCount = 0;
+        if(SubStringFind($validRounds,'|1|')) { $showRound1 = true; $roundCount++; } else $showRound1 = false;
+        if(SubStringFind($validRounds,'|2|')) { $showRound2 = true; $roundCount++; } else $showRound2 = false;
+        if(SubStringFind($validRounds,'|3|')) { $showRound3 = true; $roundCount++; } else $showRound3 = false;
+        if(SubStringFind($validRounds,'|4|')) { $showRound4 = true; $roundCount++; } else $showRound4 = false;
+        if(SubStringFind($validRounds,'|5|')) { $showRound5 = true; $roundCount++; } else $showRound5 = false;
+        if(SubStringFind($validRounds,'|6|')) { $showRound6 = true; $roundCount++; } else $showRound6 = false;
+        if(SubStringFind($validRounds,'|7|')) { $showRound7 = true; $roundCount++; } else $showRound7 = false;
+        if(SubStringFind($validRounds,'|8|')) { $showRound8 = true; $roundCount++; } else $showRound8 = false;
+        if(SubStringFind($validRounds,'|9|')) { $showRound9 = true; $roundCount++; } else $showRound9 = false;
+
         if(CheckPermission("addOOEBVRLJgnd")) echo AddButton("/ooebv-ranglisten/neue-liste",false,false,"Liste hinzuf&uuml;gen");
 
 
