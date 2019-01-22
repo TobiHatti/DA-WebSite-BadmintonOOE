@@ -149,7 +149,7 @@
                 $playerID = $_POST['playerID'.$i];
                 $name = $_POST['name'.$i];
                 $clubID = $_POST['clubID'.$i];
-                $jg = $_POST['jg'.$i];
+                $jg = isset($_POST['jg'.$i]) ? $_POST['jg'.$i] : 0;
                 $str = $_POST['str'.$i];
                 $ges = $_POST['ges'.$i];
 
@@ -181,11 +181,9 @@
 
                     MySQL::NonQuery("INSERT INTO members_ooebvrl (id, memberID, sectionID, rank, str, ges) VALUES (?,?,?,?,?,?)",'ssssss',$id,$memberID,$sectionID,$rank,$str,$ges);
 
-                    $j = 1;
-                    while(isset($_POST[$j.'rd'.$i]))
+                    for($rc = 1; $rc < 9; $rc++)
                     {
-                        MySQL::NonQuery("UPDATE members_ooebvrl SET round".$j." = ? WHERE id = ?",'ss',$_POST[$j.'rd'.$i],$id);
-                        $j++;
+                        if(isset($_POST[$rc.'rd'.$i])) MySQL::NonQuery("UPDATE members_ooebvrl SET round".$rc." = ? WHERE id = ?",'ss',$_POST[$rc.'rd'.$i],$id);
                     }
                 }
             }
@@ -613,6 +611,8 @@
         ';
 
 
+        $showJg = MySQL::Scalar("SELECT showJg FROM ooebvrl_tables WHERE tableFilename = ?",'s',$_GET['table']);
+
 
         $p = 1;
         foreach($players AS $player)
@@ -644,7 +644,7 @@
 
                                 ';
 
-                                if($players['showJg']) echo '<td><input class="cel_xs" type="number" placeholder="Jg." name="jg'.$p.'" value="'.date_format(date_create($clubMemberData['birthdate']),"y").'"/></td>';
+                                if($showJg) echo '<td><input class="cel_xs" type="number" placeholder="Jg." name="jg'.$p.'" value="'.date_format(date_create($clubMemberData['birthdate']),"y").'"/></td>';
 
                                 if($showRound1) echo '<td><input class="cel_xs" type="number" placeholder="1.Rd." name="1rd'.$p.'" value="'.$player['round1'].'"/></td>';
                                 if($showRound2) echo '<td><input class="cel_xs" type="number" placeholder="2.Rd." name="2rd'.$p.'" value="'.$player['round2'].'"/></td>';
