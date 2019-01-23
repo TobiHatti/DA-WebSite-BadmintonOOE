@@ -179,7 +179,7 @@
                         MySQL::NonQuery("INSERT INTO members (id,clubID,playerID,firstname, lastname, birthdate) VALUES (?,?,?,?,?,?)",'@s',$memberID,$clubID, $playerID,$firstname,$lastname,$birthdate);
                     }
 
-                    MySQL::NonQuery("INSERT INTO members_ooebvrl (id, memberID, sectionID, rank, str, ges) VALUES (?,?,?,?,?,?)",'ssssss',$id,$memberID,$sectionID,$rank,$str,$ges);
+                    MySQL::NonQuery("INSERT INTO members_ooebvrl (id, memberID, currentClubID, sectionID, rank, str, ges) VALUES (?,?,?,?,?,?,?)",'sssssss',$id,$memberID,$clubID,$sectionID,$rank,$str,$ges);
 
                     for($rc = 1; $rc < 9; $rc++)
                     {
@@ -617,7 +617,7 @@
         $p = 1;
         foreach($players AS $player)
         {
-            $clubMemberData = MySQL::Row("SELECT * FROM members INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE members.id = ?",'s',$player['memberID']);
+            $clubMemberData = MySQL::Row("SELECT * FROM members INNER JOIN members_ooebvrl ON members.id = members_ooebvrl.memberID INNER JOIN vereine ON members_ooebvrl.currentClubID = vereine.kennzahl WHERE members.id = ?",'s',$player['memberID']);
 
             if(!$player['isSep'])
             {
@@ -632,7 +632,7 @@
                                 </td>
                                 <td><input class="" type="text" placeholder="Name" name="name'.$p.'" value="'.$clubMemberData['firstname'].' '.$clubMemberData['lastname'].'"/></td>
                                 <td>
-                                    <input type="hidden" name="clubID'.$p.'" id="outClubID'.$p.'" value="'.$clubMemberData['clubID'].'"/>
+                                    <input type="hidden" name="clubID'.$p.'" id="outClubID'.$p.'" value="'.$clubMemberData['currentClubID'].'"/>
                                     <input class="cel_m" type="text" placeholder="Verein" id="outClub'.$p.'" value="'.$clubMemberData['verein'].' '.$clubMemberData['ort'].'" readonly/>
                                     <select class="cel_xs" onchange="CopyValueToElement(this,\'outClubID'.$p.'\'); CopyDisplayToElement(this,\'outClub'.$p.'\'); ResetDropdown(this)">
                                         <option value="" selected disabled>&#9660;</option>
@@ -823,7 +823,7 @@
             $rankOffset = 0;
             foreach($players AS $player)
             {
-                $clubMemberData = MySQL::Row("SELECT * FROM members INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE members.id = ?",'s',$player['memberID']);
+                $clubMemberData = MySQL::Row("SELECT * FROM members INNER JOIN members_ooebvrl ON members.id = members_ooebvrl.memberID INNER JOIN vereine ON members_ooebvrl.currentClubID = vereine.kennzahl WHERE members.id = ?",'s',$player['memberID']);
 
 
 
