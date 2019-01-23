@@ -10,7 +10,7 @@
         $club = $_POST['clubID'];
         if(isset($_POST['updateListM'])) $type='M';
         if(isset($_POST['updateListW'])) $type='F';
-        $strSQL = "SELECT * FROM members WHERE clubID = '$club' AND gender = '$type'";
+        $strSQL = "SELECT * FROM members WHERE members.clubID = '$club' AND members.gender = '$type'";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
         {
@@ -22,6 +22,8 @@
 
         // Remove existing values from Database
         MySQL::NonQuery("DELETE members_spielerranglisten FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = ? AND members.clubID = ? AND members_spielerranglisten.year = ?",'@s',$type,$club,$year);
+
+
 
         $i=1;
         foreach($selectedMembers as $member)
@@ -48,6 +50,8 @@
         $reihungComboM = $_POST['reihungM'];
         $reihungComboW = $_POST['reihungW'];
 
+        $clubID = $_POST['clubID'];
+
         $year = $_POST['year'];
 
         $reihungPartsW = explode('||',$reihungComboW);
@@ -64,7 +68,7 @@
 
             $memberID = MySQL::Scalar("SELECT id FROM members WHERE playerID = ?",'s',$rp[1]);
 
-            MySQL::NonQuery("UPDATE members_spielerranglisten SET team = ?, mf = ?, year = ?, position = ? WHERE memberID = ?",'@s',$team,$mf,$year,$rp[0],$memberID);
+            MySQL::NonQuery("UPDATE members_spielerranglisten SET currentClubID = ?, assignedClubID = ?, team = ?, mf = ?, position = ? WHERE memberID = ? AND year = ?",'@s',$clubID,$clubID,$team,$mf,$rp[0],$memberID,$year);
             MySQL::NonQuery("UPDATE members SET email = ?, mobileNr = ? WHERE id = ?",'@s',$email,$mobile,$memberID);
         }
 
@@ -80,7 +84,7 @@
 
             $memberID = MySQL::Scalar("SELECT id FROM members WHERE playerID = ?",'s',$rp[1]);
 
-            MySQL::NonQuery("UPDATE members_spielerranglisten SET team = ?, mf = ?, year = ?, position = ? WHERE memberID = ?",'@s',$team,$mf,$year,$rp[0],$memberID);
+            MySQL::NonQuery("UPDATE members_spielerranglisten SET currentClubID = ?, assignedClubID = ?, team = ?, mf = ?, position = ? WHERE memberID = ? AND year = ?",'@s',$clubID,$clubID,$team,$mf,$rp[0],$memberID,$year);
             MySQL::NonQuery("UPDATE members SET email = ?, mobileNr = ? WHERE id = ?",'@s',$email,$mobile,$memberID);
         }
 
@@ -186,8 +190,6 @@
             echo '
 
                 <hr>
-
-
                 <script>
                     $( function() {
                         $( "#sortListM" ).sortable();
@@ -236,11 +238,13 @@
                                     </ul>
                                     <ul class="dragSortList_values" id="sortListM">
                                     ';
+
                                         $currentSelectedMembersM = array();
                                         $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender='M' AND members.clubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
                                         $rs=mysqli_query($link,$strSQL);
                                         while($row=mysqli_fetch_assoc($rs))
                                         {
+
                                             echo '
                                             <li value="'.$row['playerID'].'">
                                                 '.$row['playerID'].' - '.$row['firstname'].' '.$row['lastname'].'

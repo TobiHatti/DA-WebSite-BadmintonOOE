@@ -32,7 +32,7 @@
                 }
                 if($c == 1) $lastname = $data[$c];
                 if($c == 2) $firstname = $data[$c];
-                if($c == 3) $playerID = (intval($data[$c]) < 10 ) ? 'TMP'.uniqid() : intval($data[$c]);
+                if($c == 3) $playerID = intval($data[$c]);
                 if($c == 4) $team = intval($data[$c]);
                 if($c == 5) $clubID = intval($data[$c]);
                 if($c == 6) $mf = $data[$c];
