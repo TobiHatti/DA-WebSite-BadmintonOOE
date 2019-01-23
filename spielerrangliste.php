@@ -20,7 +20,11 @@
     echo '<h1 class="stagfade1">Spielerrangliste '.$_GET['year'].'</h1>';
 
     if(CheckPermission("EditSpielerrangliste")) echo '<a href="/spielerrangliste/einstellungen/'.$_GET['year'].'">&#x270E; Spielerranglisten-Einstellungen</a>';
-    if(CheckPermission("EditSpielerrangliste")) echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/spielerrangliste/reihungen/'.$_GET['year'].'/bearbeiten">&#x270E; Reihungen Bearbeiten</a>';
+    if(CheckPermission("EditSpielerrangliste"))
+    {
+        if(SRLIsLocked($_GET['year'])) echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x270E; <span style="color: #696969">Bearbeitung nicht mehr m&ouml;glich</span>';
+        else echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/spielerrangliste/reihungen/'.$_GET['year'].'/bearbeiten">&#x270E; Reihungen Bearbeiten</a>';
+    }
 
     echo '
         <hr>
