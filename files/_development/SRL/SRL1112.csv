@@ -15,10 +15,10 @@ Herren;;;;;;;;;
 13.;Kirchberger ;Herbert;30285;2;301;;;;301
 14.;Mayer;Michael;31675;2;301;;;;301
 15.;Brandl;Daniel;30000;2;301;;;;301
-16.;Jankowski;Mateusz;34133;2;301;40888;;;301
-17.;Bernauer;Valentin;34134;2;301;40888;;;301
-18.;Schirmer ;Erik;33293;2;301;40888;;;301
-19.;Jankowksi;Fabian;34135;2;301;40888;;;301
+16.;Jankowski;Mateusz;34133;2;301;11.12.2011;;;301
+17.;Bernauer;Valentin;34134;2;301;11.12.2011;;;301
+18.;Schirmer ;Erik;33293;2;301;11.12.2011;;;301
+19.;Jankowksi;Fabian;34135;2;301;11.12.2011;;;301
 Damen;;;;;;;;;0
 1.;Steinmann ;Maria;31381;1;301;;;;301
 2.;Braid;Elke;1703;1;301;;;;301
@@ -29,7 +29,7 @@ Damen;;;;;;;;;0
 7.;Lindinger ;Melanie;321113;2;301;;;;301
 8.;Angleitner ;Nadine;32199;2;301;;;;301
 9.;Lindinger ;Monika;32255;2;301;;;;301
-10.;Brandl ;Alina;32339;2;301;40888;;;301
+10.;Brandl ;Alina;32339;2;301;11.12.2011;;;301
 Herren;;;;;;;;;0
 1.;Salmhofer;Martin;31339;1;302;;;;302
 2.;Puchinger;Hannes;31883;1;302;;;;302
@@ -37,7 +37,7 @@ Herren;;;;;;;;;0
 4.;Taferner;Paul;31648;1;302;;;;302
 5.;Koch;Walter;32512;1;302;;;;302
 6.;Mayerhofer;Franz;32513;1;302;;;;302
-7.;Grügner ;Robert ;33933;1;302;40835;;;302
+7.;Grügner ;Robert ;33933;1;302;19.10.2011;;;302
 8.;Bognar;Michael;31645;1;302;;;;302
 9.;Taferner;Ronald;30873;1;302;MF;0676/4546039;;302
 Damen;;;;;;;;;0
@@ -78,9 +78,9 @@ Damen;;;;;;;;;0
 9.;Mack;Else;33793;2;303;;;;303
 10.;Wakolbinger ;Waltraud;1178;2;303;;;;303
 11.;Hinterkörner;Susanne;33993;2;303; 2.11.2011;;;303
-12.;Kattner;Rosa;34194;2;303;40952;;;303
-13.;Hinterkörner;Magdalena;34193;2;303;40952;;;303
-14.;Eidenberger     ;Marah;34273;2;303;40987;;;303
+12.;Kattner;Rosa;34194;2;303;13.02.2012;;;303
+13.;Hinterkörner;Magdalena;34193;2;303;13.02.2012;;;303
+14.;Eidenberger     ;Marah;34273;2;303;19.03.2012;;;303
 Herren;;;;;;;;;0
 1.;Sepec (EU);Miha jun ;21057;1;304;;;;304
 2.;Horvat (EU);Miha ;80402;1;304;;;;304
@@ -153,11 +153,11 @@ Herren;;;;;;;;;0
 17.;Reifetshammer ;Rudolf;31191;3;307;MF III;0664/73686751;;307
 18.;Lösch ;Dieter;31080;3;307;;;;307
 19.;Schlöglhofer;Florian;32245;3;307;;;;307
-20.;Engels;Denis;33516;3;307;40858;;;307
+20.;Engels;Denis;33516;3;307;11.11.2011;;;307
 21.;Fehringer;Florian;32694;3;307;;;;307
-22.;Hauser;Klemens;31570;3;307;40920;;;307
-23.;Pospichal            ;Gustav Rudolf ;34054;3;307;40871;;;307
-24.;Berndl                                  ;Josef  ;32634;3;307;40871;;;307
+22.;Hauser;Klemens;31570;3;307;12.01.2012;;;307
+23.;Pospichal            ;Gustav Rudolf ;34054;3;307;24.11.2011;;;307
+24.;Berndl                                  ;Josef  ;32634;3;307;24.11.2011;;;307
 25.;Lindorfer;Robert;33513;3;307;;;;307
 26.;Koch ;Herbert;1312;3;307;MF II;0664/2407556;;307
 Damen;;;;;;;;;0
@@ -186,7 +186,7 @@ Herren;;;;;;;;;0
 6.;Austaller;Christian;33534;2;308;;;;308
 7.;Huemer;Gottfried;1335;2;308;;;;308
 8.;Felbauer;Karl;33033;2;308;;;;308
-9.;Hofer;Martin;34093;2;308;40882;;;308
+9.;Hofer;Martin;34093;2;308;05.12.2011;;;308
 10.;Schifko;Martin;33034;2;308;;;;308
 11.;Pilz;Martin;30335;2;308;;;;308
 12.;Kerscher;Robert;33673;2;308;;;;308
@@ -268,7 +268,7 @@ Herren;;;;;;;;;0
 4.;Kieslinger ;Rainer;30417;1;311;;;;311
 5.;Moser ;Josef;1409;1;311;;;;311
 6.;Mayer;Johannes;31844;1;311;;;;311
-7.;Dörflinger;Richard;355;1;311;40828;;;311
+7.;Dörflinger;Richard;355;1;311;12.10.2011;;;311
 8.;Bamberger ;Norbert;30777;1;311;;;;311
 9.;Reitinger;Christoph;32077;1;311;;;;311
 10.;Freihaut;Hannes;31533;1;311;;;;311
@@ -346,8 +346,8 @@ Damen;;;;;;;;;0
 5.;Mitterdorfer;Gabriele;32134;1;317;;;;317
 6.;Rebhandl;Eva;32417;1;317;;;;317
 7.;Plursch;Sabrina;32136;1;317;;;;317
-8.;Schickbauer;Jennifer;32610;1;317;40976;;;317
-9.;Lugmayr;Theresa;32611;1;317;40976;;;317
+8.;Schickbauer;Jennifer;32610;1;317;08.03.2012;;;317
+9.;Lugmayr;Theresa;32611;1;317;08.03.2012;;;317
 Herren;;;;;;;;;0
 1.;Benda;Philipp;32067;1;319;;;;319
 2.;Benda;Markus;1320;1;319;MF;0676/81438889;;319
@@ -380,7 +380,7 @@ Damen;;;;;;;;;0
 10.;Benda;Celina;32266;1;319;;;;319
 Herren;;;;;;;;;0
 1.;Bangerl;Leopold;31434;1;321;;;;321
-2.;Schönberger;Siegfried;1114;1;321;MF;0664 9229544 ;;321
+2.;Schönberger;Siegfried;1114;1;321;MF;6 649 229 544;;321
 3.;Klopf;Jürgen;32000;1;321;;;;321
 4.;Dedic;Almer;32101;1;321;;;;321
 5.;Aufreiter;Gerold;1168;1;321;;;;321
@@ -429,7 +429,7 @@ Damen;;;;;;;;;0
 5.;Hauser;Barbara;31509;2;325;;;;325
 6.;Leutgeb;Simone;31151;2;325;;;;325
 7.;Lanzerstorfer;Daniela;32591;2;325;;;;325
-8.;Ritirc;Daniela;32175;2;325;40915;;;325
+8.;Ritirc;Daniela;32175;2;325;07.01.2012;;;325
 Herren;;;;;;;;;0
 1.;Hahn ;Thomas;31506;1;326;;;;326
 2.;Rebhandl (LS-U22);Lukas;31389;1;326;;;;326
@@ -452,13 +452,13 @@ Herren;;;;;;;;;0
 19.;Mittermayr;Lukas;32141;3;326;;;;326
 20.;Jordan;Walter;30216;3;326;;;;326
 21.;Freimüller;Fritz;3476;3;326;;;;326
-22.;Dunzinger;Markus;3423;3;326;40806;;;326
+22.;Dunzinger;Markus;3423;3;326;20.09.2011;;;326
 23.;Krinninger;Aron;32426;3;326;;;;326
 24.;Kaltenböck;Georg;32140;3;326;;;;326
 25.;Raup;Max;32597;3;326;;;;326
 26.;Haberfellner;Jakob;33454;3;326;;;;326
-27.;Zachhuber ;Thomas;32429;3;326;40872;;;326
-28.;Harringer;Sebastian;33453;3;326;40872;;;326
+27.;Zachhuber ;Thomas;32429;3;326;25.11.2011;;;326
+28.;Harringer;Sebastian;33453;3;326;25.11.2011;;;326
 Damen;;;;;;;;;0
 1.;Freimüller;Iris;30954;1;326;;;;326
 2.;Steinmann (LS);Maria;31381;1;326;;;;326
@@ -502,13 +502,13 @@ Herren;;;;;;;;;0
 10.;Gruber;Armin;31550;3;330;;;;330
 11.;Ploberger;Benjamin;33355;3;330;;;;330
 12.;Artelsmair;Markus;32300;3;330;;;;330
-13.;Hackl; Simon  ;32130;3;330;40968;;;330
+13.;Hackl; Simon  ;32130;3;330;29.02.2012;;;330
 14.;Peter;Vincent;32595;3;330;;;;330
 15.;Heutichak;Simon;32037;3;330;;;;330
 16.;Rinnhofer;Gerhard;32193;3;330;;;;330
 17.;Mollnhuber;Adolf;32192;3;330;;;;330
 18.;Watzl;Martin;32521;3;330;;;;330
-19.;Radner ;Gregor;33913;3;330;40855;;;330
+19.;Radner ;Gregor;33913;3;330;08.11.2011;;;330
 20.;Wilfinger;Wolfgang;33893;3;330;;;;330
 Damen;;;;;;;;;0
 1.;Peter;Stefanie;31959;1;330;MF I;0650/5171500;;330
@@ -516,7 +516,7 @@ Damen;;;;;;;;;0
 3.;Schmeißl;Bettina;31903;2;330;;;;330
 4.;Kranzl;Sandra;32297;2;330;MF II;0676/6095018;;330
 5.;Winter;Heidemarie;31153;3;330;;;;330
-6.;Schulten;Florence;33873;3;330;40821;;;330
+6.;Schulten;Florence;33873;3;330;05.10.2011;;;330
 7.;Kranzl;Chantal;32596;3;330;;;;330
 8.;Bachinger;Lisa;33213;3;330;;;;330
 9.;Lindinger;Barbara;32547;3;330;;;;330
@@ -557,7 +557,7 @@ Herren;;;;;;;;;0
 14.;Eckerstorfer;Andreas;32059;3;332;;;;332
 15.;Galter;Thomas;32653;3;332;;;;332
 16.;Scherz;Wolfgang;33753;3;332;;;;332
-17.;Schäfer;Carsten;34034;3;332;40939;;;332
+17.;Schäfer;Carsten;34034;3;332;31.01.2012;;;332
 18.;Punz;Ernst;1235;3;332;;;;332
 19.;El-Dabbagh;Leon;31063;3;332;;;;332
 Damen;;;;;;;;;0
@@ -607,7 +607,7 @@ Herren;;;;;;;;;0
 32.;Jungwirth ;Philipp;32064;7;333;;;;333
 33.;Lehner;Dietmar;32197;7;333;;;;333
 34.;Miskovic ;Josef;32586;7;333;;;;333
-35.;Jax;Wolfgang;32584;7;333;40882;;;333
+35.;Jax;Wolfgang;32584;7;333;05.12.2011;;;333
 36.;Kranawetter;Florian;33473;7;333;;;;333
 37.;Berhuber;Sebastian;33474;7;333;;;;333
 38.;Sommer;Christian;32872;7;333;;;;333
@@ -621,7 +621,7 @@ Damen;;;;;;;;;0
 6.;Kreindl ;Daniela;31839;3;333;;;;333
 7.;Hörmann;Christine;31654;3;333;MF III;0650/78 77 097;;333
 8.;Rogner;Regina;31160;4;333;;;;333
-9.;Seiringer;Michaela;34073;5;333;40882;;;333
+9.;Seiringer;Michaela;34073;5;333;05.12.2011;;;333
 10.;Zöllner;Christine;32305;5;333;;;;333
 11.;Lindner;Sabine;32524;6;333;;;;333
 12.;Weinberger;Petra;32525;6;333;;;;333
@@ -633,9 +633,9 @@ Damen;;;;;;;;;0
 18.;Zöllner;Sandra;32376;7;333;;;;333
 19.;Lindlbauer;Sandra;32606;7;333;;;;333
 20.;Winter;Veronika;32603;7;333;;;;333
-21.;Führer;Margit;34013;7;333;40858;;;333
+21.;Führer;Margit;34013;7;333;11.11.2011;;;333
 22.;Winter;Martina;32604;7;333;;;;333
-23.;Dietrich;Simone;34014;7;333;40858;;;333
+23.;Dietrich;Simone;34014;7;333;11.11.2011;;;333
 24.;Markesic;Christina;32587;7;333;;;;333
 Herren;;;;;;;;;0
 1.;Grossegger;Bernhard;1872;1;338;MF I;0699/13260407;;338
@@ -667,8 +667,8 @@ Damen;;;;;;;;;0
 5.;Basting;Irene;31511;3;338;;;;338
 6.;Viertlmayr ;Daniela;33434;3;338;;;;338
 7.;Staudinger ;Sandra;33433;3;338;;;;338
-8.;Maj-Britt;Fobian;34174;3;338;40939;;;338
-9.;Zekira;Mandara;34173;3;338;40939;;;338
+8.;Maj-Britt;Fobian;34174;3;338;31.01.2012;;;338
+9.;Zekira;Mandara;34173;3;338;31.01.2012;;;338
 Herren;;;;;;;;;0
 1.;Reuter;Stefan;31738;1;342;;;;342
 2.;Hager;Hermann;31740;1;342;;;;342
@@ -688,8 +688,8 @@ Herren;;;;;;;;;0
 6.;Käferböck ;Moritz;33515;1;344;;;;344
 7.;Kickinger;Peter;1216;1;344;;;;344
 8.;Nussbaumer ;Lukas;32340;1;344;;;;344
-9.;Nussbaumer ;Michael;32431;1;344;40956;;;344
-10.;Helm;Fabian;33333;1;344;40956;;;344
+9.;Nussbaumer ;Michael;32431;1;344;17.02.2012;;;344
+10.;Helm;Fabian;33333;1;344;17.02.2012;;;344
 11.;Sulzbacher ;Michael;33493;1;344;;;;344
 Damen;;;;;;;;;0
 1.;Wolfsgruber;Vanessa;32177;1;344;;;;344
@@ -699,8 +699,8 @@ Damen;;;;;;;;;0
 5.;Nussbaumer ;Sarah;32309;1;344;;;;344
 6.;Hattinger; Katharina;32432;1;344;;;;344
 7.;Decker;Julia;32169;1;344;;;;344
-8.;Pertl;Isolde;32774;1;344;40937;;;344
-9.;Nussbaumer ;Elisabeth;32773;1;344;40937;;;344
+8.;Pertl;Isolde;32774;1;344;29.01.2012;;;344
+9.;Nussbaumer ;Elisabeth;32773;1;344;29.01.2012;;;344
 Herren;;;;;;;;;0
 1.;Dornig;Manuel;62970;1;347;;;;347
 2.;Aigner ;Daniel;31992;1;347;;;;347
@@ -744,9 +744,9 @@ Herren;;;;;;;;;0
 11.;Pongratz;Manuel;32894;2;348;;;;348
 12.;Pongratz;Werner;32897;2;348;;;;348
 13.;Höfer;Thomas;32558;2;348;;;;348
-14.;Hebesberger;Michael;34215;2;348;40978;;;348
-15.;Stadlmair ;Tobias;34213;2;348;40978;;;348
-16.;Schmied;Tobias;34214;2;348;40978;;;348
+14.;Hebesberger;Michael;34215;2;348;10.03.2012;;;348
+15.;Stadlmair ;Tobias;34213;2;348;10.03.2012;;;348
+16.;Schmied;Tobias;34214;2;348;10.03.2012;;;348
 Damen;;;;;;;;;0
 1.;Hebesberger;Sonja;3892;1;348;MF I;0660/5093294;;348
 2.;Hebesberger;Kerstin;32564;1;348;;;;348

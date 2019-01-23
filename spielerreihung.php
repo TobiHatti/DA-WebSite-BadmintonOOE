@@ -142,9 +142,9 @@
                             if($i == intval(date("Y")))
                             {
                                 // Saisonwechsel mit 1. September
-                                if(intval(date("m"))>= 9) echo '<option value="'.$i.'-'.($i+1).'" '.(($year==$i.'-'.($i+1)) ? 'selected' : '').'>'.$i.'-'.($i+1).'</option>';
+                                if(intval(date("m"))>= 9) echo '<option value="'.$i.'-'.($i+1).'" '.(($year==$i.'-'.($i+1)) ? 'selected' : '').' '.(SRLIsLocked($i.'-'.($i+1)) ? 'disabled' : '').'>'.$i.'-'.($i+1).'</option>';
                             }
-                            else echo '<option value="'.$i.'-'.($i+1).'" '.(($year==$i.'-'.($i+1)) ? 'selected' : '').'>'.$i.'-'.($i+1).'</option>';
+                            else echo '<option value="'.$i.'-'.($i+1).'" '.(($year==$i.'-'.($i+1)) ? 'selected' : '').' '.(SRLIsLocked($i.'-'.($i+1)) ? 'disabled' : '').'>'.$i.'-'.($i+1).'</option>';
                         }
                         echo '
                         </select>
@@ -168,9 +168,9 @@
                             if($i == intval(date("Y")))
                             {
                                 // Saisonwechsel mit 1. September
-                                if(intval(date("m"))>= 9) echo '<option value="'.$i.'-'.($i+1).'" '.(($year==$i.'-'.($i+1)) ? 'selected' : '').'>'.$i.'-'.($i+1).'</option>';
+                                if(intval(date("m"))>= 9) echo '<option value="'.$i.'-'.($i+1).'" '.(($year==$i.'-'.($i+1)) ? 'selected' : '').'  '.(SRLIsLocked($i.'-'.($i+1)) ? 'disabled' : '').'>'.$i.'-'.($i+1).'</option>';
                             }
-                            else echo '<option value="'.$i.'-'.($i+1).'" '.(($year==$i.'-'.($i+1)) ? 'selected' : '').'>'.$i.'-'.($i+1).'</option>';
+                            else echo '<option value="'.$i.'-'.($i+1).'" '.(($year==$i.'-'.($i+1)) ? 'selected' : '').' '.(SRLIsLocked($i.'-'.($i+1)) ? 'disabled' : '').'>'.$i.'-'.($i+1).'</option>';
                         }
                         echo '
                         </select>
@@ -178,7 +178,7 @@
                         <select class="cel_m" onchange="RedirectSelectBoxParam(this,\'/spielerrangliste/reihungen/'.$_GET['jahr'].'/bearbeiten/??\');">
                             <option value="" selected disabled>&#9660; Verein ausw&auml;hlen</option>
                         ';
-                        $clubList = MySQL::Cluster("SELECT * FROM vereine ORDER BY ort, verein ASC");
+                        $clubList = MySQL::Cluster("SELECT * FROM vereine WHERE isOOEClub = '1' ORDER BY ort, verein ASC");
                         foreach($clubList as $clubData) echo '<option '.($club == $clubData['kennzahl'] ? 'selected' : '').' value="'.$clubData['kennzahl'].'">'.$clubData['kennzahl'].' - '.$clubData['verein'].' '.$clubData['ort'].'</option>';
                         echo '
                         </select>
@@ -212,6 +212,10 @@
             if(CheckRank() == "administrative" AND $club == "")
             {
                 echo '<br><br><center><h3>Bitte Verein und Jahr ausw&auml;hlen</h3></center>';
+            }
+            else if(SRLIsLocked($year))
+            {
+                echo '<br><br><center><h3>Bearbeitung f&uuml;r diese Rangliste ist bereits gesperrt!</h3></center>';
             }
             else
             {
@@ -407,11 +411,16 @@
                     Jahr ausw&auml;hlen:
                     <select onchange="RedirectSelectBox(this,\'/spielerreihung?jahr=\');">
                     ';
-                    for($i=date("Y");$i>=2011;$i--)
-                    {
-                        echo '<option value="'.$i.'-'.($i+1).'" '.(($year==$i.'-'.($i+1)) ? 'selected' : '').'>'.$i.'-'.($i+1).'</option>';
-                    }
-                    echo '
+                        for($i=date("Y");$i>=2011;$i--)
+                        {
+                            if($i == intval(date("Y")))
+                            {
+                                // Saisonwechsel mit 1. September
+                                if(intval(date("m"))>= 9) echo '<option value="'.$i.'-'.($i+1).'" '.(($year==$i.'-'.($i+1)) ? 'selected' : '').'>'.$i.'-'.($i+1).'</option>';
+                            }
+                            else echo '<option value="'.$i.'-'.($i+1).'" '.(($year==$i.'-'.($i+1)) ? 'selected' : '').'>'.$i.'-'.($i+1).'</option>';
+                        }
+                        echo '
                     </select>
                 </div>
                 <hr>

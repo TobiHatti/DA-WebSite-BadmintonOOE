@@ -105,7 +105,22 @@
         // Delete old member
         MySQL::NonQuery("DELETE FROM members WHERE id = ?",'s',$oldMember);
 
-        Redirect("/verein-info/mitglieder");
+        $playerClubID = MySQL::Scalar("SELECT clubID FROM members WHERE id = ?",'s',$newMember);
+
+        if(isset($_POST['editByAdmin']) AND $_POST['editByAdmin']=='1') Redirect("/mitglieder/anzeigen?verein=".$playerClubID);
+        else Redirect("/verein-info/mitglieder");
+        die();
+    }
+
+    if(isset($_POST['switchClub']))
+    {
+        $newClubID = $_POST['newClubID'];
+        $memberID = $_GET['memberID'];
+
+        MySQL::NonQuery("UPDATE members SET clubID = ? WHERE id = ?",'ss',$newClubID,$memberID);
+
+        if(isset($_POST['editByAdmin']) AND $_POST['editByAdmin']=='1') Redirect("/mitglieder/anzeigen?verein=".$newClubID);
+        else Redirect("/verein-info/mitglieder");
         die();
     }
 
@@ -321,6 +336,7 @@
                                 </tr>
                                 <tr>
                                     <td></td>
+                                    <input type="hidden" name="editByAdmin" value="'.((CheckRank() == "administrative") ? '1' : '0').'"/>
                                     <td colspan=3 style="text-align: center"><button type="submit" name="mergePlayers">Spieler zusammenf&uuml;hren</button></td>
                                 </tr>
                             </table>
@@ -330,6 +346,62 @@
                     </form>
                 ';
             }
+        }
+        else if(isset($_GET['switchClub']))
+        {
+            $playerData = MySQL::Row("SELECT * FROM members WHERE id = ?",'s',$_GET['memberID']);
+            $clubData = MySQL::Row("SELECT * FROM vereine INNER JOIN members ON vereine.kennzahl = members.clubID");
+
+            $clubListPerm = MySQL::Cluster("SELECT * FROM vereine WHERE isOOEclub = '1' ORDER BY ort,verein ASC");
+            $clubListTemp = MySQL::Cluster("SELECT * FROM vereine WHERE isOOEclub = '0' ORDER BY ort,verein ASC");
+
+            echo '<h2 class="stagfade1">Verein des Spielers wechseln</h2>';
+
+            echo '
+                <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                    <center>
+                        <table>
+                            <tr>
+                                <td colspan=3 style="text-align:center">'.PlayerDisplayClubInfo($playerData,"",false,false).'</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><h3>Aktueller Verein:</h3></td>
+                                <td style="text-align: center;"><h3>&#9654;&#9654;&#9654;</h3></td>
+                                <td style="text-align: left;"><h3>Neuer Verein:</h3></td>
+                            </tr>
+                            <tr>
+                                <td class="cel_l">
+                                    <b>'.$clubData['verein'].' '.$clubData['ort'].'</b><br>
+                                    Kennzahl: '.$clubData['kennzahl'].'
+                                </td>
+                                <td></td>
+                                <td class="cel_l">
+                                    <select name="newClubID"  class="cel_l" required>
+                                        <option value="" selected disabled>--- Neuen Verein ausw&auml;hlen</option>
+                                        <optgroup label="Vereine aus O&Ouml;">
+                                    ';
+                                        foreach($clubListPerm as $club) echo '<option value="'.$club['kennzahl'].'">'.$club['kennzahl'].' - '.$club['verein'].' '.$club['ort'].'</option>';
+                                    echo '
+                                        </optgroup>
+                                        <optgroup label="Andere Vereine">
+                                    ';
+                                        foreach($clubListTemp as $club) echo '<option value="'.$club['kennzahl'].'">'.$club['kennzahl'].' - '.$club['verein'].' '.$club['ort'].'</option>';
+                                    echo '
+                                        </optgroup>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;" colspan=3>
+                                    <br><br>
+                                    <input type="hidden" name="editByAdmin" value="'.((CheckRank() == "administrative") ? '1' : '0').'"/>
+                                    <button type="submit" name="switchClub">Verein &auml;ndern</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </center>
+                </form>
+            ';
         }
         else
         {
