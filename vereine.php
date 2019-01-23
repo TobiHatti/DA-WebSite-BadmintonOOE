@@ -20,10 +20,11 @@
         $phone1 = $_POST['phone1'];
         $phone2 = $_POST['phone2'];
         $phone3 = $_POST['phone3'];
+        $isOOEclub = isset($_POST['isOOEclub']) ? 1 : 0;
 
         if(isset($_POST['add_verein']))
         {
-            MySQL::NonQuery("INSERT INTO vereine (id, verein, ort, kennzahl, dachverband, website, contact_name, contact_street, contact_city, contact_email, contact_phoneLabel1, contact_phone1, contact_phoneLabel2, contact_phone2, contact_phoneLabel3, contact_phone3) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",'@s',$verein,$ort,$kennzahl,$dachverband,$website,$name,$street,$city,$email,$label1,$phone1,$label2,$phone2,$label3,$phone3);
+            MySQL::NonQuery("INSERT INTO vereine (id, verein, ort, kennzahl, dachverband, website, contact_name, contact_street, contact_city, contact_email, contact_phoneLabel1, contact_phone1, contact_phoneLabel2, contact_phone2, contact_phoneLabel3, contact_phone3, isOOEclub) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",'@s',$verein,$ort,$kennzahl,$dachverband,$website,$name,$street,$city,$email,$label1,$phone1,$label2,$phone2,$label3,$phone3,$isOOEclub);
             FileUpload("content/clubs/","clubImg","","","UPDATE vereine SET clubImage = 'FNAME' WHERE kennzahl = '$kennzahl'",uniqid());
         }
         else
@@ -45,10 +46,11 @@
             contact_phoneLabel2 = ?,
             contact_phone2 = ?,
             contact_phoneLabel3 = ?,
-            contact_phone3 = ?
+            contact_phone3 = ?,
+            isOOEclub = ?
             WHERE vereine.id = ?;";
 
-            MySQL::NonQuery($strSQL,'@s',$verein,$ort,$kennzahl,$dachverband,$website,$name,$street,$city,$email,$label1,$phone1,$label2,$phone2,$label3,$phone3,$id);
+            MySQL::NonQuery($strSQL,'@s',$verein,$ort,$kennzahl,$dachverband,$website,$name,$street,$city,$email,$label1,$phone1,$label2,$phone2,$label3,$phone3,$isOOEclub,$id);
             FileUpload("content/clubs/","clubImg","","","UPDATE vereine SET clubImage = 'FNAME' WHERE id = '$id'",uniqid());
         }
 
@@ -95,6 +97,12 @@
                     <tr>
                         <td class="ta_r">Website:</td>
                         <td><input type="url" name="website" placeholder="http://..." value="'.($edit ? $cdat['website'] : '').'"/></td>
+                    </tr>
+                    <tr>
+                        <td class="ta_r">Verein aus O&Ouml; :</td>
+                        <td>
+                            '.Tickbox("isOOEclub","isOOEclub",'<span title="Diese Option kann abgew&auml;hlt werden, wenn der Verein ausschlie&szlig;lich f&uuml;r Ranglisten etc. ben&ouml;tigt wird (Scheint nicht unter \'Vereine\' auf)"><i class="fas fa-info-circle"></i></span>',($edit ? ($cdat['isOOEclub']==1 ? true : false) : true )).'
+                        </td>
                     </tr>
                     <tr><td colspan=2><b>Kontaktperson:</b></td></tr>
                     <tr>
@@ -166,13 +174,13 @@
         if(CheckPermission("AddClub")) echo AddButton("/vereine/neu").'<br>';
 
         echo '<br>Alphabetisch Sortiert:';
-        $strSQL = "SELECT DISTINCT LEFT(ort , 1) AS letter FROM vereine ORDER BY ort ASC";
+        $strSQL = "SELECT DISTINCT LEFT(ort , 1) AS letter FROM vereine WHERE isOOEclub = '1'  ORDER BY ort ASC";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs)) echo ' | <a href="#'.$row['letter'].'">'.$row['letter'].'</a>';
         echo ' |<br><br>';
 
 
-        $strSQL = "SELECT DISTINCT LEFT(ort , 1) AS letter FROM vereine ORDER BY ort ASC";
+        $strSQL = "SELECT DISTINCT LEFT(ort , 1) AS letter FROM vereine WHERE isOOEclub = '1' ORDER BY ort ASC";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
         {
@@ -181,7 +189,7 @@
             echo '<a name="'.$letter.'"></a>';
 
             echo '<center>';
-            $strSQLo = "SELECT * FROM vereine WHERE ort LIKE '$letter%'";
+            $strSQLo = "SELECT * FROM vereine WHERE ort LIKE '$letter%' AND isOOEclub = '1' ";
             $rso=mysqli_query($link,$strSQLo);
             while($rowo=mysqli_fetch_assoc($rso))
             {
@@ -221,7 +229,37 @@
                     <br>
                 ';
             }
+
             echo '</center>';
+        }
+
+
+        if(CheckPermission("EditClub") OR CheckPermission("DeleteClub") OR CheckPermission("AddClub"))
+        {
+            echo '<h4>Sonstige Vereine (nicht in O&Ouml; / Aushilfsspieler / etc.)</h4>';
+
+            echo '
+                Hier werden Vereine angezeigt, die ausschlie&szlig;lich zur f&uuml;llung von Ranglisten ben&ouml;tigt werden.<br>
+                <br>
+                Ein solcher Verein kann unter "Vereine > +Hinzuf&uuml;gen" erstellt werden, indem die Box "Verein aus O&Ouml;" beim erstellen abgew&auml;hlt wird.
+                <br>
+                Sie werden nicht in der obenstehenden Liste angezeigt.<br>
+                Wird ein hier aufgelisteter Eintrag bereits in einer Rangliste verwendet, sollte der Verein nicht gel&ouml;scht werden, da<br>
+                die Daten der betroffenen Rangliste daraufhin nicht mehr aktuell sein k&ouml;nten!<br>
+                <br>
+                Ist die Vereins-Kennzahl nicht bekannt, kann eine beliebige, noch nicht verwendete Kennzahl verwendet werden.<br>
+                <br>
+            ';
+
+            echo '<ul>';
+
+            $helperClubs = MySQL::Cluster("SELECT * FROM vereine WHERE isOOEclub = '0'");
+            foreach($helperClubs as $hclub)
+            {
+                echo '<li>'.$hclub['kennzahl'].' - '.$hclub['verein'].' '.$hclub['ort'].' '.(CheckPermission("EditClub") ? EditButton("/vereine?edit=".$hclub['id'],true) : '').' '.(CheckPermission("DeleteClub") ? DeleteButton("Club","vereine",$hclub['id'],true): '').'</li>';
+            }
+
+            echo '</ul>';
         }
     }
 
