@@ -149,7 +149,7 @@
                 $playerID = $_POST['playerID'.$i];
                 $name = $_POST['name'.$i];
                 $clubID = $_POST['clubID'.$i];
-                $jg = $_POST['jg'.$i];
+                $jg = isset($_POST['jg'.$i]) ? $_POST['jg'.$i] : 0;
                 $str = $_POST['str'.$i];
                 $ges = $_POST['ges'.$i];
 
@@ -179,13 +179,11 @@
                         MySQL::NonQuery("INSERT INTO members (id,clubID,playerID,firstname, lastname, birthdate) VALUES (?,?,?,?,?,?)",'@s',$memberID,$clubID, $playerID,$firstname,$lastname,$birthdate);
                     }
 
-                    MySQL::NonQuery("INSERT INTO members_ooebvrl (id, memberID, sectionID, rank, str, ges) VALUES (?,?,?,?,?,?)",'ssssss',$id,$memberID,$sectionID,$rank,$str,$ges);
+                    MySQL::NonQuery("INSERT INTO members_ooebvrl (id, memberID, currentClubID, sectionID, rank, str, ges) VALUES (?,?,?,?,?,?,?)",'sssssss',$id,$memberID,$clubID,$sectionID,$rank,$str,$ges);
 
-                    $j = 1;
-                    while(isset($_POST[$j.'rd'.$i]))
+                    for($rc = 1; $rc < 9; $rc++)
                     {
-                        MySQL::NonQuery("UPDATE members_ooebvrl SET round".$j." = ? WHERE id = ?",'ss',$_POST[$j.'rd'.$i],$id);
-                        $j++;
+                        if(isset($_POST[$rc.'rd'.$i])) MySQL::NonQuery("UPDATE members_ooebvrl SET round".$rc." = ? WHERE id = ?",'ss',$_POST[$rc.'rd'.$i],$id);
                     }
                 }
             }
@@ -613,11 +611,13 @@
         ';
 
 
+        $showJg = MySQL::Scalar("SELECT showJg FROM ooebvrl_tables WHERE tableFilename = ?",'s',$_GET['table']);
+
 
         $p = 1;
         foreach($players AS $player)
         {
-            $clubMemberData = MySQL::Row("SELECT * FROM members INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE members.id = ?",'s',$player['memberID']);
+            $clubMemberData = MySQL::Row("SELECT * FROM members INNER JOIN members_ooebvrl ON members.id = members_ooebvrl.memberID INNER JOIN vereine ON members_ooebvrl.currentClubID = vereine.kennzahl WHERE members.id = ?",'s',$player['memberID']);
 
             if(!$player['isSep'])
             {
@@ -632,7 +632,7 @@
                                 </td>
                                 <td><input class="" type="text" placeholder="Name" name="name'.$p.'" value="'.$clubMemberData['firstname'].' '.$clubMemberData['lastname'].'"/></td>
                                 <td>
-                                    <input type="hidden" name="clubID'.$p.'" id="outClubID'.$p.'" value="'.$clubMemberData['clubID'].'"/>
+                                    <input type="hidden" name="clubID'.$p.'" id="outClubID'.$p.'" value="'.$clubMemberData['currentClubID'].'"/>
                                     <input class="cel_m" type="text" placeholder="Verein" id="outClub'.$p.'" value="'.$clubMemberData['verein'].' '.$clubMemberData['ort'].'" readonly/>
                                     <select class="cel_xs" onchange="CopyValueToElement(this,\'outClubID'.$p.'\'); CopyDisplayToElement(this,\'outClub'.$p.'\'); ResetDropdown(this)">
                                         <option value="" selected disabled>&#9660;</option>
@@ -644,7 +644,7 @@
 
                                 ';
 
-                                if($players['showJg']) echo '<td><input class="cel_xs" type="number" placeholder="Jg." name="jg'.$p.'" value="'.date_format(date_create($clubMemberData['birthdate']),"y").'"/></td>';
+                                if($showJg) echo '<td><input class="cel_xs" type="number" placeholder="Jg." name="jg'.$p.'" value="'.date_format(date_create($clubMemberData['birthdate']),"y").'"/></td>';
 
                                 if($showRound1) echo '<td><input class="cel_xs" type="number" placeholder="1.Rd." name="1rd'.$p.'" value="'.$player['round1'].'"/></td>';
                                 if($showRound2) echo '<td><input class="cel_xs" type="number" placeholder="2.Rd." name="2rd'.$p.'" value="'.$player['round2'].'"/></td>';
@@ -823,7 +823,7 @@
             $rankOffset = 0;
             foreach($players AS $player)
             {
-                $clubMemberData = MySQL::Row("SELECT * FROM members INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE members.id = ?",'s',$player['memberID']);
+                $clubMemberData = MySQL::Row("SELECT * FROM members INNER JOIN members_ooebvrl ON members.id = members_ooebvrl.memberID INNER JOIN vereine ON members_ooebvrl.currentClubID = vereine.kennzahl WHERE members.id = ?",'s',$player['memberID']);
 
 
 
