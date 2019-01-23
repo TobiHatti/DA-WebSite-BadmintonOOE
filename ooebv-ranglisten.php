@@ -538,7 +538,8 @@
                     <textarea style="display: none" name="rankList" id="sortListOutput"></textarea>
         ';
 
-        $clubList = MySQL::Cluster("SELECT * FROM vereine ORDER BY ort,verein ASC");
+        $clubListPerm = MySQL::Cluster("SELECT * FROM vereine WHERE isOOEclub = '1' ORDER BY ort,verein ASC");
+        $clubListTemp = MySQL::Cluster("SELECT * FROM vereine WHERE isOOEclub = '0' ORDER BY ort,verein ASC");
 
         $playerAddCount = 0;
         if(isset($_POST['amountPlayers'])) $playerAddCount = $_POST['amountPlayers'];
@@ -636,9 +637,16 @@
                                     <input class="cel_m" type="text" placeholder="Verein" id="outClub'.$p.'" value="'.$clubMemberData['verein'].' '.$clubMemberData['ort'].'" readonly/>
                                     <select class="cel_xs" onchange="CopyValueToElement(this,\'outClubID'.$p.'\'); CopyDisplayToElement(this,\'outClub'.$p.'\'); ResetDropdown(this)">
                                         <option value="" selected disabled>&#9660;</option>
-                                        ';
-                                        foreach($clubList as $club) echo '<option value="'.$club['kennzahl'].'">'.$club['verein'].' '.$club['ort'].'</option>';
-                                        echo '
+                                        <optgroup label="Vereine aus O&Ouml;">
+                                    ';
+                                        foreach($clubListPerm as $club) echo '<option value="'.$club['kennzahl'].'">'.$club['verein'].' '.$club['ort'].'</option>';
+                                    echo '
+                                        </optgroup>
+                                        <optgroup label="Andere Vereine">
+                                    ';
+                                        foreach($clubListTemp as $club) echo '<option value="'.$club['kennzahl'].'">'.$club['verein'].' '.$club['ort'].'</option>';
+                                    echo '
+                                        </optgroup>
                                     </select>
                                 </td>
 
@@ -715,9 +723,16 @@
                                 <input class="cel_m" type="text" placeholder="Verein" id="outClub'.$i.'" readonly/>
                                 <select class="cel_xs" onchange="CopyValueToElement(this,\'outClubID'.$i.'\'); CopyDisplayToElement(this,\'outClub'.$i.'\'); ResetDropdown(this)">
                                     <option value="" selected disabled>&#9660;</option>
+                                    <optgroup label="Vereine aus O&Ouml;">
                                     ';
-                                    foreach($clubList as $club) echo '<option value="'.$club['kennzahl'].'">'.$club['verein'].' '.$club['ort'].'</option>';
+                                        foreach($clubListPerm as $club) echo '<option value="'.$club['kennzahl'].'">'.$club['verein'].' '.$club['ort'].'</option>';
                                     echo '
+                                        </optgroup>
+                                        <optgroup label="Andere Vereine">
+                                    ';
+                                        foreach($clubListTemp as $club) echo '<option value="'.$club['kennzahl'].'">'.$club['verein'].' '.$club['ort'].'</option>';
+                                    echo '
+                                    </optgroup>
                                 </select>
                             </td>
                             ';

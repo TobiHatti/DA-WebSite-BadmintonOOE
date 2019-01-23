@@ -145,7 +145,7 @@
 
         $i=1;
         echo '<tr><td colspan=9><b>Herren:</b></td></tr>';
-        $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'M' AND members.clubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
+        $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'M' AND members_spielerranglisten.assignedClubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
         {
@@ -159,7 +159,7 @@
                     <td>'.$row['firstname'].'</td>
                     <td class="ta_c">'.$row['playerID'].'</td>
                     <td class="ta_c">'.$row['team'].'</td>
-                    <td class="ta_c">'.$row['clubID'].'</td>
+                    <td class="ta_c">'.$row['currentClubID'].'</td>
                     <td class="ta_c" '.($highlight ? ('style="background: '.$highlightColor.';"') : '').'><b>'.$row['mf'].'</b></td>
                     <td class="ta_c">'.($row['mf']!="" ? $row['mobileNr'] : '').'</td>
                     <td class="ta_c">'.($row['mf']!="" ? $row['email'] : '').'</td>
@@ -169,7 +169,7 @@
 
         $i=1;
         echo '<tr><td colspan=9><b><br>Damen:</b></td></tr>';
-        $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'F' AND members.clubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
+        $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'F' AND members_spielerranglisten.assignedClubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
         {
@@ -183,7 +183,7 @@
                     <td>'.$row['firstname'].'</td>
                     <td class="ta_c">'.$row['playerID'].'</td>
                     <td class="ta_c">'.$row['team'].'</td>
-                    <td class="ta_c">'.$row['clubID'].'</td>
+                    <td class="ta_c">'.$row['currentClubID'].'</td>
                     <td class="ta_c" '.($highlight ? ('style="background: '.$highlightColor.';"') : '').'><b>'.$row['mf'].'</b></td>
                     <td class="ta_c">'.($row['mf']!="" ? $row['mobileNr'] : '').'</td>
                     <td class="ta_c">'.($row['mf']!="" ? $row['email'] : '').'</td>
