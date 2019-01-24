@@ -113,13 +113,13 @@ function TextareaPlus($name, $id="edit", $placeholder="",$required = false)
         <script type="text/javascript" src="/js/froala/froala_editor.min.js" ></script>
         <script type="text/javascript" src="/js/froala/plugins/align.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/char_counter.min.js"></script>
-        <script type="text/javascript" src="/js/froala/plugins/code_beautifier.min.js"></script>
-        <script type="text/javascript" src="/js/froala/plugins/code_view.min.js"></script>
+        <!--<script type="text/javascript" src="/js/froala/plugins/code_beautifier.min.js"></script>-->
+        <!--<script type="text/javascript" src="/js/froala/plugins/code_view.min.js"></script>-->
         <script type="text/javascript" src="/js/froala/plugins/colors.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/draggable.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/emoticons.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/entities.min.js"></script>
-        <script type="text/javascript" src="/js/froala/plugins/file.min.js"></script>
+        <!--<script type="text/javascript" src="/js/froala/plugins/file.min.js"></script>-->
         <script type="text/javascript" src="/js/froala/plugins/font_size.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/font_family.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/fullscreen.min.js"></script>
