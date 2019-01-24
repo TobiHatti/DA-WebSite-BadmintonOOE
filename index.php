@@ -96,8 +96,6 @@
                                 <ul>
                                     ';
                                     //RefreshSliderContent();
-                                    // 3 SQL-Queries are required for the slider to work in the best way.
-                                    // Bundeling some queries can slow the slider down and skip slides
                                     if(MySQL::Count("SELECT * FROM news WHERE tags = 'Spieler-des-Monats'")>0)
                                     {
                                         $sdm = MySQL::Row("SELECT * FROM news WHERE tags = 'Spieler-des-Monats' ORDER BY id DESC LIMIT 0,1");

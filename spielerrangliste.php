@@ -100,7 +100,7 @@
     ';
 
 
-    if($club == "alle") $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' GROUP BY members.clubID";
+    if($club == "alle") $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members_spielerranglisten.assignedClubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' GROUP BY members_spielerranglisten.assignedClubID";
     else if(StartsWith($club,"M"))
     {
         $selectedClubs = str_replace('M','',$club);
@@ -109,27 +109,27 @@
         $first = true;
         foreach($clubArray AS $sClub)
         {
-            if($first) $sqlClubExtension = "members.clubID = '$sClub'";
-            else $sqlClubExtension .= " OR members.clubID = '$sClub'";
+            if($first) $sqlClubExtension = "members_spielerranglisten.assignedClubID = '$sClub'";
+            else $sqlClubExtension .= " OR members_spielerranglisten.assignedClubID = '$sClub'";
 
             $first = false;
         }
 
-        $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' AND ($sqlClubExtension) GROUP BY members.clubID";
+        $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members_spielerranglisten.assignedClubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' AND ($sqlClubExtension) GROUP BY members_spielerranglisten.assignedClubID";
     }
-    else $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' AND members.clubID = '$club' GROUP BY members.clubID";
+    else $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members_spielerranglisten.assignedClubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' AND members_spielerranglisten.assignedClubID = '$club' GROUP BY members_spielerranglisten.assignedClubID";
 
 
 
     $rsc=mysqli_query($link,$strSQLc);
     while($rowc=mysqli_fetch_assoc($rsc))
     {
-        $club = $rowc['clubID'];
+        $club = $rowc['assignedClubID'];
         echo '
             <tr><td>&nbsp;</td></tr>
             <tr>
                 <th class="ta_l" colspan=5 style="background: '.$accentColor1.'; font-size: 14pt; border-bottom: 6px solid '.$accentColor2.'">'.$rowc['verein'].' '.$rowc['ort'].'</th>
-                <th style="background: '.$accentColor1.'; font-size: 14pt; border-bottom: 6px solid '.$accentColor2.'">'.$rowc['clubID'].'</th>
+                <th style="background: '.$accentColor1.'; font-size: 14pt; border-bottom: 6px solid '.$accentColor2.'">'.$rowc['assignedClubID'].'</th>
                 <th style="background: '.$accentColor1.'; font-size: 10pt; width: 90px; border-bottom: 6px solid '.$accentColor2.'">&Auml;nderungen/<br>Mannschaftsf.</th>
                 <th style="background: '.$accentColor1.'; font-size: 14pt; width: 130px; border-bottom: 6px solid '.$accentColor2.'">Handy-Nr.</th>
                 <th style="background: '.$accentColor1.'; font-size: 14pt; width: 200px; border-bottom: 6px solid '.$accentColor2.'">E-Mail</th>
