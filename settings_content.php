@@ -26,7 +26,6 @@
     if(isset($_POST['addUserClubManager']))
     {
         $email = $_POST['email'];
-        //$password = hash('sha256',hash('sha256',$_POST['password']."salt")."pepper");
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $club = $_POST['club'];
 
@@ -54,7 +53,6 @@
         $lastname = $_POST['lastname'];
         $gedner = $_POST['gender'];
         $email = $_POST['email'];
-        //$password = hash('sha256',hash('sha256',$_POST['password']."salt")."pepper");
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         MySQL::NonQuery("INSERT INTO users (id,rank,firstname,lastname,sex,email,password) VALUES ('','administrative',?,?,?,?,?)",'@s',$firstname,$lastname,$gedner,$email,$password);
