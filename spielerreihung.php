@@ -434,13 +434,14 @@
                             <br>
                             <ul class="dragSortList_posNumbers">
                             ';
-                                $listedMembersAmt = MySQL::Scalar("SELECT position FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'M' AND members.clubID = ? AND members_spielerranglisten.year = ? ORDER BY members_spielerranglisten.position DESC LIMIT 0,1",'@s',$club,$year);
+                                $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'M' AND members_spielerranglisten.year = '$year' AND members_spielerranglisten.assignedClubID = '$club' ORDER BY members_spielerranglisten.position ASC";
+                                $listedMembersAmt = MySQL::Count($strSQL);
+
                                 for($i=1;$i<$listedMembersAmt+1; $i++) echo '<li>'.$i.'</li>';
                             echo '
                             </ul>
                             <ul class="dragSortListStatic_values" id="sortListW">
                             ';
-                                $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'M' AND members.clubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
                                 $rs=mysqli_query($link,$strSQL);
                                 while($row=mysqli_fetch_assoc($rs))
                                 {
@@ -484,13 +485,14 @@
                             <br>
                             <ul class="dragSortList_posNumbers">
                             ';
-                                $listedMembersAmt = MySQL::Scalar("SELECT position FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'F' AND members.clubID = ? AND members_spielerranglisten.year = ? ORDER BY members_spielerranglisten.position DESC LIMIT 0,1",'@s',$club,$year);
+                                $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'F' AND members_spielerranglisten.year = '$year' AND members_spielerranglisten.assignedClubID = '$club' ORDER BY members_spielerranglisten.position ASC";
+                                $listedMembersAmt = MySQL::Count($strSQL);
+
                                 for($i=1;$i<$listedMembersAmt+1; $i++) echo '<li>'.$i.'</li>';
                             echo '
                             </ul>
                             <ul class="dragSortListStatic_values" id="sortListW">
                             ';
-                                $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'F' AND members.clubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
                                 $rs=mysqli_query($link,$strSQL);
                                 while($row=mysqli_fetch_assoc($rs))
                                 {
