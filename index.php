@@ -201,6 +201,24 @@
                 </aside>
             </div>
             <br>
+
+            <div>
+                <hr>
+                <center><h3>Entwicklernotiz - Info</h3></center>
+
+                Dies ist die vorl&auml;ufige Endversion der Website. Einige Funktionen und Features sind noch nicht vollst&auml;ndig ausgebaut bzw. ausgereift.<br>
+                Im Hintergrund wird weiterhin aktiv an der Seite gearbeitet, um f&uuml;r Sie das beste Nutzererlebniss bereitszustellen.<br>
+                W&uuml;nsche, Verbesserungsvorschl&auml;ge, Fehlermeldungen und allgemeine Fragen k&ouml;nnen in k&uuml;rze <a href="https://development.endix.at/de/projekte/badminton-ooe/support"><b>hier</b></a>  eingereicht werden.<br>
+                Wir werden uns darum bem&uuml;hen, auf ihre W&uuml;nsche so schnell wie m&ouml;glich zu reagieren.<br>
+                <br>
+                Mit freundlichen Gr&uuml;&szlig;en,<br>
+                <b>Das Entwicklerteam:</b><br>
+                <i>Tobias Hattinger</i><br>
+                <i>Paul Luger</i>
+                <hr>
+                <br>
+            </div>
+
             <div>
                 <h3>Neuigkeiten</h3>
                 <hr>
