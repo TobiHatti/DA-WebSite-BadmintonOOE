@@ -1,6 +1,6 @@
 <?php
 
-    $revision = 5674;
+    $revision = 5676;
 
     echo '
         <!-- Own links -->

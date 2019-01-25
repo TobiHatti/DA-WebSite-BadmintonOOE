@@ -78,6 +78,8 @@
         background: #FFFFFF;
         background-attachment: fixed;
         height:100%;
+
+        scroll-behavior: smooth;
     }
 
     @media only screen and (max-width: $media-smalllargephone){
