@@ -1,6 +1,6 @@
 <?php
 
-    $revision = 3001;
+    $revision = 5676;
 
     echo '
         <!-- Own links -->
@@ -29,7 +29,7 @@
         <!-- Froala-Texteditor -->
             <link rel="stylesheet" href="/css/froala/froala_editor.css">
             <link rel="stylesheet" href="/css/froala/froala_style.css">
-            <link rel="stylesheet" href="/css/froala/plugins/code_view.css">
+            <!--<link rel="stylesheet" href="/css/froala/plugins/code_view.css">-->
             <link rel="stylesheet" href="/css/froala/plugins/colors.css">
             <link rel="stylesheet" href="/css/froala/plugins/emoticons.css">
             <link rel="stylesheet" href="/css/froala/plugins/image_manager.css">

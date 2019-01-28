@@ -31,15 +31,24 @@
         {
             echo '<h2>Spieler anzeigen</h2>';
 
-            $clubList = MySQL::Cluster("SELECT * FROM vereine ORDER BY ort, verein ASC");
+            $clubListPerm = MySQL::Cluster("SELECT * FROM vereine WHERE isOOEclub = '1' ORDER BY ort,verein ASC");
+            $clubListTemp = MySQL::Cluster("SELECT * FROM vereine WHERE isOOEclub = '0' ORDER BY ort,verein ASC");
 
             echo '
                 <div style="float: right;">
                     <select onchange="RedirectSelectBoxParam(this,\'/mitglieder/anzeigen?verein=??\');">
                         <option value="">--- Verein ausw&auml;hlen ---</option>
-                        ';
-                        foreach($clubList AS $clubData) echo '<option value="'.$clubData['kennzahl'].'" '.((isset($_GET['verein']) AND $_GET['verein'] == $clubData['kennzahl']) ? 'selected' : '').'>'.$clubData['kennzahl'].' - '.$clubData['verein'].' '.$clubData['ort'].'</value>';
-                        echo '
+
+                        <optgroup label="Vereine aus O&Ouml;">
+                    ';
+                        foreach($clubListPerm as $clubData) echo '<option value="'.$clubData['kennzahl'].'" '.((isset($_GET['verein']) AND $_GET['verein'] == $clubData['kennzahl']) ? 'selected' : '').'>'.$clubData['kennzahl'].' - '.$clubData['verein'].' '.$clubData['ort'].'</value>';
+                    echo '
+                        </optgroup>
+                        <optgroup label="Andere Vereine">
+                    ';
+                        foreach($clubListTemp as $clubData) echo '<option value="'.$clubData['kennzahl'].'" '.((isset($_GET['verein']) AND $_GET['verein'] == $clubData['kennzahl']) ? 'selected' : '').'>'.$clubData['kennzahl'].' - '.$clubData['verein'].' '.$clubData['ort'].'</value>';
+                    echo '
+                        </optgroup>
                     </select>
                 </div>
                 <br><br><br>

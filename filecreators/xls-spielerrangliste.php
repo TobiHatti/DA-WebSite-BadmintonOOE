@@ -21,7 +21,7 @@
     $accentColor2Sett = "Y".$year."ColorB";
     $highlightColorSett = "HighlightColor";
     $headerSubtitleSett = "Y".$year."HeaderSubtitle";
-    $lastUpdateSett = "Y".$year."LastUpdate";   
+    $lastUpdateSett = "Y".$year."LastUpdate";
 
     $color1 = MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$accentColor1Sett);
     $color2 = MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = ?",'s',$accentColor2Sett);
@@ -260,7 +260,7 @@
 
     $pageCounter = 8;
 
-    if($club == "alle") $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' GROUP BY members.clubID";
+    if($club == "alle") $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members_spielerranglisten.assignedClubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' GROUP BY members_spielerranglisten.assignedClubID";
     else if(StartsWith($club,"M"))
     {
         $selectedClubs = str_replace('M','',$club);
@@ -269,15 +269,15 @@
         $first = true;
         foreach($clubArray AS $sClub)
         {
-            if($first) $sqlClubExtension = "members.clubID = '$sClub'";
-            else $sqlClubExtension .= " OR members.clubID = '$sClub'";
+            if($first) $sqlClubExtension = "members_spielerranglisten.assignedClubID = '$sClub'";
+            else $sqlClubExtension .= " OR members_spielerranglisten.assignedClubID = '$sClub'";
 
             $first = false;
         }
 
-        $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' AND ($sqlClubExtension) GROUP BY members.clubID";
+        $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members_spielerranglisten.assignedClubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' AND ($sqlClubExtension) GROUP BY members_spielerranglisten.assignedClubID";
     }
-    else $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' AND members.clubID = '$club' GROUP BY members.clubID";
+    else $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members_spielerranglisten.assignedClubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' AND members_spielerranglisten.assignedClubID = '$club' GROUP BY members_spielerranglisten.assignedClubID";
 
 
 
@@ -286,7 +286,7 @@
     $rsc=mysqli_query($link,$strSQLc);
     while($clubVals=mysqli_fetch_assoc($rsc))
     {
-        $club = $clubVals['clubID'];
+        $club = $clubVals['assignedClubID'];
 
         //========================================================================================
         //  SECTION HEADER
@@ -336,7 +336,7 @@
         $spreadsheet->getActiveSheet()->fromArray($cellCluster,NULL,'A'.$startRow);
         $spreadsheet->getActiveSheet()->getStyle('A'.$startRow.':I'.$startRow)->getFont()->setBold(true);
 
-        $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'M' AND members.clubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
+        $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'M' AND members_spielerranglisten.assignedClubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
         {
@@ -346,7 +346,7 @@
             $startRow = $pageCounter;
             $pageCounter+=1;
 
-            $cellCluster = [NULL,$row['lastname'],$row['firstname'],$row['playerID'],$row['team'],$row['clubID'],$row['mf'],($row['mf']!="" ? $row['mobileNr'] : ''),($row['mf']!="" ? $row['email'] : '')];
+            $cellCluster = [NULL,$row['lastname'],$row['firstname'],$row['playerID'],$row['team'],$row['currentClubID'],$row['mf'],($row['mf']!="" ? $row['mobileNr'] : ''),($row['mf']!="" ? $row['email'] : '')];
             $spreadsheet->getActiveSheet()->fromArray($cellCluster,NULL,'A'.$startRow);
             $spreadsheet->getActiveSheet()->setCellValueExplicit('A'.$startRow,$i++.".",\PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
             $spreadsheet->getActiveSheet()->getStyle('D'.$startRow.':F'.$startRow)->getAlignment()->setHorizontal('center');
@@ -378,7 +378,7 @@
         $spreadsheet->getActiveSheet()->fromArray($cellCluster,NULL,'A'.$startRow);
         $spreadsheet->getActiveSheet()->getStyle('A'.$startRow.':I'.$startRow)->getFont()->setBold(true);
 
-        $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'F' AND members.clubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
+        $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'F' AND members_spielerranglisten.assignedClubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
         {
@@ -388,7 +388,7 @@
             $startRow = $pageCounter;
             $pageCounter+=1;
 
-            $cellCluster = [NULL,$row['lastname'],$row['firstname'],$row['playerID'],$row['team'],$row['clubID'],$row['mf'],($row['mf']!="" ? $row['mobileNr'] : ''),($row['mf']!="" ? $row['email'] : '')];
+            $cellCluster = [NULL,$row['lastname'],$row['firstname'],$row['playerID'],$row['team'],$row['currentClubID'],$row['mf'],($row['mf']!="" ? $row['mobileNr'] : ''),($row['mf']!="" ? $row['email'] : '')];
             $spreadsheet->getActiveSheet()->fromArray($cellCluster,NULL,'A'.$startRow);
             $spreadsheet->getActiveSheet()->setCellValueExplicit('A'.$startRow,$i++.".",\PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
             $spreadsheet->getActiveSheet()->getStyle('D'.$startRow.':F'.$startRow)->getAlignment()->setHorizontal('center');

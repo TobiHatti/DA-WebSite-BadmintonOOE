@@ -3559,7 +3559,7 @@ table.centered_content td {
     text-align: center; }
 
 .rlSortContainer {
-  min-width: 920px; }
+  width: 1000px; }
   .rlSortContainer .rlSortableListCount {
     display: inline-block;
     vertical-align: top;

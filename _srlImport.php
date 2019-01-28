@@ -38,6 +38,8 @@
                 if($c == 6) $mf = $data[$c];
                 if($c == 7) $mobile = $data[$c];
                 if($c == 8) $email = $data[$c];
+                if($c == 9) $assignID = $data[$c];
+
 
             }
 
@@ -58,6 +60,7 @@
                 <td>'.$mf.'</td>
                 <td>'.$mobile.'</td>
                 <td>'.(isset($email) ? $email : '').'</td>
+                <td>'.$assignID.'</td>
                 </tr>
                 ';
 
@@ -76,7 +79,7 @@
 
                 $year = '2011-2012';
 
-                //MySQL::NonQuery("INSERT INTO members_spielerranglisten (id,memberID,year,position,team,mf) VALUES ('',?,?,?,?,?)",'@s',$memberID,$year,$rank,$team,$mf);
+                //MySQL::NonQuery("INSERT INTO members_spielerranglisten (id,memberID,year,position,team,mf,currentClubID,assignedClubID) VALUES ('',?,?,?,?,?,?,?)",'@s',$memberID,$year,$rank,$team,$mf,$clubID,$assignID);
 
             }
         }

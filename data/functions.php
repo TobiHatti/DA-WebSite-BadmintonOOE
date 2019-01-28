@@ -113,13 +113,13 @@ function TextareaPlus($name, $id="edit", $placeholder="",$required = false)
         <script type="text/javascript" src="/js/froala/froala_editor.min.js" ></script>
         <script type="text/javascript" src="/js/froala/plugins/align.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/char_counter.min.js"></script>
-        <script type="text/javascript" src="/js/froala/plugins/code_beautifier.min.js"></script>
-        <script type="text/javascript" src="/js/froala/plugins/code_view.min.js"></script>
+        <!--<script type="text/javascript" src="/js/froala/plugins/code_beautifier.min.js"></script>-->
+        <!--<script type="text/javascript" src="/js/froala/plugins/code_view.min.js"></script>-->
         <script type="text/javascript" src="/js/froala/plugins/colors.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/draggable.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/emoticons.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/entities.min.js"></script>
-        <script type="text/javascript" src="/js/froala/plugins/file.min.js"></script>
+        <!--<script type="text/javascript" src="/js/froala/plugins/file.min.js"></script>-->
         <script type="text/javascript" src="/js/froala/plugins/font_size.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/font_family.min.js"></script>
         <script type="text/javascript" src="/js/froala/plugins/fullscreen.min.js"></script>
@@ -228,17 +228,17 @@ function PageContent($paragraph_index,$allowEdit=false,$reactToCustomPage="",$is
 
 function EditButton($link,$short = false,$targetTop = false,$customText = "")
 {
-    return '<a '.(($targetTop) ? 'target="_top"' : '').' style="margin: 0px 3px" href="'.$link.'"> &#9998; '.((!$short) ? (($customText!="") ? $customText : 'Bearbeiten') : '').'</a>';
+    return '<a title="Bearbeiten" '.(($targetTop) ? 'target="_top"' : '').' style="margin: 0px 3px" href="'.$link.'"> &#9998; '.((!$short) ? (($customText!="") ? $customText : 'Bearbeiten') : '').'</a>';
 }
 
 function AddButton($link,$short = false,$targetTop = false,$customText = "")
 {
-    return '<a '.(($targetTop) ? 'target="_top"' : '').' style="margin: 0px 3px" href="'.$link.'"> &#65291; '.((!$short) ? (($customText!="") ? $customText : 'Hinzuf&uuml;gen') : '').'</a>';
+    return '<a title="Hinzuf&uuml;gen" '.(($targetTop) ? 'target="_top"' : '').' style="margin: 0px 3px" href="'.$link.'"> &#65291; '.((!$short) ? (($customText!="") ? $customText : 'Hinzuf&uuml;gen') : '').'</a>';
 }
 
 function DeleteButton($permissionSuffix,$table,$id,$short = false,$targetTop = false,$customText = "")
 {
-    return '<a '.(($targetTop) ? 'target="_top"' : '').' style="margin: 0px 3px; color: red;" href="/delete/'.$table.'/'.$permissionSuffix.'/'.$id.'"> &#10006; '.((!$short) ? (($customText!="") ? $customText : 'L&ouml;schen') : '').' </a>';
+    return '<a title="L&ouml;schen" '.(($targetTop) ? 'target="_top"' : '').' style="margin: 0px 3px; color: red;" href="/delete/'.$table.'/'.$permissionSuffix.'/'.$id.'"> &#10006; '.((!$short) ? (($customText!="") ? $customText : 'L&ouml;schen') : '').' </a>';
 }
 
 function CheckPermission($permission)
@@ -1107,7 +1107,7 @@ function LetterCorrection($input_string)
     return $input_string;
 }
 
-function PlayerDisplayClubInfo($row,$editExtension = "", $adminEdit = false)
+function PlayerDisplayClubInfo($row,$editExtension = "", $adminEdit = false, $showControlls = true)
 {
     if(isset($_GET['edit']) AND $_GET['edit']==$row['id'].$editExtension)
     {
@@ -1177,12 +1177,16 @@ function PlayerDisplayClubInfo($row,$editExtension = "", $adminEdit = false)
 
                 <div style="position: absolute; bottom: 0px; right: 0px;">
                 ';
-                    if($adminEdit) $editLink = "/mitglieder/anzeigen?verein=".$_GET['verein']."&edit=".$row['id'].$editExtension;      
-                    else $editLink = "/verein-info/mitglieder?edit=".$row['id'].$editExtension;
+                    if($showControlls)
+                    {
+                        if($adminEdit) $editLink = "/mitglieder/anzeigen?verein=".$_GET['verein']."&edit=".$row['id'].$editExtension;
+                        else $editLink = "/verein-info/mitglieder?edit=".$row['id'].$editExtension;
 
-                    $retval .= EditButton($editLink,true);
-                    if(StartsWith($row['playerID'],"TMP")) $retval .= '<a href="/verein-info/mitglieder/zusammenfuehren/'.$row['id'].'"><i class="fas fa-compress"></i></a>';
-                    $retval .= DeleteButton("ClubManager","members",$row['id'],true);
+                        $retval .= '<a title="Verein wechseln" href="/verein-info/mitglieder/verein-wechseln/'.$row['id'].'"><i class="fas fa-bus"></i></a>';
+                        $retval .= EditButton($editLink,true);
+                        if(StartsWith($row['playerID'],"TMP")) $retval .= '<a title="Zusammenf&uuml;hren" href="/verein-info/mitglieder/zusammenfuehren/'.$row['id'].'"><i class="fas fa-compress"></i></a>';
+                        $retval .= DeleteButton("ClubManager","members",$row['id'],true);
+                    }
                 $retval .= '
                 </div>
             </div>
@@ -1190,6 +1194,38 @@ function PlayerDisplayClubInfo($row,$editExtension = "", $adminEdit = false)
     }
 
     return $retval;
+}
+
+function SRLLockUpdater()
+{
+    // Auto-Lock SRL at the end of seasons
+
+    for($i = intval(date("Y")); $i > 2011 ; $i --)
+    {
+        $year = ($i-1).'-'.($i);
+        if(intval(date("Y")) > $i) $locked = '1';
+        else
+        {
+            // Saisonwechsel mit 1. September
+            // Sperren der Spielerrangliste mit 1. Oktober
+            if(intval(date("m"))>= 10) $locked = '1';
+            else $locked = '0';
+        }
+
+
+        if(MySQL::Exist("SELECT * FROM ranglisten_settings WHERE setting = 'Y".$year."IsLocked'"))
+        {
+            MySQL::NonQuery("UPDATE ranglisten_settings SET value = '$locked' WHERE setting = 'Y".$year."IsLocked'");
+        }
+        else MySQL::NonQuery("INSERT INTO ranglisten_settings (setting,value) VALUES ('Y".$year."IsLocked','$locked')");
+
+    }
+}
+
+function SRLIsLocked($year)
+{
+    if(MySQL::Scalar("SELECT value FROM ranglisten_settings WHERE setting = 'Y".$year."IsLocked'") == '1') return true;
+    else return false;
 }
 
 ?>
