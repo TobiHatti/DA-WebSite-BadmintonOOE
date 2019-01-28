@@ -9,6 +9,8 @@
 
     if(ThisPage()=="") MySQL::PeriodicSave('d');
 
+    SRLLockUpdater(); 
+
 
     echo '<!DOCTYPE html>
         <html>

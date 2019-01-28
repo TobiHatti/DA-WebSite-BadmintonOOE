@@ -60,7 +60,7 @@
 
 
 
-    if($club == "alle") $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' GROUP BY members.clubID";
+    if($club == "alle") $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members_spielerranglisten.assignedClubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' GROUP BY members_spielerranglisten.assignedClubID";
     else if(StartsWith($club,"M"))
     {
         $selectedClubs = str_replace('M','',$club);
@@ -69,15 +69,15 @@
         $first = true;
         foreach($clubArray AS $sClub)
         {
-            if($first) $sqlClubExtension = "members.clubID = '$sClub'";
-            else $sqlClubExtension .= " OR members.clubID = '$sClub'";
+            if($first) $sqlClubExtension = "members_spielerranglisten.assignedClubID = '$sClub'";
+            else $sqlClubExtension .= " OR members_spielerranglisten.assignedClubID = '$sClub'";
 
             $first = false;
         }
 
-        $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' AND ($sqlClubExtension) GROUP BY members.clubID";
+        $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members_spielerranglisten.assignedClubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' AND ($sqlClubExtension) GROUP BY members_spielerranglisten.assignedClubID";
     }
-    else $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' AND members.clubID = '$club' GROUP BY members.clubID";
+    else $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members_spielerranglisten.assignedClubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' AND members_spielerranglisten.assignedClubID = '$club' GROUP BY members_spielerranglisten.assignedClubID";
 
 
 
@@ -85,7 +85,7 @@
     $rsc=mysqli_query($link,$strSQLc);
     while($clubVals=mysqli_fetch_assoc($rsc))
     {
-        $club = $clubVals['clubID'];
+        $club = $clubVals['assignedClubID'];
 
 
         if(!$first) $pdf->AddPage();
@@ -137,7 +137,7 @@
         $pdf->SetFont('Arial','B',9);
         $pdf->Cell(190,5,"Herren",$showBorders,1,'L');
 
-        $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'M' AND members.clubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
+        $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'M' AND members_spielerranglisten.assignedClubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
         {
@@ -157,7 +157,7 @@
             $pdf->Cell(30,5,LetterCorrection($row['firstname']),$showBorders,0,'L',$focus);
             $pdf->Cell(18,5,$row['playerID'],$showBorders,0,'C',$focus);
             $pdf->Cell(12,5,$row['team'],$showBorders,0,'C',$focus);
-            $pdf->Cell(20,5,$row['clubID'],$showBorders,0,'C',$focus);
+            $pdf->Cell(20,5,$row['currentClubID'],$showBorders,0,'C',$focus);
 
             if($highlight)
             {
@@ -178,7 +178,7 @@
         $pdf->SetFont('Arial','B',9);
         $pdf->Cell(190,5,"Damen",$showBorders,1,'L');
 
-        $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'F' AND members.clubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
+        $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'F' AND members_spielerranglisten.assignedClubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
         {
@@ -198,7 +198,7 @@
             $pdf->Cell(30,5,LetterCorrection($row['firstname']),$showBorders,0,'L',$focus);
             $pdf->Cell(18,5,$row['playerID'],$showBorders,0,'C',$focus);
             $pdf->Cell(12,5,$row['team'],$showBorders,0,'C',$focus);
-            $pdf->Cell(20,5,$row['clubID'],$showBorders,0,'C',$focus);
+            $pdf->Cell(20,5,$row['currentClubID'],$showBorders,0,'C',$focus);
 
             if($highlight)
             {

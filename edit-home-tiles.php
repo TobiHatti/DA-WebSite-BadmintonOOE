@@ -129,7 +129,7 @@
                             <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                                 <table style="border-spacing: 10px;">
                                     <tr>
-                                        <td class="ta_r">Bezeignung:<br><br> </td>
+                                        <td class="ta_r">Bezeichnung:<br><br> </td>
                                         <td><input type="text" placeholder="Anzeigename..." name="text"/><br><br></td>
                                     </tr>
                                     <tr>
@@ -188,7 +188,7 @@
                             <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                                 <table style="border-spacing: 10px;">
                                     <tr>
-                                        <td class="ta_r">Bezeignung:<br><br> </td>
+                                        <td class="ta_r">Bezeichnung:<br><br> </td>
                                         <td><input type="text" placeholder="Anzeigename..." name="text"/><br><br></td>
                                     </tr>
                                     <tr>

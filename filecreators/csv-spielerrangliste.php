@@ -6,7 +6,7 @@
     $club = $_GET['club'];
     $originalClub = $club;
 
-    if($club == "alle") $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' GROUP BY members.clubID";
+    if($club == "alle") $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members_spielerranglisten.assignedClubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' GROUP BY members_spielerranglisten.assignedClubID";
     else if(StartsWith($club,"M"))
     {
         $selectedClubs = str_replace('M','',$club);
@@ -15,27 +15,27 @@
         $first = true;
         foreach($clubArray AS $sClub)
         {
-            if($first) $sqlClubExtension = "members.clubID = '$sClub'";
-            else $sqlClubExtension .= " OR members.clubID = '$sClub'";
+            if($first) $sqlClubExtension = "members_spielerranglisten.assignedClubID = '$sClub'";
+            else $sqlClubExtension .= " OR members_spielerranglisten.assignedClubID = '$sClub'";
 
             $first = false;
         }
 
-        $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' AND ($sqlClubExtension) GROUP BY members.clubID";
+        $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members_spielerranglisten.assignedClubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' AND ($sqlClubExtension) GROUP BY members_spielerranglisten.assignedClubID";
     }
-    else $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' AND members.clubID = '$club' GROUP BY members.clubID";
+    else $strSQLc = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id INNER JOIN vereine ON members_spielerranglisten.assignedClubID = vereine.kennzahl WHERE members_spielerranglisten.year = '$year' AND members_spielerranglisten.assignedClubID = '$club' GROUP BY members_spielerranglisten.assignedClubID";
 
     $content = LetterCorrection("spielerid;clubid;name;vorname;gebdatum;sex;nat;\r\n");
 
     $rsc=mysqli_query($link,$strSQLc);
     while($rowc=mysqli_fetch_assoc($rsc))
     {
-        $club = $rowc['clubID'];
-        $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.clubID = '$club' AND members_spielerranglisten.year = '$year'";
+        $club = $rowc['assignedClubID'];
+        $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members_spielerranglisten.assignedClubID = '$club' AND members_spielerranglisten.year = '$year'";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
         {
-            $content .= LetterCorrection($row['playerID'].';'.$row['clubID'].';'.$row['lastname'].';'.$row['firstname'].';'.$row['birthdate'].';'.$row['gender'].';;'."\r\n");
+            $content .= LetterCorrection($row['playerID'].';'.$row['currentClubID'].';'.$row['lastname'].';'.$row['firstname'].';'.$row['birthdate'].';'.$row['gender'].';;'."\r\n");
         }
     }
 
