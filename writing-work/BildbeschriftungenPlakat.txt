@@ -1,0 +1,17 @@
+Die Startseite der neuen Website wurde 
+im vergleich zur alten Seite übersichtlicher 
+und Moderner gestaltet.
+
+
+Vereine können von nun an ihre Spieler selbst verwalten,
+ein weiteres Feature, welches auf der alten Website nicht zur
+Verfügung stand
+
+Zur Planung der vereinsinternen Termine wurde ein eigens entwickelter
+Terminkalender erstellt, um die Planung von Meisterschaften und sonstigen
+Events besser zu koordinieren
+
+
+Ranglisten für Turniere mussten zuvor umständlich händisch erstellt werden. 
+Nun ist es möglich Ranglisten innerhalb von wenigen Minuten
+direkt auf der Seite zu erzeugen und diese als PDF oder Excel-Tabelle zu exportieren
