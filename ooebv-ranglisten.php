@@ -221,9 +221,9 @@
 
     echo '<h1 class="stagfade1">O&Ouml;BV-Ranglisten</h1>';
 
-    if(isset($_GET['new']))
+    if(isset($_GET['new']) AND CheckRank() == "administrative")
     {
-        if(isset($_GET['newList']))
+        if(isset($_GET['newList']) AND CheckPermission("AddOOEBVRLJgnd"))
         {
             echo '<h2>Neue Liste erstellen</h2>';
 
@@ -250,7 +250,7 @@
             ';
         }
 
-        if(isset($_GET['newTable']))
+        if(isset($_GET['newTable']) AND CheckPermission("AddOOEBVRLJgnd"))
         {
             echo '<h2>Neue Tabelle erstellen</h2>';
 
@@ -301,7 +301,7 @@
             ';
         }
 
-        if(isset($_GET['newSection']))
+        if(isset($_GET['newSection']) AND CheckPermission("AddOOEBVRLJgnd"))
         {
             echo '<h2>Neue Tabellen-Sektion erstellen</h2>';
 
@@ -332,15 +332,15 @@
             ';
         }
 
-        if(isset($_GET['addPlayers']))
+        if(isset($_GET['addPlayers']) AND CheckPermission("AddOOEBVRLJgnd"))
         {
             $list = $_GET['list'];
             $table = $_GET['table'];
         }
     }
-    else if(isset($_GET['edit']))
+    else if(isset($_GET['edit']) AND CheckRank() == "administrative")
     {
-        if(isset($_GET['editList']))
+        if(isset($_GET['editList']) AND CheckPermission("EditOOEBVRLJgnd"))
         {
             $listData = MySQL::Row("SELECT * FROM ooebvrl_lists WHERE listFilename = ?",'s',$_GET['list']);
 
@@ -370,7 +370,7 @@
             ';
         }
 
-        if(isset($_GET['editTable']))
+        if(isset($_GET['editTable']) AND CheckPermission("EditOOEBVRLJgnd"))
         {
             $tableData = MySQL::Row("SELECT * FROM ooebvrl_tables WHERE tableFilename = ?",'s',$_GET['table']);
 
@@ -435,7 +435,7 @@
             ';
         }
 
-        if(isset($_GET['editSection']))
+        if(isset($_GET['editSection']) AND CheckPermission("EditOOEBVRLJgnd"))
         {
             $sectionData = MySQL::Row("SELECT * FROM ooebvrl_sections WHERE sectionFilename = ?",'s',$_GET['section']);
 
@@ -469,13 +469,13 @@
             ';
         }
 
-        if(isset($_GET['editplayer']))
+        if(isset($_GET['editplayer']) AND CheckPermission("EditOOEBVRLJgnd"))
         {
             $list = $_GET['list'];
             $table = $_GET['table'];
         }
     }
-    else if(isset($_GET['manage']))
+    else if(isset($_GET['manage']) AND CheckRank() == "administrative" AND (CheckPermission("AddOOEBVRLJgnd") OR CheckPermission("EditOOEBVRLJgnd")))
     {
         $list = $_GET['list'];
         $table = $_GET['table'];
@@ -483,7 +483,7 @@
 
         $showJg = MySQL::Scalar("SELECT showJg FROM ooebvrl_tables WHERE tableFilename = ?",'s',$_GET['table']);
 
-        if(isset($_GET['add']))
+        if(isset($_GET['add']) AND CheckPermission("AddOOEBVRLJgnd"))
         {
             echo '<h2>Spieler hinzuf&uuml;gen</h2>';
 

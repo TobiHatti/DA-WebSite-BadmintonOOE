@@ -120,7 +120,7 @@
                                         </li>
                                         <li><a href="#" style="cursor: default">Ranglisten <span style="float:right; color: #FFFFFF;">&#10148;</span></a>
                                             <ul>
-                                                <li><a href="/ooebv-ranglisten.php">O&Ouml;BV-Ranglisten</a></li>
+                                                <li><a href="/ooebv-ranglisten">O&Ouml;BV-Ranglisten</a></li>
                                                 <li><a target="_blank" href="http://www.badminton.at">&Ouml;BV-Ranglisten</a></li>
                                             </ul>
                                         </li>

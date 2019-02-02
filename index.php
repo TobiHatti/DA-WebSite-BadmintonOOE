@@ -73,7 +73,7 @@
             <div class="doublecol">
                 <article>
                     <div style="position: relative">
-                        <h2>News</h2>
+                        <a href="/news"><h2>News</h2></a>
                         ';
 
                         if(CheckPermission("AddNews"))
@@ -195,7 +195,7 @@
                     <span style="color: #A9A9A9"><output id="sliderDate"></output></span>
                 </article>
                 <aside>
-                    <h2>Nachwuchs</h2>
+                    <a href="/news/kategorie/Nachwuchs"><h2>Nachwuchs</h2></a>
                     <hr>
                     '.NewsTileSlim("SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%Nachwuchs%' ORDER BY release_date DESC, id DESC LIMIT 0,$nachwuchsLimit").'
                 </aside>
@@ -220,7 +220,7 @@
             </div>
 
             <div>
-                <h3>Neuigkeiten</h3>
+                <a href="/news/kategorie/Top-News"><h3>Neuigkeiten</h3></a>
                 <hr>
                 <div class="mdrn_news_tile_container">
                     ';

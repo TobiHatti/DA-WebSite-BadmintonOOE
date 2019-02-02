@@ -30,7 +30,7 @@
 
     echo '<h1>Trainingsgruppen</h1><hr>';
 
-    if(isset($_GET['eintragen']))
+    if(isset($_GET['eintragen']) AND CheckRank() == "administrative" AND CheckPermission("AddNWTG"))
     {
         echo '<h3>Spieler zu Gruppe "'.MySQL::Scalar("SELECT trainingsgruppe FROM trainingsgruppen WHERE tgURL = ?",'s',$_GET['eintragen']).'" hinzuf&uuml;gen</h3>';
 
@@ -38,7 +38,7 @@
 
         echo ' <iframe src="/memberAddFrame?assignUser=tg&tgID='.$tgID.'" frameborder="0" style="width: 100%; height: 400px;"></iframe>';
     }
-    else if(isset($_GET['newGroup']))
+    else if(isset($_GET['newGroup']) AND CheckRank() == "administrative" AND CheckPermission("AddNWTG"))
     {
         echo '<h3>Neue Gruppe erstellen</h3>';
 
@@ -62,7 +62,7 @@
             </form>
         ';
     }
-    else if(isset($_GET['editGroup']))
+    else if(isset($_GET['editGroup']) AND CheckRank() == "administrative" AND CheckPermission("EditNWTG"))
     {
         $tgData = MySQL::Row("SELECT * FROM trainingsgruppen WHERE id = ?",'s',$_GET['groupID']);
         echo '<h3>Gruppe bearbeiten</h3>';
