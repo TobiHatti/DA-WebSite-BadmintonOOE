@@ -214,7 +214,7 @@ function PageContent($paragraph_index,$allowEdit=false,$reactToCustomPage="",$is
                     <a href="#c">
                         <div class="modal_bg"></div>
                     </a>
-                    <div class="modal_container" style="width: 300px; height: 280px">
+                    <div class="modal_container" style="width: 500px; height: 360px">
                         <iframe src="/froalapl-upload-file?parent='.urlencode(ThisPage()).'" frameborder="0" style="width: 100%; height: 100%;"></iframe>
                     </div>
                 </div>

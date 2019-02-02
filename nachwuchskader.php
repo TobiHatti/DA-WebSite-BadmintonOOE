@@ -33,7 +33,7 @@
         die();
     }
 
-    if(isset($_GET["neu"]))
+    if(isset($_GET["neu"]) AND CheckRank() == "administrative" AND CheckPermission("AddNWK"))
     {
         echo '<h2 class="stagfade1">O&Ouml; Nachwuchskader - Spieler hinzuf&uuml;gen</h2>';
 

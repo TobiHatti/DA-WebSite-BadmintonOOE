@@ -3,6 +3,8 @@
 
     if(isset($_POST['editLinks']))
     {
+        PageTitle("Home > Links");
+
         $pageContent = $_POST['contentLinks'];
         $page = 'index';
         $pidx = 3;
@@ -20,6 +22,8 @@
 
     if(isset($_POST['editMeisterschaft']))
     {
+        PageTitle("Home > Meisterschaft");
+
         $pageContent = $_POST['contentLinks'];
         $page = 'index';
         $pidx = 1;
@@ -37,6 +41,8 @@
 
     if(isset($_POST['addLineMeisterschaft']))
     {
+        PageTitle("Home > Meisterschaft");
+
         $id = uniqid();
         $text = $_POST['text'];
         $value = $_POST['value'];
@@ -51,6 +57,8 @@
 
     if(isset($_POST['addLineRanglisten']))
     {
+        PageTitle("Home > Ranglisten");
+
         $id = uniqid();
         $text = $_POST['text'];
         $value = $_POST['value'];
@@ -65,6 +73,8 @@
 
     if(isset($_POST['editUpdateMeisterschaft']))
     {
+        PageTitle("Home > Meisterschaft");
+
         $text = $_POST['editText'];
         $value = $_POST['editValue'];
         $id = $_POST['editUpdateMeisterschaft'];
@@ -76,6 +86,8 @@
 
     if(isset($_POST['editUpdateRanglisten']))
     {
+        PageTitle("Home > Ranglisten");
+
         $text = $_POST['editText'];
         $value = $_POST['editValue'];
         $id = $_POST['editUpdateRanglisten'];
@@ -88,10 +100,10 @@
 
     if(CheckPermission("ChangeContent"))
     {
-
-
         if(isset($_GET['tile']) AND $_GET['tile'] == 'Meisterschaft')
         {
+            PageTitle("Home > Meisterschaft");
+
             echo '<h2 class="stagfade1">Startseite &#9654; Meisterschaft &#9654; Bearbeiten</h2>';
 
             echo '<ul>';
@@ -130,7 +142,7 @@
                                 <table style="border-spacing: 10px;">
                                     <tr>
                                         <td class="ta_r">Bezeichnung:<br><br> </td>
-                                        <td><input type="text" placeholder="Anzeigename..." name="text"/><br><br></td>
+                                        <td><input type="text" placeholder="Anzeigename..." name="text" required/><br><br></td>
                                     </tr>
                                     <tr>
                                         <td class="ta_r">Link/Datei: </td>
@@ -152,6 +164,8 @@
 
         if(isset($_GET['tile']) AND $_GET['tile'] == 'Ranglisten')
         {
+            PageTitle("Home > Ranglisten");
+
             echo '<h2 class="stagfade1">Startseite &#9654; Ranglisten &#9654; Bearbeiten</h2>';
 
             echo '<ul>';
@@ -207,6 +221,8 @@
 
         if(isset($_GET['tile']) AND $_GET['tile'] == 'Links')
         {
+            PageTitle("Home > Links");
+
             echo '<h2 class="stagfade1">Startseite &#9654; Links &#9654; Bearbeiten</h2>';
 
             echo '<form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">';

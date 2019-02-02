@@ -47,7 +47,7 @@
         die();
     }
 
-    if(isset($_GET['neu']))
+    if(isset($_GET['neu']) AND CheckRank() == "administrative" AND CheckPermission("AddVorstand"))
     {
         echo '<h2 class="stagfade1">Vorstandsmitglied hinzuf&uuml;gen</h2>';
 
