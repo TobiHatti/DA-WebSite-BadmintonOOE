@@ -2,12 +2,23 @@
     session_start();
     setlocale (LC_ALL, 'de_DE.UTF-8', 'de_DE@euro', 'de_DE', 'de', 'ge', 'de_DE.ISO_8859-1', 'German_Germany');
 
+
+
+
     require("headerincludes.php");
 
     require("data/editfunctions.php");
     require("data/multipagepost.php");
 
     if(ThisPage()=="") MySQL::PeriodicSave('d');
+
+    if(ThisPage()!="ie-support")
+    {
+        $ua = htmlentities($_SERVER['HTTP_USER_AGENT'], ENT_QUOTES, 'UTF-8');
+        if (preg_match('~MSIE|Internet Explorer~i', $ua) || (strpos($ua, 'Trident/7.0') !== false && strpos($ua, 'rv:11.0') !== false)) {
+            echo '<meta http-equiv="refresh" content="0; url=ie-support" />';
+        }
+    }
 
     SRLLockUpdater(); 
 
