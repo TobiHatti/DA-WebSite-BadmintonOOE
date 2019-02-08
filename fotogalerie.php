@@ -16,9 +16,9 @@
         $showDateLoc = (isset($_POST['showDateLoc'])) ? 1 : 0 ;
         $user = $_SESSION['userID'];
 
-        MySQL::NonQuery("INSERT INTO fotogalerie (id, album_url, album_name, album_description, event_location, event_date, allowDownload, creation_date, tags, author,show_dateloc) VALUES ('',?,?,?,?,?,?,?,?,?,?)",'@s',$albumUrl,$albumName,$album_description,$album_ort,$album_date,$download,$today,$tags,$user,$showDateLoc);
+        MySQL::NonQuery("INSERT INTO fotogalerie (album_url, album_name, album_description, event_location, event_date, allowDownload, creation_date, tags, author,show_dateloc) VALUES (?,?,?,?,?,?,?,?,?,?)",'@s',$albumUrl,$albumName,$album_description,$album_ort,$album_date,$download,$today,$tags,$user,$showDateLoc);
 
-        $albID = MySQL::Scalar("SELECT id FROM fotogalierie WHERE album_name = ?",'s',$albumName);
+        $albID = MySQL::Scalar("SELECT id FROM fotogalerie WHERE album_name = ?",'s',$albumName);
         FileUpload("content/gallery/".$albumUrl."/", "images" ,"","","INSERT INTO gallery_images (id,album_id,image) VALUES ('','$albID','FNAME')");
 
         Redirect("/fotogalerie");

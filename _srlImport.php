@@ -79,7 +79,7 @@
 
                 $year = '2011-2012';
 
-                //MySQL::NonQuery("INSERT INTO members_spielerranglisten (id,memberID,year,position,team,mf,currentClubID,assignedClubID) VALUES ('',?,?,?,?,?,?,?)",'@s',$memberID,$year,$rank,$team,$mf,$clubID,$assignID);
+                //MySQL::NonQuery("INSERT INTO members_spielerranglisten (memberID,year,position,team,mf,currentClubID,assignedClubID) VALUES (?,?,?,?,?,?,?)",'@s',$memberID,$year,$rank,$team,$mf,$clubID,$assignID);
 
             }
         }

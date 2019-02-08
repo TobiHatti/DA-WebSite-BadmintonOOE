@@ -20,7 +20,7 @@
         $termin_additionalInfo=$_POST['additionalInfo'];
 
 
-        MySQL::NonQuery("INSERT INTO agenda (id, title, description, date_begin, date_end, isTimespan, location, time_start, time_end,category, participant, responsible, additional_info) VALUES ('',?,?,?,?,?,?,?,?,?,?,?,?)",'@s',$terminName,$description,$termin_date_start,$termin_date_end,$isTimespanDate,$termin_location,$termin_time_start,$termin_time_end,$termin_kategorie,$termin_participant,$termin_responsible,$termin_additionalInfo);
+        MySQL::NonQuery("INSERT INTO agenda (title, description, date_begin, date_end, isTimespan, location, time_start, time_end,category, participant, responsible, additional_info) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",'@s',$terminName,$description,$termin_date_start,$termin_date_end,$isTimespanDate,$termin_location,$termin_time_start,$termin_time_end,$termin_kategorie,$termin_participant,$termin_responsible,$termin_additionalInfo);
 
         Redirect("/kalender");
         die();
