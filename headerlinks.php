@@ -1,11 +1,29 @@
 <?php
 
-    $revision = 5676;
+    $revision = 5725;
 
     echo '
+        <!-- META Tags -->
+            <meta name="Title" content="Badmintonverband O&Ouml;"/>
+            <meta name="Author" content="Badmintonverband O&Ouml;"/>
+            <meta name="Copyright" content="Tobias Hattinger, Paul Luger"/>
+            <meta name="Revisit" content="After 1 days"/>
+            <meta name="Keywords" content="Badminton Verein Verband Sport Federball O&Ouml; Ober&ouml;sterreich &Ouml;sterreich &Ouml;BV O&Ouml;BV"/>
+            <meta name="Description" content="Badmintonverband O&Ouml;
+            Wir informieren über aktuelle News der Vereine, Meisterschaft, Ranglisten, Termine und vieles mehr."/>
+            <meta name="Abstract" content="Badmintonverband O&Ouml;
+            Wir informieren &uuml;ber aktuelle News der Vereine, Meisterschaft, Ranglisten, Termine und vieles mehr."/>
+            <meta name="page-topic" content="Sport"/>
+            <meta name="page-topic" content="Private Homepage"/>
+            <meta name="audience" content="Alle"/>
+            <meta name="Robots" content="INDEX,FOLLOW"/>
+            <meta name="Language" content="Deutsch"/>
+        <!-- End META Tags -->
+
+
         <!-- Own links -->
             <link rel="stylesheet" type="text/css" href="/css/style.css?'.$revision.'">
-            <link rel="stylesheet" type="text/css" href="/css/layout_modern.css">
+            <link rel="stylesheet" type="text/css" href="/css/layout_modern.css?'.$revision.'">
             <link rel="stylesheet" type="text/css" href="/css/menu.css?'.$revision.'">
             <link rel="stylesheet" type="text/css" href="/css/slide.css?'.$revision.'" />
             <link href="/content/favicon.png" rel="icon" type="image/x-icon" />

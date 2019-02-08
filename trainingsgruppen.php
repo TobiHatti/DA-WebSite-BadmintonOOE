@@ -9,7 +9,7 @@
         $showLastEdit = (isset($_POST['showLastEdit']) ? 1 : 0);
         $lastEdit = date("Y-m-d");
 
-        MySQL::NonQuery("INSERT INTO trainingsgruppen (id,trainingsgruppe,tgURL,showLastEdit,lastEdit) VALUES ('',?,?,?,?)",'ssss',$groupName,$groupFilename,$showLastEdit,$lastEdit);
+        MySQL::NonQuery("INSERT INTO trainingsgruppen (trainingsgruppe,tgURL,showLastEdit,lastEdit) VALUES (?,?,?,?)",'ssss',$groupName,$groupFilename,$showLastEdit,$lastEdit);
         Redirect("/trainingsgruppen");
         die();
     }

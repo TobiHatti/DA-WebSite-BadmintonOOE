@@ -27,7 +27,7 @@
             $article_url = $newID;
         }
 
-        MySQL::NonQuery("INSERT INTO news (id,article_url,title, author,tags,article,release_date,thumbnail) VALUES ('',?,?,?,?,?,?,?)",'@s',$article_url,$title,$author,$tags,$article,$release,$thumb);
+        MySQL::NonQuery("INSERT INTO news (article_url,title, author,tags,article,release_date,thumbnail) VALUES (?,?,?,?,?,?,?)",'@s',$article_url,$title,$author,$tags,$article,$release,$thumb);
 
         //Changing the News-Slider in Index
         RefreshSliderContent();

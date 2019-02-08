@@ -37,12 +37,12 @@
             $trainingsgruppenID = $_POST['trainingsgruppenID'];
 
             MySQL::NonQuery("UPDATE trainingsgruppen SET lastEdit = ? WHERE id = ?",'ss',$date,$trainingsgruppenID);
-            MySQL::NonQuery("INSERT INTO members_trainingsgruppen (id,tgID,memberID) VALUES ('',?,?)",'ss',$trainingsgruppenID,$id);
+            MySQL::NonQuery("INSERT INTO members_trainingsgruppen (tgID,memberID) VALUES (?,?)",'ss',$trainingsgruppenID,$id);
         }
 
         if($_GET['assignUser'] == 'nwk')
         {
-            MySQL::NonQuery("INSERT INTO members_nachwuchskader (id,memberID) VALUES ('',?)",'s',$id);
+            MySQL::NonQuery("INSERT INTO members_nachwuchskader (memberID) VALUES (?)",'s',$id);
         }
 
         if($_GET['assignUser'] == 'club')

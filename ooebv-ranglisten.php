@@ -8,7 +8,7 @@
         $footnote = $_POST['footnote'];
         $listFilename = SReplace($listName);
 
-        MySQL::NonQuery("INSERT INTO ooebvrl_lists (id, listName, listFilename, listFootnote) VALUES ('',?,?,?)",'sss',$listName,$listFilename,$footnote);
+        MySQL::NonQuery("INSERT INTO ooebvrl_lists (listName, listFilename, listFootnote) VALUES (?,?,?)",'sss',$listName,$listFilename,$footnote);
 
         Redirect("/ooebv-ranglisten");
         die();
@@ -51,7 +51,7 @@
 
         $listID = MySQL::Scalar("SELECT id FROM ooebvrl_lists WHERE listFilename = ?",'s',$_GET['list']);
 
-        MySQL::NonQuery("INSERT INTO ooebvrl_tables (id, listID, tableName, tableFilename, headerColor, showLastEdit, lastEdit, validRounds, showJg) VALUES ('',?,?,?,?,?,?,?,?)",'ssssssss',$listID,$tableName,$tableFilename,$headerColor,$showLastEdit,$lastEdit,$validRounds,$showJg);
+        MySQL::NonQuery("INSERT INTO ooebvrl_tables (listID, tableName, tableFilename, headerColor, showLastEdit, lastEdit, validRounds, showJg) VALUES (?,?,?,?,?,?,?,?)",'ssssssss',$listID,$tableName,$tableFilename,$headerColor,$showLastEdit,$lastEdit,$validRounds,$showJg);
 
         Redirect("/ooebv-ranglisten");
         die();
@@ -96,7 +96,7 @@
         $listID = MySQL::Scalar("SELECT id FROM ooebvrl_lists WHERE listFilename = ?",'s',$_GET['list']);
         $tableID = MySQL::Scalar("SELECT id FROM ooebvrl_tables WHERE tableFilename = ?",'s',$_GET['table']);
 
-        MySQL::NonQuery("INSERT INTO ooebvrl_sections (id, listID, tableID, sectionName, sectionFilename, sectionInfoLeft, sectionInfoRight) VALUES ('',?,?,?,?,?,?)",'ssssss',$listID,$tableID,$sectionName,$sectionFilename,$sectionInfoLeft,$sectionInfoRight);
+        MySQL::NonQuery("INSERT INTO ooebvrl_sections (listID, tableID, sectionName, sectionFilename, sectionInfoLeft, sectionInfoRight) VALUES (?,?,?,?,?,?)",'ssssss',$listID,$tableID,$sectionName,$sectionFilename,$sectionInfoLeft,$sectionInfoRight);
 
         Redirect('/ooebv-ranglisten/'.$_GET['list'].'/'.$_GET['table']);
         die();

@@ -29,7 +29,7 @@
         foreach($selectedMembers as $member)
         {
             $uid = uniqid();
-            MySQL::NonQuery("INSERT INTO members_spielerranglisten (id,memberID,position,year,team) VALUES (NULL,?,'".$i++."',?,'1')",'@s',$member,$year);
+            MySQL::NonQuery("INSERT INTO members_spielerranglisten (memberID,position,year,team) VALUES (?,'".$i++."',?,'1')",'@s',$member,$year);
         }
 
         // Update last edit-Date

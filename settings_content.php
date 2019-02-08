@@ -29,7 +29,7 @@
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $club = $_POST['club'];
 
-        MySQL::NonQuery("INSERT INTO users (id,rank,club,email,password) VALUES ('','clubmanager',?,?,?)",'@s',$club,$email,$password);
+        MySQL::NonQuery("INSERT INTO users (rank,club,email,password) VALUES ('clubmanager',?,?,?)",'@s',$club,$email,$password);
 
         Redirect(ThisPage("+newUserAdded"));
         die();
@@ -55,7 +55,7 @@
         $email = $_POST['email'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-        MySQL::NonQuery("INSERT INTO users (id,rank,firstname,lastname,sex,email,password) VALUES ('','administrative',?,?,?,?,?)",'@s',$firstname,$lastname,$gedner,$email,$password);
+        MySQL::NonQuery("INSERT INTO users (rank,firstname,lastname,sex,email,password) VALUES ('administrative',?,?,?,?,?)",'@s',$firstname,$lastname,$gedner,$email,$password);
 
         $first = true;
         $uid = MySQL::Scalar("SELECT id FROM users WHERE email = ? AND password = ?",'@s',$email,$password);
@@ -105,7 +105,7 @@
             {
                 MySQL::NonQuery("UPDATE permissions SET allowed = ? WHERE user_id = ? AND permission = ?",'@s',$allowed,$id,$permission);
             }
-            else MySQL::NonQuery("INSERT INTO permissions (id,user_id,permission,allowed) VALUES ('',?,?,?)",'sss',$id,$permission,$allowed);
+            else MySQL::NonQuery("INSERT INTO permissions (user_id,permission,allowed) VALUES (?,?,?)",'sss',$id,$permission,$allowed);
         }
 
         Redirect(ThisPage());

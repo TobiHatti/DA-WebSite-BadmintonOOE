@@ -50,7 +50,7 @@
 
         if($_POST['postType']=="new")
         {
-            MySQL::NonQuery("INSERT INTO zentralausschreibungen (id,kategorie) VALUES ('','newfield')");
+            MySQL::NonQuery("INSERT INTO zentralausschreibungen (kategorie) VALUES ('newfield')");
             $zaID = MySQL::Scalar("SELECT id FROM zentralausschreibungen WHERE kategorie = 'newfield'");
         }
         else $zaID = $_POST['updateZA'];

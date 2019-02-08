@@ -9,7 +9,7 @@
         $email = $_POST['email'];
         $phone = $_POST['phone'];
 
-        MySQL::NonQuery("INSERT INTO vorstand (id,darstellung,name,bereich,email,telefon) VALUES ('','box',?,?,?,?)",'@s',$name,$fields,$email,$phone);
+        MySQL::NonQuery("INSERT INTO vorstand (darstellung,name,bereich,email,telefon) VALUES ('box',?,?,?,?)",'@s',$name,$fields,$email,$phone);
 
         FileUpload("content/vorstand/","image","","","UPDATE vorstand SET foto = 'FNAME' WHERE name = '$name'");
 

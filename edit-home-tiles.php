@@ -11,7 +11,7 @@
 
         if(!MySQL::Exist("SELECT id FROM page_content WHERE page = ? AND paragraph_index = ?",'@s',$page,$pidx))
         {
-            MySQL::NonQuery("INSERT INTO page_content (id, page, paragraph_index) VALUES ('',?,?)",'@s',$page,$pidx);
+            MySQL::NonQuery("INSERT INTO page_content (page, paragraph_index) VALUES (?,?)",'@s',$page,$pidx);
         }
 
         MySQL::NonQuery("UPDATE page_content SET text = ? WHERE page = ? AND paragraph_index = ?",'@s',$pageContent,$page,$pidx);
@@ -30,7 +30,7 @@
 
         if(!MySQL::Exist("SELECT id FROM page_content WHERE page = ? AND paragraph_index = ?",'@s',$page,$pidx))
         {
-            MySQL::NonQuery("INSERT INTO page_content (id, page, paragraph_index) VALUES ('',?,?)",'@s',$page,$pidx);
+            MySQL::NonQuery("INSERT INTO page_content (page, paragraph_index) VALUES (?,?)",'@s',$page,$pidx);
         }
 
         MySQL::NonQuery("UPDATE page_content SET text = ? WHERE page = ? AND paragraph_index = ?",'@s',$pageContent,$page,$pidx);
