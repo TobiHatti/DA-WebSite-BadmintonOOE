@@ -6,7 +6,7 @@
     $countPlayerHaveNr = 0;
 
     $row = 1;
-    if (($handle = fopen("files/_development/SRL/SRL1112.csv", "r")) !== FALSE)
+    if (($handle = fopen("files/_development/SRL/SRL1819.csv", "r")) !== FALSE)
     {
         //Skip first line
         $data = fgetcsv($handle, 1000, ";");
@@ -77,7 +77,7 @@
                     $memberID = MySQL::Scalar("SELECT id FROM members WHERE playerID = ?",'s',$playerID);
                 }
 
-                $year = '2011-2012';
+                $year = '2018-2019';
 
                 //MySQL::NonQuery("INSERT INTO members_spielerranglisten (memberID,year,position,team,mf,currentClubID,assignedClubID) VALUES (?,?,?,?,?,?,?)",'@s',$memberID,$year,$rank,$team,$mf,$clubID,$assignID);
 

@@ -6,7 +6,7 @@
         $id = $_POST['updateMembers'];
         $firstname=$_POST['firstname'];
         $lastname=$_POST['lastname'];
-        $birthdate=$_POST['birthdate'];
+        $birthdate= $_POST['birthdate'];
         $number=$_POST['number'];
         $gender = $_POST['gender'];
 

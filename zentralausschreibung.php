@@ -28,20 +28,21 @@
         $chNennschluss = (isset($_POST['ch_nennschluss']) ? 1 : 0 );
         $chZusatzangaben = (isset($_POST['ch_zusatzangaben']) ? 1 : 0 );
 
-        $Verein = $_POST['verein'];
-        $Uhrzeit = $_POST['uhrzeit'];
-        $Auslosung = $_POST['auslosung'];
-        $Hallenname = $_POST['hallenname'];
-        $AnschriftHalle = $_POST['anschrift_halle'];
-        $AnzahlFelder = $_POST['anzahl_felder'];
-        $Turnierverantwortlicher = $_POST['turnierverantwortlicher'];
-        $Oberschiedsrichter = $_POST['oberschiedsrichter'];
-        $Telefon = $_POST['telefon'];
-        $AnmeldungOnline = $_POST['anmeldung_online'];
-        $AnmeldungEmail = $_POST['anmeldung_email'];
-        $NennungenEmail = $_POST['nennungen_email'];
-        $Nennschluss = $_POST['nennschluss'];
-        $Zusatzangaben = $_POST['zusatzangaben'];
+        // Extra condintions required for world4you sql-server (i hate it...)
+        $Verein = (isset($_POST['ch_verein']) ? $_POST['verein'] : '' );
+        $Uhrzeit = (isset($_POST['ch_uhrzeit']) ? $_POST['uhrzeit'] : '' );
+        $Auslosung = (isset($_POST['ch_auslosung']) ? $_POST['auslosung'] : '' );
+        $Hallenname = (isset($_POST['ch_hallenname']) ? $_POST['hallenname'] : '' );
+        $AnschriftHalle = (isset($_POST['ch_anschrift_halle']) ? $_POST['anschrift_halle'] : '' );
+        $AnzahlFelder = (isset($_POST['ch_anzahl_felder']) ? $_POST['anzahl_felder'] : '' );
+        $Turnierverantwortlicher = (isset($_POST['ch_turnierverantwortlicher']) ? $_POST['turnierverantwortlicher'] : '' );
+        $Oberschiedsrichter = (isset($_POST['ch_oberschiedsrichter']) ? $_POST['oberschiedsrichter'] : '' );
+        $Telefon = (isset($_POST['ch_telefon']) ? $_POST['telefon'] : '' );
+        $AnmeldungOnline = (isset($_POST['ch_anmeldung_online']) ? $_POST['anmeldung_online'] : '' );
+        $AnmeldungEmail = (isset($_POST['ch_anmeldung_email']) ? $_POST['anmeldung_email'] : '' );
+        $NennungenEmail = (isset($_POST['ch_nennungen_email']) ? $_POST['nennungen_email'] : '' );
+        $Nennschluss = (isset($_POST['ch_nennschluss']) ? $_POST['nennschluss'] : '0000-00-00' );
+        $Zusatzangaben = (isset($_POST['ch_zusatzangaben']) ? $_POST['zusatzangaben'] : '' );
 
         if($kategorie=='Training') $size='';
         else $size='full';
@@ -50,15 +51,15 @@
 
         if($_POST['postType']=="new")
         {
-            MySQL::NonQuery("INSERT INTO zentralausschreibungen (kategorie) VALUES ('newfield')");
-            $zaID = MySQL::Scalar("SELECT id FROM zentralausschreibungen WHERE kategorie = 'newfield'");
+            MySQL::NonQuery("INSERT INTO zentralausschreibungen (category) VALUES ('newfield')");
+            $zaID = MySQL::Scalar("SELECT id FROM zentralausschreibungen WHERE category = 'newfield'");
         }
         else $zaID = $_POST['updateZA'];
 
         $updateSQL = "
             UPDATE zentralausschreibungen SET
             size = ?,
-            kategorie = ?,
+            category = ?,
             title_line1 = ?,
             title_line2 = ?,
             date_begin = ?,
@@ -93,7 +94,7 @@
             act_zusatzangaben = ?,
             zusatzangaben = ?,
             location = ?
-            WHERE id = ?;
+            WHERE id = ?
         ";
 
         MySQL::NonQuery($updateSQL,'@s',$size,$kategorie,$title1,$title2,$date1,$date2,$chTimespan,$chVerein,$Verein,$chUhrzeit,$Uhrzeit,$chAuslosung,$Auslosung,$chHallenname,
@@ -237,7 +238,7 @@
                         echo '
                             <div class="za_box">
                                 <div class="za_title">
-                                    <h3 style="color: '.Setting::Get("Color".$row['kategorie']).'">'.$row['title_line1'].'</h3>
+                                    <h3 style="color: '.Setting::Get("Color".$row['category']).'">'.$row['title_line1'].'</h3>
 
                                 </div>
                                 <div class="za_data">
