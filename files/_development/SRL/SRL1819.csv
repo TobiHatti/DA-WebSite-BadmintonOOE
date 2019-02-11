@@ -1,0 +1,731 @@
+ ;Nachname;Vorname;Mitgl. Nr.;Team;Vereins-Nr.;MF;Handy;Email;Assign
+Herren;;;;;;;;;0
+1.;Hajek;Christoph;32198;1;301;;;;301
+2.;Rockenschaub ;Erwin;1125;1;301;;;;301
+3.;Hörmanseder ;Markus;30008;1;301;;;;301
+4.;Mittermayr ;Alexander;32076;1;301;;;;301
+5.;Adlmanninger ;Hans Peter;34293;2;301;;;;301
+6.;Huber ;Helmuth;1111;2;301;;;;301
+7.;Sageder;Jürgen;31029;2;301;;;;301
+8.;Gumpoltsberger;Andreas;30007;2;301;;;;301
+9;Shijo;Sebastian;39393;2;301;21.01.2019;;;301
+10;Schinagl;Justin;35735;2;301;;;;301
+11;Löwe;Bernd;38593;2;301;;;;301
+12;Strauß;Stefan;31866;2;301;;;;301
+13;Penzinger;Martin;38373;2;301;;;;301
+14;Khawavi;Mohammad Reza;38913;2;301;27.09.2018;;;301
+15;Bösch;Julian;36354;2;301;;;;301
+16.;Schwarz;Rene;37953;2;301;;;;301
+Damen;;;;;;;;;0
+1.;Steinmann ;Maria;31381;1;301;MF 1    ;0676 / 3230073;m.steinmann@raiffeisen-schaerding.at;301
+2.;Braid;Elke;1703;1;301;;;;301
+3.;Mittermayr ;Carolina;36353;2;301;;;;301
+4.;Gumpoltsberger;Sabine;31298;2;301;MF 2   ; 0676 / 7121784;bine_mayer@gmx.at;301
+5.;Lindinger ;Melanie;32113;2;301;;;;301
+6.;Lindinger ;Alexandra;31851;2;301;;;;301
+7.;Rockenschaub;Brunhilde;1129;2;301;;;;301
+8.;Strasser;Petra;3403;2;301;;;;301
+9.;Angleitner;Nadine;32199;2;301;;;;301
+Herren;;;;;;;;;0
+1.;Suleimanov;Ruslan;37633;1;302;;;;302
+2.;Koch;Walter;32512;1;302;;;;302
+3.;Mayrhofer;Franz;32513;1;302;MF;0664 / 88791276;mayrhofer.franz@gmx.net;302
+4.;Grügner;Robert;33933;1;302;;;;302
+5.;Krammer;Jürgen;37333;1;302;;;;302
+6.;Röbl;Markus;38213;1;302;;;;302
+7.;Rieder ;Alexander;37593;1;302;;;;302
+Damen;; ;;;;;;;0
+1.;Schmidt;Monika;35773;1;302;;;;302
+2.;Röbl;Maria;36833;1;302;;;;302
+3.;Fuchs;Renate;32536;1;302;;;;302
+4.;Nadarevic;Melissa;38153;1;302;;;;302
+5.;Herzig;Desiree;38033;1;302;;;;302
+6.;Ljutic;Amila;38353;1;302;;;;302
+Herren;;;;;;;;;0
+1.;Razinger;Felix;32214;1;303;MF 1;0681 / 20210824;f.razinger@tele2.at;303
+2.;Brüggenwerth;Jan-Matteo;32628;1;303;;;;303
+3.;Kolbeinsson;Axel;32151;1;303;;;;303
+4.;Wiesinger;Michael;31010;1;303;;;;303
+5.;Stelzmüller;Philipp;31875;2;303;;;;303
+6.;Mayrhauser;Lukas;32041;2;303;;;;303
+7.;Brüggenwerth;Carle;35413;2;303;;;;303
+8.;Paar;Dennis;36194;2;303;MF 2;0680 / 3235992;dennis.paar@gmail.com;303
+9.;Peterseil;Manfred;33115;2;303;;;;303
+10.;Pineker ;Markus;53154;2;303;;;;303
+11.;Kienpointner ;Philipp;50332;2;303;;;;303
+12.;Eggert;Holger;39033;2;303;04.11.2018;;;303
+13.;Grafenberger;Peter;30772;2;303;;;;303
+Damen;;;;;;;;;0
+1.;Fröhlich;Melanie;32084;1;303;;;;303
+2.;Hinterkörner;Susanne;33993;1;303;;;;303
+3.;Mößler;Barbara;34593;2;303;;;;303
+4.;Assmann;Hannah;37753;2;303;;;;303
+5.;Reischl;Jana;37054;2;303;;;;303
+Herren;;;;;;;;;0
+1.;Gnedt;Wolfgang;21139;2;304;;;;304
+2.;Sepec;Miha jun.;21057;1;304;;;;304
+3.;Jamnik;Kek;34393;1;304;;;;304
+4.;Novak;Daniel;70864;1;304;;;;304
+5.;Krivec;Gasper;38734;1;304;;;;304
+6.;Horvat;Miha ;80402;2;304;;;;304
+7.;Hochgatterer;Harald;3602;2;304;;;;304
+8.;Dornig;Klaus;31577;2;304;;;;304
+9.;Bauer;Roland;3345;3;304;;;;304
+10.;Hechenberger;Reinhard;635;3;304;MF Stv. 2;;reinhard.hechenberger@bsc70linz.at;304
+11.;El-Dabbagh;Tarek;276;3;304;;;;304
+12.;Farooq;Tariq;1197;3;304;;;;304
+13.;Preissl;Christoph;34533;3;304;;;;304
+14.;Kainrath;Christoph;337;3;304;MF 2;0664 / 60651615;christoph.kainrath@bsc70linz.at;304
+15.;Tomsovic;Arthur;32333;3;304;;;;304
+16.;Arnold;Nikita;30531;3;304;;;;304
+17.;Böhm;Andreas;32095;3;304;MF Stv. 3;;andreas.boehm@bsc70linz.at;304
+18.;Ziermayr;Stephan;31199;3;304;11.02.2019;;;304
+19.;Sternberger;Wolfgang;31703;3;304;;;;304
+20.;Hofer;Richard;31582;3;304;;;;304
+21.;Reininger;Patrick;36334;3;304;;;;304
+22.;Mitterhauser;Klaus;31289;3;304;;;;304
+23.;Regner;Michael ;32854;3;304;;;;304
+24.;Regner;Peter;32485;3;304;;;;304
+25.;Halasz;Janos;2087;3;304;;;;304
+26.;Nemecek;David;35016;3;304;;;;304
+27.;Tomancok;Max;37073;3;304;;;;304
+Damen;;;;;;;;;0
+1.;Polanc;Petra;38793;1;304;;;;304
+2.;Bajuk;Jerca;38733;1;304;;;;304
+3.;Peshekhonova;Natalia;35133;2;304;;;;304
+4.;Nader;Karina;30038;2;304;;;;304
+5.;Hofinger;Natalie;31522;3;304;;;;304
+6.;Edelmüller;Ursula;3172;3;304;;;;304
+7.;Wu;Christina;10768;3;304;;;;304
+8.;Regner;Sabine;32455;3;304;MF 3;0676 / 6343322;sabine.regner@bsc70linz.at;304
+9.;Kosorus;Hilda;34773;3;304;;;;304
+10.;Coroli;Vetuta;38735;3;304;;;;304
+11.;Perneder;Sandra;34157;3;304;;;;304
+12.;Poledna;Pia;38434;3;304;;;;304
+Herren;;;;;;;;;0
+1.;Leisch;Günther;30921;1;305;;;;305
+2.;Leisch ;Klaus;31988;1;305;;;;305
+3.;Dorn;Manfred;01257;1;305;;;;305
+4.;Leisch;Peter;01272;1;305;;;;305
+5.;Pröll;Karl;01275;1;305;MF;0676 / 814276220;proell.karl@aon.at;305
+6.;Dorn;David;32372;1;305;;;;305
+7.;Ban;Bonarith;31262;1;305;;;;305
+Damen;;;;;;;;;0
+1.;Leidlmayer;Doris;30504;1;305;;;;305
+2.;Pröll;Elisabeth;01274;1;305;;;;305
+3.;Schned ;Alexandra;30505;1;305;;;;305
+4.;Ameseder;Karin;35253;1;305;;;;305
+Herren;;;;;;;;;0
+1.;Gnedt (LS);Wolfgang;21139;1;307;;;;307
+2.;Filimon (EU);Collins-Valentine;37394;1;307;;;;307
+3.;Koch ;Jürgen;1313;1;307;;;;307
+4.;Zauner ;Peter;1749;1;307;;;;307
+5.;Serov;Alexander;31894;2;307;;;;307
+6.;Ratzenböck ;Markus ;30640;2;307;;;;307
+7.;Froschauer;Luca;34973;2;307;;;;307
+8.;Niederhuber(LS);Kai;34673;1;307;;;;307
+9.;Ostermann ;Jakob;31874;2;307;;;;307
+10.;Auberger ;Jannik;35215;3;307;;;;307
+11.;Stündl ;Manfred;1326;3;307;;;;307
+12;Szöke (EU);Gyula;38114;3;307;;;;307
+13.;Stockinger;Dieter;35193;3;307;MF 3;0650 / 6060210;dieter.stockinger@haberkorn.com;307
+14.;Koch ;Harald;1311;4;307;;;;307
+15.;Danninger ;Harald;31709;4;307;MF 2;0664 / 4108801;harald.danninger@aon.at;307
+16.;Wieshofer ;Helmut;31639;4;307;;;;307
+17.;Buckstegen;Sebastian;35654;4;307;;;;307
+18.;Gindelhumer;Roland;31195;4;307;;;;307
+19.;Dirngrabner;Claus;1713;4;307;;;;307
+20.;Giel;Michael Peter;31310;4;307;MF 4;0676-4464071;michael.giel@liwest.at;307
+21.;Reifetshamer ;Rudolf;31191;4;307;;;;307
+22.;Pospichal;Gustav Rudolf;32600;4;307;;;;307
+23.;Lösch ;Dieter;31080;4;307;;;;307
+24.;Spitzhofer;Elias;37177;4;307;;;;307
+25.;Stockinger;Marco;35214;4;307;;;;307
+26.;Grum;Christoph;37433;4;307;;;;307
+27.;Stocklasser         ;Thomas;32149;4;307;11.09.2018;;;307
+28.;Huber               ;Stefan    ;38874;4;307;11.09.2018;;;307
+29.;Berndl;Josef;32634;4;307;;;;307
+30.;Kreys;Luca;90183;4;307;;;;307
+31.;Koch ;Herbert;1312;4;307;;;;307
+Damen;;;;;;;;;0
+1.;Heidenreich (EU);Lisa;38113;1;307;;;;307
+2.;Constaninescu (EU);Florentina;38813;1;307;;;;307
+3.;Lais (LS);Janine;61722;1;307;;;;307
+4.;Dutu (EU);Maria;38814;2;307;;;;307
+5.;Hauser;Laura;32243;2;307;;;;307
+6.;Zinganell;Lena;32409;3;307;;;;307
+7.;Scheer;Barbara;31044;3;307;;;;307
+8.;Sendlhofer;Denise;32168;4;307;;;;307
+9.;Pohlmüller;Julia;31573;4;307;;;;307
+10.;Pei ;Sun;3852;4;307;;;;307
+11.;Turner;Lelaina;32146;4;307;;;;307
+12.;Reifetshamer ;Karola;31362;4;307;;;;307
+13.;Weilguni;Bettina;1179;4;307;;;;307
+14.;Grum;Bettina;37393;4;307;;;;307
+15.;Maric;Sara;36373;4;307;;;;307
+16.;Stockinger;Lara;35213;4;307;;;;307
+17.;Fobian;Anita;36914;4;307;;;;307
+18.;Auberger ;Ronja;36013;4;307;keine Lizenz-nicht spielberechtigt;;;307
+19.;Dreu;Sara;37176;4;307;keine Lizenz-nicht spielberechtigt;;;307
+20.;Fobian;Maibritt;36014;4;307;;;;307
+21.;Lanzerstorfer;Emma;37173;4;307;;;;307
+22.;Ratzenböck ;Liga;36913;4;307;;;;307
+23.;Zangenfeind;Katrin;35873;4;307;;;;307
+24.;Staack;Nina;38833;4;307;;;;307
+Herren:;;;;;;;;;0
+1.;Berger;Manuel;30729;1;308;;;;308
+2.;Schwarzlmüller;Jürgen;32202;1;308;;;;308
+3.;Klement;Christian;3809;1;308;MF ;0664 / 60405539;chriklement@gmail.com;308
+4.;Pöllhuber;Markus;32009;1;308;;;;308
+5.;Schmid;Erik;33553;1;308;;;;308
+6.;Hofer;Martin;34093;1;308;;;;308
+7.;Pilz;Martin;30335;1;308;;;;308
+8.;Hofreiter;Wolfgang;911;1;308;;;;308
+9.;Felbauer;Karl;33033;1;308;;;;308
+Damen:;;;;;;;;;0
+1.;Walter;Marion;32568;1;308;;;;308
+2.;Kloihofer;Christa;1336;1;308;;;;308
+3.;Messner ;Brigitte;32008;1;308;;;;308
+4.;Klement;Andrea;31459;1;308;;;;308
+5.;Suwa;Elena;38753;1;308;;;;308
+Herren;;;;;;;;;0
+1.;Brandstötter;Florian;31250;1;309;;;;309
+2.;Kronsteiner;Dominik;31026;1;309;;;;309
+3.;Kofler;Günter;31561;1;309;;;;309
+4.;Weber;Manuel;3765;1;309;;;;309
+5.;Gruber;Bernhard;31485;1;309;;;;309
+6.;Höller;Rene;32189;1;309;;;;309
+7.;Starl;Harald;1;1;309;MF;0676 / 5117052;starl@badminton.at;309
+8.;Gollinger;Stefan;31559;1;309;;;;309
+9.;Hellauer;Markus;3946;1;309;keine Lizenz-nicht spielberechtigt;;;309
+10.;Hennerbichler;Christian;2754;1;309;;;;309
+11.;Kronsteiner;Andreas;1652;1;309;;;;309
+12.;Forstinger;Manfred;2759;1;309;;;;309
+13.;Ohler;Richard;30295;1;309;;;;309
+14.;Stikler;Daniel;32616;1;309;;;;309
+15.;Hollinetz;Tobias;37018;1;309;keine Lizenz-nicht spielberechtigt;;;309
+16.;Sperrer;Jakob;37020;1;309;;;;309
+17.;Thalhammer;Sebastian;37021;1;309;keine Lizenz-nicht spielberechtigt;;;309
+18.;Altenstrasser;Alexander;38476;1;309;keine Lizenz-nicht spielberechtigt;;;309
+19.;Amering;Georg;37774;1;309;keine Lizenz-nicht spielberechtigt;;;309
+20.;Colaco;Desmond;38474;1;309;keine Lizenz-nicht spielberechtigt;;;309
+21.;Pavlovic;Mateja;38414;1;309;keine Lizenz-nicht spielberechtigt;;;309
+22.;Wiesenberger;Roland;38413;1;309;;;;309
+23.;Kalkhofer;Elias;37773;1;309;keine Lizenz-nicht spielberechtigt;;;309
+Damen;;;;;;;;;0
+1.;Gruber;Miriam;1798;1;309;;;;309
+2.;Banhegyi;Zita;32539;1;309;;;;309
+3.;Forstinger;Lisa;31560;1;309;;;;309
+4.;Putz;Susanne;30294;1;309;keine Lizenz-nicht spielberechtigt;;;309
+5.;Kronsteiner;Waltraud;1365;1;309;;;;309
+6.;Riedler;Cornelia;32613;1;309;;;;309
+7.;Zimmer;Esther;32615;1;309;keine Lizenz-nicht spielberechtigt;;;309
+8.;Dallinger;Petra;35954;1;309;;;;309
+9.;Jusufi;Sherife;35953;1;309;;;;309
+10.;Martetschläger;Hanna;37019;1;309;;;;309
+11.;Pöschl;Susanna;37793;1;309;keine Lizenz-nicht spielberechtigt;;;309
+12.;Jusufi;Leunora;37775;1;309;;;;309
+13.;Auringer;Emma;38473;1;309;;;;309
+14.;Böhm;Jamie Lee;38475;1;309;keine Lizenz-nicht spielberechtigt;;;309
+15.;Weber;Laura;38415;1;309;;;;309
+Herren;;;;;;;;;0
+1.;Schwack;Göran;30061;1;310;;;;310
+2.;Wong;Alexander;02926;1;310;;;;310
+3.;Bendl;Gerhard;01374;1;310;;;;310
+4.;Miksche;Florian;00307;1;310;;;;310
+5.;Kundl;Stephan;31765;1;310;MF ;0650 / 4977137;badminton.braunau@gmail.com;310
+6.;Huber;Christian;02614;1;310;;;;310
+7.;Aberer;Alexander;30972;1;310;;;;310
+8.;Wong;Gabriel;32953;1;310;;;;310
+9.;Wong;Hin Danny;01405;1;310;;;;310
+10.;Höller;Maximilian;38333;1;310;;;;310
+11.;Wong;Joel;38334;1;310;;;;310
+12.;Jölly;Niclas;39235;1;310;;;;310
+Damen;;;;;;;;;0
+1.;Fric;Melanie;10988;1;310;;;;310
+2.;Kundl;Mirjam;03922;1;310;;;;310
+3.;Demmelbauer;Roswitha;31763;1;310;gestrichen nach Hinrunde;;;310
+4.;Vokroj;Katharina;16487;1;310;;;;310
+5.;Rödig;Pia;35994;1;310;;;;310
+6.;Seidl;Christina;38154;1;310;;;;310
+7.;Stein;Lilli;39233;1;310;;;;310
+8.;Höller;Marie;39234;1;310;;;;310
+Herren;;;;;;;;;0
+1.;Bamberger;Norbert;30777;1;311;;;;311
+2.;Moser;Simon;2598;1;311;;;;311
+3.;Moser ;Stefan;1774;1;311;;;;311
+4.;Moser ;Lukas;31973;1;311;;;;311
+5.;Kotzor;Klaus;30071;1;311;MF;0676 / 7560243;office@buchhaltung-kotzor.at;311
+6.;Moser ;Josef;1409;1;311;;;;311
+7.;Kammerer ;Stefan;38773;1;311;;;;311
+8.;Wösner ;Robert;30829;1;311;;;;311
+9.;Wösner;Benedikt;38774;1;311;;;;311
+10.;Haslinger ;Andreas;38775;1;311;;;;311
+Damen;;;;;;;;;0
+1.;Kaserer;Maria Magdalena;31845;1;311;;;;311
+2.;Osterkorn ;Stefanie;33774;1;311;;;;311
+3.;Moser;Helga;1408;1;311;;;;311
+4.;Kieslinger;Julia;32026;1;311;;;;311
+5.;Moser;Margarete;33853;1;311;;;;311
+6.;Woldrich ;Eva;32171;1;311;;;;311
+Herren;;;;;;;;;0
+1.;Berger-Söllinger;Manfred;3917;1;313;MF;0664 / 2523750;bergersoellingermanfred@gmx.at;313
+2.;Plank;Wolfgang;1386;1;313;;;;313
+3.;Plank;Josef;1358;1;313;;;;313
+4.;Kronberger;Thomas;30769;1;313;;;;313
+5.;Nussbaumer;Marcel;37215;1;313;;;;313
+6.;Schrems;Helmut;38273;1;313;;;;313
+Damen;;;;;;;;;0
+1.;Fuchshuber;Manuela;30770;1;313;;;;313
+2.;Kronberger;Elisabeth;30768;1;313;;;;313
+3.;Mairinger ;Barbara;36473;1;313;;;;313
+4.;Plank;Tina;37013;1;313;;;;313
+5.;Mairinger ;Laura;35534;1;313;;;;313
+Herren;;;;;;;;;0
+1.;Baumgartner;Florian;31656;1;314;;;;314
+2.;Serov;Andrej;31972;1;314;;;;314
+3.;Schausberger;Michael;32282;1;314;;;;314
+4.;Berger (LS);Manuel;30729;1;314;;;;314
+5.;Wimmer;Thomas;31479;2;314;;;;314
+6.;Brunner ;Roland;10674;2;314;;;;314
+7.;Fröhlich;Lukas;32035;2;314;;;;314
+8.;Baumgartner;Tobias;31681;2;314;MF 2 ;0699 / 18144125;;314
+9.;Sturm;Thomas;31878;3;314;;;;314
+10.;Hammerer;Alexander;40542;3;314;;;;314
+11.;Nussbaumer;Lukas;32340;3;314;;;;314
+12.;Retschitzegger;Lukas;31006;3;314;;;;314
+13.;Horninger;Gerald;30299;4;314;MF 3 Stv.;0664 / 4024410;;314
+14.;Schausberger;Hermann;3753;4;314;MF 3 ;0664 / 88506659;h.schaussi@gmail.com;314
+15.;Neudorfer;Roman;32083;4;314;;;;314
+16.;Dlapka;Stephan;34554;4;314;MF 4;0660 / 6503582;stephandlapka@gmail.com;314
+17.;Stadlmayr;Maximilian;33396;4;314;;;;314
+18.;Schausberger;Stefan;33393;4;314;MF 4 Stv.;0677 / 61930924;st.schausberger@gmx.net;314
+19.;Hoffelner;Josef;31941;4;314;;;;314
+20.;Edlmayr;Alexander;34473;4;314;;;;314
+21.;Huber;Stefan;30083;4;314;;;;314
+22.;Huemer;Alexander;34253;4;314;;;;314
+23.;Windauer;Jonas;35714;4;314;;;;314
+24.;Mauler;Christian;3493;4;314;;;;314
+25.;Retschitzegger;Josef;1074;4;314;;;;314
+26.;Windauer;Lorenz;37693;4;314;;;;314
+27.;Huber;Sebastian;37914;4;314;;;;314
+28.;Kuttner;Christoph;13187;4;314;;;;314
+29.;Puschl;Alexander;38695;4;314;;;;314
+30.;Huber ;Sebastian Thomas;38696;4;314;;;;314
+Damen;;;;;;;;;0
+1.;Hochmeir;Katharina;32225;1;314;;;;314
+2.;Haas;Jana;32224;1;314;;;;314
+3.;Reiter;Nadine;32331;2;314;MF 2 Stv.;0676 / 7649966  ;reiter272@gmail.com;314
+4.;Pertl;Isolde;32774;2;314;;;;314
+5.;Fröhlich;Maria;32082;3;314;;;;314
+6.;Tippelt;Ina;33633;3;314;;;;314
+7.;Stadlmayr;Christine;33773;4;314;;;;314
+8.;Kuttner;Lisa;31924;4;314;;;;314
+9.;Sturm;Katharina;31877;4;314;;;;314
+10.;Schausberger;Theresa;32307;4;314;;;;314
+11.;Stadler;Uli;32219;4;314;;;;314
+12.;Stadlmayr;Sandra;34613;4;314;;;;314
+13.;Dlapka;Kira;36293;4;314;;;;314
+14.;Dlapka;Sarah;36633;4;314;;;;314
+15.;Dlapka;Rafaela;37313;4;314;;;;314
+16.;Gillesberger ;Hanna;37154;4;314;;;;314
+17.;Durchschlag;Hannah;32273;4;314;13.01.2019;;;314
+Herren;;;;;;;;;0
+1.;Rebhandl;Lukas;31389;1;317;;;;317
+2.;Rebhandl;Simon;31682;1;317;;;;317
+3.;Popp;Harald;491;1;317;MF 1;0699 / 16363705;popp.harald@gmail.com;317
+4.;Weilguni;Andreas;3496;1;317;;;;317
+5.;Jenkner;Armin;30963;2;317;;;;317
+6.;Mühringer;Christian;3487;2;317;;;;317
+7.;Rebhandl;Ernst;3491;2;317;;;;317
+8.;Kaun;Michael;1575;2;317;;;;317
+9.;Reisenbauer;Roland;32421;2;317;MF 2;0664 / 9608441;roland.reisenbauer@gmx.at;317
+10.;Rebhandl;Matthias;32418;2;317;;;;317
+11.;Rebhandl;Alfred;1568;2;317;;;;317
+12.;Berger;Manuel;32415;2;317;;;;317
+13.;Ofner ;Fabian;35613 ;2;317;;;;317
+14.;Dräher;Julian;37033 ;2;317;;;;317
+15.;Rebhandl;Jakob;36174 ;2;317;;;;317
+Damen;;;;;;;;;0
+1.;Rebhandl;Christine;2574;1;317;;;;317
+2.;Rebhandl;Eva;32417;1;317;;;;317
+3.;Schoiswohl;Elisabeth;31217;2;317;;;;317
+4.;Herzog;Jennifer;32610;2;317;;;;317
+5.;Lugmayr;Daniela;2318;2;317;;;;317
+6.;Kaun;Gabriele;32134;2;317;;;;317
+7.;Reisenbauer;Monika;35234;2;317;;;;317
+8.;Laurien;Jana;36253;2;317;;;;317
+9.;Rebhandl;Susanne;36653;2;317;;;;317
+10.;Reisenbauer;Nina;35755;2;317;;;;317
+Herren;;;;;;;;;0
+1.;Dadas;Slawomir;3110;1;319;;;;319
+2.;Leko;Luka;32157;1;319;;;;319
+3.;Leko;Dominik;32158;1;319;;;;319
+4.;Huber;Bernhard;32211;1;319;MF;0650 / 5714262;physiotherapie.huber@gmx.de;319
+5.;Harwöck;Florian;32691;1;319;;;;319
+6.;Leko;Tomas;32043;1;319;;;;319
+7.;Mairhofer;Wolfgang;32913;1;319;;;;319
+8.;Karimi;Yasin;37133;1;319;;;;319
+9.;Wellinger;Stefan;31001;1;319;;;;319
+10.;Leeb;Kurt;3365;1;319;;;;319
+Damen:;;;;;;;;;0
+1.;Schwetz;Alexandra;32068;1;319;;;;319
+2.;Schwetz;Lena;32143;1;319;;;;319
+3.;Mairhofer;Hannah;32582;1;319;;;;319
+4.;Mairhofer;Helena;32639;1;319;;;;319
+5.;Fischlhammer;Laura;32258;1;319;;;;319
+Herren;;;;;;;;;0
+1.;Krimbacher;Rene;50095;1;322;;;;322
+2.;Dengkeng;Julius;31761;1;322;;;;322
+3.;Hennebichler;Thomas;30883;1;322;;;;322
+4.;Aichstill;Florian;32578;1;322;MF 1;0664 / 5354524;f.aichstill@gmail.com;322
+5.;Nussdorfer;Jonas;37453;2;322;;;;322
+6.;Baumann;Klaus;30936;2;322;;;;322
+7.;Binder;Stefan;32579;2;322;MF 2;0660 / 6778676;binder2@gmx.at;322
+8.;Duschlbauer;Heinz;31853;2;322;;;;322
+9.;Hausjell;Christian;32280;2;322;;;;322
+10.;Hüttmayr;Harald;35854;2;322;;;;322
+11.;Schuster;Manfred;36873;2;322;;;;322
+12.;Nussdorfer;Norbert;31624;2;322;;;;322
+13.;Stelzhammer;Klaus;1341;2;322;;;;322
+14.;Kalleitner;Anton;35853;2;322;;;;322
+Damen;;;;;;;;;0
+1.;Staufer;Simone;32338;1;322;;;;322
+2.;Ryba;Astrid;31655;1;322;;;;322
+3.;Wimmer;Katrin;35513;2;322;;;;322
+4.;Pedrotti;Sylvia;31443;2;322;;;;322
+5.;Zaglmair;Judith;1252;2;322;;;;322
+6.;Duschlbauer;Petra;31940;2;322;;;;322
+7.;Lanzinger;Ulli;39293;2;322;13.01.2019;;;322
+Herren;;;;;;;;;0
+1.;Fehringer;Florian;32404;1;325;;;;325
+2.;Krenmayr;Peter;30242;1;325;;;;325
+3.;Handlechner;Josef;30241;1;325;MF 1;0676 / 4075406;josef.handlechner@at.trumpf.com;325
+4.;Edlinger;Gerald;32793;1;325;;;;325
+5.;Leierzopf;Thomas;3748;2;325;;;;325
+6.;Auberger;Otmar;3420;2;325;;;;325
+7.;Hauser;Klemens;31570;2;325;;;;325
+8.;Froschauer;Alexander;35174;2;325;;;;325
+9.;Hubner;Klaus;32594;2;325;MF 2;0680 / 1435298;klaus.hubner@liwest.at;325
+10.;Hittmannsberger;Andreas;30679;2;325;;;;325
+11.;Mauhart;Günter;3972;2;325;;;;325
+12.;Lanzerstorfer;Rene;9035;2;325;;;;325
+13.;Krenmayr;Daniel;32023;2;325;;;;325
+Damen;;;;;;;;;0
+1.;Mauhart;Carola-Bianca;30405;1;325;;;;325
+2.;Knogler;Kerstin;31726;1;325;;;;325
+3.;Hauser;Barbara;31509;2;325;;;;325
+4.;Spitzhofer;Alexandra;37253;2;325;;;;325
+5.;Auberger;Susanna;35373;2;325;;;;325
+6.;Lanzerstorfer;Daniela;32591;2;325;;;;325
+7.;Koblmüller;Judith;36973;2;325;;;;325
+8.;Florucz;Madalina Emilia;35875;2;325;;;;325
+9.;Plescher;Renate;4033;2;325;;;;325
+10.;Ben Ahmed;Roswitha;3343;2;325;;;;325
+Herren;;;;;;;;;0
+1;Rebhandl ;Lukas;31389;1;317;;;;326
+2;Flis;Primoz;81001;1;326;;;;326
+3;Rebhandl ;Simon;31682;1;317;;;;326
+4;Kronsteiner;Dominik;31026;1;309;;;;326
+5;Gratzer;Marian;80253;1;107;;;;326
+6;Laux ;Andreas;3517;1;107;;;;326
+7;Hahn;Thomas;31506;2;326;;;;326
+8;Lessl;Christoph;30689;2;326;;;;326
+9;Mittermayr;Lukas;32141;2;326;;;;326
+10;Scheinecker;Michael;34233;2;326;MF 2;0660 / 4745415;michael.scheinecker@gmx.at;326
+11;Wan;Richard;37353;3;326;;;;326
+12;Stoiber;Ulrich;31275;3;326;;;;326
+13;Strasser;Michael;32320;3;326;;;;326
+14;Kotanko;Sascha;32105;3;326;;;;326
+15;Schöringhumer;Christian;2554;4;326;MF 3;0676 / 892618270;christian.schoeringhumer@gmail.com;326
+16;Zich;Andreas;40351;4;326;;;;326
+17;Kain;Klaus;30849;4;326;;;;326
+18;Aumayr;Philipp;31224;4;326;;;;326
+19;Skovlund;Soeren;32042;4;326;;;;326
+20;Aigner;Stefan;30433;4;326;;;;326
+21;Eckersberger;Markus;32440;4;326;MF 4 und alle;0699 / 11138311;m.eckersberger@badminton-alkoven.at;326
+22;Jech;Martin;90032;4;326;;;;326
+23;Keplinger;Hermann;31322;4;326;;;;326
+24;Dunzinger;Markus;3423;4;326;;;;326
+25;Gall;Matthias;31504;4;326;;;;326
+26;Hergan;Benedikt;38698;4;326;;;;326
+27;Freimüller;Fritz;3476;4;326;;;;326
+28;Ratzenböck;Michael;36393;4;326;;;;326
+29;Kaiblinger;Simon;36395;4;326;;;;326
+30;Huemer;Sebastian;37015;4;326;;;;326
+31;Labmayer;Florian;34874;4;326;;;;326
+32;Maier;Benjamin;37017;4;326;;;;326
+Damen;;;;;;;;;0
+1;Steinmann ;Maria;31381;1;301;;;;326
+2;Pertl;Isolde;32774;1;314;;;;326
+3;Freimüller;Iris;30954;2;326;;;;326
+4;Bertsch;Nicole;61506;1;504;;;;326
+5;Rebhandl;Eva;32417;1;317;;;;326
+6;Lin;Sheau Yu;38993;2;326;01.11.2018;;;326
+7;Füreder;Tina;1484;3;326;;;;326
+8;Aumayr Ivancic;Valerie;30847;3;326;;;;326
+9;Hecher;Lisa;32425;4;326;;;;326
+10;Baier;Agnes;40393;4;326;;;;326
+11;Atzelstorfer ;Anna;32246;4;326;;;;326
+12;Voitic;Gerrit;72397;4;326;;;;326
+13;Limberger;Leonie;36394;4;326;;;;326
+14;Höfinger;Corina;37195;4;326;;;;326
+15;Aspalter;Eva;36236;4;326;;;;326
+16;Frühauf;Raffaela;37196;4;326;;;;326
+17;Stierberger;Tabea;37194;4;326;;;;326
+18;Stierberger;Laura;37193;4;326;;;;326
+19;Manjic;Emma;38433;4;326;;;;326
+20;Viehböck;Magdalena;38315;4;326;;;;326
+21;Stütz;Viktoria;38314;4;326;;;;326
+22;Frühauf;Xenia;38313;4;326;;;;326
+Herren;;;;;;;;;0
+1.;Mizelli ;Lukas;31957;1;330;;;;330
+2.;Mayr;Philipp;32128;1;330;;;;330
+3.;Mizelli ;Dominik;31958;1;330;MF 1;0676 / 9727432;;330
+4.;Radner ;Gregor;33913;1;330;keine Lizenz-nicht spielberechtigt;;;330
+5.;Freudenthaler;Hubert;3098;1;330;;;;330
+6.;Ofner;Erik;35694;2;330;;;;330
+7.;Gruber;Armin;31550;2;330;MF 2;0676 / 3734976;;330
+8.;Winter;Johann;2600;2;330;;;;330
+9.;Rinnhofer;Gerhard;32193;2;330;;;;330
+10.;Mollnhuber;Adolf;32192;2;330;;;;330
+11.;Brunner;Thomas;38493;2;330;;;;330
+12.;Schobesberger;Daniel;36573;2;330;;;;330
+13.;Klambauer;Phillipp;38014;2;330;;;;330
+Damen;;;;;;;;;0
+1.;Kranzl;Sandra;32297;1;330;;;;330
+2.;Lungenschmid;Nora;35614;1;330;;;;330
+3.;Kranzl;Chantal;32296;2;330;;;;330
+4.;Gruber;Andrea;38053;2;330;;;;330
+5.;Kienbacher;Jutta;38054;2;330;;;;330
+6.;Eder;Marianne;38055;2;330;;;;330
+7.;Groiss;Emma;37993;2;330;;;;330
+8.;Winter;Julia;36614;2;330;;;;330
+9.;Winter;Heidemarie;31153;2;330;;;;330
+Herren;;;;;;;;;0
+1.;Radner;Gregor;33913;1;331;20.11.2018;;;331
+2;Reischauer;Matthias;32190;1;331;;;;331
+3.;Blatancic ;Daniel;33233;1;331;;;;331
+4.;Holl ;Stefan;32507;1;331;MF 1 ; 0660 / 6890719 od. 0664 / 602838337  ;stefanholl@gmx.net;331
+5.;Ebner;Reinhard;32575;2;331;MF 2 ;0650 / 2309650 ;reinhard.ebner@webspeed.at;331
+6.;Roidinger ;Robert;38073;2;331;;;;331
+7.;Singer;Heribert;3093;2;331;;;;331
+8;Rohrauer;Florian;38074;2;331;;;;331
+9.;Juvancic ;Egon;38694;2;331;;;;331
+10.;Bichlwagner ;Gerhard;31197;2;331;;;;331
+11.;Holl ;Christoph;32573;2;331;;;;331
+12.;Studener;Walter;35474;2;331;;;;331
+Damen;;;;;;;;;0
+1.;Anleitner;Sarah;32814;1;331;;;;331
+2.;Koppler ;Ursula;32572;1;331;;;;331
+3.;Stübl;Flora;34733;2;331;;;;331
+4.;Unterbrunner;Elisabeth;32569;2;331;;;;331
+5.;Loibl;Sylvia;37533;2;331;;;;331
+6.;Crnoja;Laura;38693;2;331;;;;331
+7.;Saricicek;Evla;39213;2;331;20.11.2018;;;331
+Herren;;;;;;;;;0
+1.;Friedrich;Harald;30452;1;332;;;;332
+2.;Galter;Thomas;32653;1;332;;;;332
+3.;Böhm;Peter;31524;1;332;;;;332
+4.;Doppelmair;Rainer;32133;1;332;;;;332
+5.;Mayr;Gerhard;2285;1;332;;;;332
+6.;Reisinger;Manuel;33754;1;332;;;;332
+7.;Ebner;Florian;32590;1;332;;;;332
+8.;Fetzer;Robert;32231;1;332;;;;332
+9.;Grafinger;Martin;2414;1;332;MF;0676 / 542 72 15;martin@grafinger-denk.com;332
+10.;Eckerstorfer;Andreas;32059;1;332;;;;332
+11.;Fohler;Armin;10187;1;332;;;;332
+Damen;;;;;;;;;0
+1.;Neurauter;Doris;31255;1;332;;;;332
+2.;Riener;Gisela;32132;1;332;;;;332
+3.;Friedrich;Anja;31133;1;332;;;;332
+4.;Grafinger-Denk;Ricarda;318;1;332;;;;332
+5.;Mösenbacher;Sara;37673;1;332;;;;332
+Herren;;;;;;;;;0
+1.;Walchshofer;Daniel;32124;1;333;;;;333
+2.;Putz;Christian;4067;1;333;MF 1;0699 / 81265235;;333
+3.;Niederhuber;Kai;34673;1;333;;;;333
+4.;Zeiml;Wolfgang;30750;1;333;;;;333
+5.;Garsleitner;Markus;30780;2;333;nachträgliche Änderung durch Ligagremium, da Fehler bei Umreichung;;;333
+6.;Schmidt;Jürgen;31535;2;333;MF 2;;;333
+7.;Lindner;Manuel;32288;2;333;;;;333
+8.;Stroß;Sebastian;30798;2;333;;;;333
+9.;Ettinger;Thomas;31880;3;333;;;;333
+10.;Pistorius;Christo;36073;3;333;;;;333
+11.;Jungwirth;Philipp;32064;3;333;;;;333
+12.;Greimer;Michael;31432;3;333;;;;333
+13.;Fernbach;Herbert;30785;4;333;;;;333
+14.;Mayer;Dietmar;31538;4;333;;;;333
+15.;Niederhuber;Klaus;32377;4;333;MF 4;0650 / 7441000;;333
+16.;Holderbaum;Roland;37094;4;333;;;;333
+17.;Graml;Philipp;31982;5;333;;;;333
+18.;Straub;Michael;31979;5;333;;;;333
+19.;Seisenbacher;Michael;32081;5;333;;;;333
+20.;Baschinger;Roland;32079;5;333;MF 5;;;333
+21.;Nemetz;Stefan;31980;6;333;;;;333
+22.;Söllradl;Stefan;35154;6;333;;;;333
+23.;Mitterbauer ;Markus;32589;6;333;MF 6; 0664 / 3948334;;333
+24.;Klausner;Florian;35834;6;333;;;;333
+25.;Wimmer;Jonas;34854;7;333;;;;333
+26.;Maier;Stefan;32310;7;333;;;;333
+27.;Miskovic;Josip;32586;7;333;;;;333
+28.;Schmidthaler;Erik;36954;7;333;;;;333
+29.;Gerschbacher;Anton;34373;8;333;;;;333
+30.;Zöllner;Richard;32306;8;333;;;;333
+31.;Ganglbauer;Wolfgang;38555;8;333;;;;333
+32.;Fucec;Wolfgang;3871;8;333;;;;333
+33.;Schnell;Helmut;31686;8;333;;;;333
+34.;Bogensberger;Albert;31713;8;333;;;;333
+35.;Wimmer;Martin;1369;8;333;;;;333
+36.;Rabel;Andreas;31087;8;333;MF für alle;0664 / 1147807 ;;333
+37.;Lindner;Peter;31096;8;333;;;;333
+38.;Blettlinger;Markus;31427;8;333;;;;333
+39.;Staufer;Edgar;34834;8;333;;;;333
+40.;Zeiml;Norbert;30180;8;333;;;;333
+41.;Rabel;Harald;31148;8;333;;;;333
+42.;Lehner;Dieter;32197;8;333;;;;333
+43.;Ressler;Martin;38193;8;333;;;;333
+44. ;Krist;Wolfgang;37719;8;333;;;;333
+45.;Rolinek ;Clemens;38974;8;333;03.11.2018;;;333
+46.;Laister;Martin;38973;8;333;03.11.2018;;;333
+47.;Sattelberger;Gerhard;32914;8;333;;;;333
+48.;Ruttensteiner;Jonas;38697;8;333;;;;333
+49.;Krist ;Jona;37714;8;333;;;;333
+50.;Ganglbauer;Daniel;38135;8;333;;;;333
+51.;Mastny-Eder;Rafael;37718;8;333;;;;333
+Damen;;;;;;;;;0
+1.;Kleinfelder ;Ruth;30052;1;333;;;;333
+2.;Reifetshammer ;Michaela;34073;1;333;;;;333
+3.;Rathenböck;Elisabeth;35453;2;333;;;;333
+4.;Schnell;Susanne;31688;2;333;;;;333
+5.;Weilhartner;Lydia;30366;3;333;;;;333
+6.;Hörmann;Christine;31654;3;333;MF 3;;;333
+7.;Fernbach-Jeitler;Marion;32754;4;333;;;;333
+8.;Kreindl;Daniela;31839;4;333;;;;333
+9.;Jungwirth;Manuela;31260;5;333;;;;333
+10.;Schwarzbauer;Nina;34893;5;333;;;;333
+11.;Dollfuss;Sandra;38393;6;333;;;;333
+12.;Yan;Yan;3853;6;333;;;;333
+13.;Sattelberger;Szilvia;34753;7;333;;;;333
+14.;Bless;Silke;31808;7;333;;;;333
+15.;Rathenböck;Mila;34313;8;333;;;;333
+16.;Orr;Olivia;37573;8;333;;;;333
+17.;Berndt;Karin;35573;8;333;;;;333
+18.;Winter;Martina;32604;8;333;;;;333
+19.;Krist;Cara;37713;8;333;;;;333
+20.;Schmidthaler;Annika;38553;8;333;;;;333
+21.;Stempfer;Emilie;32501;8;333;;;;333
+22.;Mastny;Alexandra;37716;8;333;;;;333
+23.;Krist;Manuela;37717;8;333;;;;333
+24.;Limberger;Isabella;37715;8;333;;;;333
+25.;Krenmayer;Stefanie;39194;8;333;20.11.2018;;;333
+26.;Hartmann;Anja;39133;8;333;21.11.2018;;;333
+27.;Fassmann;Nicole;38853;8;333;;;;333
+Herren;;;;;;;;;0
+1.;Dalla-Rosa;Philipp;30946;1;338;;;;338
+2.;Österreicher;Thomas;2179;1;338;;;;338
+3.;Grossegger;Bernhard;1872;1;338;MF 1;0664 / 806874490;berni@keinegnade.com;338
+4.;Wögrath;Thomas;32915;1;338;;;;338
+5.;Klammer;Edgar;35315;2;338;;;;338
+6.;Mayr;Norbert;31652;2;338;;;;338
+7.;Danzer;Karl;37014;2;338;MF 2;0699 / 11716638;karl_danzer26@yahoo.de;338
+8.;Kreundl;Robert;32073;2;338;;;;338
+9.;Stieger;Andreas;41107;2;338;;;;338
+10.;Unterweger;Andreas;31913;2;338;;;;338
+11.;Basting;Herbert;31470;2;338;;;;338
+12.;Wimplinger;Markus;32074;2;338;;;;338
+13.;Kraus;Fritz;35313;2;338;;;;338
+14.;Braun;Philipp;31628;2;338;;;;338
+Damen;;;;;;;;;0
+1.;Basting;Irene;31511;1;338;MF Stv. 1;0676 / 9375409;;338
+2.;Rittberger;Michaela;37973 ;1;338;;;;338
+3.;Christl;Marianna;34693;2;338;;;;338
+4.;Posch;Susanne;38513;2;338;;;;338
+5.;Nerriere;Pauline;39333;2;338;16.01.2019;;;338
+6.;Holzer;Manuela;31494;2;338;MF Stv. 2;0664 / 8208026;;338
+7.;Freund;Julia;;2;338;;;;338
+8.;Stieger;Theresa;37853;2;338;;;;338
+9.;Saric;Jasna;37494 ;2;338;;;;338
+Herren;;;;;;;;;0
+1.;Austaller;Christian;33534;1;342;;;;342
+2.;Reuter;Stefan;31738;1;342;MF Stv.;0699 / 18134276;reuterstfn@gmail.com;342
+3.;Hager;Hermann;31740;1;342;;;;342
+4.;Hofmann;Erik;31795;1;342;;;;342
+5.;Mössl;Helmut;31735;1;342;;;;342
+6.;Aichbauer;Stefan;34793;1;342;;;;342
+7.;Hofmann;Hermann;31712;1;342;;;;342
+Damen;;;;;;;;;0
+1;Ecklbauer;Daniela;31733;1;342;;;;342
+2;Mittendorfer;Kornelia;31732;1;342;MF;0650 / 2010678;kmittendorfer@hotmail.com;342
+3;Hofmann;Karin;31989;1;342;;;;342
+4;Haas-Stöger;Karin;37153;1;342;;;;342
+Herren;;;;;;;;;0
+1.;Schreiber;Uli;36835;1;344;;;;344
+2.;Hager;Thomas;31813;1;344;13.01.2019;;;344
+3.;Mühlbacher;Ronny;35737;1;344;;;;344
+4.;Durchschlag ;Bernhard;38093;1;344;;;;344
+5.;Walsberger ;Christoph;36673;1;344;;;;344
+6.;Wolfsgruber;Louis;32438;1;344;;;;344
+7.;Sulzbacher ;Michael;32437;1;344;;;;344
+8.;Hager;Sigfried;36993;1;344;;;;344
+9.;Kickinger;Peter;31811;1;344;MF;0660 / 6760427;peter.kickinger@aon.at;344
+Damen;;;;;;;;;0
+1.;Kruppa;Hanna;32200;1;344;;;;344
+2.;Weberstorfer;Emma;38355;1;344;;;;344
+3.;Neuhuber;Hanna;39253;1;344;13.01.2019;;;344
+4.;Gassenbauer;Katharina;36313;1;344;;;;344
+5.;Kickinger;Franziska;32110;1;344;;;;344
+6.;Pertl ;Monika;36813;1;344;;;;344
+7.;Nussbaumer ;Sarah;32309;1;344;;;;344
+Herren;;;;;;;;;0
+1.;Aigner;Daniel;31992;1;347;MF 1;0676 / 81428135; Daniel.aigner@live.at;347
+2.;Dornig;Manuel;31800;1;347;;;;347
+3.;Schauer;Christian;32091;1;347;;;;347
+4.;Schwarzmann;Adrian;36775;1;347;;;;347
+5.;Eckhardt;Christian;32210;2;347;;;;347
+6.;Hayböck;Mathias;32087;2;347;;;;347
+7.;Aigner;Walter;32085;2;347;MF 2;0676 / 81424913;aigner.34491@raiffeisen-ooe.at;347
+8.;Wilfing;Georg;2315;2;347;;;;347
+9.;Huemer;Lukas;32390;2;347;;;;347
+10.;Huemer;Hubert;32184;2;347;;;;347
+11.;Schauer;Martin;32093;2;347;;;;347
+12.;Kaltseis;Helmut;32088;2;347;;;;347
+13.;Schmid;Franz;32185;2;347;;;;347
+Damen;;;;;;;;;0
+1.;Burzic (Dzinic);Sejla;32308;1;347;;;;347
+2.;Gösweiner;Tatjana;31993;1;347;;;;347
+3.;Aigner;Julia;35077;2;347;;;;347
+4.;Gösweiner;Andrea;31859;2;347;;;;347
+5.;Schmid;Jasmin;32269;2;347;;;;347
+6.;Kaltseis;Melanie;32393;2;347;;;;347
+7.;Schauer;Michaela;32400;2;347;;;;347
+8.;Fichtner;Daniela;38556;2;347;;;;347
+Herren;;;;;;;;;0
+1.;Kronsteiner;Andreas;32560;1;348;;;;348
+2.;Leopolder;Christian;30487;1;348;;;;348
+3.;Hubinger;Michael;32559;1;348;;;;348
+4.;Hebesberger;Bernhard;30985;1;348;;;;348
+5.;Schmied;Tobias;34214;2;348;;;;348
+6.;Gruber ;Andreas;38713;2;348;;;;348
+7.;Kronberger;Lukas;35273;2;348;;;;348
+8.;Bauer;Martin;35993;2;348;;;;348
+9.;Geisberger;Christoph;32893;2;348;;;;348
+10.;Hebesberger;Klaus;370;2;348;MF 2;0660 / 4835830;klaus.hebesberger@aon.at;348
+11.;Gumpenberger;Jan;39313;2;348;13.01.19;;;348
+12.;Dickbauer;Manuel;32554;2;348;;;;348
+13.;Tautermann;Bernd;37113;2;348;;;;348
+14.;Trinker;Michael;38013;2;348;;;;348
+15.;Simmlinger;Michael;37915;2;348;;;;348
+16.;Brandt;Christian;37913;2;348;;;;348
+17.;Krammer;Sebastian;39353;2;348;13.01.19;;;348
+18.;Hebesberger;Michael;34215;2;348;20.09.2018;;;348
+19.;Bohmayr ;Felix;38933;2;348;28.09.2018;;;348
+20.;Tragler;Leo;38934;2;348;28.09.2018;;;348
+Damen;;;;;;;;;0
+1.;Hebesberger;Kerstin;32564;1;348;MF 1;0650 / 6684191;kerstin.hebesberger@aon.at;348
+2.;Hebesberger;Sonja;3892;1;348;;;;348
+3.;Zaunmayr;Daniela;33573;2;348;;;;348
+4.;Kronberger;Jacqueline;35275;2;348;;;;348
+5.;Knöpfle;Nina;35274;2;348;;;;348
+6.;Trinker;Anna;38015;2;348;;;;348
+7.;Pramberger;Julia;38714;2;348;;;;348

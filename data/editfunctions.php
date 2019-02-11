@@ -34,17 +34,17 @@ function EditZA($id='')
                                 <td colspan=2>
                                     <select name="kategorie" id="zaKategory" onchange="SelectZAKategory();" class="cel_m" tabindex="1">
                                         <optgroup label="Gro&szlig;e Felder">
-                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "OEBVInternational") ? 'selected' : '').' value="OEBVInternational" style="color: '.Setting::Get("ColorOEBVInternational").'">&Ouml;BV-International</option>
-                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "OEBV") ? 'selected' : '').' value="OEBV" style="color: '.Setting::Get("ColorOEBV").'">&Ouml;BV</option>
-                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "LV") ? 'selected' : '').' value="LV" style="color: '.Setting::Get("ColorLV").'">LV</option>
-                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Landesmeisterschaft") ? 'selected' : '').' value="Landesmeisterschaft" style="color: '.Setting::Get("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
-                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Doppelturnier") ? 'selected' : '').' value="Doppelturnier" style="color: '.Setting::Get("ColorDoppelturnier").'">Doppelturnier</option>
-                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Nachwuchs") ? 'selected' : '').' value="Nachwuchs" style="color: '.Setting::Get("ColorNachwuchs").'">Nachwuchs</option>
-                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "SchuelerJugend") ? 'selected' : '').' value="SchuelerJugend" style="color: '.Setting::Get("ColorSchuelerJugend").'">Sch&uuml;ler/Jugend</option>
-                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Senioren") ? 'selected' : '').' value="Senioren" style="color: '.Setting::Get("ColorSenioren").'">Senioren</option>
+                                            <option '.((isset($row['category']) AND $row['category'] == "OEBVInternational") ? 'selected' : '').' value="OEBVInternational" style="color: '.Setting::Get("ColorOEBVInternational").'">&Ouml;BV-International</option>
+                                            <option '.((isset($row['category']) AND $row['category'] == "OEBV") ? 'selected' : '').' value="OEBV" style="color: '.Setting::Get("ColorOEBV").'">&Ouml;BV</option>
+                                            <option '.((isset($row['category']) AND $row['category'] == "LV") ? 'selected' : '').' value="LV" style="color: '.Setting::Get("ColorLV").'">LV</option>
+                                            <option '.((isset($row['category']) AND $row['category'] == "Landesmeisterschaft") ? 'selected' : '').' value="Landesmeisterschaft" style="color: '.Setting::Get("ColorLandesmeisterschaft").'">Landesmeisterschaft</option>
+                                            <option '.((isset($row['category']) AND $row['category'] == "Doppelturnier") ? 'selected' : '').' value="Doppelturnier" style="color: '.Setting::Get("ColorDoppelturnier").'">Doppelturnier</option>
+                                            <option '.((isset($row['category']) AND $row['category'] == "Nachwuchs") ? 'selected' : '').' value="Nachwuchs" style="color: '.Setting::Get("ColorNachwuchs").'">Nachwuchs</option>
+                                            <option '.((isset($row['category']) AND $row['category'] == "SchuelerJugend") ? 'selected' : '').' value="SchuelerJugend" style="color: '.Setting::Get("ColorSchuelerJugend").'">Sch&uuml;ler/Jugend</option>
+                                            <option '.((isset($row['category']) AND $row['category'] == "Senioren") ? 'selected' : '').' value="Senioren" style="color: '.Setting::Get("ColorSenioren").'">Senioren</option>
                                         </optgroup>
                                         <optgroup label="Kleine Felder">
-                                            <option '.((isset($row['kategorie']) AND $row['kategorie'] == "Training") ? 'selected' : '').' value="Training" style="color: '.Setting::Get("ColorTraining").'">Training</option>
+                                            <option '.((isset($row['category']) AND $row['category'] == "Training") ? 'selected' : '').' value="Training" style="color: '.Setting::Get("ColorTraining").'">Training</option>
                                         </optgroup>
                                     </select>
                                 </td>
@@ -66,7 +66,7 @@ function EditZA($id='')
                             <tr>
                                 <td></td>
                                 <td>'.Checkbox("ch_timespan","chTimespan",0,"CopyZADate();").'</td>
-                                <td>Zeitpsanne</td>
+                                <td>Zeitspanne</td>
                             </tr>
                         </table>
 
@@ -337,7 +337,7 @@ function EditZA($id='')
                     <tr>
                         <td></td>
                         <td>'.Checkbox("ch_timespan","chTimespan",0,"CopyZADate();").'</td>
-                        <td>Zeitpsanne</td>
+                        <td>Zeitspanne</td>
                     </tr>
                 </table>
 
