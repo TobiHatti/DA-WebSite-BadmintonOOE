@@ -106,7 +106,7 @@
                             if(nodeNodes[0].tagName == "A") nodeNodes[0].style.display = "none";
                         });
 
-                }, 100);
+                }, 20);
             </script>
         </body>
     ';
