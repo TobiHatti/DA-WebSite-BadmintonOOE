@@ -59,6 +59,7 @@ class MySQL
 
 ##########################################################################################
 
+
     public static function NonQuery($sqlStatement,$parameterTypes="", &...$sqlParameters)
     {
         // Parameter-Count
@@ -278,5 +279,40 @@ class MySQL
 ##########################################################################################
 }
 MySQL::init();
+
+class DebugMySQL
+{
+    private static function GetParamTypeList($paramTypeList,$paramAmt)
+    {
+        if(substr($paramTypeList,0,1) == "@")
+        {
+            $broadcastType = str_replace("@","",$paramTypeList);
+            $mySQLParamTypes = '';
+
+            for($i=0;$i<$paramAmt;$i++) $mySQLParamTypes .= $broadcastType;
+        }
+        else
+        {
+            if($paramAmt == strlen($paramTypeList) OR ($paramTypeList == "" AND $paramAmt == -1)) $mySQLParamTypes = $paramTypeList;
+            else die("<b>Not enought parameters provided!</b> <br> <b>Provided: </b> ".strlen($paramTypeList)." <br><b>Required:</b> $paramAmt");
+        }
+
+        return $mySQLParamTypes;
+    }
+
+    public static function NonQuery($sqlStatement,$parameterTypes="", &...$sqlParameters)
+    {
+        // Parameter-Count
+        $parameterAmount = func_num_args() - 2;
+
+        // Get Parameter-Type list
+        $parameterTypeList = self::GetParamTypeList($parameterTypes,$parameterAmount);
+
+
+        foreach($sqlParameters as $param) $sqlStatement = preg_replace('/'.preg_quote('?', '/').'/', "'".$param."'", $sqlStatement, 1);
+
+        return $sqlStatement;
+    }
+}
 
 ?>
