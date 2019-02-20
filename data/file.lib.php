@@ -30,7 +30,7 @@ function FileUpload($path,$formId,$formats="",$limit="",$sql="",$customName="")
     else if(SubStringFind($limit,'GB')) $max_file_size = 1000 * 1000 * 1000 * str_replace('GB','',$limit);
     else $max_file_size = 10 * 1000 * 1000;
 
-    if(!is_dir($path)) mkdir($path, 0750);
+    if(!is_dir($path)) mkdir($path, 0777);
 
     $count=0;
     if(isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST")
@@ -95,7 +95,7 @@ function Base64toIMG($base64img,$path)
 
     $path = (StartsWith($path, '/')) ? ltrim($path,'/') : $path ;
 
-    if(!is_dir($path)) mkdir($path, 0750);
+    if(!is_dir($path)) mkdir($path, 0777);
 
     $base64img = str_replace('data:image/png;base64,', '', $base64img);
     $base64img = str_replace('data:image/jpeg;base64,', '', $base64img);

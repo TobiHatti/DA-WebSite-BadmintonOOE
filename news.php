@@ -126,8 +126,9 @@
                 ';
             }
         }
-        else
+        else if(MySQL::Exist("SELECT id FROM news WHERE article_url = ?",'s',$_GET['artikel']))
         {
+
             MySQL::NonQuery("UPDATE news SET views = views + 1 WHERE article_url = ?",'@s',$_GET['artikel']);
 
             $articleData = MySQL::Row("SELECT * FROM news WHERE article_url = ?",'s',$_GET['artikel']);
@@ -159,6 +160,7 @@
                 </div>
             ';
         }
+        else Redirect("/news");
     }
     else if(isset($_GET['kategorie']))
     {
