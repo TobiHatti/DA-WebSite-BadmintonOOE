@@ -543,7 +543,7 @@
                                                     <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("DeleteNWK","DeleteNWTG",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteNWTG' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("DeleteNWTG","DeleteNWTG",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteNWTG' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
                                                 </tr>
                                             </table>
@@ -611,7 +611,7 @@
                                             <h5>Spielerranglisten <i class="fas fa-info-circle" title="Rechte f&uuml;r das verwalten von Spielerranglisten in der Rubrik O&Ouml;MM > Allgemein"></i></h5>
                                             <table>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("EditSpielerrangliste","EditZA",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditZA' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("EditSpielerrangliste","EditSpielerrangliste",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditSpielerrangliste' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
                                                 </tr>
                                             </table>
@@ -621,15 +621,15 @@
                                             <h5>O&Ouml;BV-Ranglisten <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Ranglisten in der Rubrik Ranglisten > O&Ouml;BV"></i></h5>
                                             <table>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("AddOOEBVRLJgnd","AddOOEBVRLJgnd",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddZA' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("AddOOEBVRLJgnd","AddOOEBVRLJgnd",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'AddOOEBVRLJgnd' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("EditOOEBVRLJgnd","EditOOEBVRLJgnd",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditZA' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("EditOOEBVRLJgnd","EditOOEBVRLJgnd",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'EditOOEBVRLJgnd' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width: 50px;">'.Checkbox("DeleteOOEBVRLJgnd","DeleteOOEBVRLJgnd",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteZA' AND user_id = ?",'@s',$uid)).'</td>
+                                                    <td style="width: 50px;">'.Checkbox("DeleteOOEBVRLJgnd","DeleteOOEBVRLJgnd",MySQL::Scalar("SELECT allowed FROM permissions WHERE permission = 'DeleteOOEBVRLJgnd' AND user_id = ?",'@s',$uid)).'</td>
                                                     <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
                                                 </tr>
                                             </table>
@@ -868,7 +868,25 @@
                         <br>
                         <table>
                             <tr>
-                                <td style="width: 33%">
+                                <td style="width: 25%">
+                                    <h5>Trainingsgruppen <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Trainingsgruppen in der Rubrik Nachwuchs"></i></h5>
+                                    <table>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("AddNWTG","AddNWTG",true).'</td>
+                                            <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("EditNWTG","EditNWTG",true).'</td>
+                                            <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("DeleteNWTG","DeleteNWTG",true).'</td>
+                                            <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
+                                        </tr>
+                                    </table>
+                                </td>
+
+                                <td style="width: 25%">
                                     <h5>Nachwuchskader <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Spielern im Nachwuchskader"></i></h5>
                                     <table>
                                         <tr>
@@ -886,7 +904,7 @@
                                     </table>
                                 </td>
 
-                                <td style="width: 33%">
+                                <td style="width: 25%">
                                     <h5>Vorstand <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Mitgliedern im Vorstand"></i></h5>
                                     <table>
                                         <tr>
@@ -904,7 +922,7 @@
                                     </table>
                                 </td>
 
-                                <td style="width: 33%">
+                                <td style="width: 25%">
                                     <h5>Zentralausschreibungen <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Spielern im Nachwuchskader"></i></h5>
                                     <table>
                                         <tr>
@@ -917,6 +935,38 @@
                                         </tr>
                                         <tr>
                                             <td style="width: 50px;">'.Checkbox("DeleteZA","DeleteZA",true).'</td>
+                                            <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <br>
+                        <table>
+                            <tr>
+                                <td style="width: 50%">
+                                    <h5>Spielerranglisten <i class="fas fa-info-circle" title="Rechte f&uuml;r das verwalten von Spielerranglisten in der Rubrik O&Ouml;MM > Allgemein"></i></h5>
+                                    <table>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("EditSpielerrangliste","EditSpielerrangliste",true).'</td>
+                                            <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
+                                        </tr>
+                                    </table>
+                                </td>
+
+                                <td style="width: 50%">
+                                    <h5>O&Ouml;BV-Ranglisten <i class="fas fa-info-circle" title="Rechte f&uuml;r das erstellen und verwalten von Ranglisten in der Rubrik Ranglisten > O&Ouml;BV"></i></h5>
+                                    <table>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("AddOOEBVRLJgnd","AddOOEBVRLJgnd",true).'</td>
+                                            <td><i class="fas fa-plus-square" style="color: #32CD32"></i> Erstellen</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("EditOOEBVRLJgnd","EditOOEBVRLJgnd",true).'</td>
+                                            <td><i class="fas fa-pen-square" style="color: #1E90FF"></i> Bearbeiten</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">'.Checkbox("DeleteOOEBVRLJgnd","DeleteOOEBVRLJgnd",true).'</td>
                                             <td><i class="fas fa-minus-square" style="color: #FF0000"></i> L&ouml;schen</td>
                                         </tr>
                                     </table>
