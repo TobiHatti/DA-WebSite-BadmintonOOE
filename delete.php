@@ -10,8 +10,7 @@
             MySQL::NonQuery("DELETE FROM $table WHERE id = ?",'@s',$id);
             echo '
                 <script>
-                    window.history.back();
-                    window.history.back();
+                    window.history.go(-2);
                 </script>
             ';
             die();
@@ -21,8 +20,7 @@
         {
             echo '
                 <script>
-                    window.history.back();
-                    window.history.back();
+                    window.history.go(-2);
                 </script>
             ';
         }
