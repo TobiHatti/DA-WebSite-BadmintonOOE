@@ -140,6 +140,27 @@
         die();
     }
 
+    if(isset($_POST['ChangePassword']))
+    {
+        $oldPassword = $_POST['oldPassword'];
+        $newPassword = $_POST['newPassword'];
+        $cnewPassword = $_POST['cnewPassword'];
+
+        $phash = MySQL::Scalar("SELECT password FROM users WHERE id = ?",'s',$_SESSION['userID']);
+
+        if(password_verify($oldPassword,$phash) AND $newPassword == $cnewPassword)
+        {
+            $newPWHash = password_hash($newPassword, PASSWORD_DEFAULT);
+
+            MySQL::NonQuery("UPDATE users SET password = ? WHERE id = ?",'ss',$newPWHash,$_SESSION['userID']);
+
+            Redirect(ThisPage("-wrongPW","+pwUpdated"));
+        }
+        else Redirect(ThisPage("-pwUpdated","+wrongPW"));
+
+        die();
+    }
+
     echo '
         <!DOCTYPE html>
         <html>
@@ -159,7 +180,53 @@
 
     if(isset($_GET['topic']))
     {
-        if($_GET['topic'] == 'Allgemein')
+        if($_GET['topic'] == 'Account')
+        {
+            echo '
+                <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                    <br>
+                    <h3>Passwort &auml;ndern</h3>
+                    <br><br>
+            ';
+
+                if(isset($_GET['wrongPW'])) echo '<span style="color: #CC0000">Altes Passwort ist nicht korrekt!</span>';
+                if(isset($_GET['pwUpdated'])) echo '<span style="color: #32CD32">Passwort ge&auml;ndert!</span>';
+
+            echo '
+                    <table>
+                        <tr>
+                            <td>Altes Passwort: </td>
+                            <td><input type="password" name="oldPassword" placeholder="Altes Passwort..."/></td>
+                        </tr>
+                        <tr><td><br></td></tr>
+                        <tr>
+                            <td>Neues Passwort: </td>
+                            <td>
+                                <input type="password" name="newPassword" id="pswd1" placeholder="Neues Passwort..." oninput="CheckPasswordPair(this,\'pswd2\',\'outPswdMessage\',\'submitButton\')"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Neues Passwort<br>wiederholen: </td>
+                            <td>
+                                <input type="password" name="cnewPassword" id="pswd2" placeholder="Neues Passwort..." oninput="CheckPasswordPair(this,\'pswd1\',\'outPswdMessage\',\'submitButton\')"/>
+                                <br>
+                                <span style="color: red"><output id="outPswdMessage"></output></span>
+                            </td>
+                        </tr>
+                        <tr><td><br></td></tr>
+                        <tr>
+                            <td colspan=2>
+                                <center>
+                                    <button type="submit" name="ChangePassword" id="submitButton" disabled>Passwort &auml;ndern</button>
+                                </center>
+                            </td>
+                        </tr>
+                    </table>
+
+                </form>
+            ';
+        }
+        else if($_GET['topic'] == 'Allgemein')
         {
             echo '
                 <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
