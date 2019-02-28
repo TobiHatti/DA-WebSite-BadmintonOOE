@@ -56,10 +56,10 @@
 
             if(isset($_GET['verein']) AND $_GET['verein'] != '')
             {
-                $clubMembers = MySQL::Cluster("SELECT * FROM members WHERE clubID = ?",'s',$_GET['verein']);
+                $clubMembers = MySQL::Cluster("SELECT * FROM members WHERE clubID = ? AND active = '1'",'s',$_GET['verein']);
 
-                $playersNoGender = MySQL::Count("SELECT * FROM members WHERE clubID = ? AND gender = ''",'s',$_GET['verein']);
-                $playersNoNumber = MySQL::Count("SELECT * FROM members WHERE clubID = ? AND SUBSTRING(playerID,1,3) = 'TMP'",'s',$_GET['verein']);
+                $playersNoGender = MySQL::Count("SELECT * FROM members WHERE clubID = ? AND gender = '' AND active = 1",'s',$_GET['verein']);
+                $playersNoNumber = MySQL::Count("SELECT * FROM members WHERE clubID = ? AND SUBSTRING(playerID,1,3) = 'TMP' AND active = '1'",'s',$_GET['verein']);
 
 
                 if($playersNoGender !=0 OR $playersNoNumber !=0)
