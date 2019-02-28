@@ -2,6 +2,35 @@
     require("header.php");
     PageTitle("Vorstand");
 
+    if(isset($_GET['move']) AND isset($_GET['to']))
+    {
+        $moveVSID = $_GET['move'];
+        # Unused
+        $targetPosition = $_GET['to'];
+
+        $currentPos = MySQL::Scalar("SELECT position FROM vorstand WHERE id = ?",'s',$moveVSID);
+
+        if($_GET['dir']=="up") $newPos = $currentPos + 3;
+
+        if($_GET['dir']=="down") $newPos = $currentPos - 3;
+
+        // Put to new Position
+        MySQL::NonQuery("UPDATE vorstand SET position = ? WHERE id = ?",'ss',$newPos,$moveVSID);
+
+        // Re-Organising
+        $vsMembers = MySQL::Cluster("SELECT * FROM vorstand WHERE darstellung = 'box' ORDER BY position ASC");
+        $pos = 2;
+        foreach($vsMembers as $vs)
+        {
+            MySQL::NonQuery("UPDATE vorstand SET position = ? WHERE id = ?",'ss',$pos,$vs['id']);
+            $pos += 2;
+        }
+
+        Redirect("/vorstand");
+        die();
+
+    }
+
     if(isset($_POST['add_vorstand_member']))
     {
         $name = $_POST['name'];
@@ -97,7 +126,10 @@
             <center>
         ';
 
-        $strSQL = "SELECT * FROM vorstand WHERE darstellung = 'box'";
+        $i=1;
+        $membersCount = MySQL::Count("SELECT * FROM vorstand WHERE darstellung = 'box'");
+
+        $strSQL = "SELECT * FROM vorstand WHERE darstellung = 'box' ORDER BY position ASC";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
         {
@@ -146,7 +178,12 @@
 
                         if(CheckPermission("EditVorstand"))
                         {
+                            if($i-1 <= 0) echo '<span style="float: left;margin-left: 5px;">&#9664; Sort. <a href="/vorstand?move='.$row['id'].'&to='.($i+1).'&dir=up">&#9654;</a></span>';
+                            else if($i+1 > $membersCount) echo '<span style="float: left;margin-left: 5px;"><a href="/vorstand?move='.$row['id'].'&to='.($i-1).'&dir=down">&#9664;</a> Sort. &#9654;</span>';
+                            else echo '<span style="float: left;margin-left: 5px;"><a href="/vorstand?move='.$row['id'].'&to='.($i-1).'&dir=down">&#9664;</a> Sort. <a href="/vorstand?move='.$row['id'].'&to='.($i+1).'&dir=up">&#9654;</a></span>';
+
                             echo '<span style="float: right;margin-right: 5px;"> '.EditButton(ThisPage("!editContent","!editSC","!editBox","!editList","+editSC=".$row['id'],"+editBox"),true).' </span>';
+
                         }
 
                         if(CheckPermission("DeleteVorstand"))
@@ -158,6 +195,8 @@
                     </div>
                 ';
             }
+
+            $i++;
         }
 
         echo '

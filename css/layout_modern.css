@@ -167,7 +167,7 @@
   header {
     grid-area: header;
     background: #FFFFFF;
-    background-image: url(../content/header2.jpg);
+    background-image: url(../content/header.jpg);
     background-position: 0 360px;
     background-attachment: fixed;
     background-size: 100%;

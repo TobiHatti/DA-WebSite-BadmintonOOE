@@ -6,7 +6,7 @@
     $countPlayerHaveNr = 0;
 
     $row = 1;
-    if (($handle = fopen("files/_development/SRL/SRL1819.csv", "r")) !== FALSE)
+    if (($handle = fopen("files/_development/SRL/SRL1819new.csv", "r")) !== FALSE)
     {
         //Skip first line
         $data = fgetcsv($handle, 1000, ";");

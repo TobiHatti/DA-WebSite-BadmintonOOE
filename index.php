@@ -201,7 +201,7 @@
                 </aside>
             </div>
             <br>
-
+            <!--
             <div>
                 <hr>
                 <center><h3>Entwicklernotiz - Info</h3></center>
@@ -218,7 +218,7 @@
                 <hr>
                 <br>
             </div>
-
+            -->
             <div>
                 <a href="/news/kategorie/Top-News"><h3>Neuigkeiten</h3></a>
                 <hr>

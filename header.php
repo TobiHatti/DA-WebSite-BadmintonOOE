@@ -156,6 +156,7 @@
 
                                 <li class="active"><a href="#">Archiv</a>
                                     <ul>
+                                        <li><a href="/chronik">Chronik</a></li>
                                         <li><a href="/jahresberichte">Jahresberichte</a></li>
                                         <li><a href="/news-archiv">News-Archiv</a></li>
                                         <li><a href="/ooemm-archiv">O&Ouml;MM-Archiv</a></li>

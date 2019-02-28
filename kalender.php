@@ -242,11 +242,15 @@
             $entriesPerPage = Setting::Get("PagerSizeCalendar");
             $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
             $today = date("Y-m-d");
-            $strSQL = "SELECT id,date_begin,title,description,category FROM agenda WHERE date_begin >= '$today' UNION ALL SELECT id,date_begin,CONCAT_WS(' ', title_line1, title_line2) AS title, NULL AS description,category FROM zentralausschreibungen WHERE date_begin >= '$today' ORDER BY date_begin ASC LIMIT $offset,$entriesPerPage";
+
+            if(isset($_GET['category'])) $sqlExtension = "AND category = '".$_GET['category']."'";
+            else $sqlExtension = "";
+
+            $strSQL = "SELECT id,date_begin,title,description,category,id AS isAG,NULL AS isZA FROM agenda WHERE date_begin >= '$today' $sqlExtension UNION ALL SELECT id,date_begin,CONCAT_WS(' ', title_line1, title_line2) AS title, NULL AS description,category,NULL AS isAG,id AS isZA FROM zentralausschreibungen WHERE date_begin >= '$today' $sqlExtension ORDER BY date_begin ASC LIMIT $offset,$entriesPerPage";
             $rs=mysqli_query($link,$strSQL);
             while($row=mysqli_fetch_assoc($rs))
             {
-                $isZA = ($row['description']==NULL) ? true : false;
+                $isZA = ($row['isZA']!=NULL) ? true : false;
 
                 echo'
                     <div class="calendar_list" style="border-left-color: '.Setting::Get("Color".$row['category']).'">
