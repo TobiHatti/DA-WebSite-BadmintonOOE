@@ -227,8 +227,28 @@
                 <script type="text/javascript">
 
                     window.addEventListener("scroll", function(e) {
-                        if (window.scrollY > '.(isset($_SESSION['userID']) ? '130' : '150').') document.getElementById("staticNavBar").style.display = "block";
-                        else document.getElementById("staticNavBar").style.display = "none";
+
+                        var windowWidth = $(window).width();
+
+                        if(windowWidth > 992)
+                        {
+                            if (window.scrollY > '.(isset($_SESSION['userID']) ? '130' : '150').') document.getElementById("staticNavBar").style.display = "block";
+                            else document.getElementById("staticNavBar").style.display = "none";
+                        }
+                        else if(windowWidth > 768)
+                        {
+                            if (window.scrollY > '.(isset($_SESSION['userID']) ? '80' : '100').') document.getElementById("staticNavBar").style.display = "block";
+                            else document.getElementById("staticNavBar").style.display = "none";
+                        }
+                        else if(windowWidth > 600)
+                        {
+                            if (window.scrollY > '.(isset($_SESSION['userID']) ? '60' : '80').') document.getElementById("staticNavBar").style.display = "block";
+                            else document.getElementById("staticNavBar").style.display = "none";
+                        }
+                        else if(windowWidth < 600)
+                        {
+                            document.getElementById("staticNavBar").style.display = "block";  
+                        }
                     });
 
                 </script>
