@@ -243,8 +243,8 @@
                                     <ul class="dragSortList_values" id="sortListM">
                                     ';
 
-                                        $currentSelectedMembersM = array();
-                                        $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender='M' AND members.clubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
+                                        $currentSelectedMembersM = array();                                                                                                               // UPDATE 01.03.2019: Replaced members.clubID with members_spielerranglisten.assignedClubID
+                                        $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender='M' AND members_spielerranglisten.assignedClubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
                                         $rs=mysqli_query($link,$strSQL);
                                         while($row=mysqli_fetch_assoc($rs))
                                         {
@@ -300,8 +300,8 @@
                                     </ul>
                                     <ul class="dragSortList_values" id="sortListW">
                                     ';
-                                        $currentSelectedMembersW = array();
-                                        $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender='F' AND members.clubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
+                                        $currentSelectedMembersW = array();                                                                                                              // UPDATE 01.03.2019: Replaced members.clubID with members_spielerranglisten.assignedClubID    
+                                        $strSQL = "SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender='F' AND members_spielerranglisten.assignedClubID = '$club' AND members_spielerranglisten.year = '$year' ORDER BY members_spielerranglisten.position ASC";
                                         $rs=mysqli_query($link,$strSQL);
                                         while($row=mysqli_fetch_assoc($rs))
                                         {
