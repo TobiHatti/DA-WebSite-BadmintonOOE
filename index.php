@@ -118,14 +118,14 @@
                                         {
                                             echo '
                                                 <li>
-                                                    <img src="/content/news/_slideshow/slide_sdm.jpg?'.$refreshID.'" title="'.$sdm['title'].'" id="wows1_99"/>
+                                                    <a href="/spieler-des-monats/'.$row['article_url'].'"><img src="/content/news/_slideshow/slide_sdm.jpg?'.$refreshID.'" title="'.$sdm['title'].'" id="wows1_99"/></a>
                                                 </li>
                                             ';
                                         }
 
                                         echo '
                                             <li>
-                                                <img src="/content/news/_slideshow/slide_'.$i.'.jpg?'.$refreshID.'" title="'.$row['title'].'" id="wows1_'.($i-1).'"/>
+                                                <a href="/news/artikel/'.$row['article_url'].'"><img src="/content/news/_slideshow/slide_'.$i.'.jpg?'.$refreshID.'" title="'.$row['title'].'" id="wows1_'.($i-1).'"/></a>
                                             </li>
                                         ';
                                         $i++;
@@ -191,8 +191,8 @@
                         }, 500);
                     </script>
 
-                    <h1><a href="" id="sliderLink"><output id="slider_news_title" style="color: #000000; height: 36px; overflow: hidden;">News-Artikel Titel</output></a></h1>
-                    <span style="color: #A9A9A9"><output id="sliderDate"></output></span>
+                    <h1 class="stagfade6"><a href="" id="sliderLink"><output id="slider_news_title" style="color: #000000; height: 36px; overflow: hidden;"></output></a></h1>
+                    <span style="color: #A9A9A9" class="stagfade7"><output id="sliderDate"></output></span>
                 </article>
                 <aside>
                     <a href="/news/kategorie/Nachwuchs"><h2>Nachwuchs</h2></a>
