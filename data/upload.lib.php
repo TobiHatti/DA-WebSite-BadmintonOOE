@@ -356,7 +356,7 @@ class FileUploader
                         $fileSQLStatement = $this->fileSQLEntry;
 
                         $fileSQLStatement = str_replace(FileUploaderOutput::FilenameOnly,str_replace(pathinfo($fileName, PATHINFO_EXTENSION).'.','',$fileName),$fileSQLStatement);
-                        $fileSQLStatement = str_replace(FileUploaderOutput::FilenamePlusExtension,$fileName,$fileSQLStatement);
+                        $fileSQLStatement = str_replace(FileUploaderOutput::FilenamePlusExtension,str_replace($this->fileUploadDirectory,'',$fileName),$fileSQLStatement);
                         $fileSQLStatement = str_replace(FileUploaderOutput::ExtensionOnly,pathinfo($fileName, PATHINFO_EXTENSION),$fileSQLStatement);
                         $fileSQLStatement = str_replace(FileUploaderOutput::FilepathPlusFilename,$this->fileUploadDirectory.$fileName,$fileSQLStatement);
                         $fileSQLStatement = str_replace(FileUploaderOutput::FilepathOnly,$this->fileUploadDirectory,$fileSQLStatement);
