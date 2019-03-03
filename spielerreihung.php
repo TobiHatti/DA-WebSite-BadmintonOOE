@@ -1,6 +1,31 @@
 <?php
     require("header.php");
 
+
+    if(isset($_GET['delete']) AND CheckPermission("EditSpielerrangliste"))
+    {
+        // Deleting player
+        MySQL::NonQuery("DELETE FROM members_spielerranglisten WHERE memberID = ? AND year = ? AND assignedClubID = ?",'@s',$_GET['delete'],$_GET['jahr'],$_GET['clubID']);
+
+        // Get players gender
+        $gender = MySQL::Scalar("SELECT gender FROM members WHERE id = ?",'s',$_GET['delete']);
+
+        // Reordering
+
+        $playerList = MySQL::Cluster("SELECT * FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = ? AND members_spielerranglisten.year = ? AND members_spielerranglisten.assignedClubID = ? ORDER BY members_spielerranglisten.position ASC",'@s',$gender,$_GET['jahr'],$_GET['clubID']);
+
+        $i = 1;
+        foreach($playerList as $player)
+        {
+            MySQL::NonQuery("UPDATE members_spielerranglisten SET position = ? WHERE memberID = ? AND year = ? AND assignedClubID = ?",'@s',$i,$player['memberID'],$_GET['jahr'],$_GET['clubID']);
+            $i++;
+        }
+
+
+        Redirect('/spielerrangliste/reihungen/'.$_GET['jahr'].'/bearbeiten/'.$_GET['clubID']);
+        die();
+    }
+
     if(isset($_POST['updateListM']) OR isset($_POST['updateListW']))
     {
         $selectedMembers = array();
@@ -10,6 +35,31 @@
         $club = $_POST['clubID'];
         if(isset($_POST['updateListM'])) $type='M';
         if(isset($_POST['updateListW'])) $type='F';
+
+
+        $strSQL = "SELECT * FROM members WHERE members.gender = '$type'";
+        $rs=mysqli_query($link,$strSQL);
+        while($row=mysqli_fetch_assoc($rs))
+        {
+            if(isset($_POST["member".$row['playerID']]))
+            {
+                array_push($selectedMembers,$row['id']);
+            }
+        }
+
+        $highestRank = MySQL::Count("SELECT position FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members_spielerranglisten.assignedClubID = ? AND members_spielerranglisten.year = ? AND members.gender = ?",'@s',$club,$year,$type);
+
+        foreach($selectedMembers as $member)
+        {
+            if(!MySQL::Exist("SELECT * FROM members_spielerranglisten WHERE year = ? AND memberID = ? AND assignedClubID = ?",'@s',$year,$member,$club))
+            {
+                $highestRank++;
+                MySQL::NonQuery("INSERT INTO members_spielerranglisten (memberID,position,year,team,currentClubID,assignedClubID) VALUES (?,?,?,'1',?,?)",'@s',$member,$highestRank,$year,$club,$club);
+            }
+        }
+
+
+        /*
         $strSQL = "SELECT * FROM members WHERE members.clubID = '$club' AND members.gender = '$type'";
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
@@ -31,6 +81,8 @@
             $uid = uniqid();
             MySQL::NonQuery("INSERT INTO members_spielerranglisten (memberID,position,year,team,currentClubID,assignedClubID) VALUES (?,'".$i++."',?,'1',?,?)",'@s',$member,$year,$club,$club);
         }
+        */
+
 
         // Update last edit-Date
         $paramLatestUpdate = 'Y'.$year.'LastUpdate';
@@ -231,7 +283,7 @@
                                 <center>
                                     <h3>Reihung Herren</h3>
 
-                                    <a href="#spielerM"><button type="button">Spieler ausw&auml;hlen</button></a>
+                                    <a href="#spielerM"><button type="button">Spieler hinzuf&uuml;gen...</button></a>
                                     <br>
 
                                     <ul class="dragSortList_posNumbers">
@@ -272,6 +324,11 @@
                                                             <td class="ta_r">E-Mail:</td>
                                                             <td><input name="email_'.$row['playerID'].'" type="text" class="cel_s sampleField" value="'.$row['email'].'"/></td>
                                                         </tr>
+                                                        <tr>
+                                                            <td colspan=2>
+                                                                <a href="/spielerrangliste/reihungen/'.$year.'/bearbeiten/'.$club.'?delete='.$row['memberID'].'"><span style="color: #CC0000">&#10006; Spieler aus Liste entfernen</span></a>
+                                                            </td>
+                                                        </tr>
                                                     </table>
                                                 </div>
                                                 </span>
@@ -290,7 +347,7 @@
                                 <center>
                                     <h3>Reihung Damen</h3>
 
-                                    <a href="#spielerW"><button type="button">Spieler ausw&auml;hlen</button></a>
+                                    <a href="#spielerW"><button type="button">Spieler hinzuf&uuml;gen...</button></a>
                                     <br>
                                     <ul class="dragSortList_posNumbers">
                                     ';
@@ -328,6 +385,11 @@
                                                             <td class="ta_r">E-Mail:</td>
                                                             <td><input name="email_'.$row['playerID'].'" type="text" class="cel_s sampleField" value="'.$row['email'].'"/></td>
                                                         </tr>
+                                                        <tr>
+                                                            <td colspan=2>
+                                                                <a href="/spielerrangliste/reihungen/'.$year.'/bearbeiten/'.$club.'?delete='.$row['memberID'].'"><span style="color: #CC0000">&#10006; Spieler aus Liste entfernen</span></a>
+                                                            </td>
+                                                        </tr>
                                                     </table>
                                                 </div>
                                                 </span>
@@ -353,7 +415,7 @@
                                 <div class="modal_bg"></div>
                             </a>
                             <div class="modal_container" style="width: 50%; height: 40%;">
-                                <h3>Spieler ausw&auml;hlen (Herren)</h3>
+                                <h3>Spieler hinzuf&uuml;gen (Herren)</h3>
                                 ';
 
                                 $strSQL = "SELECT * FROM members WHERE clubID = '$club' AND gender = 'M' AND SUBSTRING(playerID,1,3) != 'TMP'";
@@ -361,12 +423,12 @@
                                 while($row=mysqli_fetch_assoc($rs))
                                 {
                                     $checked = in_array($row['playerID'],$currentSelectedMembersM) ? true : false;
-                                    echo Tickbox("member".$row['playerID'],"member".$row['playerID'],$row['playerID'].' - '.$row['firstname'].' '.$row['lastname'],$checked);
+                                    echo Tickbox("member".$row['playerID'],"member".$row['playerID'],$row['playerID'].' - '.$row['firstname'].' '.$row['lastname'],$checked,"",$checked);
                                 }
 
                                 echo '
                                 <br><br>
-                                <button type="submit" name="updateListM">Aktualisieren</button>
+                                <button type="submit" name="updateListM">Spieler hinzuf&uuml;gen</button>
                             </div>
                         </div>
 
@@ -376,7 +438,7 @@
                                 <div class="modal_bg"></div>
                             </a>
                             <div class="modal_container" style="width: 50%; height: 40%;">
-                                <h3>Spieler ausw&auml;hlen (Damen)</h3>
+                                <h3>Spieler hinzuf&uuml;gen (Damen)</h3>
                                 ';
 
                                 $strSQL = "SELECT * FROM members WHERE clubID = '$club' AND gender = 'F' AND SUBSTRING(playerID,1,3) != 'TMP'";
@@ -384,7 +446,7 @@
                                 while($row=mysqli_fetch_assoc($rs))
                                 {
                                     $checked = in_array($row['playerID'],$currentSelectedMembersW) ? true : false;
-                                    echo Tickbox("member".$row['playerID'],"member".$row['playerID'],$row['playerID'].' - '.$row['firstname'].' '.$row['lastname'],$checked);
+                                    echo Tickbox("member".$row['playerID'],"member".$row['playerID'],$row['playerID'].' - '.$row['firstname'].' '.$row['lastname'],$checked,"",$checked);
                                 }
 
                                 echo '
@@ -392,7 +454,7 @@
 
                                 <input type="hidden" value="'.$year.'" name="year"/>
 
-                                <button type="submit" name="updateListW">Aktualisieren</button>
+                                <button type="submit" name="updateListW">Spieler hinzuf&uuml;gen</button>
                             </div>
                         </div>
                     </form>
@@ -402,7 +464,7 @@
         }
         else
         {
-            $club = MySQL::Scalar("SELECT club FROM users WHERE id = ?",'i',$_SESSION['userID']);  
+            $club = MySQL::Scalar("SELECT club FROM users WHERE id = ?",'i',$_SESSION['userID']);
             $year = $_GET['jahr'];
 
             echo '
