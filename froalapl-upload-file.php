@@ -10,6 +10,7 @@
         $id = uniqid();
         $displayName = $_POST['display'];
 
+           /*
         $filename = SReplace($_FILES['file']['name'][0]);
         $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
@@ -36,6 +37,26 @@
         if($displayName == '') $displayName = $filename;
 
         FileUpload("files/pagecontent/","file","","","INSERT INTO uploads (id,filename,displayname) VALUES ('$id','$filename','$displayName')",$filenameNoExtension);
+
+
+*/
+
+
+        // Creating the uploader
+        $uploader = new FileUploader();
+
+        // Setting the general upload-settings
+        $uploader->SetFileElement("file");
+        $uploader->SetPath("files/pagecontent/");
+        $uploader->OverrideDuplicates(false);
+
+        // Setting the SQL-Entry
+        $uploader->SetSQLEntry("INSERT INTO uploads (id,filename,displayname) VALUES ('$id','@FUO_FILENAMEPLUSEXTENSION','$displayName')");
+
+        // Uploading the file to the Server
+        $uploader->Upload();
+
+
 
         Redirect(ThisPage("+uploadComplete=$id"));
         die();
