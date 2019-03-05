@@ -90,9 +90,9 @@
                                 <option value="none" disabled selected>--- Kategorie Ausw&auml;hlen ---</option>
                                 <optgroup label="Hauptkategorien">
                                     ';
-                                    $strSQLT = "SELECT * FROM news_tags";
+                                    $strSQLT = "SELECT * FROM news_tags WHERE active = '1'";
                                     $rsT=mysqli_query($link,$strSQLT);
-                                    while($rowT=mysqli_fetch_assoc($rsT)) { echo '<option value="'.$rowT['name'].'">'.$rowT['name'].'</option>'; }
+                                    while($rowT=mysqli_fetch_assoc($rsT)) { echo '<option value="'.$rowT['name'].'##'.$rowT['id'].'">'.$rowT['name'].'</option>'; }
                                     echo '
                                 </optgroup>
                             </select>

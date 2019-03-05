@@ -240,13 +240,15 @@ function LoadTags()
     {
         if(tagArray[i]!="")
         {
-            tag_nr++;
+
 
             block_to_insert = document.createElement( 'div' );
-            block_to_insert.innerHTML = '<div id="tagID' + tag_nr + '"><input type="hidden" id="tagVal' + tag_nr + '" value="' + tagArray[i] + '"/><a onclick="RmTag(' + tag_nr + ');">&#128500;</a>&nbsp;' + tagArray[i] + '</div>';
+            block_to_insert.innerHTML = '<div id="tagID' + tag_nr + '"><input type="hidden" id="tagVal' + tag_nr + '" value="' + tagArray[i].replace("|","") + '"/><a onclick="RmTag(' + tag_nr + ');">&#128500;</a>&nbsp;' + tagArray[i].replace("|","") + '</div>';
 
             container_block = document.getElementById( 'tagContainer' );
             container_block.appendChild( block_to_insert );
+
+            tag_nr++;   
         }
     }
 
