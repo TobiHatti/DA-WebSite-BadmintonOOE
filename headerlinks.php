@@ -1,6 +1,6 @@
 <?php
 
-    $revision = 6756;
+    $revision = 6876;
 
     echo '
         <!-- META Tags -->
@@ -31,7 +31,7 @@
 
 
         <!-- Own Scripts -->
-            <script src="/js/source.js?'.$revision.'"></script>
+            <script src="/js/sourceRev005.js?'.$revision.'"></script>
         <!-- End of Own Scripts -->
 
 
