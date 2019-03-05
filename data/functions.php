@@ -539,7 +539,7 @@ function NewsSidebar()
             <div class="home_tile_title">Kategorien</div>
             <div class="home_tile_content">
                 <ul>';
-                    $strSQL = "SELECT * FROM news_tags";
+                    $strSQL = "SELECT * FROM news_tags WHERE active = '1'";
                     $rs=mysqli_query($link,$strSQL);
                     while($row=mysqli_fetch_assoc($rs)) { $retval .= '<li><a href="/news/kategorie/'.$row['id'].'">'.$row['name'].'</a></li>'; }
                     $retval .= '
@@ -1074,7 +1074,7 @@ function TagSelector($phpFormName)
             <optgroup label="Hauptkategorien">
     ';
 
-    $strSQL = "SELECT * FROM news_tags";
+    $strSQL = "SELECT * FROM news_tags WHERE active = '1'";
     $rs=mysqli_query($link,$strSQL);
     while($row=mysqli_fetch_assoc($rs)) { $retval .= '<option value="'.$row['name'].'##'.$row['id'].'">'.$row['name'].'</option>'; }
 

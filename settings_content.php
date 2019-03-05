@@ -4,6 +4,66 @@
 
     require("headerincludes.php");
 
+    if(isset($_POST['addTag']))
+    {
+        $tagName = $_POST['tagName'];
+
+        $tagID = SReplace($tagName);
+
+        if(!MySQL::Exist("SELECT * FROM news_tags WHERE id = ?",'s',$tagID))
+        {
+            MySQL::NonQuery("INSERT INTO news_tags (id,name) VALUES (?,?)",'ss',$tagID,$tagName);
+        }
+        else
+        {
+            Redirect("/settings_content?topic=News&error");
+            die();
+        }
+
+        Redirect("/settings_content?topic=News");
+        die();
+    }
+
+    if(isset($_POST['updateTag']))
+    {
+        $tagID = $_POST['updateTag'];
+        $tagName = $_POST['tagName'];
+        $newTagID = SReplace($_POST['tagName']);
+
+        $updateExisting = (isset($_POST['updateExisting']))  ? true : false;
+
+        if(!MySQL::Exist("SELECT * FROM news_tags WHERE id = ?",'s',$newTagID))
+        {
+            // Create new Entry
+            MySQL::NonQuery("INSERT INTO news_tags (id,name) VALUES (?,?)",'ss',$newTagID,$tagName);
+
+            if($updateExisting)
+            {
+                $newsArray = MySQL::Cluster("SELECT * FROM news");
+                foreach($newsArray as $news)
+                {
+                    $newTags = str_replace('|'.$tagID.'|','|'.$newTagID.'|',$news['tags']);
+                    MySQL::NonQuery("UPDATE news SET tags = ? WHERE id = ?",'ss',$newTags,$news['id']);
+                }
+
+                // Delete old entry
+                MySQL::NonQuery("DELETE FROM news_tags WHERE id = ?",'s',$tagID);
+            }
+            else
+            {
+                // Disable old entry (MUST BE KEPT FOR DISPLAYING OLD NEWS CORRECTLY)
+                MySQL::NonQuery("UPDATE news_tags SET active = '0' WHERE id = ?",'s',$tagID);
+            }
+        }
+        else
+        {
+            Redirect("/settings_content?topic=News&error");
+            die();
+        }
+
+        Redirect("/settings_content?topic=News");
+        die();
+    }
 
     if(isset($_POST['updateSetting']))
     {
@@ -225,6 +285,67 @@
 
                 </form>
             ';
+        }
+        else if($_GET['topic'] == 'News')
+        {
+            $newsTagArray = MySQL::Cluster("SELECT * FROM news_tags WHERE active = '1' ORDER BY name ASC");
+
+            if(isset($_GET['error'])) echo '<span style="color: #CC0000">Ein Fehler ist aufgetreten! M&ouml;glicherweise existiert die Kategorie bereits?</span>';
+
+            echo '
+                <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                    <ul>
+            ';
+            foreach($newsTagArray as $tag)
+            {
+                if(isset($_GET['editTag']) AND $_GET['editTag'] == $tag['id'])
+                {
+                    echo '
+                        <li>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <input type="text" placeholder="Kategorie..." value="'.$tag['name'].'" name="tagName"/>
+                                    </td>
+                                    <td>
+                                        '.Tickbox("updateExisting","updateExisting","Diese Kategorie bei vorhandenen Artikeln &auml;ndern").'
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan=2>
+                                        <button type="submit" name="updateTag" value="'.$tag['id'].'">Aktualisieren</button>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </li>
+                    ';
+                }
+                else
+                {
+                    $tagsFound = MySQL::Count("SELECT * FROM news WHERE tags LIKE '%|".$tag['id']."|%'");
+                    echo '<li>'.$tag['name'].' ['.$tagsFound.'x vorkommend] '.EditButton("/settings_content?topic=News&editTag=".$tag['id']).'</li>';
+                }
+            }
+            echo '</ul></form><br><br>';
+
+            if(!isset($_GET['newTag'])) echo AddButton("/settings_content?topic=News&newTag");
+            else
+            {
+                echo '
+                    <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                        <table>
+                            <tr>
+                                <td>Neue Kategorie eintragen:</td>
+                                <td><input type="text" placeholder="Kategorie..." name="tagName"/></td>
+                                <td><button name="addTag">Hinzuf&uuml;gen</button></td>
+                            </tr>
+                        </table>
+                    </form>
+                ';
+            }
+
+
         }
         else if($_GET['topic'] == 'Allgemein')
         {
