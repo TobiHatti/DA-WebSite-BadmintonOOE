@@ -135,11 +135,11 @@ function TagInsert(e)
     // Submits onEnter
 
     var tagText = document.getElementById("tagText").value;
-    var tagStr = "||" + document.getElementById("tag_str").value;
+    var tagStr = "|" + document.getElementById("tag_str").value + "|";
 
     if (e.keyCode == 13 && tagText!= "")
     {
-        if(tagStr.replace("||" + tagText + "||") == ("||" + document.getElementById("tag_str").value))
+        if(tagStr.replace("|" + tagText + "|") == ("|" + document.getElementById("tag_str").value + "|"))
         {
             var block_to_insert ;
             var container_block ;
@@ -153,7 +153,7 @@ function TagInsert(e)
             container_block = document.getElementById( 'tagContainer' );
             container_block.appendChild( block_to_insert );
 
-            document.getElementById("tag_str").value = document.getElementById("tag_str").value + tagText + '||';
+            document.getElementById("tag_str").value = document.getElementById("tag_str").value + "|" + tagText + "|";
             document.getElementById("tagText").value="";
         }
     }
@@ -171,11 +171,11 @@ function RmTag(tagID,tagText,tagValue)
     // Remove
     // a) Custom Tags and Tags without special letters
     var oldStr = document.getElementById("tag_str").value;
-    var newStr = oldStr.replace(tagText + "||","");
+    var newStr = oldStr.replace("|" + tagText + "|","");
 
     // b) Tags with custom letters
     var oldStr = document.getElementById("tag_str").value;
-    var newStr = oldStr.replace(tagValue + "||","");
+    var newStr = oldStr.replace("|" + tagValue + "|","");
 
     document.getElementById("tag_str").value = newStr;
 
@@ -194,7 +194,7 @@ function TagList()
 
     var listpre = document.getElementById("tagList");
     var tagComb = listpre.options[listpre.selectedIndex].value;
-    var tagStr = "||" + document.getElementById("tag_str").value;
+    var tagStr = "|" + document.getElementById("tag_str").value + "|";
 
 
     tagArray = tagComb.split('##');
@@ -202,7 +202,7 @@ function TagList()
     tagText = tagArray[0];
     tagValue = tagArray[1];
 
-    if(tagStr.replace("||" + tagText + "||") == ("||" + document.getElementById("tag_str").value))
+    if(tagStr.replace("|" + tagText + "|") == ("|" + document.getElementById("tag_str").value + "|"))
     {
         var block_to_insert ;
         var container_block ;
@@ -216,7 +216,7 @@ function TagList()
         container_block = document.getElementById( 'tagContainer' );
         container_block.appendChild(block_to_insert);
 
-        document.getElementById("tag_str").value = document.getElementById("tag_str").value + tagValue + '||';
+        document.getElementById("tag_str").value = document.getElementById("tag_str").value + "|" + tagValue + "|";
     }
     document.getElementById("tagList").value="none";
 
