@@ -1068,7 +1068,7 @@ function TagSelector($phpFormName)
 
     $retval = '
         <input type="search" class="cel_l" id="tagText" placeholder="Tags eingeben... (Mit [Enter] best&auml;tigen)" onkeypress="return TagInsert(event)"/>
-        oder
+        oder   
         <select onchange="TagList();" id="tagList">
             <option value="none" disabled selected>--- Kategorie Ausw&auml;hlen ---</option>
             <optgroup label="Hauptkategorien">
