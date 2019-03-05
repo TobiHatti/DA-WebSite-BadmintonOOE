@@ -180,8 +180,8 @@
 
         $offset = ((isset($_GET['page'])) ? $_GET['page']-1 : 0 ) * $entriesPerPage;
 
-        echo NewsTile("SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%$tag%' ORDER BY release_date DESC, id DESC LIMIT $offset,$entriesPerPage");
-        echo Pager("SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%$tag%'",$entriesPerPage);
+        echo NewsTile("SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%|$tag|%' ORDER BY release_date DESC, id DESC LIMIT $offset,$entriesPerPage");
+        echo Pager("SELECT * FROM news WHERE release_date <= '$today' AND tags LIKE '%|$tag|%'",$entriesPerPage);
 
         echo '
                 </article>
@@ -283,10 +283,15 @@
             <span style="color: #A9A9A9">'.date_format(date_create($_POST['release_date']),"d. F Y").'</span>
             |';
 
+            $first = true;
             foreach($tags = explode('||',$_POST['tags']) as $tag)
             {
-                if($tag != "" AND $tag != $tags[0]) echo ',&nbsp;&nbsp;<a href="#">'.$tag.'</a>';
-                if($tag == $tags[0]) echo '&nbsp;&nbsp;<a href="#">'.$tag.'</a>';
+                $tag = str_replace('|','',$tag);
+
+                if($tag != "" AND !$first) echo ',&nbsp;&nbsp;<a href="#">'.$tag.'</a>';
+                if($first) echo '&nbsp;&nbsp;<a href="#">'.$tag.'</a>';
+
+                $first = false;
             }
 
             echo '

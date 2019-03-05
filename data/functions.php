@@ -291,12 +291,17 @@ function ShowTags($tagstr,$disableLinks = false, $targetTop = false)
 
     $retval = '';
 
+    $first = true;
     foreach($tags = explode('||',$tagstr) as $tag)
     {
+        $tag = str_replace('|','',$tag);
+
         $ntname = MySQL::Scalar("SELECT name FROM news_tags WHERE id = ?",'s',$tag);
 
-        if($tag != "" AND $tag != $tags[0]) $retval .= ',&nbsp;&nbsp;<a '.(($targetTop) ? 'target="_top"' : '').' href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.(($ntname!="") ? $ntname : $tag).'</a>';
-        if($tag == $tags[0]) $retval .= '<a '.(($targetTop) ? 'target="_top"' : '').' href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.(($ntname!="") ? $ntname : $tag).'</a>';
+        if($tag != "" AND !$first) $retval .= ',&nbsp;&nbsp;<a '.(($targetTop) ? 'target="_top"' : '').' href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.(($ntname!="") ? $ntname : $tag).'</a>';
+        if($first) $retval .= '<a '.(($targetTop) ? 'target="_top"' : '').' href="'.(($disableLinks) ? '#' : '/news/kategorie/'.$tag).'">'.(($ntname!="") ? $ntname : $tag).'</a>';
+
+        $first = false;
     }
 
    return $retval;
