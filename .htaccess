@@ -123,6 +123,9 @@ RewriteRule ^([^\.]+)$ $1.php [NC,L]
 RewriteRule (^|/)backup(/|$) - [F]
 RewriteRule (^|/)sass(/|$) - [F]
 
+# Comment this out whe using tools
+RewriteRule (^|/)tools(/|$) - [F]
+
 ###############################
 #       Error Documents       #
 ###############################
