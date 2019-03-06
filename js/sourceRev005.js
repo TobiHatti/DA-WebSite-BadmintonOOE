@@ -171,11 +171,10 @@ function RmTag(tagID,tagText,tagValue)
     // Remove
     // a) Custom Tags and Tags without special letters
     var oldStr = document.getElementById("tag_str").value;
-    var newStr = oldStr.replace("|" + tagText + "|","");
+    var newStrPre = oldStr.replace("|" + tagText + "|","");
 
     // b) Tags with custom letters
-    var oldStr = document.getElementById("tag_str").value;
-    var newStr = oldStr.replace("|" + tagValue + "|","");
+    newStr = newStrPre.replace("|" + tagValue + "|","");
 
     document.getElementById("tag_str").value = newStr;
 
@@ -243,7 +242,7 @@ function LoadTags()
 
 
             block_to_insert = document.createElement( 'div' );
-            block_to_insert.innerHTML = '<div id="tagID' + tag_nr + '"><input type="hidden" id="tagVal' + tag_nr + '" value="' + tagArray[i].replace("|","") + '"/><a onclick="RmTag(' + tag_nr + ');">&#128500;</a>&nbsp;' + tagArray[i].replace("|","") + '</div>';
+            block_to_insert.innerHTML = '<div id="tagID' + tag_nr + '"><input type="hidden" id="tagVal' + tag_nr + '" value="' + tagArray[i].replace("|","").replace("|","") + '"/><a onclick="RmTag(' + tag_nr + ',\'' + tagArray[i].replace("|","").replace("|","") + '\',\'' + tagArray[i].replace("|","").replace("|","") + '\');">&#128500;</a>&nbsp;' + tagArray[i].replace("|","").replace("|","") + '</div>';
 
             container_block = document.getElementById( 'tagContainer' );
             container_block.appendChild( block_to_insert );
