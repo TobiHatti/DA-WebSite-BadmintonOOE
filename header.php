@@ -105,9 +105,9 @@
                     echo '
                 </header>
 
-                <nav>
-                    <div class="dropdown_menu_container">
-                        <div id="cssmenu">
+                <nav style="z-index:99999999">
+                    <div class="dropdown_menu_container" style="z-index:99999999">
+                        <div id="cssmenu" style="z-index:99999999">
                             <ul>
                                 <li><a href="/" style="cursor: pointer">Startseite</a></li>
 
@@ -253,6 +253,7 @@
 
                 </script>
 
+
                 <nav style="position: fixed; top: '.(isset($_SESSION['userID']) ? '20' : '0').'px; width: 100%; height: 38px; display: none;" id="staticNavBar">
                     <div class="dropdown_menu_container">
                         <div id="cssmenu">
@@ -371,7 +372,6 @@
                         </div>
                     </div>
                 </nav>
-
 
 
                 <main>
