@@ -54,9 +54,11 @@
 
         list($article,$nameid,$thumb,$title) = ArticlePreProcessRoutine($article);
 
-        MySQL::NonQuery("UPDATE news SET title = ?,article_url = ?, tags = ?, article = ?, release_date = ?, thumbnail = ? WHERE id = ?",'@s',$title,$nameid,$tags,$article,$release,$thumb,$id);
+        MySQL::NonQuery("UPDATE news SET title = ?, tags = ?, article = ?, release_date = ?, thumbnail = ? WHERE id = ?",'@s',$title,$tags,$article,$release,$thumb,$id);
 
-        Redirect("/news/artikel/".$nameid);
+        $artURL = MySQL::Scalar("SELECT article_url FROM news WHERE id = ?",'s',$id);
+
+        Redirect("/news/artikel/".$artURL);
         die();
     }
 
