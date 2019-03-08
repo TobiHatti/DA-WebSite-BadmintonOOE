@@ -31,7 +31,7 @@
         }
 
 
-        if($_GET['assignUser'] == 'tg')
+        if(isset($_GET['assignUser']) AND $_GET['assignUser'] == 'tg')
         {
             $date = date("Y-m-d");
             $trainingsgruppenID = $_POST['trainingsgruppenID'];
@@ -40,17 +40,17 @@
             MySQL::NonQuery("INSERT INTO members_trainingsgruppen (tgID,memberID) VALUES (?,?)",'ss',$trainingsgruppenID,$id);
         }
 
-        if($_GET['assignUser'] == 'nwk')
+        if(isset($_GET['assignUser']) AND $_GET['assignUser'] == 'nwk')
         {
             MySQL::NonQuery("INSERT INTO members_nachwuchskader (memberID) VALUES (?)",'s',$id);
         }
 
-        if($_GET['assignUser'] == 'club')
+        if(isset($_GET['assignUser']) AND $_GET['assignUser'] == 'club')
         {
             // No actions needed -> special actions in reihung!
         }
 
-        Redirect(ThisPage());
+        Redirect(ThisPage("+playerAdded"));
         die();
     }
 
@@ -74,6 +74,7 @@
     $tempPlayerID = 'TMP'.uniqid();
 
     echo '
+                '.(isset($_GET['playerAdded']) ? '<center><span style="color: #32CD32">Spieler wurde hinzugef&uuml;gt!</span></center>' : '').'
                     <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                         <center>
 
@@ -91,7 +92,7 @@
                                     document.getElementById("inputBirthyear").disabled = false;
                                     document.getElementById("inputEmail").disabled = false;
                                     document.getElementById("inputPhone").disabled = false;
-                                    '.((isset($_GET['assignUser']) AND $_GET['assignUser'] != "club") ? 'document.getElementById("inputClub").disabled = false;' : '').'
+                                    '.((isset($_GET['assignUser']) AND $_GET['assignUser'] != 'club') OR !isset($_GET['assignUser']) ? 'document.getElementById("inputClub").disabled = false;' : '').'
                                     document.getElementById("inputPlayerID").disabled = true;
 
                                     document.getElementById("inputPlayerID").value = "'.$tempPlayerID.'";
@@ -113,7 +114,7 @@
                                         document.getElementById("inputBirthyear").disabled = true;
                                         document.getElementById("inputEmail").disabled = true;
                                         document.getElementById("inputPhone").disabled = true;
-                                        '.((isset($_GET['assignUser']) AND $_GET['assignUser'] != "club") ? 'document.getElementById("inputClub").disabled = true;' : '').'
+                                        '.((isset($_GET['assignUser']) AND $_GET['assignUser'] != 'club') OR !isset($_GET['assignUser']) ? 'document.getElementById("inputClub").disabled = true;' : '').'
 
                                         document.getElementById("checkMemberNotificationExists").style.display = "table-row";
                                         document.getElementById("checkMemberNotificationExistsNot").style.display = "none";
@@ -127,7 +128,7 @@
                                         document.getElementById("inputBirthyear").disabled = false;
                                         document.getElementById("inputEmail").disabled = false;
                                         document.getElementById("inputPhone").disabled = false;
-                                        '.((isset($_GET['assignUser']) AND $_GET['assignUser'] != "club") ? 'document.getElementById("inputClub").disabled = false;' : '').'
+                                        '.((isset($_GET['assignUser']) AND $_GET['assignUser'] != 'club') OR !isset($_GET['assignUser']) ? 'document.getElementById("inputClub").disabled = false;' : '').'
 
                                         document.getElementById("checkMemberNotificationExistsNot").style.display = "table-row";
                                         document.getElementById("checkMemberNotificationExists").style.display = "none";
@@ -145,7 +146,7 @@
                                     document.getElementById("inputBirthyear").disabled = true;
                                     document.getElementById("inputEmail").disabled = true;
                                     document.getElementById("inputPhone").disabled = true;
-                                    '.((isset($_GET['assignUser']) AND $_GET['assignUser'] != "club") ? 'document.getElementById("inputClub").disabled = true;' : '').'
+                                    '.((isset($_GET['assignUser']) AND $_GET['assignUser'] != 'club') OR !isset($_GET['assignUser']) ? 'document.getElementById("inputClub").disabled = true;' : '').'
                                 }
 
 
@@ -204,25 +205,30 @@
                             </tr>
                             ';
 
-                            if(isset($_GET['assignUser']) AND $_GET['assignUser'] != 'club')
+                            if((isset($_GET['assignUser']) AND $_GET['assignUser'] != 'club') OR !isset($_GET['assignUser']))
                             {
+                                $clubListPerm = MySQL::Cluster("SELECT * FROM vereine WHERE isOOEclub = '1' ORDER BY ort,verein ASC");
+                                $clubListTemp = MySQL::Cluster("SELECT * FROM vereine WHERE isOOEclub = '0' ORDER BY ort,verein ASC");
+
                                 echo '
                                     <tr>
                                         <td class="ta_r">Verein: </td>
                                         <td colspan=2>
+
                                             <select name="club" class="cel_m" id="inputClub">
                                                 <option selected disabled>--- Verein Ausw&auml;hlen ---</option>
+                                                <optgroup label="Vereine aus O&Ouml;">
                                             ';
-
-                                                $strSQL = "SELECT * FROM vereine ORDER BY ort ASC";
-                                                $rs=mysqli_query($link,$strSQL);
-                                                while($row=mysqli_fetch_assoc($rs))
-                                                {
-                                                    echo '<option value="'.$row['kennzahl'].'">'.$row['verein'].' '.$row['ort'].'</option>';
-                                                }
-
+                                                foreach($clubListPerm as $club) echo '<option value="'.$club['kennzahl'].'">'.$club['verein'].' '.$club['ort'].'</option>';
                                             echo '
+                                                </optgroup>
+                                                <optgroup label="Andere Vereine">
+                                            ';
+                                                foreach($clubListTemp as $club) echo '<option value="'.$club['kennzahl'].'">'.$club['verein'].' '.$club['ort'].'</option>';
+                                            echo '
+                                                </optgroup>
                                             </select>
+
                                         </td>
                                     </tr>
                                 ';
