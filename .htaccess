@@ -50,7 +50,7 @@ RewriteRule ^vereine/neu vereine.php?neu [NC,QSA,L]
 RewriteRule ^vorstand/neu vorstand.php?neu [NC,QSA,L]
 
 # Rewrite Rules for nachwuchskader.php
-RewriteRule ^nachwuchskader/neu nachwuchskader.php?neu [NC,QSA,L]
+#RewriteRule ^nachwuchskader/neu nachwuchskader.php?neu [NC,QSA,L]
 
 # Rewrite Rules for zentralausschreibungen.php
 RewriteRule ^schiedsrichter/seite/([a-zA-Z0-9-]+)/?$ schiedsrichter.php?seite=$1 [NC,QSA,L]
@@ -88,9 +88,14 @@ RewriteRule ^spielerrangliste/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/xls/?$/?$ filecr
 RewriteRule ^spielerrangliste/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/csv/?$/?$ filecreators/csv-spielerrangliste.php?year=$1&club=$2 [NC,QSA,L]
 
 # Rewrite Rules for trainingsgruppen
-RewriteRule ^trainingsgruppen/([a-zA-Z0-9-_]+)/eintragen/?$ trainingsgruppen.php?eintragen=$1 [NC,QSA,L]
-RewriteRule ^trainingsgruppen/neue-gruppe trainingsgruppen.php?newGroup [NC,QSA,L]
-RewriteRule ^trainingsgruppen/gruppe-bearbeiten/([a-zA-Z0-9-_]+)/?$ trainingsgruppen.php?editGroup&groupID=$1 [NC,QSA,L]
+#RewriteRule ^trainingsgruppen/([a-zA-Z0-9-_]+)/eintragen/?$ trainingsgruppen.php?eintragen=$1 [NC,QSA,L]
+#RewriteRule ^trainingsgruppen/neue-gruppe trainingsgruppen.php?newGroup [NC,QSA,L]
+#RewriteRule ^trainingsgruppen/gruppe-bearbeiten/([a-zA-Z0-9-_]+)/?$ trainingsgruppen.php?editGroup&groupID=$1 [NC,QSA,L]
+
+# Rewrite Rules for trainingsgruppen
+RewriteRule ^nachwuchskader/([a-zA-Z0-9-_]+)/eintragen/?$ nachwuchskader.php?eintragen=$1 [NC,QSA,L]
+RewriteRule ^nachwuchskader/neue-gruppe nachwuchskader.php?newGroup [NC,QSA,L]
+RewriteRule ^nachwuchskader/gruppe-bearbeiten/([a-zA-Z0-9-_]+)/?$ nachwuchskader.php?editGroup&groupID=$1 [NC,QSA,L]
 
 # Rewrite Rules for member-edit
 RewriteRule ^mitglieder/bearbeiten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$/?$ editMembers.php?permissionSuffix=$1&memberID=$2 [NC,QSA,L]
@@ -113,6 +118,14 @@ RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/spieler-bearbeit
 RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$/?$ ooebv-ranglisten.php?list=$1&table=$2&show [NC,QSA,L]
 
 RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/pdf/?$/?$ filecreators/pdf-ooebvrl.php?list=$1&table=$2 [NC,QSA,L]
+
+# Rewrite Rules for nw-overview
+RewriteRule ^monatsuebersicht/neu monatsuebersicht.php?new [NC,QSA,L]
+RewriteRule ^monatsuebersicht/([a-zA-Z0-9-_]+)/bearbeiten/?$ monatsuebersicht.php?edit=$1 [NC,QSA,L]
+
+# Rewrite Rules for trainingsgruppen
+RewriteRule ^trainingsgruppen/neu trainingsgruppen.php?new [NC,QSA,L]
+RewriteRule ^trainingsgruppen/([a-zA-Z0-9-_]+)/bearbeiten/?$ trainingsgruppen.php?edit=$1 [NC,QSA,L]
 
 # Ignore .php-Extension
 RewriteRule ^([^\.]+)$ $1.php [NC,L]

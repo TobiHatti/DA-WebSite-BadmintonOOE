@@ -145,10 +145,12 @@
                                 <li class="active"><a href="#">Nachwuchs</a>
                                     <ul>
                                         <li><a href="/nachwuchskader">O&Ouml; Nachwuchskader</a></li>
+                                        <li><a href="/nachwuchs-ranglisten">Nachwuchs-Ranglisten</a></li>
                                         <li><a href="/trainingszeiten">Trainingszeiten BNLZ-Nord</a></li>
                                         <li><a href="/fotogalerie">Fotogalerie</a></li>
                                         <li><a href="/trainingsgruppen">Trainingsgruppen</a></li>
                                         <li><a href="/kalender/Nachwuchs">Terminkalender</a></li>
+                                        <li><a href="/monatsuebersicht">Monats-&Uuml;bersicht</a></li>
                                     </ul>
                                 </li>
 

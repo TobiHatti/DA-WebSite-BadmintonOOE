@@ -2,9 +2,20 @@
     require("header.php");
     PageTitle("Fotogalerie");
 
+    if(isset($_POST['changeImageTitle']))
+    {
+        $imageID = $_POST['changeImageTitle'];
+        $imageTitle = $_POST['imageTitle'];
 
-     if(isset($_POST['add_album']))
-     {
+        MySQL::NonQuery("UPDATE gallery_images SET title = ? WHERE id = ?",'ss',$imageTitle,$imageID);
+
+        Redirect(ThisPage("!editTitle"));
+        die();
+    }
+
+
+    if(isset($_POST['add_album']))
+    {
         $albumName = $_POST['album_name'];
         $albumUrl = SReplace($_POST['album_name']);
         $today = date("Y-m-d");
@@ -20,6 +31,16 @@
 
         $albID = MySQL::Scalar("SELECT id FROM fotogalerie WHERE album_name = ?",'s',$albumName);
         FileUpload("content/gallery/".$albumUrl."/", "images" ,"","","INSERT INTO gallery_images (id,album_id,image) VALUES ('','$albID','FNAME')");
+
+        $images = MySQL::Cluster("SELECT * FROM gallery_images WHERE album_id = ?",'s',$albID);
+        $i=1;
+        foreach($images as $img)
+        {
+            $imgTitle = $albumName." (".$i.")";
+            MySQL::NonQuery("UPDATE gallery_images SET title = ? WHERE id = ?",'ss',$imgTitle,$img['id']);
+            $i++;
+        }
+
 
         Redirect("/fotogalerie");
         die();
@@ -218,8 +239,10 @@
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
         {
+
+
             echo '
-                <a href="#galleryView" onclick="SelectGalleryImage('.$row['id'].');">
+                '.((isset($_GET['editTitle']) AND $_GET['editTitle'] == $row['id']) ? '' : '<a href="#galleryView" onclick="SelectGalleryImage('.$row['id'].');">' ).'
                     <div class="gallery_image_thumb">
                         <center>
                             <div class="image_container">
@@ -228,13 +251,35 @@
                             </div>
                         </center>
                         <p>
-                            '.$album_name.' ('.$i++.')
+
+
+
+                            ';
+
+                            if(isset($_GET['editTitle']) AND $_GET['editTitle'] == $row['id'])
+                            {
+                                echo '
+                                    <form action="'.ThisPage("").'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                                        <input type="text" value="'.$row['title'].'" name="imageTitle" class="cel_s cel_h20"><button class="cel_xs cel_h20" type="submit" name="changeImageTitle" value="'.$row['id'].'">&Auml;ndern</button>
+                                    </form>
+                                ';
+                            }
+                            else
+                            {
+                                echo '<output style="color: #000000; text-decoration: none;" id="galleryTitle'.$row['id'].'">'.$row['title'].'</output>';
+                                if(CheckPermission("EditGallery")) echo EditButton(ThisPage("!editTitle","+editTitle=".$row['id']),true);
+                            }
+
+
+
+
+                            echo '
                             <br>
                             <span>'.$row['image'].'</span>
                         </p>
                     </div>
                 </a>
-
+                '.((isset($_GET['editTitle']) AND $_GET['editTitle'] == $row['id']) ? '' : '</a>' ).'
 
             ';
         }
@@ -252,6 +297,10 @@
                     <input type="hidden" value="'.$allowDownload.'" id="galleryAllowDownload"/>
                     '.(($allowDownload) ? '<a href="" id="galleryDownload" download><button type="button" title="Bild Herunterladen"><i class="fa fa-download"></i></button></a>' : '').'
                     <img src="" alt="" class="gallery_image" id="galleryFullSized"/>
+
+                    <span style="position: absolute; top: 20px; left: 30px;"><h2>'.$album_name.'</h2></span>
+                    <span style="position: absolute; top: 50px; left: 50px;"><h1><output id="fullsizeTitle"></output></h1></span>
+
                     ';
 
                     if(CheckPermission("DeleteGallery"))

@@ -1,10 +1,10 @@
 <?php
     require("header.php");
 
-    if(isset($_POST['addMember']))
+    if(isset($_POST['updateMember']))
     {
         $playerID = $_POST['playerID'];
-        $id = MySQL::Scalar("SELECT id FROM members WHERE playerID = ?",'s',$playerID);
+        $id = $_POST['updateMember'];
         $clubID = $_POST['club'];
         $gender = $_POST['gender'];
         $firstname = $_POST['firstname'];
@@ -31,7 +31,7 @@
                 <table>
                     <tr>
                         <td class="ta_r">Spielernummer: </td>
-                        <td colspan=2><input type="number" name="playerID" placeholder="Spielernummer..." value="'.$memberData['playerID'].'"/></td>
+                        <td colspan=2><input type="text" name="playerID" placeholder="Spielernummer..." value="'.$memberData['playerID'].'"/></td>
                     </tr>
                     <tr>
                         <td colspan=3><hr></td>
@@ -39,7 +39,7 @@
                     <tr>
                         <td class="ta_r">Geschlecht: </td>
                         <td>'.RadioButton("M&auml;nnlich", "gender",($memberData['gender']=='M' ? true : false),"M","inputGenderM").'</td>
-                        <td>'.RadioButton("Weiblich", "gender",($memberData['gender']=='W' ? true : false),"W","inputGenderF").'</td>
+                        <td>'.RadioButton("Weiblich", "gender",($memberData['gender']=='F' ? true : false),"F","inputGenderF").'</td>
                     </tr>
                     <tr>
                         <td class="ta_r">Vorname: </td>
@@ -82,7 +82,7 @@
                         <td colspan=2><center>'.FileButton("playerImg", "playerImg").'</center></td>
                     </tr>
                     <tr>
-                        <td colspan=3 class="ta_c"><br><button type="submit" name="updateMember">Spielerdaten aktualisieren</button></td>
+                        <td colspan=3 class="ta_c"><br><button type="submit" name="updateMember" value="'.$memberData['id'].'">Spielerdaten aktualisieren</button></td>
                     </tr>
                 </table>
             </center>
