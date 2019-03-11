@@ -105,9 +105,9 @@
                     echo '
                 </header>
 
-                <nav style="z-index:99999999">
-                    <div class="dropdown_menu_container" style="z-index:99999999">
-                        <div id="cssmenu" style="z-index:99999999">
+                <nav style="z-index:99">
+                    <div class="dropdown_menu_container" style="z-index:99">
+                        <div id="cssmenu" style="z-index:99">
                             <ul>
                                 <li><a href="/" style="cursor: pointer">Startseite</a></li>
 
