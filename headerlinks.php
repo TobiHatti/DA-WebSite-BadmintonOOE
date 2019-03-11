@@ -1,6 +1,6 @@
 <?php
 
-    $revision = 6896;
+    $revision = 6996;
 
     echo '
         <!-- META Tags -->

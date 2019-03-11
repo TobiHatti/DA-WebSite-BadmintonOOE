@@ -530,6 +530,11 @@ function SelectGalleryImage(imageID)
 {
     var selectedImg = document.getElementById("galleryImg" + imageID).src;
     document.getElementById("galleryFullSized").src = selectedImg;
+
+    var selectedTitle = document.getElementById("galleryTitle" + imageID).value;
+    document.getElementById("fullsizeTitle").innerHTML = selectedTitle;
+
+
     if(document.getElementById("galleryAllowDownload").value=="1") document.getElementById("galleryDownload").href = selectedImg;
     document.getElementById("currentImageID").value = imageID;
 
