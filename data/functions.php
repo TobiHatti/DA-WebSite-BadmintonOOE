@@ -157,6 +157,25 @@ function TextareaPlus($name, $id="edit", $placeholder="",$required = false)
                 })
             });
         </script>
+
+        <script>
+            window.setInterval(function(){
+
+                    $( document ).ready(function() {
+                        var doc = document.getElementsByClassName("fr-wrapper");
+                        var nodes = doc[0].childNodes;
+                        var nodeNodes = nodes[0].childNodes;
+                        if(nodeNodes[0].tagName == "A")
+                        {
+                            nodeNodes[0].style.opacity = "0";
+                            nodeNodes[0].href = "#";
+                            nodeNodes[0].target = "";
+                            nodeNodes[0].padding = "0px 0px 0px 0px";
+                        }
+                    });
+
+            }, 100);
+        </script>
     ';
 }
 
