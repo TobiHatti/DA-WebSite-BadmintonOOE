@@ -298,6 +298,7 @@
 
             echo '
             '.FroalaContent($article).'
+            <br>
             <hr>
             <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 
