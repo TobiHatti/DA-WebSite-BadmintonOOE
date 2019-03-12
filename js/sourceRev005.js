@@ -502,9 +502,14 @@ function UpdateArchiveFrame()
 
 function CopySliderTitle(maxSlides,sdmActive)
 {
+    // Note for adding new Special characters:
+    // 1) Add 2 replace()-Methods to the lines below, converting HTML-Encoded characters to JS-Encoded characters
+    // 2) In index.php, in the input slideTitleX, add a str_replace function to replace the HTML-Encoded character with the actual character
+
     var list = document.getElementsByClassName("ws-title")[0];
-    document.getElementById("slider_news_title").value = list.getElementsByTagName("SPAN")[0].innerHTML;
-    var currentTitle = list.getElementsByTagName("SPAN")[0].innerHTML;
+    document.getElementById("slider_news_title").value = list.getElementsByTagName("SPAN")[0].innerHTML.replace("&amp;","\&");
+    var currentTitle = list.getElementsByTagName("SPAN")[0].innerHTML.replace("&amp;","\&"); ;
+
 
     for(var i=1 ; i <= maxSlides ; i++)
     {

@@ -177,7 +177,7 @@
                         }
 
                         echo '
-                            <input type="hidden" id="slideTitle'.$i.'" value="'.$row['title'].'">
+                            <input type="hidden" id="slideTitle'.$i.'" value="'.str_replace("&amp;","&",$row['title']).'">
                             <input type="hidden" id="slideDate'.$i.'" value="'.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($row['release_date']))).'">
                             <input type="hidden" id="slideLink'.$i++.'" value="'.$row['article_url'].'">
                         ';

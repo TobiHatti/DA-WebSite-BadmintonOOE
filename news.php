@@ -297,7 +297,7 @@
             }
 
             echo '
-            <div class="fr-view fr-element">'.$article.'</div>
+            '.FroalaContent($article).'
             <hr>
             <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 
