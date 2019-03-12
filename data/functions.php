@@ -586,7 +586,28 @@ function ArticlePreProcessRoutine($article)
 
     // Remove HTML-Tags, exchange whitespaces and so on.
     $title = strip_tags(substr($article,0,$cpos));
-    $nameid = SReplace(strip_tags(substr($article,0,$cpos)));
+    $nameid = strip_tags(substr($article,0,$cpos));
+
+    // Removing Special HTML-Entities
+    $nameid = str_replace("&amp;","-",$nameid);
+    $nameid = str_replace("&quot;","-",$nameid);
+    $nameid = str_replace("&circ;","-",$nameid);
+    $nameid = str_replace("&lt;","-",$nameid);
+    $nameid = str_replace("&gt;","-",$nameid);
+    $nameid = str_replace("&ndash;","-",$nameid);
+    $nameid = str_replace("&mdash;","-",$nameid);
+    $nameid = str_replace("&euro;","-",$nameid);
+    $nameid = str_replace("&bdquo;","-",$nameid);
+    $nameid = str_replace("&rdquo;","-",$nameid);
+    $nameid = str_replace("&ldquo;","-",$nameid);
+    $nameid = str_replace("&sbquo;","-",$nameid);
+    $nameid = str_replace("&rsquo;","-",$nameid);
+    $nameid = str_replace("&lsquo;","-",$nameid);
+    $nameid = str_replace("&rsaquo;","-",$nameid);
+    $nameid = str_replace("&lsaquo;","-",$nameid);
+
+    // Final stripping
+    $nameid = SReplace($nameid);
 
     $path = "content/news/$nameid/";
     $article = ArticleImgFilter($article,$path);
