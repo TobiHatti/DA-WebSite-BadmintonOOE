@@ -149,8 +149,12 @@
 
         echo '<br><center>';
         $first = true;
-        $today=date("Y-m-d");  
-        $strSQL = "SELECT DISTINCT SUBSTRING(date_begin, 1, 7) AS date FROM zentralausschreibungen WHERE date_begin > '$today' ORDER BY date_begin ASC";
+        $today=date("Y-m-d");
+
+
+        if(isset($_GET['vergangen'])) $strSQL = "SELECT DISTINCT SUBSTRING(date_begin, 1, 7) AS date FROM zentralausschreibungen ORDER BY date_begin ASC";
+        else $strSQL = "SELECT DISTINCT SUBSTRING(date_begin, 1, 7) AS date FROM zentralausschreibungen WHERE date_begin > '$today' ORDER BY date_begin ASC";
+
         $rs=mysqli_query($link,$strSQL);
         while($row=mysqli_fetch_assoc($rs))
         {
@@ -164,15 +168,17 @@
         echo PageContent("1",CheckPermission("ChangeContent"));
 
 
-
-        $strSQLt = "SELECT DISTINCT SUBSTRING(date_begin, 1, 7) AS date FROM zentralausschreibungen WHERE date_begin > '$today' ORDER BY date_begin ASC";
+        if(isset($_GET['vergangen'])) $strSQLt = "SELECT DISTINCT SUBSTRING(date_begin, 1, 7) AS date FROM zentralausschreibungen ORDER BY date_begin ASC";
+        else $strSQLt = "SELECT DISTINCT SUBSTRING(date_begin, 1, 7) AS date FROM zentralausschreibungen WHERE date_begin > '$today' ORDER BY date_begin ASC";
         $rst=mysqli_query($link,$strSQLt);
         while($rowt=mysqli_fetch_assoc($rst))
         {
             $date = $rowt['date'];
             echo '<a name="'.$date.'">&nbsp;</a>';
 
-            $strSQL = "SELECT * FROM zentralausschreibungen WHERE date_begin LIKE '$date%' AND date_begin > '$today' ORDER BY date_begin ASC";
+            if(isset($_GET['vergangen'])) $strSQL  = "SELECT * FROM zentralausschreibungen WHERE date_begin LIKE '$date%' ORDER BY date_begin ASC";
+            else $strSQL = "SELECT * FROM zentralausschreibungen WHERE date_begin LIKE '$date%' AND date_begin > '$today' ORDER BY date_begin ASC";
+
             $rs=mysqli_query($link,$strSQL);
             while($row=mysqli_fetch_assoc($rs))
             {
@@ -273,6 +279,9 @@
             }
         }
     }
+
+    if(isset($_GET['vergangen'])) echo '<a href="/zentralausschreibung">Aktuelle Zentralausschreibungen anzeigen</a>';
+    else echo '<a href="/zentralausschreibung/vergangen">Vergangene Zentralausschreibungen anzeigen</a>';
 
 
 
