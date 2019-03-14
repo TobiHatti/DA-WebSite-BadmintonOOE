@@ -42,6 +42,7 @@ RewriteRule ^kalender/([a-zA-Z0-9-]+)/?$ kalender.php?category=$1 [NC,QSA,L]
 
 # Rewrite Rules for zentralausschreibungen.php
 RewriteRule ^zentralausschreibung/neu zentralausschreibung.php?neu [NC,QSA,L]
+RewriteRule ^zentralausschreibung/vergangen zentralausschreibung.php?vergangen [NC,QSA,L]
 
 # Rewrite Rules for vereine.php
 RewriteRule ^vereine/neu vereine.php?neu [NC,QSA,L]
