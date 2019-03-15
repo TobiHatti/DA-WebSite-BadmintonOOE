@@ -20,7 +20,7 @@
         $phone1 = $_POST['phone1'];
         $phone2 = $_POST['phone2'];
         $phone3 = $_POST['phone3'];
-        $isOOEclub = isset($_POST['isOOEclub']) ? 1 : 0;
+        $isOOEclub = 1;
 
         if(isset($_POST['add_verein']))
         {
@@ -97,12 +97,6 @@
                     <tr>
                         <td class="ta_r">Website:</td>
                         <td><input type="url" name="website" placeholder="http://..." value="'.($edit ? $cdat['website'] : '').'"/></td>
-                    </tr>
-                    <tr>
-                        <td class="ta_r">Verein aus O&Ouml; :</td>
-                        <td>
-                            '.Tickbox("isOOEclub","isOOEclub",'<span title="Diese Option kann abgew&auml;hlt werden, wenn der Verein ausschlie&szlig;lich f&uuml;r Ranglisten etc. ben&ouml;tigt wird (Scheint nicht unter \'Vereine\' auf)"><i class="fas fa-info-circle"></i></span>',($edit ? ($cdat['isOOEclub']==1 ? true : false) : true )).'
-                        </td>
                     </tr>
                     <tr><td colspan=2><b>Kontaktperson:</b></td></tr>
                     <tr>
@@ -233,7 +227,7 @@
             echo '</center>';
         }
 
-
+        /*
         if(CheckPermission("EditClub") OR CheckPermission("DeleteClub") OR CheckPermission("AddClub"))
         {
             echo '<h4>Sonstige Vereine (nicht in O&Ouml; / Aushilfsspieler / etc.)</h4>';
@@ -261,6 +255,7 @@
 
             echo '</ul>';
         }
+        */
     }
 
     include("footer.php");

@@ -116,7 +116,15 @@
                         <img src="'.(($memberData['image']!="") ? ('/content/members/'.$memberData['image']) : '/content/user.png' ).'" alt="" />
                         <div>
                             <b>'.$memberData['lastname'].'</b> '.$memberData['firstname'].'<br>
-                            Geb.: '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($memberData['birthdate']))).'<br>
+
+                            ';
+
+                            if($memberData['birthdate'] != "0000-00-00")
+                            {
+                                echo 'Geb.: '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($memberData['birthdate']))).'<br>';
+                            }
+
+                            echo '
                             <span style="color: #696969">'.MySQL::Scalar("SELECT CONCAT_WS(' ',verein,ort) FROM vereine WHERE kennzahl = ?",'s',$memberData['clubID']).'</span>
                         </div>
                         <div style="position: absolute; bottom: 0px; right: 0px; height: 20px;">

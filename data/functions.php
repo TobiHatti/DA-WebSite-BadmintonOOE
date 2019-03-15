@@ -1210,10 +1210,19 @@ function PlayerDisplayClubInfo($row,$editExtension = "", $adminEdit = false, $sh
                         <td>Nachname: </td>
                         <td>'.$row['lastname'].'</td>
                     </tr>
-                    <tr>
-                        <td>Geb. Datum: </td>
-                        <td>'.str_replace('ä','&auml;',strftime("%d. %b. %Y",strtotime($row['birthdate']))).' ('.Age($row['birthdate']).')</td>
-                    </tr>
+                    ';
+
+                    if($row['birthdate'] != "0000-00-00")
+                    {
+                        $retval .= '
+                            <tr>
+                                <td>Geb. Datum: </td>
+                                <td>'.str_replace('ä','&auml;',strftime("%d. %b. %Y",strtotime($row['birthdate']))).' ('.Age($row['birthdate']).')</td>
+                            </tr>
+                        ';
+                    }
+
+                    $retval .= '
                     <tr>
                         <td>Mitgl. Nr.: </td>
                         <td>'.(StartsWith($row['playerID'],"TMP") ? '<i>-</i>' : $row['playerID']).'</td>

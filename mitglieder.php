@@ -10,6 +10,8 @@
         $number=$_POST['number'];
         $gender = $_POST['gender'];
 
+        if(!SubStringFind($number,"TMP")) $number = intval($number);
+
         MySQL::NonQuery("UPDATE members SET firstname = ?, lastname = ?, birthdate = ?, playerID = ?, gender = ? WHERE id = ?",'@s',$firstname,$lastname,$birthdate,$number,$gender,$id);
 
         FileUpload("content/members/","image","","","UPDATE members SET img = 'FNAME' WHERE id = '$id'",uniqid());

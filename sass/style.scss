@@ -3162,6 +3162,8 @@ $listItemHeight: 25px;
         box-shadow: 0 0 20px 0px #000000;
     }
 
+
+
 }
 
 .dragSortListStatic_values{
@@ -3180,6 +3182,11 @@ $listItemHeight: 25px;
     }
 }
 
+#externClub{
+    background: linear-gradient(to right, #BFFDBF, #FFFFFF);
+    border: 1px solid #32CD32;
+}
+
 .reihungFold{
     position: relative;
     .infoContainer{
@@ -3188,7 +3195,7 @@ $listItemHeight: 25px;
         top: -45px;
         display: none;
         width: 230px;
-        height: 220px;
+        height: 280px;
         background: #FFFFFF;
         box-shadow: 0 0 15px 2px #303030;
         overflow: visible;

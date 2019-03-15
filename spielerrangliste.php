@@ -156,14 +156,19 @@
             $highlight = ($row['mf']!='' AND !(SubStringFind($row['mf'],'MF')));
             $focus = (SubStringFind($row['mf'],'MF'));
 
+            $specialStyle = '';
+            if($row['isStriked']==1 AND $row['isGrayed']==1) $specialStyle = 'style="text-decoration: line-through; color: #696969"';
+            else if($row['isStriked']==1) $specialStyle = 'style="text-decoration: line-through;"';
+            else if($row['isGrayed']==1) $specialStyle = 'style="color: #696969"';
+
             echo '
                 <tr '.($focus ? ('style="background: '.$accentColor2.'; font-weight: bold;"') : '').'>
-                    <td class="ta_r">'.$i++.'.</td>
-                    <td>'.$row['lastname'].'</td>
-                    <td>'.$row['firstname'].'</td>
-                    <td class="ta_c">'.$row['playerID'].'</td>
-                    <td class="ta_c">'.$row['team'].'</td>
-                    <td class="ta_c">'.$row['currentClubID'].'</td>
+                    <td '.$specialStyle.' class="ta_r">'.$i++.'.</td>
+                    <td '.$specialStyle.'>'.$row['lastname'].'</td>
+                    <td '.$specialStyle.'>'.$row['firstname'].'</td>
+                    <td '.$specialStyle.' class="ta_c">'.$row['playerID'].'</td>
+                    <td '.$specialStyle.' class="ta_c">'.$row['team'].'</td>
+                    <td '.$specialStyle.' class="ta_c">'.$row['currentClubID'].'</td>
                     <td class="ta_c" '.($highlight ? ('style="background: '.$highlightColor.';"') : '').'><b>'.$row['mf'].'</b></td>
                     <td class="ta_c">'.($row['mf']!="" ? $row['mobileNr'] : '').'</td>
                     <td class="ta_c">'.($row['mf']!="" ? $row['email'] : '').'</td>
@@ -180,14 +185,19 @@
             $highlight = ($row['mf']!='' AND !(SubStringFind($row['mf'],'MF')));
             $focus = (SubStringFind($row['mf'],'MF'));
 
+            $specialStyle = '';
+            if($row['isStriked']==1 AND $row['isGrayed']==1) $specialStyle = 'style="text-decoration: line-through; color: #696969"';
+            else if($row['isStriked']==1) $specialStyle = 'style="text-decoration: line-through;"';
+            else if($row['isGrayed']==1) $specialStyle = 'style="color: #696969"';
+
             echo '
                 <tr '.($focus ? ('style="background: '.$accentColor2.'; font-weight: bold;"') : '').'>
-                    <td class="ta_r">'.$i++.'.</td>
-                    <td>'.$row['lastname'].'</td>
-                    <td>'.$row['firstname'].'</td>
-                    <td class="ta_c">'.$row['playerID'].'</td>
-                    <td class="ta_c">'.$row['team'].'</td>
-                    <td class="ta_c">'.$row['currentClubID'].'</td>
+                    <td '.$specialStyle.' class="ta_r">'.$i++.'.</td>
+                    <td '.$specialStyle.'>'.$row['lastname'].'</td>
+                    <td '.$specialStyle.'>'.$row['firstname'].'</td>
+                    <td '.$specialStyle.' class="ta_c">'.$row['playerID'].'</td>
+                    <td '.$specialStyle.' class="ta_c">'.$row['team'].'</td>
+                    <td '.$specialStyle.' class="ta_c">'.$row['currentClubID'].'</td>
                     <td class="ta_c" '.($highlight ? ('style="background: '.$highlightColor.';"') : '').'><b>'.$row['mf'].'</b></td>
                     <td class="ta_c">'.($row['mf']!="" ? $row['mobileNr'] : '').'</td>
                     <td class="ta_c">'.($row['mf']!="" ? $row['email'] : '').'</td>
