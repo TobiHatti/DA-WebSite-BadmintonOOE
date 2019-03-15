@@ -162,7 +162,7 @@
             $pdf->Cell(12,5,$row['team'],$showBorders,0,'C',$focus);
             $pdf->Cell(20,5,$row['currentClubID'],$showBorders,0,'C',$focus);
 
-            $pdf->SetFillColor(0,0,0);
+            $pdf->SetTextColor(0,0,0);
 
             if($highlight)
             {
@@ -208,7 +208,7 @@
             $pdf->Cell(12,5,$row['team'],$showBorders,0,'C',$focus);
             $pdf->Cell(20,5,$row['currentClubID'],$showBorders,0,'C',$focus);
 
-            $pdf->SetFillColor(0,0,0);    
+            $pdf->SetTextColor(0,0,0);
 
             if($highlight)
             {
