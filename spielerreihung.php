@@ -26,78 +26,7 @@
         die();
     }
 
-    if(isset($_POST['updateListM']) OR isset($_POST['updateListW']))
-    {
-        $selectedMembers = array();
-
-        $year = $_POST['year'];
-
-        $club = $_POST['clubID'];
-        if(isset($_POST['updateListM'])) $type='M';
-        if(isset($_POST['updateListW'])) $type='F';
-
-
-        $strSQL = "SELECT * FROM members WHERE members.gender = '$type'";
-        $rs=mysqli_query($link,$strSQL);
-        while($row=mysqli_fetch_assoc($rs))
-        {
-            if(isset($_POST["member".$row['playerID']]))
-            {
-                array_push($selectedMembers,$row['id']);
-            }
-        }
-
-        $highestRank = MySQL::Count("SELECT position FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members_spielerranglisten.assignedClubID = ? AND members_spielerranglisten.year = ? AND members.gender = ?",'@s',$club,$year,$type);
-
-        foreach($selectedMembers as $member)
-        {
-            if(!MySQL::Exist("SELECT * FROM members_spielerranglisten WHERE year = ? AND memberID = ? AND assignedClubID = ?",'@s',$year,$member,$club))
-            {
-                $highestRank++;
-                MySQL::NonQuery("INSERT INTO members_spielerranglisten (memberID,position,year,team,currentClubID,assignedClubID) VALUES (?,?,?,'1',?,?)",'@s',$member,$highestRank,$year,$club,$club);
-            }
-        }
-
-
-        /*
-        $strSQL = "SELECT * FROM members WHERE members.clubID = '$club' AND members.gender = '$type'";
-        $rs=mysqli_query($link,$strSQL);
-        while($row=mysqli_fetch_assoc($rs))
-        {
-            if(isset($_POST["member".$row['playerID']]))
-            {
-                array_push($selectedMembers,$row['id']);
-            }
-        }
-
-        // Remove existing values from Database
-        MySQL::NonQuery("DELETE members_spielerranglisten FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = ? AND members.clubID = ? AND members_spielerranglisten.year = ?",'@s',$type,$club,$year);
-
-
-
-        $i=1;
-        foreach($selectedMembers as $member)
-        {
-            $uid = uniqid();
-            MySQL::NonQuery("INSERT INTO members_spielerranglisten (memberID,position,year,team,currentClubID,assignedClubID) VALUES (?,'".$i++."',?,'1',?,?)",'@s',$member,$year,$club,$club);
-        }
-        */
-
-
-        // Update last edit-Date
-        $paramLatestUpdate = 'Y'.$year.'LastUpdate';
-        $latestDate = date("Y-m-d");
-        if(!MySQL::Exist("SELECT * FROM ranglisten_settings WHERE setting = ?",'s',$paramLatestUpdate))
-        {
-            MySQL::NonQuery("INSERT INTO ranglisten_settings (setting,value) VALUES (?,'')",'s',$paramLatestUpdate);
-        }
-        MySQL::NonQuery("UPDATE ranglisten_settings SET value = ? WHERE setting = ?",'ss',$latestDate,$paramLatestUpdate);
-
-        Redirect(ThisPage());
-        die();
-    }
-
-    if(isset($_POST['updateReihung']))
+    if(isset($_POST['updateReihung']) OR isset($_POST['updateListM']) OR isset($_POST['updateListW']))
     {
         $reihungComboM = $_POST['reihungM'];
         $reihungComboW = $_POST['reihungW'];
@@ -118,9 +47,13 @@
             $mobile = $_POST['mobile_'.$rp[1]];
             $email = $_POST['email_'.$rp[1]];
 
-            $memberID = MySQL::Scalar("SELECT id FROM members WHERE playerID = ?",'s',$rp[1]);
+            $isStriked = isset($_POST['striked_'.$rp[1]]) ? 1 : 0;
+            $isGrayed = isset($_POST['grayed_'.$rp[1]]) ? 1 : 0;
 
-            MySQL::NonQuery("UPDATE members_spielerranglisten SET currentClubID = ?, assignedClubID = ?, team = ?, mf = ?, position = ? WHERE memberID = ? AND year = ?",'@s',$clubID,$clubID,$team,$mf,$rp[0],$memberID,$year);
+            $memberID = MySQL::Scalar("SELECT id FROM members WHERE playerID = ?",'s',$rp[1]);
+            $playerclub = MySQL::Scalar("SELECT clubID FROM members WHERE id = ?",'s',$memberID);
+
+            MySQL::NonQuery("UPDATE members_spielerranglisten SET currentClubID = ?, team = ?, mf = ?, position = ?, isStriked = ?, isGrayed = ? WHERE memberID = ? AND year = ? AND assignedClubID = ?",'@s',$playerclub,$team,$mf,$rp[0],$isStriked,$isGrayed,$memberID,$year,$clubID);
             MySQL::NonQuery("UPDATE members SET email = ?, mobileNr = ? WHERE id = ?",'@s',$email,$mobile,$memberID);
         }
 
@@ -134,9 +67,13 @@
             $mobile = $_POST['mobile_'.$rp[1]];
             $email = $_POST['email_'.$rp[1]];
 
-            $memberID = MySQL::Scalar("SELECT id FROM members WHERE playerID = ?",'s',$rp[1]);
+            $isStriked = isset($_POST['striked_'.$rp[1]]) ? 1 : 0;
+            $isGrayed = isset($_POST['grayed_'.$rp[1]]) ? 1 : 0;
 
-            MySQL::NonQuery("UPDATE members_spielerranglisten SET currentClubID = ?, assignedClubID = ?, team = ?, mf = ?, position = ? WHERE memberID = ? AND year = ?",'@s',$clubID,$clubID,$team,$mf,$rp[0],$memberID,$year);
+            $memberID = MySQL::Scalar("SELECT id FROM members WHERE playerID = ?",'s',$rp[1]);
+            $playerclub = MySQL::Scalar("SELECT clubID FROM members WHERE id = ?",'s',$memberID);
+
+            MySQL::NonQuery("UPDATE members_spielerranglisten SET currentClubID = ?, team = ?, mf = ?, position = ?, isStriked = ?, isGrayed = ? WHERE memberID = ? AND year = ? AND assignedClubID = ?",'@s',$playerclub,$team,$mf,$rp[0],$isStriked,$isGrayed,$memberID,$year,$clubID);
             MySQL::NonQuery("UPDATE members SET email = ?, mobileNr = ? WHERE id = ?",'@s',$email,$mobile,$memberID);
         }
 
@@ -149,10 +86,64 @@
         }
         MySQL::NonQuery("UPDATE ranglisten_settings SET value = ? WHERE setting = ?",'ss',$latestDate,$paramLatestUpdate);
 
-        if($_POST['returnToSamePage'] == 1) Redirect(ThisPage());
-        else Redirect("/spielerreihung");
+        if(isset($_POST['updateReihung']))
+        {
+            if($_POST['returnToSamePage'] == 1) Redirect(ThisPage());
+            else Redirect("/spielerreihung");
+            die();
+        }
+    }
+
+    if(isset($_POST['updateListM']) OR isset($_POST['updateListW']))
+    {
+        $selectedMembers = array();
+
+        $year = $_POST['year'];
+
+        $club = $_POST['clubID'];
+        if(isset($_POST['updateListM'])) $type='M';
+        if(isset($_POST['updateListW'])) $type='F';
+
+
+
+        $strSQL = "SELECT * FROM members WHERE members.gender = '$type'";
+        $rs=mysqli_query($link,$strSQL);
+        while($row=mysqli_fetch_assoc($rs))
+        {
+            if(isset($_POST["member".$row['playerID']]))
+            {
+                array_push($selectedMembers,$row['id']);
+            }
+        }
+
+        $highestRank = MySQL::Count("SELECT position FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members_spielerranglisten.assignedClubID = ? AND members_spielerranglisten.year = ? AND members.gender = ?",'@s',$club,$year,$type);
+
+        foreach($selectedMembers as $member)
+        {
+
+            if(!MySQL::Exist("SELECT * FROM members_spielerranglisten WHERE year = ? AND memberID = ? AND assignedClubID = ?",'@s',$year,$member,$club))
+            {
+                $highestRank++;
+                $playerclub = MySQL::Scalar("SELECT clubID FROM members WHERE id = ?",'s',$member);
+                MySQL::NonQuery("INSERT INTO members_spielerranglisten (memberID,position,year,team,currentClubID,assignedClubID) VALUES (?,?,?,'1',?,?)",'@s',$member,$highestRank,$year,$playerclub,$club);
+            }
+        }
+
+
+        // Update last edit-Date
+        $paramLatestUpdate = 'Y'.$year.'LastUpdate';
+        $latestDate = date("Y-m-d");
+        if(!MySQL::Exist("SELECT * FROM ranglisten_settings WHERE setting = ?",'s',$paramLatestUpdate))
+        {
+            MySQL::NonQuery("INSERT INTO ranglisten_settings (setting,value) VALUES (?,'')",'s',$paramLatestUpdate);
+        }
+        MySQL::NonQuery("UPDATE ranglisten_settings SET value = ? WHERE setting = ?",'ss',$latestDate,$paramLatestUpdate);
+
+        Redirect(ThisPage());
         die();
     }
+
+
 
 //========================================================================================
 //      /\  POST-SECTION
@@ -288,7 +279,7 @@
 
                                     <ul class="dragSortList_posNumbers">
                                     ';
-                                        $listedMembersAmt = MySQL::Scalar("SELECT position FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'M' AND members.clubID = ? AND members_spielerranglisten.year = ? ORDER BY members_spielerranglisten.position DESC LIMIT 0,1",'@s',$club,$year);
+                                        $listedMembersAmt = MySQL::Scalar("SELECT position FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'M' AND members_spielerranglisten.assignedClubID = ? AND members_spielerranglisten.year = ? ORDER BY members_spielerranglisten.position DESC LIMIT 0,1",'@s',$club,$year);
                                         for($i=1;$i<$listedMembersAmt+1; $i++) echo '<li>'.$i.'</li>';
                                     echo '
                                     </ul>
@@ -300,10 +291,19 @@
                                         $rs=mysqli_query($link,$strSQL);
                                         while($row=mysqli_fetch_assoc($rs))
                                         {
+                                            $isStrikedStart = ($row['isStriked'] == 1) ? '<s>' : '';
+                                            $isStrikedEnd = ($row['isStriked'] == 1) ? '</s>' : '';
+
+                                            $isGrayedStart = ($row['isGrayed'] == 1) ? '<span style="color: #696969">' : '';
+                                            $isGrayedEnd = ($row['isGrayed'] == 1) ? '</span>' : '';
 
                                             echo '
-                                            <li value="'.$row['playerID'].'">
+                                            <li value="'.$row['playerID'].'" '.(($row['currentClubID'] != $row['assignedClubID']) ? 'id="externClub"' : '').'>
+                                                '.$isGrayedStart.'
+                                                '.$isStrikedStart.'
                                                 '.$row['playerID'].' - '.$row['firstname'].' '.$row['lastname'].'
+                                                '.$isStrikedEnd.'
+                                                '.$isGrayedEnd.'
                                                 <span style="float: right; font-size: 8pt; padding-right: 4px;" class="reihungFold">
                                                 Mehr &raquo;
                                                 <div class="infoContainer">
@@ -323,6 +323,27 @@
                                                         <tr>
                                                             <td class="ta_r">E-Mail:</td>
                                                             <td><input name="email_'.$row['playerID'].'" type="text" class="cel_s sampleField" value="'.$row['email'].'"/></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan=2>
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>'.Checkbox("striked_".$row['playerID'],"striked_".$row['playerID'],(($row['isStriked'] == 1) ? true : false)).'</td>
+                                                                        <td>In Liste durchstreichen</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td colspan=2>
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>'.Checkbox("grayed_".$row['playerID'],"grayed_".$row['playerID'],(($row['isGrayed'] == 1) ? true : false)).'</td>
+                                                                        <td>In Liste ausgrauen</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td colspan=2>
@@ -351,7 +372,7 @@
                                     <br>
                                     <ul class="dragSortList_posNumbers">
                                     ';
-                                        $listedMembersAmt = MySQL::Scalar("SELECT position FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'F' AND members.clubID = ? AND members_spielerranglisten.year = ? ORDER BY members_spielerranglisten.position DESC LIMIT 0,1",'@s',$club,$year);
+                                        $listedMembersAmt = MySQL::Scalar("SELECT position FROM members_spielerranglisten INNER JOIN members ON members_spielerranglisten.memberID = members.id WHERE members.gender = 'F' AND members_spielerranglisten.assignedClubID = ? AND members_spielerranglisten.year = ? ORDER BY members_spielerranglisten.position DESC LIMIT 0,1",'@s',$club,$year);
                                         for($i=1;$i<$listedMembersAmt+1; $i++) echo '<li>'.$i.'</li>';
                                     echo '
                                     </ul>
@@ -362,9 +383,19 @@
                                         $rs=mysqli_query($link,$strSQL);
                                         while($row=mysqli_fetch_assoc($rs))
                                         {
+                                            $isStrikedStart = ($row['isStriked'] == 1) ? '<s>' : '';
+                                            $isStrikedEnd = ($row['isStriked'] == 1) ? '</s>' : '';
+
+                                            $isGrayedStart = ($row['isGrayed'] == 1) ? '<span style="color: #696969">' : '';
+                                            $isGrayedEnd = ($row['isGrayed'] == 1) ? '</span>' : '';
+
                                             echo '
-                                            <li value="'.$row['playerID'].'">
+                                            <li value="'.$row['playerID'].'" '.(($row['currentClubID'] != $row['assignedClubID']) ? 'id="externClub"' : '').'>
+                                                '.$isGrayedStart.'
+                                                '.$isStrikedStart.'
                                                 '.$row['playerID'].' - '.$row['firstname'].' '.$row['lastname'].'
+                                                '.$isStrikedEnd.'
+                                                '.$isGrayedEnd.'
                                                 <span style="float: right; font-size: 8pt; padding-right: 4px;" class="reihungFold">
                                                 Mehr &raquo;
                                                 <div class="infoContainer">
@@ -385,6 +416,29 @@
                                                             <td class="ta_r">E-Mail:</td>
                                                             <td><input name="email_'.$row['playerID'].'" type="text" class="cel_s sampleField" value="'.$row['email'].'"/></td>
                                                         </tr>
+
+                                                        <tr>
+                                                            <td colspan=2>
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>'.Checkbox("striked_".$row['playerID'],"striked_".$row['playerID'],(($row['isStriked'] == 1) ? true : false)).'</td>
+                                                                        <td>In Liste durchstreichen</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td colspan=2>
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>'.Checkbox("grayed_".$row['playerID'],"grayed_".$row['playerID'],(($row['isGrayed'] == 1) ? true : false)).'</td>
+                                                                        <td>In Liste ausgrauen</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+
                                                         <tr>
                                                             <td colspan=2>
                                                                 <a href="/spielerrangliste/reihungen/'.$year.'/bearbeiten/'.$club.'?delete='.$row['memberID'].'"><span style="color: #CC0000">&#10006; Spieler aus Liste entfernen</span></a>
@@ -416,6 +470,7 @@
                             </a>
                             <div class="modal_container" style="width: 50%; height: 40%;">
                                 <h3>Spieler hinzuf&uuml;gen (Herren)</h3>
+                                <a href="#spielerMExt">+ Externe Spieler hinzuf&uuml;gen</a>
                                 ';
 
                                 $strSQL = "SELECT * FROM members WHERE clubID = '$club' AND gender = 'M' AND SUBSTRING(playerID,1,3) != 'TMP'";
@@ -432,6 +487,37 @@
                             </div>
                         </div>
 
+                        <div class="modal_wrapper" id="spielerMExt">
+                            <a href="#c">
+                                <div class="modal_bg"></div>
+                            </a>
+                            <div class="modal_container" style="width: 50%; height: 40%;">
+                                <h3>Spieler hinzuf&uuml;gen (Herren)</h3>
+                                ';
+
+                                $strSQLc = "SELECT * FROM members INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE vereine.isOOEclub = '1' GROUP BY members.clubID ORDER BY members.clubID ASC";
+                                $rsc=mysqli_query($link,$strSQLc);
+                                while($rowc=mysqli_fetch_assoc($rsc))
+                                {
+                                    echo '<br><h5>'.$rowc['kennzahl'].' - '.$rowc['verein'].' '.$rowc['ort'].'</h5>';
+
+                                    $strSQL = "SELECT * FROM members WHERE gender = 'M' AND clubID = '".$rowc['kennzahl']."' AND SUBSTRING(playerID,1,3) != 'TMP'";
+                                    $rs=mysqli_query($link,$strSQL);
+                                    while($row=mysqli_fetch_assoc($rs))
+                                    {
+                                        $checked = in_array($row['playerID'],$currentSelectedMembersM) ? true : false;
+                                        echo Tickbox("member".$row['playerID'],"member".$row['playerID'],$row['playerID'].' - '.$row['firstname'].' '.$row['lastname'],$checked,"",$checked);
+                                    }
+                                }
+
+
+
+                                echo '
+                                <br><br>
+                                <button type="submit" name="updateListM">Spieler hinzuf&uuml;gen</button>
+                            </div>
+                        </div>
+
 
                         <div class="modal_wrapper" id="spielerW">
                             <a href="#c">
@@ -439,6 +525,7 @@
                             </a>
                             <div class="modal_container" style="width: 50%; height: 40%;">
                                 <h3>Spieler hinzuf&uuml;gen (Damen)</h3>
+                                <a href="#spielerWExt">+ Externe Spieler hinzuf&uuml;gen</a>
                                 ';
 
                                 $strSQL = "SELECT * FROM members WHERE clubID = '$club' AND gender = 'F' AND SUBSTRING(playerID,1,3) != 'TMP'";
@@ -447,6 +534,39 @@
                                 {
                                     $checked = in_array($row['playerID'],$currentSelectedMembersW) ? true : false;
                                     echo Tickbox("member".$row['playerID'],"member".$row['playerID'],$row['playerID'].' - '.$row['firstname'].' '.$row['lastname'],$checked,"",$checked);
+                                }
+
+                                echo '
+                                <br><br>
+
+                                <input type="hidden" value="'.$year.'" name="year"/>
+
+                                <button type="submit" name="updateListW">Spieler hinzuf&uuml;gen</button>
+                            </div>
+                        </div>
+
+
+                        <div class="modal_wrapper" id="spielerWExt">
+                            <a href="#c">
+                                <div class="modal_bg"></div>
+                            </a>
+                            <div class="modal_container" style="width: 50%; height: 40%;">
+                                <h3>Spieler hinzuf&uuml;gen (Damen - Extern)</h3>
+                                ';
+
+                                $strSQLc = "SELECT * FROM members INNER JOIN vereine ON members.clubID = vereine.kennzahl WHERE vereine.isOOEclub = '1' GROUP BY members.clubID ORDER BY members.clubID ASC";
+                                $rsc=mysqli_query($link,$strSQLc);
+                                while($rowc=mysqli_fetch_assoc($rsc))
+                                {
+                                    echo '<br><h5>'.$rowc['kennzahl'].' - '.$rowc['verein'].' '.$rowc['ort'].'</h5>';
+
+                                    $strSQL = "SELECT * FROM members WHERE gender = 'F' AND clubID = '".$rowc['kennzahl']."' AND SUBSTRING(playerID,1,3) != 'TMP'";
+                                    $rs=mysqli_query($link,$strSQL);
+                                    while($row=mysqli_fetch_assoc($rs))
+                                    {
+                                        $checked = in_array($row['playerID'],$currentSelectedMembersW) ? true : false;
+                                        echo Tickbox("member".$row['playerID'],"member".$row['playerID'],$row['playerID'].' - '.$row['firstname'].' '.$row['lastname'],$checked,"",$checked);
+                                    }
                                 }
 
                                 echo '

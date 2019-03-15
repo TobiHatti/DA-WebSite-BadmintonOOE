@@ -9,7 +9,7 @@
 
 
         if(!isset($_POST['playerID'])) $playerID = $_POST['playerIDTMP'];
-        else $playerID = $_POST['playerID'];
+        else $playerID = intval($_POST['playerID']);
 
         if(!MySQL::Exist("SELECT id FROM members WHERE playerID = ?",'s',$playerID))
         {

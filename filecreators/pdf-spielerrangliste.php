@@ -152,12 +152,17 @@
                 $pdf->SetFillColor($color2R ,$color2G,$color2B);
             }
 
+            if($row['isGrayed'] == 1) $pdf->SetTextColor(105,105,105);
+            else $pdf->SetTextColor(0,0,0);
+
             $pdf->Cell(8,5,$i++.'.',$showBorders,0,'R',$focus);
             $pdf->Cell(30,5,LetterCorrection($row['lastname']),$showBorders,0,'L',$focus);
             $pdf->Cell(30,5,LetterCorrection($row['firstname']),$showBorders,0,'L',$focus);
             $pdf->Cell(18,5,$row['playerID'],$showBorders,0,'C',$focus);
             $pdf->Cell(12,5,$row['team'],$showBorders,0,'C',$focus);
             $pdf->Cell(20,5,$row['currentClubID'],$showBorders,0,'C',$focus);
+
+            $pdf->SetFillColor(0,0,0);
 
             if($highlight)
             {
@@ -193,12 +198,17 @@
                 $pdf->SetFillColor($color2R ,$color2G,$color2B);
             }
 
+            if($row['isGrayed'] == 1) $pdf->SetTextColor(105,105,105);
+            else $pdf->SetTextColor(0,0,0);
+
             $pdf->Cell(8,5,$i++.'.',$showBorders,0,'R',$focus);
             $pdf->Cell(30,5,LetterCorrection($row['lastname']),$showBorders,0,'L',$focus);
             $pdf->Cell(30,5,LetterCorrection($row['firstname']),$showBorders,0,'L',$focus);
             $pdf->Cell(18,5,$row['playerID'],$showBorders,0,'C',$focus);
             $pdf->Cell(12,5,$row['team'],$showBorders,0,'C',$focus);
             $pdf->Cell(20,5,$row['currentClubID'],$showBorders,0,'C',$focus);
+
+            $pdf->SetFillColor(0,0,0);    
 
             if($highlight)
             {
