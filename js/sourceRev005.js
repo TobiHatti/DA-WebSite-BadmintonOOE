@@ -1078,8 +1078,22 @@ function CheckSortableListState(ulListID,outputID)
 
     for (i = 0; i < myListItems.length; ++i) {
         // Execute Event for every list-element
-
         output.value = output.value + (i+1) + "##" + myListItems[i].value + "||";
+    }
+}
+
+function CheckSortableListStateRev2(ulListID,outputID)
+{
+    var myList = document.getElementById(ulListID);
+    var myListItems = myList.getElementsByTagName("li");
+
+    var output = document.getElementById(outputID);
+
+    output.value="";
+
+    for (i = 0; i < myListItems.length; ++i) {
+        // Execute Event for every list-element
+        output.value = output.value + (i+1) + "##" + myListItems[i].getAttribute("data-memberID") + "||";
     }
 }
 

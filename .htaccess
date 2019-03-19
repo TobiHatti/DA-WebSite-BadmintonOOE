@@ -95,6 +95,7 @@ RewriteRule ^spielerrangliste/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/csv/?$/?$ filecr
 
 # Rewrite Rules for trainingsgruppen
 RewriteRule ^nachwuchskader/([a-zA-Z0-9-_]+)/eintragen/?$ nachwuchskader.php?eintragen=$1 [NC,QSA,L]
+RewriteRule ^nachwuchskader/([a-zA-Z0-9-_]+)/anordnen/?$ nachwuchskader.php?anordnen=$1 [NC,QSA,L]
 RewriteRule ^nachwuchskader/neue-gruppe nachwuchskader.php?newGroup [NC,QSA,L]
 RewriteRule ^nachwuchskader/gruppe-bearbeiten/([a-zA-Z0-9-_]+)/?$ nachwuchskader.php?editGroup&groupID=$1 [NC,QSA,L]
 
