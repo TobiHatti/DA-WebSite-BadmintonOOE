@@ -32,6 +32,27 @@
         die();
     }
 
+    if(isset($_POST['updateRowing']))
+    {
+        $tgID = $_POST['updateRowing'];
+
+        $reihungComboNWK = $_POST['sortOutputNWK'];
+
+        foreach(explode('||',$reihungComboNWK) as $rp)
+        {
+            $rp = explode('##',$rp);
+            if(!isset($rp[1])) continue;
+
+            $memberID = MySQL::Scalar("SELECT id FROM members WHERE playerID = ?",'s',$rp[1]);
+
+            MySQL::NonQuery("UPDATE members_trainingsgruppen SET rank = ? WHERE memberID = ? AND tgID = ?",'@s',$rp[0],$memberID,$tgID);
+        }
+
+        Redirect("/nachwuchskader");
+        die();
+
+    }
+
     echo '<h1>O&Ouml; Nachwuchskader</h1><hr>';
 
 
@@ -101,42 +122,89 @@
 
         if(CheckPermission("AddNWK")) echo '<a href="/nachwuchskader/neue-gruppe">Neue Gruppe erstellen</a><br>';
 
+
+
         $trainingsgruppen = MySQL::Cluster("SELECT * FROM trainingsgruppen");
         foreach($trainingsgruppen as $tg)
         {
             echo '<h3>'.$tg['trainingsgruppe'].' '.($tg['showLastEdit'] == 1 ? ('(Stand: '.date_format(date_create($tg['lastEdit']),"d.m.Y").')') : '').' <sub>'.(CheckPermission("EditNWK") ? EditButton("/nachwuchskader/gruppe-bearbeiten/".$tg['id'],true) : '').' '.(CheckPermission("DeleteNWK") ? DeleteButton("NWK","trainingsgruppen",$tg['id'],true) : '').'</sub></h3><hr>';
-            if(CheckPermission("AddNWTG")) echo '<a href="/nachwuchskader/'.$tg['tgURL'].'/eintragen">Spieler hinzuf&uuml;gen</a><br>';
 
-            $tgData = MySQL::Cluster("SELECT *,members_trainingsgruppen.id AS mbID FROM members_trainingsgruppen INNER JOIN members ON members_trainingsgruppen.memberID = members.id WHERE members_trainingsgruppen.tgID = ?",'i',$tg['id']);
-            foreach($tgData as $memberData)
+            if(isset($_GET['anordnen']) AND $_GET['anordnen'] == $tg['tgURL'])
             {
+                echo '
+                    <b>Spieler anordnen:</b><br>
+                    Mit der Maus anglicken und verschieben (Drag\'n\'drop)<br>
+
+                    <script>
+                        $( function() {
+                            $( "#sortListNWK" ).sortable();
+                            $( "#sortListNWK" ).disableSelection();
+                        } );
+
+                        window.setInterval(function(){
+                            CheckSortableListStateRev2("sortListNWK","outputNWK");
+                        }, 100);
+
+                    </script>
+                ';
+
+                $tgDataCount = MySQL::Count("SELECT * FROM members_trainingsgruppen INNER JOIN members ON members_trainingsgruppen.memberID = members.id WHERE members_trainingsgruppen.tgID = ?",'s',$tg['id']);
+                echo '<ul class="dragSortList_posNumbers">';
+                for($i=1 ; $i <= $tgDataCount ; $i++) echo '<li>'.$i.'</li>';
+                echo '</ul>';
+
+                $tgData = MySQL::Cluster("SELECT *,members_trainingsgruppen.id AS mbID FROM members_trainingsgruppen INNER JOIN members ON members_trainingsgruppen.memberID = members.id WHERE members_trainingsgruppen.tgID = ? ORDER BY rank ASC",'i',$tg['id']);
+
+                $i=1;
+                echo '<ul class="dragSortList_values" id="sortListNWK">';
+                foreach($tgData as $memberData) echo '<li type="text" data-memberID="'.$memberData['playerID'].'">'.$memberData['lastname'].'</b> '.$memberData['firstname'].'</li>';
+                echo '</ul>
+
+                ';
 
                 echo '
-                    <div class="nwkaderCard" style="border-left: 5px groove '.(($memberData['gender']=='M') ? 'blue' : (($memberData['gender']=='F') ? 'red' : 'black')).'">
-                        <img src="'.(($memberData['image']!="") ? ('/content/members/'.$memberData['image']) : '/content/user.png' ).'" alt="" />
-                        <div>
-                            <b>'.$memberData['lastname'].'</b> '.$memberData['firstname'].'<br>
+                    <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                        <input type="hidden" name="sortOutputNWK" id="outputNWK"/>
 
-                            ';
-
-                            if($memberData['birthdate'] != "0000-00-00")
-                            {
-                                echo 'Geb.: '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($memberData['birthdate']))).'<br>';
-                            }
-
-                            echo '
-                            <span style="color: #696969">'.MySQL::Scalar("SELECT CONCAT_WS(' ',verein,ort) FROM vereine WHERE kennzahl = ?",'s',$memberData['clubID']).'</span>
-                        </div>
-                        <div style="position: absolute; bottom: 0px; right: 0px; height: 20px;">
-                        ';
-                        if(CheckPermission("EditNWK")) echo EditButton("/mitglieder/bearbeiten/NWK/".$memberData['playerID'],true);
-                        if(CheckPermission("DeleteNWK")) echo DeleteButton("NWK","members_trainingsgruppen",$memberData['mbID'],true);
-                        echo '
-                        </div>
-                    </div>
+                        <button type="submit" name="updateRowing" value="'.$tg['id'].'">Reihung speichern</button>
+                    </form>
+                    <br><br>
                 ';
             }
-            echo '<br><br><br>';
+            else
+            {
+                if(CheckPermission("AddNWTG")) echo '<a href="/nachwuchskader/'.$tg['tgURL'].'/eintragen">&#65291; Spieler hinzuf&uuml;gen</a><br>';
+                if(CheckPermission("EditNWTG")) echo '<a href="/nachwuchskader/'.$tg['tgURL'].'/anordnen">&#8634; Spieler anordnen</a><br>';
+
+                $tgData = MySQL::Cluster("SELECT *,members_trainingsgruppen.id AS mbID FROM members_trainingsgruppen INNER JOIN members ON members_trainingsgruppen.memberID = members.id WHERE members_trainingsgruppen.tgID = ? ORDER BY rank ASC",'i',$tg['id']);
+                foreach($tgData as $memberData)
+                {
+
+                    echo '
+                        <div class="nwkaderCard" style="border-left: 5px groove '.(($memberData['gender']=='M') ? 'blue' : (($memberData['gender']=='F') ? 'red' : 'black')).'">
+                            <img src="'.(($memberData['image']!="") ? ('/content/members/'.$memberData['image']) : '/content/user.png' ).'" alt="" />
+                            <div>
+                                <b>'.$memberData['lastname'].'</b> '.$memberData['firstname'].'<br>
+                                ';
+
+                                if($memberData['birthdate'] != "0000-00-00")  echo 'Geb.: '.str_replace('ä','&auml;',strftime("%d. %B %Y",strtotime($memberData['birthdate']))).'<br>';
+
+                                echo '
+                                <span style="color: #696969">'.MySQL::Scalar("SELECT CONCAT_WS(' ',verein,ort) FROM vereine WHERE kennzahl = ?",'s',$memberData['clubID']).'</span>
+                            </div>
+                            <div style="position: absolute; bottom: 0px; right: 0px; height: 20px;">
+                            ';
+                            if(CheckPermission("EditNWK")) echo EditButton("/mitglieder/bearbeiten/NWK/".$memberData['playerID'],true);
+                            if(CheckPermission("DeleteNWK")) echo DeleteButton("NWK","members_trainingsgruppen",$memberData['mbID'],true);
+                            echo '
+                            </div>
+                        </div>
+                    ';
+                }
+                echo '<br><br><br>';
+            }
+
+
         }
 
         echo PageContent('1',CheckPermission("ChangeContent"));
