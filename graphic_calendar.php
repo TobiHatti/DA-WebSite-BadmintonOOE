@@ -82,6 +82,20 @@
     $redirEx = '';
     if(isset($_GET['category'])) $redirEx = "&category=".$_GET['category'];
 
+
+    /*
+    if(isset($_SESSION['calenderSections']) and $_SESSION['calenderSections'] != '')
+    {
+        foreach(explode($_SESSION['calenderSections'],'||') as $extension)
+        {
+            $cat = str_replace('|','',$extension);
+
+
+
+        }
+    }
+    */
+
     // output table
     echo '
         <center>
@@ -114,8 +128,28 @@
 // FETCHING DATA FROM DB TO IMPROVE RUNTIME
     $showZAinAG = Setting::Get("ShowZAinAG");
 
+    //$sqlExtension = '';
+    //if(isset($_GET['category'])) $sqlExtension = " AND category = '".$_GET['category']."'";
+
     $sqlExtension = '';
-    if(isset($_GET['category'])) $sqlExtension = " AND category = '".$_GET['category']."'";
+
+    if(isset($_SESSION['calenderSections']) and $_SESSION['calenderSections'] != '')
+    {
+        $sqlExtension = " AND (";
+        $first = True;
+
+        foreach(explode('||',$_SESSION['calenderSections']) as $extension)
+        {
+            $cat = str_replace('|','',$extension);
+
+            if($first) $sqlExtension .= "category = '".$cat."'";
+            else $sqlExtension .= " OR category = '".$cat."'";
+
+            $first = False;
+
+        }
+        $sqlExtension .= " )";
+    }
 
     $thisMontAndYear = $yr.'-'.str_pad($mo,2,0,STR_PAD_LEFT).'-%';
 
