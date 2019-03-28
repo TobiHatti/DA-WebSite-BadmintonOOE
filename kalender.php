@@ -3,6 +3,29 @@
     require("header.php");
     PageTitle("Kalender");
 
+
+    if(isset($_GET['addCategory']))
+    {
+        if(!isset($_SESSION['calenderSections'])) $_SESSION['calenderSections'] = '';
+
+        if(!SubStringFind($_SESSION['calenderSections'],'|'.$_GET['addCategory'].'|')) $_SESSION['calenderSections'] = $_SESSION['calenderSections'].'|'.$_GET['addCategory'].'|';
+
+        if($_GET['addCategory'] == 'alle') $_SESSION['calenderSections'] = '';
+
+        Redirect(ThisPage("!addCategory"));
+        die();
+    }
+
+    if(isset($_GET['removeCategory']))
+    {
+        if(!isset($_SESSION['calenderSections'])) $_SESSION['calenderSections'] = '';
+
+        $_SESSION['calenderSections'] = str_replace('|'.$_GET['removeCategory'].'|','',$_SESSION['calenderSections']);
+
+        Redirect(ThisPage("!removeCategory"));
+        die();
+    }
+
     if(isset($_POST['add_termin']))
     {
         $terminName = $_POST['termin_titel'];
@@ -184,7 +207,7 @@
 
         $frameExtension = '';
 
-        if(isset($_GET['category'])) $frameExtension = "?category=".$_GET['category'];
+        if(isset($_GET['category']) and $_GET['category'] != 'alle') $frameExtension = "?category=".$_GET['category'];
 
         if(isset($_GET['event']))
         {
@@ -201,9 +224,7 @@
 
 
 
-        if(isset($_GET['editSC']))  $frameExtension = '?datum='.$_GET['datum'].'&edit='.$_GET['editSC'].'#calenderInfo'.$_GET['event'];
-
-
+        if(isset($_GET['editSC']))  $frameExtension = '?datum='.$_GET['datum'].'&edit='.$_GET['editSC'].'#calenderInfoAG-'.$_GET['editSC'];
 
 
         echo '<div style="float:right;"><table><tr><td>Liste / Kalender</td><td>'.Togglebox("","changeListStyle",1,"ChangeCalenderStyle();","toggleCalendar").'</td></tr></table></div><br>';
@@ -279,8 +300,9 @@
 
             echo '
                 <div style="float: right;">
-                    <select onchange="RedirectSelectBox(this,\'/kalender/\');">
+                    <select onchange="RedirectSelectBox(this,\'/kalender?addCategory=\');">
                         <option value="" disabled selected>--- Kategorie ausw&auml;hlen ---</option>
+                        <option value="alle">Alle</option>
                         <option '.((isset($_GET['category']) AND $_GET['category'] == 'OEBVInternational') ? 'selected' : '').' value="OEBVInternational" style="color: '.Setting::Get("ColorOEBVInternational").'">&Ouml;BV-International</option>
                         <option '.((isset($_GET['category']) AND $_GET['category'] == 'OEBV') ? 'selected' : '').' value="OEBV" style="color: '.Setting::Get("ColorOEBV").'">&Ouml;BV</option>
                         <option '.((isset($_GET['category']) AND $_GET['category'] == 'LV') ? 'selected' : '').' value="LV" style="color: '.Setting::Get("ColorLV").'">LV</option>
@@ -292,7 +314,39 @@
                         <option '.((isset($_GET['category']) AND $_GET['category'] == 'Training') ? 'selected' : '').' value="Training" style="color: '.Setting::Get("ColorTraining").'">Training</option>
                     </select>
                 </div>
+
+
             ';
+
+
+
+
+
+            echo '
+
+                <style>
+
+                .calendarOptionBox{
+
+                    border: 1px solid;
+                    border-radius: 5px;
+                    padding: 3px 10px;
+                    margin: 0 5px;
+                }
+
+                </style>
+            ';
+
+
+            if(SubStringFind($_SESSION['calenderSections'],'|OEBVInternational|')) echo '<span class="calendarOptionBox" style="border-color: '.Setting::Get("ColorOEBVInternational").'"><a href="'.ThisPage("+removeCategory=OEBVInternational").'">X</a> &Ouml;BV-International</span>';
+            if(SubStringFind($_SESSION['calenderSections'],'|OEBV|')) echo '<span class="calendarOptionBox" style="border-color: '.Setting::Get("ColorOEBV").'"><a href="'.ThisPage("+removeCategory=OEBV").'">X</a> &Ouml;BV</span>';
+            if(SubStringFind($_SESSION['calenderSections'],'|LV|')) echo '<span class="calendarOptionBox" style="border-color: '.Setting::Get("ColorLV").'"><a href="'.ThisPage("+removeCategory=LV").'">X</a> LV</span>';
+            if(SubStringFind($_SESSION['calenderSections'],'|Landesmeisterschaft|')) echo '<span class="calendarOptionBox" style="border-color: '.Setting::Get("ColorLandesmeisterschaft").'"><a href="'.ThisPage("+removeCategory=Landesmeisterschaft").'">X</a> Landesmeisterschaft</span>';
+            if(SubStringFind($_SESSION['calenderSections'],'|Doppelturnier|')) echo '<span class="calendarOptionBox" style="border-color: '.Setting::Get("ColorDoppelturnier").'"><a href="'.ThisPage("+removeCategory=Doppelturnier").'">X</a> Doppelturnier</span>';
+            if(SubStringFind($_SESSION['calenderSections'],'|Nachwuchs|')) echo '<span class="calendarOptionBox" style="border-color: '.Setting::Get("ColorNachwuchs").'"><a href="'.ThisPage("+removeCategory=Nachwuchs").'">X</a> Nachwuchs</span>';
+            if(SubStringFind($_SESSION['calenderSections'],'|SchuelerJugend|')) echo '<span class="calendarOptionBox" style="border-color: '.Setting::Get("ColorSchuelerJugend").'"><a href="'.ThisPage("+removeCategory=SchuelerJugend").'">X</a> Sch&uuml;ler/Jugend</span>';
+            if(SubStringFind($_SESSION['calenderSections'],'|Senioren|')) echo '<span class="calendarOptionBox" style="border-color: '.Setting::Get("ColorSenioren").'"><a href="'.ThisPage("+removeCategory=Senioren").'">X</a> Senioren</span>';
+            if(SubStringFind($_SESSION['calenderSections'],'|Training|')) echo '<span class="calendarOptionBox" style="border-color: '.Setting::Get("ColorTraining").'"><a href="'.ThisPage("+removeCategory=Training").'">X</a> Training</span>';
 
             echo '
             <iframe src="/graphic_calendar'.$frameExtension.'" frameborder="0" onload="ResizeIframe(this);" class="calender_iframe"></iframe>
