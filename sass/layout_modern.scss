@@ -170,11 +170,40 @@
         grid-area: header;
 
         background: #FFFFFF;
-        background-image: url(../content/header.jpg);
-        background-position: 0 360px;
-        background-attachment: fixed;
-        background-size:   100%;
+        background-image: url(../content/headerBG.png);
         padding: 10px 0 3px 25px;
+    }
+
+    @media only screen and (max-width: $media-smalllargephone){
+        header{
+            background-position: 0 150px;
+            background-attachment: fixed;
+            background-size:   200%;
+        }
+    }
+
+    @media only screen and (min-width: $media-smalllargephone){
+        header{
+            background-position: 0 150px;
+            background-attachment: fixed;
+            background-size:   150%;
+        }
+    }
+
+    @media only screen and (min-width: $media-tablet){
+        header{
+            background-position: 0 150px;
+            background-attachment: fixed;
+            background-size:   150%;
+        }
+    }
+
+    @media only screen and (min-width: $media-desktop){
+        header{
+            background-position: 0 150px;
+            background-attachment: fixed;
+            background-size:   100%;
+        }
     }
 }
 
@@ -383,9 +412,9 @@
 
 .header_logo{
     height: 100%;
-    background-image: url(../content/logo2.png);
+    background-image: url(../content/headerText.png);
     background-repeat: no-repeat;
-    background-size: auto 100px;
+    background-size: auto auto;
     background-position: 10px;
     float: left;
 
@@ -393,29 +422,29 @@
 
 @media only screen and (max-width: $media-smalllargephone){
     .header_logo{
-        background-size: auto 80px;
-        width: 490px;
+        background-size: auto 60px;
+        width: 515px;
     }
 }
 
 @media only screen and (min-width: $media-smalllargephone){
     .header_logo{
         background-size: auto 60px;
-        width: 370px;
+        width: 515px;
     }
 }
 
 @media only screen and (min-width: $media-tablet){
     .header_logo{
         background-size: auto 65px;
-        width: 400px;
+        width: 555px;
     }
 }
 
 @media only screen and (min-width: $media-desktop){
     .header_logo{
         background-size: auto 100px;
-        width: 610px;
+        width: 845px;
     }
 }
 
