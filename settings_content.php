@@ -240,7 +240,11 @@
 
     if(isset($_GET['topic']))
     {
-        if($_GET['topic'] == 'Account')
+        if($_GET['topic'] == 'Handbuch')
+        {
+            echo '<h1>Bald verf&uuml;gbar!</h1>';
+        }
+        else if($_GET['topic'] == 'Account')
         {
             echo '
                 <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
