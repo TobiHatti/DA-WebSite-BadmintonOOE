@@ -17,6 +17,7 @@
                 if(CheckPermission("ManageUsers")) echo '<a onclick="ChangeFrameLink(\'settings_content?topic=Nutzer\');"><li>Nutzer</li></a>';
                 if(CheckPermission("ChangeContent")) echo '<a onclick="ChangeFrameLink(\'settings_content?topic=Fusszeile\');"><li>Fu&szlig;zeile</li></a>';
                 if(CheckPermission("ChangeContent")) echo '<a onclick="ChangeFrameLink(\'settings_content?topic=Dateien\');"><li>Dateien</li></a>';
+                if(CheckPermission("ChangeContent")) echo '<a onclick="ChangeFrameLink(\'settings_content?topic=Handbuch\');"><li>Handbuch</li></a>';
 
                 echo '
             </div>
