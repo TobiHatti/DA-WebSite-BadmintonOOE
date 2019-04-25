@@ -1,6 +1,6 @@
 <?php
 
-    $revision = 7311;
+    $revision = 8511;
 
     echo '
         <!-- META Tags -->
@@ -81,7 +81,7 @@
         <!-- Header-Parallax -->
             <script>
                 window.addEventListener("scroll", function(e) {
-                    var scrOffset = (window.scrollY/3) + 360;
+                    var scrOffset = (window.scrollY/4)  + 150;
                     document.getElementById("htmlheader").style.backgroundPosition = "0px " + (scrOffset) + "px";
                 });
             </script>
