@@ -242,7 +242,7 @@
     {
         if($_GET['topic'] == 'Handbuch')
         {
-            echo '<h1>Bald verf&uuml;gbar!</h1>';
+            echo '<iframe src="/files/Benutzerhandbuch.pdf" style="width: 100%; height: 500px;"></iframe> ';
         }
         else if($_GET['topic'] == 'Account')
         {
