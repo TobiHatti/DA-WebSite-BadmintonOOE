@@ -31,7 +31,7 @@
                     <br>
                     <h1 class="stagfade1">Eintrag wirklich l&ouml;schen?</h1>
                     <br>
-                    <h2 class="stagfade2" style="color: #000000">Nach dem l&ouml;schen kann der Eintrag nicht wiederhergestellt werden!</h2>
+                    <h2 class="stagfade2" style="color: #000000">Nach dem L&ouml;schen kann der Eintrag nicht wiederhergestellt werden!</h2>
                     <br><br>
                     <button type="submit" name="delete" class="cef_warning">L&ouml;schen</button>
                     <button type="submit" name="abort">Abbrechen</button>
