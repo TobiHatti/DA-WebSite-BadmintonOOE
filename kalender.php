@@ -337,6 +337,7 @@
                 </style>
             ';
 
+            if(!isset($_SESSION['calenderSections'])) $_SESSION['calenderSections'] = '';
 
             if(SubStringFind($_SESSION['calenderSections'],'|OEBVInternational|')) echo '<span class="calendarOptionBox" style="border-color: '.Setting::Get("ColorOEBVInternational").'"><a href="'.ThisPage("+removeCategory=OEBVInternational").'">X</a> &Ouml;BV-International</span>';
             if(SubStringFind($_SESSION['calenderSections'],'|OEBV|')) echo '<span class="calendarOptionBox" style="border-color: '.Setting::Get("ColorOEBV").'"><a href="'.ThisPage("+removeCategory=OEBV").'">X</a> &Ouml;BV</span>';
