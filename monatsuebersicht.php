@@ -30,6 +30,23 @@
         die();
     }
 
+    if(isset($_POST['updateRowing']))
+    {
+        $reihungComboMOV = $_POST['sortOutputMOV'];
+
+        foreach(explode('||',$reihungComboMOV) as $rp)
+        {
+            $rp = explode('##',$rp);
+            if(!isset($rp[1])) continue;
+
+            MySQL::NonQuery("UPDATE nw_month_overview SET position = ? WHERE id = ?",'@s',$rp[0],$rp[1]);
+        }
+
+        Redirect("/monatsuebersicht");
+        die();
+
+    }
+
     echo '<h1 class="stagfade1">Monats-&Uuml;bersicht</h1>';
 
 
@@ -100,11 +117,61 @@
             </form>
         ';
     }
+    else if(CheckPermission("AddDate") AND isset($_GET['reihung']))
+    {
+        echo '<h3>Reihenfolge bearbeiten</h3>';
+
+        echo '
+            Mit der Maus anglicken und verschieben (Drag\'n\'drop)<br>
+
+            <script>
+                $( function() {
+                    $( "#sortListMOV" ).sortable();
+                    $( "#sortListMOV" ).disableSelection();
+                } );
+
+                window.setInterval(function(){
+                    CheckSortableListStateRev2("sortListMOV","outputMOV");
+                }, 100);
+
+            </script>
+        ';
+
+
+        $tgDataCount = MySQL::Count("SELECT * FROM nw_month_overview ORDER BY position ASC");
+        echo '<ul class="dragSortList_posNumbers">';
+        for($i=1 ; $i <= $tgDataCount ; $i++) echo '<li>'.$i.'</li>';
+        echo '</ul>';
+
+        $tgData = MySQL::Cluster("SELECT * FROM nw_month_overview ORDER BY position ASC");
+
+        $i=1;
+        echo '<ul class="dragSortList_values" id="sortListMOV">';
+        foreach($tgData as $memberData) echo '<li type="text" data-memberID="'.$memberData['id'].'">'.$memberData['title'].'</b></li>';
+        echo '</ul>
+
+        ';
+
+        echo '
+            <form action="'.ThisPage().'" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                <input type="hidden" name="sortOutputMOV" id="outputMOV"/>
+                <br><br>
+                <button type="submit" name="updateRowing" value="">Reihenfolge speichern</button>
+            </form>
+            <br><br>
+        ';
+    }
     else
     {
-        if(CheckPermission("AddDate")) echo AddButton("/monatsuebersicht/neu");
+        if(CheckPermission("AddDate"))
+        {
+           echo AddButton("/monatsuebersicht/neu");
+           echo '<br>';
+           echo EditButton("monatsuebersicht/reihung",false,false,"Reihenfolge bearbeiten");
+        }
 
-        $sections = MySQL::Cluster("SELECT * FROM nw_month_overview");
+
+        $sections = MySQL::Cluster("SELECT * FROM nw_month_overview ORDER BY position ASC");
 
         foreach($sections as $sect)
         {

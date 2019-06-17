@@ -122,6 +122,7 @@ RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$/?$ ooebv-rang
 RewriteRule ^ooebv-ranglisten/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/pdf/?$/?$ filecreators/pdf-ooebvrl.php?list=$1&table=$2 [NC,QSA,L]
 
 # Rewrite Rules for nw-overview
+RewriteRule ^monatsuebersicht/reihung monatsuebersicht.php?reihung [NC,QSA,L]
 RewriteRule ^monatsuebersicht/neu monatsuebersicht.php?new [NC,QSA,L]
 RewriteRule ^monatsuebersicht/([a-zA-Z0-9-_]+)/bearbeiten/?$ monatsuebersicht.php?edit=$1 [NC,QSA,L]
 
