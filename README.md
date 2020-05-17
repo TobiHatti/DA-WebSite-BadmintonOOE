@@ -21,5 +21,3 @@ New Website for "Badminton-Verband OÖ"
 ![image](https://github.com/TobiHatti/DA-WebSite-BadmintonOOE/blob/master/ooebv_sample_02.png)
 ![image](https://github.com/TobiHatti/DA-WebSite-BadmintonOOE/blob/master/ooebv_sample_03.png)
 
-## Download
-Get the latest release [here](https://github.com/TobiHatti/DA-WebSite-BadmintonOOE/releases)
